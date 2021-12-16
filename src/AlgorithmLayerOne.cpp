@@ -1,16 +1,15 @@
 #include "AlgorithmLayerOne.hpp"
 
-AlgorithmLayerOne::AlgorithmLayerOne(GridManager& grid_) : Algorithm(grid_) {}
+AlgorithmLayerOne::AlgorithmLayerOne(GridManager& grid_, AlgorithmDataStorage& data_) : Algorithm(grid_), data(data_) {}
 
 AlgorithmLayerOne::~AlgorithmLayerOne() {}
 
 bool AlgorithmLayerOne::Run()
 {
-    grid.RefreshBorder();
     const unsigned int number_of_clicks_before = grid.left_click_counter + grid.right_click_counter;
-    const unsigned int border_index_max = grid.border_index;
+    const unsigned int border_index_max = data.border_index;
     unsigned int border_field_temp = 0;
-    const unsigned int* border_temp = grid.border;
+    const unsigned int* border_temp = data.border;
     const unsigned char* neighbors_l = grid.neighbors_l;
     const bool* is_flag = grid.is_flag;
     unsigned int** neighbors = grid.neighbors;

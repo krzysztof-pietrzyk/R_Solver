@@ -2,11 +2,16 @@
 #define AlgorithmFactory_hpp
 
 #include "Algorithm.hpp"
+#include "AlgorithmDataStorage.hpp"
+#include "AlgorithmRefreshBorder.hpp"
+#include "AlgorithmRefreshFace.hpp"
 #include "AlgorithmLayerOne.hpp"
 #include "AlgorithmSimpleCorners.hpp"
 
 enum AlgorithmType
 {
+    ALGORITHM_REFRESH_BORDER,
+    ALGORITHM_REFRESH_FACE,
     ALGORITHM_LAYER_ONE,
     ALGORITHM_SIMPLE_CORNERS
 };
@@ -15,13 +20,16 @@ class AlgorithmFactory
 {
     public:
 
-    static Algorithm* Create(AlgorithmType type, GridManager& grid);
-
     ~AlgorithmFactory();
 
-    protected:
+    AlgorithmFactory(GridManager& grid_, AlgorithmDataStorage& data_);
 
-    AlgorithmFactory();
+    Algorithm* Create(AlgorithmType type);
+
+    private:
+
+    GridManager& grid;
+    AlgorithmDataStorage& data;
 };
 
 #endif

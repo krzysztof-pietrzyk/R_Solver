@@ -10,24 +10,30 @@ using namespace std;
 int main()
 {
 	GridManager m = GridManager(30, 16, 99);
-	Algorithm* layer_one = AlgorithmFactory::Create(AlgorithmType::ALGORITHM_LAYER_ONE, m);
-	Algorithm* simple_corners = AlgorithmFactory::Create(AlgorithmType::ALGORITHM_SIMPLE_CORNERS, m);
+	AlgorithmDataStorage a = AlgorithmDataStorage(m);
+	AlgorithmFactory algorithm_factory = AlgorithmFactory(m, a);
+	Algorithm* layer_one = algorithm_factory.Create(AlgorithmType::ALGORITHM_LAYER_ONE);
+	Algorithm* simple_corners = algorithm_factory.Create(AlgorithmType::ALGORITHM_SIMPLE_CORNERS);
+	Algorithm* refresh_border = algorithm_factory.Create(AlgorithmType::ALGORITHM_REFRESH_BORDER);
 	unsigned long int tries = 0;
 	unsigned long int wins = 0;
 	const unsigned int fields_to_uncover = m.S - m.M;
 	while(true)
 	{
 		tries++;
+		a.Clear();
 		m.Generate();
 		while(true)
 		{
 			if(m.is_lost) break;
 			if(!simple_corners->Run()) break;
-			m.RefreshBorder();
-			while(layer_one->Run());
+			do
+			{
+				refresh_border->Run();
+			} while(layer_one->Run());
 		}
 		if(m.visible_fields_index == fields_to_uncover) wins++;
-		if(tries % 100000 == 0)
+		if(tries % 10000 == 0)
 		{
 			cout << "Tries: " << tries << ", Wins: " << wins << ", Ratio: " << float(wins) / tries << endl;
 			m.Display();

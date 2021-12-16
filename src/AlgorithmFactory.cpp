@@ -1,15 +1,19 @@
 #include "AlgorithmFactory.hpp"
 
-AlgorithmFactory::AlgorithmFactory() {}
+AlgorithmFactory::AlgorithmFactory(GridManager& grid_, AlgorithmDataStorage& data_) : grid(grid_), data(data_) {}
 
 AlgorithmFactory::~AlgorithmFactory() {}
 
-Algorithm* AlgorithmFactory::Create(AlgorithmType type, GridManager& grid)
+Algorithm* AlgorithmFactory::Create(AlgorithmType type)
 {
     switch(type)
     {
+        case ALGORITHM_REFRESH_BORDER:
+            return new AlgorithmRefreshBorder(grid, data);
+        case ALGORITHM_REFRESH_FACE:
+            return new AlgorithmRefreshFace(grid, data);
         case ALGORITHM_LAYER_ONE:
-            return new AlgorithmLayerOne(grid);
+            return new AlgorithmLayerOne(grid, data);
         case ALGORITHM_SIMPLE_CORNERS:
             return new AlgorithmSimpleCorners(grid);
         default:

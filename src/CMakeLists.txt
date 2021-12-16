@@ -12,7 +12,10 @@ set(SOURCES
     ./GridView.cpp
     ./GridViewConsole.cpp
     ./Algorithm.cpp
+    ./AlgorithmDataStorage.cpp
     ./AlgorithmFactory.cpp
+    ./AlgorithmRefreshBorder.cpp
+    ./AlgorithmRefreshFace.cpp
     ./AlgorithmLayerOne.cpp
     ./AlgorithmSimpleCorners.cpp)
 

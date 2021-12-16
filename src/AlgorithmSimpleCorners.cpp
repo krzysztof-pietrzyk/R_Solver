@@ -1,8 +1,5 @@
 #include "AlgorithmSimpleCorners.hpp"
 
-#include <iostream>
-using namespace std;
-
 AlgorithmSimpleCorners::AlgorithmSimpleCorners(GridManager& grid_) : Algorithm(grid_), 
     corners_number(4)
 {
