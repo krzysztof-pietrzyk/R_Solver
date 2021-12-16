@@ -17,6 +17,7 @@ class AlgorithmSimpleCorners : public Algorithm
 
     const unsigned int corners_number;
     const unsigned int* corners;
+    bool* is_visible;
 };
 
 #endif
