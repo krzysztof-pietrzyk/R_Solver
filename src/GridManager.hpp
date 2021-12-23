@@ -1,6 +1,8 @@
 #ifndef GridManager_hpp
 #define GridManager_hpp
 
+#include <stdexcept>
+
 class GridManager
 {
     public:
@@ -29,6 +31,8 @@ class GridManager
 
     ~GridManager();
 
+    unsigned char FieldValue(unsigned int field);
+
     virtual void LeftClick(unsigned int field) = 0;
 
     virtual void RightClick(unsigned int field) = 0;
@@ -37,7 +41,7 @@ class GridManager
 
     void Clear();
 
-    /* TODO: this should be protected */ public: unsigned char* field_values;  // Values of all fields (sorted)
+    unsigned char* field_values;  // Values of all fields (sorted)
 
 };
 

@@ -10,7 +10,7 @@ using namespace std;
 
 int main()
 {
-	GridSelfGenerated* m = new GridSelfGenerated(9, 9, 10);
+	GridSelfGenerated* m = new GridSelfGenerated(200, 60, 1000);
 	AlgorithmDataStorage a = AlgorithmDataStorage(*m);
 	GridGenerator* g = GridGeneratorFactory::Create(GridGeneratorType::GENERATOR_UNSAFE, *m);
 	GridView* v = GridViewFactory::Create(GridViewType::GRID_VIEW_CONSOLE, *m);
@@ -36,7 +36,7 @@ int main()
 			} while(layer_one->Run());
 		}
 		if(m->visible_fields_index == fields_to_uncover) wins++;
-		if(tries % 10000 == 0)
+		if(tries % 1000 == 0)
 		{
 			cout << "Tries: " << tries << ", Wins: " << wins << ", Ratio: " << float(wins) / tries << endl;
 			v->Display();

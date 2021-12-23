@@ -40,7 +40,7 @@ bool AlgorithmLayerOne::Run()
             if(is_flag[neighbor_field_temp]) flags_count++;
             else if(!is_visible[neighbor_field_temp]) not_visible_count++;
         }
-        field_value_temp = grid.field_values[border_field_temp];
+        field_value_temp = grid.FieldValue(border_field_temp);
         if(field_value_temp == flags_count)
         {
             for(j = 0; j < num_of_neighbors_temp; j++)

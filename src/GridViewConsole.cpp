@@ -39,8 +39,8 @@ void GridViewConsole::Display()
             if(grid.is_flag[f]) output << "x";
 			else if(!grid.is_visible[f]) output << "#";
 			else if(grid.is_mine[f]) output << "*";
-			else if(grid.field_values[f] == 0) output << " ";
-			else output << to_string(grid.field_values[f]);
+			else if(grid.FieldValue(f) == 0) output << " ";
+			else output << to_string(grid.FieldValue(f));
 		}
 		output << "|" << left << i << endl;
 	}
