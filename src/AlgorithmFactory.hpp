@@ -1,6 +1,8 @@
 #ifndef AlgorithmFactory_hpp
 #define AlgorithmFactory_hpp
 
+#include <stdexcept>
+
 #include "Algorithm.hpp"
 #include "AlgorithmDataStorage.hpp"
 #include "AlgorithmRefreshBorder.hpp"

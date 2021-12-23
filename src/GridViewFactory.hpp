@@ -1,6 +1,8 @@
 #ifndef GridViewFactory_hpp
 #define GridViewFactory_hpp
 
+#include <stdexcept>
+
 #include "GridView.hpp"
 #include "GridViewConsole.hpp"
 

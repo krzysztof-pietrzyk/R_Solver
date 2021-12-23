@@ -3,16 +3,16 @@
 
 #include <cstring>
 
-#include "GridGenerator.hpp"
+#include "GridInternalGenerator.hpp"
 
-class GridGeneratorFromHash : public GridGenerator
+class GridGeneratorFromHash : public GridInternalGenerator
 {
     public:
 
     char* hash;
     const unsigned int hash_length;
     
-    GridGeneratorFromHash(Grid& grid);
+    GridGeneratorFromHash(GridSelfGenerated& grid);
 
     ~GridGeneratorFromHash();
 

@@ -1,6 +1,6 @@
 #include "GridGeneratorUnsafe.hpp"
 
-GridGeneratorUnsafe::GridGeneratorUnsafe(Grid& grid) : GridGenerator(grid)
+GridGeneratorUnsafe::GridGeneratorUnsafe(GridSelfGenerated& grid) : GridInternalGenerator(grid)
 {
     int64_t r = std::chrono::system_clock::now().time_since_epoch().count();
     rng = std::minstd_rand(r);

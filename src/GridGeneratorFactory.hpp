@@ -1,7 +1,9 @@
 #ifndef GridGeneratorFactory_hpp
 #define GridGeneratorFactory_hpp
 
-#include "GridGenerator.hpp"
+#include <stdexcept>
+
+#include "GridInternalGenerator.hpp"
 #include "GridGeneratorUnsafe.hpp"
 #include "GridGeneratorFromHash.hpp"
 
@@ -15,7 +17,7 @@ class GridGeneratorFactory
 {
     public:
 
-    static GridGenerator* Create(GridGeneratorType type, Grid& grid);
+    static GridInternalGenerator* Create(GridGeneratorType type, GridSelfGenerated& grid);
 
     ~GridGeneratorFactory();
 

@@ -3,9 +3,11 @@ set(BINARY ${CMAKE_PROJECT_NAME})
 set(SOURCES
     ./main.cpp
     ./Grid.cpp
+    ./GridSelfGenerated.cpp
     ./GridManager.cpp
     ./GridGeneratorFactory.cpp
     ./GridGenerator.cpp
+    ./GridInternalGenerator.cpp
     ./GridGeneratorUnsafe.cpp
     ./GridGeneratorFromHash.cpp
     ./GridViewFactory.cpp

@@ -5,13 +5,14 @@
 #include <chrono>
 #include <limits.h>
 
-#include "GridGenerator.hpp"
+#include "GridInternalGenerator.hpp"
+#include "GridSelfGenerated.hpp"
 
-class GridGeneratorUnsafe : public GridGenerator
+class GridGeneratorUnsafe : public GridInternalGenerator
 {
     public:
 
-    GridGeneratorUnsafe(Grid& grid);
+    GridGeneratorUnsafe(GridSelfGenerated& grid);
 
     ~GridGeneratorUnsafe();
 

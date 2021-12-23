@@ -17,6 +17,6 @@ Algorithm* AlgorithmFactory::Create(AlgorithmType type)
         case ALGORITHM_SIMPLE_CORNERS:
             return new AlgorithmSimpleCorners(grid);
         default:
-            return NULL;
+            throw std::invalid_argument("ERROR: Attempting to create a non-existent Algorithm type!");
     }
 }

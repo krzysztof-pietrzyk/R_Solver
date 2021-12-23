@@ -11,6 +11,6 @@ GridView* GridViewFactory::Create(GridViewType type, Grid& grid)
         case GRID_VIEW_CONSOLE:
             return new GridViewConsole(grid);
         default:
-            return NULL;
+            throw std::invalid_argument("ERROR: Attempting to create a non-existent GridView type!");
     }
 }

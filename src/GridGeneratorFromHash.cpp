@@ -1,6 +1,6 @@
 #include "GridGeneratorFromHash.hpp"
 
-GridGeneratorFromHash::GridGeneratorFromHash(Grid& grid) : GridGenerator(grid), hash_length(grid.hash_length)
+GridGeneratorFromHash::GridGeneratorFromHash(GridSelfGenerated& grid) : GridInternalGenerator(grid), hash_length(grid.hash_length)
 {
     hash = new char[hash_length];
 }

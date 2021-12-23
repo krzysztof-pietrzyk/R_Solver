@@ -4,7 +4,7 @@ GridGeneratorFactory::GridGeneratorFactory() {}
 
 GridGeneratorFactory::~GridGeneratorFactory() {}
 
-GridGenerator* GridGeneratorFactory::Create(GridGeneratorType type, Grid& grid)
+GridInternalGenerator* GridGeneratorFactory::Create(GridGeneratorType type, GridSelfGenerated& grid)
 {
     switch(type)
     {
@@ -13,6 +13,6 @@ GridGenerator* GridGeneratorFactory::Create(GridGeneratorType type, Grid& grid)
         case GENERATOR_FROM_HASH:
             return new GridGeneratorFromHash(grid);
         default:
-            return NULL;
+            throw std::invalid_argument("ERROR: Attempting to create a non-existent Generator type!");
     }
 }
