@@ -10,7 +10,7 @@ using namespace std;
 
 int main()
 {
-	GridSelfGenerated* m = new GridSelfGenerated(9, 9, 10);
+	GridSelfGenerated* m = new GridSelfGenerated(30, 16, 99);
 	GridGenerator* g = GridGeneratorFactory::Create(GridGeneratorType::GENERATOR_UNSAFE, *m);
 	GridView* v = GridViewFactory::Create(GridViewType::GRID_VIEW_CONSOLE, *m);
 	AlgorithmManager a = AlgorithmManager(*m);
