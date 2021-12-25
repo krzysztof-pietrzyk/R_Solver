@@ -16,6 +16,7 @@ set(SOURCES
     ./Algorithm.cpp
     ./AlgorithmDataStorage.cpp
     ./AlgorithmFactory.cpp
+    ./AlgorithmManager.cpp
     ./AlgorithmRefreshBorder.cpp
     ./AlgorithmRefreshFace.cpp
     ./AlgorithmLayerOne.cpp

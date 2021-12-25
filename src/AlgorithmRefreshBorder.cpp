@@ -26,7 +26,6 @@ bool AlgorithmRefreshBorder::Run()
 
     border_old = data.border_internal_indicator ? data.border_internal_0 : data.border_internal_1;
     border_new = data.border_internal_indicator ? data.border_internal_1 : data.border_internal_0;
-
     for(i = 0; i < border_index_old; i++)
     {
         border_field_temp = border_old[i];
