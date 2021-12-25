@@ -16,6 +16,7 @@ class AlgorithmManager
 
     private:
 
+    GridManager* grid;
     AlgorithmFactory* factory;
     AlgorithmDataStorage* data;
 
