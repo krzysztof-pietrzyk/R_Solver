@@ -29,7 +29,6 @@ void Solver::RunForever()
 	{
 		tries++;
 		generator->Generate();
-		grid->Clear();
 		algorithm_manager->RunAll();
 		if(grid->visible_fields_index == fields_to_uncover)
 		{
