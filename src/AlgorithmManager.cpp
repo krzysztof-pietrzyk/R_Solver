@@ -11,7 +11,11 @@ AlgorithmManager::AlgorithmManager(GridManager& grid_)
 
 AlgorithmManager::~AlgorithmManager()
 {
+    delete factory;
     delete data;
+    delete layer_one;
+    delete simple_corners;
+    delete refresh_border;
 }
 
 bool AlgorithmManager::RunAll()
