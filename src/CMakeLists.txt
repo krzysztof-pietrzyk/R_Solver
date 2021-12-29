@@ -21,6 +21,7 @@ set(SOURCES
     ./AlgorithmRefreshFace.cpp
     ./AlgorithmLayerOne.cpp
     ./AlgorithmSimpleCorners.cpp
-    ./Solver.cpp)
+    ./Solver.cpp
+    ./SolverThreadData.cpp)
 
 add_executable(${BINARY}_run ${SOURCES})
