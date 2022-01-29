@@ -29,7 +29,7 @@ void Solver::RunForever()
 		tries++;
 		generator->Generate();
 		algorithm_manager->RunAll();
-		if(grid->visible_fields_index == fields_to_uncover) wins++;
+		if(!grid->is_lost && grid->visible_fields_index == fields_to_uncover) wins++;
 		UpdateThreadData();
 	}
 }

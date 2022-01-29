@@ -36,10 +36,13 @@ void GridSelfGenerated::LeftClick(unsigned int field)
     //cout << "Left Click @ " << field << endl;
     if(is_lost) return;
     left_click_counter++;
-    is_visible[field] = true;
-    visible_fields[visible_fields_index++] = field;
     if(is_mine[field]) is_lost = true;
-    else if(field_values[field] == 0) ZeroChainReaction(field); 
+    else
+    {
+        is_visible[field] = true;
+        visible_fields[visible_fields_index++] = field;
+        if(field_values[field] == 0) ZeroChainReaction(field);
+    }
 }
 
 void GridSelfGenerated::RightClick(unsigned int field)

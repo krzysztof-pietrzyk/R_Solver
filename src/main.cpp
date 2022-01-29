@@ -8,7 +8,6 @@
 
 using namespace std;
 
-
 void Run(Solver* solver)
 {
 	solver->RunForever();
@@ -57,10 +56,10 @@ void CheckStatus(SolverThreadData* data)
 
 int main()
 {
-	const unsigned short int threads_number = 12;
-	const unsigned short int grid_width = 80;
-	const unsigned short int grid_height = 80;
-	const unsigned int grid_mines = 999;
+	const unsigned short int threads_number = 4;
+	const unsigned short int grid_width = 30;
+	const unsigned short int grid_height = 16;
+	const unsigned int grid_mines = 99;
 
 	cout << "Attempting to run " << threads_number << " threads on " << grid_width << "x" << grid_height << " grid with " << grid_mines << " mines" << endl;
 
