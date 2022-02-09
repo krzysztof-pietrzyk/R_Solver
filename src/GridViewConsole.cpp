@@ -57,7 +57,7 @@ void GridViewConsole::Display()
 		for(int i = 0; i < grid.W; i+=10) output << setw(10) << left << i;
 		output << endl;
     }
-	std::system("cls");
+	//std::system("cls");  // this is very ugly
     cout << output.str();
 	//output.close();
 }

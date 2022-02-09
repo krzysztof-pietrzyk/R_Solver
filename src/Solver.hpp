@@ -16,6 +16,8 @@ class Solver
 
     void RunForever();
 
+    void Run();
+
     private:
 
     GridSelfGenerated* grid;

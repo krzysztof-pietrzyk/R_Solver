@@ -23,6 +23,7 @@ class AlgorithmManager
     Algorithm* layer_one;
 	Algorithm* simple_corners;
 	Algorithm* refresh_border;
+    Algorithm* refresh_sections;
 };
 
 #endif

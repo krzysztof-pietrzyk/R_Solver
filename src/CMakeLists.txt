@@ -19,6 +19,7 @@ set(SOURCES
     ./AlgorithmManager.cpp
     ./AlgorithmRefreshBorder.cpp
     ./AlgorithmRefreshFace.cpp
+    ./AlgorithmRefreshSections.cpp
     ./AlgorithmLayerOne.cpp
     ./AlgorithmSimpleCorners.cpp
     ./Solver.cpp

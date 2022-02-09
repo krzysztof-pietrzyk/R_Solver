@@ -7,6 +7,7 @@
 #include "AlgorithmDataStorage.hpp"
 #include "AlgorithmRefreshBorder.hpp"
 #include "AlgorithmRefreshFace.hpp"
+#include "AlgorithmRefreshSections.hpp"
 #include "AlgorithmLayerOne.hpp"
 #include "AlgorithmSimpleCorners.hpp"
 
@@ -14,6 +15,7 @@ enum AlgorithmType
 {
     ALGORITHM_REFRESH_BORDER,
     ALGORITHM_REFRESH_FACE,
+    ALGORITHM_REFRESH_SECTIONS,
     ALGORITHM_LAYER_ONE,
     ALGORITHM_SIMPLE_CORNERS
 };

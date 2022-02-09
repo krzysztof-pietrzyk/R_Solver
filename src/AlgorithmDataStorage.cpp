@@ -17,6 +17,14 @@ AlgorithmDataStorage::AlgorithmDataStorage(GridManager& grid)
     border_internal_indicator = false;
     border_index = 0;
     last_read_index_border = 0;
+    last_read_index_border_flags = 0;
+
+    sections = new unsigned int[grid.S * 8] {0};
+    sections_l = new unsigned char[grid.S] {0};
+    sections_values = new unsigned char[grid.S] {0};
+
+    sections_neighbors = new unsigned int[grid.S * 16] {0};
+    sections_neighbors_l = new unsigned char[grid.S] {0};
 }
 
 AlgorithmDataStorage::~AlgorithmDataStorage()
@@ -27,6 +35,11 @@ AlgorithmDataStorage::~AlgorithmDataStorage()
     delete[] is_border;
     delete[] border_internal_0;
     delete[] border_internal_1;
+    delete[] sections;
+    delete[] sections_l;
+    delete[] sections_values;
+    delete[] sections_neighbors;
+    delete[] sections_neighbors_l;
 }
 
 void AlgorithmDataStorage::Clear()
@@ -37,4 +50,5 @@ void AlgorithmDataStorage::Clear()
     border_index = 0;
     last_read_index_face = 0;
     last_read_index_border = 0;
+    last_read_index_border_flags = 0;
 }

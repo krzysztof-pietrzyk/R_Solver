@@ -15,6 +15,7 @@ class AlgorithmDataStorage
     unsigned int* border;
     unsigned int border_index;
     unsigned int last_read_index_border;
+    unsigned int last_read_index_border_flags;
     bool* is_border;
 
     unsigned int* face_internal_0;
@@ -23,6 +24,13 @@ class AlgorithmDataStorage
     unsigned int* border_internal_1;
     bool face_internal_indicator;
     bool border_internal_indicator;
+    
+    unsigned int* sections;
+    unsigned char* sections_l;
+    unsigned char* sections_values;
+
+    unsigned int* sections_neighbors;
+    unsigned char* sections_neighbors_l;
 
     AlgorithmDataStorage(GridManager& grid);
 
