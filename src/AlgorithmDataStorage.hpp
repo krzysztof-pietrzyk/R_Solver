@@ -25,11 +25,13 @@ class AlgorithmDataStorage
     bool face_internal_indicator;
     bool border_internal_indicator;
     
-    unsigned int* sections;
+    unsigned int* sections_big;
+    unsigned int** sections;
     unsigned char* sections_l;
     unsigned char* sections_values;
 
-    unsigned int* sections_neighbors;
+    unsigned int* sections_neighbors_big;
+    unsigned int** sections_neighbors;
     unsigned char* sections_neighbors_l;
 
     AlgorithmDataStorage(GridManager& grid);

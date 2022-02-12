@@ -21,6 +21,7 @@ class AlgorithmManager
     AlgorithmDataStorage* data;
 
     Algorithm* layer_one;
+    Algorithm* layer_two;
 	Algorithm* simple_corners;
 	Algorithm* refresh_border;
     Algorithm* refresh_sections;

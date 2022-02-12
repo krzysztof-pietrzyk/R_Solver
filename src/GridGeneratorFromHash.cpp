@@ -12,7 +12,7 @@ GridGeneratorFromHash::~GridGeneratorFromHash()
 
 void GridGeneratorFromHash::Generate()
 {
-    SetHash((char*)"21BB0D30140:09@06081P400:1`T2YLFRHP16PP>PCR<8009V>0F00P0RP48400010P0j02890P0U5P`");
+    SetHash((char*)"D22R82T000@100BQ1P00b800@[QHX20<3P024<P`@@9P@QH318B0`0d@282T8=80HP`0QR40K045:120");
     unsigned int current_field = 0;
     unsigned int current_not_mine_index = 0;
     bool is_mine;

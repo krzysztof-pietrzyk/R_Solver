@@ -21,6 +21,7 @@ set(SOURCES
     ./AlgorithmRefreshFace.cpp
     ./AlgorithmRefreshSections.cpp
     ./AlgorithmLayerOne.cpp
+    ./AlgorithmLayerTwo.cpp
     ./AlgorithmSimpleCorners.cpp
     ./Solver.cpp
     ./SolverThreadData.cpp)

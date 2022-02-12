@@ -16,6 +16,8 @@ Algorithm* AlgorithmFactory::Create(AlgorithmType type)
             return new AlgorithmRefreshSections(grid, data);
         case ALGORITHM_LAYER_ONE:
             return new AlgorithmLayerOne(grid, data);
+        case ALGORITHM_LAYER_TWO:
+            return new AlgorithmLayerTwo(grid, data);
         case ALGORITHM_SIMPLE_CORNERS:
             return new AlgorithmSimpleCorners(grid);
         default:

@@ -19,11 +19,15 @@ AlgorithmDataStorage::AlgorithmDataStorage(GridManager& grid)
     last_read_index_border = 0;
     last_read_index_border_flags = 0;
 
-    sections = new unsigned int[grid.S * 8] {0};
+    sections_big = new unsigned int[grid.S * 8] {0};
+    sections = new unsigned int*[grid.S];
+    for(int i = 0; i < grid.S; i++) sections[i] = sections_big + i * 8;
     sections_l = new unsigned char[grid.S] {0};
     sections_values = new unsigned char[grid.S] {0};
 
-    sections_neighbors = new unsigned int[grid.S * 16] {0};
+    sections_neighbors_big = new unsigned int[grid.S * 16] {0};
+    sections_neighbors = new unsigned int*[grid.S];
+    for(int i = 0; i < grid.S; i++) sections_neighbors[i] = sections_neighbors_big + i * 16;
     sections_neighbors_l = new unsigned char[grid.S] {0};
 }
 
@@ -35,9 +39,11 @@ AlgorithmDataStorage::~AlgorithmDataStorage()
     delete[] is_border;
     delete[] border_internal_0;
     delete[] border_internal_1;
+    delete[] sections_big;
     delete[] sections;
     delete[] sections_l;
     delete[] sections_values;
+    delete[] sections_neighbors_big;
     delete[] sections_neighbors;
     delete[] sections_neighbors_l;
 }

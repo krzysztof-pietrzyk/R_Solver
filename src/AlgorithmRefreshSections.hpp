@@ -27,6 +27,8 @@ class AlgorithmRefreshSections : public Algorithm
     unsigned char section_value_temp;
     unsigned int* border_field_neighbors;
     unsigned char border_field_neighbors_l;
+    unsigned int* section_temp;
+    unsigned int* section_neighbors_temp;
 };
 
 #endif

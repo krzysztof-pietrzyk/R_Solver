@@ -9,6 +9,7 @@
 #include "AlgorithmRefreshFace.hpp"
 #include "AlgorithmRefreshSections.hpp"
 #include "AlgorithmLayerOne.hpp"
+#include "AlgorithmLayerTwo.hpp"
 #include "AlgorithmSimpleCorners.hpp"
 
 enum AlgorithmType
@@ -17,6 +18,7 @@ enum AlgorithmType
     ALGORITHM_REFRESH_FACE,
     ALGORITHM_REFRESH_SECTIONS,
     ALGORITHM_LAYER_ONE,
+    ALGORITHM_LAYER_TWO,
     ALGORITHM_SIMPLE_CORNERS
 };
 

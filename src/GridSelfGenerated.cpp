@@ -33,23 +33,46 @@ GridSelfGenerated::~GridSelfGenerated()
 
 void GridSelfGenerated::LeftClick(unsigned int field)
 {
-    //cout << "Left Click @ " << field << endl;
+    // cout << "Left Click @ " << field << endl;
     if(is_lost) return;
+    if(is_visible[field]) return;
     left_click_counter++;
     is_visible[field] = true;
     visible_fields[visible_fields_index++] = field;
-    if(is_mine[field]) is_lost = true; 
+    if(is_mine[field])
+    {
+        is_lost = true; 
+        //cout << "LOST: " << field << endl;
+    } 
     else if(field_values[field] == 0) ZeroChainReaction(field); 
 }
 
 void GridSelfGenerated::RightClick(unsigned int field)
 {
-    //cout << "Right Click @ " << field << endl;
+    // cout << "Right Click @ " << field << endl;
     if(is_lost) return;
+    if(is_flag[field]) return;
     right_click_counter++;
     is_flag[field] = true;
     flags[flags_index++] = field;
 }
+
+// void GridSelfGenerated::ShowUncovered()
+// {
+//     for(int i = 0; i < H; i++)
+//     {
+//         for(int j = 0; j < W; j++)
+//         {
+//             int f = i * W + j;
+//             if(is_flag[f]) cout << "x";
+// 			else if(!is_visible[f]) cout << "#";
+// 			else if(is_mine[f]) cout << "*";
+// 			else if(field_values[f] == 0) cout << " ";
+// 			else cout << to_string(field_values[f]);
+//         }
+//         cout << endl;
+//     }
+// }
 
 void GridSelfGenerated::CalculateValues()
 {

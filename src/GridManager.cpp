@@ -11,7 +11,10 @@ GridManager::~GridManager() {}
 
 unsigned char GridManager::FieldValue(unsigned int field)
 {
-    if(!is_visible[field]) throw std::invalid_argument("ERROR: Attempting to read a value of a covered field!");
+    if(!is_visible[field]) 
+    {
+        throw std::invalid_argument("ERROR: Attempting to read a value of a covered field! " + field);
+    }
     else return field_values[field];
 }
 

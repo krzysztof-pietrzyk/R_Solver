@@ -1,11 +1,8 @@
 #include "Solver.hpp"
 
-#include <iostream>
-using namespace std;
-
 Solver::Solver(unsigned short int w, unsigned short int h, unsigned int m, SolverThreadData* thread_data_) :
     grid(new GridSelfGenerated(w, h, m)),
-    generator(GridGeneratorFactory::Create(GridGeneratorType::GENERATOR_FROM_HASH, *grid)),
+    generator(GridGeneratorFactory::Create(GridGeneratorType::GENERATOR_UNSAFE, *grid)),
     view(GridViewFactory::Create(GridViewType::GRID_VIEW_CONSOLE, *grid)),
     algorithm_manager(new AlgorithmManager(*grid)),
 	thread_data(thread_data_)
@@ -31,6 +28,7 @@ void Solver::RunForever()
 	{
 		tries++;
 		generator->Generate();
+		grid->CalculateHash();
 		algorithm_manager->RunAll();
 		if(!grid->is_lost && grid->visible_fields_index == fields_to_uncover) wins++;
 		UpdateThreadData();
@@ -42,10 +40,7 @@ void Solver::Run()
 	const unsigned int fields_to_uncover = grid->S - grid->M;
 	generator->Generate();
 	algorithm_manager->RunAll();
-	grid->CalculateHash();
 	view->Display();
-
-	std::cout << grid->hash << std::endl;
 }
 
 void Solver::UpdateThreadData()
