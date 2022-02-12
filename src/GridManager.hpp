@@ -37,7 +37,7 @@ class GridManager
 
     virtual void RightClick(unsigned int field) = 0;
 
-    virtual void ShowUncovered() = 0;
+    //virtual void ShowUncovered() = 0;
 
     protected:
 

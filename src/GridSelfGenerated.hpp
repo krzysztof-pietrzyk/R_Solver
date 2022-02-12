@@ -24,7 +24,7 @@ class GridSelfGenerated : public Grid
 
     void RightClick(unsigned int field);
 
-    void ShowUncovered();
+    //void ShowUncovered();
 
     void CalculateHash();
 

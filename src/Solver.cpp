@@ -5,7 +5,7 @@ Solver::Solver(unsigned short int w, unsigned short int h, unsigned int m, Solve
     generator(GridGeneratorFactory::Create(GridGeneratorType::GENERATOR_UNSAFE, *grid)),
     view(GridViewFactory::Create(GridViewType::GRID_VIEW_CONSOLE, *grid)),
     algorithm_manager(new AlgorithmManager(*grid)),
-	thread_data(thread_data_)
+	thread_data(thread_data_), fields_to_uncover(grid->S - grid->M)
 {
 	tries = 0;
 	wins = 0;
@@ -23,7 +23,6 @@ Solver::~Solver()
 
 void Solver::RunForever()
 {
-	const unsigned int fields_to_uncover = grid->S - grid->M;
 	while(true)
 	{
 		tries++;
@@ -45,9 +44,13 @@ void Solver::Run()
 
 void Solver::UpdateThreadData()
 {
+	unsigned int lost = 0;
+	if(grid->is_lost) lost = 1;
+	float completion_rate = float(grid->visible_fields_index - lost) / fields_to_uncover;
 	thread_data->mut.lock();
 	thread_data->tries += tries - last_read_tries;
 	thread_data->wins += wins - last_read_wins;
+	thread_data->completion += completion_rate;
 	thread_data->mut.unlock();
 	last_read_tries = tries;
     last_read_wins = wins;

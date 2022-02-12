@@ -31,6 +31,7 @@ class Solver
 	unsigned long int wins;
     unsigned long int last_read_tries;
     unsigned long int last_read_wins;
+    const unsigned int fields_to_uncover;
 
     void UpdateThreadData();
 };

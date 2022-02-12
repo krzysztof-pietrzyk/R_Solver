@@ -14,6 +14,7 @@ class SolverThreadData
 	std::mutex mut;
 	unsigned long int tries;
 	unsigned long int wins;
+    double completion;
 };
 
 #endif

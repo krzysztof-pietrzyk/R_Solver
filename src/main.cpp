@@ -20,16 +20,16 @@ void CheckStatus(SolverThreadData* data)
 	time_t seconds_since_start = 0;
 	unsigned long int games_played = 0;
 	unsigned long int games_played_last = 0;
+	double completion = 0.0;
 	unsigned long int wins = 0;
 	unsigned long int wins_last = 0;
 	float win_ratio = 0.0;
 	float games_per_second_avg = 0.0;
 	float wins_per_second_avg = 0.0;
-	float games_per_second_now = 0.0;
-	float wins_per_second_now = 0.0;
+	float completion_rate_avg = 0.0;
 	time_t start_time = chrono::system_clock::to_time_t(chrono::system_clock::now());
 	time_t current_time = chrono::system_clock::to_time_t(chrono::system_clock::now());
-	cout << "Seconds_since_start\tGames_played\tWins\tWin_ratio\tGames_per_second_avg\tWins_per_second_avg\tGames_per_second_now\tWins_per_second_now" << endl;
+	cout << "Seconds_since_start\tGames_played\tWins\tWin_ratio\tCompletion_rate_avg\tGames_per_second_avg\tWins_per_second_avg" << endl;
 	while(true)
 	{
 		this_thread::sleep_for(chrono::seconds(status_read_interval));
@@ -38,20 +38,19 @@ void CheckStatus(SolverThreadData* data)
 		data->mut.lock();
 		games_played = data->tries;
 		wins = data->wins;
+		completion = data->completion;
 		data->mut.unlock();
 
 		seconds_since_start = current_time - start_time;
 		win_ratio = float(wins) / float(games_played);
 		games_per_second_avg = float(games_played) / float(seconds_since_start);
 		wins_per_second_avg = float(wins) / float(seconds_since_start);
-		games_per_second_now = float(games_played - games_played_last) / float(status_read_interval);
-		wins_per_second_now = float(wins - wins_last) / float(status_read_interval);
+		completion_rate_avg = completion / float(games_played);
 		wins_last = wins;
 		games_played_last = games_played;
 
 		cout << seconds_since_start << "\t" << games_played << "\t" << wins << "\t" << win_ratio << "\t" 
-			<< games_per_second_avg << "\t" << wins_per_second_avg << "\t" << games_per_second_now << "\t" 
-			<< wins_per_second_now << endl;
+			<<  completion_rate_avg << "\t" << games_per_second_avg << "\t" << wins_per_second_avg << "\t" << endl;
 	}
 }
 
