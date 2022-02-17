@@ -24,6 +24,9 @@ set(SOURCES
     ./AlgorithmLayerTwo.cpp
     ./AlgorithmSimpleCorners.cpp
     ./Solver.cpp
-    ./SolverThreadData.cpp)
+    ./SolverThreadData.cpp
+    ./Buffer.cpp
+    ./Buffer2D.cpp
+    ./BitMask.cpp)
 
 add_executable(${BINARY}_run ${SOURCES})
