@@ -1,20 +1,14 @@
-project(Algorithms)
+message("Entering directory ${CMAKE_CURRENT_SOURCE_DIR}")
 
-set(CPP_SOURCES
-    Algorithm.cpp
-    AlgorithmDataStorage.cpp
-    AlgorithmFactory.cpp
-    AlgorithmLayerOne.cpp
-    AlgorithmLayerTwo.cpp
-    AlgorithmManager.cpp
-    AlgorithmRefreshBorder.cpp
-    AlgorithmRefreshFace.cpp
-    AlgorithmRefreshSections.cpp
-    AlgorithmSimpleCorners.cpp)
-
-add_library(${PROJECT_NAME} ${CPP_SOURCES})
-
-target_include_directories(${PROJECT_NAME} PUBLIC .)
-target_include_directories(${PROJECT_NAME} PRIVATE ../grid)
-
-target_link_libraries(${PROJECT_NAME} PRIVATE Grid)
+set(CPP_SOURCES_ALGORITHMS
+    ${CMAKE_CURRENT_SOURCE_DIR}/Algorithm.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/AlgorithmDataStorage.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/AlgorithmFactory.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/AlgorithmLayerOne.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/AlgorithmLayerTwo.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/AlgorithmManager.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/AlgorithmRefreshBorder.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/AlgorithmRefreshFace.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/AlgorithmRefreshSections.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/AlgorithmSimpleCorners.cpp
+    PARENT_SCOPE)

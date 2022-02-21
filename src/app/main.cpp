@@ -82,7 +82,7 @@
 #include <ctime>
 #include <iostream>
 
-#include "Solver.hpp"
+#include "solver/Solver.hpp"
 
 using namespace std;
 

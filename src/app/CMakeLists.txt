@@ -1,8 +1,5 @@
-project(R_Solver)
+message("Entering directory ${CMAKE_CURRENT_SOURCE_DIR}")
 
-set(CPP_SOURCES
-    main.cpp)
-
-add_executable(${PROJECT_NAME} ${CPP_SOURCES})
-
-target_link_libraries(${PROJECT_NAME} PRIVATE Solver)
+set(CPP_SOURCES_APP
+    ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
+    PARENT_SCOPE)

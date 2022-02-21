@@ -1,7 +1,8 @@
 #ifndef AlgorithmManager_hpp
 #define AlgorithmManager_hpp
 
-#include "GridManager.hpp"
+#include "grid/GridManager.hpp"
+
 #include "AlgorithmFactory.hpp"
 
 class AlgorithmManager

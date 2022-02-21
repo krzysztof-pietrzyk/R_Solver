@@ -1,8 +1,9 @@
 #ifndef GridInternalGenerator_hpp
 #define GridInternalGenerator_hpp
 
+#include "grid/GridSelfGenerated.hpp"
+
 #include "GridGenerator.hpp"
-#include "GridSelfGenerated.hpp"
 
 class GridInternalGenerator : public GridGenerator
 {

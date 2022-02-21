@@ -1,13 +1,7 @@
-project(View)
+message("Entering directory ${CMAKE_CURRENT_SOURCE_DIR}")
 
-set(CPP_SOURCES
-    GridView.cpp
-    GridViewConsole.cpp
-    GridViewFactory.cpp)
-
-add_library(${PROJECT_NAME} ${CPP_SOURCES})
-
-target_include_directories(${PROJECT_NAME} PUBLIC .)
-target_include_directories(${PROJECT_NAME} PRIVATE ../grid)
-
-target_link_libraries(${PROJECT_NAME} PRIVATE Grid)
+set(CPP_SOURCES_VIEW
+    ${CMAKE_CURRENT_SOURCE_DIR}/GridView.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/GridViewConsole.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/GridViewFactory.cpp
+    PARENT_SCOPE)

@@ -1,7 +1,7 @@
 #ifndef GridView_hpp
 #define GridView_hpp
 
-#include "Grid.hpp"
+#include "grid/Grid.hpp"
 
 class GridView
 {

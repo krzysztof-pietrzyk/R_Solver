@@ -1,7 +1,7 @@
 #ifndef AlgorithmDataStorage_hpp
 #define AlgorithmDataStorage_hpp
 
-#include "GridManager.hpp"
+#include "grid/GridManager.hpp"
 
 class AlgorithmDataStorage
 {

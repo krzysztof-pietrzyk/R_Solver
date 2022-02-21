@@ -1,10 +1,7 @@
-project(Grid)
+message("Entering directory ${CMAKE_CURRENT_SOURCE_DIR}")
 
-set(CPP_SOURCES
-    Grid.cpp
-    GridManager.cpp
-    GridSelfGenerated.cpp)
-
-add_library(${PROJECT_NAME} ${CPP_SOURCES})
-
-target_include_directories(${PROJECT_NAME} PUBLIC .)
+set(CPP_SOURCES_GRID
+    ${CMAKE_CURRENT_SOURCE_DIR}/Grid.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/GridManager.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/GridSelfGenerated.cpp
+    PARENT_SCOPE)

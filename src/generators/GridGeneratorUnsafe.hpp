@@ -6,7 +6,6 @@
 #include <limits.h>
 
 #include "GridInternalGenerator.hpp"
-#include "GridSelfGenerated.hpp"
 
 class GridGeneratorUnsafe : public GridInternalGenerator
 {
