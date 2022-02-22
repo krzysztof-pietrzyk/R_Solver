@@ -27,7 +27,7 @@ class GridManager
     unsigned int right_click_counter;
     bool is_lost;
 
-    GridManager();
+    GridManager(unsigned short int w, unsigned short int h, unsigned int m);
 
     ~GridManager();
 
