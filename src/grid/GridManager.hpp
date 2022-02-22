@@ -3,25 +3,26 @@
 
 #include <stdexcept>
 
+#include "utils/BitMask.hpp"
+#include "utils/Buffer.hpp"
+#include "utils/Buffer2D.hpp"
+
 class GridManager
 {
     public:
 
-    unsigned short int W;  // Width
-    unsigned short int H;  // Height
-    unsigned int S;  // Size (Width * Height)
-    unsigned int M;  // Number of mines
+    const unsigned short int W;  // Width
+    const unsigned short int H;  // Height
+    const unsigned int S;  // Size (Width * Height)
+    const unsigned int M;  // Number of mines
 
-    unsigned int* visible_fields;  // Positions of visible fields (not sorted)
-    unsigned int visible_fields_index;  // Current count of visible fields
-	bool* is_visible;  // True if index is visible (sorted)
+    Buffer visible_fields;  // Positions of visible fields (not sorted)
+	BitMask is_visible;  // True if index is visible (sorted)
 
-    unsigned int* flags;  // Positions of flags (not sorted). Only for the purpose of clearing is_flag array quicker
-    unsigned int flags_index;  // Current count of flags
-    bool* is_flag;  // True if index is a flag (sorted)
+    Buffer flags;  // Positions of flags (not sorted). Only for the purpose of clearing is_flag array quicker
+    BitMask is_flag;  // True if index is a flag (sorted)
 
-    unsigned int** neighbors;  // Array of pointers to positions of neighbors for each field (sorted)
-    unsigned char* neighbors_l;  // Number of neighbors of each field (sorted)
+    Buffer2D neighbors;  // Buffer with positions of neighbors for each field (sorted)
 
     unsigned int left_click_counter;
     unsigned int right_click_counter;
@@ -43,7 +44,7 @@ class GridManager
 
     void Clear();
 
-    unsigned char* field_values;  // Values of all fields (sorted)
+    Buffer field_values;  // Values of all fields (sorted)
 
 };
 

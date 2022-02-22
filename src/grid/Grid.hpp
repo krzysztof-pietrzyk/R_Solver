@@ -10,11 +10,9 @@ class Grid : public GridManager
 {
     public:
 
-    unsigned int* mines;  // Mine positions (not sorted)
-    unsigned int* not_mines;  // Other fields, not mines (not sorted)
-    bool* is_mine;  // True if index is a mine (sorted)
-
-    unsigned int* neighbors_large;  // Neighbors array contains pointers to this array
+    Buffer mines;  // Mine positions (not sorted)
+    Buffer not_mines;  // Other fields, not mines (not sorted)
+    BitMask is_mine;  // True if index is a mine (sorted)
 
     Grid(unsigned short int w, unsigned short int h, unsigned int m);
 

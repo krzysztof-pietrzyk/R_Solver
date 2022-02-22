@@ -2,8 +2,9 @@
 
 // w - Width, h - Height, m - Number of mines
 GridSelfGenerated::GridSelfGenerated(unsigned short int w, unsigned short int h, unsigned int m) : Grid(w, h, m),
-    hash_length(S % 6 > 0 ? (S / 6) + 2 : (S / 6) + 1)
+    hash_length(S % 6 > 0 ? (S / 6) + 2 : (S / 6) + 1),
     // each hash symbol encodes 6 fields, 1 more if size is not divisible by 6, 1 more for string terminator
+    zcr_zeros(Buffer(S)), zcr_is_zero(BitMask(S))
 {
     hash = new char[hash_length] {0};
 
@@ -17,18 +18,12 @@ GridSelfGenerated::GridSelfGenerated(unsigned short int w, unsigned short int h,
      'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 
      'l', 'm', 'n', 'o'};
     hash_up_to_date = false;
-
-    zcr_zeros = new unsigned int[S] {0};
-    zcr_zeros_index = 0;
-    zcr_is_zero = new bool[S] {false};
 }
 
 GridSelfGenerated::~GridSelfGenerated()
 {
     delete[] hash;
     delete[] hash_symbols;
-    delete[] zcr_zeros;
-    delete[] zcr_is_zero;
 }
 
 void GridSelfGenerated::LeftClick(unsigned int field)
@@ -38,7 +33,7 @@ void GridSelfGenerated::LeftClick(unsigned int field)
     if(is_visible[field]) return;
     left_click_counter++;
     is_visible[field] = true;
-    visible_fields[visible_fields_index++] = field;
+    visible_fields += field;
     if(is_mine[field])
     {
         is_lost = true; 
@@ -54,7 +49,7 @@ void GridSelfGenerated::RightClick(unsigned int field)
     if(is_flag[field]) return;
     right_click_counter++;
     is_flag[field] = true;
-    flags[flags_index++] = field;
+    flags += field;
 }
 
 // void GridSelfGenerated::ShowUncovered()
@@ -79,19 +74,16 @@ void GridSelfGenerated::CalculateValues()
     unsigned char current_field_value;
     unsigned int current_field;
     unsigned char num_of_neighbors;
-    const unsigned int num_of_not_mines = S - M;
-    unsigned int* current_field_neighbors;
     // Only iterate over non-mine fields
-    for(int i = 0; i < num_of_not_mines; i++)
+    for(int i = 0; i < not_mines.Len(); i++)
     {
         current_field_value = 0;
         current_field = not_mines[i];
-        num_of_neighbors = neighbors_l[current_field];
-        current_field_neighbors = neighbors[current_field];
+        num_of_neighbors = neighbors[current_field].Len();
         for(int j = 0; j < num_of_neighbors; j++)
         {
             // Count how many mines are within each field's neighbors
-            if(is_mine[current_field_neighbors[j]]) current_field_value++;
+            if(is_mine[neighbors[current_field][j]]) current_field_value++;
         }
         field_values[current_field] = current_field_value;
     }
@@ -132,32 +124,29 @@ void GridSelfGenerated::ZeroChainReaction(unsigned int field)
 
     ClearZCR();
     unsigned int* current_neighbors;
-    unsigned char current_neighbors_l;
     unsigned int current_zero;
     unsigned int current_neighbor;
     // Clicked field is the beginning of the chain reaction
     zcr_is_zero[field] = true;
-    zcr_zeros[zcr_zeros_index++] = field;
+    zcr_zeros += field;
 
-    for(int i = 0; i < zcr_zeros_index; i++)
+    for(int i = 0; i < zcr_zeros.Len(); i++)
     {
         // Iterate through each element in zcr_zeros
-        // zcr_zeros_index may increase while the loop is running
+        // zcr_zeros.Len() may increase while the loop is running
         current_zero = zcr_zeros[i];
-        current_neighbors = neighbors[current_zero];
-        current_neighbors_l = neighbors_l[current_zero];
-        for(int j = 0; j < current_neighbors_l; j++)
+        for(int j = 0; j < neighbors[current_zero].Len(); j++)
         {
             // Iterate through neighbors of current field
-            current_neighbor = current_neighbors[j];
+            current_neighbor = neighbors[current_zero][j];
             if(!is_visible[current_neighbor])
             {
                 is_visible[current_neighbor] = true;
-                visible_fields[visible_fields_index++] = current_neighbor;
+                visible_fields += current_neighbor;
                 if(field_values[current_neighbor] == 0 && !zcr_is_zero[current_neighbor])
                 {
                     zcr_is_zero[current_neighbor] = true;
-                    zcr_zeros[zcr_zeros_index++] = current_neighbor;
+                    zcr_zeros += current_neighbor;
                 }
             }
         }
@@ -168,6 +157,6 @@ void GridSelfGenerated::ZeroChainReaction(unsigned int field)
 void GridSelfGenerated::ClearZCR()
 {
     // Clear the temporary array and zero the index
-    for(int i = 0; i < zcr_zeros_index; i++) zcr_is_zero[zcr_zeros[i]] = false;
-    zcr_zeros_index = 0;
+    zcr_is_zero.Clear();
+    zcr_zeros.Clear();
 }
