@@ -11,8 +11,7 @@ Grid::~Grid() {}
 
 void Grid::Clear()
 {
-    // Only clear the data, which may influence the next generated grid
-    for(int i = 0; i < M; i++) is_mine[mines[i]] = false;
+    is_mine.Clear();
     mines.Clear();
     not_mines.Clear();
 
@@ -43,7 +42,10 @@ void Grid::FindNeighbors()
         if(neighbors_temp.Len() > 0)
         {
             // Store the neighbors in the Buffer
-            for(int j = 0; j < neighbors_temp.Len(); j++) neighbors[i] += neighbors_temp[j];
+            for(int j = 0; j < neighbors_temp.Len(); j++) 
+            {
+                neighbors[i] += neighbors_temp[j];
+            }
         }
     }
 }

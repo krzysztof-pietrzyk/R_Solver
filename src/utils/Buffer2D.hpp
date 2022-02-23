@@ -2,6 +2,7 @@
 #define Buffer2D_hpp
 
 #include <stdexcept>
+#include <vector>
 
 #include "Buffer.hpp"
 
@@ -9,7 +10,7 @@ class Buffer2D
 {
     private:
 
-    Buffer* arr;
+    std::vector<Buffer> arr;
     const unsigned int max_capacity;
     const unsigned int element_size;
 

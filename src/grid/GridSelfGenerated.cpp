@@ -60,7 +60,7 @@ void GridSelfGenerated::RightClick(unsigned int field)
 //         {
 //             int f = i * W + j;
 //             if(is_flag[f]) cout << "x";
-// 			else if(!is_visible[f]) cout << "#";
+// 			//else if(!is_visible[f]) cout << "#";
 // 			else if(is_mine[f]) cout << "*";
 // 			else if(field_values[f] == 0) cout << " ";
 // 			else cout << to_string(field_values[f]);
