@@ -10,6 +10,7 @@ class AlgorithmDataStorage
     unsigned int* face;
     unsigned int face_index;
     unsigned int last_read_index_face;
+    unsigned int last_read_index_face_flags;
     bool* is_face;
 
     unsigned int* border;

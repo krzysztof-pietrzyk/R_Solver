@@ -15,7 +15,7 @@ void GridGeneratorUnsafe::Generate()
     const unsigned int mines_target = grid.M;
     unsigned int poll_index;
     unsigned int random_field;
-    std::copy(empty_template, empty_template + grid.S, safe_fields);
+    for(unsigned int i = 0; i < empty_template.Len(); i++) safe_fields[i] = empty_template[i];
 
     grid.Clear();
 
@@ -23,12 +23,12 @@ void GridGeneratorUnsafe::Generate()
     {
         poll_index = dist(rng) % current_max;
         random_field = safe_fields[poll_index];
-        grid.mines[i] = random_field;
+        grid.mines += random_field;
         grid.is_mine[random_field] = true;
         safe_fields[poll_index] = safe_fields[--current_max];
     }
 
-    std::copy(safe_fields, safe_fields + current_max, grid.not_mines);
+    for(unsigned int i = 0; i < current_max; i++) grid.not_mines += safe_fields[i];
     grid.hash_up_to_date = false;
     grid.CalculateValues();
 }

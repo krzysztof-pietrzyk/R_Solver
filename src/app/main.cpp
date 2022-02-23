@@ -4,7 +4,7 @@
 // #include <ctime>
 // #include <iostream>
 
-// #include "Solver.hpp"
+// #include "solver/Solver.hpp"
 
 // using namespace std;
 
@@ -76,24 +76,16 @@
 // }
 
 
-#include <thread>
-#include <vector>
-#include <chrono>
-#include <ctime>
-#include <iostream>
-
 #include "solver/Solver.hpp"
-
-using namespace std;
-
 
 int main()
 {
 	Solver s = Solver(30, 16, 99, nullptr);
-	s.Run();
+	//s.Run();
 	
 	return 0;
 }
+
 
 // #include <iostream>
 

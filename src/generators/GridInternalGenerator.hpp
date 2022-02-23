@@ -2,6 +2,8 @@
 #define GridInternalGenerator_hpp
 
 #include "grid/GridSelfGenerated.hpp"
+#include "utils/Buffer.hpp"
+#include "utils/ValueTable.hpp"
 
 #include "GridGenerator.hpp"
 
@@ -17,13 +19,9 @@ class GridInternalGenerator : public GridGenerator
 
     GridSelfGenerated& grid;
 
-    unsigned int* empty_template;
-
-    unsigned int* safe_fields;
-    unsigned int safe_fields_index;
-    
-    unsigned int* generated_mines;
-    unsigned int generated_mines_index;
+    ValueTable empty_template;
+    ValueTable safe_fields;
+    Buffer generated_mines;
 };
 
 #endif

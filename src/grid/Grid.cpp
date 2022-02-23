@@ -13,6 +13,8 @@ void Grid::Clear()
 {
     // Only clear the data, which may influence the next generated grid
     for(int i = 0; i < M; i++) is_mine[mines[i]] = false;
+    mines.Clear();
+    not_mines.Clear();
 
     GridManager::Clear();
 }

@@ -7,11 +7,6 @@ AlgorithmLayerOne::AlgorithmLayerOne(GridManager& grid_, AlgorithmDataStorage& d
     num_of_neighbors_temp = 0;
     field_value_temp = 0;
     border = nullptr;
-    neighbors_l = grid.neighbors_l;
-    is_flag = grid.is_flag;
-    neighbors = grid.neighbors;
-    is_visible = grid.is_visible;
-    neighbors_temp = nullptr;
 }
 
 AlgorithmLayerOne::~AlgorithmLayerOne() {}
@@ -30,31 +25,32 @@ bool AlgorithmLayerOne::Run()
     for(i = 0; i < border_index_max; i++)
     {
         border_field_temp = border[i];
-        num_of_neighbors_temp = neighbors_l[border_field_temp];
-        neighbors_temp = neighbors[border_field_temp];
         flags_count = 0;
         not_visible_count = 0;
+        num_of_neighbors_temp = grid.neighbors[border_field_temp].Len();
         for(j = 0; j < num_of_neighbors_temp; j++)
         {
-            neighbor_field_temp = neighbors_temp[j];
-            if(is_flag[neighbor_field_temp]) flags_count++;
-            else if(!is_visible[neighbor_field_temp]) not_visible_count++;
+            neighbor_field_temp = grid.neighbors[border_field_temp][j];
+            if(grid.is_flag[neighbor_field_temp]) flags_count++;
+            else if(!grid.is_visible[neighbor_field_temp]) not_visible_count++;
         }
         field_value_temp = grid.FieldValue(border_field_temp);
         if(field_value_temp == flags_count)
         {
             for(j = 0; j < num_of_neighbors_temp; j++)
             {
-                neighbor_field_temp = neighbors_temp[j];
-                if(!is_flag[neighbor_field_temp] && !is_visible[neighbor_field_temp]) grid.LeftClick(neighbor_field_temp);
+                neighbor_field_temp = grid.neighbors[border_field_temp][j];
+                if(!grid.is_flag[neighbor_field_temp] && !grid.is_visible[neighbor_field_temp])
+                    grid.LeftClick(neighbor_field_temp);
             }
         }
         else if(field_value_temp == flags_count + not_visible_count)
         {
             for(j = 0; j < num_of_neighbors_temp; j++)
             {
-                neighbor_field_temp = neighbors_temp[j];
-                if(!is_flag[neighbor_field_temp] && !is_visible[neighbor_field_temp]) grid.RightClick(neighbor_field_temp);
+                neighbor_field_temp = grid.neighbors[border_field_temp][j];
+                if(!grid.is_flag[neighbor_field_temp] && !grid.is_visible[neighbor_field_temp])
+                    grid.RightClick(neighbor_field_temp);
             }
         }
     }

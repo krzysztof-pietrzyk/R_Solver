@@ -6,7 +6,6 @@ AlgorithmRefreshBorder::AlgorithmRefreshBorder(GridManager& grid_, AlgorithmData
     visible_field_temp = 0;
     num_of_neighbors_temp = 0;
     neighbor_field_temp = 0;
-    neighbors_temp = nullptr;
     border_old = nullptr;
     border_new = nullptr;
 }
@@ -15,11 +14,11 @@ AlgorithmRefreshBorder::~AlgorithmRefreshBorder() {}
 
 bool AlgorithmRefreshBorder::Run()
 {
-    if(data.last_read_index_border == grid.visible_fields_index &&
-        data.last_read_index_border_flags == grid.flags_index) return true;
+    if(data.last_read_index_border == grid.visible_fields.Len() &&
+        data.last_read_index_border_flags == grid.flags.Len()) return true;
     
     const unsigned int border_index_old = data.border_index;
-    const unsigned int visible_fields_new_index = grid.visible_fields_index;
+    const unsigned int visible_fields_new_index = grid.visible_fields.Len();
     unsigned int i = 0;
     unsigned int j = 0;
     bool at_least_one_not_visible = false;
@@ -30,12 +29,11 @@ bool AlgorithmRefreshBorder::Run()
     for(i = 0; i < border_index_old; i++)
     {
         border_field_temp = border_old[i];
-        num_of_neighbors_temp = grid.neighbors_l[border_field_temp];
-        neighbors_temp = grid.neighbors[border_field_temp];
+        num_of_neighbors_temp = grid.neighbors[border_field_temp].Len();
         at_least_one_not_visible = false;
         for(j = 0; j < num_of_neighbors_temp; j++)
         {
-            neighbor_field_temp = neighbors_temp[j];
+            neighbor_field_temp = grid.neighbors[border_field_temp][j];
             if(!grid.is_visible[neighbor_field_temp] && !grid.is_flag[neighbor_field_temp])
             {
                 at_least_one_not_visible = true;
@@ -49,12 +47,11 @@ bool AlgorithmRefreshBorder::Run()
     for(i = data.last_read_index_border; i < visible_fields_new_index; i++)
     {
         visible_field_temp = grid.visible_fields[i];
-        num_of_neighbors_temp = grid.neighbors_l[visible_field_temp];
-        neighbors_temp = grid.neighbors[visible_field_temp];
+        num_of_neighbors_temp = grid.neighbors[visible_field_temp].Len();
         at_least_one_not_visible = false;
         for(j = 0; j < num_of_neighbors_temp; j++)
         {
-            neighbor_field_temp = neighbors_temp[j];
+            neighbor_field_temp = grid.neighbors[visible_field_temp][j];
             if(!grid.is_visible[neighbor_field_temp] && !grid.is_flag[neighbor_field_temp])
             {
                 at_least_one_not_visible = true;
@@ -69,7 +66,7 @@ bool AlgorithmRefreshBorder::Run()
     }
 
     data.last_read_index_border = visible_fields_new_index;
-    data.last_read_index_border_flags = grid.flags_index;
+    data.last_read_index_border_flags = grid.flags.Len();
     data.border = border_new;
     data.border_internal_indicator = !data.border_internal_indicator;
     data.border_index = border_index_new;

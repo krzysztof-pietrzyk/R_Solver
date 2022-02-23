@@ -6,6 +6,7 @@
 #include "utils/BitMask.hpp"
 #include "utils/Buffer.hpp"
 #include "utils/Buffer2D.hpp"
+#include "utils/ValueTable.hpp"
 
 class GridManager
 {
@@ -44,7 +45,7 @@ class GridManager
 
     void Clear();
 
-    Buffer field_values;  // Values of all fields (sorted)
+    ValueTable field_values;  // Values of all fields (sorted)
 
 };
 

@@ -9,6 +9,7 @@ AlgorithmDataStorage::AlgorithmDataStorage(GridManager& grid)
     face_internal_indicator = false;
     face_index = 0;
     last_read_index_face = 0;
+    last_read_index_face_flags = 0;
 
     is_border = new bool[grid.S] {0};
     border_internal_0 = new unsigned int[grid.S] {0};
@@ -55,6 +56,7 @@ void AlgorithmDataStorage::Clear()
     face_index = 0;
     border_index = 0;
     last_read_index_face = 0;
+    last_read_index_face_flags = 0;
     last_read_index_border = 0;
     last_read_index_border_flags = 0;
 }

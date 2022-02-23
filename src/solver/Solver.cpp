@@ -29,7 +29,7 @@ void Solver::RunForever()
 		generator->Generate();
 		grid->CalculateHash();
 		algorithm_manager->RunAll();
-		if(!grid->is_lost && grid->visible_fields_index == fields_to_uncover) wins++;
+		if(!grid->is_lost && grid->visible_fields.Len() == fields_to_uncover) wins++;
 		UpdateThreadData();
 	}
 }
@@ -46,7 +46,7 @@ void Solver::UpdateThreadData()
 {
 	unsigned int lost = 0;
 	if(grid->is_lost) lost = 1;
-	float completion_rate = float(grid->visible_fields_index - lost) / fields_to_uncover;
+	float completion_rate = float(grid->visible_fields.Len() - lost) / fields_to_uncover;
 	thread_data->mut.lock();
 	thread_data->tries += tries - last_read_tries;
 	thread_data->wins += wins - last_read_wins;

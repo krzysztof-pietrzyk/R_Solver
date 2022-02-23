@@ -22,7 +22,6 @@ class AlgorithmRefreshFace : public Algorithm
     unsigned int visible_field_temp;
     unsigned char num_of_neighbors_temp;
     unsigned int neighbor_field_temp;
-    unsigned int* neighbors_temp;
     unsigned int* face_old;
     unsigned int* face_new;
 };

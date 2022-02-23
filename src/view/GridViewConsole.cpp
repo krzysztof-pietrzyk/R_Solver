@@ -2,10 +2,11 @@
 
 using namespace std;
 
-GridViewConsole::GridViewConsole(Grid& grid) : GridView(grid)
+GridViewConsole::GridViewConsole(Grid& grid) : GridView(grid),
+	row_indicator_max_w(to_string(grid.H).length()),
+	is_wider_than_10(grid.W > 10)
 {
-    row_indicator_max_w = to_string(grid.H).length();
-    is_wider_than_10 = (grid.W > 10);
+	
 }
 
 GridViewConsole::~GridViewConsole() {}

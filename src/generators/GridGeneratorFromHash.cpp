@@ -14,7 +14,6 @@ void GridGeneratorFromHash::Generate()
 {
     SetHash((char*)"D22R82T000@100BQ1P00b800@[QHX20<3P024<P`@@9P@QH318B0`0d@282T8=80HP`0QR40K045:120");
     unsigned int current_field = 0;
-    unsigned int current_not_mine_index = 0;
     bool is_mine;
     char current_symbol;
 
@@ -30,7 +29,7 @@ void GridGeneratorFromHash::Generate()
             {
                 is_mine = (current_symbol & 32);
                 if(is_mine) grid.is_mine[current_field] = is_mine;
-                else grid.not_mines[current_not_mine_index++] = current_field;
+                else grid.not_mines += current_field;
                 current_field++;
                 current_symbol = current_symbol << 1;
             }
@@ -45,7 +44,7 @@ void GridGeneratorFromHash::Generate()
             {
                 is_mine = (current_symbol & 32);
                 if(is_mine) grid.is_mine[current_field] = is_mine;
-                else grid.not_mines[current_not_mine_index++] = current_field;
+                else grid.not_mines += current_field;
                 current_field++;
                 current_symbol = current_symbol << 1;
             }

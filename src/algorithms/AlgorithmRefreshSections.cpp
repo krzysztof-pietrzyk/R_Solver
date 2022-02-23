@@ -8,11 +8,9 @@ AlgorithmRefreshSections::AlgorithmRefreshSections(GridManager& grid_, Algorithm
     current_border_field = 0;
     neighbor_temp = 0;
     neighbor_section_temp = 0;
-    neighbors_of_neighbor_temp = nullptr;
     neighbors_of_neighbor_temp_l = 0;
     potential_section_neighbor = 0;
     section_value_temp = 0;
-    border_field_neighbors = nullptr;
     border_field_neighbors_l = 0;
     section_temp = nullptr;
     section_neighbors_temp = nullptr;
@@ -39,15 +37,14 @@ bool AlgorithmRefreshSections::Run()
     {
         current_section_length = 0;
         current_border_field = data.border[i];
-        border_field_neighbors = grid.neighbors[current_border_field];
-        border_field_neighbors_l = grid.neighbors_l[current_border_field];
+        border_field_neighbors_l = grid.neighbors[current_border_field].Len();
         section_value_temp = grid.FieldValue(current_border_field);
         current_section_neighbors_index = 0;
 
         // iterate through each border field's neigbors
         for(j = 0; j < border_field_neighbors_l; j++)
         {
-            neighbor_temp = border_field_neighbors[j];
+            neighbor_temp = grid.neighbors[current_border_field][j];
             // count the number of flags already marked around the current_border_field
             if(grid.is_flag[neighbor_temp]) { section_value_temp--; continue; }
             // if this neighbor is already visible, ignore it
@@ -55,14 +52,13 @@ bool AlgorithmRefreshSections::Run()
             // add this neighbor to the section
             section_temp = data.sections[current_border_field];
             section_temp[current_section_length++] = neighbor_temp;
-            neighbors_of_neighbor_temp = grid.neighbors[neighbor_temp];
-            neighbors_of_neighbor_temp_l = grid.neighbors_l[neighbor_temp];
+            neighbors_of_neighbor_temp_l = grid.neighbors[neighbor_temp].Len();
             section_neighbors_temp = data.sections_neighbors[current_border_field];
             // iterate through the neighbors of that neighbor, in order to determine
             // potential neighbour sections of this section
             for(k = 0; k < neighbors_of_neighbor_temp_l; k++)
             {
-                potential_section_neighbor = neighbors_of_neighbor_temp[k];
+                potential_section_neighbor = grid.neighbors[neighbor_temp][k];
                 // if this neighbor is not on border or is the currently considered field, ignore it
                 if(!data.is_border[potential_section_neighbor] || potential_section_neighbor == current_border_field) { continue; }
                 duplicate_temp = false;

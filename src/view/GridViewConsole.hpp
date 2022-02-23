@@ -20,9 +20,9 @@ class GridViewConsole : public GridView
 
     private:
 
-    unsigned int row_indicator_max_w;
+    const unsigned int row_indicator_max_w;
 
-    bool is_wider_than_10;
+    const bool is_wider_than_10;
 };
 
 #endif
