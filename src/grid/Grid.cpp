@@ -28,6 +28,7 @@ void Grid::FindNeighbors()
     unsigned short int row;
     for(unsigned int i = 0; i < S; i++)
     {
+        neighbors_temp.Clear();
         // For each field, list the neighbors
         column = i % W;
         row = i / W;

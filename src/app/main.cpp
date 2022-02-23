@@ -81,7 +81,7 @@
 int main()
 {
 	Solver s = Solver(30, 16, 99, nullptr);
-	//s.Run();
+	s.Run();
 	
 	return 0;
 }
