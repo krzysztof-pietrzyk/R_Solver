@@ -2,6 +2,7 @@
 
 BitMask::BitMask(unsigned int capacity) : max_capacity(capacity)
 {
+    if(0 == max_capacity) { throw std::invalid_argument("ERROR: BitMask capacity must be greater than 0!"); }
     arr = new bool[max_capacity] {0};
 }
 

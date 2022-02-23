@@ -1,10 +1,8 @@
 #include "Buffer.hpp"
 
-#include <iostream>
-using namespace std;
-
 Buffer::Buffer(unsigned int capacity) : max_capacity(capacity)
 {
+    if(0 == max_capacity) { throw std::invalid_argument("ERROR: Buffer capacity must be greater than 0!"); }
     arr = new unsigned int[max_capacity] {0};
     _len = 0;
 }
