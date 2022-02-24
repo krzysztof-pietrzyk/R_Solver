@@ -1,3 +1,13 @@
+# Command for creating makefiles
+# E:\Projects\R_Solver\build>cmake .. -DCMAKE_BUILD_TYPE=Release -G "Unix Makefiles"
+
+message("CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE}")
+if(${CMAKE_BUILD_TYPE} STREQUAL "Release")
+   message("CMAKE_CXX_FLAGS_RELEASE: ${CMAKE_CXX_FLAGS_RELEASE}")
+elseif(${CMAKE_BUILD_TYPE} STREQUAL "Debug")
+   message("CMAKE_CXX_FLAGS_DEBUG: ${CMAKE_CXX_FLAGS_DEBUG}")
+endif()
+
 message("Entering directory ${CMAKE_CURRENT_SOURCE_DIR}")
 
 add_subdirectory(algorithms)
