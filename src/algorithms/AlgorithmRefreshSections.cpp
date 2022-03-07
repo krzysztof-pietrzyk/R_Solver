@@ -5,10 +5,7 @@ using namespace std;
 
 AlgorithmRefreshSections::AlgorithmRefreshSections(GridManager& grid_, AlgorithmDataStorage& data_) : Algorithm(grid_), data(data_) {}
 
-AlgorithmRefreshSections::~AlgorithmRefreshSections()
-{
-
-}
+AlgorithmRefreshSections::~AlgorithmRefreshSections() {}
 
 bool AlgorithmRefreshSections::Run()
 {
@@ -20,12 +17,8 @@ bool AlgorithmRefreshSections::Run()
     unsigned char current_section_neighbors_index = 0;
     unsigned char current_section_length = 0;
     unsigned int current_border_field = 0;
-    unsigned int neighbor_temp = 0;
     unsigned int neighbor_section_temp = 0;
-    unsigned int neighbors_of_neighbor_temp_l = 0;
-    unsigned int potential_section_neighbor = 0;
     unsigned int section_value_temp = 0;
-    unsigned int border_field_neighbors_l = 0;
     unsigned int* section_neighbors_temp = nullptr;
     bool duplicate_temp = false;
 
@@ -34,35 +27,31 @@ bool AlgorithmRefreshSections::Run()
     {
         current_section_length = 0;
         current_border_field = data.border[i];
-        border_field_neighbors_l = grid.neighbors[current_border_field].size();
         section_value_temp = grid.FieldValue(current_border_field);
         current_section_neighbors_index = 0;
 
         // iterate through each border field's neigbors
-        for(j = 0; j < border_field_neighbors_l; j++)
+        for(unsigned int & neighbor_field : grid.neighbors[current_border_field])
         {
-            neighbor_temp = grid.neighbors[current_border_field][j];
             // count the number of flags already marked around the current_border_field
-            if(grid.is_flag[neighbor_temp]) { section_value_temp--; continue; }
+            if(grid.is_flag[neighbor_field]) { section_value_temp--; continue; }
             // if this neighbor is already visible, ignore it
-            else if(grid.is_visible[neighbor_temp]) { continue; }
+            else if(grid.is_visible[neighbor_field]) { continue; }
             // add this neighbor to the section
-            data.sections[current_border_field][current_section_length++] = neighbor_temp;
-            neighbors_of_neighbor_temp_l = grid.neighbors[neighbor_temp].size();
+            data.sections[current_border_field][current_section_length++] = neighbor_field;
             section_neighbors_temp = data.sections_neighbors[current_border_field];
             // iterate through the neighbors of that neighbor, in order to determine
             // potential neighbour sections of this section
-            for(k = 0; k < neighbors_of_neighbor_temp_l; k++)
+            for(unsigned int & neighbor_of_neighbor : grid.neighbors[neighbor_field])
             {
-                potential_section_neighbor = grid.neighbors[neighbor_temp][k];
                 // if this neighbor is not on border or is the currently considered field, ignore it
-                if(!data.is_border[potential_section_neighbor] || potential_section_neighbor == current_border_field) { continue; }
+                if(!data.is_border[neighbor_of_neighbor] || neighbor_of_neighbor == current_border_field) { continue; }
                 duplicate_temp = false;
                 // iterate through neighbors of this section, which have already been found before
                 // in order to filter duplicates
                 for(l = 0; l < current_section_neighbors_index; l++)
                 {
-                    if(section_neighbors_temp[l] == potential_section_neighbor)
+                    if(section_neighbors_temp[l] == neighbor_of_neighbor)
                     {
                         duplicate_temp = true;
                         break;
@@ -71,7 +60,7 @@ bool AlgorithmRefreshSections::Run()
                 if(!duplicate_temp) 
                 {
                     // only add this to section neighbors if it's not a duplicate
-                    section_neighbors_temp[current_section_neighbors_index++] = potential_section_neighbor;
+                    section_neighbors_temp[current_section_neighbors_index++] = neighbor_of_neighbor;
                 }
             }
         }

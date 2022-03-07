@@ -17,20 +17,16 @@ bool AlgorithmRefreshBorder::Run()
     unsigned int border_index_new = 0;
     unsigned int border_field_temp = 0;
     unsigned int visible_field_temp = 0;
-    unsigned char num_of_neighbors_temp = 0;
-    unsigned int neighbor_field_temp = 0;
 
     unsigned int* border_old = data.border_internal_indicator ? data.border_internal_0 : data.border_internal_1;
     unsigned int* border_new = data.border_internal_indicator ? data.border_internal_1 : data.border_internal_0;
     for(i = 0; i < border_index_old; i++)
     {
         border_field_temp = border_old[i];
-        num_of_neighbors_temp = grid.neighbors[border_field_temp].size();
         at_least_one_not_visible = false;
-        for(j = 0; j < num_of_neighbors_temp; j++)
+        for(unsigned int & neighbor_field : grid.neighbors[border_field_temp])
         {
-            neighbor_field_temp = grid.neighbors[border_field_temp][j];
-            if(!grid.is_visible[neighbor_field_temp] && !grid.is_flag[neighbor_field_temp])
+            if(!grid.is_visible[neighbor_field] && !grid.is_flag[neighbor_field])
             {
                 at_least_one_not_visible = true;
                 break;
@@ -43,12 +39,10 @@ bool AlgorithmRefreshBorder::Run()
     for(i = data.last_read_index_border; i < visible_fields_new_index; i++)
     {
         visible_field_temp = grid.visible_fields[i];
-        num_of_neighbors_temp = grid.neighbors[visible_field_temp].size();
         at_least_one_not_visible = false;
-        for(j = 0; j < num_of_neighbors_temp; j++)
+        for(unsigned int & neighbor_field : grid.neighbors[visible_field_temp])
         {
-            neighbor_field_temp = grid.neighbors[visible_field_temp][j];
-            if(!grid.is_visible[neighbor_field_temp] && !grid.is_flag[neighbor_field_temp])
+            if(!grid.is_visible[neighbor_field] && !grid.is_flag[neighbor_field])
             {
                 at_least_one_not_visible = true;
                 break;
