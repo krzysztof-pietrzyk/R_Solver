@@ -17,18 +17,6 @@ class AlgorithmRefreshSections : public Algorithm
     protected:
 
     AlgorithmDataStorage& data;
-
-    unsigned int current_border_field;
-    unsigned int neighbor_temp;
-    unsigned int neighbor_section_temp;
-    unsigned int* neighbors_of_neighbor_temp;
-    unsigned char neighbors_of_neighbor_temp_l;
-    unsigned int potential_section_neighbor;
-    unsigned char section_value_temp;
-    unsigned int* border_field_neighbors;
-    unsigned char border_field_neighbors_l;
-    unsigned int* section_temp;
-    unsigned int* section_neighbors_temp;
 };
 
 #endif

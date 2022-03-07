@@ -1,6 +1,7 @@
 #ifndef GridManager_hpp
 #define GridManager_hpp
 
+#include <vector>
 #include <stdexcept>
 
 class GridManager
@@ -12,16 +13,15 @@ class GridManager
     const unsigned int S;  // Size (Width * Height)
     const unsigned int M;  // Number of mines
 
-    unsigned int* visible_fields;  // Positions of visible fields (not sorted)
+    std::vector<unsigned int> visible_fields;  // Positions of visible fields (not sorted)
     unsigned int visible_fields_index;  // Current count of visible fields
-	bool* is_visible;  // True if index is visible (sorted)
+	std::vector<bool> is_visible;  // True if index is visible (sorted)
 
-    unsigned int* flags;  // Positions of flags (not sorted). Only for the purpose of clearing is_flag array quicker
+    std::vector<unsigned int> flags;  // Positions of flags (not sorted). Only for the purpose of clearing is_flag array quicker
     unsigned int flags_index;  // Current count of flags
-    bool* is_flag;  // True if index is a flag (sorted)
+    std::vector<bool> is_flag;  // True if index is a flag (sorted)
 
-    unsigned int** neighbors;  // Array of pointers to positions of neighbors for each field (sorted)
-    unsigned char* neighbors_l;  // Number of neighbors of each field (sorted)
+    std::vector<std::vector<unsigned int>> neighbors;  // Array of pointers to positions of neighbors for each field (sorted)
 
     unsigned int left_click_counter;
     unsigned int right_click_counter;
@@ -43,7 +43,7 @@ class GridManager
 
     void Clear();
 
-    unsigned char* field_values;  // Values of all fields (sorted)
+    std::vector<unsigned char> field_values;  // Values of all fields (sorted)
 
 };
 

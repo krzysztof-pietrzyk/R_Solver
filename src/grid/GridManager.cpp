@@ -3,35 +3,24 @@
 GridManager::GridManager(unsigned short int w, unsigned short int h, unsigned int m)
     : W(w), H(h), M(m), S(w * h)
 {
-    visible_fields = new unsigned int[S] {0};
+    visible_fields = std::vector<unsigned int>(S, 0);
     visible_fields_index = 0;
-	is_visible = new bool[S] {false};
+	is_visible = std::vector<bool>(S, false);
     
-    flags = new unsigned int[S] {0};
+    flags = std::vector<unsigned int>(S, 0);
     flags_index = 0;
-    is_flag = new bool[S] {false};
+    is_flag = std::vector<bool>(S, false);
 
-    neighbors = new unsigned int*[S];
-    neighbors_l = new unsigned char[S] {0};
+    neighbors = std::vector<std::vector<unsigned int>>(S, std::vector<unsigned int>());
 
-    field_values = new unsigned char[S] {0};
+    field_values = std::vector<unsigned char>(S, 0);
 
     left_click_counter = 0;
     right_click_counter = 0;
     is_lost = false;
 }
 
-GridManager::~GridManager()
-{
-    delete[] field_values;
-    delete[] visible_fields;
-    delete[] is_visible;
-    delete[] flags;
-    delete[] is_flag;
-    for(int i = 0; i < S; i++) delete[] neighbors[i];
-    delete[] neighbors;
-    delete[] neighbors_l;
-}
+GridManager::~GridManager() {}
 
 unsigned char GridManager::FieldValue(unsigned int field)
 {

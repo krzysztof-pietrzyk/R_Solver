@@ -18,17 +18,15 @@ GridSelfGenerated::GridSelfGenerated(unsigned short int w, unsigned short int h,
      'l', 'm', 'n', 'o'};
     hash_up_to_date = false;
 
-    zcr_zeros = new unsigned int[S] {0};
+    zcr_zeros = std::vector<unsigned int>(S, 0);
     zcr_zeros_index = 0;
-    zcr_is_zero = new bool[S] {false};
+    zcr_is_zero = std::vector<bool>(S, false);
 }
 
 GridSelfGenerated::~GridSelfGenerated()
 {
     delete[] hash;
     delete[] hash_symbols;
-    delete[] zcr_zeros;
-    delete[] zcr_is_zero;
 }
 
 void GridSelfGenerated::LeftClick(unsigned int field)
@@ -80,18 +78,16 @@ void GridSelfGenerated::CalculateValues()
     unsigned int current_field;
     unsigned char num_of_neighbors;
     const unsigned int num_of_not_mines = S - M;
-    unsigned int* current_field_neighbors;
     // Only iterate over non-mine fields
     for(int i = 0; i < num_of_not_mines; i++)
     {
         current_field_value = 0;
         current_field = not_mines[i];
-        num_of_neighbors = neighbors_l[current_field];
-        current_field_neighbors = neighbors[current_field];
+        num_of_neighbors = neighbors[current_field].size();
         for(int j = 0; j < num_of_neighbors; j++)
         {
             // Count how many mines are within each field's neighbors
-            if(is_mine[current_field_neighbors[j]]) current_field_value++;
+            if(is_mine[neighbors[current_field][j]]) current_field_value++;
         }
         field_values[current_field] = current_field_value;
     }
@@ -131,8 +127,7 @@ void GridSelfGenerated::ZeroChainReaction(unsigned int field)
     if(field_values[field] != 0) return;
 
     ClearZCR();
-    unsigned int* current_neighbors;
-    unsigned char current_neighbors_l;
+    unsigned char num_of_neighbors;
     unsigned int current_zero;
     unsigned int current_neighbor;
     // Clicked field is the beginning of the chain reaction
@@ -144,12 +139,11 @@ void GridSelfGenerated::ZeroChainReaction(unsigned int field)
         // Iterate through each element in zcr_zeros
         // zcr_zeros_index may increase while the loop is running
         current_zero = zcr_zeros[i];
-        current_neighbors = neighbors[current_zero];
-        current_neighbors_l = neighbors_l[current_zero];
-        for(int j = 0; j < current_neighbors_l; j++)
+        num_of_neighbors = neighbors[current_zero].size();
+        for(int j = 0; j < num_of_neighbors; j++)
         {
             // Iterate through neighbors of current field
-            current_neighbor = current_neighbors[j];
+            current_neighbor = neighbors[current_zero][j];
             if(!is_visible[current_neighbor])
             {
                 is_visible[current_neighbor] = true;

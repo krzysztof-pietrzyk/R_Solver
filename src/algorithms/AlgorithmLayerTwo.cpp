@@ -1,14 +1,8 @@
 #include "AlgorithmLayerTwo.hpp"
 
-AlgorithmLayerTwo::AlgorithmLayerTwo(GridManager& grid_, AlgorithmDataStorage& data_) : Algorithm(grid_), data(data_)
-{
-    
-}
+AlgorithmLayerTwo::AlgorithmLayerTwo(GridManager& grid_, AlgorithmDataStorage& data_) : Algorithm(grid_), data(data_) {}
 
-AlgorithmLayerTwo::~AlgorithmLayerTwo()
-{
-
-}
+AlgorithmLayerTwo::~AlgorithmLayerTwo() {}
 
 bool AlgorithmLayerTwo::Run()
 {

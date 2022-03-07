@@ -17,14 +17,6 @@ class AlgorithmRefreshBorder : public Algorithm
     protected:
 
     AlgorithmDataStorage& data;
-
-    unsigned int border_field_temp;
-    unsigned int visible_field_temp;
-    unsigned char num_of_neighbors_temp;
-    unsigned int neighbor_field_temp;
-    unsigned int* neighbors_temp;
-    unsigned int* border_old;
-    unsigned int* border_new;
 };
 
 #endif

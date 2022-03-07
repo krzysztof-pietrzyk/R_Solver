@@ -12,10 +12,6 @@ class GridSelfGenerated : public Grid
     const char* hash_symbols;  // Possible symbols for hash (constant set)
     bool hash_up_to_date;  // False if CalculateHash has not been called after generating grid
 
-    unsigned int* zcr_zeros;  // Temporary array used in ZeroChainReaction
-    unsigned int zcr_zeros_index;  // Temporary index used in ZeroChainReaction
-    bool* zcr_is_zero;  // Temporary array used in ZeroChainReaction
-
     GridSelfGenerated(unsigned short int w, unsigned short int h, unsigned int m);
 
     ~GridSelfGenerated();
@@ -24,17 +20,17 @@ class GridSelfGenerated : public Grid
 
     void RightClick(unsigned int field);
 
-    //void ShowUncovered();
-
     void CalculateHash();
 
     void CalculateValues();
 
     protected:
 
-    void ZeroChainReaction(unsigned int field);
+    std::vector<unsigned int> zcr_zeros;  // Temporary array used in ZeroChainReaction
+    unsigned int zcr_zeros_index;  // Temporary index used in ZeroChainReaction
+    std::vector<bool> zcr_is_zero;  // Temporary array used in ZeroChainReaction
 
-    private:
+    void ZeroChainReaction(unsigned int field);
 
     void ClearZCR();
 };
