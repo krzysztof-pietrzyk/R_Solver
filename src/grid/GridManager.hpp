@@ -7,10 +7,10 @@ class GridManager
 {
     public:
 
-    unsigned short int W;  // Width
-    unsigned short int H;  // Height
-    unsigned int S;  // Size (Width * Height)
-    unsigned int M;  // Number of mines
+    const unsigned short int W;  // Width
+    const unsigned short int H;  // Height
+    const unsigned int S;  // Size (Width * Height)
+    const unsigned int M;  // Number of mines
 
     unsigned int* visible_fields;  // Positions of visible fields (not sorted)
     unsigned int visible_fields_index;  // Current count of visible fields
@@ -27,7 +27,7 @@ class GridManager
     unsigned int right_click_counter;
     bool is_lost;
 
-    GridManager();
+    GridManager(unsigned short int w, unsigned short int h, unsigned int m);
 
     ~GridManager();
 
