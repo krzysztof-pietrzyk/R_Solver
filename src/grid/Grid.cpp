@@ -20,13 +20,6 @@ void Grid::Clear()
 {
     // Only clear the data, which may influence the next generated grid
     for(int i = 0; i < M; i++) is_mine[mines[i]] = false;
-    for(int i = 0; i < visible_fields_index; i++) is_visible[visible_fields[i]] = false;
-    // Zero the index - old data remains in the array, but will be overwritten before it is used
-    visible_fields_index = 0;
-    for(int i = 0; i < flags_index; i++) is_flag[flags[i]] = false;
-    // Zero the index - old data remains in the array, but will be overwritten before it is used
-    flags_index = 0;
-
     GridManager::Clear();
 }
 
