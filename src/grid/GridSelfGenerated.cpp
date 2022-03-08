@@ -75,19 +75,15 @@ void GridSelfGenerated::RightClick(unsigned int field)
 void GridSelfGenerated::CalculateValues()
 {
     unsigned char current_field_value;
-    unsigned int current_field;
-    unsigned char num_of_neighbors;
     const unsigned int num_of_not_mines = S - M;
     // Only iterate over non-mine fields
-    for(int i = 0; i < num_of_not_mines; i++)
+    for(unsigned int & current_field : not_mines)
     {
         current_field_value = 0;
-        current_field = not_mines[i];
-        num_of_neighbors = neighbors[current_field].size();
-        for(int j = 0; j < num_of_neighbors; j++)
+        for(unsigned int & current_neighbor : neighbors[current_field])
         {
             // Count how many mines are within each field's neighbors
-            if(is_mine[neighbors[current_field][j]]) current_field_value++;
+            if(is_mine[current_neighbor]) current_field_value++;
         }
         field_values[current_field] = current_field_value;
     }
@@ -129,7 +125,6 @@ void GridSelfGenerated::ZeroChainReaction(unsigned int field)
     ClearZCR();
     unsigned char num_of_neighbors;
     unsigned int current_zero;
-    unsigned int current_neighbor;
     // Clicked field is the beginning of the chain reaction
     zcr_is_zero[field] = true;
     zcr_zeros[zcr_zeros_index++] = field;
@@ -138,12 +133,11 @@ void GridSelfGenerated::ZeroChainReaction(unsigned int field)
     {
         // Iterate through each element in zcr_zeros
         // zcr_zeros_index may increase while the loop is running
+        // this is why a standard iterator can't be used here
         current_zero = zcr_zeros[i];
-        num_of_neighbors = neighbors[current_zero].size();
-        for(int j = 0; j < num_of_neighbors; j++)
+        for(unsigned int & current_neighbor : neighbors[current_zero])
         {
             // Iterate through neighbors of current field
-            current_neighbor = neighbors[current_zero][j];
             if(!is_visible[current_neighbor])
             {
                 is_visible[current_neighbor] = true;
