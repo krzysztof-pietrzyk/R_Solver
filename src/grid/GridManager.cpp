@@ -35,10 +35,10 @@ unsigned char GridManager::FieldValue(unsigned int field)
 //protected
 void GridManager::Clear()
 {
-    for(int i = 0; i < visible_fields_index; i++) is_visible[visible_fields[i]] = false;
+    is_visible.assign(S, false);
     // Zero the index - old data remains in the array, but will be overwritten before it is used
     visible_fields_index = 0;
-    for(int i = 0; i < flags_index; i++) is_flag[flags[i]] = false;
+    is_flag.assign(S, false);
     // Zero the index - old data remains in the array, but will be overwritten before it is used
     flags_index = 0;
 

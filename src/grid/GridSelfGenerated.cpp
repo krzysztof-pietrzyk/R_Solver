@@ -159,6 +159,6 @@ void GridSelfGenerated::ZeroChainReaction(unsigned int field)
 void GridSelfGenerated::ClearZCR()
 {
     // Clear the temporary array and zero the index
-    for(int i = 0; i < zcr_zeros_index; i++) zcr_is_zero[zcr_zeros[i]] = false;
+    zcr_is_zero.assign(S, false);
     zcr_zeros_index = 0;
 }
