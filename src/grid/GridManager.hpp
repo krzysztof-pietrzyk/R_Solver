@@ -4,6 +4,9 @@
 #include <vector>
 #include <stdexcept>
 
+#define for_neighbors_of(f) const unsigned int z__=f*GridManager::MAX_NEIGHBORS;const unsigned int c__=z__+neighbors_l[f];for(size_t x=z__;x<c__;x++)
+#define for_grid_neighbors_of(f) const unsigned int z__=f*GridManager::MAX_NEIGHBORS;const unsigned int c__=z__+grid.neighbors_l[f];for(size_t x=z__;x<c__;x++)
+
 class GridManager
 {
     public:
@@ -12,6 +15,7 @@ class GridManager
     const unsigned short int H;  // Height
     const unsigned int S;  // Size (Width * Height)
     const unsigned int M;  // Number of mines
+    static const unsigned int MAX_NEIGHBORS = 8;
 
     std::vector<unsigned int> visible_fields;  // Positions of visible fields (not sorted)
     unsigned int visible_fields_index;  // Current count of visible fields
@@ -21,7 +25,8 @@ class GridManager
     unsigned int flags_index;  // Current count of flags
     std::vector<bool> is_flag;  // True if index is a flag (sorted)
 
-    std::vector<std::vector<unsigned int>> neighbors;  // Array of pointers to positions of neighbors for each field (sorted)
+    std::vector<unsigned int> neighbors;
+    std::vector<unsigned char> neighbors_l;
 
     unsigned int left_click_counter;
     unsigned int right_click_counter;

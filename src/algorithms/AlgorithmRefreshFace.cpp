@@ -15,7 +15,6 @@ bool AlgorithmRefreshFace::Run()
     unsigned int face_index_new = 0;
     unsigned int face_field_temp = 0;
     unsigned int visible_field_temp = 0;
-    unsigned char num_of_neighbors_temp = 0;
     unsigned int neighbor_field_temp = 0;
 
     unsigned int* face_old = data.face_internal_indicator ? data.face_internal_0 : data.face_internal_1;
@@ -31,10 +30,9 @@ bool AlgorithmRefreshFace::Run()
     for(i = data.last_read_index_face; i < visible_fields_new_index; i++)
     {
         visible_field_temp = grid.visible_fields[i];
-        num_of_neighbors_temp = grid.neighbors[visible_field_temp].size();
-        for(j = 0; j < num_of_neighbors_temp; j++)
+        for_grid_neighbors_of(visible_field_temp)
         {
-            neighbor_field_temp = grid.neighbors[visible_field_temp][j];
+            neighbor_field_temp = grid.neighbors[x];
             if(!grid.is_visible[neighbor_field_temp] && !grid.is_flag[neighbor_field_temp] && !data.is_face[neighbor_field_temp])
             {
                 data.is_face[neighbor_field_temp] = true;

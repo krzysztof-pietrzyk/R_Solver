@@ -11,7 +11,8 @@ GridManager::GridManager(unsigned short int w, unsigned short int h, unsigned in
     flags_index = 0;
     is_flag = std::vector<bool>(S, false);
 
-    neighbors = std::vector<std::vector<unsigned int>>(S, std::vector<unsigned int>());
+    neighbors = std::vector<unsigned int>(S * MAX_NEIGHBORS, 0);
+    neighbors_l = std::vector<unsigned char>(S, 0);
 
     field_values = std::vector<unsigned char>(S, 0);
 

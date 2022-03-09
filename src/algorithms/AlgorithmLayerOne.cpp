@@ -14,6 +14,7 @@ bool AlgorithmLayerOne::Run()
     unsigned int j = 0;
     unsigned int border_field_temp = 0;
     unsigned char field_value_temp = 0;
+    unsigned int neighbor_field = 0;
 
     unsigned int* border = data.border;
 
@@ -22,23 +23,26 @@ bool AlgorithmLayerOne::Run()
         border_field_temp = border[i];
         flags_count = 0;
         not_visible_count = 0;
-        for(unsigned int & neighbor_field : grid.neighbors[border_field_temp])
+        for_grid_neighbors_of(border_field_temp)
         {
+            neighbor_field = grid.neighbors[x];
             if(grid.is_flag[neighbor_field]) flags_count++;
             else if(!grid.is_visible[neighbor_field]) not_visible_count++;
         }
         field_value_temp = grid.FieldValue(border_field_temp);
         if(field_value_temp == flags_count)
         {
-            for(unsigned int & neighbor_field : grid.neighbors[border_field_temp])
+            for_grid_neighbors_of(border_field_temp)
             {
+                neighbor_field = grid.neighbors[x];
                 if(!grid.is_flag[neighbor_field] && !grid.is_visible[neighbor_field]) grid.LeftClick(neighbor_field);
             }
         }
         else if(field_value_temp == flags_count + not_visible_count)
         {
-            for(unsigned int & neighbor_field : grid.neighbors[border_field_temp])
+            for_grid_neighbors_of(border_field_temp)
             {
+                neighbor_field = grid.neighbors[x];
                 if(!grid.is_flag[neighbor_field] && !grid.is_visible[neighbor_field]) grid.RightClick(neighbor_field);
             }
         }

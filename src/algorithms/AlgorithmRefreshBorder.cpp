@@ -17,6 +17,7 @@ bool AlgorithmRefreshBorder::Run()
     unsigned int border_index_new = 0;
     unsigned int border_field_temp = 0;
     unsigned int visible_field_temp = 0;
+    unsigned int neighbor_field = 0;
 
     unsigned int* border_old = data.border_internal_indicator ? data.border_internal_0 : data.border_internal_1;
     unsigned int* border_new = data.border_internal_indicator ? data.border_internal_1 : data.border_internal_0;
@@ -24,8 +25,9 @@ bool AlgorithmRefreshBorder::Run()
     {
         border_field_temp = border_old[i];
         at_least_one_not_visible = false;
-        for(unsigned int & neighbor_field : grid.neighbors[border_field_temp])
+        for_grid_neighbors_of(border_field_temp)
         {
+            neighbor_field = grid.neighbors[x];
             if(!grid.is_visible[neighbor_field] && !grid.is_flag[neighbor_field])
             {
                 at_least_one_not_visible = true;
@@ -40,8 +42,9 @@ bool AlgorithmRefreshBorder::Run()
     {
         visible_field_temp = grid.visible_fields[i];
         at_least_one_not_visible = false;
-        for(unsigned int & neighbor_field : grid.neighbors[visible_field_temp])
+        for_grid_neighbors_of(visible_field_temp)
         {
+            neighbor_field = grid.neighbors[x];
             if(!grid.is_visible[neighbor_field] && !grid.is_flag[neighbor_field])
             {
                 at_least_one_not_visible = true;
