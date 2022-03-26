@@ -19,8 +19,8 @@ bool AlgorithmRefreshBorder::Run()
     unsigned int visible_field_temp = 0;
     unsigned int neighbor_field = 0;
 
-    unsigned int* border_old = data.border_internal_indicator ? data.border_internal_0 : data.border_internal_1;
-    unsigned int* border_new = data.border_internal_indicator ? data.border_internal_1 : data.border_internal_0;
+    const std::vector<unsigned int>& border_old = data.border_internal_indicator ? data.border_internal_0 : data.border_internal_1;
+    std::vector<unsigned int>& border_new = data.border_internal_indicator ? data.border_internal_1 : data.border_internal_0;
     for(i = 0; i < border_index_old; i++)
     {
         border_field_temp = border_old[i];
@@ -60,7 +60,6 @@ bool AlgorithmRefreshBorder::Run()
 
     data.last_read_index_border = visible_fields_new_index;
     data.last_read_index_border_flags = grid.flags_index;
-    data.border = border_new;
     data.border_internal_indicator = !data.border_internal_indicator;
     data.border_index = border_index_new;
     return true;

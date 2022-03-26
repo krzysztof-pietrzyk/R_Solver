@@ -16,7 +16,7 @@ bool AlgorithmLayerOne::Run()
     unsigned char field_value_temp = 0;
     unsigned int neighbor_field = 0;
 
-    unsigned int* border = data.border;
+    const std::vector<unsigned int>& border = data.GetBorder();
 
     for(i = 0; i < border_index_max; i++)
     {

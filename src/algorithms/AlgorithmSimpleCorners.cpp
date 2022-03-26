@@ -7,7 +7,11 @@ AlgorithmSimpleCorners::AlgorithmSimpleCorners(GridManager& grid_) : Algorithm(g
     unsigned int upper_right = grid.W - 1;
     unsigned int bottom_left = (grid.H - 1) * grid.W;
     unsigned int bottom_right = grid.H * grid.W - 1;
-    corners = new unsigned int[corners_number] { upper_left, upper_right, bottom_left, bottom_right };
+    corners = std::vector<unsigned int>();
+    corners.push_back(upper_left);
+    corners.push_back(upper_right);
+    corners.push_back(bottom_left);
+    corners.push_back(bottom_right);
 }
 
 AlgorithmSimpleCorners::~AlgorithmSimpleCorners() {}

@@ -10,25 +10,29 @@ AlgorithmRefreshSections::~AlgorithmRefreshSections() {}
 bool AlgorithmRefreshSections::Run()
 {
     const unsigned int border_l = data.border_index;
-    unsigned int i = 0;
-    unsigned int j = 0;
-    unsigned int k = 0;
-    unsigned int l = 0;
+    size_t i = 0;
+    size_t j = 0;
+    size_t k = 0;
+    size_t l = 0;
     unsigned char current_section_neighbors_index = 0;
     unsigned char current_section_length = 0;
+    unsigned int current_section_offset = 0;
+    unsigned int current_section_neighbors_offset = 0;
     unsigned int current_border_field = 0;
     unsigned int neighbor_section_temp = 0;
     unsigned int section_value_temp = 0;
     unsigned int neighbor_field = 0;
     unsigned int neighbor_of_neighbor = 0;
-    unsigned int* section_neighbors_temp = nullptr;
     bool duplicate_temp = false;
+    const std::vector<unsigned int>& border = data.GetBorder();
 
     // iterate through border fields
     for(i = 0; i < border_l; i++)
     {
         current_section_length = 0;
-        current_border_field = data.border[i];
+        current_border_field = border[i];
+        current_section_offset = current_border_field * MAX_SECTION_LENGTH;
+        current_section_neighbors_offset = current_border_field * MAX_SECTION_NEIGHBORS;
         section_value_temp = grid.FieldValue(current_border_field);
         current_section_neighbors_index = 0;
 
@@ -41,8 +45,7 @@ bool AlgorithmRefreshSections::Run()
             // if this neighbor is already visible, ignore it
             else if(grid.is_visible[neighbor_field]) { continue; }
             // add this neighbor to the section
-            data.sections[current_border_field][current_section_length++] = neighbor_field;
-            section_neighbors_temp = data.sections_neighbors[current_border_field];
+            data.sections[current_section_offset + current_section_length++] = neighbor_field;
             // iterate through the neighbors of that neighbor, in order to determine
             // potential neighbour sections of this section
             const unsigned int first_neighbor_index = neighbor_field * GridManager::MAX_NEIGHBORS;
@@ -57,7 +60,7 @@ bool AlgorithmRefreshSections::Run()
                 // in order to filter duplicates
                 for(l = 0; l < current_section_neighbors_index; l++)
                 {
-                    if(section_neighbors_temp[l] == neighbor_of_neighbor)
+                    if(data.sections_neighbors[current_section_neighbors_offset + l] == neighbor_of_neighbor)
                     {
                         duplicate_temp = true;
                         break;
@@ -66,7 +69,7 @@ bool AlgorithmRefreshSections::Run()
                 if(!duplicate_temp) 
                 {
                     // only add this to section neighbors if it's not a duplicate
-                    section_neighbors_temp[current_section_neighbors_index++] = neighbor_of_neighbor;
+                    data.sections_neighbors[current_section_neighbors_offset + current_section_neighbors_index++] = neighbor_of_neighbor;
                 }
             }
         }

@@ -16,7 +16,7 @@ class AlgorithmSimpleCorners : public Algorithm
     private:
 
     const unsigned int corners_number;
-    const unsigned int* corners;
+    std::vector<unsigned int> corners;
 };
 
 #endif

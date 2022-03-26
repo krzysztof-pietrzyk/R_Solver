@@ -1,6 +1,8 @@
 #ifndef GridInternalGenerator_hpp
 #define GridInternalGenerator_hpp
 
+#include <vector>
+
 #include "grid/GridSelfGenerated.hpp"
 
 #include "GridGenerator.hpp"
@@ -17,12 +19,12 @@ class GridInternalGenerator : public GridGenerator
 
     GridSelfGenerated& grid;
 
-    unsigned int* empty_template;
+    std::vector<unsigned int> empty_template;
 
-    unsigned int* safe_fields;
+    std::vector<unsigned int> safe_fields;
     unsigned int safe_fields_index;
     
-    unsigned int* generated_mines;
+    std::vector<unsigned int> generated_mines;
     unsigned int generated_mines_index;
 };
 

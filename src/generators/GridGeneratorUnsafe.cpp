@@ -15,7 +15,7 @@ void GridGeneratorUnsafe::Generate()
     const unsigned int mines_target = grid.M;
     unsigned int poll_index;
     unsigned int random_field;
-    std::copy(empty_template, empty_template + grid.S, safe_fields);
+    for(size_t i = 0; i < grid.S; i++) safe_fields[i] = empty_template[i];
 
     grid.Clear();
 
