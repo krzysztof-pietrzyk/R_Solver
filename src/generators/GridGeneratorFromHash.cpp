@@ -20,13 +20,13 @@ void GridGeneratorFromHash::Generate()
 
     grid.Clear();
 
-    for(int i = 0; i < hash_length - 1; i++)
+    for(size_t i = 0; i < hash_length - 1; i++)
     {
         current_symbol = hash[i];
         current_symbol = current_symbol - 48;  // zero's ID in ASCII table
         if(i < hash_length - 2)
         {
-            for(int j = 0; j < 6; j++)
+            for(size_t j = 0; j < 6; j++)
             {
                 is_mine = (current_symbol & 32);
                 if(is_mine) grid.is_mine[current_field] = is_mine;
@@ -41,7 +41,7 @@ void GridGeneratorFromHash::Generate()
             if(last_symbol_length == 0) last_symbol_length = 6;
             current_symbol = current_symbol << (6 - last_symbol_length);
 
-            for(int j = 0; j < last_symbol_length; j++)
+            for(size_t j = 0; j < last_symbol_length; j++)
             {
                 is_mine = (current_symbol & 32);
                 if(is_mine) grid.is_mine[current_field] = is_mine;

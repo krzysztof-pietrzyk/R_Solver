@@ -55,23 +55,6 @@ void GridSelfGenerated::RightClick(unsigned int field)
     flags[flags_index++] = field;
 }
 
-// void GridSelfGenerated::ShowUncovered()
-// {
-//     for(int i = 0; i < H; i++)
-//     {
-//         for(int j = 0; j < W; j++)
-//         {
-//             int f = i * W + j;
-//             if(is_flag[f]) cout << "x";
-// 			else if(!is_visible[f]) cout << "#";
-// 			else if(is_mine[f]) cout << "*";
-// 			else if(field_values[f] == 0) cout << " ";
-// 			else cout << to_string(field_values[f]);
-//         }
-//         cout << endl;
-//     }
-// }
-
 void GridSelfGenerated::CalculateValues()
 {
     unsigned char current_field_value;
@@ -131,7 +114,7 @@ void GridSelfGenerated::ZeroChainReaction(unsigned int field)
     zcr_is_zero[field] = true;
     zcr_zeros[zcr_zeros_index++] = field;
 
-    for(unsigned int i = 0; i < zcr_zeros_index; i++)
+    for(size_t i = 0; i < zcr_zeros_index; i++)
     {
         // Iterate through each element in zcr_zeros
         // zcr_zeros_index may increase while the loop is running

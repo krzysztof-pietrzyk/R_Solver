@@ -19,7 +19,7 @@ void GridGeneratorUnsafe::Generate()
 
     grid.Clear();
 
-    for(int i = 0; i < mines_target; i++)
+    for(size_t i = 0; i < mines_target; i++)
     {
         poll_index = dist(rng) % current_max;
         random_field = safe_fields[poll_index];
@@ -28,7 +28,7 @@ void GridGeneratorUnsafe::Generate()
         safe_fields[poll_index] = safe_fields[--current_max];
     }
 
-    for(int i = 0; i < current_max; i++) grid.not_mines[i] = safe_fields[i];
+    for(size_t i = 0; i < current_max; i++) grid.not_mines[i] = safe_fields[i];
     grid.hash_up_to_date = false;
     grid.CalculateValues();
 }

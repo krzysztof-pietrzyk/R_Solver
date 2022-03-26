@@ -3,7 +3,7 @@
 GridInternalGenerator::GridInternalGenerator(GridSelfGenerated& grid_) : GridGenerator(), grid(grid_)
 {
     empty_template = std::vector<unsigned int>(grid.S, 0);
-    for(int i = 0; i < grid.S; i++) empty_template[i] = i;
+    for(unsigned int i = 0; i < grid.S; i++) empty_template[i] = i;
 
     safe_fields = std::vector<unsigned int>(grid.S, 0);
     safe_fields_index = grid.S;

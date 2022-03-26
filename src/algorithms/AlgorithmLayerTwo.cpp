@@ -10,10 +10,10 @@ bool AlgorithmLayerTwo::Run()
 
     bool success = false;
 
-    unsigned int i = 0;
-    unsigned int j = 0;
-    unsigned int k = 0;
-    unsigned int l = 0;
+    size_t i = 0;
+    size_t j = 0;
+    size_t k = 0;
+    size_t l = 0;
 
     unsigned int origin = 0;
     unsigned int section_origin_offset = 0;

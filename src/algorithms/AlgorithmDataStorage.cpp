@@ -29,7 +29,7 @@ std::vector<unsigned int>& AlgorithmDataStorage::GetBorder()
 void AlgorithmDataStorage::Clear()
 {
     const std::vector<unsigned int>& border = GetBorder();
-    for(int i = 0; i < border_index; i++) is_border[border[i]] = false;
+    for(size_t i = 0; i < border_index; i++) is_border[border[i]] = false;
     border_index = 0;
     last_read_index_border = 0;
     last_read_index_border_flags = 0;

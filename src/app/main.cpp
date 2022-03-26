@@ -66,10 +66,10 @@ int main()
 	SolverThreadData* data = new SolverThreadData();
 
 	vector<thread> solver_threads;
-	for(int i = 0; i < threads_number; i++) 
+	for(size_t i = 0; i < threads_number; i++) 
 		solver_threads.push_back(thread(Run, new Solver(grid_width, grid_height, grid_mines, data)));
 	thread status = thread(CheckStatus, data);
-	for(int i = 0; i < threads_number; i++) solver_threads[i].join();
+	for(size_t i = 0; i < threads_number; i++) solver_threads[i].join();
 	status.join();
 	
 	return 0;
@@ -106,13 +106,13 @@ int main()
 // 	unsigned int s = 10;
 // 	Buffer2D b = Buffer2D(s, 8);
 
-// 	for(int i = 0; i < b.Len(); i++)
+// 	for(size_t i = 0; i < b.Len(); i++)
 // 	{
 // 		Buffer& buffer = b[i];
 // 		buffer += i;
 // 		buffer += buffer[0] * i;
 // 		buffer += buffer[1] * i;
-// 		for(int j = 0; j < buffer.Len(); j++)
+// 		for(size_t j = 0; j < buffer.Len(); j++)
 // 		{
 // 			cout << buffer[j] << ", ";
 // 		}
