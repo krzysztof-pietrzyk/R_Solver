@@ -17,7 +17,7 @@ void Run(Solver* solver)
 void CheckStatus(SolverThreadData* data)
 {
 	const unsigned int status_read_interval = 5;
-	time_t seconds_since_start = 0;
+	auto time_since_start = std::chrono::duration<int64_t, std::nano>(0);
 	unsigned long int games_played = 0;
 	unsigned long int games_played_last = 0;
 	double completion = 0.0;
@@ -27,13 +27,13 @@ void CheckStatus(SolverThreadData* data)
 	float games_per_second_avg = 0.0;
 	float wins_per_second_avg = 0.0;
 	float completion_rate_avg = 0.0;
-	time_t start_time = chrono::system_clock::to_time_t(chrono::system_clock::now());
-	time_t current_time = chrono::system_clock::to_time_t(chrono::system_clock::now());
+	auto start_time = std::chrono::high_resolution_clock::now();
+	auto current_time = std::chrono::high_resolution_clock::now();
 	cout << "Seconds_since_start\tGames_played\tWins\tWin_ratio\tCompletion_rate_avg\tGames_per_second_avg\tWins_per_second_avg" << endl;
 	while(true)
 	{
 		this_thread::sleep_for(chrono::seconds(status_read_interval));
-		current_time = chrono::system_clock::to_time_t(chrono::system_clock::now());
+		current_time = std::chrono::high_resolution_clock::now();
 
 		data->mut.lock();
 		games_played = data->tries;
@@ -41,7 +41,8 @@ void CheckStatus(SolverThreadData* data)
 		completion = data->completion;
 		data->mut.unlock();
 
-		seconds_since_start = current_time - start_time;
+		time_since_start = current_time - start_time;
+		float seconds_since_start = time_since_start.count() / float(1E09);
 		win_ratio = float(wins) / float(games_played);
 		games_per_second_avg = float(games_played) / float(seconds_since_start);
 		wins_per_second_avg = float(wins) / float(seconds_since_start);
