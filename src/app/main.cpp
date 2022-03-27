@@ -94,30 +94,3 @@ int main()
 	
 // 	return 0;
 // }
-
-// #include <iostream>
-
-// #include "Buffer2D.hpp"
-
-// using namespace std;
-
-// int main()
-// {
-// 	unsigned int s = 10;
-// 	Buffer2D b = Buffer2D(s, 8);
-
-// 	for(size_t i = 0; i < b.Len(); i++)
-// 	{
-// 		Buffer& buffer = b[i];
-// 		buffer += i;
-// 		buffer += buffer[0] * i;
-// 		buffer += buffer[1] * i;
-// 		for(size_t j = 0; j < buffer.Len(); j++)
-// 		{
-// 			cout << buffer[j] << ", ";
-// 		}
-// 		cout << endl;
-// 	}
-
-// 	return 0;
-// }

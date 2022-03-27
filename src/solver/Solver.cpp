@@ -2,7 +2,7 @@
 
 Solver::Solver(unsigned short int w, unsigned short int h, unsigned int m, SolverThreadData* thread_data_) :
     grid(new GridSelfGenerated(w, h, m)),
-    generator(GridGeneratorFactory::Create(GridGeneratorType::GENERATOR_UNSAFE, *grid)),
+    generator(GridGeneratorFactory::Create(GridGeneratorType::GENERATOR_SAFE, *grid)),
     view(GridViewFactory::Create(GridViewType::GRID_VIEW_CONSOLE, *grid)),
     algorithm_manager(new AlgorithmManager(*grid)),
 	thread_data(thread_data_), fields_to_uncover(grid->S - grid->M)

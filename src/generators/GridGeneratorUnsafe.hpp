@@ -17,11 +17,18 @@ class GridGeneratorUnsafe : public GridInternalGenerator
 
     void Generate();
 
+    virtual void SetStartingField(unsigned int starting_field);
+
     protected:
 
-    std::minstd_rand rng;
+    virtual void PrepareSafeFields();
 
+    virtual void CopySafeFields();
+
+    std::minstd_rand rng;
 	std::uniform_int_distribution<int> dist;
+    std::vector<unsigned int> forced_safe;  // For other generators deriving from this
+    unsigned int current_max;
 };
 
 #endif

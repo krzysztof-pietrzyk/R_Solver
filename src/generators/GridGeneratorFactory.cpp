@@ -10,6 +10,8 @@ GridInternalGenerator* GridGeneratorFactory::Create(GridGeneratorType type, Grid
     {
         case GENERATOR_UNSAFE:
             return new GridGeneratorUnsafe(grid);
+        case GENERATOR_SAFE:
+            return new GridGeneratorSafe(grid);
         case GENERATOR_FROM_HASH:
             return new GridGeneratorFromHash(grid);
         default:
