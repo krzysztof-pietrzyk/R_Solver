@@ -45,6 +45,8 @@ bool AlgorithmLayerTwo::Run()
         for(j = 0; j < neighbors_l_origin; j++)
         {
             neighbor_section_origin = data.sections_neighbors[origin_neighbors_offset + j];
+            // only consider neighbors which are actual section origins
+            if(!data.is_section_origin[neighbor_section_origin]) { continue; }
             // only compare origin to neighbors with larger field number
             // this assures that each pair of sections is only compared once, not twice
             if(neighbor_section_origin < origin) { continue; }

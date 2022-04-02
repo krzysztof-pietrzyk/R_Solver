@@ -17,6 +17,12 @@ class AlgorithmRefreshSections : public Algorithm
     protected:
 
     AlgorithmDataStorage& data;
+    const unsigned int double_grid_width;
+    std::vector<unsigned int> sections_hashes;
+
+    unsigned int GetHashBit(unsigned int difference);
+
+    bool CheckHashUnique(unsigned int hash);
 };
 
 #endif
