@@ -19,7 +19,10 @@ class AlgorithmDataStorage
     std::vector<bool> is_border;
     std::vector<unsigned int> border_internal_0;
     std::vector<unsigned int> border_internal_1;
-    
+
+    unsigned int sections_origins_index;
+    std::vector<unsigned int> sections_origins;
+    std::vector<bool> is_section_origin;
     std::vector<unsigned int> sections;
     std::vector<unsigned char> sections_l;
     std::vector<unsigned char> sections_values;

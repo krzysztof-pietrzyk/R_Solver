@@ -6,7 +6,7 @@ AlgorithmLayerTwo::~AlgorithmLayerTwo() {}
 
 bool AlgorithmLayerTwo::Run()
 {
-    const unsigned int sections_l = data.border_index;
+    const unsigned int sections_l = data.sections_origins_index;
 
     bool success = false;
 
@@ -27,11 +27,10 @@ bool AlgorithmLayerTwo::Run()
     unsigned char common_fields_l = 0;
     unsigned char origin_value = 0;
     unsigned char neighbor_value = 0;
-    const std::vector<unsigned int>& border = data.GetBorder();
     
     for(i = 0; i < sections_l; i++)
     {
-        origin = border[i];
+        origin = data.sections_origins[i];
         neighbors_l_origin = data.sections_neighbors_l[origin];
         // ignore sections that have no neighbors
         if(neighbors_l_origin == 0) { continue; }

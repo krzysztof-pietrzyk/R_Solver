@@ -25,6 +25,7 @@ bool AlgorithmRefreshSections::Run()
     unsigned int neighbor_of_neighbor = 0;
     bool duplicate_temp = false;
     const std::vector<unsigned int>& border = data.GetBorder();
+    data.sections_origins_index = 0;
 
     // iterate through border fields
     for(i = 0; i < border_l; i++)
@@ -77,7 +78,16 @@ bool AlgorithmRefreshSections::Run()
         data.sections_values[current_border_field] = section_value_temp;
         data.sections_l[current_border_field] = current_section_length;
         data.sections_neighbors_l[current_border_field] = current_section_neighbors_index;
+        data.sections_origins[data.sections_origins_index++] = current_border_field;
+        data.is_section_origin[current_border_field] = true;
     }
+
+    // cout << "border: ";
+    // for(int i = 0; i < data.border_index; i++) cout << data.GetBorder()[i] << " ";
+    // cout << endl;
+    // cout << "sections: ";
+    // for(int i = 0; i < data.sections_origins_index; i++) cout << data.sections_origins[i] << " ";
+    // cout << endl;
 
     return true;
 }
