@@ -12,6 +12,8 @@ Algorithm* AlgorithmFactory::Create(AlgorithmType type)
             return new AlgorithmRefreshBorder(grid, data);
         case ALGORITHM_REFRESH_SECTIONS:
             return new AlgorithmRefreshSections(grid, data);
+        case ALGORITHM_REFRESH_SEGMENTS:
+            return new AlgorithmRefreshSegments(grid, data);
         case ALGORITHM_LAYER_ONE:
             return new AlgorithmLayerOne(grid, data);
         case ALGORITHM_LAYER_TWO:
