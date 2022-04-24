@@ -29,6 +29,12 @@ class AlgorithmDataStorage
     std::vector<unsigned int> sections_neighbors;
     std::vector<unsigned char> sections_neighbors_l;
 
+    unsigned int segments_index;
+    unsigned int segments_count;
+    std::vector<unsigned int> segments;
+    std::vector<unsigned int> segments_starting_indexes;
+    std::vector<unsigned int> segments_l;
+
     AlgorithmDataStorage(GridManager& grid);
 
     ~AlgorithmDataStorage();

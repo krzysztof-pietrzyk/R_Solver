@@ -9,6 +9,7 @@ AlgorithmManager::AlgorithmManager(GridManager& grid_) : grid(&grid_)
 	simple_corners = factory->Create(AlgorithmType::ALGORITHM_SIMPLE_CORNERS);
 	refresh_border = factory->Create(AlgorithmType::ALGORITHM_REFRESH_BORDER);
     refresh_sections = factory->Create(AlgorithmType::ALGORITHM_REFRESH_SECTIONS);
+    refresh_segments = factory->Create(AlgorithmType::ALGORITHM_REFRESH_SEGMENTS);
 }
 
 AlgorithmManager::~AlgorithmManager()
@@ -20,6 +21,7 @@ AlgorithmManager::~AlgorithmManager()
     delete simple_corners;
     delete refresh_border;
     delete refresh_sections;
+    delete refresh_segments;
 }
 
 bool AlgorithmManager::RunAll()
@@ -44,6 +46,8 @@ bool AlgorithmManager::RunAll()
         } while (layer_one->Run());
         refresh_sections->Run();
         if(layer_two->Run()) continue;
+        refresh_segments->Run();
+
         clueless = true;
     }
 }

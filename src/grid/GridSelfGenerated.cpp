@@ -145,3 +145,26 @@ void GridSelfGenerated::ClearZCR()
     zcr_is_zero.assign(S, false);
     zcr_zeros_index = 0;
 }
+
+// #include <iostream>
+// using namespace std;
+
+// void GridSelfGenerated::PrintUncovered()
+// {
+//     for(size_t i = 0; i < H; i++)
+//     {
+//         for(size_t j = 0; j < W; j++)
+//         {
+//             const unsigned int f = i * W + j;
+//             if(is_flag[f]) cout << ".";
+//             else if(is_visible[f])
+//             {
+//                 if(field_values[f] == 0) cout << " ";
+//                 else cout << int(field_values[f]);
+//             } 
+//             else cout << "#";
+//         }
+//         cout << endl;
+//     }
+//     cout << endl;
+// }

@@ -16,9 +16,14 @@ AlgorithmDataStorage::AlgorithmDataStorage(GridManager& grid)
     sections = std::vector<unsigned int>(grid.S * MAX_SECTION_LENGTH, 0);
     sections_l = std::vector<unsigned char>(grid.S, 0);
     sections_values = std::vector<unsigned char>(grid.S, 0);
-
     sections_neighbors = std::vector<unsigned int>(grid.S * MAX_SECTION_NEIGHBORS, 0);
     sections_neighbors_l = std::vector<unsigned char>(grid.S, 0);
+
+    segments_index = 0;
+    segments_count = 0;
+    segments = std::vector<unsigned int>(grid.S, 0);
+    segments_starting_indexes = std::vector<unsigned int>(grid.S, 0);
+    segments_l = std::vector<unsigned int>(grid.S, 0);
 }
 
 AlgorithmDataStorage::~AlgorithmDataStorage() {}
@@ -38,4 +43,6 @@ void AlgorithmDataStorage::Clear()
     last_read_index_border_flags = 0;
     for(size_t i = 0; i < sections_origins_index; i++) is_section_origin[sections_origins[i]] = false;
     sections_origins_index = 0;
+    segments_index = 0;
+    segments_count = 0;
 }

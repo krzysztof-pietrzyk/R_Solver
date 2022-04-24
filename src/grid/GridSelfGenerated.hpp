@@ -24,6 +24,8 @@ class GridSelfGenerated : public Grid
 
     void CalculateValues();
 
+    // void PrintUncovered();
+
     protected:
 
     std::vector<unsigned int> zcr_zeros;  // Temporary array used in ZeroChainReaction

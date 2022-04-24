@@ -26,6 +26,7 @@ class AlgorithmManager
 	Algorithm* simple_corners;
 	Algorithm* refresh_border;
     Algorithm* refresh_sections;
+    Algorithm* refresh_segments;
 };
 
 #endif
