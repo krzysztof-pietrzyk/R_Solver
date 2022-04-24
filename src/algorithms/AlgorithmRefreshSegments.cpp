@@ -1,7 +1,6 @@
 #include "AlgorithmRefreshSegments.hpp"
 
-AlgorithmRefreshSegments::AlgorithmRefreshSegments(GridManager& grid_, AlgorithmDataStorage& data_)
-    : Algorithm(grid_), data(data_)
+AlgorithmRefreshSegments::AlgorithmRefreshSegments(GridManager& grid_, AlgorithmDataStorage& data_) : Algorithm(grid_, data_)
 {
     fields_to_check = std::vector<unsigned int>(grid.S, 0);
     fields_to_check_index = 0;

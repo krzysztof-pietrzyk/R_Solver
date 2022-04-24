@@ -2,12 +2,18 @@
 #define Algorithm_hpp
 
 #include "grid/GridManager.hpp"
+#include "AlgorithmDataStorage.hpp"
 
 class Algorithm
 {
+    /*
+    Abstract base class for algorithm objects.
+    Each algorithm has a Run() method, which executes the algorithm
+    Algorithms have access to AlgorithmDataStorage and GridManager
+    */
     public:
     
-    Algorithm(GridManager& grid_);
+    Algorithm(GridManager& grid_, AlgorithmDataStorage& data_);
 
     ~Algorithm();
 
@@ -16,6 +22,8 @@ class Algorithm
     protected:
 
     GridManager& grid;
+
+    AlgorithmDataStorage& data;
 };
 
 #endif

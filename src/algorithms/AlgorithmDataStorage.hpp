@@ -10,6 +10,9 @@
 
 class AlgorithmDataStorage
 {
+    /*
+    This class is used for storing all data which needs to be exchanged between algorithms.
+    */
     public:
 
     unsigned int border_index;

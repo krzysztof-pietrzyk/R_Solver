@@ -7,6 +7,10 @@
 
 class AlgorithmManager
 {
+    /*
+    This class holds references to the algorithms and manages interactions between them.
+    In other words, it defines in which order the algorithms should be executed.
+    */
     public:
 
     AlgorithmManager(GridManager& grid_);

@@ -1,5 +1,5 @@
 #include "Algorithm.hpp"
 
-Algorithm::Algorithm(GridManager& grid_) : grid(grid_) {}
+Algorithm::Algorithm(GridManager& grid_, AlgorithmDataStorage& data_) : grid(grid_), data(data_) {}
 
 Algorithm::~Algorithm() {}

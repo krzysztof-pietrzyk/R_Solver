@@ -1,6 +1,6 @@
 #include "AlgorithmRefreshBorder.hpp"
 
-AlgorithmRefreshBorder::AlgorithmRefreshBorder(GridManager& grid_, AlgorithmDataStorage& data_) : Algorithm(grid_), data(data_) {}
+AlgorithmRefreshBorder::AlgorithmRefreshBorder(GridManager& grid_, AlgorithmDataStorage& data_) : Algorithm(grid_, data_) {}
 
 AlgorithmRefreshBorder::~AlgorithmRefreshBorder() {}
 
@@ -11,23 +11,19 @@ bool AlgorithmRefreshBorder::Run()
     
     const unsigned int border_index_old = data.border_index;
     const unsigned int visible_fields_new_index = grid.visible_fields_index;
-    unsigned int i = 0;
-    unsigned int j = 0;
     bool at_least_one_not_visible = false;
     unsigned int border_index_new = 0;
-    unsigned int border_field_temp = 0;
-    unsigned int visible_field_temp = 0;
-    unsigned int neighbor_field = 0;
+    size_t i, j = 0;
 
     const std::vector<unsigned int>& border_old = data.border_internal_indicator ? data.border_internal_0 : data.border_internal_1;
     std::vector<unsigned int>& border_new = data.border_internal_indicator ? data.border_internal_1 : data.border_internal_0;
     for(i = 0; i < border_index_old; i++)
     {
-        border_field_temp = border_old[i];
+        const unsigned int border_field_temp = border_old[i];
         at_least_one_not_visible = false;
         for_grid_neighbors_of(border_field_temp)
         {
-            neighbor_field = grid.neighbors[x];
+            const unsigned int neighbor_field = grid.neighbors[x];
             if(!grid.is_visible[neighbor_field] && !grid.is_flag[neighbor_field])
             {
                 at_least_one_not_visible = true;
@@ -40,11 +36,11 @@ bool AlgorithmRefreshBorder::Run()
 
     for(i = data.last_read_index_border; i < visible_fields_new_index; i++)
     {
-        visible_field_temp = grid.visible_fields[i];
+        const unsigned int visible_field_temp = grid.visible_fields[i];
         at_least_one_not_visible = false;
         for_grid_neighbors_of(visible_field_temp)
         {
-            neighbor_field = grid.neighbors[x];
+            const unsigned int neighbor_field = grid.neighbors[x];
             if(!grid.is_visible[neighbor_field] && !grid.is_flag[neighbor_field])
             {
                 at_least_one_not_visible = true;

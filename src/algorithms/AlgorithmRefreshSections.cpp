@@ -1,7 +1,7 @@
 #include "AlgorithmRefreshSections.hpp"
 
 AlgorithmRefreshSections::AlgorithmRefreshSections(GridManager& grid_, AlgorithmDataStorage& data_)
-    : Algorithm(grid_), data(data_), double_grid_width(grid_.W * 2)
+    : Algorithm(grid_, data_), double_grid_width(grid_.W * 2)
 {
     if(grid.S > 1048575) std::invalid_argument("ERROR: AlgorithmRefreshSections: Grid size must not exceed 1048575 (2^20 - 1) fields!");
     sections_hashes = std::vector<unsigned int>(grid.S, 0);
@@ -11,33 +11,25 @@ AlgorithmRefreshSections::~AlgorithmRefreshSections() {}
 
 bool AlgorithmRefreshSections::Run()
 {
+    Clear();
+
     const unsigned int border_l = data.border_index;
-    size_t i = 0;
-    size_t j = 0;
-    size_t k = 0;
-    size_t l = 0;
+    const std::vector<unsigned int>& border = data.GetBorder();
     unsigned char current_section_neighbors_index = 0;
     unsigned char current_section_length = 0;
-    unsigned int current_section_offset = 0;
-    unsigned int current_section_neighbors_offset = 0;
     unsigned int current_border_field = 0;
-    unsigned int neighbor_section_temp = 0;
-    unsigned int section_value_temp = 0;
-    unsigned int neighbor_field = 0;
-    unsigned int neighbor_of_neighbor = 0;
-    bool duplicate_temp = false;
+    unsigned char section_value_temp = 0;
     unsigned int current_section_hash = 0;
-    const std::vector<unsigned int>& border = data.GetBorder();
-    for(size_t i = 0; i < data.sections_origins_index; i++) data.is_section_origin[data.sections_origins[i]] = false;
-    data.sections_origins_index = 0;
+    bool duplicate_temp = false;
+    size_t i, j, k = 0;
 
     // iterate through border fields
     for(i = 0; i < border_l; i++)
     {
         current_section_length = 0;
         current_border_field = border[i];
-        current_section_offset = current_border_field * MAX_SECTION_LENGTH;
-        current_section_neighbors_offset = current_border_field * MAX_SECTION_NEIGHBORS;
+        const unsigned int current_section_offset = current_border_field * MAX_SECTION_LENGTH;
+        const unsigned int current_section_neighbors_offset = current_border_field * MAX_SECTION_NEIGHBORS;
         section_value_temp = grid.FieldValue(current_border_field);
         current_section_neighbors_index = 0;
         current_section_hash = 0;
@@ -45,7 +37,7 @@ bool AlgorithmRefreshSections::Run()
         // iterate through each border field's neigbors
         for_grid_neighbors_of(current_border_field)
         {
-            neighbor_field = grid.neighbors[x];
+            const unsigned int neighbor_field = grid.neighbors[x];
             // count the number of flags already marked around the current_border_field
             if(grid.is_flag[neighbor_field]) { section_value_temp--; continue; }
             // if this neighbor is already visible, ignore it
@@ -59,17 +51,17 @@ bool AlgorithmRefreshSections::Run()
             // potential neighbour sections of this section
             const unsigned int first_neighbor_index = neighbor_field * GridManager::MAX_NEIGHBORS;
             const unsigned int last_neighbor_index = first_neighbor_index + grid.neighbors_l[neighbor_field];
-            for(size_t x2 = first_neighbor_index; x2 < last_neighbor_index; x2++)
+            for(j = first_neighbor_index; j < last_neighbor_index; j++)
             {
-                neighbor_of_neighbor = grid.neighbors[x2];
+                const unsigned int neighbor_of_neighbor = grid.neighbors[j];
                 // if this neighbor is not on border or is the currently considered field, ignore it
                 if(!data.is_border[neighbor_of_neighbor] || neighbor_of_neighbor == current_border_field) { continue; }
                 duplicate_temp = false;
                 // iterate through neighbors of this section, which have already been found before
                 // in order to filter duplicates
-                for(l = 0; l < current_section_neighbors_index; l++)
+                for(k = 0; k < current_section_neighbors_index; k++)
                 {
-                    if(data.sections_neighbors[current_section_neighbors_offset + l] == neighbor_of_neighbor)
+                    if(data.sections_neighbors[current_section_neighbors_offset + k] == neighbor_of_neighbor)
                     {
                         duplicate_temp = true;
                         break;
@@ -82,9 +74,10 @@ bool AlgorithmRefreshSections::Run()
                 }
             }
         }
-        // after iterating through neighbors, save final section value, length
+        // Check if section is not a duplicate
         if(CheckHashUnique(current_section_hash))
         {
+            // Save all the information about the section
             sections_hashes[data.sections_origins_index] = current_section_hash;
             data.sections_origins[data.sections_origins_index++] = current_border_field;
             data.is_section_origin[current_border_field] = true;
@@ -95,6 +88,12 @@ bool AlgorithmRefreshSections::Run()
     }
 
     return true;
+}
+
+void AlgorithmRefreshSections::Clear()
+{
+    for(size_t i = 0; i < data.sections_origins_index; i++) data.is_section_origin[data.sections_origins[i]] = false;
+    data.sections_origins_index = 0;
 }
 
 unsigned int AlgorithmRefreshSections::GetHashBit(unsigned int difference)

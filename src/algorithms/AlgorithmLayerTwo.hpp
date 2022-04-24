@@ -2,10 +2,13 @@
 #define AlgorithmLayerTwo_hpp
 
 #include "Algorithm.hpp"
-#include "AlgorithmDataStorage.hpp"
 
 class AlgorithmLayerTwo : public Algorithm
 {
+    /*
+    "Layer Two" algorithm implements the medium difficulty player strategy.
+    It makes all safe decisions which can be made by considering pairs of neighboring numbered fields.
+    */
     public:
 
     AlgorithmLayerTwo(GridManager& grid_, AlgorithmDataStorage& data_);
@@ -13,11 +16,6 @@ class AlgorithmLayerTwo : public Algorithm
     ~AlgorithmLayerTwo();
 
     bool Run();
-
-    protected:
-
-    AlgorithmDataStorage& data;
-
 };
 
 #endif

@@ -24,6 +24,9 @@ enum AlgorithmType
 
 class AlgorithmFactory
 {
+    /*
+    Factory class for creating Algorithm objects.
+    */
     public:
 
     ~AlgorithmFactory();
