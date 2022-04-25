@@ -10,5 +10,6 @@ set(CPP_SOURCES_ALGORITHMS
     ${CMAKE_CURRENT_SOURCE_DIR}/AlgorithmRefreshBorder.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/AlgorithmRefreshSections.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/AlgorithmRefreshSegments.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/AlgorithmRefreshCombinations.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/AlgorithmSimpleCorners.cpp
     PARENT_SCOPE)
