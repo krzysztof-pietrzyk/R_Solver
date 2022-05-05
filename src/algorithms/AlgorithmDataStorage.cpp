@@ -21,9 +21,14 @@ AlgorithmDataStorage::AlgorithmDataStorage(GridManager& grid)
 
     segments_index = 0;
     segments_count = 0;
-    segments = std::vector<unsigned int>(grid.S, 0);
-    segments_starting_indexes = std::vector<unsigned int>(grid.S, 0);
-    segments_l = std::vector<unsigned int>(grid.S, 0);
+    segments = std::vector<unsigned int>(grid.M, 0);
+    segments_starting_indexes = std::vector<unsigned int>(grid.M, 0);
+    segments_l = std::vector<unsigned int>(grid.M, 0);
+
+    segments_combinations = std::vector<std::map<unsigned int, long double>>();
+    for(size_t i = 0; i < grid.M; i++) segments_combinations[i] = std::map<unsigned int, long double>();
+    border_combinations = std::vector<std::map<unsigned int, long double>>();
+    for(size_t i = 0; i < grid.S; i++) border_combinations[i] = std::map<unsigned int, long double>();
 }
 
 AlgorithmDataStorage::~AlgorithmDataStorage() {}

@@ -2,6 +2,7 @@
 #define AlgorithmDataStorage_hpp
 
 #include <vector>
+#include <map>
 
 #include "grid/GridManager.hpp"
 
@@ -37,6 +38,15 @@ class AlgorithmDataStorage
     std::vector<unsigned int> segments;
     std::vector<unsigned int> segments_starting_indexes;
     std::vector<unsigned int> segments_l;
+
+    // segments_combinations - vector id: segment number, key: mine count within the segment
+    // value: number of possible mine combinations with that mine count for that segment
+    // border_combinations - vector id: field position, key: given mine count within entire segment
+    // value: number of combinations, in which a mine appears on that field for given mine count of this segment
+    // long double allows to count up to 10^4932 combinations
+    // It should be enough for about 2000 independent segments multiplied together
+    std::vector<std::map<unsigned int, long double>> segments_combinations;
+    std::vector<std::map<unsigned int, long double>> border_combinations;
 
     AlgorithmDataStorage(GridManager& grid);
 
