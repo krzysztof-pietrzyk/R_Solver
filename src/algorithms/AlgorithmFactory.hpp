@@ -8,6 +8,7 @@
 #include "AlgorithmRefreshBorder.hpp"
 #include "AlgorithmRefreshSections.hpp"
 #include "AlgorithmRefreshSegments.hpp"
+#include "AlgorithmOptimizedSegments.hpp"
 #include "AlgorithmRefreshCombinations.hpp"
 #include "AlgorithmLayerOne.hpp"
 #include "AlgorithmLayerTwo.hpp"
@@ -18,6 +19,7 @@ enum AlgorithmType
     ALGORITHM_REFRESH_BORDER,
     ALGORITHM_REFRESH_SECTIONS,
     ALGORITHM_REFRESH_SEGMENTS,
+    ALGORITHM_OPTIMIZED_SEGMENTS,
     ALGORITHM_REFRESH_COMBINATIONS,
     ALGORITHM_LAYER_ONE,
     ALGORITHM_LAYER_TWO,

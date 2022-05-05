@@ -31,6 +31,7 @@ class AlgorithmManager
 	Algorithm* refresh_border;
     Algorithm* refresh_sections;
     Algorithm* refresh_segments;
+    Algorithm* optimized_segments;
 };
 
 #endif

@@ -10,6 +10,7 @@ AlgorithmManager::AlgorithmManager(GridManager& grid_) : grid(&grid_)
 	refresh_border = factory->Create(AlgorithmType::ALGORITHM_REFRESH_BORDER);
     refresh_sections = factory->Create(AlgorithmType::ALGORITHM_REFRESH_SECTIONS);
     refresh_segments = factory->Create(AlgorithmType::ALGORITHM_REFRESH_SEGMENTS);
+    optimized_segments = factory->Create(AlgorithmType::ALGORITHM_OPTIMIZED_SEGMENTS);
 }
 
 AlgorithmManager::~AlgorithmManager()
@@ -22,6 +23,7 @@ AlgorithmManager::~AlgorithmManager()
     delete refresh_border;
     delete refresh_sections;
     delete refresh_segments;
+    delete optimized_segments;
 }
 
 bool AlgorithmManager::RunAll()
