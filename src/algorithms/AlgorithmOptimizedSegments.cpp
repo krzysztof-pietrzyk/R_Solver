@@ -1,8 +1,5 @@
 #include "AlgorithmOptimizedSegments.hpp"
 
-#include <iostream>
-using namespace std;
-
 AlgorithmOptimizedSegments::AlgorithmOptimizedSegments(GridManager& grid_, AlgorithmDataStorage& data_) : Algorithm(grid_, data_)
 {
     is_checked = std::vector<bool>(grid.S, false);
@@ -16,7 +13,6 @@ AlgorithmOptimizedSegments::~AlgorithmOptimizedSegments() {}
 
 bool AlgorithmOptimizedSegments::Run()
 {
-    //cout << "AlgorithmOptimizedSegments::Run()" << endl;
     Clear();
 
     const unsigned int segments_count = data.segments_count;
@@ -43,7 +39,6 @@ bool AlgorithmOptimizedSegments::Run()
 
 void AlgorithmOptimizedSegments::Clear()
 {
-    //cout << "AlgorithmOptimizedSegments::Clear()" << endl;
     for(size_t i = 0; i < checked_index; i++) { is_checked[checked[i]] = false; }
     checked_index = 0;
     data.optimized_segments.clear();
@@ -51,7 +46,6 @@ void AlgorithmOptimizedSegments::Clear()
 
 void AlgorithmOptimizedSegments::UpdateNeighborsBits(unsigned int border_field)
 {
-    //cout << "AlgorithmOptimizedSegments::UpdateNeighborsBits" << endl;
     neighbors_bits.clear();
     const unsigned int border_field_neighbors_begin = border_field * MAX_SECTION_NEIGHBORS;
     const unsigned int border_field_neighbors_end = border_field_neighbors_begin + data.sections_neighbors_l[border_field];
@@ -69,7 +63,6 @@ void AlgorithmOptimizedSegments::UpdateNeighborsBits(unsigned int border_field)
 
 void AlgorithmOptimizedSegments::UpdateSectionNeighborhood(unsigned int section_origin)
 {
-    //cout << "AlgorithmOptimizedSegments::UpdateSectionNeighborhood" << endl;
     section_neighborhood.clear();
     const unsigned int section_start = section_origin * MAX_SECTION_LENGTH;
     const unsigned int section_end = section_start + data.sections_l[section_origin];
@@ -93,7 +86,6 @@ void AlgorithmOptimizedSegments::UpdateSectionNeighborhood(unsigned int section_
 
 void AlgorithmOptimizedSegments::FindSegmentsToOptimize(unsigned int parent_segment)
 {
-    //cout << "AlgorithmOptimizedSegments::FindSegmentsToOptimize" << endl;
     for(auto iter = section_neighborhood.begin(); iter != section_neighborhood.end(); ++iter)
     {
         const size_t hash_repetitions = iter->second.size();
@@ -109,7 +101,6 @@ void AlgorithmOptimizedSegments::FindSegmentsToOptimize(unsigned int parent_segm
 
 unsigned int AlgorithmOptimizedSegments::GetNeighborhoodHash(unsigned int section_field)
 {
-    //cout << "AlgorithmOptimizedSegments::GetNeighborhoodHash" << endl;
     const unsigned int section_field_neighbors_begin = section_field * grid.MAX_NEIGHBORS;
     const unsigned int section_field_neighbors_end = section_field_neighbors_begin + grid.neighbors_l[section_field];
     unsigned int hash_result = 0;
@@ -125,7 +116,6 @@ unsigned int AlgorithmOptimizedSegments::GetNeighborhoodHash(unsigned int sectio
 
 void AlgorithmOptimizedSegments::FindPossibleValuesForSubsegment(OptimizedSegmentData& subsegment_data)
 {
-    //cout << "AlgorithmOptimizedSegments::FindPossibleValuesForSubsegment" << endl;
     // all subsegment fields have the same neighboring section origins. just take the first one
     const unsigned int subsegment_field = subsegment_data.fields[0];
     const unsigned int subsegment_field_neighbors_begin = subsegment_field * grid.MAX_NEIGHBORS;
