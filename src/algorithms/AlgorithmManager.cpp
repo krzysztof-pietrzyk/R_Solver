@@ -49,6 +49,7 @@ bool AlgorithmManager::RunAll()
         refresh_sections->Run();
         if(layer_two->Run()) continue;
         refresh_segments->Run();
+        optimized_segments->Run();
 
         clueless = true;
     }

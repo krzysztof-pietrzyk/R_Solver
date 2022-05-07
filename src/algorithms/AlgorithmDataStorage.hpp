@@ -9,6 +9,12 @@
 #define MAX_SECTION_LENGTH 8
 #define MAX_SECTION_NEIGHBORS 16
 
+struct OptimizedSegmentData
+{
+    std::vector<unsigned int> fields;
+    std::vector<unsigned char> possible_values;
+};
+
 class AlgorithmDataStorage
 {
     /*
@@ -38,6 +44,9 @@ class AlgorithmDataStorage
     std::vector<unsigned int> segments;
     std::vector<unsigned int> segments_starting_indexes;
     std::vector<unsigned int> segments_l;
+
+    // optimized_segments[segment_id][optimized_segment_id]
+    std::vector<std::vector<OptimizedSegmentData>> optimized_segments;
 
     // segments_combinations - vector id: segment number, key: mine count within the segment
     // value: number of possible mine combinations with that mine count for that segment
