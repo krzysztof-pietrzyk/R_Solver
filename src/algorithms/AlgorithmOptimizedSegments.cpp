@@ -142,9 +142,10 @@ void AlgorithmOptimizedSegments::FindPossibleValuesForSubsegment(OptimizedSegmen
     }
     // a little paranoid check. maximum_forced_mines should never be less than 0 anyways
     const unsigned char lower_bound = maximum_forced_mines > 0 ? maximum_forced_mines : 0;
-    const unsigned char upper_bound = minimum_section_value;
-    // all values between those bounds are possible numbers of mines in this subsection
-    for(unsigned char i = lower_bound; i < upper_bound; i++)
+    // there can't be more mines in the subsegment than there are fields in the subsegment
+    const unsigned char upper_bound = minimum_section_value < subsegment_length ? minimum_section_value : subsegment_length;
+    // all values between those bounds are possible numbers of mines in this subsection (including bounds)
+    for(unsigned char i = lower_bound; i <= upper_bound; i++)
     {
         subsegment_data.possible_values.push_back(i);
     }
