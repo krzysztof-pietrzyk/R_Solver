@@ -9,7 +9,7 @@
 #define MAX_SECTION_LENGTH 8
 #define MAX_SECTION_NEIGHBORS 16
 
-struct OptimizedSegmentData
+struct SubsegmentData
 {
     std::vector<unsigned int> fields;
     std::vector<unsigned char> possible_values;
@@ -45,8 +45,10 @@ class AlgorithmDataStorage
     std::vector<unsigned int> segments_starting_indexes;
     std::vector<unsigned int> segments_l;
 
-    // optimized_segments[segment_id][optimized_segment_id]
-    std::vector<std::vector<OptimizedSegmentData>> optimized_segments;
+    // subsegments[segment_id][subsegment_id]
+    // subsegments are parts of segments (section fields), which have exactly the same neighbors (section origins)
+    // those subsegments can be further optimized in the combinations checking algorithm
+    std::vector<std::vector<SubsegmentData>> subsegments;
 
     // segments_combinations - vector id: segment number, key: mine count within the segment
     // value: number of possible mine combinations with that mine count for that segment

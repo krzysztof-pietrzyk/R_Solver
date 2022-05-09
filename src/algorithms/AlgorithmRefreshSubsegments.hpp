@@ -1,15 +1,15 @@
-#ifndef AlgorithmOptimizedSegments_hpp
-#define AlgorithmOptimizedSegments_hpp
+#ifndef AlgorithmRefreshSubsegments_hpp
+#define AlgorithmRefreshSubsegments_hpp
 
 #include "Algorithm.hpp"
 
-class AlgorithmOptimizedSegments : public Algorithm
+class AlgorithmRefreshSubsegments : public Algorithm
 {
     public:
 
-    AlgorithmOptimizedSegments(GridManager& grid_, AlgorithmDataStorage& data_);
+    AlgorithmRefreshSubsegments(GridManager& grid_, AlgorithmDataStorage& data_);
 
-    ~AlgorithmOptimizedSegments();
+    ~AlgorithmRefreshSubsegments();
 
     bool Run();
 
@@ -33,7 +33,7 @@ class AlgorithmOptimizedSegments : public Algorithm
 
     unsigned int GetNeighborhoodHash(unsigned int section_field);
 
-    void FindPossibleValuesForSubsegment(OptimizedSegmentData& subsegment_data);
+    void FindPossibleValuesForSubsegment(SubsegmentData& subsegment_data);
 
     unsigned int NChooseK(unsigned int n, unsigned int k);
 };

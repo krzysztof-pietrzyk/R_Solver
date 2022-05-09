@@ -1,6 +1,6 @@
-#include "AlgorithmOptimizedSegments.hpp"
+#include "AlgorithmRefreshSubsegments.hpp"
 
-AlgorithmOptimizedSegments::AlgorithmOptimizedSegments(GridManager& grid_, AlgorithmDataStorage& data_) : Algorithm(grid_, data_)
+AlgorithmRefreshSubsegments::AlgorithmRefreshSubsegments(GridManager& grid_, AlgorithmDataStorage& data_) : Algorithm(grid_, data_)
 {
     is_checked = std::vector<bool>(grid.S, false);
     checked = std::vector<unsigned int>(grid.S, 0);
@@ -9,9 +9,9 @@ AlgorithmOptimizedSegments::AlgorithmOptimizedSegments(GridManager& grid_, Algor
     section_neighborhood = std::map<unsigned int, std::vector<unsigned int>>();
 }
 
-AlgorithmOptimizedSegments::~AlgorithmOptimizedSegments() {}
+AlgorithmRefreshSubsegments::~AlgorithmRefreshSubsegments() {}
 
-bool AlgorithmOptimizedSegments::Run()
+bool AlgorithmRefreshSubsegments::Run()
 {
     Clear();
 
@@ -19,7 +19,7 @@ bool AlgorithmOptimizedSegments::Run()
 
     for(size_t segment_id = 0; segment_id < segments_count; segment_id++)
     {
-        data.optimized_segments.push_back(std::vector<OptimizedSegmentData>());
+        data.subsegments.push_back(std::vector<SubsegmentData>());
         // It's important to keep track which segment this optimization relates to
         // This is why we are iterating over segments, not over sections directly
         const unsigned int segment_begin = data.segments_starting_indexes[segment_id];
@@ -37,14 +37,14 @@ bool AlgorithmOptimizedSegments::Run()
     return true;
 }
 
-void AlgorithmOptimizedSegments::Clear()
+void AlgorithmRefreshSubsegments::Clear()
 {
     for(size_t i = 0; i < checked_index; i++) { is_checked[checked[i]] = false; }
     checked_index = 0;
-    data.optimized_segments.clear();
+    data.subsegments.clear();
 }
 
-void AlgorithmOptimizedSegments::UpdateNeighborsBits(unsigned int border_field)
+void AlgorithmRefreshSubsegments::UpdateNeighborsBits(unsigned int border_field)
 {
     neighbors_bits.clear();
     const unsigned int border_field_neighbors_begin = border_field * MAX_SECTION_NEIGHBORS;
@@ -61,7 +61,7 @@ void AlgorithmOptimizedSegments::UpdateNeighborsBits(unsigned int border_field)
     }
 }
 
-void AlgorithmOptimizedSegments::UpdateSectionNeighborhood(unsigned int section_origin)
+void AlgorithmRefreshSubsegments::UpdateSectionNeighborhood(unsigned int section_origin)
 {
     section_neighborhood.clear();
     const unsigned int section_start = section_origin * MAX_SECTION_LENGTH;
@@ -84,22 +84,22 @@ void AlgorithmOptimizedSegments::UpdateSectionNeighborhood(unsigned int section_
     }
 }
 
-void AlgorithmOptimizedSegments::FindSegmentsToOptimize(unsigned int parent_segment)
+void AlgorithmRefreshSubsegments::FindSegmentsToOptimize(unsigned int parent_segment)
 {
     for(auto iter = section_neighborhood.begin(); iter != section_neighborhood.end(); ++iter)
     {
         const size_t hash_repetitions = iter->second.size();
         // filter out all hashes which appear less than 2 times (vast majority)
         if(hash_repetitions < 2) { continue; }
-        OptimizedSegmentData subsegment_temp = OptimizedSegmentData();
+        SubsegmentData subsegment_temp = SubsegmentData();
         // copy the fields into the structure
         for(size_t i = 0; i < hash_repetitions; i++) { subsegment_temp.fields.push_back(iter->second[i]); }
         FindPossibleValuesForSubsegment(subsegment_temp);
-        data.optimized_segments[parent_segment].push_back(subsegment_temp);
+        data.subsegments[parent_segment].push_back(subsegment_temp);
     }
 }
 
-unsigned int AlgorithmOptimizedSegments::GetNeighborhoodHash(unsigned int section_field)
+unsigned int AlgorithmRefreshSubsegments::GetNeighborhoodHash(unsigned int section_field)
 {
     const unsigned int section_field_neighbors_begin = section_field * grid.MAX_NEIGHBORS;
     const unsigned int section_field_neighbors_end = section_field_neighbors_begin + grid.neighbors_l[section_field];
@@ -114,7 +114,7 @@ unsigned int AlgorithmOptimizedSegments::GetNeighborhoodHash(unsigned int sectio
     return hash_result;
 }
 
-void AlgorithmOptimizedSegments::FindPossibleValuesForSubsegment(OptimizedSegmentData& subsegment_data)
+void AlgorithmRefreshSubsegments::FindPossibleValuesForSubsegment(SubsegmentData& subsegment_data)
 {
     // all subsegment fields have the same neighboring section origins. just take the first one
     const unsigned int subsegment_field = subsegment_data.fields[0];
@@ -151,7 +151,7 @@ void AlgorithmOptimizedSegments::FindPossibleValuesForSubsegment(OptimizedSegmen
     }
 }
 
-unsigned int AlgorithmOptimizedSegments::NChooseK(unsigned int n, unsigned int k)
+unsigned int AlgorithmRefreshSubsegments::NChooseK(unsigned int n, unsigned int k)
 {
     // vast majority of results are handled by those two cases
     if(k == 0 || k == n) { return 1; }

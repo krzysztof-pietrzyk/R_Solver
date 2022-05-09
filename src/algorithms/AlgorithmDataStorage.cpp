@@ -25,7 +25,7 @@ AlgorithmDataStorage::AlgorithmDataStorage(GridManager& grid)
     segments_starting_indexes = std::vector<unsigned int>(grid.M, 0);
     segments_l = std::vector<unsigned int>(grid.M, 0);
 
-    optimized_segments = std::vector<std::vector<OptimizedSegmentData>>();
+    subsegments = std::vector<std::vector<SubsegmentData>>();
 
     segments_combinations = std::vector<std::map<unsigned int, long double>>(grid.M, std::map<unsigned int, long double>());
     border_combinations = std::vector<std::map<unsigned int, long double>>(grid.S, std::map<unsigned int, long double>());
