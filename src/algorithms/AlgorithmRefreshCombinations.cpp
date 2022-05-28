@@ -1,8 +1,9 @@
 #include "AlgorithmRefreshCombinations.hpp"
 
-AlgorithmRefreshCombinations::AlgorithmRefreshCombinations(GridManager& grid_, AlgorithmDataStorage& data_) : Algorithm(grid_, data_) {}
+#include <iostream>
+using namespace std;
 
-AlgorithmRefreshCombinations::~AlgorithmRefreshCombinations()
+AlgorithmRefreshCombinations::AlgorithmRefreshCombinations(GridManager& grid_, AlgorithmDataStorage& data_) : Algorithm(grid_, data_)
 {
     field_states = std::vector<FieldCombinationState>(grid.S, FCS_UNASSIGNED);
     choice_stack = std::vector<unsigned int>();
@@ -18,6 +19,8 @@ AlgorithmRefreshCombinations::~AlgorithmRefreshCombinations()
     segments_combinations = std::vector<std::map<unsigned int, long double>>(grid.M, std::map<unsigned int, long double>());
     field_combinations_temp = std::vector<std::map<unsigned int, long double>>(grid.S, std::map<unsigned int, long double>());
 }
+
+AlgorithmRefreshCombinations::~AlgorithmRefreshCombinations() {}
 
 bool AlgorithmRefreshCombinations::Run()
 {

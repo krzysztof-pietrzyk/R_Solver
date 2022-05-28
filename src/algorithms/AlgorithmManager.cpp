@@ -54,8 +54,8 @@ bool AlgorithmManager::RunAll()
         if(layer_two->Run()) continue;
         refresh_segments->Run();
         refresh_subsegments->Run();
-        //refresh_face->Run();
-        //refresh_combinations->Run();
+        refresh_face->Run();
+        refresh_combinations->Run();
 
         clueless = true;
     }
