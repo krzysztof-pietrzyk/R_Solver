@@ -41,6 +41,9 @@ void AlgorithmRefreshSubsegments::Clear()
 {
     for(size_t i = 0; i < checked_index; i++) { is_checked[checked[i]] = false; }
     checked_index = 0;
+    const unsigned int subsegments_cache_index = data.subsegments_cache_index;
+    for(size_t i = 0; i < subsegments_cache_index; i++) { data.is_subsegment[data.subsegments_cache[i]] = false; }
+    data.subsegments_cache_index = 0;
     data.subsegments.clear();
 }
 
@@ -93,7 +96,13 @@ void AlgorithmRefreshSubsegments::FindSegmentsToOptimize(unsigned int parent_seg
         if(hash_repetitions < 2) { continue; }
         SubsegmentData subsegment_temp = SubsegmentData();
         // copy the fields into the structure
-        for(size_t i = 0; i < hash_repetitions; i++) { subsegment_temp.fields.push_back(iter->second[i]); }
+        for(size_t i = 0; i < hash_repetitions; i++)
+        {
+            const unsigned int field_temp = iter->second[i];
+            data.is_subsegment[field_temp] = true;
+            data.subsegments_cache[data.subsegments_cache_index++] = field_temp;
+            subsegment_temp.fields.push_back(field_temp); 
+        }
         FindPossibleValuesForSubsegment(subsegment_temp);
         data.subsegments[parent_segment].push_back(subsegment_temp);
     }
@@ -148,17 +157,21 @@ void AlgorithmRefreshSubsegments::FindPossibleValuesForSubsegment(SubsegmentData
     for(unsigned char i = lower_bound; i <= upper_bound; i++)
     {
         subsegment_data.possible_values.push_back(i);
+        subsegment_data.combinations_for_value[i] = NChooseK(subsegment_length, i);
     }
+    subsegment_data.total_possibilities = subsegment_data.possible_values.size();
+    subsegment_data.current_possibility_id = 0;
 }
 
 unsigned int AlgorithmRefreshSubsegments::NChooseK(unsigned int n, unsigned int k)
 {
+    // look-up table to speed things up. there are relatively few possible cases here
     // vast majority of results are handled by those two cases
     if(k == 0 || k == n) { return 1; }
     else if(k == 1 || k == n - 1) { return n; }
     // less popular cases (exhaustive list)
-    else if(n == 4 && k == 2) { return 6; }
-    else if(n == 5 && (k == 2 || k == 3)) { return 10; }
+    else if(n == 4 && k == 2) { return 6; }  // only checking for k value for error detection
+    else if(n == 5 && (k == 2 || k == 3)) { return 10; }  // only checking k value for error detection
     else if(n == 6)
     {
         if(k == 2 || k == 4) { return 15; }
@@ -175,6 +188,6 @@ unsigned int AlgorithmRefreshSubsegments::NChooseK(unsigned int n, unsigned int 
         else if(k == 3 || k == 5) { return 56; }
         else if(k == 4) { return 70; }
     }
-    // else do full computation? throw exception?
+    throw std::invalid_argument("ERROR: AlgorithmRefreshSubsegments::NChooseK(n, k): Unknown result for given n, k values!");
     return 0;
 }

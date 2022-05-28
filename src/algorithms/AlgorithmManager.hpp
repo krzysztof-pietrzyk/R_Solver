@@ -32,6 +32,8 @@ class AlgorithmManager
     Algorithm* refresh_sections;
     Algorithm* refresh_segments;
     Algorithm* refresh_subsegments;
+    Algorithm* refresh_face;
+    Algorithm* refresh_combinations;
 };
 
 #endif

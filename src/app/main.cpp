@@ -77,21 +77,37 @@ int main()
 }
 
 
-// // #include <thread>
-// // #include <vector>
-// // #include <chrono>
-// // #include <ctime>
-// // #include <iostream>
 
-// // #include "solver/Solver.hpp"
+// #include <thread>
+// #include <vector>
+// #include <chrono>
+// #include <ctime>
+// #include <iostream>
 
-// // using namespace std;
+// #include "solver/Solver.hpp"
+
+// using namespace std;
 
 
-// // int main()
-// // {
-// // 	Solver s = Solver(30, 16, 99, nullptr);
-// // 	s.Run();
+// int main()
+// {
+// 	Solver s = Solver(30, 16, 99, nullptr);
+// 	s.Run();
 	
-// // 	return 0;
-// // }
+// 	return 0;
+// }
+
+// #include <iostream>
+// #include <map>
+// using namespace std;
+
+// int main()
+// {
+// 	map<unsigned int, double> a = map<unsigned int, double>();
+
+// 	a[10] += 14.0;
+
+// 	cout << a[10] << endl;
+
+// 	return 0;
+// }

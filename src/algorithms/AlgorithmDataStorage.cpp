@@ -26,9 +26,23 @@ AlgorithmDataStorage::AlgorithmDataStorage(GridManager& grid)
     segments_l = std::vector<unsigned int>(grid.M, 0);
 
     subsegments = std::vector<std::vector<SubsegmentData>>();
+    is_subsegment = std::vector<bool>(grid.S, false);
+    subsegments_cache = std::vector<unsigned int>(grid.S, 0);
+    subsegments_cache_index = 0;
 
-    segments_combinations = std::vector<std::map<unsigned int, long double>>(grid.M, std::map<unsigned int, long double>());
-    border_combinations = std::vector<std::map<unsigned int, long double>>(grid.S, std::map<unsigned int, long double>());
+    face = std::vector<unsigned int>(grid.S, 0);
+    is_face = std::vector<bool>(grid.S, false);
+    face_index = 0;
+    segments_face = std::vector<std::vector<unsigned int>>(grid.M, std::vector<unsigned int>());
+
+    factorial = std::vector<long double>(grid.S, 0.0L);
+    factorial_reciprocal = std::vector<long double>(grid.S, 0.0L);
+
+    field_combinations = std::vector<std::map<unsigned int, long double>>(grid.S, std::map<unsigned int, long double>());
+    total_combinations = 0.0L;
+    remaining_fields_mine_count_combinations = std::map<unsigned int, long double>();
+
+    PreCalculateFactorials(grid);
 }
 
 AlgorithmDataStorage::~AlgorithmDataStorage() {}
@@ -50,4 +64,20 @@ void AlgorithmDataStorage::Clear()
     sections_origins_index = 0;
     segments_index = 0;
     segments_count = 0;
+}
+
+// only called once in constructor
+void AlgorithmDataStorage::PreCalculateFactorials(GridManager& grid)
+{
+    long double current_factorial = 1.0L;
+    long double current_factorial_reciprocal = 1.0L;
+    factorial[0] = current_factorial;
+    factorial_reciprocal[0] = current_factorial_reciprocal;
+    for(unsigned int i = 1; i < grid.S; i++)
+    {
+        current_factorial *= i;
+        current_factorial_reciprocal /= i;
+        factorial[i] = current_factorial;
+        factorial_reciprocal[i] = current_factorial_reciprocal;
+    }
 }

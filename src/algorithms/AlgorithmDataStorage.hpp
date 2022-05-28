@@ -13,6 +13,9 @@ struct SubsegmentData
 {
     std::vector<unsigned int> fields;
     std::vector<unsigned char> possible_values;
+    std::map<unsigned char, unsigned int> combinations_for_value;
+    size_t total_possibilities;
+    size_t current_possibility_id;
 };
 
 class AlgorithmDataStorage
@@ -47,17 +50,28 @@ class AlgorithmDataStorage
 
     // subsegments[segment_id][subsegment_id]
     // subsegments are parts of segments (section fields), which have exactly the same neighbors (section origins)
-    // those subsegments can be further optimized in the combinations checking algorithm
+    // those subsegments can be used to optimize the combinations checking algorithm
     std::vector<std::vector<SubsegmentData>> subsegments;
+    std::vector<bool> is_subsegment;
+    std::vector<unsigned int> subsegments_cache;
+    unsigned int subsegments_cache_index;
 
-    // segments_combinations - vector id: segment number, key: mine count within the segment
-    // value: number of possible mine combinations with that mine count for that segment
-    // border_combinations - vector id: field position, key: given mine count within entire segment
-    // value: number of combinations, in which a mine appears on that field for given mine count of this segment
+    std::vector<unsigned int> face;
+    std::vector<bool> is_face;
+    unsigned int face_index;
+    std::vector<std::vector<unsigned int>> segments_face;
+
+    std::vector<long double> factorial;
+    std::vector<long double> factorial_reciprocal;
+
+    // field_combinations - vector id: field position, key: given mine count within entire face
+    // value: number of combinations, in which a mine appears on that field for given mine count of the entire face
     // long double allows to count up to 10^4932 combinations
     // It should be enough for about 2000 independent segments multiplied together
-    std::vector<std::map<unsigned int, long double>> segments_combinations;
-    std::vector<std::map<unsigned int, long double>> border_combinations;
+    std::vector<std::map<unsigned int, long double>> field_combinations;
+    // key: mine count on the face (!!!), value: number of combinations of mines in the remaining fields
+    std::map<unsigned int, long double> remaining_fields_mine_count_combinations;
+    long double total_combinations;
 
     AlgorithmDataStorage(GridManager& grid);
 
@@ -67,6 +81,9 @@ class AlgorithmDataStorage
 
     void Clear();
 
+    private:
+
+    void PreCalculateFactorials(GridManager& grid);
 };
 
 #endif
