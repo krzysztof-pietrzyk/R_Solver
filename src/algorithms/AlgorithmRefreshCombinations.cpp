@@ -38,19 +38,13 @@ bool AlgorithmRefreshCombinations::Run()
 void AlgorithmRefreshCombinations::Clear()
 {
     // Only clearing fields that are going to be used
-    const unsigned int sections_to_clear = data.segments_index;
-    for(size_t i = 0; i < sections_to_clear; i++)
+    const unsigned int face_length = data.face_index;
+    for(size_t i = 0; i < face_length; i++)
     {
-        const unsigned int current_section = data.segments[i];
-        const unsigned int section_begin = current_section * MAX_SECTION_LENGTH;
-        const unsigned int section_end = section_begin + data.sections_l[current_section];
-        for(size_t j = section_begin; j < section_end; j++)
-        {
-            const unsigned int section_field = data.sections[j];
-            field_states[section_field] = FCS_UNASSIGNED;
-            data.field_combinations[section_field].clear();
-            field_combinations_temp[section_field].clear();
-        }
+        const unsigned int face_field = data.face[i];
+        field_states[face_field] = FCS_UNASSIGNED;
+        data.field_combinations[face_field] = 0.0L;
+        field_combinations_temp[face_field].clear();
     }
     const unsigned int segments_count = data.segments_count;
     for(size_t i = 0; i < segments_count; i++)
@@ -59,7 +53,7 @@ void AlgorithmRefreshCombinations::Clear()
         mine_counts_in_segment[i].clear();
         current_mine_count_id_in_segment[i] = 0;
     }
-    data.remaining_fields_mine_count_combinations.clear();
+    data.remaining_fields_combinations = 0.0L;
     data.total_combinations = 0.0L;
 }
 
@@ -189,6 +183,7 @@ bool AlgorithmRefreshCombinations::RevertSegmentHeadToLastChoice(size_t& segment
         {
             // change the last choice into FCS_SAFE (it was originally FSC_MINE)
             current_field_state = FCS_SAFE;
+            current_segment_mine_count--;
             // don't pop_back because it is still a modification, just different
             break; 
         }
@@ -335,16 +330,23 @@ unsigned int AlgorithmRefreshCombinations::GetTotalMineCountOfSegmentCombination
 
 void AlgorithmRefreshCombinations::MergeCurrentSegmentsMineCountCombination(const unsigned int segments_combination_mine_count)
 {
-    long double combinations_for_current_mine_count_combination = 1.0L;
     const unsigned int mines_in_remaining_fields = remaining_mines - segments_combination_mine_count;
     const unsigned int remaining_safe_fields = remaining_fields - mines_in_remaining_fields;
     // binomial distribution of the remaining mines in the remaining fields (outside of segments)
     // f(n, k) = n! / (k! * (n - k)!)
     // using pre-calculated values for factorials and reciprocals
-    combinations_for_current_mine_count_combination = 
+    const long double combinations_in_remaining_fields = 
         data.factorial[remaining_fields] * 
         data.factorial_reciprocal[mines_in_remaining_fields] * 
         data.factorial_reciprocal[remaining_safe_fields];
+    // store this number of combinations for the remaining fields
+    if(remaining_fields != 0)
+    {
+        data.remaining_fields_combinations += combinations_in_remaining_fields * (mines_in_remaining_fields / remaining_fields);
+    }
+    
+    // initial multiplier for the combinations on the face
+    long double combinations_for_current_mine_count_combination = combinations_in_remaining_fields;
 
     const size_t segments_count = data.segments_count;
     // calculate the number of mine combinations for this combination of mine counts in the segments
@@ -355,13 +357,13 @@ void AlgorithmRefreshCombinations::MergeCurrentSegmentsMineCountCombination(cons
         const long double segment_combinations_for_current_possibility = segments_combinations[segment_id][mine_count];
         combinations_for_current_mine_count_combination *= segment_combinations_for_current_possibility;
     }
-    // store this number of combinations for the remaining fields
-    data.remaining_fields_mine_count_combinations[segments_combination_mine_count] += combinations_for_current_mine_count_combination;
+
     data.total_combinations += combinations_for_current_mine_count_combination;
     for(size_t segment_id = 0; segment_id < segments_count; segment_id++)
     {
         const size_t mine_count_id = current_mine_count_id_in_segment[segment_id];
         const unsigned int mine_count = mine_counts_in_segment[segment_id][mine_count_id];
+        const long double mine_count_combinations_in_segment = segments_combinations[segment_id][mine_count];
         std::vector<unsigned int>& segment_face = data.segments_face[segment_id];
         const size_t segment_face_length = segment_face.size();
         for(size_t face_field_id = 0; face_field_id < segment_face_length; face_field_id++)
@@ -370,9 +372,11 @@ void AlgorithmRefreshCombinations::MergeCurrentSegmentsMineCountCombination(cons
             // check if this field ever has mines in combination containing mine_count number of mines in the segment
             if(field_combinations_temp[face_field].count(mine_count))
             {
-                // if it does, add the combinations of the entire face to that field into the final map
-                // for the mine count of the entire face
-                data.field_combinations[face_field][segments_combination_mine_count] += combinations_for_current_mine_count_combination;
+                const long double face_field_combinations = field_combinations_temp[face_field][mine_count];
+                // how many times this field is a mine, within all combinations of this mine count in this segment
+                // should be between 0 and 1 (including 0 and 1);
+                const long double appearance_ratio = face_field_combinations / mine_count_combinations_in_segment;
+                data.field_combinations[face_field] += combinations_for_current_mine_count_combination * appearance_ratio;
             }
         }
     }

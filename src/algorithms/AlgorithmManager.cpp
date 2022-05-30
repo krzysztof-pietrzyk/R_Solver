@@ -58,7 +58,7 @@ bool AlgorithmManager::RunAll()
         refresh_subsegments->Run();
         refresh_face->Run();
         refresh_combinations->Run();
-        sure_moves_from_combinations->Run();
+        if(sure_moves_from_combinations->Run()) continue;
 
         clueless = true;
     }

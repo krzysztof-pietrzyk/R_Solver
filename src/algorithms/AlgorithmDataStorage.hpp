@@ -64,13 +64,11 @@ class AlgorithmDataStorage
     std::vector<long double> factorial;
     std::vector<long double> factorial_reciprocal;
 
-    // field_combinations - vector id: field position, key: given mine count within entire face
-    // value: number of combinations, in which a mine appears on that field for given mine count of the entire face
     // long double allows to count up to 10^4932 combinations
     // It should be enough for about 2000 independent segments multiplied together
-    std::vector<std::map<unsigned int, long double>> field_combinations;
-    // key: mine count on the face (!!!), value: number of combinations of mines in the remaining fields
-    std::map<unsigned int, long double> remaining_fields_mine_count_combinations;
+    std::vector<long double> field_combinations;
+    // number of combinations in which one remaining field is a mine (the same number for each remaining field)
+    long double remaining_fields_combinations;
     long double total_combinations;
 
     AlgorithmDataStorage(GridManager& grid);
