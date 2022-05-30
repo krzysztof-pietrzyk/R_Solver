@@ -26,6 +26,8 @@ Algorithm* AlgorithmFactory::Create(AlgorithmType type)
             return new AlgorithmLayerTwo(grid, data);
         case ALGORITHM_SIMPLE_CORNERS:
             return new AlgorithmSimpleCorners(grid, data);
+        case ALGORITHM_SURE_MOVES_FROM_COMBINATIONS:
+            return new AlgorithmSureMovesFromCombinations(grid, data);
         default:
             throw std::invalid_argument("ERROR: Attempting to create a non-existent Algorithm type!");
     }

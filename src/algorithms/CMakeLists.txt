@@ -14,4 +14,5 @@ set(CPP_SOURCES_ALGORITHMS
     ${CMAKE_CURRENT_SOURCE_DIR}/AlgorithmRefreshFace.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/AlgorithmRefreshCombinations.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/AlgorithmSimpleCorners.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/AlgorithmSureMovesFromCombinations.cpp
     PARENT_SCOPE)

@@ -13,6 +13,7 @@ AlgorithmManager::AlgorithmManager(GridManager& grid_) : grid(&grid_)
     refresh_subsegments = factory->Create(AlgorithmType::ALGORITHM_REFRESH_SUBSEGMENTS);
     refresh_face = factory->Create(AlgorithmType::ALGORITHM_REFRESH_FACE);
     refresh_combinations = factory->Create(AlgorithmType::ALGORITHM_REFRESH_COMBINATIONS);
+    sure_moves_from_combinations = factory->Create(AlgorithmType::ALGORITHM_SURE_MOVES_FROM_COMBINATIONS);
 }
 
 AlgorithmManager::~AlgorithmManager()
@@ -28,6 +29,7 @@ AlgorithmManager::~AlgorithmManager()
     delete refresh_subsegments;
     delete refresh_face;
     delete refresh_combinations;
+    delete sure_moves_from_combinations;
 }
 
 bool AlgorithmManager::RunAll()
@@ -56,6 +58,7 @@ bool AlgorithmManager::RunAll()
         refresh_subsegments->Run();
         refresh_face->Run();
         refresh_combinations->Run();
+        sure_moves_from_combinations->Run();
 
         clueless = true;
     }

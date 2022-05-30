@@ -34,6 +34,7 @@ class AlgorithmManager
     Algorithm* refresh_subsegments;
     Algorithm* refresh_face;
     Algorithm* refresh_combinations;
+    Algorithm* sure_moves_from_combinations;
 };
 
 #endif
