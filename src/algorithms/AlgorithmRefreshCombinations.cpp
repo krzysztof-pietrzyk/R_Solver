@@ -1,11 +1,7 @@
 #include "AlgorithmRefreshCombinations.hpp"
 
-#include <iostream>
-using namespace std;
-
 AlgorithmRefreshCombinations::AlgorithmRefreshCombinations(GridManager& grid_, AlgorithmDataStorage& data_) : Algorithm(grid_, data_)
 {
-    //cout << "AlgorithmRefreshCombinations::AlgorithmRefreshCombinations()" << endl;
     field_states = std::vector<FieldCombinationState>(grid.S, FCS_UNASSIGNED);
     choice_stack = std::vector<unsigned int>();
     segment_of_choice_stack = std::vector<unsigned int>();
@@ -25,7 +21,6 @@ AlgorithmRefreshCombinations::~AlgorithmRefreshCombinations() {}
 
 bool AlgorithmRefreshCombinations::Run()
 {
-    cout << "AlgorithmRefreshCombinations::Run() =================================================================" << endl;
     Clear();
     remaining_mines = grid.M - grid.flags_index;
     remaining_fields = grid.S - grid.visible_fields_index - grid.flags_index - data.face_index;
@@ -42,7 +37,6 @@ bool AlgorithmRefreshCombinations::Run()
 // only called once at the beginning of Run
 void AlgorithmRefreshCombinations::Clear()
 {
-    //cout << "AlgorithmRefreshCombinations::Clear()" << endl;
     // Only clearing fields that are going to be used
     const unsigned int sections_to_clear = data.segments_index;
     for(size_t i = 0; i < sections_to_clear; i++)
@@ -71,18 +65,28 @@ void AlgorithmRefreshCombinations::Clear()
 
 void AlgorithmRefreshCombinations::GetCombinationsForSegment(unsigned int segment_id)
 {
-    cout << "AlgorithmRefreshCombinations::GetCombinationsForSegment(" << segment_id << ")" << endl;
     std::vector<SubsegmentData>& subsegments_ref = data.subsegments[segment_id];
     do
     {
+        ClearStatesInSegment(segment_id);
         const long double combination_multiplier = ApplySubsegmentsCombination(subsegments_ref);
         GetCombinationsForFixedSubsegments(segment_id, combination_multiplier);
     } while (NextSubsegmentsCombination(subsegments_ref));
 }
 
+void AlgorithmRefreshCombinations::ClearStatesInSegment(unsigned int segment_id)
+{
+    std::vector<unsigned int>& segment_face = data.segments_face[segment_id];
+    const size_t segment_face_l = segment_face.size();
+    for(size_t i = 0; i < segment_face_l; i++)
+    {
+        const unsigned int segment_face_field = segment_face[i];
+        field_states[segment_face_field] = FCS_UNASSIGNED;
+    }
+}
+
 long double AlgorithmRefreshCombinations::ApplySubsegmentsCombination(std::vector<SubsegmentData>& subsegments_ref)
 {
-    cout << "AlgorithmRefreshCombinations::ApplySubsegmentsCombination()" << endl;
     // returns the weight of the combination. it is the multiplier of the number of mine combinations
     // of the entire segment for this particular set of subsegments values combination
     current_segment_mine_count = 0;
@@ -106,7 +110,6 @@ long double AlgorithmRefreshCombinations::ApplySubsegmentsCombination(std::vecto
 
 void AlgorithmRefreshCombinations::GetCombinationsForFixedSubsegments(const unsigned int segment_id, const long double combination_multiplier)
 {
-    //cout << "AlgorithmRefreshCombinations::GetCombinationsForFixedSubsegments()" << endl;
     choice_stack.clear();
     modifications_stack.clear();
     modifications_stack.clear();
@@ -126,7 +129,6 @@ void AlgorithmRefreshCombinations::GetCombinationsForFixedSubsegments(const unsi
         // check if previous choices have already made this section contain a contradiction
         if(remaining_section_value < 0) 
         {
-            cout << "contadiction generated previously. remaining_section_value == " << int(remaining_section_value) << endl;
             bool revert_success = RevertSegmentHeadToLastChoice(segment_head);
             if(revert_success) { continue; }
             else               { break; }
@@ -142,7 +144,6 @@ void AlgorithmRefreshCombinations::GetCombinationsForFixedSubsegments(const unsi
         // check if enough mines were put into the section
         if(remaining_section_value != 0)
         {
-            cout << "contradiction generated now. remaining_section_value == " << int(remaining_section_value) << endl;
             bool revert_success = RevertSegmentHeadToLastChoice(segment_head);
             if(revert_success) { continue; }
             else               { break; }
@@ -153,7 +154,6 @@ void AlgorithmRefreshCombinations::GetCombinationsForFixedSubsegments(const unsi
         // if no contradictions were found until the last segment, this combination is valid
         if(segment_head == segment_end)
         {
-            cout << "valid combination" << endl;
             ApplyCurrentCombinationAsValid(segment_id, combination_multiplier);
             bool revert_success = RevertSegmentHeadToLastChoice(segment_head);
             if(revert_success) { continue; }
@@ -164,7 +164,6 @@ void AlgorithmRefreshCombinations::GetCombinationsForFixedSubsegments(const unsi
 
 void AlgorithmRefreshCombinations::GetRemainingSectionValue(const unsigned int section_begin, const unsigned int section_end, char& section_value, char& section_length)
 {
-    //cout << "AlgorithmRefreshCombinations::GetRemainingSectionValue()" << endl;
     std::vector<unsigned int>& sections = data.sections;
     for(size_t section_head = section_begin; section_head < section_end; section_head++)
     {
@@ -174,10 +173,9 @@ void AlgorithmRefreshCombinations::GetRemainingSectionValue(const unsigned int s
     }
 }
 
-// returns true if there was a choice it could revert to
 bool AlgorithmRefreshCombinations::RevertSegmentHeadToLastChoice(size_t& segment_head)
 {
-    //cout << "AlgorithmRefreshCombinations::RevertSegmentHeadToLastChoice()" << endl;
+    // returns true if there was a choice it could revert to
     if(choice_stack.empty()) { return false; }
     const unsigned int last_choice = choice_stack.back();
     choice_stack.pop_back();
@@ -210,7 +208,6 @@ bool AlgorithmRefreshCombinations::RevertSegmentHeadToLastChoice(size_t& segment
 
 void AlgorithmRefreshCombinations::TransitionFieldStateForward(const unsigned int section_field, const size_t current_segment_head, char& remaining_section_value, char& remaining_section_length)
 {
-    //cout << "AlgorithmRefreshCombinations::TransitionFieldStateForward()" << endl;
     FieldCombinationState& current_state = field_states[section_field];
     if(current_state != FCS_UNASSIGNED) { return; }
     if(remaining_section_value > 0)
@@ -235,7 +232,6 @@ void AlgorithmRefreshCombinations::TransitionFieldStateForward(const unsigned in
 
 void AlgorithmRefreshCombinations::ApplyCurrentCombinationAsValid(const unsigned int segment_id, const long double combination_multiplier)
 {
-    //cout << "AlgorithmRefreshCombinations::ApplyCurrentCombinationAsValid()" << endl;
     const unsigned int final_mine_count = current_segment_mine_count;
     // store the number of combinations for the whole segment
     segments_combinations[segment_id][final_mine_count] += combination_multiplier;
@@ -279,7 +275,6 @@ void AlgorithmRefreshCombinations::ApplyCurrentCombinationAsValid(const unsigned
 
 bool AlgorithmRefreshCombinations::NextSubsegmentsCombination(std::vector<SubsegmentData>& subsegments_ref)
 {
-    //cout << "AlgorithmRefreshCombinations::NextSubsegmentsCombination()" << endl;
     // repeatedly called, this will enumerate over every possible set of values of subsegments within the segment
     // returns false if there aren't any more possibilities for the sets of values of subsegments
     const size_t subsegments_max = subsegments_ref.size();
@@ -300,7 +295,6 @@ bool AlgorithmRefreshCombinations::NextSubsegmentsCombination(std::vector<Subseg
 
 void AlgorithmRefreshCombinations::MergeAllSegmentsCombinations()
 {
-    //cout << "AlgorithmRefreshCombinations::MergeAllSegmentsCombinations()" << endl;
     CachePossibleSegmentsMineCounts();
     do
     {
@@ -316,12 +310,10 @@ void AlgorithmRefreshCombinations::MergeAllSegmentsCombinations()
 
 void AlgorithmRefreshCombinations::CachePossibleSegmentsMineCounts()
 {
-    //cout << "AlgorithmRefreshCombinations::CachePossibleSegmentsMineCounts()" << endl;
     const unsigned int segments_to_check = data.segments_count;
     for(unsigned int segment_id = 0; segment_id < segments_to_check; segment_id++)
     {
         std::map<unsigned int, long double>& combinations_ref = segments_combinations[segment_id];
-        if(combinations_ref.size() == 0) { cout << "segment " << segment_id << " is empty" << endl; }
         std::vector<unsigned int>& mine_counts_ref = mine_counts_in_segment[segment_id];
         for(auto it = combinations_ref.begin(); it != combinations_ref.end(); ++it)
         {
@@ -332,7 +324,6 @@ void AlgorithmRefreshCombinations::CachePossibleSegmentsMineCounts()
 
 unsigned int AlgorithmRefreshCombinations::GetTotalMineCountOfSegmentCombination()
 {
-    //cout << "AlgorithmRefreshCombinations::GetTotalMineCountOfSegmentCombination()" << endl;
     unsigned int mine_count_sum = 0;
     const size_t segments_count = data.segments_count;
     for(size_t segment_id = 0; segment_id < segments_count; segment_id++)
@@ -344,7 +335,6 @@ unsigned int AlgorithmRefreshCombinations::GetTotalMineCountOfSegmentCombination
 
 void AlgorithmRefreshCombinations::MergeCurrentSegmentsMineCountCombination(const unsigned int segments_combination_mine_count)
 {
-    //cout << "AlgorithmRefreshCombinations::MergeCurrentSegmentsMineCountCombination()" << endl;
     long double combinations_for_current_mine_count_combination = 1.0L;
     const unsigned int mines_in_remaining_fields = remaining_mines - segments_combination_mine_count;
     const unsigned int remaining_safe_fields = remaining_fields - mines_in_remaining_fields;
@@ -390,14 +380,12 @@ void AlgorithmRefreshCombinations::MergeCurrentSegmentsMineCountCombination(cons
 
 bool AlgorithmRefreshCombinations::NextSegmentsMineCountCombination()
 {
-    //cout << "AlgorithmRefreshCombinations::NextSegmentsMineCountCombination()" << endl;
     // repeatedly called, this will enumerate over every possible set of values of mine counts within the segments
     // returns false if there aren't any more possibilities for the sets of mine counts of segments
     const size_t segments_count = data.segments_count;
     for(size_t segment_id = 0; segment_id < segments_count; segment_id++)
     {
         size_t segment_mine_counts_l = mine_counts_in_segment[segment_id].size();
-        if(segment_mine_counts_l == 0) { cout << "!!!!! there are 0 mine count possibilities for segment " << segment_id << endl; }
         size_t& possibility_id = current_mine_count_id_in_segment[segment_id];
         possibility_id++;
         if(possibility_id >= segment_mine_counts_l)

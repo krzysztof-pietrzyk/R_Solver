@@ -43,6 +43,8 @@ class AlgorithmRefreshCombinations : public Algorithm
 
     void GetCombinationsForSegment(unsigned int segment_id);
 
+    void ClearStatesInSegment(unsigned int segment_id);
+
     bool NextSubsegmentsCombination(std::vector<SubsegmentData>& subsegments_ref);
 
     long double ApplySubsegmentsCombination(std::vector<SubsegmentData>& subsegments_ref);

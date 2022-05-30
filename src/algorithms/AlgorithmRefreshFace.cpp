@@ -20,10 +20,11 @@ bool AlgorithmRefreshFace::Run()
         {
             const unsigned int section_origin = data.segments[section_id];
             const unsigned int section_begin = section_origin * MAX_SECTION_LENGTH;
-            const unsigned int section_end = section_begin + data.sections_l[section_id];
+            const unsigned int section_end = section_begin + data.sections_l[section_origin];
             for(size_t field_id = section_begin; field_id < section_end; field_id++)
             {
                 const unsigned int section_field = data.sections[field_id];
+
                 if(data.is_face[section_field]) { continue; }
                 data.is_face[section_field] = true;
                 data.face[data.face_index++] = section_field;
