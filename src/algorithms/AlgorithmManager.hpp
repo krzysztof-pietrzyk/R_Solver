@@ -35,6 +35,7 @@ class AlgorithmManager
     Algorithm* refresh_face;
     Algorithm* refresh_combinations;
     Algorithm* sure_moves_from_combinations;
+    Algorithm* safest_move_from_combinations;
 };
 
 #endif

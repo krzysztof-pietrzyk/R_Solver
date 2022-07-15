@@ -15,4 +15,5 @@ set(CPP_SOURCES_ALGORITHMS
     ${CMAKE_CURRENT_SOURCE_DIR}/AlgorithmRefreshCombinations.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/AlgorithmSimpleCorners.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/AlgorithmSureMovesFromCombinations.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/AlgorithmSafestMoveFromCombinations.cpp
     PARENT_SCOPE)

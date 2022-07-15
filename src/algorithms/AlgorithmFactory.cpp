@@ -28,6 +28,8 @@ Algorithm* AlgorithmFactory::Create(AlgorithmType type)
             return new AlgorithmSimpleCorners(grid, data);
         case ALGORITHM_SURE_MOVES_FROM_COMBINATIONS:
             return new AlgorithmSureMovesFromCombinations(grid, data);
+        case ALGORITHM_SAFEST_MOVE_FROM_COMBINATIONS:
+            return new AlgorithmSafestMoveFromCombinations(grid, data);
         default:
             throw std::invalid_argument("ERROR: Attempting to create a non-existent Algorithm type!");
     }

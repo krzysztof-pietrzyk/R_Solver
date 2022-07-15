@@ -14,6 +14,7 @@ AlgorithmManager::AlgorithmManager(GridManager& grid_) : grid(&grid_)
     refresh_face = factory->Create(AlgorithmType::ALGORITHM_REFRESH_FACE);
     refresh_combinations = factory->Create(AlgorithmType::ALGORITHM_REFRESH_COMBINATIONS);
     sure_moves_from_combinations = factory->Create(AlgorithmType::ALGORITHM_SURE_MOVES_FROM_COMBINATIONS);
+    safest_move_from_combinations = factory->Create(AlgorithmType::ALGORITHM_SAFEST_MOVE_FROM_COMBINATIONS);
 }
 
 AlgorithmManager::~AlgorithmManager()
@@ -30,6 +31,7 @@ AlgorithmManager::~AlgorithmManager()
     delete refresh_face;
     delete refresh_combinations;
     delete sure_moves_from_combinations;
+    delete safest_move_from_combinations;
 }
 
 bool AlgorithmManager::RunAll()
@@ -43,7 +45,10 @@ bool AlgorithmManager::RunAll()
         {
             if(!simple_corners->Run())
             {
-                return false;
+                if(!safest_move_from_combinations->Run())
+                {
+                    return false;
+                }
             }
             else clueless = false;
         }
@@ -61,7 +66,7 @@ bool AlgorithmManager::RunAll()
         refresh_face->Run();
         refresh_combinations->Run();
         if(!grid->is_lost && grid->visible_fields_index == grid->S - grid->M) { return true; }
-        if(sure_moves_from_combinations->Run()) continue;
+        if(sure_moves_from_combinations->Run()) continue; 
 
         clueless = true;
     }

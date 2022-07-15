@@ -15,6 +15,7 @@
 #include "AlgorithmLayerTwo.hpp"
 #include "AlgorithmSimpleCorners.hpp"
 #include "AlgorithmSureMovesFromCombinations.hpp"
+#include "AlgorithmSafestMoveFromCombinations.hpp"
 
 enum AlgorithmType
 {
@@ -27,7 +28,8 @@ enum AlgorithmType
     ALGORITHM_LAYER_ONE,
     ALGORITHM_LAYER_TWO,
     ALGORITHM_SIMPLE_CORNERS,
-    ALGORITHM_SURE_MOVES_FROM_COMBINATIONS
+    ALGORITHM_SURE_MOVES_FROM_COMBINATIONS,
+    ALGORITHM_SAFEST_MOVE_FROM_COMBINATIONS
 };
 
 class AlgorithmFactory
