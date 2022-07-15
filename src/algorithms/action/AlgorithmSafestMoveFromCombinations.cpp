@@ -26,5 +26,5 @@ AlgorithmResult AlgorithmSafestMoveFromCombinations::RunInternal()
         return AlgorithmResult::SUCCESS;
     }
 
-    return AlgorithmResult::NO_MOVES;
+    return AlgorithmResult::GAME_LOST;  // temporary. this should be NO_MOVES but it causes an infinite loop
 }
