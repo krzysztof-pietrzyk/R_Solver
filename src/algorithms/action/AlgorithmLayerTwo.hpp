@@ -1,9 +1,9 @@
 #ifndef AlgorithmLayerTwo_hpp
 #define AlgorithmLayerTwo_hpp
 
-#include "../Algorithm.hpp"
+#include "AlgorithmAction.hpp"
 
-class AlgorithmLayerTwo : public Algorithm
+class AlgorithmLayerTwo : public AlgorithmAction
 {
     /*
     "Layer Two" algorithm implements the medium difficulty player strategy.
@@ -15,7 +15,9 @@ class AlgorithmLayerTwo : public Algorithm
 
     ~AlgorithmLayerTwo();
 
-    AlgorithmResult Run();
+    protected:
+
+    AlgorithmResult RunInternal();
 };
 
 #endif

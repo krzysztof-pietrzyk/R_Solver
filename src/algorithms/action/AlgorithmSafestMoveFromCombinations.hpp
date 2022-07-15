@@ -1,9 +1,9 @@
 #ifndef AlgorithmSafestMoveFromCombinations_hpp
 #define AlgorithmSafestMoveFromCombinations_hpp
 
-#include "../Algorithm.hpp"
+#include "AlgorithmAction.hpp"
 
-class AlgorithmSafestMoveFromCombinations : public Algorithm
+class AlgorithmSafestMoveFromCombinations : public AlgorithmAction
 {
     public:
 
@@ -11,7 +11,9 @@ class AlgorithmSafestMoveFromCombinations : public Algorithm
 
     ~AlgorithmSafestMoveFromCombinations();
 
-    AlgorithmResult Run();
+    protected:
+
+    AlgorithmResult RunInternal();
 };
 
 #endif

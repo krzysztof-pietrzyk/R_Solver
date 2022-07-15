@@ -1,9 +1,9 @@
 #ifndef AlgorithmSureMovesFromCombinations_hpp
 #define AlgorithmSureMovesFromCombinations_hpp
 
-#include "../Algorithm.hpp"
+#include "AlgorithmAction.hpp"
 
-class AlgorithmSureMovesFromCombinations : public Algorithm
+class AlgorithmSureMovesFromCombinations : public AlgorithmAction
 {
     public:
 
@@ -11,7 +11,9 @@ class AlgorithmSureMovesFromCombinations : public Algorithm
 
     ~AlgorithmSureMovesFromCombinations();
 
-    AlgorithmResult Run();
+    protected:
+
+    AlgorithmResult RunInternal();
 };
 
 #endif

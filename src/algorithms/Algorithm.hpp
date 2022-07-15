@@ -23,7 +23,9 @@ enum AlgorithmResult
 {
     SUCCESS,  // At least one click performed
     NO_MOVES,  // No clicks were performed
-    NO_RESULT  // For algorithms which only analyze the board
+    NO_RESULT,  // For algorithms which only analyze the board
+    GAME_WON,
+    GAME_LOST
 };
 
 class Algorithm

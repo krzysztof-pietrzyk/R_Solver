@@ -1,6 +1,6 @@
 #include "AlgorithmSimpleCorners.hpp"
 
-AlgorithmSimpleCorners::AlgorithmSimpleCorners(GridManager& grid_, AlgorithmDataStorage& data_) : Algorithm(grid_, data_), 
+AlgorithmSimpleCorners::AlgorithmSimpleCorners(GridManager& grid_, AlgorithmDataStorage& data_) : AlgorithmAction(grid_, data_), 
     corners_number(4)
 {
     const unsigned int upper_left = 0;
@@ -16,7 +16,7 @@ AlgorithmSimpleCorners::AlgorithmSimpleCorners(GridManager& grid_, AlgorithmData
 
 AlgorithmSimpleCorners::~AlgorithmSimpleCorners() {}
 
-AlgorithmResult AlgorithmSimpleCorners::Run()
+AlgorithmResult AlgorithmSimpleCorners::RunInternal()
 {
     for(size_t i = 0; i < corners_number; i++)
     {

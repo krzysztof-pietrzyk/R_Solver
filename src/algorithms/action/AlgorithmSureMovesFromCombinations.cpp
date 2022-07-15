@@ -1,10 +1,10 @@
 #include "AlgorithmSureMovesFromCombinations.hpp"
 
-AlgorithmSureMovesFromCombinations::AlgorithmSureMovesFromCombinations(GridManager& grid_, AlgorithmDataStorage& data_) : Algorithm(grid_, data_) {}
+AlgorithmSureMovesFromCombinations::AlgorithmSureMovesFromCombinations(GridManager& grid_, AlgorithmDataStorage& data_) : AlgorithmAction(grid_, data_) {}
 
 AlgorithmSureMovesFromCombinations::~AlgorithmSureMovesFromCombinations() {}
 
-AlgorithmResult AlgorithmSureMovesFromCombinations::Run()
+AlgorithmResult AlgorithmSureMovesFromCombinations::RunInternal()
 {
     bool success = false;
     const long double total_combinations = data.total_combinations;

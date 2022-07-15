@@ -1,10 +1,10 @@
 #include "AlgorithmLayerOne.hpp"
 
-AlgorithmLayerOne::AlgorithmLayerOne(GridManager& grid_, AlgorithmDataStorage& data_) : Algorithm(grid_, data_) {}
+AlgorithmLayerOne::AlgorithmLayerOne(GridManager& grid_, AlgorithmDataStorage& data_) : AlgorithmAction(grid_, data_) {}
 
 AlgorithmLayerOne::~AlgorithmLayerOne() {}
 
-AlgorithmResult AlgorithmLayerOne::Run()
+AlgorithmResult AlgorithmLayerOne::RunInternal()
 {
     const unsigned int number_of_clicks_before = grid.left_click_counter + grid.right_click_counter;
     const unsigned int border_index_max = data.border_index;

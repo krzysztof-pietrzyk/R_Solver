@@ -1,10 +1,10 @@
 #include "AlgorithmSafestMoveFromCombinations.hpp"
 
-AlgorithmSafestMoveFromCombinations::AlgorithmSafestMoveFromCombinations(GridManager& grid_, AlgorithmDataStorage& data_) : Algorithm(grid_, data_) {}
+AlgorithmSafestMoveFromCombinations::AlgorithmSafestMoveFromCombinations(GridManager& grid_, AlgorithmDataStorage& data_) : AlgorithmAction(grid_, data_) {}
 
 AlgorithmSafestMoveFromCombinations::~AlgorithmSafestMoveFromCombinations() {}
 
-AlgorithmResult AlgorithmSafestMoveFromCombinations::Run()
+AlgorithmResult AlgorithmSafestMoveFromCombinations::RunInternal()
 {
     const long double total_combinations = data.total_combinations;
     const unsigned int face_length = data.face_index;
