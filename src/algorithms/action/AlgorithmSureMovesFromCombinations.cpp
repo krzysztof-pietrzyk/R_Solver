@@ -4,7 +4,7 @@ AlgorithmSureMovesFromCombinations::AlgorithmSureMovesFromCombinations(GridManag
 
 AlgorithmSureMovesFromCombinations::~AlgorithmSureMovesFromCombinations() {}
 
-AlgorithmResult AlgorithmSureMovesFromCombinations::RunInternal()
+AlgorithmStatus AlgorithmSureMovesFromCombinations::RunInternal()
 {
     bool success = false;
     const long double total_combinations = data.total_combinations;
@@ -24,6 +24,6 @@ AlgorithmResult AlgorithmSureMovesFromCombinations::RunInternal()
             success = true;
         }
     }
-    if(success) { return AlgorithmResult::SUCCESS; }
-    return AlgorithmResult::NO_MOVES;
+    if(success) { return AlgorithmStatus::SUCCESS; }
+    return AlgorithmStatus::NO_MOVES;
 }

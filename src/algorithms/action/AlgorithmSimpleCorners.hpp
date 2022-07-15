@@ -19,7 +19,7 @@ class AlgorithmSimpleCorners : public AlgorithmAction
 
     protected:
 
-    AlgorithmResult RunInternal();
+    AlgorithmStatus RunInternal();
 
     const unsigned int corners_number;
     std::vector<unsigned int> corners;

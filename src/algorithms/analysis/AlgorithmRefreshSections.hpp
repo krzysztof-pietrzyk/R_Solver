@@ -22,7 +22,7 @@ class AlgorithmRefreshSections : public Algorithm
 
     ~AlgorithmRefreshSections();
 
-    AlgorithmResult Run();
+    AlgorithmStatus Run();
 
     protected:
 

@@ -4,7 +4,7 @@ AlgorithmSafestMoveFromCombinations::AlgorithmSafestMoveFromCombinations(GridMan
 
 AlgorithmSafestMoveFromCombinations::~AlgorithmSafestMoveFromCombinations() {}
 
-AlgorithmResult AlgorithmSafestMoveFromCombinations::RunInternal()
+AlgorithmStatus AlgorithmSafestMoveFromCombinations::RunInternal()
 {
     const long double total_combinations = data.total_combinations;
     const unsigned int face_length = data.face_index;
@@ -23,8 +23,8 @@ AlgorithmResult AlgorithmSafestMoveFromCombinations::RunInternal()
     if(safest_field != UINT_MAX)
     {
         grid.LeftClick(safest_field);
-        return AlgorithmResult::SUCCESS;
+        return AlgorithmStatus::SUCCESS;
     }
 
-    return AlgorithmResult::GAME_LOST;  // temporary. this should be NO_MOVES but it causes an infinite loop
+    return AlgorithmStatus::GAME_LOST;  // temporary. this should be NO_MOVES but it causes an infinite loop
 }

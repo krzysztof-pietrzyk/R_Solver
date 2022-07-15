@@ -17,15 +17,15 @@ class AlgorithmAction : public Algorithm
 
     ~AlgorithmAction();
 
-    AlgorithmResult Run();
+    AlgorithmStatus Run();
 
     protected:
 
-    virtual AlgorithmResult RunInternal() = 0;
+    virtual AlgorithmStatus RunInternal() = 0;
 
     private:
 
-    AlgorithmResult CheckGameOverConditions();
+    AlgorithmStatus CheckGameOverConditions();
 };
 
 #endif

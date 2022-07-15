@@ -18,7 +18,7 @@ class AlgorithmRefreshCombinations : public Algorithm
 
     ~AlgorithmRefreshCombinations();
 
-    AlgorithmResult Run();
+    AlgorithmStatus Run();
 
     protected:
 

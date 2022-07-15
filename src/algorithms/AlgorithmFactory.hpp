@@ -13,9 +13,9 @@
 #include "analysis/AlgorithmRefreshFace.hpp"
 #include "analysis/AlgorithmRefreshCombinations.hpp"
 
+#include "action/AlgorithmSimpleCorners.hpp"
 #include "action/AlgorithmLayerOne.hpp"
 #include "action/AlgorithmLayerTwo.hpp"
-#include "action/AlgorithmSimpleCorners.hpp"
 #include "action/AlgorithmSureMovesFromCombinations.hpp"
 #include "action/AlgorithmSafestMoveFromCombinations.hpp"
 

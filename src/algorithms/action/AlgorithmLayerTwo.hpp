@@ -17,7 +17,7 @@ class AlgorithmLayerTwo : public AlgorithmAction
 
     protected:
 
-    AlgorithmResult RunInternal();
+    AlgorithmStatus RunInternal();
 };
 
 #endif

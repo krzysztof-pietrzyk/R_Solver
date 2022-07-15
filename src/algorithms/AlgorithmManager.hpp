@@ -29,7 +29,7 @@ class AlgorithmManager
 
     std::map<AlgorithmType, Algorithm*> algorithms;  // pointers to all algorithms
     // <key: current AlgorithmType, value: <key: current AlgorithmResult, value: next AlgorithmType>>
-    std::map<AlgorithmType, std::map<AlgorithmResult, AlgorithmType>> algorithm_transitions;
+    std::map<AlgorithmType, std::map<AlgorithmStatus, AlgorithmType>> algorithm_transitions;
 
     void ConfigureAlgorithms();
 };

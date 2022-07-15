@@ -4,7 +4,7 @@ AlgorithmLayerTwo::AlgorithmLayerTwo(GridManager& grid_, AlgorithmDataStorage& d
 
 AlgorithmLayerTwo::~AlgorithmLayerTwo() {}
 
-AlgorithmResult AlgorithmLayerTwo::RunInternal()
+AlgorithmStatus AlgorithmLayerTwo::RunInternal()
 {
     const unsigned int sections_l = data.sections_origins_index;
     bool success = false;
@@ -93,6 +93,6 @@ AlgorithmResult AlgorithmLayerTwo::RunInternal()
             }
         }
     }
-    if(success) { return AlgorithmResult::SUCCESS; }
-    return AlgorithmResult::NO_MOVES;
+    if(success) { return AlgorithmStatus::SUCCESS; }
+    return AlgorithmStatus::NO_MOVES;
 }

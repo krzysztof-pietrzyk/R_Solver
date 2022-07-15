@@ -7,17 +7,17 @@ AlgorithmAction::AlgorithmAction(GridManager& grid_, AlgorithmDataStorage& data_
 
 AlgorithmAction::~AlgorithmAction() {}
 
-AlgorithmResult AlgorithmAction::Run()
+AlgorithmStatus AlgorithmAction::Run()
 {
-    AlgorithmResult action_result = RunInternal();
-    AlgorithmResult game_over_result = CheckGameOverConditions();
-    if(game_over_result == AlgorithmResult::NO_RESULT) return action_result;
+    AlgorithmStatus action_result = RunInternal();
+    AlgorithmStatus game_over_result = CheckGameOverConditions();
+    if(game_over_result == AlgorithmStatus::NO_STATUS) return action_result;
     else return game_over_result;
 }
 
-AlgorithmResult AlgorithmAction::CheckGameOverConditions()
+AlgorithmStatus AlgorithmAction::CheckGameOverConditions()
 {
-    if(grid.is_lost) return AlgorithmResult::GAME_LOST;
-    else if(grid.visible_fields_index == grid.NM) return AlgorithmResult::GAME_WON;
-    else return AlgorithmResult::NO_RESULT;
+    if(grid.is_lost) return AlgorithmStatus::GAME_LOST;
+    else if(grid.visible_fields_index == grid.NM) return AlgorithmStatus::GAME_WON;
+    else return AlgorithmStatus::NO_STATUS;
 }

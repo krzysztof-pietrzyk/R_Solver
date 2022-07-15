@@ -6,26 +6,26 @@
 
 enum AlgorithmType
 {
+    ALGORITHM_SIMPLE_CORNERS,
     ALGORITHM_REFRESH_BORDER,
+    ALGORITHM_LAYER_ONE,
     ALGORITHM_REFRESH_SECTIONS,
+    ALGORITHM_LAYER_TWO,
     ALGORITHM_REFRESH_SEGMENTS,
     ALGORITHM_REFRESH_SUBSEGMENTS,
     ALGORITHM_REFRESH_FACE,
     ALGORITHM_REFRESH_COMBINATIONS,
-    ALGORITHM_LAYER_ONE,
-    ALGORITHM_LAYER_TWO,
-    ALGORITHM_SIMPLE_CORNERS,
     ALGORITHM_SURE_MOVES_FROM_COMBINATIONS,
     ALGORITHM_SAFEST_MOVE_FROM_COMBINATIONS
 };
 
-enum AlgorithmResult
+enum AlgorithmStatus
 {
+    NO_STATUS,  // For algorithms which only analyze the board
     SUCCESS,  // At least one click performed
     NO_MOVES,  // No clicks were performed
-    NO_RESULT,  // For algorithms which only analyze the board
-    GAME_WON,
-    GAME_LOST
+    GAME_WON,  // Map is successfully cleared after this algorithm run and game is won
+    GAME_LOST  // This algorithm run resulted in clicking on a mine and game is lost
 };
 
 class Algorithm
@@ -41,7 +41,7 @@ class Algorithm
 
     ~Algorithm();
 
-    virtual AlgorithmResult Run() = 0;
+    virtual AlgorithmStatus Run() = 0;
 
     protected:
 
