@@ -11,7 +11,7 @@ class AlgorithmRefreshFace : public Algorithm
 
     ~AlgorithmRefreshFace();
 
-    bool Run();
+    AlgorithmResult Run();
 
     protected:
 

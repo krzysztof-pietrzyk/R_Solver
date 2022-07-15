@@ -4,6 +4,13 @@
 #include "grid/GridManager.hpp"
 #include "AlgorithmDataStorage.hpp"
 
+enum AlgorithmResult
+{
+    SUCCESS,  // At least one click performed
+    NO_MOVES,  // No clicks were performed
+    NO_RESULT  // For algorithms which only analyze the board
+};
+
 class Algorithm
 {
     /*
@@ -17,7 +24,7 @@ class Algorithm
 
     ~Algorithm();
 
-    virtual bool Run() = 0;
+    virtual AlgorithmResult Run() = 0;
 
     protected:
 

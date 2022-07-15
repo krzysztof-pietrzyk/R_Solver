@@ -4,10 +4,9 @@ AlgorithmSureMovesFromCombinations::AlgorithmSureMovesFromCombinations(GridManag
 
 AlgorithmSureMovesFromCombinations::~AlgorithmSureMovesFromCombinations() {}
 
-bool AlgorithmSureMovesFromCombinations::Run()
+AlgorithmResult AlgorithmSureMovesFromCombinations::Run()
 {
     bool success = false;
-    if(grid.is_lost) return false;
     const long double total_combinations = data.total_combinations;
     const unsigned int face_length = data.face_index;
     for(unsigned int i = 0; i < face_length; i++)
@@ -25,6 +24,6 @@ bool AlgorithmSureMovesFromCombinations::Run()
             success = true;
         }
     }
-
-    return success;
+    if(success) { return AlgorithmResult::SUCCESS; }
+    return AlgorithmResult::NO_MOVES;
 }

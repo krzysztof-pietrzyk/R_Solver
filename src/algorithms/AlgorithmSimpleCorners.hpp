@@ -17,7 +17,7 @@ class AlgorithmSimpleCorners : public Algorithm
 
     ~AlgorithmSimpleCorners();
 
-    bool Run();
+    AlgorithmResult Run();
 
     protected:
 

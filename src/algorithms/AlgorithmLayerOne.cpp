@@ -4,7 +4,7 @@ AlgorithmLayerOne::AlgorithmLayerOne(GridManager& grid_, AlgorithmDataStorage& d
 
 AlgorithmLayerOne::~AlgorithmLayerOne() {}
 
-bool AlgorithmLayerOne::Run()
+AlgorithmResult AlgorithmLayerOne::Run()
 {
     const unsigned int number_of_clicks_before = grid.left_click_counter + grid.right_click_counter;
     const unsigned int border_index_max = data.border_index;
@@ -48,6 +48,7 @@ bool AlgorithmLayerOne::Run()
         }
     }
     const unsigned int number_of_clicks_after = grid.left_click_counter + grid.right_click_counter;
-    // Return true if any clicks have occurred
-    return number_of_clicks_after > number_of_clicks_before;
+
+    if(number_of_clicks_after > number_of_clicks_before) { return AlgorithmResult::SUCCESS; }
+    return AlgorithmResult::NO_MOVES;
 }

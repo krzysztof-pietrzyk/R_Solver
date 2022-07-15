@@ -11,7 +11,7 @@ class AlgorithmRefreshSubsegments : public Algorithm
 
     ~AlgorithmRefreshSubsegments();
 
-    bool Run();
+    AlgorithmResult Run();
 
     protected:
 

@@ -19,7 +19,7 @@ AlgorithmRefreshCombinations::AlgorithmRefreshCombinations(GridManager& grid_, A
 
 AlgorithmRefreshCombinations::~AlgorithmRefreshCombinations() {}
 
-bool AlgorithmRefreshCombinations::Run()
+AlgorithmResult AlgorithmRefreshCombinations::Run()
 {
     Clear();
     remaining_mines = grid.M - grid.flags_index;
@@ -31,7 +31,7 @@ bool AlgorithmRefreshCombinations::Run()
     }
     MergeAllSegmentsCombinations();
 
-    return true;
+    return AlgorithmResult::NO_RESULT;
 }
 
 // only called once at the beginning of Run

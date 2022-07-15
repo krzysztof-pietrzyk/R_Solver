@@ -19,7 +19,7 @@ class AlgorithmRefreshSegments : public Algorithm
 
     ~AlgorithmRefreshSegments();
 
-    bool Run();
+    AlgorithmResult Run();
 
     protected:
     

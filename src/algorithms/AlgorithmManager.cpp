@@ -43,9 +43,9 @@ bool AlgorithmManager::RunAll()
     {
         if(clueless)
         {
-            if(!simple_corners->Run())
+            if(simple_corners->Run() == AlgorithmResult::NO_MOVES)
             {
-                if(!safest_move_from_combinations->Run())
+                if(safest_move_from_combinations->Run() == AlgorithmResult::NO_MOVES)
                 {
                     return false;
                 }
@@ -57,16 +57,16 @@ bool AlgorithmManager::RunAll()
         do
         {
             refresh_border->Run();
-        } while (layer_one->Run());
+        } while (layer_one->Run() == AlgorithmResult::SUCCESS);
         refresh_sections->Run();
-        if(layer_two->Run()) continue;
+        if(layer_two->Run() == AlgorithmResult::SUCCESS) continue;
         if(!grid->is_lost && grid->visible_fields_index == grid->S - grid->M) { return true; }
         refresh_segments->Run();
         refresh_subsegments->Run();
         refresh_face->Run();
         refresh_combinations->Run();
         if(!grid->is_lost && grid->visible_fields_index == grid->S - grid->M) { return true; }
-        if(sure_moves_from_combinations->Run()) continue; 
+        if(sure_moves_from_combinations->Run() == AlgorithmResult::SUCCESS) continue; 
 
         clueless = true;
     }

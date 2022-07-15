@@ -1,15 +1,11 @@
 #include "AlgorithmSafestMoveFromCombinations.hpp"
 
-#include <iostream>
-using namespace std;
-
 AlgorithmSafestMoveFromCombinations::AlgorithmSafestMoveFromCombinations(GridManager& grid_, AlgorithmDataStorage& data_) : Algorithm(grid_, data_) {}
 
 AlgorithmSafestMoveFromCombinations::~AlgorithmSafestMoveFromCombinations() {}
 
-bool AlgorithmSafestMoveFromCombinations::Run()
+AlgorithmResult AlgorithmSafestMoveFromCombinations::Run()
 {
-    if(grid.is_lost) return false;
     const long double total_combinations = data.total_combinations;
     const unsigned int face_length = data.face_index;
     long double lowest_combination = __LDBL_MAX__;
@@ -27,8 +23,8 @@ bool AlgorithmSafestMoveFromCombinations::Run()
     if(safest_field != UINT_MAX)
     {
         grid.LeftClick(safest_field);
-        return true;
+        return AlgorithmResult::SUCCESS;
     }
 
-    return false;
+    return AlgorithmResult::NO_MOVES;
 }

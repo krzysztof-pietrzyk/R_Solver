@@ -17,7 +17,7 @@ class AlgorithmLayerOne : public Algorithm
 
     ~AlgorithmLayerOne();
 
-    bool Run();
+    AlgorithmResult Run();
 };
 
 #endif

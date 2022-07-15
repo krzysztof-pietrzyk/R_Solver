@@ -4,10 +4,10 @@ AlgorithmRefreshBorder::AlgorithmRefreshBorder(GridManager& grid_, AlgorithmData
 
 AlgorithmRefreshBorder::~AlgorithmRefreshBorder() {}
 
-bool AlgorithmRefreshBorder::Run()
+AlgorithmResult AlgorithmRefreshBorder::Run()
 {
     if(data.last_read_index_border == grid.visible_fields_index &&
-        data.last_read_index_border_flags == grid.flags_index) return true;
+        data.last_read_index_border_flags == grid.flags_index) return AlgorithmResult::NO_RESULT;
     
     const unsigned int border_index_old = data.border_index;
     const unsigned int visible_fields_new_index = grid.visible_fields_index;
@@ -58,5 +58,5 @@ bool AlgorithmRefreshBorder::Run()
     data.last_read_index_border_flags = grid.flags_index;
     data.border_internal_indicator = !data.border_internal_indicator;
     data.border_index = border_index_new;
-    return true;
+    return AlgorithmResult::NO_RESULT;
 }

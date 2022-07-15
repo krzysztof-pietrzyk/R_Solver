@@ -22,7 +22,7 @@ class AlgorithmRefreshBorder : public Algorithm
 
     ~AlgorithmRefreshBorder();
 
-    bool Run();
+    AlgorithmResult Run();
 };
 
 #endif

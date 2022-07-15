@@ -11,7 +11,7 @@ class AlgorithmSureMovesFromCombinations : public Algorithm
 
     ~AlgorithmSureMovesFromCombinations();
 
-    bool Run();
+    AlgorithmResult Run();
 };
 
 #endif

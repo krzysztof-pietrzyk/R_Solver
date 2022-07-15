@@ -11,7 +11,7 @@ class AlgorithmSafestMoveFromCombinations : public Algorithm
 
     ~AlgorithmSafestMoveFromCombinations();
 
-    bool Run();
+    AlgorithmResult Run();
 };
 
 #endif

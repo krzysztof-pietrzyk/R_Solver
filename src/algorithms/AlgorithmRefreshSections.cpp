@@ -9,7 +9,7 @@ AlgorithmRefreshSections::AlgorithmRefreshSections(GridManager& grid_, Algorithm
 
 AlgorithmRefreshSections::~AlgorithmRefreshSections() {}
 
-bool AlgorithmRefreshSections::Run()
+AlgorithmResult AlgorithmRefreshSections::Run()
 {
     Clear();
 
@@ -87,7 +87,7 @@ bool AlgorithmRefreshSections::Run()
         }
     }
 
-    return true;
+    return AlgorithmResult::NO_RESULT;
 }
 
 void AlgorithmRefreshSections::Clear()
