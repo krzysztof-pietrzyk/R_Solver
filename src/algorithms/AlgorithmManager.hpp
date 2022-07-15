@@ -1,6 +1,8 @@
 #ifndef AlgorithmManager_hpp
 #define AlgorithmManager_hpp
 
+#include <map>
+
 #include "grid/GridManager.hpp"
 
 #include "AlgorithmFactory.hpp"
@@ -19,23 +21,15 @@ class AlgorithmManager
 
     bool RunAll();
 
+    bool RunAll2();
+
     private:
 
     GridManager* grid;
     AlgorithmFactory* factory;
     AlgorithmDataStorage* data;
 
-    Algorithm* layer_one;
-    Algorithm* layer_two;
-	Algorithm* simple_corners;
-	Algorithm* refresh_border;
-    Algorithm* refresh_sections;
-    Algorithm* refresh_segments;
-    Algorithm* refresh_subsegments;
-    Algorithm* refresh_face;
-    Algorithm* refresh_combinations;
-    Algorithm* sure_moves_from_combinations;
-    Algorithm* safest_move_from_combinations;
+    std::map<AlgorithmType, Algorithm*> algorithms;
 };
 
 #endif

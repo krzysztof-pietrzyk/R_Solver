@@ -4,48 +4,43 @@ AlgorithmManager::AlgorithmManager(GridManager& grid_) : grid(&grid_)
 {
     data = new AlgorithmDataStorage(grid_);
     factory = new AlgorithmFactory(grid_, *data);
-    layer_one = factory->Create(AlgorithmType::ALGORITHM_LAYER_ONE);
-    layer_two = factory->Create(AlgorithmType::ALGORITHM_LAYER_TWO);
-	simple_corners = factory->Create(AlgorithmType::ALGORITHM_SIMPLE_CORNERS);
-	refresh_border = factory->Create(AlgorithmType::ALGORITHM_REFRESH_BORDER);
-    refresh_sections = factory->Create(AlgorithmType::ALGORITHM_REFRESH_SECTIONS);
-    refresh_segments = factory->Create(AlgorithmType::ALGORITHM_REFRESH_SEGMENTS);
-    refresh_subsegments = factory->Create(AlgorithmType::ALGORITHM_REFRESH_SUBSEGMENTS);
-    refresh_face = factory->Create(AlgorithmType::ALGORITHM_REFRESH_FACE);
-    refresh_combinations = factory->Create(AlgorithmType::ALGORITHM_REFRESH_COMBINATIONS);
-    sure_moves_from_combinations = factory->Create(AlgorithmType::ALGORITHM_SURE_MOVES_FROM_COMBINATIONS);
-    safest_move_from_combinations = factory->Create(AlgorithmType::ALGORITHM_SAFEST_MOVE_FROM_COMBINATIONS);
+
+    algorithms = std::map<AlgorithmType, Algorithm*>();
+    algorithms[AlgorithmType::ALGORITHM_LAYER_ONE] = factory->Create(AlgorithmType::ALGORITHM_LAYER_ONE);
+    algorithms[AlgorithmType::ALGORITHM_LAYER_TWO] = factory->Create(AlgorithmType::ALGORITHM_LAYER_TWO);
+	algorithms[AlgorithmType::ALGORITHM_SIMPLE_CORNERS] = factory->Create(AlgorithmType::ALGORITHM_SIMPLE_CORNERS);
+	algorithms[AlgorithmType::ALGORITHM_REFRESH_BORDER] = factory->Create(AlgorithmType::ALGORITHM_REFRESH_BORDER);
+    algorithms[AlgorithmType::ALGORITHM_REFRESH_SECTIONS] = factory->Create(AlgorithmType::ALGORITHM_REFRESH_SECTIONS);
+    algorithms[AlgorithmType::ALGORITHM_REFRESH_SEGMENTS] = factory->Create(AlgorithmType::ALGORITHM_REFRESH_SEGMENTS);
+    algorithms[AlgorithmType::ALGORITHM_REFRESH_SUBSEGMENTS] = factory->Create(AlgorithmType::ALGORITHM_REFRESH_SUBSEGMENTS);
+    algorithms[AlgorithmType::ALGORITHM_REFRESH_FACE] = factory->Create(AlgorithmType::ALGORITHM_REFRESH_FACE);
+    algorithms[AlgorithmType::ALGORITHM_REFRESH_COMBINATIONS] = factory->Create(AlgorithmType::ALGORITHM_REFRESH_COMBINATIONS);
+    algorithms[AlgorithmType::ALGORITHM_SURE_MOVES_FROM_COMBINATIONS] = factory->Create(AlgorithmType::ALGORITHM_SURE_MOVES_FROM_COMBINATIONS);
+    algorithms[AlgorithmType::ALGORITHM_SAFEST_MOVE_FROM_COMBINATIONS] = factory->Create(AlgorithmType::ALGORITHM_SAFEST_MOVE_FROM_COMBINATIONS);
 }
 
 AlgorithmManager::~AlgorithmManager()
 {
     delete factory;
     delete data;
-    delete layer_one;
-    delete layer_two;
-    delete simple_corners;
-    delete refresh_border;
-    delete refresh_sections;
-    delete refresh_segments;
-    delete refresh_subsegments;
-    delete refresh_face;
-    delete refresh_combinations;
-    delete sure_moves_from_combinations;
-    delete safest_move_from_combinations;
+    for(auto iter = algorithms.begin(); iter != algorithms.end(); ++iter)
+    {
+        delete iter->second;
+    }
 }
 
 bool AlgorithmManager::RunAll()
 {
     data->Clear();
     bool clueless = false;
-    simple_corners->Run();
+    algorithms[AlgorithmType::ALGORITHM_SIMPLE_CORNERS]->Run();
     while(true)
     {
         if(clueless)
         {
-            if(simple_corners->Run() == AlgorithmResult::NO_MOVES)
+            if(algorithms[AlgorithmType::ALGORITHM_SIMPLE_CORNERS]->Run() == AlgorithmResult::NO_MOVES)
             {
-                if(safest_move_from_combinations->Run() == AlgorithmResult::NO_MOVES)
+                if(algorithms[AlgorithmType::ALGORITHM_SAFEST_MOVE_FROM_COMBINATIONS]->Run() == AlgorithmResult::NO_MOVES)
                 {
                     return false;
                 }
@@ -56,17 +51,17 @@ bool AlgorithmManager::RunAll()
         if(grid->is_lost) return false;
         do
         {
-            refresh_border->Run();
-        } while (layer_one->Run() == AlgorithmResult::SUCCESS);
-        refresh_sections->Run();
-        if(layer_two->Run() == AlgorithmResult::SUCCESS) continue;
+            algorithms[AlgorithmType::ALGORITHM_REFRESH_BORDER]->Run();
+        } while (algorithms[AlgorithmType::ALGORITHM_LAYER_ONE]->Run() == AlgorithmResult::SUCCESS);
+        algorithms[AlgorithmType::ALGORITHM_REFRESH_SECTIONS]->Run();
+        if(algorithms[AlgorithmType::ALGORITHM_LAYER_TWO]->Run() == AlgorithmResult::SUCCESS) continue;
         if(!grid->is_lost && grid->visible_fields_index == grid->S - grid->M) { return true; }
-        refresh_segments->Run();
-        refresh_subsegments->Run();
-        refresh_face->Run();
-        refresh_combinations->Run();
+        algorithms[AlgorithmType::ALGORITHM_REFRESH_SEGMENTS]->Run();
+        algorithms[AlgorithmType::ALGORITHM_REFRESH_SUBSEGMENTS]->Run();
+        algorithms[AlgorithmType::ALGORITHM_REFRESH_FACE]->Run();
+        algorithms[AlgorithmType::ALGORITHM_REFRESH_COMBINATIONS]->Run();
         if(!grid->is_lost && grid->visible_fields_index == grid->S - grid->M) { return true; }
-        if(sure_moves_from_combinations->Run() == AlgorithmResult::SUCCESS) continue; 
+        if(algorithms[AlgorithmType::ALGORITHM_SURE_MOVES_FROM_COMBINATIONS]->Run() == AlgorithmResult::SUCCESS) continue; 
 
         clueless = true;
     }
