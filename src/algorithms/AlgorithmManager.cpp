@@ -47,6 +47,7 @@ bool AlgorithmManager::RunAll()
             }
             else clueless = false;
         }
+        if(!grid->is_lost && grid->visible_fields_index == grid->S - grid->M) { return true; }
         if(grid->is_lost) return false;
         do
         {
@@ -54,10 +55,12 @@ bool AlgorithmManager::RunAll()
         } while (layer_one->Run());
         refresh_sections->Run();
         if(layer_two->Run()) continue;
+        if(!grid->is_lost && grid->visible_fields_index == grid->S - grid->M) { return true; }
         refresh_segments->Run();
         refresh_subsegments->Run();
         refresh_face->Run();
         refresh_combinations->Run();
+        if(!grid->is_lost && grid->visible_fields_index == grid->S - grid->M) { return true; }
         if(sure_moves_from_combinations->Run()) continue;
 
         clueless = true;
