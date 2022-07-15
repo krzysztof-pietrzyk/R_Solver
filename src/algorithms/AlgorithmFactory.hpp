@@ -16,8 +16,8 @@
 #include "action/AlgorithmSimpleCorners.hpp"
 #include "action/AlgorithmLayerOne.hpp"
 #include "action/AlgorithmLayerTwo.hpp"
-#include "action/AlgorithmSureMovesFromCombinations.hpp"
-#include "action/AlgorithmSafestMoveFromCombinations.hpp"
+#include "action/AlgorithmCombinationsSafeMoves.hpp"
+#include "action/AlgorithmCombinationsLeastRisky.hpp"
 
 class AlgorithmFactory
 {

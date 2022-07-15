@@ -32,6 +32,8 @@ class AlgorithmManager
     std::map<AlgorithmType, std::map<AlgorithmStatus, AlgorithmType>> algorithm_transitions;
 
     void ConfigureAlgorithms();
+
+    AlgorithmType GetNextAlgorithm(const AlgorithmType previous_algorithm, const AlgorithmStatus previous_status);
 };
 
 #endif

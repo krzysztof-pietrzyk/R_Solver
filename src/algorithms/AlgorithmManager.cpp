@@ -32,8 +32,17 @@ bool AlgorithmManager::RunAll()
         if(current_status == AlgorithmStatus::GAME_WON) return true;
         
         // algorithm_transitions map defines which algorithm should be executed next
-        current_algorithm = algorithm_transitions[current_algorithm][current_status];
+        current_algorithm = GetNextAlgorithm(current_algorithm, current_status);
     }
+}
+
+AlgorithmType AlgorithmManager::GetNextAlgorithm(const AlgorithmType previous_algorithm, const AlgorithmStatus previous_status)
+{
+    if(algorithm_transitions[previous_algorithm].count(previous_status) == 0)
+    {
+        throw std::invalid_argument("ERROR: AlgorithmManager::GetNextAlgorithm() unhandled AlgorithmStatus for this AlgorithmType!");
+    }
+    return algorithm_transitions[previous_algorithm][previous_status];
 }
 
 void AlgorithmManager::ConfigureAlgorithms()
@@ -47,7 +56,7 @@ void AlgorithmManager::ConfigureAlgorithms()
 	algorithms[AlgorithmType::ALGORITHM_SIMPLE_CORNERS] = factory->Create(AlgorithmType::ALGORITHM_SIMPLE_CORNERS);
     algorithm_transitions[AlgorithmType::ALGORITHM_SIMPLE_CORNERS] = {
         {AlgorithmStatus::SUCCESS, AlgorithmType::ALGORITHM_REFRESH_BORDER},
-        {AlgorithmStatus::NO_MOVES, AlgorithmType::ALGORITHM_SAFEST_MOVE_FROM_COMBINATIONS}
+        {AlgorithmStatus::NO_MOVES, AlgorithmType::ALGORITHM_COMBINATIONS_LEAST_RISKY}
     };
 
 	algorithms[AlgorithmType::ALGORITHM_REFRESH_BORDER] = factory->Create(AlgorithmType::ALGORITHM_REFRESH_BORDER);
@@ -89,17 +98,17 @@ void AlgorithmManager::ConfigureAlgorithms()
 
     algorithms[AlgorithmType::ALGORITHM_REFRESH_COMBINATIONS] = factory->Create(AlgorithmType::ALGORITHM_REFRESH_COMBINATIONS);
     algorithm_transitions[AlgorithmType::ALGORITHM_REFRESH_COMBINATIONS] = {
-        {AlgorithmStatus::NO_STATUS, AlgorithmType::ALGORITHM_SURE_MOVES_FROM_COMBINATIONS}
+        {AlgorithmStatus::NO_STATUS, AlgorithmType::ALGORITHM_COMBINATIONS_SAFE_MOVES}
     };
 
-    algorithms[AlgorithmType::ALGORITHM_SURE_MOVES_FROM_COMBINATIONS] = factory->Create(AlgorithmType::ALGORITHM_SURE_MOVES_FROM_COMBINATIONS);
-    algorithm_transitions[AlgorithmType::ALGORITHM_SURE_MOVES_FROM_COMBINATIONS] = {
+    algorithms[AlgorithmType::ALGORITHM_COMBINATIONS_SAFE_MOVES] = factory->Create(AlgorithmType::ALGORITHM_COMBINATIONS_SAFE_MOVES);
+    algorithm_transitions[AlgorithmType::ALGORITHM_COMBINATIONS_SAFE_MOVES] = {
         {AlgorithmStatus::SUCCESS, AlgorithmType::ALGORITHM_REFRESH_BORDER},
         {AlgorithmStatus::NO_MOVES, AlgorithmType::ALGORITHM_SIMPLE_CORNERS}
     };
 
-    algorithms[AlgorithmType::ALGORITHM_SAFEST_MOVE_FROM_COMBINATIONS] = factory->Create(AlgorithmType::ALGORITHM_SAFEST_MOVE_FROM_COMBINATIONS);
-    algorithm_transitions[AlgorithmType::ALGORITHM_SAFEST_MOVE_FROM_COMBINATIONS] = {
+    algorithms[AlgorithmType::ALGORITHM_COMBINATIONS_LEAST_RISKY] = factory->Create(AlgorithmType::ALGORITHM_COMBINATIONS_LEAST_RISKY);
+    algorithm_transitions[AlgorithmType::ALGORITHM_COMBINATIONS_LEAST_RISKY] = {
         {AlgorithmStatus::SUCCESS, AlgorithmType::ALGORITHM_REFRESH_BORDER}
     };
 }
