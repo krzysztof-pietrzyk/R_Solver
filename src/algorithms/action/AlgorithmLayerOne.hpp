@@ -1,7 +1,7 @@
 #ifndef AlgorithmLayerOne_hpp
 #define AlgorithmLayerOne_hpp
 
-#include "Algorithm.hpp"
+#include "../Algorithm.hpp"
 
 class AlgorithmLayerOne : public Algorithm
 {

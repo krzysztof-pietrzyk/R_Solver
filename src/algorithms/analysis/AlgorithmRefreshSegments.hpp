@@ -1,7 +1,7 @@
 #ifndef AlgorithmRefreshSegments_hpp
 #define AlgorithmRefreshSegments_hpp
 
-#include "Algorithm.hpp"
+#include "../Algorithm.hpp"
 
 class AlgorithmRefreshSegments : public Algorithm
 {

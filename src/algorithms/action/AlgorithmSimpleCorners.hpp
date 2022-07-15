@@ -1,7 +1,7 @@
 #ifndef AlgorithmSimpleCorners_hpp
 #define AlgorithmSimpleCorners_hpp
 
-#include "Algorithm.hpp"
+#include "../Algorithm.hpp"
 
 class AlgorithmSimpleCorners : public Algorithm
 {

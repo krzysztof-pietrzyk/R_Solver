@@ -1,7 +1,7 @@
 #ifndef AlgorithmSureMovesFromCombinations_hpp
 #define AlgorithmSureMovesFromCombinations_hpp
 
-#include "Algorithm.hpp"
+#include "../Algorithm.hpp"
 
 class AlgorithmSureMovesFromCombinations : public Algorithm
 {

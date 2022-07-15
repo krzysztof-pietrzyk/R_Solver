@@ -1,7 +1,7 @@
 #ifndef AlgorithmSafestMoveFromCombinations_hpp
 #define AlgorithmSafestMoveFromCombinations_hpp
 
-#include "Algorithm.hpp"
+#include "../Algorithm.hpp"
 
 class AlgorithmSafestMoveFromCombinations : public Algorithm
 {

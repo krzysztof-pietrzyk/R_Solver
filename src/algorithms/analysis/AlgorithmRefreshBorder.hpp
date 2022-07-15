@@ -1,7 +1,7 @@
 #ifndef AlgorithmRefreshBorder_hpp
 #define AlgorithmRefreshBorder_hpp
 
-#include "Algorithm.hpp"
+#include "../Algorithm.hpp"
 
 class AlgorithmRefreshBorder : public Algorithm
 {

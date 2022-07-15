@@ -1,19 +1,13 @@
 message("Entering directory ${CMAKE_CURRENT_SOURCE_DIR}")
 
+add_subdirectory(action)
+add_subdirectory(analysis)
+
 set(CPP_SOURCES_ALGORITHMS
     ${CMAKE_CURRENT_SOURCE_DIR}/Algorithm.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/AlgorithmDataStorage.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/AlgorithmFactory.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/AlgorithmLayerOne.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/AlgorithmLayerTwo.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/AlgorithmManager.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/AlgorithmRefreshBorder.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/AlgorithmRefreshSections.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/AlgorithmRefreshSegments.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/AlgorithmRefreshSubsegments.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/AlgorithmRefreshFace.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/AlgorithmRefreshCombinations.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/AlgorithmSimpleCorners.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/AlgorithmSureMovesFromCombinations.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/AlgorithmSafestMoveFromCombinations.cpp
+    ${CPP_SOURCES_ALGORITHMS_ACTION}
+    ${CPP_SOURCES_ALGORITHMS_ANALYSIS}
     PARENT_SCOPE)

@@ -1,7 +1,7 @@
 #ifndef AlgorithmRefreshCombinations_hpp
 #define AlgorithmRefreshCombinations_hpp
 
-#include "Algorithm.hpp"
+#include "../Algorithm.hpp"
 
 enum FieldCombinationState
 {
