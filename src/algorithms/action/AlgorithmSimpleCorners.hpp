@@ -1,9 +1,9 @@
 #ifndef AlgorithmSimpleCorners_hpp
 #define AlgorithmSimpleCorners_hpp
 
-#include "Algorithm.hpp"
+#include "AlgorithmAction.hpp"
 
-class AlgorithmSimpleCorners : public Algorithm
+class AlgorithmSimpleCorners : public AlgorithmAction
 {
     /*
     This algorithm implements the player strategy for simlpy uncovering the four corners of the map.
@@ -17,9 +17,9 @@ class AlgorithmSimpleCorners : public Algorithm
 
     ~AlgorithmSimpleCorners();
 
-    bool Run();
-
     protected:
+
+    AlgorithmStatus RunInternal();
 
     const unsigned int corners_number;
     std::vector<unsigned int> corners;

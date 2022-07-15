@@ -1,7 +1,7 @@
 #ifndef AlgorithmRefreshFace_hpp
 #define AlgorithmRefreshFace_hpp
 
-#include "Algorithm.hpp"
+#include "../Algorithm.hpp"
 
 class AlgorithmRefreshFace : public Algorithm
 {
@@ -11,7 +11,7 @@ class AlgorithmRefreshFace : public Algorithm
 
     ~AlgorithmRefreshFace();
 
-    bool Run();
+    AlgorithmStatus Run();
 
     protected:
 

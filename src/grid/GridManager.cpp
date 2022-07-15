@@ -1,7 +1,7 @@
 #include "GridManager.hpp"
 
 GridManager::GridManager(unsigned short int w, unsigned short int h, unsigned int m)
-    : W(w), H(h), M(m), S(w * h)
+    : W(w), H(h), M(m), S(w * h), NM(S - M)
 {
     visible_fields = std::vector<unsigned int>(S, 0);
     visible_fields_index = 0;

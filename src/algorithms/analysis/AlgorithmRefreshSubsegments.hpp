@@ -1,7 +1,7 @@
 #ifndef AlgorithmRefreshSubsegments_hpp
 #define AlgorithmRefreshSubsegments_hpp
 
-#include "Algorithm.hpp"
+#include "../Algorithm.hpp"
 
 class AlgorithmRefreshSubsegments : public Algorithm
 {
@@ -11,7 +11,7 @@ class AlgorithmRefreshSubsegments : public Algorithm
 
     ~AlgorithmRefreshSubsegments();
 
-    bool Run();
+    AlgorithmStatus Run();
 
     protected:
 

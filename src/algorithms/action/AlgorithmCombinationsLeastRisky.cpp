@@ -1,15 +1,11 @@
-#include "AlgorithmSafestMoveFromCombinations.hpp"
+#include "AlgorithmCombinationsLeastRisky.hpp"
 
-#include <iostream>
-using namespace std;
+AlgorithmCombinationsLeastRisky::AlgorithmCombinationsLeastRisky(GridManager& grid_, AlgorithmDataStorage& data_) : AlgorithmAction(grid_, data_) {}
 
-AlgorithmSafestMoveFromCombinations::AlgorithmSafestMoveFromCombinations(GridManager& grid_, AlgorithmDataStorage& data_) : Algorithm(grid_, data_) {}
+AlgorithmCombinationsLeastRisky::~AlgorithmCombinationsLeastRisky() {}
 
-AlgorithmSafestMoveFromCombinations::~AlgorithmSafestMoveFromCombinations() {}
-
-bool AlgorithmSafestMoveFromCombinations::Run()
+AlgorithmStatus AlgorithmCombinationsLeastRisky::RunInternal()
 {
-    if(grid.is_lost) return false;
     const long double total_combinations = data.total_combinations;
     const unsigned int face_length = data.face_index;
     long double lowest_combination = __LDBL_MAX__;
@@ -27,8 +23,8 @@ bool AlgorithmSafestMoveFromCombinations::Run()
     if(safest_field != UINT_MAX)
     {
         grid.LeftClick(safest_field);
-        return true;
+        return AlgorithmStatus::SUCCESS;
     }
 
-    return false;
+    return AlgorithmStatus::GAME_LOST;  // temporary. this should be NO_MOVES but it causes an infinite loop
 }

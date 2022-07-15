@@ -9,7 +9,7 @@ AlgorithmRefreshSegments::AlgorithmRefreshSegments(GridManager& grid_, Algorithm
 
 AlgorithmRefreshSegments::~AlgorithmRefreshSegments() {}
 
-bool AlgorithmRefreshSegments::Run()
+AlgorithmStatus AlgorithmRefreshSegments::Run()
 {
     const unsigned int sections_origins_index = data.sections_origins_index;
     Clear();
@@ -29,7 +29,7 @@ bool AlgorithmRefreshSegments::Run()
         // ... start a chain reaction, which marks all section fields connected to it
         ChainReactionFromField(current_section_origin);
     }
-    return true;
+    return AlgorithmStatus::NO_STATUS;
 }
 
 void AlgorithmRefreshSegments::Clear()

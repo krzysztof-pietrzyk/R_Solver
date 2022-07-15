@@ -1,6 +1,8 @@
 #ifndef AlgorithmManager_hpp
 #define AlgorithmManager_hpp
 
+#include <map>
+
 #include "grid/GridManager.hpp"
 
 #include "AlgorithmFactory.hpp"
@@ -25,17 +27,13 @@ class AlgorithmManager
     AlgorithmFactory* factory;
     AlgorithmDataStorage* data;
 
-    Algorithm* layer_one;
-    Algorithm* layer_two;
-	Algorithm* simple_corners;
-	Algorithm* refresh_border;
-    Algorithm* refresh_sections;
-    Algorithm* refresh_segments;
-    Algorithm* refresh_subsegments;
-    Algorithm* refresh_face;
-    Algorithm* refresh_combinations;
-    Algorithm* sure_moves_from_combinations;
-    Algorithm* safest_move_from_combinations;
+    std::map<AlgorithmType, Algorithm*> algorithms;  // pointers to all algorithms
+    // <key: current AlgorithmType, value: <key: current AlgorithmResult, value: next AlgorithmType>>
+    std::map<AlgorithmType, std::map<AlgorithmStatus, AlgorithmType>> algorithm_transitions;
+
+    void ConfigureAlgorithms();
+
+    AlgorithmType GetNextAlgorithm(const AlgorithmType previous_algorithm, const AlgorithmStatus previous_status);
 };
 
 #endif

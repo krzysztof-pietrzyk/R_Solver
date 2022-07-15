@@ -15,6 +15,7 @@ class GridManager
     const unsigned short int H;  // Height
     const unsigned int S;  // Size (Width * Height)
     const unsigned int M;  // Number of mines
+    const unsigned int NM;  // Number of fields that are not mines (S - M)
     static const unsigned int MAX_NEIGHBORS = 8;
 
     std::vector<unsigned int> visible_fields;  // Positions of visible fields (not sorted)

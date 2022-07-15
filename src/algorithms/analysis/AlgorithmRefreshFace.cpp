@@ -7,7 +7,7 @@ AlgorithmRefreshFace::AlgorithmRefreshFace(GridManager& grid_, AlgorithmDataStor
 
 AlgorithmRefreshFace::~AlgorithmRefreshFace() {}
 
-bool AlgorithmRefreshFace::Run()
+AlgorithmStatus AlgorithmRefreshFace::Run()
 {
     Clear();
 
@@ -33,7 +33,7 @@ bool AlgorithmRefreshFace::Run()
         }
     }
 
-    return true;
+    return AlgorithmStatus::NO_STATUS;
 }
 
 void AlgorithmRefreshFace::Clear()

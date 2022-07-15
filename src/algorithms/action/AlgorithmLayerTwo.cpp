@@ -1,10 +1,10 @@
 #include "AlgorithmLayerTwo.hpp"
 
-AlgorithmLayerTwo::AlgorithmLayerTwo(GridManager& grid_, AlgorithmDataStorage& data_) : Algorithm(grid_, data_) {}
+AlgorithmLayerTwo::AlgorithmLayerTwo(GridManager& grid_, AlgorithmDataStorage& data_) : AlgorithmAction(grid_, data_) {}
 
 AlgorithmLayerTwo::~AlgorithmLayerTwo() {}
 
-bool AlgorithmLayerTwo::Run()
+AlgorithmStatus AlgorithmLayerTwo::RunInternal()
 {
     const unsigned int sections_l = data.sections_origins_index;
     bool success = false;
@@ -93,5 +93,6 @@ bool AlgorithmLayerTwo::Run()
             }
         }
     }
-    return success;
+    if(success) { return AlgorithmStatus::SUCCESS; }
+    return AlgorithmStatus::NO_MOVES;
 }

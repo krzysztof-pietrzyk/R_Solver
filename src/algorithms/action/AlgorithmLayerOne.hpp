@@ -1,9 +1,9 @@
 #ifndef AlgorithmLayerOne_hpp
 #define AlgorithmLayerOne_hpp
 
-#include "Algorithm.hpp"
+#include "AlgorithmAction.hpp"
 
-class AlgorithmLayerOne : public Algorithm
+class AlgorithmLayerOne : public AlgorithmAction
 {
     /* 
     "Layer One" algorithm implements the most simple player strategy.
@@ -17,7 +17,9 @@ class AlgorithmLayerOne : public Algorithm
 
     ~AlgorithmLayerOne();
 
-    bool Run();
+    protected:
+
+    AlgorithmStatus RunInternal();
 };
 
 #endif
