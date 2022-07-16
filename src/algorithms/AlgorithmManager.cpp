@@ -4,7 +4,10 @@ AlgorithmManager::AlgorithmManager(GridManager& grid_) : grid(&grid_)
 {
     data = new AlgorithmDataStorage(grid_);
     factory = new AlgorithmFactory(grid_, *data);
-    
+
+    algorithms = std::map<AlgorithmType, Algorithm*>();
+    algorithm_transitions = std::map<AlgorithmType, std::map<AlgorithmStatus, AlgorithmType>>();
+
     ConfigureAlgorithms();
 }
 
@@ -21,7 +24,9 @@ AlgorithmManager::~AlgorithmManager()
 bool AlgorithmManager::RunAll()
 {
     // Run algorithms in defined order until the game is either won or lost
+    // returns true if game is won, false if game is lost
     data->Clear();
+    // first algorithm (starting strategy)
     AlgorithmType current_algorithm = AlgorithmType::ALGORITHM_SIMPLE_CORNERS;
     AlgorithmStatus current_status = AlgorithmStatus::NO_STATUS;
     while(true)
@@ -30,7 +35,7 @@ bool AlgorithmManager::RunAll()
 
         if(current_status == AlgorithmStatus::GAME_LOST) return false;
         if(current_status == AlgorithmStatus::GAME_WON) return true;
-        
+
         // algorithm_transitions map defines which algorithm should be executed next
         current_algorithm = GetNextAlgorithm(current_algorithm, current_status);
     }
@@ -40,6 +45,7 @@ AlgorithmType AlgorithmManager::GetNextAlgorithm(const AlgorithmType previous_al
 {
     if(algorithm_transitions[previous_algorithm].count(previous_status) == 0)
     {
+        // If this is thrown, something is incorrectly configured in AlgorithmManager::ConfigureAlgorithms
         throw std::invalid_argument("ERROR: AlgorithmManager::GetNextAlgorithm() unhandled AlgorithmStatus for this AlgorithmType!");
     }
     return algorithm_transitions[previous_algorithm][previous_status];
@@ -50,8 +56,6 @@ void AlgorithmManager::ConfigureAlgorithms()
     // This method is only called once in the constructor
     // It creates all Algorithm objects and defines the transitions between them
     // This is where changes can be made to the order of algorithm execution
-    algorithms = std::map<AlgorithmType, Algorithm*>();
-    algorithm_transitions = std::map<AlgorithmType, std::map<AlgorithmStatus, AlgorithmType>>();
 
 	algorithms[AlgorithmType::ALGORITHM_SIMPLE_CORNERS] = factory->Create(AlgorithmType::ALGORITHM_SIMPLE_CORNERS);
     algorithm_transitions[AlgorithmType::ALGORITHM_SIMPLE_CORNERS] = {
