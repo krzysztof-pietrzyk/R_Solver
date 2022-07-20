@@ -14,6 +14,7 @@ add_subdirectory(algorithms)
 add_subdirectory(app)
 add_subdirectory(generators)
 add_subdirectory(grid)
+add_subdirectory(metrics)
 add_subdirectory(solver)
 add_subdirectory(utils)
 add_subdirectory(view)
@@ -23,6 +24,7 @@ set(CPP_SOURCES_ALL
    ${CPP_SOURCES_APP}
    ${CPP_SOURCES_GENERATORS}
    ${CPP_SOURCES_GRID}
+   ${CPP_SOURCES_METRICS}
    ${CPP_SOURCES_SOLVER}
    ${CPP_SOURCES_UTILS}
    ${CPP_SOURCES_VIEW})

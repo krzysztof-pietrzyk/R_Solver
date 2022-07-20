@@ -7,7 +7,7 @@
 
 #include "AlgorithmFactory.hpp"
 #include "AlgorithmType.hpp"
-#include "AlgorithmMetricsCollector.hpp"
+#include "metrics/AlgorithmMetricsCollector.hpp"
 
 class AlgorithmManager
 {

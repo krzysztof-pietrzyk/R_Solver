@@ -4,7 +4,7 @@
 #include "grid/GridManager.hpp"
 
 #include "AlgorithmDataStorage.hpp"
-#include "AlgorithmMetrics.hpp"
+#include "metrics/AlgorithmMetrics.hpp"
 
 #ifdef GATHER_TIME_METRICS
 #include <chrono>

@@ -8,7 +8,6 @@ set(CPP_SOURCES_ALGORITHMS
     ${CMAKE_CURRENT_SOURCE_DIR}/AlgorithmDataStorage.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/AlgorithmFactory.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/AlgorithmManager.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/AlgorithmMetricsCollector.cpp
     ${CPP_SOURCES_ALGORITHMS_ACTION}
     ${CPP_SOURCES_ALGORITHMS_ANALYSIS}
     PARENT_SCOPE)

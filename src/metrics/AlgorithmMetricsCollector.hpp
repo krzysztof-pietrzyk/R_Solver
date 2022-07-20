@@ -3,9 +3,9 @@
 
 #include <map>
 
-#include "Algorithm.hpp"
-#include "AlgorithmType.hpp"
-#include "AlgorithmDataStorage.hpp"
+#include "algorithms/Algorithm.hpp"
+#include "algorithms/AlgorithmType.hpp"
+#include "algorithms/AlgorithmDataStorage.hpp"
 
 class AlgorithmMetricsCollector
 {
