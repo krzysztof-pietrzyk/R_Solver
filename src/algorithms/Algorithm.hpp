@@ -6,6 +6,10 @@
 #include "AlgorithmDataStorage.hpp"
 #include "AlgorithmMetrics.hpp"
 
+#ifdef GATHER_TIME_METRICS
+#include <chrono>
+#endif
+
 enum AlgorithmStatus
 {
     NO_STATUS,  // For algorithms which only analyze the board

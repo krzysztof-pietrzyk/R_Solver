@@ -10,7 +10,19 @@ Algorithm::~Algorithm() {}
 AlgorithmStatus Algorithm::Run()
 {
     metrics.times_activated++;
-    return RunInternal();
+
+    #ifdef GATHER_TIME_METRICS
+    std::chrono::_V2::system_clock::time_point time_start = std::chrono::high_resolution_clock::now();
+    #endif
+
+    AlgorithmStatus result = RunInternal();
+
+    #ifdef GATHER_TIME_METRICS
+    std::chrono::_V2::system_clock::time_point time_end = std::chrono::high_resolution_clock::now();
+    metrics.total_time_running += time_end - time_start;
+    #endif
+
+    return result;
 }
 
 void Algorithm::LeftClick(unsigned int field)
