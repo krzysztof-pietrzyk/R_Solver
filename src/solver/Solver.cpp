@@ -28,15 +28,13 @@ void Solver::RunForever()
 		tries++;
 		generator->Generate();
 		grid->CalculateHash();
-		algorithm_manager->RunAll();
-		if(!grid->is_lost && grid->visible_fields_index == fields_to_uncover) wins++;
+		if(algorithm_manager->RunAll()) { wins++; }
 		UpdateThreadData();
 	}
 }
 
 void Solver::Run()
 {
-	const unsigned int fields_to_uncover = grid->S - grid->M;
 	generator->Generate();
 	algorithm_manager->RunAll();
 	view->Display();

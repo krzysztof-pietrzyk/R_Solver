@@ -22,7 +22,7 @@ AlgorithmStatus AlgorithmCombinationsLeastRisky::RunInternal()
     }
     if(safest_field != UINT_MAX)
     {
-        grid.LeftClick(safest_field);
+        LeftClick(safest_field);
         return AlgorithmStatus::SUCCESS;
     }
 

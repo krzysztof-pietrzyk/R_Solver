@@ -22,7 +22,9 @@ class AlgorithmRefreshBorder : public Algorithm
 
     ~AlgorithmRefreshBorder();
 
-    AlgorithmStatus Run();
+    protected:
+
+    AlgorithmStatus RunInternal();
 };
 
 #endif

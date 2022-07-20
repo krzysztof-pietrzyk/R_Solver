@@ -9,6 +9,7 @@ AlgorithmAction::~AlgorithmAction() {}
 
 AlgorithmStatus AlgorithmAction::Run()
 {
+    metrics.times_activated++;
     AlgorithmStatus action_result = RunInternal();
     AlgorithmStatus game_over_result = CheckGameOverConditions();
     if(game_over_result == AlgorithmStatus::NO_STATUS) return action_result;

@@ -18,9 +18,9 @@ class AlgorithmRefreshCombinations : public Algorithm
 
     ~AlgorithmRefreshCombinations();
 
-    AlgorithmStatus Run();
-
     protected:
+
+    AlgorithmStatus RunInternal();
 
     std::vector<FieldCombinationState> field_states;
     std::vector<unsigned int> choice_stack;

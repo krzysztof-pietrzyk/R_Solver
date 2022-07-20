@@ -2,22 +2,9 @@
 #define Algorithm_hpp
 
 #include "grid/GridManager.hpp"
-#include "AlgorithmDataStorage.hpp"
 
-enum AlgorithmType
-{
-    ALGORITHM_SIMPLE_CORNERS,
-    ALGORITHM_REFRESH_BORDER,
-    ALGORITHM_LAYER_ONE,
-    ALGORITHM_REFRESH_SECTIONS,
-    ALGORITHM_LAYER_TWO,
-    ALGORITHM_REFRESH_SEGMENTS,
-    ALGORITHM_REFRESH_SUBSEGMENTS,
-    ALGORITHM_REFRESH_FACE,
-    ALGORITHM_REFRESH_COMBINATIONS,
-    ALGORITHM_COMBINATIONS_SAFE_MOVES,
-    ALGORITHM_COMBINATIONS_LEAST_RISKY
-};
+#include "AlgorithmDataStorage.hpp"
+#include "AlgorithmMetrics.hpp"
 
 enum AlgorithmStatus
 {
@@ -36,18 +23,26 @@ class Algorithm
     Algorithms have access to AlgorithmDataStorage and GridManager
     */
     public:
+
+    AlgorithmMetrics metrics;
     
     Algorithm(GridManager& grid_, AlgorithmDataStorage& data_);
 
     ~Algorithm();
 
-    virtual AlgorithmStatus Run() = 0;
+    virtual AlgorithmStatus Run();
 
     protected:
 
     GridManager& grid;
 
     AlgorithmDataStorage& data;
+
+    virtual AlgorithmStatus RunInternal() = 0;
+
+    virtual void LeftClick(unsigned int field);
+
+    virtual void RightClick(unsigned int field);
 };
 
 #endif

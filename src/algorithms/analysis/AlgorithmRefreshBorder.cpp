@@ -4,7 +4,7 @@ AlgorithmRefreshBorder::AlgorithmRefreshBorder(GridManager& grid_, AlgorithmData
 
 AlgorithmRefreshBorder::~AlgorithmRefreshBorder() {}
 
-AlgorithmStatus AlgorithmRefreshBorder::Run()
+AlgorithmStatus AlgorithmRefreshBorder::RunInternal()
 {
     if(data.last_read_index_border == grid.visible_fields_index &&
         data.last_read_index_border_flags == grid.flags_index) return AlgorithmStatus::NO_STATUS;

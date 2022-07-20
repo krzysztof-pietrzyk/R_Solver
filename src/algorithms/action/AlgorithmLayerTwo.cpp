@@ -59,7 +59,7 @@ AlgorithmStatus AlgorithmLayerTwo::RunInternal()
                     if(!is_common_origin[k])
                     {
                         success = true;
-                        grid.RightClick(data.sections[section_origin_offset + k]);
+                        RightClick(data.sections[section_origin_offset + k]);
                     }
                 }
                 for(k = 0; k < neighbor_section_l; k++)
@@ -67,7 +67,7 @@ AlgorithmStatus AlgorithmLayerTwo::RunInternal()
                     if(!is_common_neighbor[k])
                     {
                         success = true;
-                        grid.LeftClick(data.sections[neighbor_section_offset + k]);
+                        LeftClick(data.sections[neighbor_section_offset + k]);
                     }
                 }
             }
@@ -79,7 +79,7 @@ AlgorithmStatus AlgorithmLayerTwo::RunInternal()
                     if(!is_common_neighbor[k])
                     {
                         success = true;
-                        grid.RightClick(data.sections[neighbor_section_offset + k]);
+                        RightClick(data.sections[neighbor_section_offset + k]);
                     }
                 }
                 for(k = 0; k < section_l_origin; k++)
@@ -87,7 +87,7 @@ AlgorithmStatus AlgorithmLayerTwo::RunInternal()
                     if(!is_common_origin[k])
                     {
                         success = true;
-                        grid.LeftClick(data.sections[section_origin_offset + k]);
+                        LeftClick(data.sections[section_origin_offset + k]);
                     }
                 }
             }

@@ -23,7 +23,7 @@ AlgorithmStatus AlgorithmSimpleCorners::RunInternal()
         const unsigned int corner = corners[i];
         if(!grid.is_visible[corner] && !grid.is_flag[corner])
         {
-            grid.LeftClick(corner);
+            LeftClick(corner);
             return AlgorithmStatus::SUCCESS;
         }
     }

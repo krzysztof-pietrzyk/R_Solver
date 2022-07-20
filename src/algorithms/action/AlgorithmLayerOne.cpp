@@ -34,7 +34,7 @@ AlgorithmStatus AlgorithmLayerOne::RunInternal()
             for_grid_neighbors_of(border_field_temp)
             {
                 const unsigned int neighbor_field = grid.neighbors[x];
-                if(!grid.is_flag[neighbor_field] && !grid.is_visible[neighbor_field]) grid.LeftClick(neighbor_field);
+                if(!grid.is_flag[neighbor_field] && !grid.is_visible[neighbor_field]) LeftClick(neighbor_field);
             }
         }
         // If the remaining covered fields exactly account for missing flags, right click on them
@@ -43,7 +43,7 @@ AlgorithmStatus AlgorithmLayerOne::RunInternal()
             for_grid_neighbors_of(border_field_temp)
             {
                 const unsigned int neighbor_field = grid.neighbors[x];
-                if(!grid.is_flag[neighbor_field] && !grid.is_visible[neighbor_field]) grid.RightClick(neighbor_field);
+                if(!grid.is_flag[neighbor_field] && !grid.is_visible[neighbor_field]) RightClick(neighbor_field);
             }
         }
     }

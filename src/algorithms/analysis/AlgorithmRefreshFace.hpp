@@ -11,9 +11,9 @@ class AlgorithmRefreshFace : public Algorithm
 
     ~AlgorithmRefreshFace();
 
-    AlgorithmStatus Run();
-
     protected:
+
+    AlgorithmStatus RunInternal();
 
     void Clear();
 };

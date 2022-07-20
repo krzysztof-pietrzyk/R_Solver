@@ -6,6 +6,8 @@
 #include "grid/GridManager.hpp"
 
 #include "AlgorithmFactory.hpp"
+#include "AlgorithmType.hpp"
+#include "AlgorithmMetricsCollector.hpp"
 
 class AlgorithmManager
 {
@@ -26,6 +28,7 @@ class AlgorithmManager
     GridManager* grid;
     AlgorithmFactory* factory;
     AlgorithmDataStorage* data;
+    AlgorithmMetricsCollector* algorithm_metrics_collector;
 
     std::map<AlgorithmType, Algorithm*> algorithms;  // pointers to all algorithms
     // <key: current AlgorithmType, value: <key: current AlgorithmResult, value: next AlgorithmType>>

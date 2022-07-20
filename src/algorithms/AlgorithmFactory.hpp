@@ -5,6 +5,7 @@
 
 #include "Algorithm.hpp"
 #include "AlgorithmDataStorage.hpp"
+#include "AlgorithmType.hpp"
 
 #include "analysis/AlgorithmRefreshBorder.hpp"
 #include "analysis/AlgorithmRefreshSections.hpp"

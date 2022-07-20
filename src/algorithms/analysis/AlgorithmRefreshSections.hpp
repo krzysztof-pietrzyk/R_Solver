@@ -22,9 +22,9 @@ class AlgorithmRefreshSections : public Algorithm
 
     ~AlgorithmRefreshSections();
 
-    AlgorithmStatus Run();
-
     protected:
+
+    AlgorithmStatus RunInternal();
 
     const unsigned int double_grid_width;
     std::vector<unsigned int> sections_hashes;

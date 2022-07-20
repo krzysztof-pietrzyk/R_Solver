@@ -15,12 +15,12 @@ AlgorithmStatus AlgorithmCombinationsSafeMoves::RunInternal()
         const long double face_field_combinations = data.field_combinations[face_field];
         if(face_field_combinations == 0.0L) 
         {
-            grid.LeftClick(face_field);
+            LeftClick(face_field);
             success = true;
         }
         else if(face_field_combinations == total_combinations)
         {
-            grid.RightClick(face_field);
+            RightClick(face_field);
             success = true;
         }
     }

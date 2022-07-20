@@ -28,10 +28,10 @@ class Solver
 
     SolverThreadData* thread_data;
 
-    unsigned long int tries;
-	unsigned long int wins;
-    unsigned long int last_read_tries;
-    unsigned long int last_read_wins;
+    unsigned long long tries;
+	unsigned long long wins;
+    unsigned long long last_read_tries;
+    unsigned long long last_read_wins;
     const unsigned int fields_to_uncover;
 
     void UpdateThreadData();

@@ -11,9 +11,9 @@ class AlgorithmRefreshSubsegments : public Algorithm
 
     ~AlgorithmRefreshSubsegments();
 
-    AlgorithmStatus Run();
-
     protected:
+
+    AlgorithmStatus RunInternal();
 
     std::vector<bool> is_checked;
     std::vector<unsigned int> checked;

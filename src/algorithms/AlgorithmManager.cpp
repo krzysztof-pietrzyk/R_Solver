@@ -8,6 +8,8 @@ AlgorithmManager::AlgorithmManager(GridManager& grid_) : grid(&grid_)
     algorithms = std::map<AlgorithmType, Algorithm*>();
     algorithm_transitions = std::map<AlgorithmType, std::map<AlgorithmStatus, AlgorithmType>>();
 
+    algorithm_metrics_collector = new AlgorithmMetricsCollector(algorithms);
+
     ConfigureAlgorithms();
 }
 
@@ -18,7 +20,9 @@ AlgorithmManager::~AlgorithmManager()
         delete iter->second;
     }
     delete factory;
+    delete algorithm_metrics_collector;
     delete data;
+
 }
 
 bool AlgorithmManager::RunAll()
@@ -33,9 +37,16 @@ bool AlgorithmManager::RunAll()
     {
         current_status = algorithms[current_algorithm]->Run();
 
-        if(current_status == AlgorithmStatus::GAME_LOST) return false;
-        if(current_status == AlgorithmStatus::GAME_WON) return true;
-
+        if(current_status == AlgorithmStatus::GAME_LOST)
+        {
+            algorithm_metrics_collector->UpdateMetrics();
+            return false;
+        }
+        if(current_status == AlgorithmStatus::GAME_WON)
+        {
+            algorithm_metrics_collector->UpdateMetrics();
+            return true;
+        }
         // algorithm_transitions map defines which algorithm should be executed next
         current_algorithm = GetNextAlgorithm(current_algorithm, current_status);
     }

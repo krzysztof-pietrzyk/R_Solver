@@ -11,7 +11,7 @@ AlgorithmRefreshSubsegments::AlgorithmRefreshSubsegments(GridManager& grid_, Alg
 
 AlgorithmRefreshSubsegments::~AlgorithmRefreshSubsegments() {}
 
-AlgorithmStatus AlgorithmRefreshSubsegments::Run()
+AlgorithmStatus AlgorithmRefreshSubsegments::RunInternal()
 {
     Clear();
 

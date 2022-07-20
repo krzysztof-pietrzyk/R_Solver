@@ -19,9 +19,9 @@ class AlgorithmRefreshSegments : public Algorithm
 
     ~AlgorithmRefreshSegments();
 
-    AlgorithmStatus Run();
-
     protected:
+
+    AlgorithmStatus RunInternal();
     
     std::vector<unsigned int> fields_to_check;
     unsigned int fields_to_check_index;
