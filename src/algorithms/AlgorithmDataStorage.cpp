@@ -21,9 +21,9 @@ AlgorithmDataStorage::AlgorithmDataStorage(GridManager& grid)
 
     segments_index = 0;
     segments_count = 0;
-    segments = std::vector<unsigned int>(grid.M, 0);
-    segments_starting_indexes = std::vector<unsigned int>(grid.M, 0);
-    segments_l = std::vector<unsigned int>(grid.M, 0);
+    segments = std::vector<unsigned int>(grid.NM, 0);
+    segments_starting_indexes = std::vector<unsigned int>(grid.NM, 0);
+    segments_l = std::vector<unsigned int>(grid.NM, 0);
 
     subsegments = std::vector<std::vector<SubsegmentData>>();
     is_subsegment = std::vector<bool>(grid.S, false);
