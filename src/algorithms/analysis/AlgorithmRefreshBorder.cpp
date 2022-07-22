@@ -21,9 +21,8 @@ AlgorithmStatus AlgorithmRefreshBorder::Run()
     {
         const unsigned int border_field_temp = border_old[i];
         at_least_one_not_visible = false;
-        for_grid_neighbors_of(border_field_temp)
+        for(const unsigned int& neighbor_field : grid.neighbors[border_field_temp])
         {
-            const unsigned int neighbor_field = grid.neighbors[x];
             if(!grid.is_visible[neighbor_field] && !grid.is_flag[neighbor_field])
             {
                 at_least_one_not_visible = true;
@@ -38,9 +37,8 @@ AlgorithmStatus AlgorithmRefreshBorder::Run()
     {
         const unsigned int visible_field_temp = grid.visible_fields[i];
         at_least_one_not_visible = false;
-        for_grid_neighbors_of(visible_field_temp)
+        for(const unsigned int& neighbor_field : grid.neighbors[visible_field_temp])
         {
-            const unsigned int neighbor_field = grid.neighbors[x];
             if(!grid.is_visible[neighbor_field] && !grid.is_flag[neighbor_field])
             {
                 at_least_one_not_visible = true;

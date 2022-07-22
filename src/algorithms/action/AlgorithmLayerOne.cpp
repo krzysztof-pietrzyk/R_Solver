@@ -21,9 +21,8 @@ AlgorithmStatus AlgorithmLayerOne::RunInternal()
         flags_count = 0;
         not_visible_count = 0;
         // Count flags and covered fields around the border field
-        for_grid_neighbors_of(border_field_temp)
+        for(const unsigned int& neighbor_field : grid.neighbors[border_field_temp])
         {
-            const unsigned int neighbor_field = grid.neighbors[x];
             if(grid.is_flag[neighbor_field]) flags_count++;
             else if(!grid.is_visible[neighbor_field]) not_visible_count++;
         }
@@ -31,18 +30,16 @@ AlgorithmStatus AlgorithmLayerOne::RunInternal()
         // If there are already enough flags, left click on all remaining covered fields
         if(field_value_temp == flags_count)
         {
-            for_grid_neighbors_of(border_field_temp)
+            for(const unsigned int& neighbor_field : grid.neighbors[border_field_temp])
             {
-                const unsigned int neighbor_field = grid.neighbors[x];
                 if(!grid.is_flag[neighbor_field] && !grid.is_visible[neighbor_field]) grid.LeftClick(neighbor_field);
             }
         }
         // If the remaining covered fields exactly account for missing flags, right click on them
         else if(field_value_temp == flags_count + not_visible_count)
         {
-            for_grid_neighbors_of(border_field_temp)
+            for(const unsigned int& neighbor_field : grid.neighbors[border_field_temp])
             {
-                const unsigned int neighbor_field = grid.neighbors[x];
                 if(!grid.is_flag[neighbor_field] && !grid.is_visible[neighbor_field]) grid.RightClick(neighbor_field);
             }
         }

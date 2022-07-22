@@ -17,7 +17,6 @@ AlgorithmStatus AlgorithmRefreshSections::Run()
     const std::vector<unsigned int>& border = data.GetBorder();
     unsigned char current_section_neighbors_index = 0;
     unsigned char current_section_length = 0;
-    unsigned int current_border_field = 0;
     unsigned char section_value_temp = 0;
     unsigned int current_section_hash = 0;
     bool duplicate_temp = false;
@@ -27,7 +26,7 @@ AlgorithmStatus AlgorithmRefreshSections::Run()
     for(i = 0; i < border_l; i++)
     {
         current_section_length = 0;
-        current_border_field = border[i];
+        const unsigned int current_border_field = border[i];
         const unsigned int current_section_offset = current_border_field * MAX_SECTION_LENGTH;
         const unsigned int current_section_neighbors_offset = current_border_field * MAX_SECTION_NEIGHBORS;
         section_value_temp = grid.FieldValue(current_border_field);
@@ -35,9 +34,8 @@ AlgorithmStatus AlgorithmRefreshSections::Run()
         current_section_hash = 0;
 
         // iterate through each border field's neigbors
-        for_grid_neighbors_of(current_border_field)
+        for(const unsigned int& neighbor_field : grid.neighbors[current_border_field])
         {
-            const unsigned int neighbor_field = grid.neighbors[x];
             // count the number of flags already marked around the current_border_field
             if(grid.is_flag[neighbor_field]) { section_value_temp--; continue; }
             // if this neighbor is already visible, ignore it
@@ -49,11 +47,8 @@ AlgorithmStatus AlgorithmRefreshSections::Run()
             else { current_section_hash += GetHashBit(neighbor_field - data.sections[current_section_offset]); }
             // iterate through the neighbors of that neighbor, in order to determine
             // potential neighbour sections of this section
-            const unsigned int first_neighbor_index = neighbor_field * GridManager::MAX_NEIGHBORS;
-            const unsigned int last_neighbor_index = first_neighbor_index + grid.neighbors_l[neighbor_field];
-            for(j = first_neighbor_index; j < last_neighbor_index; j++)
+            for(const unsigned int& neighbor_of_neighbor : grid.neighbors[neighbor_field])
             {
-                const unsigned int neighbor_of_neighbor = grid.neighbors[j];
                 // if this neighbor is not on border or is the currently considered field, ignore it
                 if(!data.is_border[neighbor_of_neighbor] || neighbor_of_neighbor == current_border_field) { continue; }
                 duplicate_temp = false;

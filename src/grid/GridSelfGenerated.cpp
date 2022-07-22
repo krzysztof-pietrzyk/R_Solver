@@ -61,12 +61,11 @@ void GridSelfGenerated::CalculateValues()
     unsigned int current_neighbor;
     const unsigned int num_of_not_mines = S - M;
     // Only iterate over non-mine fields
-    for(unsigned int & current_field : not_mines)
+    for(const unsigned int& current_field : not_mines)
     {
         current_field_value = 0;
-        for_neighbors_of(current_field)
+        for(const unsigned int& current_neighbor : neighbors[current_field])
         {
-            current_neighbor = neighbors[x];
             // Count how many mines are within each field's neighbors
             if(is_mine[current_neighbor]) current_field_value++;
         }
@@ -108,8 +107,6 @@ void GridSelfGenerated::ZeroChainReaction(unsigned int field)
     if(field_values[field] != 0) return;
 
     ClearZCR();
-    unsigned int current_zero;
-    unsigned int current_neighbor;
     // Clicked field is the beginning of the chain reaction
     zcr_is_zero[field] = true;
     zcr_zeros[zcr_zeros_index++] = field;
@@ -119,10 +116,9 @@ void GridSelfGenerated::ZeroChainReaction(unsigned int field)
         // Iterate through each element in zcr_zeros
         // zcr_zeros_index may increase while the loop is running
         // this is why a standard iterator can't be used here
-        current_zero = zcr_zeros[i];
-        for_neighbors_of(current_zero)
+        const unsigned int current_zero = zcr_zeros[i];
+        for(const unsigned int& current_neighbor : neighbors[current_zero])
         {
-            current_neighbor = neighbors[x];
             // Iterate through neighbors of current field
             if(!is_visible[current_neighbor])
             {
