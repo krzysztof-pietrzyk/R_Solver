@@ -7,8 +7,12 @@
 #include <chrono>
 #endif
 
-struct AlgorithmMetrics
+#include "Metrics.hpp"
+
+class AlgorithmMetrics : public Metrics
 {
+    public:
+
     unsigned long long times_activated = 0LL;
     unsigned long long left_clicks = 0LL;
     unsigned long long right_clicks = 0LL;
@@ -17,29 +21,13 @@ struct AlgorithmMetrics
     std::chrono::duration<int64_t, std::nano> total_time_running = std::chrono::duration<int64_t, std::nano>(0);
     #endif
 
-    struct AlgorithmMetrics operator+=(AlgorithmMetrics const& other)
-    {
-        times_activated += other.times_activated;
-        left_clicks += other.left_clicks;
-        right_clicks += other.right_clicks;
+    AlgorithmMetrics();
 
-        #ifdef GATHER_TIME_METRICS
-        total_time_running += other.total_time_running;
-        #endif
+    ~AlgorithmMetrics();
 
-        return *this;
-    }
+    void operator+=(AlgorithmMetrics const& other);
 
-    void Clear()
-    {
-        times_activated = 0LL;
-        left_clicks = 0LL;
-        right_clicks = 0LL;
-
-        #ifdef GATHER_TIME_METRICS
-        total_time_running = std::chrono::duration<int64_t, std::nano>(0);
-        #endif
-    }
+    void Clear();
 };
 
 #endif
