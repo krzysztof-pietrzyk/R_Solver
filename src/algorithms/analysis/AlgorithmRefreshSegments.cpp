@@ -11,11 +11,8 @@ AlgorithmRefreshSegments::~AlgorithmRefreshSegments() {}
 
 AlgorithmStatus AlgorithmRefreshSegments::RunInternal()
 {
-    const unsigned int sections_origins_index = data.sections_origins_index;
     Clear();
-
-    data.segments_count = 0;
-    data.segments_index = 0;
+    const unsigned int sections_origins_index = data.sections_origins_index;
 
     size_t i = 0;
     size_t j = 0;
@@ -36,6 +33,8 @@ void AlgorithmRefreshSegments::Clear()
 {
     for(size_t i = 0; i < fields_to_check_index; i++) { is_checked[fields_to_check[i]] = false; }
     fields_to_check_index = 0;
+    data.segments_count = 0;
+    data.segments_index = 0;
 }
 
 void AlgorithmRefreshSegments::ChainReactionFromField(unsigned int field)
