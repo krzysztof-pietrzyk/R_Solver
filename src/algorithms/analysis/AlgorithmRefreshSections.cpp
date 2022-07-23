@@ -15,8 +15,6 @@ AlgorithmStatus AlgorithmRefreshSections::Run()
 
     const unsigned int border_l = data.border_index;
     const std::vector<unsigned int>& border = data.GetBorder();
-    unsigned char current_section_neighbors_index = 0;
-    unsigned char current_section_length = 0;
     unsigned char section_value_temp = 0;
     unsigned int current_section_hash = 0;
     bool duplicate_temp = false;
@@ -25,14 +23,12 @@ AlgorithmStatus AlgorithmRefreshSections::Run()
     // iterate through border fields
     for(i = 0; i < border_l; i++)
     {
-        current_section_length = 0;
         const unsigned int current_border_field = border[i];
-        const unsigned int current_section_offset = current_border_field * MAX_SECTION_LENGTH;
-        const unsigned int current_section_neighbors_offset = current_border_field * MAX_SECTION_NEIGHBORS;
+        Section& current_section = data.sections[current_border_field];
+        current_section.fields_index = 0;
+        current_section.neighbors_index = 0;
         section_value_temp = grid.FieldValue(current_border_field);
-        current_section_neighbors_index = 0;
         current_section_hash = 0;
-
         // iterate through each border field's neigbors
         for(const unsigned int& neighbor_field : grid.neighbors[current_border_field])
         {
@@ -41,10 +37,10 @@ AlgorithmStatus AlgorithmRefreshSections::Run()
             // if this neighbor is already visible, ignore it
             else if(grid.is_visible[neighbor_field]) { continue; }
             // add this neighbor to the section
-            data.sections[current_section_offset + current_section_length++] = neighbor_field;
+            data.sections[current_border_field].AddField(neighbor_field);
             // encode data about the section into the hash
-            if(current_section_length == 1) { current_section_hash += neighbor_field; }
-            else { current_section_hash += GetHashBit(neighbor_field - data.sections[current_section_offset]); }
+            if(data.sections[current_border_field].fields_index == 1) { current_section_hash += neighbor_field; }
+            else { current_section_hash += GetHashBit(neighbor_field - current_section.fields[0]); }
             // iterate through the neighbors of that neighbor, in order to determine
             // potential neighbour sections of this section
             for(const unsigned int& neighbor_of_neighbor : grid.neighbors[neighbor_field])
@@ -54,9 +50,10 @@ AlgorithmStatus AlgorithmRefreshSections::Run()
                 duplicate_temp = false;
                 // iterate through neighbors of this section, which have already been found before
                 // in order to filter duplicates
+                const size_t current_section_neighbors_index = current_section.neighbors_index;
                 for(k = 0; k < current_section_neighbors_index; k++)
                 {
-                    if(data.sections_neighbors[current_section_neighbors_offset + k] == neighbor_of_neighbor)
+                    if(current_section.neighbors[k] == neighbor_of_neighbor)
                     {
                         duplicate_temp = true;
                         break;
@@ -65,7 +62,7 @@ AlgorithmStatus AlgorithmRefreshSections::Run()
                 if(!duplicate_temp) 
                 {
                     // only add this to section neighbors if it's not a duplicate
-                    data.sections_neighbors[current_section_neighbors_offset + current_section_neighbors_index++] = neighbor_of_neighbor;
+                    current_section.AddNeighbor(neighbor_of_neighbor);
                 }
             }
         }
@@ -76,9 +73,7 @@ AlgorithmStatus AlgorithmRefreshSections::Run()
             sections_hashes[data.sections_origins_index] = current_section_hash;
             data.sections_origins[data.sections_origins_index++] = current_border_field;
             data.is_section_origin[current_border_field] = true;
-            data.sections_values[current_border_field] = section_value_temp;
-            data.sections_l[current_border_field] = current_section_length;
-            data.sections_neighbors_l[current_border_field] = current_section_neighbors_index;
+            current_section.value = section_value_temp;
         }
     }
 
@@ -87,7 +82,13 @@ AlgorithmStatus AlgorithmRefreshSections::Run()
 
 void AlgorithmRefreshSections::Clear()
 {
-    for(size_t i = 0; i < data.sections_origins_index; i++) data.is_section_origin[data.sections_origins[i]] = false;
+    for(size_t i = 0; i < data.sections_origins_index; i++)
+    {
+        const unsigned int section_origin = data.sections_origins[i];
+        data.is_section_origin[section_origin] = false;
+        data.sections[section_origin].fields_index = 0;
+        data.sections[section_origin].neighbors_index = 0;
+    }
     data.sections_origins_index = 0;
 }
 

@@ -6,9 +6,6 @@
 
 #include "grid/GridManager.hpp"
 
-#define MAX_SECTION_LENGTH 8
-#define MAX_SECTION_NEIGHBORS 16
-
 struct SubsegmentData
 {
     std::vector<unsigned int> fields;
@@ -16,6 +13,25 @@ struct SubsegmentData
     std::map<unsigned char, unsigned int> combinations_for_value;
     size_t total_possibilities;
     size_t current_possibility_id;
+};
+
+struct Section
+{
+    std::vector<unsigned int> fields = std::vector<unsigned int>(8, 0);
+    size_t fields_index = 0;
+    std::vector<unsigned int> neighbors = std::vector<unsigned int>(16, 0);
+    size_t neighbors_index = 0;
+    unsigned char value = 0;
+
+    void AddField(const unsigned int field)
+    {
+        fields[fields_index++] = field;
+    }
+
+    void AddNeighbor(const unsigned int field)
+    {
+        neighbors[neighbors_index++] = field;
+    }
 };
 
 class AlgorithmDataStorage
@@ -36,11 +52,7 @@ class AlgorithmDataStorage
     unsigned int sections_origins_index;
     std::vector<unsigned int> sections_origins;
     std::vector<bool> is_section_origin;
-    std::vector<unsigned int> sections;
-    std::vector<unsigned char> sections_l;
-    std::vector<unsigned char> sections_values;
-    std::vector<unsigned int> sections_neighbors;
-    std::vector<unsigned char> sections_neighbors_l;
+    std::vector<Section> sections;
 
     unsigned int segments_index;
     unsigned int segments_count;

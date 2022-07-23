@@ -50,15 +50,15 @@ void AlgorithmRefreshSubsegments::Clear()
 void AlgorithmRefreshSubsegments::UpdateNeighborsBits(const unsigned int border_field)
 {
     neighbors_bits.clear();
-    const unsigned int border_field_neighbors_begin = border_field * MAX_SECTION_NEIGHBORS;
-    const unsigned int border_field_neighbors_end = border_field_neighbors_begin + data.sections_neighbors_l[border_field];
+    const Section& border_field_section = data.sections[border_field];
+    const size_t border_field_neighbors_l = border_field_section.neighbors_index;
     unsigned int bit_shift_temp = 1;
-    for(size_t i = border_field_neighbors_begin; i < border_field_neighbors_end; i++)
+    for(size_t i = 0; i < border_field_neighbors_l; i++)
     {
         // border_field_neighbors are origins of sections, which overlap with this border field's section
         // each of those neighbors is being assigned a different bit.
         // those bits will be later summed up to create a hash of section field's neighbors
-        const unsigned int border_field_neighbor = data.sections_neighbors[i];
+        const unsigned int border_field_neighbor = border_field_section.neighbors[i];
         neighbors_bits[border_field_neighbor] = bit_shift_temp;
         bit_shift_temp = bit_shift_temp << 1;
     }
@@ -67,11 +67,11 @@ void AlgorithmRefreshSubsegments::UpdateNeighborsBits(const unsigned int border_
 void AlgorithmRefreshSubsegments::UpdateSectionNeighborhood(const unsigned int section_origin)
 {
     section_neighborhood.clear();
-    const unsigned int section_start = section_origin * MAX_SECTION_LENGTH;
-    const unsigned int section_end = section_start + data.sections_l[section_origin];
-    for(size_t i = section_start; i < section_end; i++)
+    const Section& current_section = data.sections[section_origin];
+    const size_t current_section_l = current_section.fields_index;
+    for(size_t i = 0; i < current_section_l; i++)
     {
-        const unsigned int section_field = data.sections[i];
+        const unsigned int section_field = current_section.fields[i];
         // Sections can overlap. Need to check for duplicates
         if(is_checked[section_field]) { continue; }
         is_checked[section_field] = true;
@@ -131,8 +131,9 @@ void AlgorithmRefreshSubsegments::FindPossibleValuesForSubsegment(SubsegmentData
     {
         // ignore neighbors which are not section origins
         if(!data.is_section_origin[subsegment_field_neighbor]) { continue; }
-        const unsigned char section_value = data.sections_values[subsegment_field_neighbor];
-        const unsigned char section_length = data.sections_l[subsegment_field_neighbor];
+        const Section& current_section = data.sections[subsegment_field_neighbor];
+        const unsigned char section_value = current_section.value;
+        const size_t section_length = current_section.fields_index;
         // will be greater than 0 if the section value is so big that it can't fit
         // in the section without allocating at least one mine in the subsegment
         const char forced_mines = section_value - section_length + subsegment_length;

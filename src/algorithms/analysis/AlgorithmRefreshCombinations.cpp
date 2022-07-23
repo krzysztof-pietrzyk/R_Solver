@@ -114,12 +114,11 @@ void AlgorithmRefreshCombinations::GetCombinationsForFixedSubsegments(const unsi
     while(true)
     {
         const unsigned int section_origin = data.segments[segment_head];
-        const unsigned char section_l = data.sections_l[section_origin];
-        const unsigned int section_begin = section_origin * MAX_SECTION_LENGTH;
-        const unsigned int section_end = section_begin + section_l;
-        char remaining_section_value = data.sections_values[section_origin];
+        const Section& current_section = data.sections[section_origin];
+        const unsigned char section_l = current_section.fields_index;
+        char remaining_section_value = current_section.value;
         char remaining_section_length = 0;
-        GetRemainingSectionValue(section_begin, section_end, remaining_section_value, remaining_section_length);
+        GetRemainingSectionValue(current_section, remaining_section_value, remaining_section_length);
         // check if previous choices have already made this section contain a contradiction
         if(remaining_section_value < 0) 
         {
@@ -129,9 +128,9 @@ void AlgorithmRefreshCombinations::GetCombinationsForFixedSubsegments(const unsi
         }
 
         // Apply state transitions
-        for(size_t section_head = section_begin; section_head < section_end; section_head++)
+        for(size_t section_head = 0; section_head < section_l; section_head++)
         {
-            const unsigned int section_field = data.sections[section_head];
+            const unsigned int section_field = current_section.fields[section_head];
             TransitionFieldStateForward(section_field, segment_head, remaining_section_value, remaining_section_length);
         }
 
@@ -156,12 +155,12 @@ void AlgorithmRefreshCombinations::GetCombinationsForFixedSubsegments(const unsi
     }
 }
 
-void AlgorithmRefreshCombinations::GetRemainingSectionValue(const unsigned int section_begin, const unsigned int section_end, char& section_value, char& section_length)
+void AlgorithmRefreshCombinations::GetRemainingSectionValue(const Section& section, char& section_value, char& section_length)
 {
-    std::vector<unsigned int>& sections = data.sections;
-    for(size_t section_head = section_begin; section_head < section_end; section_head++)
+    const size_t section_l = section.fields_index;
+    for(size_t section_head = 0; section_head < section_l; section_head++)
     {
-        FieldCombinationState& field_state = field_states[sections[section_head]];
+        FieldCombinationState& field_state = field_states[section.fields[section_head]];
         if(field_state == FCS_MINE) { section_value--; }
         else if(field_state == FCS_UNASSIGNED) { section_length++; }
     }
