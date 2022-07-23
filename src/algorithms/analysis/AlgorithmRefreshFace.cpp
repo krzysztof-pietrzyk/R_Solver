@@ -19,11 +19,11 @@ AlgorithmStatus AlgorithmRefreshFace::Run()
         for(size_t section_id = segment_begin; section_id < segment_end; section_id++)
         {
             const unsigned int section_origin = data.segments[section_id];
-            const unsigned int section_begin = section_origin * MAX_SECTION_LENGTH;
-            const unsigned int section_end = section_begin + data.sections_l[section_origin];
-            for(size_t field_id = section_begin; field_id < section_end; field_id++)
+            const Section& current_section = data.sections[section_origin];
+            const size_t current_section_l = current_section.fields_index;
+            for(size_t field_id = 0; field_id < current_section_l; field_id++)
             {
-                const unsigned int section_field = data.sections[field_id];
+                const unsigned int section_field = current_section.fields[field_id];
 
                 if(data.is_face[section_field]) { continue; }
                 data.is_face[section_field] = true;

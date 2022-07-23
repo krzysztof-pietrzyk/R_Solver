@@ -49,11 +49,11 @@ void AlgorithmRefreshSegments::ChainReactionFromField(unsigned int field)
     for(size_t i = fields_to_check_starting_index; i < fields_to_check_index; i++)
     {
         const unsigned int field_to_check = fields_to_check[i];
-        const unsigned char field_to_check_neighbors_l = data.sections_neighbors_l[field_to_check];
-        const unsigned int sections_neighbors_offset = field_to_check * MAX_SECTION_NEIGHBORS;
+        const Section& section_to_check = data.sections[field_to_check];
+        const unsigned char field_to_check_neighbors_l = section_to_check.neighbors_index;
         for(size_t j = 0; j < field_to_check_neighbors_l; j++)
         {
-            const unsigned int neighbor_to_add = data.sections_neighbors[sections_neighbors_offset + j];
+            const unsigned int neighbor_to_add = section_to_check.neighbors[j];
             if(!data.is_section_origin[neighbor_to_add]) { continue; }  // Ignore fields that are not sections origins
             if(is_checked[neighbor_to_add]) { continue; }  // Ignore duplicates
             is_checked[neighbor_to_add] = true;

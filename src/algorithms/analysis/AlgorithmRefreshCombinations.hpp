@@ -51,7 +51,7 @@ class AlgorithmRefreshCombinations : public Algorithm
 
     void GetCombinationsForFixedSubsegments(const unsigned int segment_id, const long double combination_multiplier);
 
-    void GetRemainingSectionValue(const unsigned int section_begin, const unsigned int section_end, char& section_value, char& section_length);
+    void GetRemainingSectionValue(const Section& section, char& section_value, char& section_length);
     
     void TransitionFieldStateForward(const unsigned int section_field, const size_t current_segment_head, char& remaining_section_value, char& remaining_section_length);
 

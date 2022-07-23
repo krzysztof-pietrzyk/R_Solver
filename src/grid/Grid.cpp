@@ -29,24 +29,18 @@ void Grid::FindNeighbors()
     // Only called once in constructor. The neighbors addresses never change
     unsigned short int column;
     unsigned short int row;
-    unsigned int offset = 0;
-    unsigned char neighbors_count = 0;
     for(unsigned int i = 0; i < S; i++)
     {
         // For each field, list the neighbors
         column = i % W;
         row = i / W;
-        offset = i * MAX_NEIGHBORS;
-        neighbors_count = 0;
-        if(column - 1 >= 0 && row - 1 >= 0) neighbors[offset + neighbors_count++] = i - 1 - W;  // Upper Left
-        if(row - 1 >= 0)                    neighbors[offset + neighbors_count++] = i - W;      // Upper Middle
-        if(column + 1 < W && row - 1 >= 0)  neighbors[offset + neighbors_count++] = i + 1 - W;  // Upper Right
-        if(column - 1 >= 0)                 neighbors[offset + neighbors_count++] = i - 1;      // Middle Left
-        if(column + 1 < W)                  neighbors[offset + neighbors_count++] = i + 1;      // Middle Right
-        if(column - 1 >= 0 && row + 1 < H)  neighbors[offset + neighbors_count++] = i - 1 + W;  // Bottom Left
-        if(row + 1 < H)                     neighbors[offset + neighbors_count++] = i + W;      // Bottom Middle
-        if(column + 1 < W && row + 1 < H)   neighbors[offset + neighbors_count++] = i + 1 + W;  // Bottom Right
-
-        neighbors_l[i] = neighbors_count;
+        if(column - 1 >= 0 && row - 1 >= 0) neighbors[i].push_back(i - 1 - W);  // Upper Left
+        if(row - 1 >= 0)                    neighbors[i].push_back(i - W);      // Upper Middle
+        if(column + 1 < W && row - 1 >= 0)  neighbors[i].push_back(i + 1 - W);  // Upper Right
+        if(column - 1 >= 0)                 neighbors[i].push_back(i - 1);      // Middle Left
+        if(column + 1 < W)                  neighbors[i].push_back(i + 1);      // Middle Right
+        if(column - 1 >= 0 && row + 1 < H)  neighbors[i].push_back(i - 1 + W);  // Bottom Left
+        if(row + 1 < H)                     neighbors[i].push_back(i + W);      // Bottom Middle
+        if(column + 1 < W && row + 1 < H)   neighbors[i].push_back(i + 1 + W);  // Bottom Right
     }
 }

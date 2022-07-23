@@ -16,7 +16,7 @@ void Run(Solver* solver)
 
 void CheckStatus(SolverThreadData* data)
 {
-	const unsigned int status_read_interval = 5;
+	const unsigned int status_read_interval = 1;
 	auto time_since_start = std::chrono::duration<int64_t, std::nano>(0);
 	unsigned long int games_played = 0;
 	unsigned long int games_played_last = 0;
@@ -29,7 +29,9 @@ void CheckStatus(SolverThreadData* data)
 	float completion_rate_avg = 0.0;
 	auto start_time = std::chrono::high_resolution_clock::now();
 	auto current_time = std::chrono::high_resolution_clock::now();
-	cout << "Seconds_since_start\tGames_played\tWins\tWin_ratio\tCompletion_rate_avg\tGames_per_second_avg\tWins_per_second_avg" << endl;
+	cout << "+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+\n";
+	cout << "|SECONDS SINCE START |    GAMES PLAYED    |     GAMES WON      |  WON/PLAYED RATIO  |AVG COMPLETION RATE |  AVG GAMES/SECOND  |\n";
+	cout << "+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+\n";
 	while(true)
 	{
 		this_thread::sleep_for(chrono::seconds(status_read_interval));
@@ -50,8 +52,12 @@ void CheckStatus(SolverThreadData* data)
 		wins_last = wins;
 		games_played_last = games_played;
 
-		cout << seconds_since_start << "\t" << games_played << "\t" << wins << "\t" << win_ratio << "\t" 
-			<<  completion_rate_avg << "\t" << games_per_second_avg << "\t" << wins_per_second_avg << "\t" << endl;
+		cout << "|" << right << setw(20) << seconds_since_start << 
+		        "|" << right << setw(20) << games_played << 
+				"|" << right << setw(20) << wins << 
+				"|" << left << setw(20) << win_ratio << 
+				"|" << left << setw(20) << completion_rate_avg << 
+				"|" << left << setw(20) << games_per_second_avg << "|\n";
 	}
 }
 
