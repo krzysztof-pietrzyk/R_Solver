@@ -1,5 +1,8 @@
 #include "GridGeneratorUnsafe.hpp"
 
+#include <vector>
+#include <iostream>
+
 GridGeneratorUnsafe::GridGeneratorUnsafe(GridSelfGenerated& grid) : GridInternalGenerator(grid)
 {
     int64_t r = std::chrono::system_clock::now().time_since_epoch().count();
@@ -19,16 +22,33 @@ void GridGeneratorUnsafe::Generate()
     grid.Clear();
     PrepareSafeFields();
 
+    std::vector<unsigned int> forced_mines = 
+    {
+        3, 7, 23, 24, 29, 
+        30, 33, 37, 42, 46, 51, 57, 58, 
+        62, 64, 66, 69, 70, 71, 75, 76, 79, 81, 84, 
+        95, 98, 103, 106, 110, 111, 114, 115, 117, 
+        121, 122, 125, 135, 140, 144, 148, 
+        153, 161, 162, 166, 177, 179, 
+        183,
+        213, 217, 219, 237, 
+        240, 242, 244, 266, 267, 269, 
+        272, 
+        301, 318, 319, 323, 327, 
+        332, 341, 345, 353, 
+        361, 364, 366, 369, 370, 374, 375, 379, 382, 384, 387, 388, 
+        392, 396, 397, 400, 401, 402, 405, 409, 410, 412, 415, 416, 
+        422, 427, 438, 445, 
+        450, 465, 466, 479
+    };
+
     for(size_t i = 0; i < grid.M; i++)
     {
-        // Get random poll_index between 0 and current_max
-        poll_index = dist(rng) % current_max;
         // safe_fields[poll_index] is the next generated mine
-        random_field = safe_fields[poll_index];
+        random_field = forced_mines[i];
         grid.mines[i] = random_field;
         grid.is_mine[random_field] = true;
         // Move the last value in safe_fields to safe_fields[poll_index] and decrement current_max
-        safe_fields[poll_index] = safe_fields[--current_max];
     }
 
     CopySafeFields();
@@ -47,5 +67,9 @@ void GridGeneratorUnsafe::PrepareSafeFields()
 
 void GridGeneratorUnsafe::CopySafeFields()
 {
-    for(size_t i = 0; i < current_max; i++) grid.not_mines[i] = safe_fields[i];
+    size_t index = 0;
+    for(size_t i = 0; i < grid.S; i++)
+    {
+        if(!grid.is_mine[i]) grid.not_mines[index++] = i;
+    }
 }

@@ -24,7 +24,7 @@ class GridSelfGenerated : public Grid
 
     void CalculateValues();
 
-    // void PrintUncovered();
+    void PrintUncovered();
 
     protected:
 

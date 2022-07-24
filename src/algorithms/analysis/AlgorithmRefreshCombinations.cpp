@@ -57,11 +57,30 @@ void AlgorithmRefreshCombinations::Clear()
     data.total_combinations = 0.0L;
 }
 
+#include <iostream>
+using namespace std;
+
 void AlgorithmRefreshCombinations::GetCombinationsForSegment(unsigned int segment_id)
 {
     std::vector<SubsegmentData>& subsegments_ref = data.subsegments[segment_id];
+    long double total_subsegment_combinations = 1.0L;
+    for(int i = 0; i < subsegments_ref.size(); i++)
+    {
+        total_subsegment_combinations *= subsegments_ref[i].total_possibilities;
+        cout << total_subsegment_combinations << "\n";
+    }
+    cout << "total number of subsegment combinations: " << total_subsegment_combinations << "\n";
+    long double current_subsegment_combination = 0.0L;
+    unsigned int temp_counter = 0;
     do
     {
+        current_subsegment_combination += 1;
+        temp_counter += 1;
+        if(temp_counter % 1000000 == 0)
+        {
+            cout << "\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b" << current_subsegment_combination;
+            temp_counter = 1;
+        }
         ClearStatesInSegment(segment_id);
         const long double combination_multiplier = ApplySubsegmentsCombination(subsegments_ref);
         GetCombinationsForFixedSubsegments(segment_id, combination_multiplier);
