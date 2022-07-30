@@ -1,63 +1,42 @@
 #include "GridGeneratorFromHash.hpp"
 
-GridGeneratorFromHash::GridGeneratorFromHash(GridSelfGenerated& grid) : GridInternalGenerator(grid), hash_length(grid.hash_length)
+GridGeneratorFromHash::GridGeneratorFromHash(GridSelfGenerated& grid)
+    : GridInternalGenerator(grid), hash(GridHash(grid.S))
 {
-    hash = new char[hash_length];
+
 }
 
 GridGeneratorFromHash::~GridGeneratorFromHash()
 {
-    delete[] hash;
+
 }
 
 void GridGeneratorFromHash::Generate()
 {
-    SetHash((char*)"D22R82T000@100BQ1P00b800@[QHX20<3P024<P`@@9P@QH318B0`0d@282T8=80HP`0QR40K045:120");
-    unsigned int current_field = 0;
-    unsigned int current_not_mine_index = 0;
-    bool is_mine;
-    char current_symbol;
-
+    hash = std::string("4P8S@B4D0008P3TPH3b0`6D550P1P0081Z0b0240DU4010008P489`284QbPX4@8Q7@6810808T80D>2");
     grid.Clear();
-
-    for(size_t i = 0; i < hash_length - 1; i++)
+    hash.GetMines(grid.is_mine);
+    grid.hash = hash;
+    size_t mines_index = 0;
+    size_t not_mines_index = 0; 
+    for(size_t i = 0; i < grid.S; i++)
     {
-        current_symbol = hash[i];
-        current_symbol = current_symbol - 48;  // zero's ID in ASCII table
-        if(i < hash_length - 2)
+        if(grid.is_mine[i])
         {
-            for(size_t j = 0; j < 6; j++)
+            if(mines_index == grid.M)
             {
-                is_mine = (current_symbol & 32);
-                if(is_mine) grid.is_mine[current_field] = is_mine;
-                else grid.not_mines[current_not_mine_index++] = current_field;
-                current_field++;
-                current_symbol = current_symbol << 1;
+                throw std::invalid_argument("Error: GridGeneratorFromHash: Too many mines in hash!");
             }
+            grid.mines[mines_index++] = i;
         }
         else
         {
-            unsigned char last_symbol_length = grid.S % 6;
-            if(last_symbol_length == 0) last_symbol_length = 6;
-            current_symbol = current_symbol << (6 - last_symbol_length);
-
-            for(size_t j = 0; j < last_symbol_length; j++)
+            if(not_mines_index == grid.NM)
             {
-                is_mine = (current_symbol & 32);
-                if(is_mine) grid.is_mine[current_field] = is_mine;
-                else grid.not_mines[current_not_mine_index++] = current_field;
-                current_field++;
-                current_symbol = current_symbol << 1;
+                throw std::invalid_argument("Error: GridGeneratorFromHash: Too few mines in hash!");
             }
+            grid.not_mines[not_mines_index++] = i;
         }
     }
-
-    std::strcpy(grid.hash, hash);
-    grid.hash_up_to_date = true;
     grid.CalculateValues();
-}
-
-void GridGeneratorFromHash::SetHash(char* new_hash)
-{
-    strcpy(hash, new_hash);
 }

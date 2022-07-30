@@ -32,7 +32,7 @@ void GridGeneratorUnsafe::Generate()
     }
 
     CopySafeFields();
-    grid.hash_up_to_date = false;
+    grid.hash.SetUpToDate(false);
     grid.CalculateValues();
 }
 

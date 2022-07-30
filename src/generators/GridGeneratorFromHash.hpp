@@ -1,24 +1,19 @@
 #ifndef GridGeneratorFromHash_hpp
 #define GridGeneratorFromHash_hpp
 
-#include <cstring>
-
 #include "GridInternalGenerator.hpp"
 
 class GridGeneratorFromHash : public GridInternalGenerator
 {
     public:
 
-    char* hash;
-    const unsigned int hash_length;
+    GridHash hash;
     
     GridGeneratorFromHash(GridSelfGenerated& grid);
 
     ~GridGeneratorFromHash();
 
     void Generate();
-
-    void SetHash(char*);
 };
 
 #endif

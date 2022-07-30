@@ -1,23 +1,9 @@
 #include "GridSelfGenerated.hpp"
 
 // w - Width, h - Height, m - Number of mines
-GridSelfGenerated::GridSelfGenerated(unsigned short int w, unsigned short int h, unsigned int m) : Grid(w, h, m),
-    hash_length(S % 6 > 0 ? (S / 6) + 2 : (S / 6) + 1)
-    // each hash symbol encodes 6 fields, 1 more if size is not divisible by 6, 1 more for string terminator
+GridSelfGenerated::GridSelfGenerated(unsigned short int w, unsigned short int h, unsigned int m)
+    : Grid(w, h, m), hash(GridHash(S))
 {
-    hash = new char[hash_length] {0};
-
-    // 64 consecutive printable ASCII characters
-    hash_symbols = new char[64] 
-    {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-     ':', ';', '<', '=', '>', '?', '@', 'A', 'B', 'C', 
-     'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 
-     'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 
-     'X', 'Y', 'Z', '[', '\\', ']', '^', '_', '`', 'a', 
-     'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 
-     'l', 'm', 'n', 'o'};
-    hash_up_to_date = false;
-
     zcr_zeros = std::vector<unsigned int>(S, 0);
     zcr_zeros_index = 0;
     zcr_is_zero = std::vector<bool>(S, false);
@@ -25,8 +11,7 @@ GridSelfGenerated::GridSelfGenerated(unsigned short int w, unsigned short int h,
 
 GridSelfGenerated::~GridSelfGenerated()
 {
-    delete[] hash;
-    delete[] hash_symbols;
+
 }
 
 void GridSelfGenerated::LeftClick(unsigned int field)
@@ -75,29 +60,7 @@ void GridSelfGenerated::CalculateValues()
 
 void GridSelfGenerated::CalculateHash()
 {
-    // Return if there's no need to recalculate
-    if(hash_up_to_date) return;
-    char current_value = 0;
-    unsigned int current_symbol_index = 0;
-    // Each symbol encodes 6 consequent fields, in terms of mines they contain.
-    // It's important to think about the char current_value as a string of bits
-    // For example: 00101000 (where 0s are safe and 1s are mines). That value is then 
-    // used as an index (in this case 40) in the hash_symbols array to determine the symbol.
-    // The hash_symbols array contains 64 consecutive, printable ASCII characters
-    for(int i = 0; i < S; i++)
-    {
-        // Bit shift left
-        current_value = current_value << 1;
-        // If mine, set the rightmost bit to be 1
-        if(is_mine[i]) current_value++;
-        // Store the symbol every 6 fields, or if end of map has been reached
-        if(i % 6 == 5 || i == S - 1)
-        {
-            hash[current_symbol_index++] = hash_symbols[current_value];
-            current_value = 0;
-        }
-    }
-    hash_up_to_date = true;
+    hash.CalculateHash(is_mine);
 }
 
 // protected

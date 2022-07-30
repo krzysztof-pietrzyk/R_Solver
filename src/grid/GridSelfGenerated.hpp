@@ -2,15 +2,13 @@
 #define GridSelfGenerated_hpp
 
 #include "Grid.hpp"
+#include "GridHash.hpp"
 
 class GridSelfGenerated : public Grid
 {
     public:
 
-    char* hash;  // String of characters, which uniquely defines the grid (encoded mine positions)
-    const unsigned int hash_length;  // Length of hash (constant for given width, height and mines number)
-    const char* hash_symbols;  // Possible symbols for hash (constant set)
-    bool hash_up_to_date;  // False if CalculateHash has not been called after generating grid
+    GridHash hash;
 
     GridSelfGenerated(unsigned short int w, unsigned short int h, unsigned int m);
 

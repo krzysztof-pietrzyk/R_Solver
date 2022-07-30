@@ -38,6 +38,7 @@ void Solver::Run()
 {
 	const unsigned int fields_to_uncover = grid->S - grid->M;
 	generator->Generate();
+	grid->CalculateHash();
 	algorithm_manager->RunAll();
 	view->Display();
 }

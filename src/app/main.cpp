@@ -16,7 +16,7 @@ void Run(Solver* solver)
 
 void CheckStatus(SolverThreadData* data)
 {
-	const unsigned int status_read_interval = 1;
+	const unsigned int status_read_interval = 5;
 	auto time_since_start = std::chrono::duration<int64_t, std::nano>(0);
 	unsigned long int games_played = 0;
 	unsigned long int games_played_last = 0;
@@ -100,20 +100,5 @@ int main()
 // 	Solver s = Solver(30, 16, 99, nullptr);
 // 	s.Run();
 	
-// 	return 0;
-// }
-
-// #include <iostream>
-// #include <map>
-// using namespace std;
-
-// int main()
-// {
-// 	map<unsigned int, double> a = map<unsigned int, double>();
-
-// 	a[10] += 14.0;
-
-// 	cout << a[10] << endl;
-
 // 	return 0;
 // }
