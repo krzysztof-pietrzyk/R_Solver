@@ -23,7 +23,7 @@ class GridHash
     void CalculateHash(const std::vector<unsigned int> mine_positions, const unsigned int grid_size);
 
     // From is_mine vector
-    void CalculateHash(const std::vector<bool> is_mine);
+    virtual void CalculateHash(const std::vector<bool> is_mine);
 
     // For is_mine vector
     void GetMines(std::vector<bool>& is_mine);

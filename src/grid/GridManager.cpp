@@ -24,11 +24,11 @@ GridManager::~GridManager() {}
 
 unsigned char GridManager::FieldValue(unsigned int field)
 {
-    if(!is_visible[field]) 
+    if(!CheckVisible(field))
     {
-        throw std::invalid_argument("ERROR: GridManager: Attempting to read a value of a covered field! " + field);
+        throw std::invalid_argument("ERROR: GridManager: Attempting to read a value of a covered field!");
     }
-    else return field_values[field];
+    return field_values[field];
 }
 
 //protected
@@ -44,4 +44,9 @@ void GridManager::Clear()
     left_click_counter = 0;
     right_click_counter = 0;
     is_lost = false;
+}
+
+bool GridManager::CheckVisible(unsigned int field)
+{
+    return is_visible[field];
 }

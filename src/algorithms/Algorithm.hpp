@@ -1,7 +1,7 @@
 #ifndef Algorithm_hpp
 #define Algorithm_hpp
 
-#include "grid/GridManager.hpp"
+#include "../grid/GridManager.hpp"
 #include "AlgorithmDataStorage.hpp"
 
 enum AlgorithmType

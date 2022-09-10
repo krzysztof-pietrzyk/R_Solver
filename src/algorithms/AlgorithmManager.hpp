@@ -3,7 +3,7 @@
 
 #include <map>
 
-#include "grid/GridManager.hpp"
+#include "../grid/GridManager.hpp"
 
 #include "AlgorithmFactory.hpp"
 

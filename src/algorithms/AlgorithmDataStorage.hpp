@@ -4,7 +4,7 @@
 #include <vector>
 #include <map>
 
-#include "grid/GridManager.hpp"
+#include "../grid/GridManager.hpp"
 
 struct SubsegmentData
 {

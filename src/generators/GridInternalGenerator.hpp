@@ -3,7 +3,7 @@
 
 #include <vector>
 
-#include "grid/GridSelfGenerated.hpp"
+#include "../grid/GridSelfGenerated.hpp"
 
 #include "GridGenerator.hpp"
 

@@ -4,7 +4,7 @@
 #include <ctime>
 #include <iostream>
 
-#include "solver/Solver.hpp"
+#include "../solver/Solver.hpp"
 
 using namespace std;
 

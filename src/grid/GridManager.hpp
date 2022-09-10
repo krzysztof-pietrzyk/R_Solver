@@ -46,6 +46,8 @@ class GridManager
 
     std::vector<unsigned char> field_values;  // Values of all fields (sorted)
 
+    virtual bool CheckVisible(unsigned int field);
+
 };
 
 #endif

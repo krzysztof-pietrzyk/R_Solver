@@ -43,8 +43,6 @@ void GridSelfGenerated::RightClick(unsigned int field)
 void GridSelfGenerated::CalculateValues()
 {
     unsigned char current_field_value;
-    unsigned int current_neighbor;
-    const unsigned int num_of_not_mines = S - M;
     // Only iterate over non-mine fields
     for(const unsigned int& current_field : not_mines)
     {

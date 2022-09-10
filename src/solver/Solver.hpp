@@ -1,9 +1,9 @@
 #ifndef Solver_hpp
 #define Solver_hpp
 
-#include "algorithms/AlgorithmManager.hpp"
-#include "view/GridViewFactory.hpp"
-#include "generators/GridGeneratorFactory.hpp"
+#include "../algorithms/AlgorithmManager.hpp"
+#include "../view/GridViewFactory.hpp"
+#include "../generators/GridGeneratorFactory.hpp"
 
 #include "SolverThreadData.hpp"
 

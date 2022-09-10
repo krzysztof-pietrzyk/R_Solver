@@ -1,0 +1,29 @@
+// ${workspaceRoot} the path of the folder opened in VS Code
+// ${file} the current opened file
+// ${fileBasename} the current opened file's basename
+// ${fileDirname} the current opened file's dirname
+// ${fileExtname} the current opened file's extension
+// ${cwd} the task runner's current working directory on startup
+{
+    "tasks": [
+        {
+            "type": "cppbuild",
+            "label": "Build All",
+            "command": "make",
+            "args": ["--directory=${workspaceRoot}\\build", "all", "--no-print-directory"]
+        },
+        {
+            "type": "cppbuild",
+            "label": "Build R_Solver.exe",
+            "command": "make",
+            "args": ["--directory=${workspaceRoot}\\build", "App", "--no-print-directory"]
+        },
+        {
+            "type": "cppbuild",
+            "label": "Build R_Solver_UnitTests.exe",
+            "command": "make",
+            "args": ["--directory=${workspaceRoot}\\build", "UnitTests", "--no-print-directory"]
+        }
+    ],
+    "version": "2.0.0"
+}

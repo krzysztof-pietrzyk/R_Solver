@@ -5,7 +5,10 @@ Grid::Grid(unsigned short int w, unsigned short int h, unsigned int m) : GridMan
 {
     // Mines should be less than Size, at least 1 mine, and Size can't be arbitrarily large
     // It is possible to create a 5000x5000 grid, but it's not recommended to go that big
-    if(M >= S || M < 1 || S > (unsigned int)(1e+8)) throw std::invalid_argument("ERROR: Grid constructor parameters are invalid.");
+    if(M >= S || M < 1 || S > (unsigned int)(1e+6) || W > 1024 || H > 1024)
+    {
+        throw std::invalid_argument("ERROR: Grid constructor parameters are invalid.");
+    }
 
     mines = std::vector<unsigned int>(M, 0);
     not_mines = std::vector<unsigned int>(S - M, 0);
