@@ -41,31 +41,31 @@ class AlgorithmRefreshCombinations : public Algorithm
 
     void Clear();
 
-    void GetCombinationsForSegment(unsigned int segment_id);
+    void FindCombinationsForSegment(unsigned int segment_id);
 
     void ClearStatesInSegment(unsigned int segment_id);
 
-    bool NextSubsegmentsCombination(std::vector<SubsegmentData>& subsegments_ref);
-
     long double ApplySubsegmentsCombination(std::vector<SubsegmentData>& subsegments_ref);
 
-    void GetCombinationsForFixedSubsegments(const unsigned int segment_id, const long double combination_multiplier);
+    void FindCombinationsForFixedSubsegments(const unsigned int segment_id, const long double combination_multiplier);
 
-    void GetRemainingSectionValue(const Section& section, char& section_value, char& section_length);
-    
-    void TransitionFieldStateForward(const unsigned int section_field, const size_t current_segment_head, char& remaining_section_value, char& remaining_section_length);
+    void FindRemainingSectionValue(const Section& section, char& section_value, char& section_length) const;
 
     bool RevertSegmentHeadToLastChoice(size_t& segment_head);
 
+    void TransitionFieldStateForward(const unsigned int section_field, const size_t current_segment_head, char& remaining_section_value, char& remaining_section_length);
+
     void ApplyCurrentCombinationAsValid(const unsigned int segment_id, const long double combination_multiplier);
-    
+
+    bool NextSubsegmentsCombination(std::vector<SubsegmentData>& subsegments_ref) const;
+
     void MergeAllSegmentsCombinations();
 
     void CachePossibleSegmentsMineCounts();
 
-    unsigned int GetTotalMineCountOfSegmentCombination();
+    unsigned int GetTotalMineCountOfSegmentCombination() const;
 
-    void MergeCurrentSegmentsMineCountCombination(const unsigned int segments_combination_mine_count);
+    void MergeCurrentSegmentsMineCountCombination(const unsigned int segments_combination_mine_count) const;
 
     bool NextSegmentsMineCountCombination();
 };

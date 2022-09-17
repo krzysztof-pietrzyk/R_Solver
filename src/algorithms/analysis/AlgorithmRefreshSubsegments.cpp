@@ -50,7 +50,7 @@ void AlgorithmRefreshSubsegments::Clear()
 void AlgorithmRefreshSubsegments::UpdateNeighborsBits(const unsigned int border_field)
 {
     neighbors_bits.clear();
-    const Section& border_field_section = data.sections[border_field];
+    const Section& border_field_section = data.sections.at(border_field);
     const size_t border_field_neighbors_l = border_field_section.neighbors_index;
     unsigned int bit_shift_temp = 1;
     for(size_t i = 0; i < border_field_neighbors_l; i++)
@@ -58,7 +58,7 @@ void AlgorithmRefreshSubsegments::UpdateNeighborsBits(const unsigned int border_
         // border_field_neighbors are origins of sections, which overlap with this border field's section
         // each of those neighbors is being assigned a different bit.
         // those bits will be later summed up to create a hash of section field's neighbors
-        const unsigned int border_field_neighbor = border_field_section.neighbors[i];
+        const unsigned int border_field_neighbor = border_field_section.neighbors.at(i);
         neighbors_bits[border_field_neighbor] = bit_shift_temp;
         bit_shift_temp = bit_shift_temp << 1;
     }
@@ -87,7 +87,7 @@ void AlgorithmRefreshSubsegments::UpdateSectionNeighborhood(const unsigned int s
     }
 }
 
-void AlgorithmRefreshSubsegments::FindSegmentsToOptimize(const unsigned int parent_segment)
+void AlgorithmRefreshSubsegments::FindSegmentsToOptimize(const unsigned int parent_segment) const
 {
     for(auto iter = section_neighborhood.begin(); iter != section_neighborhood.end(); ++iter)
     {
@@ -120,7 +120,7 @@ unsigned int AlgorithmRefreshSubsegments::GetNeighborhoodHash(const unsigned int
     return hash_result;
 }
 
-void AlgorithmRefreshSubsegments::FindPossibleValuesForSubsegment(SubsegmentData& subsegment_data)
+void AlgorithmRefreshSubsegments::FindPossibleValuesForSubsegment(SubsegmentData& subsegment_data) const
 {
     // all subsegment fields have the same neighboring section origins. just take the first one
     const unsigned int subsegment_field = subsegment_data.fields[0];
@@ -158,7 +158,7 @@ void AlgorithmRefreshSubsegments::FindPossibleValuesForSubsegment(SubsegmentData
     subsegment_data.current_possibility_id = 0;
 }
 
-unsigned int AlgorithmRefreshSubsegments::NChooseK(const unsigned int n, const unsigned int k)
+unsigned int AlgorithmRefreshSubsegments::NChooseK(const unsigned int n, const unsigned int k) const
 {
     // look-up table to speed things up. there are relatively few possible cases here
     // vast majority of results are handled by those two cases

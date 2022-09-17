@@ -15,7 +15,7 @@ AlgorithmStatus AlgorithmAction::Run()
     else return game_over_result;
 }
 
-AlgorithmStatus AlgorithmAction::CheckGameOverConditions()
+AlgorithmStatus AlgorithmAction::CheckGameOverConditions() const
 {
     if(grid.is_lost) return AlgorithmStatus::GAME_LOST;
     else if(grid.visible_fields_index == grid.NM) return AlgorithmStatus::GAME_WON;

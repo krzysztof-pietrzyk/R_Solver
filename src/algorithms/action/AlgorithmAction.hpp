@@ -25,7 +25,7 @@ class AlgorithmAction : public Algorithm
 
     private:
 
-    AlgorithmStatus CheckGameOverConditions();
+    AlgorithmStatus CheckGameOverConditions() const;
 };
 
 #endif

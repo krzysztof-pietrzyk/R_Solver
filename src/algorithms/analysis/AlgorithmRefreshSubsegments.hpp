@@ -29,13 +29,13 @@ class AlgorithmRefreshSubsegments : public Algorithm
 
     void UpdateSectionNeighborhood(const unsigned int section_origin);
 
-    void FindSegmentsToOptimize(const unsigned int parent_segment);
+    void FindSegmentsToOptimize(const unsigned int parent_segment) const;
 
     unsigned int GetNeighborhoodHash(const unsigned int section_field);
 
-    void FindPossibleValuesForSubsegment(SubsegmentData& subsegment_data);
+    void FindPossibleValuesForSubsegment(SubsegmentData& subsegment_data) const;
 
-    unsigned int NChooseK(const unsigned int n, const unsigned int k);
+    unsigned int NChooseK(const unsigned int n, const unsigned int k) const;
 };
 
 #endif

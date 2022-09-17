@@ -92,7 +92,7 @@ void AlgorithmRefreshSections::Clear()
     data.sections_origins_index = 0;
 }
 
-unsigned int AlgorithmRefreshSections::GetHashBit(unsigned int difference)
+unsigned int AlgorithmRefreshSections::GetHashBit(unsigned int difference) const
 {
 	/* This method will only work as intended if the map has less than 1048576 fields
 
@@ -123,7 +123,7 @@ unsigned int AlgorithmRefreshSections::GetHashBit(unsigned int difference)
     else throw std::invalid_argument("ERROR: AlgorithmRefreshSections::GetHashBit: Impossible section shape!");
 }
 
-bool AlgorithmRefreshSections::CheckHashUnique(unsigned int hash)
+bool AlgorithmRefreshSections::CheckHashUnique(unsigned int hash) const
 {
     const unsigned int number_of_hashes = data.sections_origins_index;
     for(size_t i = 0; i < number_of_hashes; i++)

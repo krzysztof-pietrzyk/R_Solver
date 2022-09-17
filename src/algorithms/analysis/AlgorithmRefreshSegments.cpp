@@ -14,14 +14,8 @@ AlgorithmStatus AlgorithmRefreshSegments::Run()
     const unsigned int sections_origins_index = data.sections_origins_index;
     Clear();
 
-    data.segments_count = 0;
-    data.segments_index = 0;
-
-    size_t i = 0;
-    size_t j = 0;
-
     // Go through each section origin
-    for(i = 0; i < sections_origins_index; i++)
+    for(size_t i = 0; i < sections_origins_index; i++)
     {
         const unsigned int current_section_origin = data.sections_origins[i];
         // If the field hasn't been marked as checked ...
@@ -36,6 +30,8 @@ void AlgorithmRefreshSegments::Clear()
 {
     for(size_t i = 0; i < fields_to_check_index; i++) { is_checked[fields_to_check[i]] = false; }
     fields_to_check_index = 0;
+    data.segments_count = 0;
+    data.segments_index = 0;
 }
 
 void AlgorithmRefreshSegments::ChainReactionFromField(unsigned int field)

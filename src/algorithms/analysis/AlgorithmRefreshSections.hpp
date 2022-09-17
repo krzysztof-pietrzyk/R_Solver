@@ -31,9 +31,9 @@ class AlgorithmRefreshSections : public Algorithm
 
     void Clear();
 
-    unsigned int GetHashBit(unsigned int difference);
+    unsigned int GetHashBit(unsigned int difference) const;
 
-    bool CheckHashUnique(unsigned int hash);
+    bool CheckHashUnique(unsigned int hash) const;
 };
 
 #endif
