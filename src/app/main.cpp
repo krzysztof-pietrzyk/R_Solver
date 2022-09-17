@@ -52,12 +52,12 @@ void CheckStatus(SolverThreadData* data)
 		wins_last = wins;
 		games_played_last = games_played;
 
-		cout << "|" << right << setw(20) << seconds_since_start << 
+		cout << "|" << right << setw(20) << setprecision(6) << seconds_since_start << 
 		        "|" << right << setw(20) << games_played << 
 				"|" << right << setw(20) << wins << 
-				"|" << left << setw(20) << win_ratio << 
-				"|" << left << setw(20) << completion_rate_avg << 
-				"|" << left << setw(20) << games_per_second_avg << "|\n";
+				"|" << left << setw(20) << setprecision(12) << win_ratio << 
+				"|" << left << setw(20) << setprecision(12) << completion_rate_avg << 
+				"|" << left << setw(20) << setprecision(6) << games_per_second_avg << "|\n";
 	}
 }
 
