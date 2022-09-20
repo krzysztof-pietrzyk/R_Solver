@@ -17,7 +17,6 @@ AlgorithmStatus AlgorithmRefreshSections::Run()
     const std::vector<unsigned int>& border = data.GetBorder();
     unsigned char section_value_temp = 0;
     unsigned int current_section_hash = 0;
-    bool duplicate_temp = false;
     size_t i, j, k = 0;
 
     // iterate through border fields
@@ -25,8 +24,7 @@ AlgorithmStatus AlgorithmRefreshSections::Run()
     {
         const unsigned int current_border_field = border[i];
         Section& current_section = data.sections[current_border_field];
-        current_section.fields_index = 0;
-        current_section.neighbors_index = 0;
+        current_section.Clear();
         section_value_temp = grid.FieldValue(current_border_field);
         current_section_hash = 0;
         // iterate through each border field's neigbors
@@ -47,23 +45,9 @@ AlgorithmStatus AlgorithmRefreshSections::Run()
             {
                 // if this neighbor is not on border or is the currently considered field, ignore it
                 if(!data.is_border[neighbor_of_neighbor] || neighbor_of_neighbor == current_border_field) { continue; }
-                duplicate_temp = false;
-                // iterate through neighbors of this section, which have already been found before
-                // in order to filter duplicates
-                const size_t current_section_neighbors_index = current_section.neighbors_index;
-                for(k = 0; k < current_section_neighbors_index; k++)
-                {
-                    if(current_section.neighbors[k] == neighbor_of_neighbor)
-                    {
-                        duplicate_temp = true;
-                        break;
-                    }
-                }
-                if(!duplicate_temp) 
-                {
-                    // only add this to section neighbors if it's not a duplicate
-                    current_section.AddNeighbor(neighbor_of_neighbor);
-                }
+                // ignore duplicate neighbors
+                if(current_section.HasNeighbor(neighbor_of_neighbor)) { continue; }
+                current_section.AddNeighbor(neighbor_of_neighbor);
             }
         }
         // Check if section is not a duplicate

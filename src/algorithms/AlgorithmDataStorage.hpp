@@ -5,6 +5,7 @@
 #include <map>
 
 #include "../grid/GridManager.hpp"
+#include "Section.hpp"
 
 struct SubsegmentData
 {
@@ -13,25 +14,6 @@ struct SubsegmentData
     std::map<unsigned char, unsigned int> combinations_for_value;
     size_t total_possibilities;
     size_t current_possibility_id;
-};
-
-struct Section
-{
-    std::vector<unsigned int> fields = std::vector<unsigned int>(8, 0);
-    size_t fields_index = 0;
-    std::vector<unsigned int> neighbors = std::vector<unsigned int>(16, 0);
-    size_t neighbors_index = 0;
-    unsigned char value = 0;
-
-    void AddField(const unsigned int field)
-    {
-        fields[fields_index++] = field;
-    }
-
-    void AddNeighbor(const unsigned int field)
-    {
-        neighbors[neighbors_index++] = field;
-    }
 };
 
 class AlgorithmDataStorage
