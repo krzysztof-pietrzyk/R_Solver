@@ -1,9 +1,12 @@
 #include "AlgorithmRefreshSections.hpp"
 
 AlgorithmRefreshSections::AlgorithmRefreshSections(GridManager& grid_, AlgorithmDataStorage& data_)
-    : Algorithm(grid_, data_), double_grid_width(grid_.W * 2)
+    : Algorithm(grid_, data_),
+    diff_bit_20(1), diff_bit_21(2), diff_bit_22(grid.W - 2), diff_bit_23(grid.W - 1),
+    diff_bit_24(grid.W), diff_bit_25(grid.W + 1), diff_bit_26(grid.W + 2), diff_bit_27(2 * grid.W - 2),
+    diff_bit_28(2 * grid.W - 1), diff_bit_29(2 * grid.W), diff_bit_30(2 * grid.W + 1), diff_bit_31(2 * grid.W + 2)
 {
-    if(grid.S > 1048575) std::invalid_argument("ERROR: AlgorithmRefreshSections: Grid size must not exceed 1048575 (2^20 - 1) fields!");
+    if(grid.S > MAX_ALLOWED_GRID_SIZE) std::invalid_argument("ERROR: AlgorithmRefreshSections: Grid size too large!");
     sections_hashes = std::vector<unsigned int>(grid.S, 0);
 }
 
@@ -92,27 +95,23 @@ unsigned int AlgorithmRefreshSections::GetHashBit(unsigned int difference) const
     the goal here is to encode all information about the given section within a single 32bit int hash
     with that achieved it is much faster to compare sections between each other and exclude multiple occurences */
 
-    if     (difference == 1)                     return 1048576U;     // 2^20
-    else if(difference == 2)                     return 2097152U;     // 2^21
-    else if(difference == grid.W - 2)            return 4194304U;     // 2^22
-    else if(difference == grid.W - 1)            return 8388608U;     // 2^23
-    else if(difference == grid.W)                return 16777216U;    // 2^24
-    else if(difference == grid.W + 1)            return 33554432U;    // 2^25
-    else if(difference == grid.W + 2)            return 67108864U;    // 2^26
-    else if(difference == double_grid_width - 2) return 134217728U;   // 2^27
-    else if(difference == double_grid_width - 1) return 268435456U;   // 2^28
-    else if(difference == double_grid_width)     return 536870912U;   // 2^29
-    else if(difference == double_grid_width + 1) return 1073741824U;  // 2^30
-    else if(difference == double_grid_width + 2) return 2147483648U;  // 2^31
+    if     (difference == diff_bit_20) return 1048576U;     // 2^20
+    else if(difference == diff_bit_21) return 2097152U;     // 2^21
+    else if(difference == diff_bit_22) return 4194304U;     // 2^22
+    else if(difference == diff_bit_23) return 8388608U;     // 2^23
+    else if(difference == diff_bit_24) return 16777216U;    // 2^24
+    else if(difference == diff_bit_25) return 33554432U;    // 2^25
+    else if(difference == diff_bit_26) return 67108864U;    // 2^26
+    else if(difference == diff_bit_27) return 134217728U;   // 2^27
+    else if(difference == diff_bit_28) return 268435456U;   // 2^28
+    else if(difference == diff_bit_29) return 536870912U;   // 2^29
+    else if(difference == diff_bit_30) return 1073741824U;  // 2^30
+    else if(difference == diff_bit_31) return 2147483648U;  // 2^31
     else throw std::invalid_argument("ERROR: AlgorithmRefreshSections::GetHashBit: Impossible section shape!");
 }
 
 bool AlgorithmRefreshSections::CheckHashUnique(unsigned int hash) const
 {
-    const unsigned int number_of_hashes = data.sections_origins_index;
-    for(size_t i = 0; i < number_of_hashes; i++)
-    {
-        if(sections_hashes[i] == hash) return false;
-    }
-    return true;
+    auto end = sections_hashes.begin() + data.sections_origins_index;
+    return std::find(sections_hashes.begin(), end, hash) == end;
 }

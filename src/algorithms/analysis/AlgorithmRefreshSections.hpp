@@ -3,6 +3,10 @@
 
 #include "../Algorithm.hpp"
 
+#include <algorithm>
+
+#define MAX_ALLOWED_GRID_SIZE 1048575
+
 class AlgorithmRefreshSections : public Algorithm
 {
     /*
@@ -26,7 +30,6 @@ class AlgorithmRefreshSections : public Algorithm
 
     protected:
 
-    const unsigned int double_grid_width;
     std::vector<unsigned int> sections_hashes;
 
     void Clear();
@@ -34,6 +37,19 @@ class AlgorithmRefreshSections : public Algorithm
     unsigned int GetHashBit(unsigned int difference) const;
 
     bool CheckHashUnique(unsigned int hash) const;
+
+    const unsigned int diff_bit_20;
+    const unsigned int diff_bit_21;
+    const unsigned int diff_bit_22;
+    const unsigned int diff_bit_23;
+    const unsigned int diff_bit_24;
+    const unsigned int diff_bit_25;
+    const unsigned int diff_bit_26;
+    const unsigned int diff_bit_27;
+    const unsigned int diff_bit_28;
+    const unsigned int diff_bit_29;
+    const unsigned int diff_bit_30;
+    const unsigned int diff_bit_31;
 };
 
 #endif
