@@ -10,6 +10,7 @@ AlgorithmStatus AlgorithmCombinationsLeastRisky::RunInternal()
     const unsigned int face_length = data.face_index;
     long double lowest_combination = __LDBL_MAX__;
     unsigned int safest_field = UINT_MAX;
+    // Find the safest field (lowest entry in data.field_combinations)
     for(unsigned int i = 0; i < face_length; i++)
     {
         const unsigned int face_field = data.face[i];
@@ -20,6 +21,7 @@ AlgorithmStatus AlgorithmCombinationsLeastRisky::RunInternal()
             safest_field = face_field;
         }
     }
+    // Only click if a field was found
     if(safest_field != UINT_MAX)
     {
         grid.LeftClick(safest_field);

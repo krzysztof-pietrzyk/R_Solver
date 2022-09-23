@@ -3,6 +3,16 @@
 
 #include "AlgorithmAction.hpp"
 
+#include <tuple>
+
+struct LayerOneFieldSignature
+{
+    unsigned int field = 0;
+    unsigned char flags_count = 0;
+    unsigned char not_visible_count = 0;
+    unsigned char field_value = 0;
+};
+
 class AlgorithmLayerOne : public AlgorithmAction
 {
     /* 
@@ -20,6 +30,12 @@ class AlgorithmLayerOne : public AlgorithmAction
     protected:
 
     AlgorithmStatus RunInternal();
+
+    LayerOneFieldSignature GetFieldSignature(const unsigned int border_field) const;
+
+    void CheckForSafeClicks(const LayerOneFieldSignature signature) const;
+
+    void CheckForMines(const LayerOneFieldSignature signature) const;
 };
 
 #endif

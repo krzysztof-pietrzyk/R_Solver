@@ -15,11 +15,13 @@ AlgorithmStatus AlgorithmCombinationsSafeMoves::RunInternal()
         const long double face_field_combinations = data.field_combinations[face_field];
         if(face_field_combinations == 0.0L) 
         {
+            // A mine on this field appears in 0 combinations - it's safe
             grid.LeftClick(face_field);
             success = true;
         }
         else if(face_field_combinations == total_combinations)
         {
+            // A mine on this field appears in all combinations - it's a mine
             grid.RightClick(face_field);
             success = true;
         }
