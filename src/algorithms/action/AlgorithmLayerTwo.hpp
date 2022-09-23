@@ -3,6 +3,9 @@
 
 #include "AlgorithmAction.hpp"
 
+#include <vector>
+#include <algorithm>
+
 class AlgorithmLayerTwo : public AlgorithmAction
 {
     /*
@@ -17,7 +20,20 @@ class AlgorithmLayerTwo : public AlgorithmAction
 
     protected:
 
+    std::vector<unsigned int> not_common_current;
+    std::vector<unsigned int> not_common_neighbor;
+
     AlgorithmStatus RunInternal();
+
+    unsigned int CompareSections(const Section& a, const Section& b);
+
+    bool IsCurrentSectionValid(const Section& current_section) const;
+
+    bool IsNeighborSectionValid(const Section& current_section, const Section& neighbor_section) const;
+
+    void ExecNeighborPerspectiveCondition(const Section& current_section, const Section& neighbor_section, const unsigned int common_fields_l) const;
+
+    void ExecCurrentPerspectiveCondition(const Section& current_section, const Section& neighbor_section, const unsigned int common_fields_l) const;
 };
 
 #endif

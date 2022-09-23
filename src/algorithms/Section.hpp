@@ -26,6 +26,7 @@ class Section
 
     ~Section();
 
+    unsigned int origin;
     std::vector<unsigned int> fields;
     size_t fields_index;
     std::vector<unsigned int> neighbors;

@@ -6,7 +6,8 @@ AlgorithmCombinationsSafeMoves::~AlgorithmCombinationsSafeMoves() {}
 
 AlgorithmStatus AlgorithmCombinationsSafeMoves::RunInternal()
 {
-    bool success = false;
+    const unsigned int number_of_clicks_before = grid.left_click_counter + grid.right_click_counter;
+
     const long double total_combinations = data.total_combinations;
     const unsigned int face_length = data.face_index;
     for(unsigned int i = 0; i < face_length; i++)
@@ -17,15 +18,15 @@ AlgorithmStatus AlgorithmCombinationsSafeMoves::RunInternal()
         {
             // A mine on this field appears in 0 combinations - it's safe
             grid.LeftClick(face_field);
-            success = true;
         }
         else if(face_field_combinations == total_combinations)
         {
             // A mine on this field appears in all combinations - it's a mine
             grid.RightClick(face_field);
-            success = true;
         }
     }
-    if(success) { return AlgorithmStatus::SUCCESS; }
+
+    const unsigned int number_of_clicks_after = grid.left_click_counter + grid.right_click_counter;
+    if(number_of_clicks_after > number_of_clicks_before) { return AlgorithmStatus::SUCCESS; }
     return AlgorithmStatus::NO_MOVES;
 }

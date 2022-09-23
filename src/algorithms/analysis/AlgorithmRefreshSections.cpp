@@ -20,10 +20,9 @@ AlgorithmStatus AlgorithmRefreshSections::Run()
     const std::vector<unsigned int>& border = data.GetBorder();
     unsigned char section_value_temp = 0;
     unsigned int current_section_hash = 0;
-    size_t i, j, k = 0;
 
     // iterate through border fields
-    for(i = 0; i < border_l; i++)
+    for(size_t i = 0; i < border_l; i++)
     {
         const unsigned int current_border_field = border[i];
         Section& current_section = data.sections[current_border_field];
@@ -61,6 +60,7 @@ AlgorithmStatus AlgorithmRefreshSections::Run()
             data.sections_origins[data.sections_origins_index++] = current_border_field;
             data.is_section_origin[current_border_field] = true;
             current_section.value = section_value_temp;
+            current_section.origin = current_border_field;
         }
     }
 

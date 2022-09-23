@@ -2,6 +2,7 @@
 
 Section::Section()
 {
+    origin = 0;
     fields = std::vector<unsigned int>(MAX_SECTION_LEN, 0);
     fields_index = 0;
     neighbors = std::vector<unsigned int>(MAX_SECTION_NEIGHBORS, 0);
