@@ -4,6 +4,7 @@
 #include <stdexcept>
 
 #include "Algorithm.hpp"
+#include "AlgorithmType.hpp"
 #include "AlgorithmDataStorage.hpp"
 
 #include "analysis/AlgorithmRefreshBorder.hpp"
