@@ -18,6 +18,7 @@
 #include "action/AlgorithmLayerTwo.hpp"
 #include "action/AlgorithmCombinationsSafeMoves.hpp"
 #include "action/AlgorithmCombinationsLeastRisky.hpp"
+#include "action/AlgorithmGiveUp.hpp"
 
 class AlgorithmFactory
 {

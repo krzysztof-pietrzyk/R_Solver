@@ -109,6 +109,10 @@ void AlgorithmManager::ConfigureAlgorithms()
 
     algorithms[AlgorithmType::ALGORITHM_COMBINATIONS_LEAST_RISKY] = factory->Create(AlgorithmType::ALGORITHM_COMBINATIONS_LEAST_RISKY);
     algorithm_transitions[AlgorithmType::ALGORITHM_COMBINATIONS_LEAST_RISKY] = {
-        {AlgorithmStatus::SUCCESS, AlgorithmType::ALGORITHM_REFRESH_BORDER}
+        {AlgorithmStatus::SUCCESS, AlgorithmType::ALGORITHM_REFRESH_BORDER},
+        {AlgorithmStatus::NO_MOVES, AlgorithmType::ALGORITHM_GIVE_UP}
     };
+
+    algorithms[AlgorithmType::ALGORITHM_GIVE_UP] = factory->Create(AlgorithmType::ALGORITHM_GIVE_UP);
+    algorithm_transitions[AlgorithmType::ALGORITHM_GIVE_UP] = {};
 }

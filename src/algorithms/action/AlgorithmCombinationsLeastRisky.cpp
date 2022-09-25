@@ -27,6 +27,5 @@ AlgorithmStatus AlgorithmCombinationsLeastRisky::RunInternal()
         grid.LeftClick(safest_field);
         return AlgorithmStatus::SUCCESS;
     }
-
-    return AlgorithmStatus::GAME_LOST;  // temporary. this should be NO_MOVES but it causes an infinite loop
+    return AlgorithmStatus::NO_MOVES;
 }
