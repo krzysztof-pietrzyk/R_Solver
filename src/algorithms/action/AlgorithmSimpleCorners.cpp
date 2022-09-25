@@ -18,13 +18,27 @@ AlgorithmSimpleCorners::~AlgorithmSimpleCorners() {}
 
 void AlgorithmSimpleCorners::RunInternal()
 {
-    for(size_t i = 0; i < corners_number; i++)
+    try
     {
-        const unsigned int corner = corners[i];
+        const unsigned int corner = GetCorner();
+        grid.LeftClick(corner);
+    }
+    catch(const std::exception& e)
+    {
+        // No corners left
+        return;
+    }
+}
+
+unsigned int AlgorithmSimpleCorners::GetCorner() const
+{
+    for(const unsigned int corner : corners)
+    {
         if(!grid.is_visible[corner] && !grid.is_flag[corner])
         {
-            grid.LeftClick(corner);
-            return;
+            return corner;
         }
     }
+    // No corners left
+    throw std::exception();
 }
