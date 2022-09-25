@@ -8,10 +8,8 @@ AlgorithmLayerTwo::AlgorithmLayerTwo(GridManager& grid_, AlgorithmDataStorage& d
 
 AlgorithmLayerTwo::~AlgorithmLayerTwo() {}
 
-AlgorithmStatus AlgorithmLayerTwo::RunInternal()
+void AlgorithmLayerTwo::RunInternal()
 {
-    const unsigned int number_of_clicks_before = grid.left_click_counter + grid.right_click_counter;
-
     for(size_t i = 0; i < data.sections_origins_index; i++)
     {
         const Section& current_section = data.sections[data.sections_origins[i]];
@@ -27,10 +25,6 @@ AlgorithmStatus AlgorithmLayerTwo::RunInternal()
             ExecNeighborPerspectiveCondition(current_section, neighbor_section, common_fields_l);
         }
     }
-
-    const unsigned int number_of_clicks_after = grid.left_click_counter + grid.right_click_counter;
-    if(number_of_clicks_after > number_of_clicks_before) { return AlgorithmStatus::SUCCESS; }
-    return AlgorithmStatus::NO_MOVES;
 }
 
 unsigned int AlgorithmLayerTwo::CompareSections(const Section& current_section, const Section& neighbor_section)

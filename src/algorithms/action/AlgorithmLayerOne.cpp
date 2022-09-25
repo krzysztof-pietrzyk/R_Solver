@@ -4,9 +4,8 @@ AlgorithmLayerOne::AlgorithmLayerOne(GridManager& grid_, AlgorithmDataStorage& d
 
 AlgorithmLayerOne::~AlgorithmLayerOne() {}
 
-AlgorithmStatus AlgorithmLayerOne::RunInternal()
+void AlgorithmLayerOne::RunInternal()
 {
-    const unsigned int number_of_clicks_before = grid.left_click_counter + grid.right_click_counter;
     const unsigned int border_index_max = data.border_index;
     const std::vector<unsigned int>& border = data.GetBorder();
 
@@ -18,10 +17,6 @@ AlgorithmStatus AlgorithmLayerOne::RunInternal()
         CheckForSafeClicks(field_signature);
         CheckForMines(field_signature);
     }
-
-    const unsigned int number_of_clicks_after = grid.left_click_counter + grid.right_click_counter;
-    if(number_of_clicks_after > number_of_clicks_before) { return AlgorithmStatus::SUCCESS; }
-    return AlgorithmStatus::NO_MOVES;
 }
 
 LayerOneFieldSignature AlgorithmLayerOne::GetFieldSignature(const unsigned int border_field) const

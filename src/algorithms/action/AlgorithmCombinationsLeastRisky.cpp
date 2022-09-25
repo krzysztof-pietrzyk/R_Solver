@@ -4,7 +4,7 @@ AlgorithmCombinationsLeastRisky::AlgorithmCombinationsLeastRisky(GridManager& gr
 
 AlgorithmCombinationsLeastRisky::~AlgorithmCombinationsLeastRisky() {}
 
-AlgorithmStatus AlgorithmCombinationsLeastRisky::RunInternal()
+void AlgorithmCombinationsLeastRisky::RunInternal()
 {
     const long double total_combinations = data.total_combinations;
     const unsigned int face_length = data.face_index;
@@ -25,7 +25,5 @@ AlgorithmStatus AlgorithmCombinationsLeastRisky::RunInternal()
     if(safest_field != UINT_MAX)
     {
         grid.LeftClick(safest_field);
-        return AlgorithmStatus::SUCCESS;
     }
-    return AlgorithmStatus::NO_MOVES;
 }

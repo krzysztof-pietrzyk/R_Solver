@@ -4,7 +4,7 @@ AlgorithmGiveUp::AlgorithmGiveUp(GridManager& grid_, AlgorithmDataStorage& data_
 
 AlgorithmGiveUp::~AlgorithmGiveUp() {}
 
-AlgorithmStatus AlgorithmGiveUp::RunInternal()
+void AlgorithmGiveUp::RunInternal()
 {
-    return AlgorithmStatus::GAME_LOST;
+    grid.is_lost = true;
 }

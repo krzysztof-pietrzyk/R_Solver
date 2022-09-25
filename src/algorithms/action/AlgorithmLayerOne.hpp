@@ -29,7 +29,7 @@ class AlgorithmLayerOne : public AlgorithmAction
 
     protected:
 
-    AlgorithmStatus RunInternal();
+    void RunInternal();
 
     LayerOneFieldSignature GetFieldSignature(const unsigned int border_field) const;
 

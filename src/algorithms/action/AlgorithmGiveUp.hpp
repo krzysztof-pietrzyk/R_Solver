@@ -13,7 +13,7 @@ class AlgorithmGiveUp : public AlgorithmAction
 
     protected:
 
-    AlgorithmStatus RunInternal();
+    void RunInternal();
 };
 
 #endif

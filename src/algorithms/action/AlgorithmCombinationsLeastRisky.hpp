@@ -13,7 +13,7 @@ class AlgorithmCombinationsLeastRisky : public AlgorithmAction
 
     protected:
 
-    AlgorithmStatus RunInternal();
+    void RunInternal();
 };
 
 #endif

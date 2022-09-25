@@ -13,7 +13,7 @@ class AlgorithmCombinationsSafeMoves : public AlgorithmAction
 
     protected:
 
-    AlgorithmStatus RunInternal();
+    void RunInternal();
 };
 
 #endif

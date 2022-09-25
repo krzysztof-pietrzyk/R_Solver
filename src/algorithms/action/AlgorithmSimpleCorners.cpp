@@ -16,7 +16,7 @@ AlgorithmSimpleCorners::AlgorithmSimpleCorners(GridManager& grid_, AlgorithmData
 
 AlgorithmSimpleCorners::~AlgorithmSimpleCorners() {}
 
-AlgorithmStatus AlgorithmSimpleCorners::RunInternal()
+void AlgorithmSimpleCorners::RunInternal()
 {
     for(size_t i = 0; i < corners_number; i++)
     {
@@ -24,8 +24,7 @@ AlgorithmStatus AlgorithmSimpleCorners::RunInternal()
         if(!grid.is_visible[corner] && !grid.is_flag[corner])
         {
             grid.LeftClick(corner);
-            return AlgorithmStatus::SUCCESS;
+            return;
         }
     }
-    return AlgorithmStatus::NO_MOVES;
 }

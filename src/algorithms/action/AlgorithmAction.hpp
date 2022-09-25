@@ -21,11 +21,13 @@ class AlgorithmAction : public Algorithm
 
     protected:
 
-    virtual AlgorithmStatus RunInternal() = 0;
+    virtual void RunInternal() = 0;
 
     private:
 
     AlgorithmStatus CheckGameOverConditions() const;
+
+    AlgorithmStatus GetActionResult(const unsigned int clicks_difference) const;
 };
 
 #endif

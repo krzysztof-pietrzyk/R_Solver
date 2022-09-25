@@ -23,7 +23,7 @@ class AlgorithmLayerTwo : public AlgorithmAction
     std::vector<unsigned int> not_common_current;
     std::vector<unsigned int> not_common_neighbor;
 
-    AlgorithmStatus RunInternal();
+    void RunInternal();
 
     unsigned int CompareSections(const Section& a, const Section& b);
 
