@@ -6,6 +6,7 @@
 #include "../grid/GridManager.hpp"
 
 #include "AlgorithmFactory.hpp"
+#include "AlgorithmTransitionManager.hpp"
 
 class AlgorithmManager
 {
@@ -30,18 +31,14 @@ class AlgorithmManager
     GridManager* grid;
     AlgorithmFactory* factory;
     AlgorithmDataStorage* data;
+    AlgorithmTransitionManager transitions;
+
     AlgorithmType starting_algorithm;
     static const AlgorithmType default_starting_algorithm;
 
     std::map<AlgorithmType, Algorithm*> algorithms;  // pointers to all algorithms
-    // <key: current AlgorithmType, value: <key: current AlgorithmResult, value: next AlgorithmType>>
-    std::map<AlgorithmType, std::map<AlgorithmStatus, AlgorithmType>> algorithm_transitions;
 
     void CreateAlgorithms();
-
-    void ConfigureAlgorithmTransitions();
-
-    AlgorithmType GetNextAlgorithm(const AlgorithmType previous_algorithm, const AlgorithmStatus previous_status) const;
 };
 
 #endif
