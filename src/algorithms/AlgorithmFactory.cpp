@@ -8,29 +8,29 @@ Algorithm* AlgorithmFactory::Create(AlgorithmType type)
 {
     switch(type)
     {
-        case ALGORITHM_REFRESH_BORDER:
+        case REFRESH_BORDER:
             return new AlgorithmRefreshBorder(grid, data);
-        case ALGORITHM_REFRESH_SECTIONS:
+        case REFRESH_SECTIONS:
             return new AlgorithmRefreshSections(grid, data);
-        case ALGORITHM_REFRESH_SEGMENTS:
+        case REFRESH_SEGMENTS:
             return new AlgorithmRefreshSegments(grid, data);
-        case ALGORITHM_REFRESH_SUBSEGMENTS:
+        case REFRESH_SUBSEGMENTS:
             return new AlgorithmRefreshSubsegments(grid, data);
-        case ALGORITHM_REFRESH_FACE:
+        case REFRESH_FACE:
             return new AlgorithmRefreshFace(grid, data);
-        case ALGORITHM_REFRESH_COMBINATIONS:
+        case REFRESH_COMBINATIONS:
             return new AlgorithmRefreshCombinations(grid, data);
-        case ALGORITHM_SIMPLE_CORNERS:
+        case SIMPLE_CORNERS:
             return new AlgorithmSimpleCorners(grid, data);
-        case ALGORITHM_LAYER_ONE:
+        case LAYER_ONE:
             return new AlgorithmLayerOne(grid, data);
-        case ALGORITHM_LAYER_TWO:
+        case LAYER_TWO:
             return new AlgorithmLayerTwo(grid, data);
-        case ALGORITHM_COMBINATIONS_SAFE_MOVES:
+        case COMBINATIONS_SAFE_MOVES:
             return new AlgorithmCombinationsSafeMoves(grid, data);
-        case ALGORITHM_COMBINATIONS_LEAST_RISKY:
+        case COMBINATIONS_LEAST_RISKY:
             return new AlgorithmCombinationsLeastRisky(grid, data);
-        case ALGORITHM_GIVE_UP:
+        case GIVE_UP:
             return new AlgorithmGiveUp(grid, data);
         default:
             throw std::invalid_argument("ERROR: Attempting to create a non-existent Algorithm type!");

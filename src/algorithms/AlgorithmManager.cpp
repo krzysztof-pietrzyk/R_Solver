@@ -1,11 +1,18 @@
 #include "AlgorithmManager.hpp"
 
+const AlgorithmType AlgorithmManager::default_starting_algorithm = AlgorithmType::SIMPLE_CORNERS;
+
 AlgorithmManager::AlgorithmManager(GridManager& grid_) : grid(&grid_)
 {
     data = new AlgorithmDataStorage(grid_);
     factory = new AlgorithmFactory(grid_, *data);
-    
-    ConfigureAlgorithms();
+
+    algorithms = std::map<AlgorithmType, Algorithm*>();
+    algorithm_transitions = std::map<AlgorithmType, std::map<AlgorithmStatus, AlgorithmType>>();
+
+    CreateAlgorithms();
+    ConfigureAlgorithmTransitions();
+    SetStartingAlgorithm(default_starting_algorithm);
 }
 
 AlgorithmManager::~AlgorithmManager()
@@ -18,15 +25,25 @@ AlgorithmManager::~AlgorithmManager()
     delete data;
 }
 
-bool AlgorithmManager::RunAll()
+void AlgorithmManager::SetStartingAlgorithm(const AlgorithmType new_starting_algorithm)
+{
+    this->starting_algorithm = new_starting_algorithm;
+}
+
+AlgorithmType AlgorithmManager::GetStartingAlgorithm() const
+{
+    return starting_algorithm;
+}
+
+bool AlgorithmManager::RunAll() const
 {
     // Run algorithms in defined order until the game is either won or lost
     data->Clear();
-    AlgorithmType current_algorithm = AlgorithmType::ALGORITHM_SIMPLE_CORNERS;
-    AlgorithmStatus current_status = AlgorithmStatus::NO_STATUS;
+    AlgorithmType current_algorithm = starting_algorithm;
+    AlgorithmStatus current_status;
     while(true)
     {
-        current_status = algorithms[current_algorithm]->Run();
+        current_status = algorithms.at(current_algorithm)->Run();
 
         if(current_status == AlgorithmStatus::GAME_LOST) return false;
         if(current_status == AlgorithmStatus::GAME_WON) return true;
@@ -36,83 +53,79 @@ bool AlgorithmManager::RunAll()
     }
 }
 
-AlgorithmType AlgorithmManager::GetNextAlgorithm(const AlgorithmType previous_algorithm, const AlgorithmStatus previous_status)
+AlgorithmType AlgorithmManager::GetNextAlgorithm(const AlgorithmType previous_algorithm, const AlgorithmStatus previous_status) const
 {
-    if(algorithm_transitions[previous_algorithm].count(previous_status) == 0)
+    try
     {
-        throw std::invalid_argument("ERROR: AlgorithmManager::GetNextAlgorithm() unhandled AlgorithmStatus for this AlgorithmType!");
+        const AlgorithmType next_algorithm = algorithm_transitions.at(previous_algorithm).at(previous_status);
+        return next_algorithm;
     }
-    return algorithm_transitions[previous_algorithm][previous_status];
+    catch(const std::out_of_range& e)
+    {
+        throw std::out_of_range("ERROR: AlgorithmManager::GetNextAlgorithm() unhandled AlgorithmStatus for this AlgorithmType!");
+    }
 }
 
-void AlgorithmManager::ConfigureAlgorithms()
+void AlgorithmManager::CreateAlgorithms()
 {
     // This method is only called once in the constructor
-    // It creates all Algorithm objects and defines the transitions between them
+    // It creates all Algorithm objects
+    algorithms[AlgorithmType::SIMPLE_CORNERS]           = factory->Create(AlgorithmType::SIMPLE_CORNERS);
+    algorithms[AlgorithmType::REFRESH_BORDER]           = factory->Create(AlgorithmType::REFRESH_BORDER);
+    algorithms[AlgorithmType::LAYER_ONE]                = factory->Create(AlgorithmType::LAYER_ONE);
+    algorithms[AlgorithmType::REFRESH_SECTIONS]         = factory->Create(AlgorithmType::REFRESH_SECTIONS);
+    algorithms[AlgorithmType::LAYER_TWO]                = factory->Create(AlgorithmType::LAYER_TWO);
+    algorithms[AlgorithmType::REFRESH_SEGMENTS]         = factory->Create(AlgorithmType::REFRESH_SEGMENTS);
+    algorithms[AlgorithmType::REFRESH_SUBSEGMENTS]      = factory->Create(AlgorithmType::REFRESH_SUBSEGMENTS);
+    algorithms[AlgorithmType::REFRESH_FACE]             = factory->Create(AlgorithmType::REFRESH_FACE);
+    algorithms[AlgorithmType::REFRESH_COMBINATIONS]     = factory->Create(AlgorithmType::REFRESH_COMBINATIONS);
+    algorithms[AlgorithmType::COMBINATIONS_SAFE_MOVES]  = factory->Create(AlgorithmType::COMBINATIONS_SAFE_MOVES);
+    algorithms[AlgorithmType::COMBINATIONS_LEAST_RISKY] = factory->Create(AlgorithmType::COMBINATIONS_LEAST_RISKY);
+    algorithms[AlgorithmType::GIVE_UP]                  = factory->Create(AlgorithmType::GIVE_UP);
+}
+
+void AlgorithmManager::ConfigureAlgorithmTransitions()
+{
+    // This method is only called once in the constructor
+    // It defines transitions between algorithms
     // This is where changes can be made to the order of algorithm execution
-    algorithms = std::map<AlgorithmType, Algorithm*>();
-    algorithm_transitions = std::map<AlgorithmType, std::map<AlgorithmStatus, AlgorithmType>>();
+    algorithm_transitions[AlgorithmType::SIMPLE_CORNERS] = {
+        {AlgorithmStatus::SUCCESS, AlgorithmType::REFRESH_BORDER},
+        {AlgorithmStatus::NO_MOVES, AlgorithmType::COMBINATIONS_LEAST_RISKY}};
 
-	algorithms[AlgorithmType::ALGORITHM_SIMPLE_CORNERS] = factory->Create(AlgorithmType::ALGORITHM_SIMPLE_CORNERS);
-    algorithm_transitions[AlgorithmType::ALGORITHM_SIMPLE_CORNERS] = {
-        {AlgorithmStatus::SUCCESS, AlgorithmType::ALGORITHM_REFRESH_BORDER},
-        {AlgorithmStatus::NO_MOVES, AlgorithmType::ALGORITHM_COMBINATIONS_LEAST_RISKY}
-    };
+    algorithm_transitions[AlgorithmType::REFRESH_BORDER] = {
+        {AlgorithmStatus::NO_STATUS, AlgorithmType::LAYER_ONE}};
 
-	algorithms[AlgorithmType::ALGORITHM_REFRESH_BORDER] = factory->Create(AlgorithmType::ALGORITHM_REFRESH_BORDER);
-    algorithm_transitions[AlgorithmType::ALGORITHM_REFRESH_BORDER] = {
-        {AlgorithmStatus::NO_STATUS, AlgorithmType::ALGORITHM_LAYER_ONE}
-    };
+    algorithm_transitions[AlgorithmType::LAYER_ONE] = {
+        {AlgorithmStatus::SUCCESS, AlgorithmType::REFRESH_BORDER},
+        {AlgorithmStatus::NO_MOVES, AlgorithmType::REFRESH_SECTIONS}};
 
-    algorithms[AlgorithmType::ALGORITHM_LAYER_ONE] = factory->Create(AlgorithmType::ALGORITHM_LAYER_ONE);
-    algorithm_transitions[AlgorithmType::ALGORITHM_LAYER_ONE] = {
-        {AlgorithmStatus::SUCCESS, AlgorithmType::ALGORITHM_REFRESH_BORDER},
-        {AlgorithmStatus::NO_MOVES, AlgorithmType::ALGORITHM_REFRESH_SECTIONS}
-    };
+    algorithm_transitions[AlgorithmType::REFRESH_SECTIONS] = {
+        {AlgorithmStatus::NO_STATUS, AlgorithmType::LAYER_TWO}};
 
-    algorithms[AlgorithmType::ALGORITHM_REFRESH_SECTIONS] = factory->Create(AlgorithmType::ALGORITHM_REFRESH_SECTIONS);
-    algorithm_transitions[AlgorithmType::ALGORITHM_REFRESH_SECTIONS] = {
-        {AlgorithmStatus::NO_STATUS, AlgorithmType::ALGORITHM_LAYER_TWO}
-    };
+    algorithm_transitions[AlgorithmType::LAYER_TWO] = {
+        {AlgorithmStatus::SUCCESS, AlgorithmType::REFRESH_BORDER},
+        {AlgorithmStatus::NO_MOVES, AlgorithmType::REFRESH_SEGMENTS}};
 
-    algorithms[AlgorithmType::ALGORITHM_LAYER_TWO] = factory->Create(AlgorithmType::ALGORITHM_LAYER_TWO);
-    algorithm_transitions[AlgorithmType::ALGORITHM_LAYER_TWO] = {
-        {AlgorithmStatus::SUCCESS, AlgorithmType::ALGORITHM_REFRESH_BORDER},
-        {AlgorithmStatus::NO_MOVES, AlgorithmType::ALGORITHM_REFRESH_SEGMENTS}
-    };
+    algorithm_transitions[AlgorithmType::REFRESH_SEGMENTS] = {
+        {AlgorithmStatus::NO_STATUS, AlgorithmType::REFRESH_SUBSEGMENTS}};
 
-    algorithms[AlgorithmType::ALGORITHM_REFRESH_SEGMENTS] = factory->Create(AlgorithmType::ALGORITHM_REFRESH_SEGMENTS);
-    algorithm_transitions[AlgorithmType::ALGORITHM_REFRESH_SEGMENTS] = {
-        {AlgorithmStatus::NO_STATUS, AlgorithmType::ALGORITHM_REFRESH_SUBSEGMENTS}
-    };
+    algorithm_transitions[AlgorithmType::REFRESH_SUBSEGMENTS] = {
+        {AlgorithmStatus::NO_STATUS, AlgorithmType::REFRESH_FACE}};
 
-    algorithms[AlgorithmType::ALGORITHM_REFRESH_SUBSEGMENTS] = factory->Create(AlgorithmType::ALGORITHM_REFRESH_SUBSEGMENTS);
-    algorithm_transitions[AlgorithmType::ALGORITHM_REFRESH_SUBSEGMENTS] = {
-        {AlgorithmStatus::NO_STATUS, AlgorithmType::ALGORITHM_REFRESH_FACE}
-    };
+    algorithm_transitions[AlgorithmType::REFRESH_FACE] = {
+        {AlgorithmStatus::NO_STATUS, AlgorithmType::REFRESH_COMBINATIONS}};
 
-    algorithms[AlgorithmType::ALGORITHM_REFRESH_FACE] = factory->Create(AlgorithmType::ALGORITHM_REFRESH_FACE);
-    algorithm_transitions[AlgorithmType::ALGORITHM_REFRESH_FACE] = {
-        {AlgorithmStatus::NO_STATUS, AlgorithmType::ALGORITHM_REFRESH_COMBINATIONS}
-    };
+    algorithm_transitions[AlgorithmType::REFRESH_COMBINATIONS] = {
+        {AlgorithmStatus::NO_STATUS, AlgorithmType::COMBINATIONS_SAFE_MOVES}};
 
-    algorithms[AlgorithmType::ALGORITHM_REFRESH_COMBINATIONS] = factory->Create(AlgorithmType::ALGORITHM_REFRESH_COMBINATIONS);
-    algorithm_transitions[AlgorithmType::ALGORITHM_REFRESH_COMBINATIONS] = {
-        {AlgorithmStatus::NO_STATUS, AlgorithmType::ALGORITHM_COMBINATIONS_SAFE_MOVES}
-    };
+    algorithm_transitions[AlgorithmType::COMBINATIONS_SAFE_MOVES] = {
+        {AlgorithmStatus::SUCCESS, AlgorithmType::REFRESH_BORDER},
+        {AlgorithmStatus::NO_MOVES, AlgorithmType::SIMPLE_CORNERS}};
 
-    algorithms[AlgorithmType::ALGORITHM_COMBINATIONS_SAFE_MOVES] = factory->Create(AlgorithmType::ALGORITHM_COMBINATIONS_SAFE_MOVES);
-    algorithm_transitions[AlgorithmType::ALGORITHM_COMBINATIONS_SAFE_MOVES] = {
-        {AlgorithmStatus::SUCCESS, AlgorithmType::ALGORITHM_REFRESH_BORDER},
-        {AlgorithmStatus::NO_MOVES, AlgorithmType::ALGORITHM_SIMPLE_CORNERS}
-    };
+    algorithm_transitions[AlgorithmType::COMBINATIONS_LEAST_RISKY] = {
+        {AlgorithmStatus::SUCCESS, AlgorithmType::REFRESH_BORDER},
+        {AlgorithmStatus::NO_MOVES, AlgorithmType::GIVE_UP}};
 
-    algorithms[AlgorithmType::ALGORITHM_COMBINATIONS_LEAST_RISKY] = factory->Create(AlgorithmType::ALGORITHM_COMBINATIONS_LEAST_RISKY);
-    algorithm_transitions[AlgorithmType::ALGORITHM_COMBINATIONS_LEAST_RISKY] = {
-        {AlgorithmStatus::SUCCESS, AlgorithmType::ALGORITHM_REFRESH_BORDER},
-        {AlgorithmStatus::NO_MOVES, AlgorithmType::ALGORITHM_GIVE_UP}
-    };
-
-    algorithms[AlgorithmType::ALGORITHM_GIVE_UP] = factory->Create(AlgorithmType::ALGORITHM_GIVE_UP);
-    algorithm_transitions[AlgorithmType::ALGORITHM_GIVE_UP] = {};
+    algorithm_transitions[AlgorithmType::GIVE_UP] = {};
 }
