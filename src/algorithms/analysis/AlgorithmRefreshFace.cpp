@@ -48,6 +48,5 @@ void AlgorithmRefreshFace::Clear()
     {
         data.is_face[data.face[face_id]] = false;
     }
-    data.face.clear();
     data.face_index = 0;
 }

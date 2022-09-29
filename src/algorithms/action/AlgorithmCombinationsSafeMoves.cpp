@@ -8,10 +8,10 @@ void AlgorithmCombinationsSafeMoves::RunInternal()
 {
     const long double total_combinations = data.total_combinations;
     const unsigned int face_length = data.face_index;
-    for(unsigned int i = 0; i < face_length; i++)
+    for(size_t i = 0; i < face_length; i++)
     {
-        const unsigned int face_field = data.face[i];
-        const long double face_field_combinations = data.field_combinations[face_field];
+        const unsigned int face_field = data.face.at(i);
+        const long double face_field_combinations = data.field_combinations.at(face_field);
         if(face_field_combinations == 0.0L) 
         {
             // A mine on this field appears in 0 combinations - it's safe

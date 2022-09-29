@@ -14,6 +14,8 @@ class AlgorithmCombinationsLeastRisky : public AlgorithmAction
     protected:
 
     void RunInternal();
+
+    unsigned int FindSafestField() const;
 };
 
 #endif
