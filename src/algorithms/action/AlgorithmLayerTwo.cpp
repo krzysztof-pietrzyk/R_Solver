@@ -12,12 +12,14 @@ void AlgorithmLayerTwo::RunInternal()
 {
     for(size_t i = 0; i < data.sections_origins_index; i++)
     {
-        const Section& current_section = data.sections[data.sections_origins[i]];
+        const size_t current_section_index = data.sections_origins.at(i);
+        const Section& current_section = data.sections.at(current_section_index);
         if(!IsCurrentSectionValid(current_section)) { continue; }
 
         for(size_t j = 0; j < current_section.neighbors_index; j++)
         {
-            const Section& neighbor_section = data.sections[current_section.neighbors[j]];
+            const size_t neighbor_section_index = current_section.neighbors.at(j);
+            const Section& neighbor_section = data.sections.at(neighbor_section_index);
             if(!IsNeighborSectionValid(current_section, neighbor_section)) { continue; }
 
             const unsigned int common_fields_l = CompareSections(current_section, neighbor_section);
@@ -32,8 +34,8 @@ unsigned int AlgorithmLayerTwo::CompareSections(const Section& current_section, 
     // clear the temporary vectors
     not_common_current.clear();
     not_common_neighbor.clear();
-    auto current_section_end = current_section.fields.begin() + current_section.fields_index;
-    auto neighbor_section_end = neighbor_section.fields.begin() + neighbor_section.fields_index;
+    const auto current_section_end = current_section.fields.begin() + current_section.fields_index;
+    const auto neighbor_section_end = neighbor_section.fields.begin() + neighbor_section.fields_index;
     // Get current_section - neighbor_section
     std::set_difference(current_section.fields.begin(), current_section_end,
                         neighbor_section.fields.begin(), neighbor_section_end,
@@ -64,7 +66,7 @@ bool AlgorithmLayerTwo::IsCurrentSectionValid(const Section& current_section) co
 bool AlgorithmLayerTwo::IsNeighborSectionValid(const Section& current_section, const Section& neighbor_section) const
 {
     // only consider neighbors which are actual section origins
-    if(!data.is_section_origin[neighbor_section.origin]) { return false; }
+    if(!data.is_section_origin.at(neighbor_section.origin)) { return false; }
     // only compare origin to neighbors with larger field number
     // this assures that each pair of sections is only compared once, not twice
     if(neighbor_section.origin < current_section.origin) { return false; }
@@ -78,8 +80,8 @@ void AlgorithmLayerTwo::ExecNeighborPerspectiveCondition(const Section& current_
 {
     if(neighbor_section.value == current_section.value - current_section.fields_index + common_fields_l)
     {
-        for(unsigned int field : not_common_neighbor) { grid.LeftClick(field); }
-        for(unsigned int field : not_common_current) { grid.RightClick(field); }
+        for(const unsigned int field : not_common_neighbor) { grid.LeftClick(field); }
+        for(const unsigned int field : not_common_current) { grid.RightClick(field); }
     }
 }
 
@@ -87,7 +89,7 @@ void AlgorithmLayerTwo::ExecCurrentPerspectiveCondition(const Section& current_s
 {
     if(current_section.value == neighbor_section.value - neighbor_section.fields_index + common_fields_l)
     {
-        for(unsigned int field : not_common_current) { grid.LeftClick(field); }
-        for(unsigned int field : not_common_neighbor) { grid.RightClick(field); }
+        for(const unsigned int field : not_common_current) { grid.LeftClick(field); }
+        for(const unsigned int field : not_common_neighbor) { grid.RightClick(field); }
     }
 }

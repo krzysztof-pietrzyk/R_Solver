@@ -34,7 +34,7 @@ unsigned int AlgorithmSimpleCorners::GetCorner() const
 {
     for(const unsigned int corner : corners)
     {
-        if(!grid.is_visible[corner] && !grid.is_flag[corner])
+        if(!grid.is_visible.at(corner) && !grid.is_flag.at(corner))
         {
             return corner;
         }
