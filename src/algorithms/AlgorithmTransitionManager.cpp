@@ -1,9 +1,12 @@
 #include "AlgorithmTransitionManager.hpp"
 
+const AlgorithmType AlgorithmTransitionManager::default_starting_algorithm = AlgorithmType::SIMPLE_CORNERS;
+
 AlgorithmTransitionManager::AlgorithmTransitionManager()
 {
     transitions = std::map<AlgorithmType, std::map<AlgorithmStatus, AlgorithmType>>();
     ConfigureDefaultTransitions();
+    SetStartingAlgorithm(default_starting_algorithm);
 }
 
 AlgorithmTransitionManager::~AlgorithmTransitionManager() {}
@@ -37,6 +40,16 @@ AlgorithmType AlgorithmTransitionManager::GetNext(const AlgorithmType previous_t
     {
         throw std::out_of_range("ERROR: AlgorithmTransitionManager::GetNext() unhandled AlgorithmStatus for this AlgorithmType!");
     }
+}
+
+void AlgorithmTransitionManager::SetStartingAlgorithm(const AlgorithmType new_starting_algorithm)
+{
+    this->starting_algorithm = new_starting_algorithm;
+}
+
+AlgorithmType AlgorithmTransitionManager::GetStartingAlgorithm() const
+{
+    return starting_algorithm;
 }
 
 void AlgorithmTransitionManager::ConfigureDefaultTransitions()

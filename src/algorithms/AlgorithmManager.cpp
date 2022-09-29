@@ -1,7 +1,5 @@
 #include "AlgorithmManager.hpp"
 
-const AlgorithmType AlgorithmManager::default_starting_algorithm = AlgorithmType::SIMPLE_CORNERS;
-
 AlgorithmManager::AlgorithmManager(GridManager& grid_) : grid(&grid_)
 {
     data = new AlgorithmDataStorage(grid_);
@@ -11,7 +9,6 @@ AlgorithmManager::AlgorithmManager(GridManager& grid_) : grid(&grid_)
     transitions = AlgorithmTransitionManager();
 
     CreateAlgorithms();
-    SetStartingAlgorithm(default_starting_algorithm);
 }
 
 AlgorithmManager::~AlgorithmManager()
@@ -24,21 +21,11 @@ AlgorithmManager::~AlgorithmManager()
     delete data;
 }
 
-void AlgorithmManager::SetStartingAlgorithm(const AlgorithmType new_starting_algorithm)
-{
-    this->starting_algorithm = new_starting_algorithm;
-}
-
-AlgorithmType AlgorithmManager::GetStartingAlgorithm() const
-{
-    return starting_algorithm;
-}
-
 bool AlgorithmManager::RunAll() const
 {
     // Run algorithms in defined order until the game is either won or lost
     data->Clear();
-    AlgorithmType current_algorithm = GetStartingAlgorithm();
+    AlgorithmType current_algorithm = transitions.GetStartingAlgorithm();
     AlgorithmStatus current_status;
     while(true)
     {
