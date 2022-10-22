@@ -7,7 +7,7 @@ AlgorithmLayerOne::~AlgorithmLayerOne() {}
 void AlgorithmLayerOne::RunInternal()
 {
     const unsigned int border_index_max = data.border_index;
-    const std::vector<unsigned int>& border = data.GetBorder();
+    const std::vector<unsigned int>& border = data.border;
 
     // Go through each field on the broder
     for(size_t i = 0; i < border_index_max; i++)

@@ -63,7 +63,7 @@ void CheckStatus(SolverThreadData* data)
 
 int main()
 {
-	const unsigned short int threads_number = 1;
+	const unsigned short int threads_number = 12;
 	const unsigned short int grid_width = 30;
 	const unsigned short int grid_height = 16;
 	const unsigned int grid_mines = 99;
@@ -89,16 +89,31 @@ int main()
 // #include <chrono>
 // #include <ctime>
 // #include <iostream>
+// #include <algorithm>
 
-// #include "solver/Solver.hpp"
 
 // using namespace std;
 
 
 // int main()
 // {
-// 	Solver s = Solver(30, 16, 99, nullptr);
-// 	s.Run();
-	
+// 	vector<int> a {1, 2, 3, 4, 5, 6, 7};
+// 	vector<int> b {5, 6, 7, 8, 9, 10, 11};
+// 	vector<int> c;
+// 	vector<int> d;
+// 	set_difference(a.begin(), a.end(), b.begin(), b.end(), inserter(c, c.begin()));
+// 	set_difference(b.begin(), b.end(), a.begin(), a.end(), inserter(d, d.begin()));
+
+// 	for(auto x : c)
+// 	{
+// 		cout << x << " ";
+// 	}
+// 	cout << "\n";
+// 	for(auto x : d)
+// 	{
+// 		cout << x << " ";
+// 	}
+// 	cout << "\n";
+
 // 	return 0;
 // }

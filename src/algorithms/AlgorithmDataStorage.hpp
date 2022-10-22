@@ -24,12 +24,9 @@ class AlgorithmDataStorage
     public:
 
     unsigned int border_index;
-    unsigned int last_read_index_border;
-    unsigned int last_read_index_border_flags;
-    bool border_internal_indicator;
+    unsigned int border_last_visible_fields_index;
+    std::vector<unsigned int> border;
     std::vector<bool> is_border;
-    std::vector<unsigned int> border_internal_0;
-    std::vector<unsigned int> border_internal_1;
 
     unsigned int sections_origins_index;
     std::vector<unsigned int> sections_origins;
@@ -68,8 +65,6 @@ class AlgorithmDataStorage
     AlgorithmDataStorage(GridManager& grid);
 
     ~AlgorithmDataStorage();
-
-    std::vector<unsigned int>& GetBorder();
 
     void Clear();
 

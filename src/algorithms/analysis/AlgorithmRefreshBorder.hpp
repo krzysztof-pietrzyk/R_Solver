@@ -23,6 +23,12 @@ class AlgorithmRefreshBorder : public Algorithm
     ~AlgorithmRefreshBorder();
 
     AlgorithmStatus Run();
+
+    protected:
+
+    void FilterOldBorderContent(std::vector<unsigned int>& border, unsigned int& border_index_new) const;
+
+    void AddNewContentToBorder(std::vector<unsigned int>& border, unsigned int& border_index_new) const;
 };
 
 #endif

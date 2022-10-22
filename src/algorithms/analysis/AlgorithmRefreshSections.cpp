@@ -17,7 +17,7 @@ AlgorithmStatus AlgorithmRefreshSections::Run()
     Clear();
 
     const unsigned int border_l = data.border_index;
-    const std::vector<unsigned int>& border = data.GetBorder();
+    const std::vector<unsigned int>& border = data.border;
     unsigned char section_value_temp = 0;
     unsigned int current_section_hash = 0;
 
@@ -95,18 +95,18 @@ unsigned int AlgorithmRefreshSections::GetHashBit(unsigned int difference) const
     the goal here is to encode all information about the given section within a single 32bit int hash
     with that achieved it is much faster to compare sections between each other and exclude multiple occurences */
 
-    if     (difference == diff_bit_20) return 1048576U;     // 2^20
-    else if(difference == diff_bit_21) return 2097152U;     // 2^21
-    else if(difference == diff_bit_22) return 4194304U;     // 2^22
-    else if(difference == diff_bit_23) return 8388608U;     // 2^23
-    else if(difference == diff_bit_24) return 16777216U;    // 2^24
-    else if(difference == diff_bit_25) return 33554432U;    // 2^25
-    else if(difference == diff_bit_26) return 67108864U;    // 2^26
-    else if(difference == diff_bit_27) return 134217728U;   // 2^27
-    else if(difference == diff_bit_28) return 268435456U;   // 2^28
-    else if(difference == diff_bit_29) return 536870912U;   // 2^29
-    else if(difference == diff_bit_30) return 1073741824U;  // 2^30
-    else if(difference == diff_bit_31) return 2147483648U;  // 2^31
+         if(difference == diff_bit_20) return 0b00000000000100000000000000000000;  // 2^20
+    else if(difference == diff_bit_21) return 0b00000000001000000000000000000000;  // 2^21
+    else if(difference == diff_bit_22) return 0b00000000010000000000000000000000;  // 2^22
+    else if(difference == diff_bit_23) return 0b00000000100000000000000000000000;  // 2^23
+    else if(difference == diff_bit_24) return 0b00000001000000000000000000000000;  // 2^24
+    else if(difference == diff_bit_25) return 0b00000010000000000000000000000000;  // 2^25
+    else if(difference == diff_bit_26) return 0b00000100000000000000000000000000;  // 2^26
+    else if(difference == diff_bit_27) return 0b00001000000000000000000000000000;  // 2^27
+    else if(difference == diff_bit_28) return 0b00010000000000000000000000000000;  // 2^28
+    else if(difference == diff_bit_29) return 0b00100000000000000000000000000000;  // 2^29
+    else if(difference == diff_bit_30) return 0b01000000000000000000000000000000;  // 2^30
+    else if(difference == diff_bit_31) return 0b10000000000000000000000000000000;  // 2^31
     else throw std::invalid_argument("ERROR: AlgorithmRefreshSections::GetHashBit: Impossible section shape!");
 }
 
