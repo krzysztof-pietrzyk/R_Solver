@@ -44,8 +44,9 @@ void AlgorithmRefreshSegments::ChainReactionFromField(unsigned int field)
 {
     if(!data.is_section_origin[field]) return;
     const unsigned int fields_to_check_starting_index = fields_to_check_index;
-    is_checked[field] = true;
+    // Initial field to start the chain reaction from
     fields_to_check[fields_to_check_index++] = field;
+    is_checked[field] = true;
     D_segments[D_segments_index++] = field;
     // fields_to_check_index may increase within the runtime of this loop
     for(size_t i = fields_to_check_starting_index; i < fields_to_check_index; i++)
