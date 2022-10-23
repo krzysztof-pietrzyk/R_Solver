@@ -1,7 +1,8 @@
 #include "AlgorithmSimpleCorners.hpp"
 
-AlgorithmSimpleCorners::AlgorithmSimpleCorners(GridManager& grid_, AlgorithmDataStorage& data_) : AlgorithmAction(grid_, data_), 
-    corners_number(4)
+AlgorithmSimpleCorners::AlgorithmSimpleCorners(GridManager& grid_, AlgorithmDataStorage& data_)
+    : AlgorithmAction(grid_, data_),
+    is_flag(grid.is_flag), is_visible(grid.is_visible)
 {
     const unsigned int upper_left = 0;
     const unsigned int upper_right = grid.W - 1;
@@ -18,27 +19,14 @@ AlgorithmSimpleCorners::~AlgorithmSimpleCorners() {}
 
 void AlgorithmSimpleCorners::RunInternal()
 {
-    try
-    {
-        const unsigned int corner = GetCorner();
-        grid.LeftClick(corner);
-    }
-    catch(const std::exception& e)
-    {
-        // No corners left
-        return;
-    }
-}
-
-unsigned int AlgorithmSimpleCorners::GetCorner() const
-{
+    unsigned int chosen_corner = UINT32_MAX;
     for(const unsigned int corner : corners)
     {
-        if(!grid.is_visible.at(corner) && !grid.is_flag.at(corner))
+        if(!is_visible[corner] && !is_flag[corner])
         {
-            return corner;
+            chosen_corner = corner;
+            break;
         }
     }
-    // No corners left
-    throw std::exception();
+    if(chosen_corner != UINT32_MAX) grid.LeftClick(chosen_corner);
 }

@@ -23,6 +23,10 @@ class AlgorithmLayerTwo : public AlgorithmAction
     std::vector<unsigned int> not_common_current;
     std::vector<unsigned int> not_common_neighbor;
 
+    std::vector<unsigned int>& sections_origins;
+    std::vector<Section>& sections;
+    std::vector<bool>& is_section_origin;
+
     void RunInternal();
 
     unsigned int CompareSections(const Section& a, const Section& b);

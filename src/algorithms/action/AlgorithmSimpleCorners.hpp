@@ -19,12 +19,12 @@ class AlgorithmSimpleCorners : public AlgorithmAction
 
     protected:
 
-    const unsigned int corners_number;
     std::vector<unsigned int> corners;
 
-    void RunInternal();
+    const std::vector<bool>& is_flag;
+    const std::vector<bool>& is_visible;
 
-    unsigned int GetCorner() const;
+    void RunInternal();
 };
 
 #endif

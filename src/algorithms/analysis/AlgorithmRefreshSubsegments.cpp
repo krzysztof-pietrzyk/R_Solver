@@ -50,7 +50,7 @@ void AlgorithmRefreshSubsegments::Clear()
 void AlgorithmRefreshSubsegments::UpdateNeighborsBits(const unsigned int border_field)
 {
     neighbors_bits.clear();
-    const Section& border_field_section = data.sections.at(border_field);
+    const Section& border_field_section = data.sections[border_field];
     const size_t border_field_neighbors_l = border_field_section.neighbors_index;
     unsigned int bit_shift_temp = 1;
     for(size_t i = 0; i < border_field_neighbors_l; i++)
@@ -58,7 +58,7 @@ void AlgorithmRefreshSubsegments::UpdateNeighborsBits(const unsigned int border_
         // border_field_neighbors are origins of sections, which overlap with this border field's section
         // each of those neighbors is being assigned a different bit.
         // those bits will be later summed up to create a hash of section field's neighbors
-        const unsigned int border_field_neighbor = border_field_section.neighbors.at(i);
+        const unsigned int border_field_neighbor = border_field_section.neighbors[i];
         neighbors_bits[border_field_neighbor] = bit_shift_temp;
         bit_shift_temp = bit_shift_temp << 1;
     }
@@ -165,7 +165,7 @@ unsigned int AlgorithmRefreshSubsegments::NChooseK(const unsigned int n, const u
     if(k == 0 || k == n) { return 1; }
     else if(k == 1 || k == n - 1) { return n; }
     // less popular cases (exhaustive list)
-    else if(n == 4 && k == 2) { return 6; }  // only checking for k value for error detection
+    else if(n == 4 && k == 2) { return 6; }  // only checking k value for error detection
     else if(n == 5 && (k == 2 || k == 3)) { return 10; }  // only checking k value for error detection
     else if(n == 6)
     {

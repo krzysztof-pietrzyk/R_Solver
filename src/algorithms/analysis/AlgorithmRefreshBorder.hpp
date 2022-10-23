@@ -26,9 +26,17 @@ class AlgorithmRefreshBorder : public Algorithm
 
     protected:
 
-    void FilterOldBorderContent(std::vector<unsigned int>& border, unsigned int& border_index_new) const;
+    const std::vector<bool>& is_flag;
+    const std::vector<bool>& is_visible;
+    const std::vector<unsigned int>& visible_fields;
+    const std::vector<std::vector<unsigned int>>& neighbors;
 
-    void AddNewContentToBorder(std::vector<unsigned int>& border, unsigned int& border_index_new) const;
+    std::vector<unsigned int>& border;
+    std::vector<bool>& is_border;
+
+    void FilterOldBorderContent(unsigned int& border_index_new) const;
+
+    void AddNewContentToBorder(unsigned int& border_index_new) const;
 };
 
 #endif

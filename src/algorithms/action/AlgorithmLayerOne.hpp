@@ -29,6 +29,11 @@ class AlgorithmLayerOne : public AlgorithmAction
 
     protected:
 
+    const std::vector<unsigned int>& border;
+    const std::vector<bool>& is_flag;
+    const std::vector<bool>& is_visible;
+    const std::vector<std::vector<unsigned int>>& neighbors;
+
     void RunInternal();
 
     LayerOneFieldSignature GetFieldSignature(const unsigned int border_field) const;

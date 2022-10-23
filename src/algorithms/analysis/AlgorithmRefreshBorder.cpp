@@ -1,6 +1,9 @@
 #include "AlgorithmRefreshBorder.hpp"
 
-AlgorithmRefreshBorder::AlgorithmRefreshBorder(GridManager& grid_, AlgorithmDataStorage& data_) : Algorithm(grid_, data_) {}
+AlgorithmRefreshBorder::AlgorithmRefreshBorder(GridManager& grid_, AlgorithmDataStorage& data_)
+    : Algorithm(grid_, data_),
+    is_flag(grid.is_flag), is_visible(grid.is_visible), visible_fields(grid.visible_fields),
+    neighbors(grid.neighbors), border(data.border), is_border(data.is_border) {}
 
 AlgorithmRefreshBorder::~AlgorithmRefreshBorder() {}
 
@@ -11,11 +14,10 @@ AlgorithmStatus AlgorithmRefreshBorder::Run()
 
     if(visible_fields_new_index == visible_fields_old_index) return AlgorithmStatus::NO_STATUS;
 
-    std::vector<unsigned int>& border = data.border;
     unsigned int border_index_new = 0;
 
-    FilterOldBorderContent(border, border_index_new);
-    AddNewContentToBorder(border, border_index_new);
+    FilterOldBorderContent(border_index_new);
+    AddNewContentToBorder(border_index_new);
 
     data.border_index = border_index_new;
     data.border_last_visible_fields_index = visible_fields_new_index;
@@ -23,39 +25,39 @@ AlgorithmStatus AlgorithmRefreshBorder::Run()
     return AlgorithmStatus::NO_STATUS;
 }
 
-void AlgorithmRefreshBorder::FilterOldBorderContent(std::vector<unsigned int>& border, unsigned int& border_index_new) const
+void AlgorithmRefreshBorder::FilterOldBorderContent(unsigned int& border_index_new) const
 {
     const unsigned int border_index_old = data.border_index;
     for(size_t i = 0; i < border_index_old; i++)
     {
-        const unsigned int border_field = border.at(i);
+        const unsigned int border_field = border[i];
         bool at_least_one_not_visible = false;
-        const std::vector<unsigned int>& border_field_neighbors = grid.neighbors.at(border_field);
+        const std::vector<unsigned int>& border_field_neighbors = neighbors[border_field];
         for(const unsigned int& neighbor_field : border_field_neighbors)
         {
-            if(!grid.is_visible.at(neighbor_field) && !grid.is_flag.at(neighbor_field))
+            if(!is_visible[neighbor_field] && !is_flag[neighbor_field])
             {
                 at_least_one_not_visible = true;
                 break;
             }
         }
-        if(at_least_one_not_visible) border.at(border_index_new++) = border_field;
-        else data.is_border.at(border_field) = false;
+        if(at_least_one_not_visible) border[border_index_new++] = border_field;
+        else is_border[border_field] = false;
     }
 }
 
-void AlgorithmRefreshBorder::AddNewContentToBorder(std::vector<unsigned int>& border, unsigned int& border_index_new) const
+void AlgorithmRefreshBorder::AddNewContentToBorder(unsigned int& border_index_new) const
 {
     const unsigned int visible_fields_old_index = data.border_last_visible_fields_index;
     const unsigned int visible_fields_new_index = grid.visible_fields_index;
     for(size_t i = visible_fields_old_index; i < visible_fields_new_index; i++)
     {
-        const unsigned int visible_field = grid.visible_fields.at(i);
+        const unsigned int visible_field = visible_fields[i];
         bool at_least_one_not_visible = false;
-        const std::vector<unsigned int>& visible_field_neighbors = grid.neighbors.at(visible_field);
+        const std::vector<unsigned int>& visible_field_neighbors = neighbors[visible_field];
         for(const unsigned int& neighbor_field : visible_field_neighbors)
         {
-            if(!grid.is_visible.at(neighbor_field) && !grid.is_flag.at(neighbor_field))
+            if(!is_visible[neighbor_field] && !is_flag[neighbor_field])
             {
                 at_least_one_not_visible = true;
                 break;
@@ -63,8 +65,8 @@ void AlgorithmRefreshBorder::AddNewContentToBorder(std::vector<unsigned int>& bo
         }
         if(at_least_one_not_visible)
         {
-            data.is_border.at(visible_field) = true;
-            border.at(border_index_new++) = visible_field;
+            is_border[visible_field] = true;
+            border[border_index_new++] = visible_field;
         }
     }
 }
