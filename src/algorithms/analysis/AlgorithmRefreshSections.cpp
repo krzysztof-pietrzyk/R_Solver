@@ -12,6 +12,8 @@ AlgorithmRefreshSections::AlgorithmRefreshSections(GridManager& grid_, Algorithm
 {
     if(grid.S > MAX_ALLOWED_GRID_SIZE) std::invalid_argument("ERROR: AlgorithmRefreshSections: Grid size too large!");
     sections_hashes = std::vector<unsigned int>(grid.S, 0);
+    section_value_temp = 0;
+    current_section_hash = 0;
 }
 
 AlgorithmRefreshSections::~AlgorithmRefreshSections() {}
@@ -21,51 +23,12 @@ AlgorithmStatus AlgorithmRefreshSections::Run()
     Clear();
 
     const unsigned int border_l = data.border_index;
-    const std::vector<unsigned int>& border = data.border;
-    unsigned char section_value_temp = 0;
-    unsigned int current_section_hash = 0;
 
     // iterate through border fields
     for(size_t i = 0; i < border_l; i++)
     {
-        const unsigned int current_border_field = border[i];
-        Section& current_section = D_sections[current_border_field];
-        current_section.Clear();
-        section_value_temp = FieldValue(current_border_field);
-        current_section_hash = 0;
-        // iterate through each border field's neigbors
-        for(const unsigned int& neighbor_field : grid.neighbors[current_border_field])
-        {
-            // count the number of flags already marked around the current_border_field
-            if(grid.is_flag[neighbor_field]) { section_value_temp--; continue; }
-            // if this neighbor is already visible, ignore it
-            else if(grid.is_visible[neighbor_field]) { continue; }
-            // add this neighbor to the section
-            D_sections[current_border_field].AddField(neighbor_field);
-            // encode data about the section into the hash
-            if(data.sections[current_border_field].fields_index == 1) { current_section_hash += neighbor_field; }
-            else { current_section_hash += GetHashBit(neighbor_field - current_section.fields[0]); }
-            // iterate through the neighbors of that neighbor, in order to determine
-            // potential neighbour sections of this section
-            for(const unsigned int& neighbor_of_neighbor : grid.neighbors[neighbor_field])
-            {
-                // if this neighbor is not on border or is the currently considered field, ignore it
-                if(!data.is_border[neighbor_of_neighbor] || neighbor_of_neighbor == current_border_field) { continue; }
-                // ignore duplicate neighbors
-                if(current_section.HasNeighbor(neighbor_of_neighbor)) { continue; }
-                current_section.AddNeighbor(neighbor_of_neighbor);
-            }
-        }
-        // Check if section is not a duplicate
-        if(CheckHashUnique(current_section_hash))
-        {
-            // Save all the information about the section
-            sections_hashes[data.sections_origins_index] = current_section_hash;
-            D_sections_origins[D_sections_origins_index++] = current_border_field;
-            D_is_section_origin[current_border_field] = true;
-            current_section.value = section_value_temp;
-            current_section.origin = current_border_field;
-        }
+        const unsigned int border_field = data.border[i];
+        AnalyzeSection(border_field);
     }
 
     return AlgorithmStatus::NO_STATUS;
@@ -81,6 +44,62 @@ void AlgorithmRefreshSections::Clear()
         D_sections[section_origin].neighbors_index = 0;
     }
     D_sections_origins_index = 0;
+}
+
+void AlgorithmRefreshSections::AnalyzeSection(const unsigned int border_field)
+{
+        Section& current_section = D_sections[border_field];
+        current_section.Clear();
+        section_value_temp = FieldValue(border_field);
+        current_section_hash = 0;
+        // iterate through each border field's neigbors
+        for(const unsigned int& border_field_neighbor : grid.neighbors[border_field])
+        {
+            AnalyzeSectionField(border_field, border_field_neighbor, current_section);
+        }
+        // Check if section is not a duplicate
+        if(CheckHashUnique(current_section_hash))
+        {
+            SaveSectionData(border_field, current_section);
+        }
+}
+
+void AlgorithmRefreshSections::AnalyzeSectionField(const unsigned int border_field, const unsigned int border_field_neighbor, Section& current_section)
+{
+    // count the number of flags already marked around the border_field
+    if(grid.is_flag[border_field_neighbor]) { section_value_temp--; return; }
+    // if this neighbor is already visible, ignore it
+    else if(grid.is_visible[border_field_neighbor]) { return; }
+    // add this neighbor to the section
+    D_sections[border_field].AddField(border_field_neighbor);
+    // encode data about the section into the hash
+    if(data.sections[border_field].fields_index == 1) { current_section_hash += border_field_neighbor; }
+    else { current_section_hash += GetHashBit(border_field_neighbor - current_section.fields[0]); }
+    // iterate through the neighbors of that neighbor, in order to determine
+    // potential neighbour sections of this section
+    for(const unsigned int& section_neighbor : grid.neighbors[border_field_neighbor])
+    {
+        AnalyzeSectionNeighbor(border_field, section_neighbor, current_section);
+    }
+}
+
+void AlgorithmRefreshSections::AnalyzeSectionNeighbor(const unsigned int border_field, const unsigned int section_neighbor, Section& current_section)
+{
+    // if this neighbor is not on border or is the currently considered field, ignore it
+    if(!data.is_border[section_neighbor] || section_neighbor == border_field) { return; }
+    // ignore duplicate neighbors
+    if(current_section.HasNeighbor(section_neighbor)) { return; }
+    current_section.AddNeighbor(section_neighbor);
+}
+
+void AlgorithmRefreshSections::SaveSectionData(const unsigned int border_field, Section& current_section)
+{
+    // Save all the information about the section
+    sections_hashes[data.sections_origins_index] = current_section_hash;
+    D_sections_origins[D_sections_origins_index++] = border_field;
+    D_is_section_origin[border_field] = true;
+    current_section.value = section_value_temp;
+    current_section.origin = border_field;
 }
 
 unsigned int AlgorithmRefreshSections::GetHashBit(unsigned int difference) const
@@ -99,18 +118,18 @@ unsigned int AlgorithmRefreshSections::GetHashBit(unsigned int difference) const
     the goal here is to encode all information about the given section within a single 32bit int hash
     with that achieved it is much faster to compare sections between each other and exclude multiple occurences */
 
-         if(difference == diff_bit_20) return 0b00000000000100000000000000000000;  // 2^20
-    else if(difference == diff_bit_21) return 0b00000000001000000000000000000000;  // 2^21
-    else if(difference == diff_bit_22) return 0b00000000010000000000000000000000;  // 2^22
-    else if(difference == diff_bit_23) return 0b00000000100000000000000000000000;  // 2^23
-    else if(difference == diff_bit_24) return 0b00000001000000000000000000000000;  // 2^24
-    else if(difference == diff_bit_25) return 0b00000010000000000000000000000000;  // 2^25
-    else if(difference == diff_bit_26) return 0b00000100000000000000000000000000;  // 2^26
-    else if(difference == diff_bit_27) return 0b00001000000000000000000000000000;  // 2^27
-    else if(difference == diff_bit_28) return 0b00010000000000000000000000000000;  // 2^28
-    else if(difference == diff_bit_29) return 0b00100000000000000000000000000000;  // 2^29
-    else if(difference == diff_bit_30) return 0b01000000000000000000000000000000;  // 2^30
-    else if(difference == diff_bit_31) return 0b10000000000000000000000000000000;  // 2^31
+         if(difference == diff_bit_20) return (unsigned int)0b00000000000100000000000000000000;  // 2^20
+    else if(difference == diff_bit_21) return (unsigned int)0b00000000001000000000000000000000;  // 2^21
+    else if(difference == diff_bit_22) return (unsigned int)0b00000000010000000000000000000000;  // 2^22
+    else if(difference == diff_bit_23) return (unsigned int)0b00000000100000000000000000000000;  // 2^23
+    else if(difference == diff_bit_24) return (unsigned int)0b00000001000000000000000000000000;  // 2^24
+    else if(difference == diff_bit_25) return (unsigned int)0b00000010000000000000000000000000;  // 2^25
+    else if(difference == diff_bit_26) return (unsigned int)0b00000100000000000000000000000000;  // 2^26
+    else if(difference == diff_bit_27) return (unsigned int)0b00001000000000000000000000000000;  // 2^27
+    else if(difference == diff_bit_28) return (unsigned int)0b00010000000000000000000000000000;  // 2^28
+    else if(difference == diff_bit_29) return (unsigned int)0b00100000000000000000000000000000;  // 2^29
+    else if(difference == diff_bit_30) return (unsigned int)0b01000000000000000000000000000000;  // 2^30
+    else if(difference == diff_bit_31) return (unsigned int)0b10000000000000000000000000000000;  // 2^31
     else throw std::invalid_argument("ERROR: AlgorithmRefreshSections::GetHashBit: Impossible section shape!");
 }
 
