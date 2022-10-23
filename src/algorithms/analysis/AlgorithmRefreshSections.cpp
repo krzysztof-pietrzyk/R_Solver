@@ -60,6 +60,7 @@ void AlgorithmRefreshSections::AnalyzeSection(const unsigned int border_field)
         // Check if section is not a duplicate
         if(CheckHashUnique(current_section_hash))
         {
+            sections_hashes[data.sections_origins_index] = current_section_hash;
             SaveSectionData(border_field, current_section);
         }
 }
@@ -83,7 +84,7 @@ void AlgorithmRefreshSections::AnalyzeSectionField(const unsigned int border_fie
     }
 }
 
-void AlgorithmRefreshSections::AnalyzeSectionNeighbor(const unsigned int border_field, const unsigned int section_neighbor, Section& current_section)
+void AlgorithmRefreshSections::AnalyzeSectionNeighbor(const unsigned int border_field, const unsigned int section_neighbor, Section& current_section) const
 {
     // if this neighbor is not on border or is the currently considered field, ignore it
     if(!data.is_border[section_neighbor] || section_neighbor == border_field) { return; }
@@ -92,10 +93,9 @@ void AlgorithmRefreshSections::AnalyzeSectionNeighbor(const unsigned int border_
     current_section.AddNeighbor(section_neighbor);
 }
 
-void AlgorithmRefreshSections::SaveSectionData(const unsigned int border_field, Section& current_section)
+void AlgorithmRefreshSections::SaveSectionData(const unsigned int border_field, Section& current_section) const
 {
     // Save all the information about the section
-    sections_hashes[data.sections_origins_index] = current_section_hash;
     D_sections_origins[D_sections_origins_index++] = border_field;
     D_is_section_origin[border_field] = true;
     current_section.value = section_value_temp;

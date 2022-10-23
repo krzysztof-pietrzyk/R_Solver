@@ -38,9 +38,9 @@ class AlgorithmRefreshSections : public Algorithm
 
     void AnalyzeSectionField(const unsigned int border_field, const unsigned int border_field_neighbor, Section& current_section);
 
-    void AnalyzeSectionNeighbor(const unsigned int border_field, const unsigned int section_neighbor, Section& current_section);
+    void AnalyzeSectionNeighbor(const unsigned int border_field, const unsigned int section_neighbor, Section& current_section) const;
 
-    void SaveSectionData(const unsigned int border_field, Section& current_section);
+    void SaveSectionData(const unsigned int border_field, Section& current_section) const;
 
     unsigned int GetHashBit(unsigned int difference) const;
 
