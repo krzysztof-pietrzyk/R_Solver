@@ -1,6 +1,12 @@
 #include "AlgorithmRefreshSegments.hpp"
 
-AlgorithmRefreshSegments::AlgorithmRefreshSegments(GridManager& grid_, AlgorithmDataStorage& data_) : Algorithm(grid_, data_)
+AlgorithmRefreshSegments::AlgorithmRefreshSegments(GridManager& grid_, AlgorithmDataStorage& data_)
+    : Algorithm(grid_, data_),
+    D_segments_index(GetModifiableAlgorithmDataStorageReference().segments_index),
+    D_segments_count(GetModifiableAlgorithmDataStorageReference().segments_count),
+    D_segments(GetModifiableAlgorithmDataStorageReference().segments),
+    D_segments_starting_indexes(GetModifiableAlgorithmDataStorageReference().segments_starting_indexes),
+    D_segments_l(GetModifiableAlgorithmDataStorageReference().segments_l)
 {
     fields_to_check = std::vector<unsigned int>(grid.S, 0);
     fields_to_check_index = 0;
@@ -30,8 +36,8 @@ void AlgorithmRefreshSegments::Clear()
 {
     for(size_t i = 0; i < fields_to_check_index; i++) { is_checked[fields_to_check[i]] = false; }
     fields_to_check_index = 0;
-    data.segments_count = 0;
-    data.segments_index = 0;
+    D_segments_count = 0;
+    D_segments_index = 0;
 }
 
 void AlgorithmRefreshSegments::ChainReactionFromField(unsigned int field)
@@ -40,7 +46,7 @@ void AlgorithmRefreshSegments::ChainReactionFromField(unsigned int field)
     const unsigned int fields_to_check_starting_index = fields_to_check_index;
     is_checked[field] = true;
     fields_to_check[fields_to_check_index++] = field;
-    data.segments[data.segments_index++] = field;
+    D_segments[D_segments_index++] = field;
     // fields_to_check_index may increase within the runtime of this loop
     for(size_t i = fields_to_check_starting_index; i < fields_to_check_index; i++)
     {
@@ -54,13 +60,13 @@ void AlgorithmRefreshSegments::ChainReactionFromField(unsigned int field)
             if(is_checked[neighbor_to_add]) { continue; }  // Ignore duplicates
             is_checked[neighbor_to_add] = true;
             fields_to_check[fields_to_check_index++] = neighbor_to_add;
-            data.segments[data.segments_index++] = neighbor_to_add;
+            D_segments[D_segments_index++] = neighbor_to_add;
         }
     }
     // Save the starting index of this segment (index in data.segments[])
-    data.segments_starting_indexes[data.segments_count] = fields_to_check_starting_index;
+    D_segments_starting_indexes[data.segments_count] = fields_to_check_starting_index;
     // Save how many sections origins there are in this segment
-    data.segments_l[data.segments_count] = fields_to_check_index - fields_to_check_starting_index;
+    D_segments_l[data.segments_count] = fields_to_check_index - fields_to_check_starting_index;
     // Increment the number of segments
-    data.segments_count++;
+    D_segments_count++;
 }

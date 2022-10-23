@@ -11,7 +11,7 @@ void AlgorithmCombinationsLeastRisky::RunInternal()
     // Only click if a field was found
     if(safest_field != UINT_MAX)
     {
-        grid.LeftClick(safest_field);
+        LeftClick(safest_field);
     }
 }
 

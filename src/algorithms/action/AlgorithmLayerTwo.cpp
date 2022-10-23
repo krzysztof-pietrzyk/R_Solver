@@ -83,8 +83,8 @@ void AlgorithmLayerTwo::ExecNeighborPerspectiveCondition(const Section& current_
 {
     if(neighbor_section.value == current_section.value - current_section.fields_index + common_fields_l)
     {
-        for(const unsigned int field : not_common_neighbor) { grid.LeftClick(field); }
-        for(const unsigned int field : not_common_current) { grid.RightClick(field); }
+        for(const unsigned int field : not_common_neighbor) { LeftClick(field); }
+        for(const unsigned int field : not_common_current) { RightClick(field); }
     }
 }
 
@@ -92,7 +92,7 @@ void AlgorithmLayerTwo::ExecCurrentPerspectiveCondition(const Section& current_s
 {
     if(current_section.value == neighbor_section.value - neighbor_section.fields_index + common_fields_l)
     {
-        for(const unsigned int field : not_common_current) { grid.LeftClick(field); }
-        for(const unsigned int field : not_common_neighbor) { grid.RightClick(field); }
+        for(const unsigned int field : not_common_current) { LeftClick(field); }
+        for(const unsigned int field : not_common_neighbor) { RightClick(field); }
     }
 }

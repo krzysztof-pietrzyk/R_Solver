@@ -4,7 +4,11 @@ AlgorithmRefreshSections::AlgorithmRefreshSections(GridManager& grid_, Algorithm
     : Algorithm(grid_, data_),
     diff_bit_20(1), diff_bit_21(2), diff_bit_22(grid.W - 2), diff_bit_23(grid.W - 1),
     diff_bit_24(grid.W), diff_bit_25(grid.W + 1), diff_bit_26(grid.W + 2), diff_bit_27(2 * grid.W - 2),
-    diff_bit_28(2 * grid.W - 1), diff_bit_29(2 * grid.W), diff_bit_30(2 * grid.W + 1), diff_bit_31(2 * grid.W + 2)
+    diff_bit_28(2 * grid.W - 1), diff_bit_29(2 * grid.W), diff_bit_30(2 * grid.W + 1), diff_bit_31(2 * grid.W + 2),
+    D_sections_origins_index(GetModifiableAlgorithmDataStorageReference().sections_origins_index),
+    D_is_section_origin(GetModifiableAlgorithmDataStorageReference().is_section_origin),
+    D_sections_origins(GetModifiableAlgorithmDataStorageReference().sections_origins),
+    D_sections(GetModifiableAlgorithmDataStorageReference().sections)
 {
     if(grid.S > MAX_ALLOWED_GRID_SIZE) std::invalid_argument("ERROR: AlgorithmRefreshSections: Grid size too large!");
     sections_hashes = std::vector<unsigned int>(grid.S, 0);
@@ -25,9 +29,9 @@ AlgorithmStatus AlgorithmRefreshSections::Run()
     for(size_t i = 0; i < border_l; i++)
     {
         const unsigned int current_border_field = border[i];
-        Section& current_section = data.sections[current_border_field];
+        Section& current_section = D_sections[current_border_field];
         current_section.Clear();
-        section_value_temp = grid.FieldValue(current_border_field);
+        section_value_temp = FieldValue(current_border_field);
         current_section_hash = 0;
         // iterate through each border field's neigbors
         for(const unsigned int& neighbor_field : grid.neighbors[current_border_field])
@@ -37,7 +41,7 @@ AlgorithmStatus AlgorithmRefreshSections::Run()
             // if this neighbor is already visible, ignore it
             else if(grid.is_visible[neighbor_field]) { continue; }
             // add this neighbor to the section
-            data.sections[current_border_field].AddField(neighbor_field);
+            D_sections[current_border_field].AddField(neighbor_field);
             // encode data about the section into the hash
             if(data.sections[current_border_field].fields_index == 1) { current_section_hash += neighbor_field; }
             else { current_section_hash += GetHashBit(neighbor_field - current_section.fields[0]); }
@@ -57,8 +61,8 @@ AlgorithmStatus AlgorithmRefreshSections::Run()
         {
             // Save all the information about the section
             sections_hashes[data.sections_origins_index] = current_section_hash;
-            data.sections_origins[data.sections_origins_index++] = current_border_field;
-            data.is_section_origin[current_border_field] = true;
+            D_sections_origins[D_sections_origins_index++] = current_border_field;
+            D_is_section_origin[current_border_field] = true;
             current_section.value = section_value_temp;
             current_section.origin = current_border_field;
         }
@@ -72,11 +76,11 @@ void AlgorithmRefreshSections::Clear()
     for(size_t i = 0; i < data.sections_origins_index; i++)
     {
         const unsigned int section_origin = data.sections_origins[i];
-        data.is_section_origin[section_origin] = false;
-        data.sections[section_origin].fields_index = 0;
-        data.sections[section_origin].neighbors_index = 0;
+        D_is_section_origin[section_origin] = false;
+        D_sections[section_origin].fields_index = 0;
+        D_sections[section_origin].neighbors_index = 0;
     }
-    data.sections_origins_index = 0;
+    D_sections_origins_index = 0;
 }
 
 unsigned int AlgorithmRefreshSections::GetHashBit(unsigned int difference) const

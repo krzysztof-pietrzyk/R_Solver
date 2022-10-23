@@ -16,6 +16,13 @@ class AlgorithmRefreshFace : public Algorithm
     protected:
 
     void Clear();
+
+    private:
+
+    unsigned int& D_face_index;
+    std::vector<unsigned int>& D_face;
+    std::vector<bool>& D_is_face;
+    std::vector<std::vector<unsigned int>>& D_segments_face;
 };
 
 #endif

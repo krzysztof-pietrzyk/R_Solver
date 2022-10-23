@@ -1,7 +1,12 @@
 #include "AlgorithmRefreshBorder.hpp"
 
 AlgorithmRefreshBorder::AlgorithmRefreshBorder(GridManager& grid_, AlgorithmDataStorage& data_)
-    : Algorithm(grid_, data_) {}
+    : Algorithm(grid_, data_),
+    D_border_index(GetModifiableAlgorithmDataStorageReference().border_index),
+    D_border_last_visible_fields_index(GetModifiableAlgorithmDataStorageReference().border_last_visible_fields_index),
+    D_border(GetModifiableAlgorithmDataStorageReference().border),
+    D_is_border(GetModifiableAlgorithmDataStorageReference().is_border)
+{}
 
 AlgorithmRefreshBorder::~AlgorithmRefreshBorder() {}
 
@@ -17,8 +22,8 @@ AlgorithmStatus AlgorithmRefreshBorder::Run()
     FilterOldBorderContent(border_index_new);
     AddNewContentToBorder(border_index_new);
 
-    data.border_index = border_index_new;
-    data.border_last_visible_fields_index = visible_fields_new_index;
+    D_border_index = border_index_new;
+    D_border_last_visible_fields_index = visible_fields_new_index;
 
     return AlgorithmStatus::NO_STATUS;
 }
@@ -39,8 +44,8 @@ void AlgorithmRefreshBorder::FilterOldBorderContent(unsigned int& border_index_n
                 break;
             }
         }
-        if(at_least_one_not_visible) data.border[border_index_new++] = border_field;
-        else data.is_border[border_field] = false;
+        if(at_least_one_not_visible) D_border[border_index_new++] = border_field;
+        else D_is_border[border_field] = false;
     }
 }
 
@@ -63,8 +68,8 @@ void AlgorithmRefreshBorder::AddNewContentToBorder(unsigned int& border_index_ne
         }
         if(at_least_one_not_visible)
         {
-            data.is_border[visible_field] = true;
-            data.border[border_index_new++] = visible_field;
+            D_is_border[visible_field] = true;
+            D_border[border_index_new++] = visible_field;
         }
     }
 }

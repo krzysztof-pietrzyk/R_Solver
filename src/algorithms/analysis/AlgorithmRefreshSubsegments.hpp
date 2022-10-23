@@ -36,6 +36,13 @@ class AlgorithmRefreshSubsegments : public Algorithm
     void FindPossibleValuesForSubsegment(SubsegmentData& subsegment_data) const;
 
     unsigned int NChooseK(const unsigned int n, const unsigned int k) const;
+
+    private:
+
+    std::vector<std::vector<SubsegmentData>>& D_subsegments;
+    std::vector<bool>& D_is_subsegment;
+    std::vector<unsigned int>& D_subsegments_cache;
+    unsigned int& D_subsegments_cache_index;
 };
 
 #endif

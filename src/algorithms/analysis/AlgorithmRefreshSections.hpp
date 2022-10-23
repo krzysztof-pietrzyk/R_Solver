@@ -50,6 +50,13 @@ class AlgorithmRefreshSections : public Algorithm
     const unsigned int diff_bit_29;
     const unsigned int diff_bit_30;
     const unsigned int diff_bit_31;
+
+    private:
+
+    unsigned int& D_sections_origins_index;
+    std::vector<unsigned int>& D_sections_origins;
+    std::vector<bool>& D_is_section_origin;
+    std::vector<Section>& D_sections;
 };
 
 #endif

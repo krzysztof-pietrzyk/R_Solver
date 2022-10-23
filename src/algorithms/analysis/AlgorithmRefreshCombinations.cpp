@@ -1,6 +1,11 @@
 #include "AlgorithmRefreshCombinations.hpp"
 
-AlgorithmRefreshCombinations::AlgorithmRefreshCombinations(GridManager& grid_, AlgorithmDataStorage& data_) : Algorithm(grid_, data_)
+AlgorithmRefreshCombinations::AlgorithmRefreshCombinations(GridManager& grid_, AlgorithmDataStorage& data_)
+    : Algorithm(grid_, data_),
+    D_subsegments(GetModifiableAlgorithmDataStorageReference().subsegments),
+    D_field_combinations(GetModifiableAlgorithmDataStorageReference().field_combinations),
+    D_remaining_fields_combinations(GetModifiableAlgorithmDataStorageReference().remaining_fields_combinations),
+    D_total_combinations(GetModifiableAlgorithmDataStorageReference().total_combinations)
 {
     field_states = std::vector<FieldCombinationState>(grid.S, FCS_UNASSIGNED);
     choice_stack = std::vector<unsigned int>();
@@ -43,7 +48,7 @@ void AlgorithmRefreshCombinations::Clear()
     {
         const unsigned int face_field = data.face[i];
         field_states[face_field] = FCS_UNASSIGNED;
-        data.field_combinations[face_field] = 0.0L;
+        D_field_combinations[face_field] = 0.0L;
         field_combinations_temp[face_field].clear();
     }
     const unsigned int segments_count = data.segments_count;
@@ -53,13 +58,13 @@ void AlgorithmRefreshCombinations::Clear()
         mine_counts_in_segment[i].clear();
         current_mine_count_id_in_segment[i] = 0;
     }
-    data.remaining_fields_combinations = 0.0L;
-    data.total_combinations = 0.0L;
+    D_remaining_fields_combinations = 0.0L;
+    D_total_combinations = 0.0L;
 }
 
 void AlgorithmRefreshCombinations::FindCombinationsForSegment(unsigned int segment_id)
 {
-    std::vector<SubsegmentData>& subsegments_ref = data.subsegments[segment_id];
+    std::vector<SubsegmentData>& subsegments_ref = D_subsegments[segment_id];
     do
     {
         ClearStatesInSegment(segment_id);
@@ -341,7 +346,7 @@ void AlgorithmRefreshCombinations::MergeCurrentSegmentsMineCountCombination(cons
     // store this number of combinations for the remaining fields
     if(remaining_fields != 0)
     {
-        data.remaining_fields_combinations += combinations_in_remaining_fields * (mines_in_remaining_fields / remaining_fields);
+        D_remaining_fields_combinations += combinations_in_remaining_fields * (mines_in_remaining_fields / remaining_fields);
     }
     
     // initial multiplier for the combinations on the face
@@ -357,7 +362,7 @@ void AlgorithmRefreshCombinations::MergeCurrentSegmentsMineCountCombination(cons
         combinations_for_current_mine_count_combination *= segment_combinations_for_current_possibility;
     }
 
-    data.total_combinations += combinations_for_current_mine_count_combination;
+    D_total_combinations += combinations_for_current_mine_count_combination;
     for(size_t segment_id = 0; segment_id < segments_count; segment_id++)
     {
         const size_t mine_count_id = current_mine_count_id_in_segment[segment_id];
@@ -375,7 +380,7 @@ void AlgorithmRefreshCombinations::MergeCurrentSegmentsMineCountCombination(cons
                 // how many times this field is a mine, within all combinations of this mine count in this segment
                 // should be between 0 and 1 (including 0 and 1);
                 const long double appearance_ratio = face_field_combinations / mine_count_combinations_in_segment;
-                data.field_combinations[face_field] += combinations_for_current_mine_count_combination * appearance_ratio;
+                D_field_combinations[face_field] += combinations_for_current_mine_count_combination * appearance_ratio;
             }
         }
     }

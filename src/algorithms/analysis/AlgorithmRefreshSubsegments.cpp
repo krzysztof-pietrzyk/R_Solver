@@ -1,6 +1,11 @@
 #include "AlgorithmRefreshSubsegments.hpp"
 
-AlgorithmRefreshSubsegments::AlgorithmRefreshSubsegments(GridManager& grid_, AlgorithmDataStorage& data_) : Algorithm(grid_, data_)
+AlgorithmRefreshSubsegments::AlgorithmRefreshSubsegments(GridManager& grid_, AlgorithmDataStorage& data_)
+    : Algorithm(grid_, data_),
+    D_subsegments(GetModifiableAlgorithmDataStorageReference().subsegments),
+    D_is_subsegment(GetModifiableAlgorithmDataStorageReference().is_subsegment),
+    D_subsegments_cache(GetModifiableAlgorithmDataStorageReference().subsegments_cache),
+    D_subsegments_cache_index(GetModifiableAlgorithmDataStorageReference().subsegments_cache_index)
 {
     is_checked = std::vector<bool>(grid.S, false);
     checked = std::vector<unsigned int>(grid.S, 0);
@@ -19,7 +24,7 @@ AlgorithmStatus AlgorithmRefreshSubsegments::Run()
 
     for(size_t segment_id = 0; segment_id < segments_count; segment_id++)
     {
-        data.subsegments.push_back(std::vector<SubsegmentData>());
+        D_subsegments.push_back(std::vector<SubsegmentData>());
         // It's important to keep track which segment this optimization relates to
         // This is why we are iterating over segments, not over sections directly
         const unsigned int segment_begin = data.segments_starting_indexes[segment_id];
@@ -42,9 +47,9 @@ void AlgorithmRefreshSubsegments::Clear()
     for(size_t i = 0; i < checked_index; i++) { is_checked[checked[i]] = false; }
     checked_index = 0;
     const unsigned int subsegments_cache_index = data.subsegments_cache_index;
-    for(size_t i = 0; i < subsegments_cache_index; i++) { data.is_subsegment[data.subsegments_cache[i]] = false; }
-    data.subsegments_cache_index = 0;
-    data.subsegments.clear();
+    for(size_t i = 0; i < subsegments_cache_index; i++) { D_is_subsegment[data.subsegments_cache[i]] = false; }
+    D_subsegments_cache_index = 0;
+    D_subsegments.clear();
 }
 
 void AlgorithmRefreshSubsegments::UpdateNeighborsBits(const unsigned int border_field)
@@ -99,12 +104,12 @@ void AlgorithmRefreshSubsegments::FindSegmentsToOptimize(const unsigned int pare
         for(size_t i = 0; i < hash_repetitions; i++)
         {
             const unsigned int field_temp = iter->second[i];
-            data.is_subsegment[field_temp] = true;
-            data.subsegments_cache[data.subsegments_cache_index++] = field_temp;
+            D_is_subsegment[field_temp] = true;
+            D_subsegments_cache[D_subsegments_cache_index++] = field_temp;
             subsegment_temp.fields.push_back(field_temp); 
         }
         FindPossibleValuesForSubsegment(subsegment_temp);
-        data.subsegments[parent_segment].push_back(subsegment_temp);
+        D_subsegments[parent_segment].push_back(subsegment_temp);
     }
 }
 

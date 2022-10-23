@@ -1,7 +1,12 @@
 #include "AlgorithmRefreshFace.hpp"
 
 AlgorithmRefreshFace::AlgorithmRefreshFace(GridManager& grid_, AlgorithmDataStorage& data_)
-    : Algorithm(grid_, data_) {}
+    : Algorithm(grid_, data_),
+    D_face_index(GetModifiableAlgorithmDataStorageReference().face_index),
+    D_face(GetModifiableAlgorithmDataStorageReference().face),
+    D_is_face(GetModifiableAlgorithmDataStorageReference().is_face),
+    D_segments_face(GetModifiableAlgorithmDataStorageReference().segments_face)
+{}
 
 AlgorithmRefreshFace::~AlgorithmRefreshFace() {}
 
@@ -24,9 +29,9 @@ AlgorithmStatus AlgorithmRefreshFace::Run()
                 const unsigned int section_field = current_section.fields[field_id];
 
                 if(data.is_face[section_field]) { continue; }
-                data.is_face[section_field] = true;
-                data.face[data.face_index++] = section_field;
-                data.segments_face[segment_id].push_back(section_field);
+                D_is_face[section_field] = true;
+                D_face[D_face_index++] = section_field;
+                D_segments_face[segment_id].push_back(section_field);
             }
         }
     }
@@ -39,12 +44,12 @@ void AlgorithmRefreshFace::Clear()
     const unsigned int segments_to_clear = data.segments_count;
     for(size_t segment_id = 0; segment_id < segments_to_clear; segment_id++)
     {
-        data.segments_face[segment_id].clear();
+        D_segments_face[segment_id].clear();
     }
     const unsigned int face_index_max = data.face_index;
     for(size_t face_id = 0; face_id < face_index_max; face_id++)
     {
-        data.is_face[data.face[face_id]] = false;
+        D_is_face[data.face[face_id]] = false;
     }
-    data.face_index = 0;
+    D_face_index = 0;
 }

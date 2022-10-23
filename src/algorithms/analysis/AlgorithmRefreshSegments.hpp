@@ -30,6 +30,14 @@ class AlgorithmRefreshSegments : public Algorithm
     void Clear();
 
     void ChainReactionFromField(unsigned int field);
+
+    private:
+
+    unsigned int& D_segments_index;
+    unsigned int& D_segments_count;
+    std::vector<unsigned int>& D_segments;
+    std::vector<unsigned int>& D_segments_starting_indexes;
+    std::vector<unsigned int>& D_segments_l;
 };
 
 #endif

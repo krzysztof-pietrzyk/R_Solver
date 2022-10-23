@@ -14,6 +14,10 @@ class AlgorithmGiveUp : public AlgorithmAction
     protected:
 
     void RunInternal();
+
+    private:
+
+    bool& D_is_lost;
 };
 
 #endif

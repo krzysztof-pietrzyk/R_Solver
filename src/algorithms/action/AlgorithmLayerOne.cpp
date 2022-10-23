@@ -34,7 +34,7 @@ LayerOneFieldSignature AlgorithmLayerOne::GetFieldSignature(const unsigned int b
     result.field = border_field;
     result.flags_count = flags_count;
     result.not_visible_count = not_visible_count;
-    result.field_value = grid.FieldValue(border_field);
+    result.field_value = FieldValue(border_field);
     return result;
 }
 
@@ -48,7 +48,7 @@ void AlgorithmLayerOne::CheckForSafeClicks(const LayerOneFieldSignature signatur
         if(!grid.is_flag[neighbor_field] && !grid.is_visible[neighbor_field])
         {
             // ...left click on all remaining covered fields
-            grid.LeftClick(neighbor_field);
+            LeftClick(neighbor_field);
         }
     }
 }
@@ -63,7 +63,7 @@ void AlgorithmLayerOne::CheckForMines(const LayerOneFieldSignature signature) co
         if(!grid.is_flag[neighbor_field] && !grid.is_visible[neighbor_field])
         {
             // ...right click on all remaining covered fields
-            grid.RightClick(neighbor_field);
+            RightClick(neighbor_field);
         }
     }
 }

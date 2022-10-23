@@ -68,6 +68,13 @@ class AlgorithmRefreshCombinations : public Algorithm
     void MergeCurrentSegmentsMineCountCombination(const unsigned int segments_combination_mine_count);
 
     bool NextSegmentsMineCountCombination();
+
+    private:
+
+    std::vector<std::vector<SubsegmentData>>& D_subsegments;
+    std::vector<long double>& D_field_combinations;
+    long double& D_remaining_fields_combinations;
+    long double& D_total_combinations;
 };
 
 #endif

@@ -1,10 +1,13 @@
 #include "AlgorithmGiveUp.hpp"
 
-AlgorithmGiveUp::AlgorithmGiveUp(GridManager& grid_, AlgorithmDataStorage& data_) : AlgorithmAction(grid_, data_) {}
+AlgorithmGiveUp::AlgorithmGiveUp(GridManager& grid_, AlgorithmDataStorage& data_)
+    : AlgorithmAction(grid_, data_),
+    D_is_lost(GetModifiableGridManagerReference().is_lost)
+{}
 
 AlgorithmGiveUp::~AlgorithmGiveUp() {}
 
 void AlgorithmGiveUp::RunInternal()
 {
-    grid.is_lost = true;
+    D_is_lost = true;
 }

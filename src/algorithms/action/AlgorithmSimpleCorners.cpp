@@ -27,5 +27,5 @@ void AlgorithmSimpleCorners::RunInternal()
             break;
         }
     }
-    if(chosen_corner != UINT32_MAX) grid.LeftClick(chosen_corner);
+    if(chosen_corner != UINT32_MAX) LeftClick(chosen_corner);
 }

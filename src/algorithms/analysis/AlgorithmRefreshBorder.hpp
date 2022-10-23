@@ -29,6 +29,13 @@ class AlgorithmRefreshBorder : public Algorithm
     void FilterOldBorderContent(unsigned int& border_index_new) const;
 
     void AddNewContentToBorder(unsigned int& border_index_new) const;
+
+    private:
+
+    unsigned int& D_border_index;
+    unsigned int& D_border_last_visible_fields_index;
+    std::vector<unsigned int>& D_border;
+    std::vector<bool>& D_is_border;
 };
 
 #endif

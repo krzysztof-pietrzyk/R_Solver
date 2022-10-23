@@ -22,9 +22,25 @@ class Algorithm
 
     protected:
 
-    GridManager& grid;
+    const GridManager& grid;
 
-    AlgorithmDataStorage& data;
+    const AlgorithmDataStorage& data;
+
+    void LeftClick(const unsigned int field) const;
+
+    void RightClick(const unsigned int field) const;
+
+    unsigned char FieldValue(const unsigned int field) const;
+
+    GridManager& GetModifiableGridManagerReference() const;
+
+    AlgorithmDataStorage& GetModifiableAlgorithmDataStorageReference() const;
+
+    private:
+
+    GridManager& _grid;
+
+    AlgorithmDataStorage& _data;
 };
 
 #endif
