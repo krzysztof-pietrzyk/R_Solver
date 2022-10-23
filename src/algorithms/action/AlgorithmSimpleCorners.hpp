@@ -21,9 +21,6 @@ class AlgorithmSimpleCorners : public AlgorithmAction
 
     std::vector<unsigned int> corners;
 
-    const std::vector<bool>& is_flag;
-    const std::vector<bool>& is_visible;
-
     void RunInternal();
 };
 

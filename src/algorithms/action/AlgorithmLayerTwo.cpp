@@ -1,8 +1,7 @@
 #include "AlgorithmLayerTwo.hpp"
 
 AlgorithmLayerTwo::AlgorithmLayerTwo(GridManager& grid_, AlgorithmDataStorage& data_)
-    : AlgorithmAction(grid_, data_),
-    sections_origins(data.sections_origins), sections(data.sections), is_section_origin(data.is_section_origin)
+    : AlgorithmAction(grid_, data_)
 {
     not_common_current = std::vector<unsigned int>();
     not_common_neighbor = std::vector<unsigned int>();
@@ -15,15 +14,15 @@ void AlgorithmLayerTwo::RunInternal()
     const unsigned int sections_origins_index = data.sections_origins_index;
     for(size_t i = 0; i < sections_origins_index; i++)
     {
-        const size_t current_section_index = sections_origins[i];
-        const Section& current_section = sections[current_section_index];
+        const size_t current_section_index = data.sections_origins[i];
+        const Section& current_section = data.sections[current_section_index];
         if(!IsCurrentSectionValid(current_section)) { continue; }
 
         const std::vector<unsigned int>& current_section_neighbors = current_section.neighbors;
         for(size_t j = 0; j < current_section.neighbors_index; j++)
         {
             const size_t neighbor_section_index = current_section_neighbors[j];
-            const Section& neighbor_section = sections[neighbor_section_index];
+            const Section& neighbor_section = data.sections[neighbor_section_index];
             if(!IsNeighborSectionValid(current_section, neighbor_section)) { continue; }
 
             const unsigned int common_fields_l = CompareSections(current_section, neighbor_section);
@@ -70,7 +69,7 @@ bool AlgorithmLayerTwo::IsCurrentSectionValid(const Section& current_section) co
 bool AlgorithmLayerTwo::IsNeighborSectionValid(const Section& current_section, const Section& neighbor_section) const
 {
     // only consider neighbors which are actual section origins
-    if(!is_section_origin[neighbor_section.origin]) { return false; }
+    if(!data.is_section_origin[neighbor_section.origin]) { return false; }
     // only compare origin to neighbors with larger field number
     // this assures that each pair of sections is only compared once, not twice
     if(neighbor_section.origin < current_section.origin) { return false; }

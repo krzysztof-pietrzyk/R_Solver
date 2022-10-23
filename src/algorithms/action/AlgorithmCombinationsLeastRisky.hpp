@@ -13,9 +13,6 @@ class AlgorithmCombinationsLeastRisky : public AlgorithmAction
 
     protected:
 
-    const std::vector<unsigned int>& face;
-    const std::vector<long double>& field_combinations;
-
     void RunInternal();
 
     unsigned int FindSafestField() const;

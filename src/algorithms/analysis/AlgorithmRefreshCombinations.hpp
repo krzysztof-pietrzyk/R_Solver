@@ -39,18 +39,6 @@ class AlgorithmRefreshCombinations : public Algorithm
     // value: number of combinations, in which a mine appears on that field for given mine count of this segment
     std::vector<std::map<unsigned int, long double>> field_combinations_temp;
 
-    const std::vector<unsigned int>& face;
-    const std::vector<bool>& is_subsegment;
-    const std::vector<std::vector<unsigned int>>& segments_face;
-    const std::vector<unsigned int>& segments;
-    const std::vector<unsigned int>& segments_starting_indexes;
-    const std::vector<unsigned int>& segments_l;
-    const std::vector<Section>& sections;
-    const std::vector<long double>& factorial;
-    const std::vector<long double>& factorial_reciprocal;
-
-    std::vector<long double>& field_combinations;
-
     void Clear();
 
     void FindCombinationsForSegment(unsigned int segment_id);

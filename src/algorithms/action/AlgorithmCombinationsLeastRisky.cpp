@@ -1,8 +1,7 @@
 #include "AlgorithmCombinationsLeastRisky.hpp"
 
 AlgorithmCombinationsLeastRisky::AlgorithmCombinationsLeastRisky(GridManager& grid_, AlgorithmDataStorage& data_)
-    : AlgorithmAction(grid_, data_),
-    face(data.face), field_combinations(data.field_combinations) {}
+    : AlgorithmAction(grid_, data_) {}
 
 AlgorithmCombinationsLeastRisky::~AlgorithmCombinationsLeastRisky() {}
 
@@ -24,8 +23,8 @@ unsigned int AlgorithmCombinationsLeastRisky::FindSafestField() const
     // Find the safest field (index of lowest entry in data.field_combinations)
     for(size_t i = 0; i < face_length; i++)
     {
-        const unsigned int face_field = face[i];
-        const long double face_field_combinations = field_combinations[face_field];
+        const unsigned int face_field = data.face[i];
+        const long double face_field_combinations = data.field_combinations[face_field];
         if(face_field_combinations < lowest_combination)
         {
             lowest_combination = face_field_combinations;

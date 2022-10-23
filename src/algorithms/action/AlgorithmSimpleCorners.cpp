@@ -1,8 +1,7 @@
 #include "AlgorithmSimpleCorners.hpp"
 
 AlgorithmSimpleCorners::AlgorithmSimpleCorners(GridManager& grid_, AlgorithmDataStorage& data_)
-    : AlgorithmAction(grid_, data_),
-    is_flag(grid.is_flag), is_visible(grid.is_visible)
+    : AlgorithmAction(grid_, data_)
 {
     const unsigned int upper_left = 0;
     const unsigned int upper_right = grid.W - 1;
@@ -22,7 +21,7 @@ void AlgorithmSimpleCorners::RunInternal()
     unsigned int chosen_corner = UINT32_MAX;
     for(const unsigned int corner : corners)
     {
-        if(!is_visible[corner] && !is_flag[corner])
+        if(!grid.is_visible[corner] && !grid.is_flag[corner])
         {
             chosen_corner = corner;
             break;

@@ -1,9 +1,7 @@
 #include "AlgorithmRefreshBorder.hpp"
 
 AlgorithmRefreshBorder::AlgorithmRefreshBorder(GridManager& grid_, AlgorithmDataStorage& data_)
-    : Algorithm(grid_, data_),
-    is_flag(grid.is_flag), is_visible(grid.is_visible), visible_fields(grid.visible_fields),
-    neighbors(grid.neighbors), border(data.border), is_border(data.is_border) {}
+    : Algorithm(grid_, data_) {}
 
 AlgorithmRefreshBorder::~AlgorithmRefreshBorder() {}
 
@@ -30,19 +28,19 @@ void AlgorithmRefreshBorder::FilterOldBorderContent(unsigned int& border_index_n
     const unsigned int border_index_old = data.border_index;
     for(size_t i = 0; i < border_index_old; i++)
     {
-        const unsigned int border_field = border[i];
+        const unsigned int border_field = data.border[i];
         bool at_least_one_not_visible = false;
-        const std::vector<unsigned int>& border_field_neighbors = neighbors[border_field];
+        const std::vector<unsigned int>& border_field_neighbors = grid.neighbors[border_field];
         for(const unsigned int& neighbor_field : border_field_neighbors)
         {
-            if(!is_visible[neighbor_field] && !is_flag[neighbor_field])
+            if(!grid.is_visible[neighbor_field] && !grid.is_flag[neighbor_field])
             {
                 at_least_one_not_visible = true;
                 break;
             }
         }
-        if(at_least_one_not_visible) border[border_index_new++] = border_field;
-        else is_border[border_field] = false;
+        if(at_least_one_not_visible) data.border[border_index_new++] = border_field;
+        else data.is_border[border_field] = false;
     }
 }
 
@@ -52,12 +50,12 @@ void AlgorithmRefreshBorder::AddNewContentToBorder(unsigned int& border_index_ne
     const unsigned int visible_fields_new_index = grid.visible_fields_index;
     for(size_t i = visible_fields_old_index; i < visible_fields_new_index; i++)
     {
-        const unsigned int visible_field = visible_fields[i];
+        const unsigned int visible_field = grid.visible_fields[i];
         bool at_least_one_not_visible = false;
-        const std::vector<unsigned int>& visible_field_neighbors = neighbors[visible_field];
+        const std::vector<unsigned int>& visible_field_neighbors = grid.neighbors[visible_field];
         for(const unsigned int& neighbor_field : visible_field_neighbors)
         {
-            if(!is_visible[neighbor_field] && !is_flag[neighbor_field])
+            if(!grid.is_visible[neighbor_field] && !grid.is_flag[neighbor_field])
             {
                 at_least_one_not_visible = true;
                 break;
@@ -65,8 +63,8 @@ void AlgorithmRefreshBorder::AddNewContentToBorder(unsigned int& border_index_ne
         }
         if(at_least_one_not_visible)
         {
-            is_border[visible_field] = true;
-            border[border_index_new++] = visible_field;
+            data.is_border[visible_field] = true;
+            data.border[border_index_new++] = visible_field;
         }
     }
 }
