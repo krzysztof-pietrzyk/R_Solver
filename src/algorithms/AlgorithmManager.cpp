@@ -54,4 +54,5 @@ void AlgorithmManager::CreateAlgorithms()
     algorithms[AlgorithmType::COMBINATIONS_SAFE_MOVES]  = factory->Create(AlgorithmType::COMBINATIONS_SAFE_MOVES);
     algorithms[AlgorithmType::COMBINATIONS_LEAST_RISKY] = factory->Create(AlgorithmType::COMBINATIONS_LEAST_RISKY);
     algorithms[AlgorithmType::GIVE_UP]                  = factory->Create(AlgorithmType::GIVE_UP);
+    algorithms[AlgorithmType::FIRST_MOVE]               = factory->Create(AlgorithmType::FIRST_MOVE);
 }

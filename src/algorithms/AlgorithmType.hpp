@@ -4,6 +4,7 @@
 enum AlgorithmType
 {
     UNHANDLED_TYPE,
+    FIRST_MOVE,
     SIMPLE_CORNERS,
     REFRESH_BORDER,
     LAYER_ONE,

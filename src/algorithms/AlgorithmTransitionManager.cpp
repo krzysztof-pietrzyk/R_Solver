@@ -1,6 +1,6 @@
 #include "AlgorithmTransitionManager.hpp"
 
-const AlgorithmType AlgorithmTransitionManager::default_starting_algorithm = AlgorithmType::SIMPLE_CORNERS;
+const AlgorithmType AlgorithmTransitionManager::default_starting_algorithm = AlgorithmType::FIRST_MOVE;
 
 AlgorithmTransitionManager::AlgorithmTransitionManager()
 {
@@ -54,6 +54,8 @@ AlgorithmType AlgorithmTransitionManager::GetStartingAlgorithm() const
 
 void AlgorithmTransitionManager::ConfigureDefaultTransitions()
 {
+    AddTransition(FIRST_MOVE, SUCCESS, REFRESH_BORDER);
+
     AddTransition(SIMPLE_CORNERS, SUCCESS, REFRESH_BORDER);
     AddTransition(SIMPLE_CORNERS, NO_MOVES, COMBINATIONS_LEAST_RISKY);
 

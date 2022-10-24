@@ -32,6 +32,8 @@ Algorithm* AlgorithmFactory::Create(AlgorithmType type)
             return new AlgorithmCombinationsLeastRisky(grid, data);
         case GIVE_UP:
             return new AlgorithmGiveUp(grid, data);
+        case FIRST_MOVE:
+            return new AlgorithmFirstMove(grid, data);
         default:
             throw std::invalid_argument("ERROR: Attempting to create a non-existent Algorithm type!");
     }

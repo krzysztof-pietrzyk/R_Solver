@@ -8,4 +8,5 @@ set(CPP_SOURCES_ALGORITHMS_ACTION
     ${CMAKE_CURRENT_SOURCE_DIR}/AlgorithmCombinationsSafeMoves.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/AlgorithmCombinationsLeastRisky.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/AlgorithmGiveUp.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/AlgorithmFirstMove.cpp
     PARENT_SCOPE)

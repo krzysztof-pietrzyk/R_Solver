@@ -20,6 +20,7 @@
 #include "action/AlgorithmCombinationsSafeMoves.hpp"
 #include "action/AlgorithmCombinationsLeastRisky.hpp"
 #include "action/AlgorithmGiveUp.hpp"
+#include "action/AlgorithmFirstMove.hpp"
 
 class AlgorithmFactory
 {
