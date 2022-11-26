@@ -23,10 +23,10 @@ void CheckStatus(SolverThreadData* data)
 	double completion = 0.0;
 	unsigned long int wins = 0;
 	unsigned long int wins_last = 0;
-	float win_ratio = 0.0;
-	float games_per_second_avg = 0.0;
-	float wins_per_second_avg = 0.0;
-	float completion_rate_avg = 0.0;
+	double win_ratio = 0.0;
+	double games_per_second_avg = 0.0;
+	double wins_per_second_avg = 0.0;
+	double completion_rate_avg = 0.0;
 	auto start_time = std::chrono::high_resolution_clock::now();
 	auto current_time = std::chrono::high_resolution_clock::now();
 	cout << "+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+\n";
@@ -44,11 +44,11 @@ void CheckStatus(SolverThreadData* data)
 		data->mut.unlock();
 
 		time_since_start = current_time - start_time;
-		float seconds_since_start = time_since_start.count() / float(1E09);
-		win_ratio = float(wins) / float(games_played);
-		games_per_second_avg = float(games_played) / float(seconds_since_start);
-		wins_per_second_avg = float(wins) / float(seconds_since_start);
-		completion_rate_avg = completion / float(games_played);
+		double seconds_since_start = time_since_start.count() / double(1E09);
+		win_ratio = double(wins) / double(games_played);
+		games_per_second_avg = double(games_played) / double(seconds_since_start);
+		wins_per_second_avg = double(wins) / double(seconds_since_start);
+		completion_rate_avg = completion / double(games_played);
 		wins_last = wins;
 		games_played_last = games_played;
 
@@ -63,7 +63,7 @@ void CheckStatus(SolverThreadData* data)
 
 int main()
 {
-	const unsigned short int threads_number = 12;
+	const unsigned short int threads_number = 1;
 	const unsigned short int grid_width = 30;
 	const unsigned short int grid_height = 16;
 	const unsigned int grid_mines = 99;
@@ -83,37 +83,18 @@ int main()
 }
 
 
-
-// #include <thread>
-// #include <vector>
-// #include <chrono>
-// #include <ctime>
+// #include <cstdio>
 // #include <iostream>
-// #include <algorithm>
-
-
-// using namespace std;
-
 
 // int main()
 // {
-// 	vector<int> a {1, 2, 3, 4, 5, 6, 7};
-// 	vector<int> b {5, 6, 7, 8, 9, 10, 11};
-// 	vector<int> c;
-// 	vector<int> d;
-// 	set_difference(a.begin(), a.end(), b.begin(), b.end(), inserter(c, c.begin()));
-// 	set_difference(b.begin(), b.end(), a.begin(), a.end(), inserter(d, d.begin()));
+// 	uint32_t a = 1000000000;
+// 	char buff[25];
+// 	snprintf(buff, sizeof(buff), "ECC");
+// 	snprintf(buff, sizeof(buff), "%s_%s", buff, "S");
+// 	snprintf(buff, sizeof(buff), "%s_%02x", buff, a);
+// 	std::cout << buff << "\n";
 
-// 	for(auto x : c)
-// 	{
-// 		cout << x << " ";
-// 	}
-// 	cout << "\n";
-// 	for(auto x : d)
-// 	{
-// 		cout << x << " ";
-// 	}
-// 	cout << "\n";
 
 // 	return 0;
 // }

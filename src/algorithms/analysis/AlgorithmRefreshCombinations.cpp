@@ -18,8 +18,8 @@ AlgorithmRefreshCombinations::AlgorithmRefreshCombinations(GridManager& grid_, A
     mine_counts_in_segment = std::vector<std::vector<unsigned int>>(grid.M, std::vector<unsigned int>());
     current_mine_count_id_in_segment = std::vector<size_t>(grid.M, 0);
 
-    segments_combinations = std::vector<std::map<unsigned int, long double>>(grid.M, std::map<unsigned int, long double>());
-    field_combinations_temp = std::vector<std::map<unsigned int, long double>>(grid.S, std::map<unsigned int, long double>());
+    segments_combinations = std::vector<std::map<unsigned int, BigNum>>(grid.M, std::map<unsigned int, BigNum>());
+    field_combinations_temp = std::vector<std::map<unsigned int, BigNum>>(grid.S, std::map<unsigned int, BigNum>());
 }
 
 AlgorithmRefreshCombinations::~AlgorithmRefreshCombinations() {}
@@ -48,7 +48,7 @@ void AlgorithmRefreshCombinations::Clear()
     {
         const unsigned int face_field = data.face[i];
         field_states[face_field] = FCS_UNASSIGNED;
-        D_field_combinations[face_field] = 0.0L;
+        D_field_combinations[face_field] = 0;
         field_combinations_temp[face_field].clear();
     }
     const unsigned int segments_count = data.segments_count;
@@ -58,7 +58,7 @@ void AlgorithmRefreshCombinations::Clear()
         mine_counts_in_segment[i].clear();
         current_mine_count_id_in_segment[i] = 0;
     }
-    D_remaining_fields_combinations = 0.0L;
+    D_remaining_fields_combinations = 0;
     D_total_combinations = 0.0L;
 }
 
@@ -68,7 +68,7 @@ void AlgorithmRefreshCombinations::FindCombinationsForSegment(unsigned int segme
     do
     {
         ClearStatesInSegment(segment_id);
-        const long double combination_multiplier = ApplySubsegmentsCombination(subsegments_ref);
+        const BigNum combination_multiplier = ApplySubsegmentsCombination(subsegments_ref);
         FindCombinationsForFixedSubsegments(segment_id, combination_multiplier);
     } while (NextSubsegmentsCombination(subsegments_ref));
 }
@@ -84,12 +84,12 @@ void AlgorithmRefreshCombinations::ClearStatesInSegment(unsigned int segment_id)
     }
 }
 
-long double AlgorithmRefreshCombinations::ApplySubsegmentsCombination(std::vector<SubsegmentData>& subsegments_ref)
+BigNum AlgorithmRefreshCombinations::ApplySubsegmentsCombination(std::vector<SubsegmentData>& subsegments_ref)
 {
     // returns the weight of the combination. it is the multiplier of the number of mine combinations
     // of the entire segment for this particular set of subsegments values combination
     current_segment_mine_count = 0;
-    long double subsegment_combination_weight = 1.0L;
+    BigNum subsegment_combination_weight = 1;
     const size_t subsegments_max = subsegments_ref.size();
     for(size_t subsegment_id = 0; subsegment_id < subsegments_max; subsegment_id++)
     {
@@ -107,7 +107,7 @@ long double AlgorithmRefreshCombinations::ApplySubsegmentsCombination(std::vecto
     return subsegment_combination_weight;
 }
 
-void AlgorithmRefreshCombinations::FindCombinationsForFixedSubsegments(const unsigned int segment_id, const long double combination_multiplier)
+void AlgorithmRefreshCombinations::FindCombinationsForFixedSubsegments(const unsigned int segment_id, const BigNum combination_multiplier)
 {
     choice_stack.clear();
     modifications_stack.clear();
@@ -229,7 +229,7 @@ void AlgorithmRefreshCombinations::TransitionFieldStateForward(const unsigned in
     remaining_section_length--;
 }
 
-void AlgorithmRefreshCombinations::ApplyCurrentCombinationAsValid(const unsigned int segment_id, const long double combination_multiplier)
+void AlgorithmRefreshCombinations::ApplyCurrentCombinationAsValid(const unsigned int segment_id, const BigNum combination_multiplier)
 {
     const unsigned int final_mine_count = current_segment_mine_count;
     // store the number of combinations for the whole segment
@@ -245,7 +245,7 @@ void AlgorithmRefreshCombinations::ApplyCurrentCombinationAsValid(const unsigned
         if(number_of_mines_in_subsegment == 0) { continue; }
         const size_t number_of_fields_in_subsegment = subsegment_ref.fields.size();
         // confusing logic to avoid unnecessary division and/or multiplication
-        const long double mines_per_field_in_subsegment = number_of_fields_in_subsegment == number_of_mines_in_subsegment
+        const BigNum mines_per_field_in_subsegment = number_of_fields_in_subsegment == number_of_mines_in_subsegment
             ? combination_multiplier
             :   (
                     number_of_mines_in_subsegment == 1 
@@ -312,7 +312,7 @@ void AlgorithmRefreshCombinations::CachePossibleSegmentsMineCounts()
     const unsigned int segments_to_check = data.segments_count;
     for(unsigned int segment_id = 0; segment_id < segments_to_check; segment_id++)
     {
-        const std::map<unsigned int, long double>& combinations_ref = segments_combinations[segment_id];
+        const std::map<unsigned int, BigNum>& combinations_ref = segments_combinations[segment_id];
         std::vector<unsigned int>& mine_counts_ref = mine_counts_in_segment[segment_id];
         for(auto it = combinations_ref.begin(); it != combinations_ref.end(); ++it)
         {
@@ -339,7 +339,7 @@ void AlgorithmRefreshCombinations::MergeCurrentSegmentsMineCountCombination(cons
     // binomial distribution of the remaining mines in the remaining fields (outside of segments)
     // f(n, k) = n! / (k! * (n - k)!)
     // using pre-calculated values for factorials and reciprocals
-    const long double combinations_in_remaining_fields = 
+    const BigNum combinations_in_remaining_fields = 
         data.factorial[remaining_fields] * 
         data.factorial_reciprocal[mines_in_remaining_fields] * 
         data.factorial_reciprocal[remaining_safe_fields];
@@ -350,7 +350,7 @@ void AlgorithmRefreshCombinations::MergeCurrentSegmentsMineCountCombination(cons
     }
     
     // initial multiplier for the combinations on the face
-    long double combinations_for_current_mine_count_combination = combinations_in_remaining_fields;
+    BigNum combinations_for_current_mine_count_combination = combinations_in_remaining_fields;
 
     const size_t segments_count = data.segments_count;
     // calculate the number of mine combinations for this combination of mine counts in the segments
@@ -358,7 +358,7 @@ void AlgorithmRefreshCombinations::MergeCurrentSegmentsMineCountCombination(cons
     {
         const size_t mine_count_id = current_mine_count_id_in_segment[segment_id];
         const unsigned int mine_count = mine_counts_in_segment[segment_id][mine_count_id];
-        const long double segment_combinations_for_current_possibility = segments_combinations[segment_id][mine_count];
+        const BigNum segment_combinations_for_current_possibility = segments_combinations[segment_id][mine_count];
         combinations_for_current_mine_count_combination *= segment_combinations_for_current_possibility;
     }
 
@@ -367,7 +367,7 @@ void AlgorithmRefreshCombinations::MergeCurrentSegmentsMineCountCombination(cons
     {
         const size_t mine_count_id = current_mine_count_id_in_segment[segment_id];
         const unsigned int mine_count = mine_counts_in_segment[segment_id][mine_count_id];
-        const long double mine_count_combinations_in_segment = segments_combinations[segment_id][mine_count];
+        const BigNum mine_count_combinations_in_segment = segments_combinations[segment_id][mine_count];
         const std::vector<unsigned int>& segment_face = data.segments_face[segment_id];
         const size_t segment_face_length = segment_face.size();
         for(size_t face_field_id = 0; face_field_id < segment_face_length; face_field_id++)
@@ -376,10 +376,10 @@ void AlgorithmRefreshCombinations::MergeCurrentSegmentsMineCountCombination(cons
             // check if this field ever has mines in combination containing mine_count number of mines in the segment
             if(field_combinations_temp[face_field].count(mine_count))
             {
-                const long double face_field_combinations = field_combinations_temp[face_field][mine_count];
+                const BigNum face_field_combinations = field_combinations_temp[face_field][mine_count];
                 // how many times this field is a mine, within all combinations of this mine count in this segment
                 // should be between 0 and 1 (including 0 and 1);
-                const long double appearance_ratio = face_field_combinations / mine_count_combinations_in_segment;
+                const BigNum appearance_ratio = face_field_combinations / mine_count_combinations_in_segment;
                 D_field_combinations[face_field] += combinations_for_current_mine_count_combination * appearance_ratio;
             }
         }

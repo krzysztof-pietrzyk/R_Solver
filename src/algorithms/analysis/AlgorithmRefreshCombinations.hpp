@@ -34,10 +34,10 @@ class AlgorithmRefreshCombinations : public Algorithm
 
     // segments_combinations - vector id: segment number, key: mine count within the segment
     // value: number of possible mine combinations with that mine count for that segment
-    std::vector<std::map<unsigned int, long double>> segments_combinations;
+    std::vector<std::map<unsigned int, BigNum>> segments_combinations;
     // field_combinations_temp - vector id: field position, key: given mine count within entire segment
     // value: number of combinations, in which a mine appears on that field for given mine count of this segment
-    std::vector<std::map<unsigned int, long double>> field_combinations_temp;
+    std::vector<std::map<unsigned int, BigNum>> field_combinations_temp;
 
     void Clear();
 
@@ -45,9 +45,9 @@ class AlgorithmRefreshCombinations : public Algorithm
 
     void ClearStatesInSegment(unsigned int segment_id);
 
-    long double ApplySubsegmentsCombination(std::vector<SubsegmentData>& subsegments_ref);
+    BigNum ApplySubsegmentsCombination(std::vector<SubsegmentData>& subsegments_ref);
 
-    void FindCombinationsForFixedSubsegments(const unsigned int segment_id, const long double combination_multiplier);
+    void FindCombinationsForFixedSubsegments(const unsigned int segment_id, const BigNum combination_multiplier);
 
     void FindRemainingSectionValue(const Section& section, char& section_value, char& section_length) const;
 
@@ -55,7 +55,7 @@ class AlgorithmRefreshCombinations : public Algorithm
 
     void TransitionFieldStateForward(const unsigned int section_field, const size_t current_segment_head, char& remaining_section_value, char& remaining_section_length);
 
-    void ApplyCurrentCombinationAsValid(const unsigned int segment_id, const long double combination_multiplier);
+    void ApplyCurrentCombinationAsValid(const unsigned int segment_id, const BigNum combination_multiplier);
 
     bool NextSubsegmentsCombination(std::vector<SubsegmentData>& subsegments_ref) const;
 
@@ -72,9 +72,9 @@ class AlgorithmRefreshCombinations : public Algorithm
     private:
 
     std::vector<std::vector<SubsegmentData>>& D_subsegments;
-    std::vector<long double>& D_field_combinations;
-    long double& D_remaining_fields_combinations;
-    long double& D_total_combinations;
+    std::vector<BigNum>& D_field_combinations;
+    BigNum& D_remaining_fields_combinations;
+    BigNum& D_total_combinations;
 };
 
 #endif

@@ -66,7 +66,6 @@ INSTANTIATE_TEST_CASE_P(TestsGrid, GridCreationFixture, Values(
     CreationFixtureParams(16, 16, 40, false),
     CreationFixtureParams(30, 16, 99, false),
     CreationFixtureParams(80, 80, 999, false),
-    CreationFixtureParams(1001, 1000, 1000, true),
     CreationFixtureParams(1024, 3, 100, false),
     CreationFixtureParams(1025, 3, 100, true),
     CreationFixtureParams(3, 1024, 100, false),

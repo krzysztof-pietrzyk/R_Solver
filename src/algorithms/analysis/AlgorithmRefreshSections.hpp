@@ -5,7 +5,7 @@
 
 #include <algorithm>
 
-#define MAX_ALLOWED_GRID_SIZE 1048575
+#define MAX_ALLOWED_GRID_SIZE 1048576
 
 class AlgorithmRefreshSections : public Algorithm
 {

@@ -5,6 +5,7 @@
 #include <map>
 
 #include "../grid/GridManager.hpp"
+#include "../utils/BigNum.hpp"
 #include "Section.hpp"
 
 struct SubsegmentData
@@ -52,15 +53,13 @@ class AlgorithmDataStorage
     unsigned int face_index;
     std::vector<std::vector<unsigned int>> segments_face;
 
-    std::vector<long double> factorial;
-    std::vector<long double> factorial_reciprocal;
+    std::vector<BigNum> factorial;
+    std::vector<BigNum> factorial_reciprocal;
 
-    // long double allows to count up to 10^4932 combinations
-    // It should be enough for about 2000 independent segments multiplied together
-    std::vector<long double> field_combinations;
+    std::vector<BigNum> field_combinations;
     // number of combinations in which one remaining field is a mine (the same number for each remaining field)
-    long double remaining_fields_combinations;
-    long double total_combinations;
+    BigNum remaining_fields_combinations;
+    BigNum total_combinations;
 
     AlgorithmDataStorage(GridManager& grid);
 

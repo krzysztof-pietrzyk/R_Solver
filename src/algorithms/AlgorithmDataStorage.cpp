@@ -28,12 +28,12 @@ AlgorithmDataStorage::AlgorithmDataStorage(GridManager& grid)
     face_index = 0;
     segments_face = std::vector<std::vector<unsigned int>>(grid.M, std::vector<unsigned int>());
 
-    factorial = std::vector<long double>(grid.S, 0.0L);
-    factorial_reciprocal = std::vector<long double>(grid.S, 0.0L);
+    factorial = std::vector<BigNum>(grid.S, BigNum(0));
+    factorial_reciprocal = std::vector<BigNum>(grid.S, BigNum(0));
 
-    field_combinations = std::vector<long double>(grid.S, 0.0L);
-    total_combinations = 0.0L;
-    remaining_fields_combinations = 0.0L;
+    field_combinations = std::vector<BigNum>(grid.S, BigNum(0));
+    total_combinations = BigNum(0);
+    remaining_fields_combinations = BigNum(0);
 
     PreCalculateFactorials(grid);
 }
@@ -59,14 +59,14 @@ void AlgorithmDataStorage::Clear()
 // only called once in constructor
 void AlgorithmDataStorage::PreCalculateFactorials(GridManager& grid)
 {
-    long double current_factorial = 1.0L;
-    long double current_factorial_reciprocal = 1.0L;
+    BigNum current_factorial = BigNum(1);
+    BigNum current_factorial_reciprocal = BigNum(1);
     factorial[0] = current_factorial;
     factorial_reciprocal[0] = current_factorial_reciprocal;
     for(unsigned int i = 1; i < grid.S; i++)
     {
-        current_factorial *= (long double)i;
-        current_factorial_reciprocal /= (long double)i;
+        current_factorial *= i;
+        current_factorial_reciprocal /= i;
         factorial[i] = current_factorial;
         factorial_reciprocal[i] = current_factorial_reciprocal;
     }

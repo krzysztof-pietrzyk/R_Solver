@@ -16,6 +16,8 @@ class AlgorithmCombinationsLeastRisky : public AlgorithmAction
     void RunInternal();
 
     unsigned int FindSafestField() const;
+
+    const BigNum max_combinations;
 };
 
 #endif
