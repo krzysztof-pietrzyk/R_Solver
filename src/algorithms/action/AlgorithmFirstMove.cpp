@@ -1,6 +1,6 @@
 #include "AlgorithmFirstMove.hpp"
 
-const unsigned int AlgorithmFirstMove::default_first_move_field = 0;
+const uint32_t AlgorithmFirstMove::default_first_move_field = 0;
 
 AlgorithmFirstMove::AlgorithmFirstMove(GridManager& grid_, AlgorithmDataStorage& data_)
     : AlgorithmAction(grid_, data_)

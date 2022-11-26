@@ -1,5 +1,5 @@
-#ifndef AlgorithmTransitionManager_hpp
-#define AlgorithmTransitionManager_hpp
+#ifndef ALGORITHM_TRANSITION_MANAGER_HPP
+#define ALGORITHM_TRANSITION_MANAGER_HPP
 
 #include "AlgorithmType.hpp"
 #include "AlgorithmStatus.hpp"

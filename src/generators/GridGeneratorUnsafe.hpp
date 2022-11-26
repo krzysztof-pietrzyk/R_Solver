@@ -1,5 +1,5 @@
-#ifndef GridGeneratorUnsafe_hpp
-#define GridGeneratorUnsafe_hpp
+#ifndef GRID_GENERATOR_UNSAFE_HPP
+#define GRID_GENERATOR_UNSAFE_HPP
 
 #include <random>
 #include <chrono>
@@ -15,9 +15,9 @@ class GridGeneratorUnsafe : public GridInternalGenerator
 
     ~GridGeneratorUnsafe();
 
-    void Generate();
+    void Generate() override;
 
-    virtual void SetStartingField(unsigned int starting_field);
+    virtual void SetStartingField(uint32_t starting_field);
 
     protected:
 
@@ -27,8 +27,8 @@ class GridGeneratorUnsafe : public GridInternalGenerator
 
     std::minstd_rand rng;
 	std::uniform_int_distribution<int> dist;
-    std::vector<unsigned int> forced_safe;  // For other generators deriving from this
-    unsigned int current_max;
+    std::vector<uint32_t> forced_safe;  // For other generators deriving from this
+    uint32_t current_max;
 };
 
 #endif

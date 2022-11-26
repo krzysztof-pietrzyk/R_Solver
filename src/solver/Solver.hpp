@@ -1,5 +1,5 @@
-#ifndef Solver_hpp
-#define Solver_hpp
+#ifndef SOLVER_HPP
+#define SOLVER_HPP
 
 #include "../algorithms/AlgorithmManager.hpp"
 #include "../view/GridViewFactory.hpp"
@@ -11,7 +11,7 @@ class Solver
 {
     public:
 
-    Solver(unsigned short int w, unsigned short int h, unsigned int m, SolverThreadData* thread_data_);
+    Solver(uint16_t w, uint16_t h, uint32_t m, SolverThreadData* thread_data_);
 
     ~Solver();
 
@@ -28,11 +28,11 @@ class Solver
 
     SolverThreadData* thread_data;
 
-    unsigned long int tries;
-	unsigned long int wins;
-    unsigned long int last_read_tries;
-    unsigned long int last_read_wins;
-    const unsigned int fields_to_uncover;
+    uint64_t tries;
+	uint64_t wins;
+    uint64_t last_read_tries;
+    uint64_t last_read_wins;
+    const uint32_t fields_to_uncover;
 
     void UpdateThreadData();
 };

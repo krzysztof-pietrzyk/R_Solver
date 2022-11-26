@@ -1,5 +1,5 @@
-#ifndef AlgorithmRefreshFace_hpp
-#define AlgorithmRefreshFace_hpp
+#ifndef ALGORITHM_REFRESH_FACE_HPP
+#define ALGORITHM_REFRESH_FACE_HPP
 
 #include "../Algorithm.hpp"
 
@@ -11,7 +11,7 @@ class AlgorithmRefreshFace : public Algorithm
 
     ~AlgorithmRefreshFace();
 
-    AlgorithmStatus Run();
+    AlgorithmStatus Run() override;
 
     protected:
 
@@ -19,10 +19,10 @@ class AlgorithmRefreshFace : public Algorithm
 
     private:
 
-    unsigned int& D_face_index;
-    std::vector<unsigned int>& D_face;
+    uint32_t& D_face_index;
+    std::vector<uint32_t>& D_face;
     std::vector<bool>& D_is_face;
-    std::vector<std::vector<unsigned int>>& D_segments_face;
+    std::vector<std::vector<uint32_t>>& D_segments_face;
 };
 
 #endif

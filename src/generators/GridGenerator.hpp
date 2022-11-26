@@ -1,5 +1,5 @@
-#ifndef GridGenerator_hpp
-#define GridGenerator_hpp
+#ifndef GRID_GENERATOR_HPP
+#define GRID_GENERATOR_HPP
 
 class GridGenerator
 {

@@ -1,5 +1,5 @@
-#ifndef GridViewConsole_hpp
-#define GridViewConsole_hpp
+#ifndef GRID_VIEW_CONSOLE_HPP
+#define GRID_VIEW_CONSOLE_HPP
 
 #include <sstream>
 #include <iostream>
@@ -16,11 +16,11 @@ class GridViewConsole : public GridView
 
     ~GridViewConsole();
 
-    void Display();
+    void Display() override;
 
     private:
 
-    unsigned int row_indicator_max_w;
+    uint32_t row_indicator_max_w;
 
     bool is_wider_than_10;
 };

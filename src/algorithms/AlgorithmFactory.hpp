@@ -1,5 +1,5 @@
-#ifndef AlgorithmFactory_hpp
-#define AlgorithmFactory_hpp
+#ifndef ALGORITHM_FACTORY_HPP
+#define ALGORITHM_FACTORY_HPP
 
 #include <stdexcept>
 

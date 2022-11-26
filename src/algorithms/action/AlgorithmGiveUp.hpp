@@ -1,5 +1,5 @@
-#ifndef AlgorithmGiveUp_hpp
-#define AlgorithmGiveUp_hpp
+#ifndef ALGORITHM_GIVE_UP_HPP
+#define ALGORITHM_GIVE_UP_HPP
 
 #include "AlgorithmAction.hpp"
 
@@ -13,7 +13,7 @@ class AlgorithmGiveUp : public AlgorithmAction
 
     protected:
 
-    void RunInternal();
+    void RunInternal() override;
 
     private:
 

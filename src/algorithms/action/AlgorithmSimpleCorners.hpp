@@ -1,5 +1,5 @@
-#ifndef AlgorithmSimpleCorners_hpp
-#define AlgorithmSimpleCorners_hpp
+#ifndef ALGORITHM_SIMPLE_CORNERS_HPP
+#define ALGORITHM_SIMPLE_CORNERS_HPP
 
 #include "AlgorithmAction.hpp"
 
@@ -19,9 +19,9 @@ class AlgorithmSimpleCorners : public AlgorithmAction
 
     protected:
 
-    std::vector<unsigned int> corners;
+    std::vector<uint32_t> corners;
 
-    void RunInternal();
+    void RunInternal() override;
 };
 
 #endif

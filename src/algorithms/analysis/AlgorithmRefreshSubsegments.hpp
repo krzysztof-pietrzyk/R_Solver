@@ -1,5 +1,5 @@
-#ifndef AlgorithmRefreshSubsegments_hpp
-#define AlgorithmRefreshSubsegments_hpp
+#ifndef ALGORITHM_REFRESH_SUBSEGMENTS_HPP
+#define ALGORITHM_REFRESH_SUBSEGMENTS_HPP
 
 #include "../Algorithm.hpp"
 
@@ -11,38 +11,38 @@ class AlgorithmRefreshSubsegments : public Algorithm
 
     ~AlgorithmRefreshSubsegments();
 
-    AlgorithmStatus Run();
+    AlgorithmStatus Run() override;
 
     protected:
 
     std::vector<bool> is_checked;
-    std::vector<unsigned int> checked;
-    unsigned int checked_index;
+    std::vector<uint32_t> checked;
+    uint32_t checked_index;
     // key: field position (section's neighbor), value: unique bit
-    std::map<unsigned int, unsigned int> neighbors_bits;
+    std::map<uint32_t, uint32_t> neighbors_bits;
     // key: neighborhood hash, value: vector of section fields' positions, which have the same hash
-    std::map<unsigned int, std::vector<unsigned int>> section_neighborhood;
+    std::map<uint32_t, std::vector<uint32_t>> section_neighborhood;
 
     void Clear();
 
-    void UpdateNeighborsBits(const unsigned int border_field);
+    void UpdateNeighborsBits(const uint32_t border_field);
 
-    void UpdateSectionNeighborhood(const unsigned int section_origin);
+    void UpdateSectionNeighborhood(const uint32_t section_origin);
 
-    void FindSegmentsToOptimize(const unsigned int parent_segment) const;
+    void FindSegmentsToOptimize(const uint32_t parent_segment) const;
 
-    unsigned int GetNeighborhoodHash(const unsigned int section_field);
+    uint32_t GetNeighborhoodHash(const uint32_t section_field);
 
     void FindPossibleValuesForSubsegment(SubsegmentData& subsegment_data) const;
 
-    unsigned int NChooseK(const unsigned int n, const unsigned int k) const;
+    uint32_t NChooseK(const uint32_t n, const uint32_t k) const;
 
     private:
 
     std::vector<std::vector<SubsegmentData>>& D_subsegments;
     std::vector<bool>& D_is_subsegment;
-    std::vector<unsigned int>& D_subsegments_cache;
-    unsigned int& D_subsegments_cache_index;
+    std::vector<uint32_t>& D_subsegments_cache;
+    uint32_t& D_subsegments_cache_index;
 };
 
 #endif

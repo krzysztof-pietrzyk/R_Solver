@@ -1,5 +1,5 @@
-#ifndef AlgorithmCombinationsSafeMoves_hpp
-#define AlgorithmCombinationsSafeMoves_hpp
+#ifndef ALGORITHM_COMBINATIONS_SAFE_MOVES_HPP
+#define ALGORITHM_COMBINATIONS_SAFE_MOVES_HPP
 
 #include "AlgorithmAction.hpp"
 
@@ -13,7 +13,7 @@ class AlgorithmCombinationsSafeMoves : public AlgorithmAction
 
     protected:
 
-    void RunInternal();
+    void RunInternal() override;
 };
 
 #endif

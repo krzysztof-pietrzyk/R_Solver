@@ -1,8 +1,9 @@
-#ifndef Section_hpp
-#define Section_hpp
+#ifndef SECTION_HPP
+#define SECTION_HPP
 
 #include <vector>
 #include <algorithm>
+#include <cstdint>
 
 // Section may contain up to 8 fields, like so:
 // 00 01 02
@@ -26,18 +27,18 @@ class Section
 
     ~Section();
 
-    unsigned int origin;
-    std::vector<unsigned int> fields;
+    uint32_t origin;
+    std::vector<uint32_t> fields;
     size_t fields_index;
-    std::vector<unsigned int> neighbors;
+    std::vector<uint32_t> neighbors;
     size_t neighbors_index;
-    unsigned char value;
+    uint8_t value;
 
-    void AddField(const unsigned int field);
+    void AddField(const uint32_t field);
 
-    void AddNeighbor(const unsigned int field);
+    void AddNeighbor(const uint32_t field);
 
-    bool HasNeighbor(const unsigned int field) const;
+    bool HasNeighbor(const uint32_t field) const;
 
     void Clear();
 };

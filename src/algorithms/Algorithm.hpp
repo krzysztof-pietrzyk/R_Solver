@@ -1,5 +1,5 @@
-#ifndef Algorithm_hpp
-#define Algorithm_hpp
+#ifndef ALGORITHM_HPP
+#define ALGORITHM_HPP
 
 #include "../grid/GridManager.hpp"
 #include "AlgorithmDataStorage.hpp"
@@ -26,11 +26,11 @@ class Algorithm
 
     const AlgorithmDataStorage& data;
 
-    void LeftClick(const unsigned int field) const;
+    void LeftClick(const uint32_t field) const;
 
-    void RightClick(const unsigned int field) const;
+    void RightClick(const uint32_t field) const;
 
-    unsigned char FieldValue(const unsigned int field) const;
+    uint8_t FieldValue(const uint32_t field) const;
 
     GridManager& GetModifiableGridManagerReference() const;
 

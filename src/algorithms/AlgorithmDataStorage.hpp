@@ -1,5 +1,5 @@
-#ifndef AlgorithmDataStorage_hpp
-#define AlgorithmDataStorage_hpp
+#ifndef ALGORITHM_DATA_STORAGE_HPP
+#define ALGORITHM_DATA_STORAGE_HPP
 
 #include <vector>
 #include <map>
@@ -10,9 +10,9 @@
 
 struct SubsegmentData
 {
-    std::vector<unsigned int> fields;
-    std::vector<unsigned char> possible_values;
-    std::map<unsigned char, unsigned int> combinations_for_value;
+    std::vector<uint32_t> fields;
+    std::vector<uint8_t> possible_values;
+    std::map<uint8_t, uint32_t> combinations_for_value;
     size_t total_possibilities;
     size_t current_possibility_id;
 };
@@ -24,34 +24,34 @@ class AlgorithmDataStorage
     */
     public:
 
-    unsigned int border_index;
-    unsigned int border_last_visible_fields_index;
-    std::vector<unsigned int> border;
+    uint32_t border_index;
+    uint32_t border_last_visible_fields_index;
+    std::vector<uint32_t> border;
     std::vector<bool> is_border;
 
-    unsigned int sections_origins_index;
-    std::vector<unsigned int> sections_origins;
+    uint32_t sections_origins_index;
+    std::vector<uint32_t> sections_origins;
     std::vector<bool> is_section_origin;
     std::vector<Section> sections;
 
-    unsigned int segments_index;
-    unsigned int segments_count;
-    std::vector<unsigned int> segments;
-    std::vector<unsigned int> segments_starting_indexes;
-    std::vector<unsigned int> segments_l;
+    uint32_t segments_index;
+    uint32_t segments_count;
+    std::vector<uint32_t> segments;
+    std::vector<uint32_t> segments_starting_indexes;
+    std::vector<uint32_t> segments_l;
 
     // subsegments[segment_id][subsegment_id]
     // subsegments are parts of segments (section fields), which have exactly the same neighbors (section origins)
     // those subsegments can be used to optimize the combinations checking algorithm
     std::vector<std::vector<SubsegmentData>> subsegments;
     std::vector<bool> is_subsegment;
-    std::vector<unsigned int> subsegments_cache;
-    unsigned int subsegments_cache_index;
+    std::vector<uint32_t> subsegments_cache;
+    uint32_t subsegments_cache_index;
 
-    std::vector<unsigned int> face;
+    std::vector<uint32_t> face;
     std::vector<bool> is_face;
-    unsigned int face_index;
-    std::vector<std::vector<unsigned int>> segments_face;
+    uint32_t face_index;
+    std::vector<std::vector<uint32_t>> segments_face;
 
     std::vector<BigNum> factorial;
     std::vector<BigNum> factorial_reciprocal;

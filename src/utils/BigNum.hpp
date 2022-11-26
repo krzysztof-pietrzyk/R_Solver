@@ -1,5 +1,5 @@
-#ifndef BigNum_hpp
-#define BigNum_hpp
+#ifndef BIG_NUM_HPP
+#define BIG_NUM_HPP
 
 #include <iomanip>
 #include <bitset>
@@ -18,14 +18,14 @@ class BigNum
     ~BigNum();
 
     BigNum(const BigNum& other);
-    BigNum(const unsigned long long& value);
+    BigNum(const uint64_t& value);
 
     std::string StrBits() const;
     std::string StrBase2() const;
     std::string StrBase10() const;
 
     void operator= (const BigNum& other);
-    void operator= (const unsigned long long& other);
+    void operator= (const uint64_t& other);
 
     BigNum operator+ (const BigNum& other) const;
     BigNum operator* (const BigNum& other) const;
@@ -35,13 +35,13 @@ class BigNum
     void   operator*=(const BigNum& other);
     void   operator/=(const BigNum& other);
 
-    BigNum operator+ (const unsigned long long& other) const;
-    BigNum operator* (const unsigned long long& other) const;
-    BigNum operator/ (const unsigned long long& other) const;
+    BigNum operator+ (const uint64_t& other) const;
+    BigNum operator* (const uint64_t& other) const;
+    BigNum operator/ (const uint64_t& other) const;
 
-    void   operator+=(const unsigned long long& other);
-    void   operator*=(const unsigned long long& other);
-    void   operator/=(const unsigned long long& other);
+    void   operator+=(const uint64_t& other);
+    void   operator*=(const uint64_t& other);
+    void   operator/=(const uint64_t& other);
 
     bool   operator> (const BigNum& other) const;
     bool   operator>=(const BigNum& other) const;
@@ -53,21 +53,21 @@ class BigNum
     protected:
 
     double base;
-    long long exponent;
+    int64_t exponent;
 
-    static const unsigned long long exponent_mask;
-    static const unsigned long long mantissa_mask;
-	static const unsigned long long is_negative_mask;
-    static const unsigned long long hidden_mantissa_bit;
-    static const unsigned long long overflow_bit;
-    static const unsigned long long exponent_value_shifted;
-	static const unsigned long long exponent_value_shift;
+    static const uint64_t exponent_mask;
+    static const uint64_t mantissa_mask;
+	static const uint64_t is_negative_mask;
+    static const uint64_t hidden_mantissa_bit;
+    static const uint64_t overflow_bit;
+    static const uint64_t exponent_value_shifted;
+	static const uint64_t exponent_value_shift;
     static const unsigned exponent_bit_shift;
     static const double log2_10;
 
     inline void Normalize();
 
-    inline double ShiftAndAdd(const double value_small, const double value_large, const unsigned int shift, bool& overflow) const;
+    inline double ShiftAndAdd(const double value_small, const double value_large, const uint32_t shift, bool& overflow) const;
 };
 
 #endif

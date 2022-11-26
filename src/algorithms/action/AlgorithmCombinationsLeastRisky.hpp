@@ -1,5 +1,5 @@
-#ifndef AlgorithmCombinationsLeastRisky_hpp
-#define AlgorithmCombinationsLeastRisky_hpp
+#ifndef ALGORITHM_COMBINATIONS_LEAST_RISKY_HPP
+#define ALGORITHM_COMBINATIONS_LEAST_RISKY_HPP
 
 #include "AlgorithmAction.hpp"
 
@@ -13,9 +13,9 @@ class AlgorithmCombinationsLeastRisky : public AlgorithmAction
 
     protected:
 
-    void RunInternal();
+    void RunInternal() override;
 
-    unsigned int FindSafestField() const;
+    uint32_t FindSafestField() const;
 
     const BigNum max_combinations;
 };

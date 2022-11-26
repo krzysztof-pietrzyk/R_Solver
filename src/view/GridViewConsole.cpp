@@ -35,7 +35,7 @@ void GridViewConsole::Display()
 		output << setw(row_indicator_max_w) << right << i << "|";
 		for(size_t j = 0; j < grid.W; j++)
 		{
-			int f = i * grid.W + j;
+			uint32_t f = i * grid.W + j;
             if(grid.is_flag[f]) output << "x";
 			else if(!grid.is_visible[f]) output << "#";
 			else if(grid.is_mine[f]) output << "*";

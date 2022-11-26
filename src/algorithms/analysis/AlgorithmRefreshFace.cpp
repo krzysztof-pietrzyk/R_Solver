@@ -14,19 +14,19 @@ AlgorithmStatus AlgorithmRefreshFace::Run()
 {
     Clear();
 
-    const unsigned int segments_max = data.segments_count;
+    const uint32_t segments_max = data.segments_count;
     for(size_t segment_id = 0; segment_id < segments_max; segment_id++)
     {
-        const unsigned int segment_begin = data.segments_starting_indexes[segment_id];
-        const unsigned int segment_end = segment_begin + data.segments_l[segment_id];
+        const uint32_t segment_begin = data.segments_starting_indexes[segment_id];
+        const uint32_t segment_end = segment_begin + data.segments_l[segment_id];
         for(size_t section_id = segment_begin; section_id < segment_end; section_id++)
         {
-            const unsigned int section_origin = data.segments[section_id];
+            const uint32_t section_origin = data.segments[section_id];
             const Section& current_section = data.sections[section_origin];
             const size_t current_section_l = current_section.fields_index;
             for(size_t field_id = 0; field_id < current_section_l; field_id++)
             {
-                const unsigned int section_field = current_section.fields[field_id];
+                const uint32_t section_field = current_section.fields[field_id];
 
                 if(data.is_face[section_field]) { continue; }
                 D_is_face[section_field] = true;
@@ -41,12 +41,12 @@ AlgorithmStatus AlgorithmRefreshFace::Run()
 
 void AlgorithmRefreshFace::Clear()
 {
-    const unsigned int segments_to_clear = data.segments_count;
+    const uint32_t segments_to_clear = data.segments_count;
     for(size_t segment_id = 0; segment_id < segments_to_clear; segment_id++)
     {
         D_segments_face[segment_id].clear();
     }
-    const unsigned int face_index_max = data.face_index;
+    const uint32_t face_index_max = data.face_index;
     for(size_t face_id = 0; face_id < face_index_max; face_id++)
     {
         D_is_face[data.face[face_id]] = false;

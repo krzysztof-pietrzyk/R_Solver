@@ -1,5 +1,5 @@
-#ifndef AlgorithmRefreshSections_hpp
-#define AlgorithmRefreshSections_hpp
+#ifndef ALGORITHM_REFRESH_SECTIONS_HPP
+#define ALGORITHM_REFRESH_SECTIONS_HPP
 
 #include "../Algorithm.hpp"
 
@@ -26,46 +26,46 @@ class AlgorithmRefreshSections : public Algorithm
 
     ~AlgorithmRefreshSections();
 
-    AlgorithmStatus Run();
+    AlgorithmStatus Run() override;
 
     protected:
 
-    std::vector<unsigned int> sections_hashes;
+    std::vector<uint32_t> sections_hashes;
 
     void Clear();
 
-    void AnalyzeSection(const unsigned int border_field);
+    void AnalyzeSection(const uint32_t border_field);
 
-    void AnalyzeSectionField(const unsigned int border_field, const unsigned int border_field_neighbor, Section& current_section);
+    void AnalyzeSectionField(const uint32_t border_field, const uint32_t border_field_neighbor, Section& current_section);
 
-    void AnalyzeSectionNeighbor(const unsigned int border_field, const unsigned int section_neighbor, Section& current_section) const;
+    void AnalyzeSectionNeighbor(const uint32_t border_field, const uint32_t section_neighbor, Section& current_section) const;
 
-    void SaveSectionData(const unsigned int border_field, Section& current_section) const;
+    void SaveSectionData(const uint32_t border_field, Section& current_section) const;
 
-    unsigned int GetHashBit(unsigned int difference) const;
+    uint32_t GetHashBit(uint32_t difference) const;
 
-    bool CheckHashUnique(unsigned int hash) const;
+    bool CheckHashUnique(uint32_t hash) const;
 
-    unsigned char section_value_temp;
-    unsigned int current_section_hash;
+    uint8_t section_value_temp;
+    uint32_t current_section_hash;
 
-    const unsigned int diff_bit_20;
-    const unsigned int diff_bit_21;
-    const unsigned int diff_bit_22;
-    const unsigned int diff_bit_23;
-    const unsigned int diff_bit_24;
-    const unsigned int diff_bit_25;
-    const unsigned int diff_bit_26;
-    const unsigned int diff_bit_27;
-    const unsigned int diff_bit_28;
-    const unsigned int diff_bit_29;
-    const unsigned int diff_bit_30;
-    const unsigned int diff_bit_31;
+    const uint32_t diff_bit_20;
+    const uint32_t diff_bit_21;
+    const uint32_t diff_bit_22;
+    const uint32_t diff_bit_23;
+    const uint32_t diff_bit_24;
+    const uint32_t diff_bit_25;
+    const uint32_t diff_bit_26;
+    const uint32_t diff_bit_27;
+    const uint32_t diff_bit_28;
+    const uint32_t diff_bit_29;
+    const uint32_t diff_bit_30;
+    const uint32_t diff_bit_31;
 
     private:
 
-    unsigned int& D_sections_origins_index;
-    std::vector<unsigned int>& D_sections_origins;
+    uint32_t& D_sections_origins_index;
+    std::vector<uint32_t>& D_sections_origins;
     std::vector<bool>& D_is_section_origin;
     std::vector<Section>& D_sections;
 };

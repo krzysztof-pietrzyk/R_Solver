@@ -7,7 +7,7 @@ AlgorithmCombinationsLeastRisky::~AlgorithmCombinationsLeastRisky() {}
 
 void AlgorithmCombinationsLeastRisky::RunInternal()
 {
-    const unsigned int safest_field = FindSafestField();
+    const uint32_t safest_field = FindSafestField();
     // Only click if a field was found
     if(safest_field != UINT_MAX)
     {
@@ -15,15 +15,15 @@ void AlgorithmCombinationsLeastRisky::RunInternal()
     }
 }
 
-unsigned int AlgorithmCombinationsLeastRisky::FindSafestField() const
+uint32_t AlgorithmCombinationsLeastRisky::FindSafestField() const
 {
-    const unsigned int face_length = data.face_index;
+    const uint32_t face_length = data.face_index;
     BigNum lowest_combination = max_combinations;
-    unsigned int safest_field = UINT_MAX;
+    uint32_t safest_field = UINT_MAX;
     // Find the safest field (index of lowest entry in data.field_combinations)
     for(size_t i = 0; i < face_length; i++)
     {
-        const unsigned int face_field = data.face[i];
+        const uint32_t face_field = data.face[i];
         const BigNum face_field_combinations = data.field_combinations[face_field];
         if(face_field_combinations < lowest_combination)
         {

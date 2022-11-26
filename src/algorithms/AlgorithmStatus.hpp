@@ -1,5 +1,5 @@
-#ifndef AlgorithmStatus_hpp
-#define AlgorithmStatus_hpp
+#ifndef ALGORITHM_STATUS_HPP
+#define ALGORITHM_STATUS_HPP
 
 enum AlgorithmStatus
 {

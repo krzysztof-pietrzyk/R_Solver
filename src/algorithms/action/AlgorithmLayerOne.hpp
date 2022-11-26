@@ -1,5 +1,5 @@
-#ifndef AlgorithmLayerOne_hpp
-#define AlgorithmLayerOne_hpp
+#ifndef ALGORITHM_LAYER_ONE_HPP
+#define ALGORITHM_LAYER_ONE_HPP
 
 #include "AlgorithmAction.hpp"
 
@@ -7,10 +7,10 @@
 
 struct LayerOneFieldSignature
 {
-    unsigned int field = 0;
-    unsigned char flags_count = 0;
-    unsigned char not_visible_count = 0;
-    unsigned char field_value = 0;
+    uint32_t field = 0;
+    uint8_t flags_count = 0;
+    uint8_t not_visible_count = 0;
+    uint8_t field_value = 0;
 };
 
 class AlgorithmLayerOne : public AlgorithmAction
@@ -29,9 +29,9 @@ class AlgorithmLayerOne : public AlgorithmAction
 
     protected:
 
-    void RunInternal();
+    void RunInternal() override;
 
-    LayerOneFieldSignature GetFieldSignature(const unsigned int border_field) const;
+    LayerOneFieldSignature GetFieldSignature(const uint32_t border_field) const;
 
     void CheckForSafeClicks(const LayerOneFieldSignature signature) const;
 

@@ -1,5 +1,5 @@
-#ifndef GridViewFactory_hpp
-#define GridViewFactory_hpp
+#ifndef GRID_VIEW_FACTORY_HPP
+#define GRID_VIEW_FACTORY_HPP
 
 #include <stdexcept>
 

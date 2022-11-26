@@ -5,17 +5,17 @@ Algorithm::Algorithm(GridManager& grid_, AlgorithmDataStorage& data_)
 
 Algorithm::~Algorithm() {}
 
-void Algorithm::LeftClick(const unsigned int field) const
+void Algorithm::LeftClick(const uint32_t field) const
 {
     _grid.LeftClick(field);
 }
 
-void Algorithm::RightClick(const unsigned int field) const
+void Algorithm::RightClick(const uint32_t field) const
 {
     _grid.RightClick(field);
 }
 
-unsigned char Algorithm::FieldValue(const unsigned int field) const
+uint8_t Algorithm::FieldValue(const uint32_t field) const
 {
     return _grid.FieldValue(field);
 }

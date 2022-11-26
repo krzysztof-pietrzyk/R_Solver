@@ -1,5 +1,5 @@
-#ifndef GridGeneratorFactory_hpp
-#define GridGeneratorFactory_hpp
+#ifndef GRID_GENERATOR_FACTORY_HPP
+#define GRID_GENERATOR_FACTORY_HPP
 
 #include <stdexcept>
 

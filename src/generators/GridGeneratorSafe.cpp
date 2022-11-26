@@ -2,19 +2,19 @@
 
 GridGeneratorSafe::GridGeneratorSafe(GridSelfGenerated& grid) : GridGeneratorUnsafe(grid)
 {
-    forced_safe = std::vector<unsigned int>(1, 0);
-    empty_template = std::vector<unsigned int>(grid.S - 1, 0);
-    safe_fields = std::vector<unsigned int>(grid.S - 1, 0);
+    forced_safe = std::vector<uint32_t>(1, 0);
+    empty_template = std::vector<uint32_t>(grid.S - 1, 0);
+    safe_fields = std::vector<uint32_t>(grid.S - 1, 0);
     SetStartingField(0);
 }
 
 GridGeneratorSafe::~GridGeneratorSafe() {}
 
-void GridGeneratorSafe::SetStartingField(unsigned int starting_field)
+void GridGeneratorSafe::SetStartingField(uint32_t starting_field)
 {
     forced_safe[0] = starting_field;
-    unsigned int empty_template_index = 0;
-    for(unsigned int i = 0; i < grid.S; i++)
+    uint32_t empty_template_index = 0;
+    for(uint32_t i = 0; i < grid.S; i++)
     {
         if(i == starting_field) { continue; }
         empty_template[empty_template_index++] = i;

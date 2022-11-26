@@ -12,13 +12,13 @@ const std::vector<char> GridHash::hash_symbols =
     'l', 'm', 'n', 'o'
 };
 
-const unsigned char GridHash::fields_per_symbol = 6;
+const uint8_t GridHash::fields_per_symbol = 6;
 
-const unsigned char GridHash::is_mine_bit_mask = 32;
+const uint8_t GridHash::is_mine_bit_mask = 32;
 
 const char GridHash::ascii_zero = '0';
 
-GridHash::GridHash(const unsigned int grid_size)
+GridHash::GridHash(const uint32_t grid_size)
 {
     // each hash symbol encodes 6 fields, 1 more if size is not divisible by 6
     const size_t hash_length = grid_size % 6 > 0 ? (grid_size / 6) + 1 : (grid_size / 6);
@@ -64,7 +64,7 @@ GridHash::~GridHash()
 
 }
 
-void GridHash::CalculateHash(const std::vector<unsigned int> mine_positions, const unsigned int grid_size)
+void GridHash::CalculateHash(const std::vector<uint32_t> mine_positions, const uint32_t grid_size)
 {
     // Return if there's no need to recalculate
     if(is_up_to_date) return;
@@ -73,7 +73,7 @@ void GridHash::CalculateHash(const std::vector<unsigned int> mine_positions, con
     const size_t number_of_mines = mine_positions.size();
     for(size_t i = 0; i < number_of_mines; i++)
     {
-        const unsigned int current_mine_position = mine_positions[i];
+        const uint32_t current_mine_position = mine_positions[i];
         if(current_mine_position >= grid_size)
         {
             throw std::invalid_argument("ERROR: GridHash: Mine out of bounds!");
@@ -91,13 +91,13 @@ void GridHash::CalculateHash(const std::vector<bool> is_mine)
     char current_value = 0;
     size_t current_symbol_index = 0;
     const size_t grid_size = is_mine.size();
-    unsigned char symbol_field_counter = 0;
+    uint8_t symbol_field_counter = 0;
     // Each symbol encodes 6 consequent fields, in terms of mines they contain.
     // It's important to think about the char current_value as a string of bits
     // For example: 00101000 (where 0s are safe and 1s are mines). That value is then 
     // used as an index (in this case 40) in the hash_symbols array to determine the symbol.
     // The hash_symbols array contains 64 consecutive, printable ASCII characters
-    for(int i = 0; i < grid_size; i++)
+    for(size_t i = 0; i < grid_size; i++)
     {
         symbol_field_counter++;
         // Bit shift left
@@ -121,7 +121,7 @@ void GridHash::GetMines(std::vector<bool>& is_mine)
     {
         throw std::invalid_argument("ERROR: GridHash: Attempting to get mines from an expired hash!");
     }
-    unsigned int current_field = 0;
+    uint32_t current_field = 0;
     const size_t grid_size = is_mine.size();
     const size_t hash_length = hash.size();
     for(size_t i = 0; i < hash_length; i++)
@@ -142,11 +142,11 @@ void GridHash::GetMines(std::vector<bool>& is_mine)
         {
             // Handling the last hash symbol
             // Figure out how many fields the last symbol encodes
-            const unsigned char grid_size_mod_6 = grid_size % fields_per_symbol;
+            const uint8_t grid_size_mod_6 = grid_size % fields_per_symbol;
             // Can be anywhere from 1 to 6. If it's a 0, it means the grid size is perfectly divisible into
             // chunks of 6 fields, so the last symbol encodes full 6 fields, just like the other symbols
             // Otherwise, it only encodes 1, 2, 3, 4 or 5 fields
-            const unsigned char last_symbol_length = grid_size_mod_6 == 0 ? fields_per_symbol : grid_size_mod_6;
+            const uint8_t last_symbol_length = grid_size_mod_6 == 0 ? fields_per_symbol : grid_size_mod_6;
             // Bit shift the symbol to skip the unused bits if necessary
             // In case when last_symbol_length is 6, it bit shifts 0 times
             current_symbol = current_symbol << (fields_per_symbol - last_symbol_length);

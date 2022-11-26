@@ -1,5 +1,5 @@
-#ifndef GridHash_hpp
-#define GridHash_hpp
+#ifndef GRID_HASH_HPP
+#define GRID_HASH_HPP
 
 #include <vector>
 #include <string>
@@ -9,7 +9,7 @@ class GridHash
 {
     public:
 
-    GridHash(const unsigned int grid_size);
+    GridHash(const uint32_t grid_size);
 
     GridHash(const GridHash& other);
 
@@ -20,7 +20,7 @@ class GridHash
     ~GridHash();
 
     // From mine_positions vector
-    void CalculateHash(const std::vector<unsigned int> mine_positions, const unsigned int grid_size);
+    void CalculateHash(const std::vector<uint32_t> mine_positions, const uint32_t grid_size);
 
     // From is_mine vector
     virtual void CalculateHash(const std::vector<bool> is_mine);
@@ -46,9 +46,9 @@ class GridHash
 
     static const std::vector<char> hash_symbols;
 
-    static const unsigned char fields_per_symbol;
+    static const uint8_t fields_per_symbol;
 
-    static const unsigned char is_mine_bit_mask;
+    static const uint8_t is_mine_bit_mask;
 
     static const char ascii_zero;
 };

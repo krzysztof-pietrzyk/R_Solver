@@ -1,5 +1,5 @@
-#ifndef SolverThreadData_hpp
-#define SolverThreadData_hpp
+#ifndef SOLVER_THREAD_DATA_HPP
+#define SOLVER_THREAD_DATA_HPP
 
 #include <mutex>
 
@@ -12,8 +12,8 @@ class SolverThreadData
     ~SolverThreadData();
 
 	std::mutex mut;
-	unsigned long int tries;
-	unsigned long int wins;
+	uint64_t tries;
+	uint64_t wins;
     double completion;
 };
 

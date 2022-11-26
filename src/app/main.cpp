@@ -16,13 +16,13 @@ void Run(Solver* solver)
 
 void CheckStatus(SolverThreadData* data)
 {
-	const unsigned int status_read_interval = 5;
+	const uint32_t status_read_interval = 5;
 	auto time_since_start = std::chrono::duration<int64_t, std::nano>(0);
-	unsigned long int games_played = 0;
-	unsigned long int games_played_last = 0;
+	uint64_t games_played = 0;
+	uint64_t games_played_last = 0;
 	double completion = 0.0;
-	unsigned long int wins = 0;
-	unsigned long int wins_last = 0;
+	uint64_t wins = 0;
+	uint64_t wins_last = 0;
 	double win_ratio = 0.0;
 	double games_per_second_avg = 0.0;
 	double wins_per_second_avg = 0.0;
@@ -63,10 +63,10 @@ void CheckStatus(SolverThreadData* data)
 
 int main()
 {
-	const unsigned short int threads_number = 1;
-	const unsigned short int grid_width = 30;
-	const unsigned short int grid_height = 16;
-	const unsigned int grid_mines = 99;
+	const uint16_t threads_number = 1;
+	const uint16_t grid_width = 30;
+	const uint16_t grid_height = 16;
+	const uint32_t grid_mines = 99;
 
 	cout << "Attempting to run " << threads_number << " threads on " << grid_width << "x" << grid_height << " grid with " << grid_mines << " mines" << endl;
 

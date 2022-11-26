@@ -1,5 +1,5 @@
-#ifndef GridGeneratorFromHash_hpp
-#define GridGeneratorFromHash_hpp
+#ifndef GRID_GENERATOR_FROM_HASH_HPP
+#define GRID_GENERATOR_FROM_HASH_HPP
 
 #include "GridInternalGenerator.hpp"
 
@@ -13,7 +13,7 @@ class GridGeneratorFromHash : public GridInternalGenerator
 
     ~GridGeneratorFromHash();
 
-    void Generate();
+    void Generate() override;
 };
 
 #endif

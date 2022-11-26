@@ -1,5 +1,5 @@
-#ifndef AlgorithmRefreshCombinations_hpp
-#define AlgorithmRefreshCombinations_hpp
+#ifndef ALGORITHM_REFRESH_COMBINATIONS_HPP
+#define ALGORITHM_REFRESH_COMBINATIONS_HPP
 
 #include "../Algorithm.hpp"
 
@@ -18,44 +18,44 @@ class AlgorithmRefreshCombinations : public Algorithm
 
     ~AlgorithmRefreshCombinations();
 
-    AlgorithmStatus Run();
+    AlgorithmStatus Run() override;
 
     protected:
 
     std::vector<FieldCombinationState> field_states;
-    std::vector<unsigned int> choice_stack;
-    std::vector<unsigned int> segment_of_choice_stack;
-    std::vector<unsigned int> modifications_stack;
-    unsigned int current_segment_mine_count;
-    unsigned int remaining_mines;
-    unsigned int remaining_fields;
-    std::vector<std::vector<unsigned int>> mine_counts_in_segment;
+    std::vector<uint32_t> choice_stack;
+    std::vector<uint32_t> segment_of_choice_stack;
+    std::vector<uint32_t> modifications_stack;
+    uint32_t current_segment_mine_count;
+    uint32_t remaining_mines;
+    uint32_t remaining_fields;
+    std::vector<std::vector<uint32_t>> mine_counts_in_segment;
     std::vector<size_t> current_mine_count_id_in_segment;
 
     // segments_combinations - vector id: segment number, key: mine count within the segment
     // value: number of possible mine combinations with that mine count for that segment
-    std::vector<std::map<unsigned int, BigNum>> segments_combinations;
+    std::vector<std::map<uint32_t, BigNum>> segments_combinations;
     // field_combinations_temp - vector id: field position, key: given mine count within entire segment
     // value: number of combinations, in which a mine appears on that field for given mine count of this segment
-    std::vector<std::map<unsigned int, BigNum>> field_combinations_temp;
+    std::vector<std::map<uint32_t, BigNum>> field_combinations_temp;
 
     void Clear();
 
-    void FindCombinationsForSegment(unsigned int segment_id);
+    void FindCombinationsForSegment(uint32_t segment_id);
 
-    void ClearStatesInSegment(unsigned int segment_id);
+    void ClearStatesInSegment(uint32_t segment_id);
 
     BigNum ApplySubsegmentsCombination(std::vector<SubsegmentData>& subsegments_ref);
 
-    void FindCombinationsForFixedSubsegments(const unsigned int segment_id, const BigNum combination_multiplier);
+    void FindCombinationsForFixedSubsegments(const uint32_t segment_id, const BigNum combination_multiplier);
 
-    void FindRemainingSectionValue(const Section& section, char& section_value, char& section_length) const;
+    void FindRemainingSectionValue(const Section& section, int8_t& section_value, int8_t& section_length) const;
 
     bool RevertSegmentHeadToLastChoice(size_t& segment_head);
 
-    void TransitionFieldStateForward(const unsigned int section_field, const size_t current_segment_head, char& remaining_section_value, char& remaining_section_length);
+    void TransitionFieldStateForward(const uint32_t section_field, const size_t current_segment_head, int8_t& remaining_section_value, int8_t& remaining_section_length);
 
-    void ApplyCurrentCombinationAsValid(const unsigned int segment_id, const BigNum combination_multiplier);
+    void ApplyCurrentCombinationAsValid(const uint32_t segment_id, const BigNum combination_multiplier);
 
     bool NextSubsegmentsCombination(std::vector<SubsegmentData>& subsegments_ref) const;
 
@@ -63,9 +63,9 @@ class AlgorithmRefreshCombinations : public Algorithm
 
     void CachePossibleSegmentsMineCounts();
 
-    unsigned int GetTotalMineCountOfSegmentCombination() const;
+    uint32_t GetTotalMineCountOfSegmentCombination() const;
 
-    void MergeCurrentSegmentsMineCountCombination(const unsigned int segments_combination_mine_count);
+    void MergeCurrentSegmentsMineCountCombination(const uint32_t segments_combination_mine_count);
 
     bool NextSegmentsMineCountCombination();
 

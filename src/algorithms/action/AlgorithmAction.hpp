@@ -1,5 +1,5 @@
-#ifndef AlgorithmAction_hpp
-#define AlgorithmAction_hpp
+#ifndef ALGORITHM_ACTION_HPP
+#define ALGORITHM_ACTION_HPP
 
 #include "../Algorithm.hpp"
 
@@ -17,7 +17,7 @@ class AlgorithmAction : public Algorithm
 
     ~AlgorithmAction();
 
-    AlgorithmStatus Run();
+    AlgorithmStatus Run() override;
 
     protected:
 
@@ -27,7 +27,7 @@ class AlgorithmAction : public Algorithm
 
     AlgorithmStatus CheckGameOverConditions() const;
 
-    AlgorithmStatus GetActionResult(const unsigned int clicks_difference) const;
+    AlgorithmStatus GetActionResult(const uint32_t clicks_difference) const;
 };
 
 #endif

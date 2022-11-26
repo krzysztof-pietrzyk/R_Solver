@@ -18,9 +18,9 @@ class MockGridSelfGenerated : public GridSelfGenerated
 {
     public:
 
-    MockGridSelfGenerated(unsigned short w, unsigned short h, unsigned int m) : GridSelfGenerated(w, h, m) {}
+    MockGridSelfGenerated(uint16_t w, uint16_t h, uint32_t m) : GridSelfGenerated(w, h, m) {}
 
-    vector<unsigned char> GetAllFieldValues()
+    vector<uint8_t> GetAllFieldValues()
     {
         return field_values;
     }
@@ -43,7 +43,7 @@ class MockGridSelfGenerated : public GridSelfGenerated
 // ============================= TEST FIXTURES ============================= //
 // ========================================================================= //
 
-using CalculateValuesFixtureParams = tuple<vector<bool>, vector<unsigned char>, unsigned short, unsigned short, unsigned int>;
+using CalculateValuesFixtureParams = tuple<vector<bool>, vector<uint8_t>, uint16_t, uint16_t, uint32_t>;
 
 class GridSelfGeneratedCalculateValuesFixture : public TestWithParam<CalculateValuesFixtureParams>
 {
@@ -54,10 +54,10 @@ TEST_P(GridSelfGeneratedCalculateValuesFixture, CalculateValues)
 {
     const CalculateValuesFixtureParams params = GetParam();
     const vector<bool> input_is_mine = get<0>(params);
-    const vector<unsigned char> expected_field_values = get<1>(params);
-    const unsigned short input_width = get<2>(params);
-    const unsigned short input_height = get<3>(params);
-    const unsigned int input_mines_num = get<4>(params);
+    const vector<uint8_t> expected_field_values = get<1>(params);
+    const uint16_t input_width = get<2>(params);
+    const uint16_t input_height = get<3>(params);
+    const uint32_t input_mines_num = get<4>(params);
 
     MockGridSelfGenerated grid(input_width, input_height, input_mines_num);
 

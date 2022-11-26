@@ -1,5 +1,5 @@
-#ifndef AlgorithmManager_hpp
-#define AlgorithmManager_hpp
+#ifndef ALGORITHM_MANAGER_HPP
+#define ALGORITHM_MANAGER_HPP
 
 #include <map>
 

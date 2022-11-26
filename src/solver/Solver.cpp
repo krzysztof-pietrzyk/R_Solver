@@ -1,6 +1,6 @@
 #include "Solver.hpp"
 
-Solver::Solver(unsigned short int w, unsigned short int h, unsigned int m, SolverThreadData* thread_data_) :
+Solver::Solver(uint16_t w, uint16_t h, uint32_t m, SolverThreadData* thread_data_) :
     grid(new GridSelfGenerated(w, h, m)),
     generator(GridGeneratorFactory::Create(GridGeneratorType::GENERATOR_SAFE, *grid)),
     view(GridViewFactory::Create(GridViewType::GRID_VIEW_CONSOLE, *grid)),
@@ -36,7 +36,7 @@ void Solver::RunForever()
 
 void Solver::Run()
 {
-	const unsigned int fields_to_uncover = grid->S - grid->M;
+	const uint32_t fields_to_uncover = grid->S - grid->M;
 	generator->Generate();
 	grid->CalculateHash();
 	algorithm_manager->RunAll();
@@ -45,7 +45,7 @@ void Solver::Run()
 
 void Solver::UpdateThreadData()
 {
-	unsigned int lost = 0;
+	uint32_t lost = 0;
 	if(grid->is_lost) lost = 1;
 	float completion_rate = float(grid->visible_fields_index - lost) / fields_to_uncover;
 	thread_data->mut.lock();

@@ -1,5 +1,5 @@
-#ifndef AlgorithmType_hpp
-#define AlgorithmType_hpp
+#ifndef ALGORITHM_TYPE_HPP
+#define ALGORITHM_TYPE_HPP
 
 enum AlgorithmType
 {

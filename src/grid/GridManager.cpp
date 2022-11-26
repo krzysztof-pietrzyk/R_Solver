@@ -1,19 +1,19 @@
 #include "GridManager.hpp"
 
-GridManager::GridManager(unsigned short int w, unsigned short int h, unsigned int m)
+GridManager::GridManager(uint16_t w, uint16_t h, uint32_t m)
     : W(w), H(h), M(m), S(w * h), NM(S - M)
 {
-    visible_fields = std::vector<unsigned int>(S, 0);
+    visible_fields = std::vector<uint32_t>(S, 0);
     visible_fields_index = 0;
 	is_visible = std::vector<bool>(S, false);
     
-    flags = std::vector<unsigned int>(S, 0);
+    flags = std::vector<uint32_t>(S, 0);
     flags_index = 0;
     is_flag = std::vector<bool>(S, false);
 
-    neighbors = std::vector<std::vector<unsigned int>>(S, std::vector<unsigned int>());
+    neighbors = std::vector<std::vector<uint32_t>>(S, std::vector<uint32_t>());
 
-    field_values = std::vector<unsigned char>(S, 0);
+    field_values = std::vector<uint8_t>(S, 0);
 
     left_click_counter = 0;
     right_click_counter = 0;
@@ -22,7 +22,7 @@ GridManager::GridManager(unsigned short int w, unsigned short int h, unsigned in
 
 GridManager::~GridManager() {}
 
-unsigned char GridManager::FieldValue(unsigned int field)
+uint8_t GridManager::FieldValue(uint32_t field)
 {
     if(!CheckVisible(field))
     {
@@ -46,7 +46,7 @@ void GridManager::Clear()
     is_lost = false;
 }
 
-bool GridManager::CheckVisible(unsigned int field)
+bool GridManager::CheckVisible(uint32_t field)
 {
     return is_visible[field];
 }

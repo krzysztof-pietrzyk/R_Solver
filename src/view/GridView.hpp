@@ -1,5 +1,5 @@
-#ifndef GridView_hpp
-#define GridView_hpp
+#ifndef GRID_VIEW_HPP
+#define GRID_VIEW_HPP
 
 #include "../grid/Grid.hpp"
 

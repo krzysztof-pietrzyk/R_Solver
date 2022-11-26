@@ -8,18 +8,18 @@ AlgorithmRefreshCombinations::AlgorithmRefreshCombinations(GridManager& grid_, A
     D_total_combinations(GetModifiableAlgorithmDataStorageReference().total_combinations)
 {
     field_states = std::vector<FieldCombinationState>(grid.S, FCS_UNASSIGNED);
-    choice_stack = std::vector<unsigned int>();
-    segment_of_choice_stack = std::vector<unsigned int>();
-    modifications_stack = std::vector<unsigned int>();
+    choice_stack = std::vector<uint32_t>();
+    segment_of_choice_stack = std::vector<uint32_t>();
+    modifications_stack = std::vector<uint32_t>();
     current_segment_mine_count = 0;
     remaining_mines = 0;
     remaining_fields = 0;
 
-    mine_counts_in_segment = std::vector<std::vector<unsigned int>>(grid.M, std::vector<unsigned int>());
+    mine_counts_in_segment = std::vector<std::vector<uint32_t>>(grid.M, std::vector<uint32_t>());
     current_mine_count_id_in_segment = std::vector<size_t>(grid.M, 0);
 
-    segments_combinations = std::vector<std::map<unsigned int, BigNum>>(grid.M, std::map<unsigned int, BigNum>());
-    field_combinations_temp = std::vector<std::map<unsigned int, BigNum>>(grid.S, std::map<unsigned int, BigNum>());
+    segments_combinations = std::vector<std::map<uint32_t, BigNum>>(grid.M, std::map<uint32_t, BigNum>());
+    field_combinations_temp = std::vector<std::map<uint32_t, BigNum>>(grid.S, std::map<uint32_t, BigNum>());
 }
 
 AlgorithmRefreshCombinations::~AlgorithmRefreshCombinations() {}
@@ -29,7 +29,7 @@ AlgorithmStatus AlgorithmRefreshCombinations::Run()
     Clear();
     remaining_mines = grid.M - grid.flags_index;
     remaining_fields = grid.S - grid.visible_fields_index - grid.flags_index - data.face_index;
-    const unsigned int segments_to_check = data.segments_count;
+    const uint32_t segments_to_check = data.segments_count;
     for(size_t i = 0; i < segments_to_check; i++)
     {
         FindCombinationsForSegment(i);
@@ -43,15 +43,15 @@ AlgorithmStatus AlgorithmRefreshCombinations::Run()
 void AlgorithmRefreshCombinations::Clear()
 {
     // Only clearing fields that are going to be used
-    const unsigned int face_length = data.face_index;
+    const uint32_t face_length = data.face_index;
     for(size_t i = 0; i < face_length; i++)
     {
-        const unsigned int face_field = data.face[i];
+        const uint32_t face_field = data.face[i];
         field_states[face_field] = FCS_UNASSIGNED;
         D_field_combinations[face_field] = 0;
         field_combinations_temp[face_field].clear();
     }
-    const unsigned int segments_count = data.segments_count;
+    const uint32_t segments_count = data.segments_count;
     for(size_t i = 0; i < segments_count; i++)
     {
         segments_combinations[i].clear();
@@ -62,7 +62,7 @@ void AlgorithmRefreshCombinations::Clear()
     D_total_combinations = 0.0L;
 }
 
-void AlgorithmRefreshCombinations::FindCombinationsForSegment(unsigned int segment_id)
+void AlgorithmRefreshCombinations::FindCombinationsForSegment(uint32_t segment_id)
 {
     std::vector<SubsegmentData>& subsegments_ref = D_subsegments[segment_id];
     do
@@ -73,13 +73,13 @@ void AlgorithmRefreshCombinations::FindCombinationsForSegment(unsigned int segme
     } while (NextSubsegmentsCombination(subsegments_ref));
 }
 
-void AlgorithmRefreshCombinations::ClearStatesInSegment(unsigned int segment_id)
+void AlgorithmRefreshCombinations::ClearStatesInSegment(uint32_t segment_id)
 {
-    const std::vector<unsigned int>& segment_face = data.segments_face[segment_id];
+    const std::vector<uint32_t>& segment_face = data.segments_face[segment_id];
     const size_t segment_face_l = segment_face.size();
     for(size_t i = 0; i < segment_face_l; i++)
     {
-        const unsigned int segment_face_field = segment_face[i];
+        const uint32_t segment_face_field = segment_face[i];
         field_states[segment_face_field] = FCS_UNASSIGNED;
     }
 }
@@ -94,12 +94,12 @@ BigNum AlgorithmRefreshCombinations::ApplySubsegmentsCombination(std::vector<Sub
     for(size_t subsegment_id = 0; subsegment_id < subsegments_max; subsegment_id++)
     {
         SubsegmentData& subsegment = subsegments_ref[subsegment_id];
-        const unsigned char mines_to_add = subsegment.possible_values[subsegment.current_possibility_id];
+        const uint8_t mines_to_add = subsegment.possible_values[subsegment.current_possibility_id];
         subsegment_combination_weight = subsegment_combination_weight * subsegment.combinations_for_value[mines_to_add];
         const size_t subsegment_l = subsegment.fields.size();
         for(size_t i = 0; i < subsegment_l; i++)
         {
-            const unsigned int subsegment_field = subsegment.fields[i];
+            const uint32_t subsegment_field = subsegment.fields[i];
             if(i < mines_to_add) { field_states[subsegment_field] = FCS_MINE; current_segment_mine_count++; }
             else                 { field_states[subsegment_field] = FCS_SAFE; }
         }
@@ -107,22 +107,22 @@ BigNum AlgorithmRefreshCombinations::ApplySubsegmentsCombination(std::vector<Sub
     return subsegment_combination_weight;
 }
 
-void AlgorithmRefreshCombinations::FindCombinationsForFixedSubsegments(const unsigned int segment_id, const BigNum combination_multiplier)
+void AlgorithmRefreshCombinations::FindCombinationsForFixedSubsegments(const uint32_t segment_id, const BigNum combination_multiplier)
 {
     choice_stack.clear();
     modifications_stack.clear();
     modifications_stack.clear();
-    const unsigned int segment_begin = data.segments_starting_indexes[segment_id];
-    const unsigned int segment_end = segment_begin + data.segments_l[segment_id];
+    const uint32_t segment_begin = data.segments_starting_indexes[segment_id];
+    const uint32_t segment_end = segment_begin + data.segments_l[segment_id];
     size_t segment_head = segment_begin;
     // dirty loop. segment_head may be going back and forth but will always terminate
     while(true)
     {
-        const unsigned int section_origin = data.segments[segment_head];
+        const uint32_t section_origin = data.segments[segment_head];
         const Section& current_section = data.sections[section_origin];
-        const unsigned char section_l = current_section.fields_index;
-        char remaining_section_value = current_section.value;
-        char remaining_section_length = 0;
+        const uint8_t section_l = current_section.fields_index;
+        int8_t remaining_section_value = current_section.value;
+        int8_t remaining_section_length = 0;
         FindRemainingSectionValue(current_section, remaining_section_value, remaining_section_length);
         // check if previous choices have already made this section contain a contradiction
         if(remaining_section_value < 0) 
@@ -135,7 +135,7 @@ void AlgorithmRefreshCombinations::FindCombinationsForFixedSubsegments(const uns
         // Apply state transitions
         for(size_t section_head = 0; section_head < section_l; section_head++)
         {
-            const unsigned int section_field = current_section.fields[section_head];
+            const uint32_t section_field = current_section.fields[section_head];
             TransitionFieldStateForward(section_field, segment_head, remaining_section_value, remaining_section_length);
         }
 
@@ -160,7 +160,7 @@ void AlgorithmRefreshCombinations::FindCombinationsForFixedSubsegments(const uns
     }
 }
 
-void AlgorithmRefreshCombinations::FindRemainingSectionValue(const Section& section, char& section_value, char& section_length) const
+void AlgorithmRefreshCombinations::FindRemainingSectionValue(const Section& section, int8_t& section_value, int8_t& section_length) const
 {
     const size_t section_l = section.fields_index;
     for(size_t section_head = 0; section_head < section_l; section_head++)
@@ -175,11 +175,11 @@ bool AlgorithmRefreshCombinations::RevertSegmentHeadToLastChoice(size_t& segment
 {
     // returns true if there was a choice it could revert to
     if(choice_stack.empty()) { return false; }
-    const unsigned int last_choice = choice_stack.back();
+    const uint32_t last_choice = choice_stack.back();
     choice_stack.pop_back();
     while(true)
     {
-        const unsigned int last_modification = modifications_stack.back();
+        const uint32_t last_modification = modifications_stack.back();
         FieldCombinationState& current_field_state = field_states[last_modification];
 
         // keep popping modifications from the stack until the last choice is found
@@ -205,7 +205,7 @@ bool AlgorithmRefreshCombinations::RevertSegmentHeadToLastChoice(size_t& segment
     return true;
 }
 
-void AlgorithmRefreshCombinations::TransitionFieldStateForward(const unsigned int section_field, const size_t current_segment_head, char& remaining_section_value, char& remaining_section_length)
+void AlgorithmRefreshCombinations::TransitionFieldStateForward(const uint32_t section_field, const size_t current_segment_head, int8_t& remaining_section_value, int8_t& remaining_section_length)
 {
     FieldCombinationState& current_state = field_states[section_field];
     if(current_state != FCS_UNASSIGNED) { return; }
@@ -229,9 +229,9 @@ void AlgorithmRefreshCombinations::TransitionFieldStateForward(const unsigned in
     remaining_section_length--;
 }
 
-void AlgorithmRefreshCombinations::ApplyCurrentCombinationAsValid(const unsigned int segment_id, const BigNum combination_multiplier)
+void AlgorithmRefreshCombinations::ApplyCurrentCombinationAsValid(const uint32_t segment_id, const BigNum combination_multiplier)
 {
-    const unsigned int final_mine_count = current_segment_mine_count;
+    const uint32_t final_mine_count = current_segment_mine_count;
     // store the number of combinations for the whole segment
     segments_combinations[segment_id][final_mine_count] += combination_multiplier;
     // store the number of mines in subsegments
@@ -240,7 +240,7 @@ void AlgorithmRefreshCombinations::ApplyCurrentCombinationAsValid(const unsigned
     for(size_t subsegment_id = 0; subsegment_id < subsegments_max; subsegment_id++)
     {
         const SubsegmentData& subsegment_ref = subsegments_ref[subsegment_id];
-        const unsigned char number_of_mines_in_subsegment = subsegment_ref.possible_values[subsegment_ref.current_possibility_id];
+        const uint8_t number_of_mines_in_subsegment = subsegment_ref.possible_values[subsegment_ref.current_possibility_id];
         // nothing to calculate or add if there are no mines in the subsegment
         if(number_of_mines_in_subsegment == 0) { continue; }
         const size_t number_of_fields_in_subsegment = subsegment_ref.fields.size();
@@ -254,16 +254,16 @@ void AlgorithmRefreshCombinations::ApplyCurrentCombinationAsValid(const unsigned
                 );
         for(size_t subsegment_field_id = 0; subsegment_field_id < number_of_fields_in_subsegment; subsegment_field_id++)
         {
-            const unsigned int subsegment_field = subsegment_ref.fields[subsegment_field_id];
+            const uint32_t subsegment_field = subsegment_ref.fields[subsegment_field_id];
             field_combinations_temp[subsegment_field][final_mine_count] += mines_per_field_in_subsegment;
         }
     }
     // store the number of mines for fields that are not subsegments
-    const std::vector<unsigned int>& segment_face = data.segments_face[segment_id];
-    const unsigned int segment_face_l = segment_face.size();
+    const std::vector<uint32_t>& segment_face = data.segments_face[segment_id];
+    const uint32_t segment_face_l = segment_face.size();
     for(size_t segment_face_id = 0; segment_face_id < segment_face_l; segment_face_id++)
     {
-        const unsigned int segment_face_field = segment_face[segment_face_id];
+        const uint32_t segment_face_field = segment_face[segment_face_id];
         // subsegments were already handled above
         if(data.is_subsegment[segment_face_field]) { continue; }
         // only look for the mines of this combination
@@ -297,7 +297,7 @@ void AlgorithmRefreshCombinations::MergeAllSegmentsCombinations()
     CachePossibleSegmentsMineCounts();
     do
     {
-        const unsigned int segments_combination_mine_count = GetTotalMineCountOfSegmentCombination();
+        const uint32_t segments_combination_mine_count = GetTotalMineCountOfSegmentCombination();
         // this combination of segments has more mines than there are left on the map. it's not valid
         if(segments_combination_mine_count > remaining_mines) { continue; }
         // this combination of segments has too few mines for the remaining mines to fit 
@@ -309,11 +309,11 @@ void AlgorithmRefreshCombinations::MergeAllSegmentsCombinations()
 
 void AlgorithmRefreshCombinations::CachePossibleSegmentsMineCounts()
 {
-    const unsigned int segments_to_check = data.segments_count;
-    for(unsigned int segment_id = 0; segment_id < segments_to_check; segment_id++)
+    const uint32_t segments_to_check = data.segments_count;
+    for(uint32_t segment_id = 0; segment_id < segments_to_check; segment_id++)
     {
-        const std::map<unsigned int, BigNum>& combinations_ref = segments_combinations[segment_id];
-        std::vector<unsigned int>& mine_counts_ref = mine_counts_in_segment[segment_id];
+        const std::map<uint32_t, BigNum>& combinations_ref = segments_combinations[segment_id];
+        std::vector<uint32_t>& mine_counts_ref = mine_counts_in_segment[segment_id];
         for(auto it = combinations_ref.begin(); it != combinations_ref.end(); ++it)
         {
             mine_counts_ref.push_back(it->first);
@@ -321,9 +321,9 @@ void AlgorithmRefreshCombinations::CachePossibleSegmentsMineCounts()
     }
 }
 
-unsigned int AlgorithmRefreshCombinations::GetTotalMineCountOfSegmentCombination() const
+uint32_t AlgorithmRefreshCombinations::GetTotalMineCountOfSegmentCombination() const
 {
-    unsigned int mine_count_sum = 0;
+    uint32_t mine_count_sum = 0;
     const size_t segments_count = data.segments_count;
     for(size_t segment_id = 0; segment_id < segments_count; segment_id++)
     {
@@ -332,10 +332,10 @@ unsigned int AlgorithmRefreshCombinations::GetTotalMineCountOfSegmentCombination
     return mine_count_sum;
 }
 
-void AlgorithmRefreshCombinations::MergeCurrentSegmentsMineCountCombination(const unsigned int segments_combination_mine_count)
+void AlgorithmRefreshCombinations::MergeCurrentSegmentsMineCountCombination(const uint32_t segments_combination_mine_count)
 {
-    const unsigned int mines_in_remaining_fields = remaining_mines - segments_combination_mine_count;
-    const unsigned int remaining_safe_fields = remaining_fields - mines_in_remaining_fields;
+    const uint32_t mines_in_remaining_fields = remaining_mines - segments_combination_mine_count;
+    const uint32_t remaining_safe_fields = remaining_fields - mines_in_remaining_fields;
     // binomial distribution of the remaining mines in the remaining fields (outside of segments)
     // f(n, k) = n! / (k! * (n - k)!)
     // using pre-calculated values for factorials and reciprocals
@@ -357,7 +357,7 @@ void AlgorithmRefreshCombinations::MergeCurrentSegmentsMineCountCombination(cons
     for(size_t segment_id = 0; segment_id < segments_count; segment_id++)
     {
         const size_t mine_count_id = current_mine_count_id_in_segment[segment_id];
-        const unsigned int mine_count = mine_counts_in_segment[segment_id][mine_count_id];
+        const uint32_t mine_count = mine_counts_in_segment[segment_id][mine_count_id];
         const BigNum segment_combinations_for_current_possibility = segments_combinations[segment_id][mine_count];
         combinations_for_current_mine_count_combination *= segment_combinations_for_current_possibility;
     }
@@ -366,13 +366,13 @@ void AlgorithmRefreshCombinations::MergeCurrentSegmentsMineCountCombination(cons
     for(size_t segment_id = 0; segment_id < segments_count; segment_id++)
     {
         const size_t mine_count_id = current_mine_count_id_in_segment[segment_id];
-        const unsigned int mine_count = mine_counts_in_segment[segment_id][mine_count_id];
+        const uint32_t mine_count = mine_counts_in_segment[segment_id][mine_count_id];
         const BigNum mine_count_combinations_in_segment = segments_combinations[segment_id][mine_count];
-        const std::vector<unsigned int>& segment_face = data.segments_face[segment_id];
+        const std::vector<uint32_t>& segment_face = data.segments_face[segment_id];
         const size_t segment_face_length = segment_face.size();
         for(size_t face_field_id = 0; face_field_id < segment_face_length; face_field_id++)
         {
-            const unsigned int face_field = segment_face[face_field_id];
+            const uint32_t face_field = segment_face[face_field_id];
             // check if this field ever has mines in combination containing mine_count number of mines in the segment
             if(field_combinations_temp[face_field].count(mine_count))
             {

@@ -21,18 +21,18 @@ class MockBigNum : public BigNum
     public:
 
     MockBigNum() : BigNum() {}
-    MockBigNum(long long a) : BigNum(a) {}
+    MockBigNum(int64_t a) : BigNum(a) {}
     MockBigNum(BigNum a) : BigNum(a) {}
 
     double GetBase() const { return base; }
-    long long GetExponent() const { return exponent; }
+    int64_t GetExponent() const { return exponent; }
 };
 
 // ========================================================================= //
 // ============================= TEST FIXTURES ============================= //
 // ========================================================================= //
 
-using OperatorAssignULLFixtureParams = tuple<unsigned long long, double, unsigned long long>;
+using OperatorAssignULLFixtureParams = tuple<uint64_t, double, uint64_t>;
 
 class BigNumOperatorAssignULLFixture : public TestWithParam<OperatorAssignULLFixtureParams>
 {
@@ -42,9 +42,9 @@ class BigNumOperatorAssignULLFixture : public TestWithParam<OperatorAssignULLFix
 TEST_P(BigNumOperatorAssignULLFixture, OperatorAssignULL)
 {
     const OperatorAssignULLFixtureParams params = GetParam();
-    const unsigned long long test_value = get<0>(params);
+    const uint64_t test_value = get<0>(params);
     const double expected_base = get<1>(params);
-    const unsigned long long expected_exponent = get<2>(params);
+    const uint64_t expected_exponent = get<2>(params);
 
     MockBigNum num;
     num = test_value;
@@ -170,7 +170,7 @@ INSTANTIATE_TEST_CASE_P(TestBigNum, BigNumOperatorDivideFixture, Values(
 // ========================================================================= //
 // ========================================================================= //
 
-using OperatorPlusULLFixtureParams = tuple<BigNum, unsigned long long, MockBigNum>;
+using OperatorPlusULLFixtureParams = tuple<BigNum, uint64_t, MockBigNum>;
 
 class BigNumOperatorPlusULLFixture : public TestWithParam<OperatorPlusULLFixtureParams>
 {
@@ -181,7 +181,7 @@ TEST_P(BigNumOperatorPlusULLFixture, OperatorPlusULL)
 {
     const OperatorPlusULLFixtureParams params = GetParam();
     const BigNum value_a = get<0>(params);
-    const unsigned long long value_b = get<1>(params);
+    const uint64_t value_b = get<1>(params);
     const MockBigNum expected_value = get<2>(params);
 
     MockBigNum num = value_a + value_b;
@@ -274,7 +274,7 @@ INSTANTIATE_TEST_CASE_P(TestBigNum, BigNumOperatorDivideULLFixture, Values(
 
 TEST(TestBigNum, OperatorAssign)
 {
-    const unsigned long long test_value = 1234567890ULL;
+    const uint64_t test_value = 1234567890ULL;
     const MockBigNum first(test_value);
     const MockBigNum second = first;
 
@@ -284,8 +284,8 @@ TEST(TestBigNum, OperatorAssign)
 
 TEST(TestBigNum, DivideByZeroULL)
 {
-    const unsigned long long test_value = 1234567890ULL;
-    const unsigned long long zero = 0;
+    const uint64_t test_value = 1234567890ULL;
+    const uint64_t zero = 0;
     const MockBigNum num(test_value);
     MockBigNum second;
     
@@ -294,8 +294,8 @@ TEST(TestBigNum, DivideByZeroULL)
 
 TEST(TestBigNum, DivideByZero)
 {
-    const unsigned long long test_value = 1234567890ULL;
-    const unsigned long long zero = 0;
+    const uint64_t test_value = 1234567890ULL;
+    const uint64_t zero = 0;
     const MockBigNum num(test_value);
     const MockBigNum num_zero(zero);
     MockBigNum second;
@@ -305,14 +305,14 @@ TEST(TestBigNum, DivideByZero)
 
 TEST(TestBigNum, FactorialAndReciprocal)
 {
-    const unsigned int factorial_max = 1000;
+    const uint32_t factorial_max = 1000;
     const long double allowed_error = 1E-9L;
     MockBigNum factorial_num = 1;
     MockBigNum reciprocal_num = 1;
     long double factorial_double = 1.0;
     long double reciprocal_double = 1.0;
 
-    for(unsigned int i = 1; i <= factorial_max; i++)
+    for(uint32_t i = 1; i <= factorial_max; i++)
     {
         factorial_num *= i; 
         reciprocal_num /= i;

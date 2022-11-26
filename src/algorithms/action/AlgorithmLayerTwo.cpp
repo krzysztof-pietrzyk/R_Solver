@@ -3,36 +3,36 @@
 AlgorithmLayerTwo::AlgorithmLayerTwo(GridManager& grid_, AlgorithmDataStorage& data_)
     : AlgorithmAction(grid_, data_)
 {
-    not_common_current = std::vector<unsigned int>();
-    not_common_neighbor = std::vector<unsigned int>();
+    not_common_current = std::vector<uint32_t>();
+    not_common_neighbor = std::vector<uint32_t>();
 }
 
 AlgorithmLayerTwo::~AlgorithmLayerTwo() {}
 
 void AlgorithmLayerTwo::RunInternal()
 {
-    const unsigned int sections_origins_index = data.sections_origins_index;
+    const uint32_t sections_origins_index = data.sections_origins_index;
     for(size_t i = 0; i < sections_origins_index; i++)
     {
         const size_t current_section_index = data.sections_origins[i];
         const Section& current_section = data.sections[current_section_index];
         if(!IsCurrentSectionValid(current_section)) { continue; }
 
-        const std::vector<unsigned int>& current_section_neighbors = current_section.neighbors;
+        const std::vector<uint32_t>& current_section_neighbors = current_section.neighbors;
         for(size_t j = 0; j < current_section.neighbors_index; j++)
         {
             const size_t neighbor_section_index = current_section_neighbors[j];
             const Section& neighbor_section = data.sections[neighbor_section_index];
             if(!IsNeighborSectionValid(current_section, neighbor_section)) { continue; }
 
-            const unsigned int common_fields_l = CompareSections(current_section, neighbor_section);
+            const uint32_t common_fields_l = CompareSections(current_section, neighbor_section);
             ExecCurrentPerspectiveCondition(current_section, neighbor_section, common_fields_l);
             ExecNeighborPerspectiveCondition(current_section, neighbor_section, common_fields_l);
         }
     }
 }
 
-unsigned int AlgorithmLayerTwo::CompareSections(const Section& current_section, const Section& neighbor_section)
+uint32_t AlgorithmLayerTwo::CompareSections(const Section& current_section, const Section& neighbor_section)
 {
     // clear the temporary vectors
     not_common_current.clear();
@@ -47,8 +47,8 @@ unsigned int AlgorithmLayerTwo::CompareSections(const Section& current_section, 
     std::set_difference(neighbor_section.fields.begin(), neighbor_section_end,
                         current_section.fields.begin(), current_section_end,
                         std::inserter(not_common_neighbor, not_common_neighbor.begin()));
-    const unsigned int current_section_common_l = current_section.fields_index - not_common_current.size();
-    const unsigned int neighbor_section_common_l = neighbor_section.fields_index - not_common_neighbor.size();
+    const uint32_t current_section_common_l = current_section.fields_index - not_common_current.size();
+    const uint32_t neighbor_section_common_l = neighbor_section.fields_index - not_common_neighbor.size();
     if(current_section_common_l != neighbor_section_common_l)
     {
         throw std::runtime_error("ERROR: AlgorithmLayerTwo::CompareSections impossible section!");
@@ -79,20 +79,20 @@ bool AlgorithmLayerTwo::IsNeighborSectionValid(const Section& current_section, c
     return true;
 }
 
-void AlgorithmLayerTwo::ExecNeighborPerspectiveCondition(const Section& current_section, const Section& neighbor_section, const unsigned int common_fields_l) const
+void AlgorithmLayerTwo::ExecNeighborPerspectiveCondition(const Section& current_section, const Section& neighbor_section, const uint32_t common_fields_l) const
 {
     if(neighbor_section.value == current_section.value - current_section.fields_index + common_fields_l)
     {
-        for(const unsigned int field : not_common_neighbor) { LeftClick(field); }
-        for(const unsigned int field : not_common_current) { RightClick(field); }
+        for(const uint32_t field : not_common_neighbor) { LeftClick(field); }
+        for(const uint32_t field : not_common_current) { RightClick(field); }
     }
 }
 
-void AlgorithmLayerTwo::ExecCurrentPerspectiveCondition(const Section& current_section, const Section& neighbor_section, const unsigned int common_fields_l) const
+void AlgorithmLayerTwo::ExecCurrentPerspectiveCondition(const Section& current_section, const Section& neighbor_section, const uint32_t common_fields_l) const
 {
     if(current_section.value == neighbor_section.value - neighbor_section.fields_index + common_fields_l)
     {
-        for(const unsigned int field : not_common_current) { LeftClick(field); }
-        for(const unsigned int field : not_common_neighbor) { RightClick(field); }
+        for(const uint32_t field : not_common_current) { LeftClick(field); }
+        for(const uint32_t field : not_common_neighbor) { RightClick(field); }
     }
 }

@@ -1,5 +1,5 @@
-#ifndef AlgorithmRefreshSegments_hpp
-#define AlgorithmRefreshSegments_hpp
+#ifndef ALGORITHM_REFRESH_SEGMENTS_HPP
+#define ALGORITHM_REFRESH_SEGMENTS_HPP
 
 #include "../Algorithm.hpp"
 
@@ -19,25 +19,25 @@ class AlgorithmRefreshSegments : public Algorithm
 
     ~AlgorithmRefreshSegments();
 
-    AlgorithmStatus Run();
+    AlgorithmStatus Run() override;
 
     protected:
     
-    std::vector<unsigned int> fields_to_check;
-    unsigned int fields_to_check_index;
+    std::vector<uint32_t> fields_to_check;
+    uint32_t fields_to_check_index;
     std::vector<bool> is_checked;
 
     void Clear();
 
-    void ChainReactionFromField(unsigned int field);
+    void ChainReactionFromField(uint32_t field);
 
     private:
 
-    unsigned int& D_segments_index;
-    unsigned int& D_segments_count;
-    std::vector<unsigned int>& D_segments;
-    std::vector<unsigned int>& D_segments_starting_indexes;
-    std::vector<unsigned int>& D_segments_l;
+    uint32_t& D_segments_index;
+    uint32_t& D_segments_count;
+    std::vector<uint32_t>& D_segments;
+    std::vector<uint32_t>& D_segments_starting_indexes;
+    std::vector<uint32_t>& D_segments_l;
 };
 
 #endif

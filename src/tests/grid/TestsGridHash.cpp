@@ -17,7 +17,7 @@
 class MockGridHash : public GridHash
 {
     public:
-    MockGridHash(const unsigned int grid_size) : GridHash(grid_size) {};
+    MockGridHash(const uint32_t grid_size) : GridHash(grid_size) {};
 
     MOCK_METHOD(void, CalculateHash, (const std::vector<bool>), (override));
 };
@@ -26,16 +26,16 @@ class MockGridHash : public GridHash
 // ============================= TEST FIXTURES ============================= //
 // ========================================================================= //
 
-class GridHashCreationFixture : public TestWithParam<unsigned int>
+class GridHashCreationFixture : public TestWithParam<uint32_t>
 {
     // grid size
 };
 
 TEST_P(GridHashCreationFixture, Creation)
 {
-    const unsigned int grid_size = GetParam();
-    const unsigned int fields_per_symbol = 6;
-    unsigned int expectedHashLength = grid_size / fields_per_symbol;
+    const uint32_t grid_size = GetParam();
+    const uint32_t fields_per_symbol = 6;
+    uint32_t expectedHashLength = grid_size / fields_per_symbol;
     if(grid_size % fields_per_symbol != 0)
     {
         expectedHashLength += 1;
@@ -65,7 +65,7 @@ TEST_P(GridHashCalculateHashFixture, CalculateHash)
     const CalculateHashFixtureParams params = GetParam();
     const vector<bool> is_mine = get<0>(params);
     const string expected_hash = get<1>(params);
-    const unsigned int grid_size = is_mine.size();
+    const uint32_t grid_size = is_mine.size();
 
     GridHash gridHash(grid_size);
 
@@ -82,7 +82,7 @@ INSTANTIATE_TEST_CASE_P(TestsGridHash, GridHashCalculateHashFixture, ValuesIn(Ge
 // ========================================================================= //
 // ========================================================================= //
 
-using CalculateHashFromMinesFixtureParams = tuple<vector<unsigned int>, unsigned int, vector<bool>>;
+using CalculateHashFromMinesFixtureParams = tuple<vector<uint32_t>, uint32_t, vector<bool>>;
 
 class GridHashCalculateHashFromMinesFixture : public TestWithParam<CalculateHashFromMinesFixtureParams>
 {
@@ -92,8 +92,8 @@ class GridHashCalculateHashFromMinesFixture : public TestWithParam<CalculateHash
 TEST_P(GridHashCalculateHashFromMinesFixture, CalculateHashFromMines)
 {
     const CalculateHashFromMinesFixtureParams params = GetParam();
-    const vector<unsigned int> mine_positions = get<0>(params);
-    const unsigned int grid_size = get<1>(params);
+    const vector<uint32_t> mine_positions = get<0>(params);
+    const uint32_t grid_size = get<1>(params);
     const vector<bool> expected_is_mine = get<2>(params);
 
     MockGridHash gridHash(grid_size);
@@ -111,7 +111,7 @@ INSTANTIATE_TEST_CASE_P(TestsGridHash, GridHashCalculateHashFromMinesFixture, Va
 // ========================================================================= //
 // ========================================================================= //
 
-using GetMinesFixtureParams = tuple<string, unsigned int, vector<bool>>;
+using GetMinesFixtureParams = tuple<string, uint32_t, vector<bool>>;
 
 class GridHashGetMinesFixture : public TestWithParam<GetMinesFixtureParams>
 {
@@ -122,7 +122,7 @@ TEST_P(GridHashGetMinesFixture, GetMines)
 {
     const GetMinesFixtureParams params = GetParam();
     const string input_hash = get<0>(params);
-    const unsigned int input_hash_length = get<1>(params);
+    const uint32_t input_hash_length = get<1>(params);
     const vector<bool> expected_is_mine = get<2>(params);
 
     GridHash gridHash(input_hash_length);

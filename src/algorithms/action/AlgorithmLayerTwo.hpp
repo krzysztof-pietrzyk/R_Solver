@@ -1,5 +1,5 @@
-#ifndef AlgorithmLayerTwo_hpp
-#define AlgorithmLayerTwo_hpp
+#ifndef ALGORITHM_LAYER_TWO_HPP
+#define ALGORITHM_LAYER_TWO_HPP
 
 #include "AlgorithmAction.hpp"
 
@@ -20,20 +20,20 @@ class AlgorithmLayerTwo : public AlgorithmAction
 
     protected:
 
-    std::vector<unsigned int> not_common_current;
-    std::vector<unsigned int> not_common_neighbor;
+    std::vector<uint32_t> not_common_current;
+    std::vector<uint32_t> not_common_neighbor;
 
-    void RunInternal();
+    void RunInternal() override;
 
-    unsigned int CompareSections(const Section& a, const Section& b);
+    uint32_t CompareSections(const Section& a, const Section& b);
 
     bool IsCurrentSectionValid(const Section& current_section) const;
 
     bool IsNeighborSectionValid(const Section& current_section, const Section& neighbor_section) const;
 
-    void ExecNeighborPerspectiveCondition(const Section& current_section, const Section& neighbor_section, const unsigned int common_fields_l) const;
+    void ExecNeighborPerspectiveCondition(const Section& current_section, const Section& neighbor_section, const uint32_t common_fields_l) const;
 
-    void ExecCurrentPerspectiveCondition(const Section& current_section, const Section& neighbor_section, const unsigned int common_fields_l) const;
+    void ExecCurrentPerspectiveCondition(const Section& current_section, const Section& neighbor_section, const uint32_t common_fields_l) const;
 };
 
 #endif

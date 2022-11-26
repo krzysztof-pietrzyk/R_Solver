@@ -1,7 +1,7 @@
 #include "Grid.hpp"
 
 // w - Width, h - Height, m - Number of mines
-Grid::Grid(unsigned short int w, unsigned short int h, unsigned int m) : GridManager(w, h, m)
+Grid::Grid(uint16_t w, uint16_t h, uint32_t m) : GridManager(w, h, m)
 {
     // Mines should be less than Size, at least 1 mine, and Size can't be arbitrarily large
     // It is possible to create a 5000x5000 grid, but it's not recommended to go that big
@@ -10,8 +10,8 @@ Grid::Grid(unsigned short int w, unsigned short int h, unsigned int m) : GridMan
         throw std::invalid_argument("ERROR: Grid constructor parameters are invalid.");
     }
 
-    mines = std::vector<unsigned int>(M, 0);
-    not_mines = std::vector<unsigned int>(S - M, 0);
+    mines = std::vector<uint32_t>(M, 0);
+    not_mines = std::vector<uint32_t>(S - M, 0);
     is_mine = std::vector<bool>(S, false);
 
     FindNeighbors();
@@ -30,9 +30,9 @@ void Grid::Clear()
 void Grid::FindNeighbors()
 {
     // Only called once in constructor. The neighbors addresses never change
-    unsigned short int column;
-    unsigned short int row;
-    for(unsigned int i = 0; i < S; i++)
+    uint16_t column;
+    uint16_t row;
+    for(uint32_t i = 0; i < S; i++)
     {
         // For each field, list the neighbors
         column = i % W;

@@ -1,5 +1,5 @@
-#ifndef AlgorithmFirstMove_hpp
-#define AlgorithmFirstMove_hpp
+#ifndef ALGORITHM_FIRST_MOVE_HPP
+#define ALGORITHM_FIRST_MOVE_HPP
 
 #include "AlgorithmAction.hpp"
 
@@ -13,13 +13,13 @@ class AlgorithmFirstMove : public AlgorithmAction
 
     protected:
 
-    unsigned int first_move_field;
+    uint32_t first_move_field;
 
-    void RunInternal();
+    void RunInternal() override;
 
     private:
 
-    static const unsigned int default_first_move_field;
+    static const uint32_t default_first_move_field;
 };
 
 #endif

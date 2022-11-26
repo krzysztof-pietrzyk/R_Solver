@@ -18,17 +18,17 @@ class MockGrid : public Grid
 {
     public:
 
-    MockGrid(unsigned short int w, unsigned short int h, unsigned int m) : Grid(w, h, m) {}
+    MockGrid(uint16_t w, uint16_t h, uint32_t m) : Grid(w, h, m) {}
 
-    MOCK_METHOD(void, LeftClick, (unsigned int), (override));
-    MOCK_METHOD(void, RightClick, (unsigned int), (override));
+    MOCK_METHOD(void, LeftClick, (uint32_t), (override));
+    MOCK_METHOD(void, RightClick, (uint32_t), (override));
 };
 
 // ========================================================================= //
 // ============================= TEST FIXTURES ============================= //
 // ========================================================================= //
 
-using CreationFixtureParams = tuple<unsigned short, unsigned short, unsigned int, bool>;
+using CreationFixtureParams = tuple<uint16_t, uint16_t, uint32_t, bool>;
 
 class GridCreationFixture : public TestWithParam<CreationFixtureParams>
 {
@@ -38,9 +38,9 @@ class GridCreationFixture : public TestWithParam<CreationFixtureParams>
 TEST_P(GridCreationFixture, Creation)
 {
     CreationFixtureParams test_params = GetParam();
-    const unsigned short width = get<0>(test_params);
-    const unsigned short height = get<1>(test_params);
-    const unsigned int mines_num = get<2>(test_params);
+    const uint16_t width = get<0>(test_params);
+    const uint16_t height = get<1>(test_params);
+    const uint32_t mines_num = get<2>(test_params);
     const bool isExpectedThorw = get<3>(test_params);
 
     if(isExpectedThorw)
@@ -78,8 +78,8 @@ INSTANTIATE_TEST_CASE_P(TestsGrid, GridCreationFixture, Values(
 
 TEST(TestsGrid, FindNeighbors3x3)
 {
-    const unsigned short width = 3, height = 3;
-    const unsigned int mines_num = 3;
+    const uint16_t width = 3, height = 3;
+    const uint32_t mines_num = 3;
     MockGrid grid(width, height, mines_num);
 
     ASSERT_THAT(grid.neighbors, ElementsAre(
@@ -97,8 +97,8 @@ TEST(TestsGrid, FindNeighbors3x3)
 
 TEST(TestsGrid, FindNeighbors1x3)
 {
-    const unsigned short width = 1, height = 3;
-    const unsigned int mines_num = 1;
+    const uint16_t width = 1, height = 3;
+    const uint32_t mines_num = 1;
     MockGrid grid(width, height, mines_num);
 
     ASSERT_THAT(grid.neighbors, ElementsAre(
@@ -110,8 +110,8 @@ TEST(TestsGrid, FindNeighbors1x3)
 
 TEST(TestsGrid, FindNeighbors3x1)
 {
-    const unsigned short width = 3, height = 1;
-    const unsigned int mines_num = 1;
+    const uint16_t width = 3, height = 1;
+    const uint32_t mines_num = 1;
     MockGrid grid(width, height, mines_num);
 
     ASSERT_THAT(grid.neighbors, ElementsAre(
@@ -123,8 +123,8 @@ TEST(TestsGrid, FindNeighbors3x1)
 
 TEST(TestsGrid, FindNeighbors2x2)
 {
-    const unsigned short width = 2, height = 2;
-    const unsigned int mines_num = 1;
+    const uint16_t width = 2, height = 2;
+    const uint32_t mines_num = 1;
     MockGrid grid(width, height, mines_num);
 
     ASSERT_THAT(grid.neighbors, ElementsAre(

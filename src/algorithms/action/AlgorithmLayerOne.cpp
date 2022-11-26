@@ -7,25 +7,25 @@ AlgorithmLayerOne::~AlgorithmLayerOne() {}
 
 void AlgorithmLayerOne::RunInternal()
 {
-    const unsigned int border_index_max = data.border_index;
+    const uint32_t border_index_max = data.border_index;
 
     // Go through each field on the broder
     for(size_t i = 0; i < border_index_max; i++)
     {
-        const unsigned int border_field = data.border[i];
+        const uint32_t border_field = data.border[i];
         const LayerOneFieldSignature field_signature = GetFieldSignature(border_field);
         CheckForSafeClicks(field_signature);
         CheckForMines(field_signature);
     }
 }
 
-LayerOneFieldSignature AlgorithmLayerOne::GetFieldSignature(const unsigned int border_field) const
+LayerOneFieldSignature AlgorithmLayerOne::GetFieldSignature(const uint32_t border_field) const
 {
-    unsigned char flags_count = 0;
-    unsigned char not_visible_count = 0;
+    uint8_t flags_count = 0;
+    uint8_t not_visible_count = 0;
     // Count flags and covered fields around the border field
-    const std::vector<unsigned int>& neighbor_fields = grid.neighbors[border_field];
-    for(const unsigned int& neighbor_field : neighbor_fields)
+    const std::vector<uint32_t>& neighbor_fields = grid.neighbors[border_field];
+    for(const uint32_t& neighbor_field : neighbor_fields)
     {
         if(grid.is_flag[neighbor_field]) flags_count++;
         else if(!grid.is_visible[neighbor_field]) not_visible_count++;
@@ -42,8 +42,8 @@ void AlgorithmLayerOne::CheckForSafeClicks(const LayerOneFieldSignature signatur
 {
     // If there are already enough flags...
     if(signature.field_value != signature.flags_count) { return; }
-    const std::vector<unsigned int>& neighbor_fields = grid.neighbors[signature.field];
-    for(const unsigned int& neighbor_field : neighbor_fields)
+    const std::vector<uint32_t>& neighbor_fields = grid.neighbors[signature.field];
+    for(const uint32_t& neighbor_field : neighbor_fields)
     {
         if(!grid.is_flag[neighbor_field] && !grid.is_visible[neighbor_field])
         {
@@ -57,8 +57,8 @@ void AlgorithmLayerOne::CheckForMines(const LayerOneFieldSignature signature) co
 {
     // If the remaining covered fields exactly account for missing flags...
     if(signature.field_value != signature.flags_count + signature.not_visible_count) { return; }
-    const std::vector<unsigned int>& neighbor_fields = grid.neighbors[signature.field];
-    for(const unsigned int& neighbor_field : neighbor_fields)
+    const std::vector<uint32_t>& neighbor_fields = grid.neighbors[signature.field];
+    for(const uint32_t& neighbor_field : neighbor_fields)
     {
         if(!grid.is_flag[neighbor_field] && !grid.is_visible[neighbor_field])
         {

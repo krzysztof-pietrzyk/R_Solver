@@ -1,5 +1,5 @@
-#ifndef AlgorithmRefreshBorder_hpp
-#define AlgorithmRefreshBorder_hpp
+#ifndef ALGORITHM_REFRESH_BORDER_HPP
+#define ALGORITHM_REFRESH_BORDER_HPP
 
 #include "../Algorithm.hpp"
 
@@ -22,19 +22,19 @@ class AlgorithmRefreshBorder : public Algorithm
 
     ~AlgorithmRefreshBorder();
 
-    AlgorithmStatus Run();
+    AlgorithmStatus Run() override;
 
     protected:
 
-    void FilterOldBorderContent(unsigned int& border_index_new) const;
+    void FilterOldBorderContent(uint32_t& border_index_new) const;
 
-    void AddNewContentToBorder(unsigned int& border_index_new) const;
+    void AddNewContentToBorder(uint32_t& border_index_new) const;
 
     private:
 
-    unsigned int& D_border_index;
-    unsigned int& D_border_last_visible_fields_index;
-    std::vector<unsigned int>& D_border;
+    uint32_t& D_border_index;
+    uint32_t& D_border_last_visible_fields_index;
+    std::vector<uint32_t>& D_border;
     std::vector<bool>& D_is_border;
 };
 

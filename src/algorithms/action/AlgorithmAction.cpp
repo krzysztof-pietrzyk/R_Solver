@@ -9,9 +9,9 @@ AlgorithmAction::~AlgorithmAction() {}
 
 AlgorithmStatus AlgorithmAction::Run()
 {
-    const unsigned int number_of_clicks_before = grid.left_click_counter + grid.right_click_counter;
+    const uint32_t number_of_clicks_before = grid.left_click_counter + grid.right_click_counter;
     RunInternal();
-    const unsigned int number_of_clicks_after = grid.left_click_counter + grid.right_click_counter;
+    const uint32_t number_of_clicks_after = grid.left_click_counter + grid.right_click_counter;
     
     AlgorithmStatus action_result = GetActionResult(number_of_clicks_after - number_of_clicks_before);
     AlgorithmStatus game_over_result = CheckGameOverConditions();
@@ -27,7 +27,7 @@ AlgorithmStatus AlgorithmAction::CheckGameOverConditions() const
     else return AlgorithmStatus::NO_STATUS;
 }
 
-AlgorithmStatus AlgorithmAction::GetActionResult(const unsigned int clicks_difference) const
+AlgorithmStatus AlgorithmAction::GetActionResult(const uint32_t clicks_difference) const
 {
     if(clicks_difference > 0) { return AlgorithmStatus::SUCCESS; }
     return AlgorithmStatus::NO_MOVES;

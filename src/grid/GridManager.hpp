@@ -1,52 +1,53 @@
-#ifndef GridManager_hpp
-#define GridManager_hpp
+#ifndef GRID_MANAGER_HPP
+#define GRID_MANAGER_HPP
 
 #include <vector>
 #include <stdexcept>
+#include <cstdint>
 
 class GridManager
 {
     public:
 
-    const unsigned short int W;  // Width
-    const unsigned short int H;  // Height
-    const unsigned int S;  // Size (Width * Height)
-    const unsigned int M;  // Number of mines
-    const unsigned int NM;  // Number of fields that are not mines (S - M)
+    const uint16_t W;  // Width
+    const uint16_t H;  // Height
+    const uint32_t S;  // Size (Width * Height)
+    const uint32_t M;  // Number of mines
+    const uint32_t NM;  // Number of fields that are not mines (S - M)
 
-    std::vector<unsigned int> visible_fields;  // Positions of visible fields (not sorted)
-    unsigned int visible_fields_index;  // Current count of visible fields
+    std::vector<uint32_t> visible_fields;  // Positions of visible fields (not sorted)
+    uint32_t visible_fields_index;  // Current count of visible fields
 	std::vector<bool> is_visible;  // True if index is visible (sorted)
 
-    std::vector<unsigned int> flags;  // Positions of flags (not sorted). Only for the purpose of clearing is_flag array quicker
-    unsigned int flags_index;  // Current count of flags
+    std::vector<uint32_t> flags;  // Positions of flags (not sorted). Only for the purpose of clearing is_flag array quicker
+    uint32_t flags_index;  // Current count of flags
     std::vector<bool> is_flag;  // True if index is a flag (sorted)
 
-    std::vector<std::vector<unsigned int>> neighbors;
+    std::vector<std::vector<uint32_t>> neighbors;
 
-    unsigned int left_click_counter;
-    unsigned int right_click_counter;
+    uint32_t left_click_counter;
+    uint32_t right_click_counter;
     bool is_lost;
 
-    GridManager(unsigned short int w, unsigned short int h, unsigned int m);
+    GridManager(uint16_t w, uint16_t h, uint32_t m);
 
     ~GridManager();
 
-    unsigned char FieldValue(unsigned int field);
+    uint8_t FieldValue(uint32_t field);
 
-    virtual void LeftClick(unsigned int field) = 0;
+    virtual void LeftClick(uint32_t field) = 0;
 
-    virtual void RightClick(unsigned int field) = 0;
+    virtual void RightClick(uint32_t field) = 0;
 
     // virtual void PrintUncovered() = 0;
 
     protected:
 
-    void Clear();
+    virtual void Clear();
 
-    std::vector<unsigned char> field_values;  // Values of all fields (sorted)
+    std::vector<uint8_t> field_values;  // Values of all fields (sorted)
 
-    virtual bool CheckVisible(unsigned int field);
+    virtual bool CheckVisible(uint32_t field);
 
 };
 

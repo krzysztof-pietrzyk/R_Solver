@@ -5,7 +5,7 @@ GridGeneratorUnsafe::GridGeneratorUnsafe(GridSelfGenerated& grid) : GridInternal
     int64_t r = std::chrono::system_clock::now().time_since_epoch().count();
     rng = std::minstd_rand(r);
     dist = std::uniform_int_distribution<int>(0, INT_MAX - (INT_MAX % grid.S) - 1);
-    forced_safe = std::vector<unsigned int>();
+    forced_safe = std::vector<uint32_t>();
     current_max = 0;
 }
 
@@ -13,8 +13,8 @@ GridGeneratorUnsafe::~GridGeneratorUnsafe() {}
 
 void GridGeneratorUnsafe::Generate()
 {
-    unsigned int poll_index = 0;
-    unsigned int random_field = 0;
+    uint32_t poll_index = 0;
+    uint32_t random_field = 0;
 
     grid.Clear();
     PrepareSafeFields();
@@ -36,7 +36,7 @@ void GridGeneratorUnsafe::Generate()
     grid.CalculateValues();
 }
 
-void GridGeneratorUnsafe::SetStartingField(unsigned int starting_field) {}
+void GridGeneratorUnsafe::SetStartingField(uint32_t starting_field) {}
 
 void GridGeneratorUnsafe::PrepareSafeFields()
 {

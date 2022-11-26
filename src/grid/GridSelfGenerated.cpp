@@ -1,10 +1,10 @@
 #include "GridSelfGenerated.hpp"
 
 // w - Width, h - Height, m - Number of mines
-GridSelfGenerated::GridSelfGenerated(unsigned short int w, unsigned short int h, unsigned int m)
+GridSelfGenerated::GridSelfGenerated(uint16_t w, uint16_t h, uint32_t m)
     : Grid(w, h, m), hash(GridHash(S))
 {
-    zcr_zeros = std::vector<unsigned int>(S, 0);
+    zcr_zeros = std::vector<uint32_t>(S, 0);
     zcr_zeros_index = 0;
     zcr_is_zero = std::vector<bool>(S, false);
 }
@@ -14,7 +14,7 @@ GridSelfGenerated::~GridSelfGenerated()
 
 }
 
-void GridSelfGenerated::LeftClick(unsigned int field)
+void GridSelfGenerated::LeftClick(uint32_t field)
 {
     // cout << "Left Click @ " << field << endl;
     if(is_lost) return;
@@ -30,7 +30,7 @@ void GridSelfGenerated::LeftClick(unsigned int field)
     else if(field_values[field] == 0) ZeroChainReaction(field); 
 }
 
-void GridSelfGenerated::RightClick(unsigned int field)
+void GridSelfGenerated::RightClick(uint32_t field)
 {
     // cout << "Right Click @ " << field << endl;
     if(is_lost) return;
@@ -42,12 +42,12 @@ void GridSelfGenerated::RightClick(unsigned int field)
 
 void GridSelfGenerated::CalculateValues()
 {
-    unsigned char current_field_value;
+    uint8_t current_field_value;
     // Only iterate over non-mine fields
-    for(const unsigned int& current_field : not_mines)
+    for(const uint32_t& current_field : not_mines)
     {
         current_field_value = 0;
-        for(const unsigned int& current_neighbor : neighbors[current_field])
+        for(const uint32_t& current_neighbor : neighbors[current_field])
         {
             // Count how many mines are within each field's neighbors
             if(is_mine[current_neighbor]) current_field_value++;
@@ -62,7 +62,7 @@ void GridSelfGenerated::CalculateHash()
 }
 
 // protected
-void GridSelfGenerated::ZeroChainReaction(unsigned int field)
+void GridSelfGenerated::ZeroChainReaction(uint32_t field)
 {
     // Return if called on a non-zero field
     if(field_values[field] != 0) return;
@@ -77,8 +77,8 @@ void GridSelfGenerated::ZeroChainReaction(unsigned int field)
         // Iterate through each element in zcr_zeros
         // zcr_zeros_index may increase while the loop is running
         // this is why a standard iterator can't be used here
-        const unsigned int current_zero = zcr_zeros[i];
-        for(const unsigned int& current_neighbor : neighbors[current_zero])
+        const uint32_t current_zero = zcr_zeros[i];
+        for(const uint32_t& current_neighbor : neighbors[current_zero])
         {
             // Iterate through neighbors of current field
             if(!is_visible[current_neighbor])
@@ -112,7 +112,7 @@ void GridSelfGenerated::ClearZCR()
 //     {
 //         for(size_t j = 0; j < W; j++)
 //         {
-//             const unsigned int f = i * W + j;
+//             const uint32_t f = i * W + j;
 //             if(is_flag[f]) cout << ".";
 //             else if(is_visible[f])
 //             {

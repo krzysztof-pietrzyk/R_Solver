@@ -1,5 +1,5 @@
-#ifndef GridGeneratorSafe_hpp
-#define GridGeneratorSafe_hpp
+#ifndef GRID_GENERATOR_SAFE_HPP
+#define GRID_GENERATOR_SAFE_HPP
 
 #include "GridGeneratorUnsafe.hpp"
 
@@ -11,13 +11,13 @@ class GridGeneratorSafe : public GridGeneratorUnsafe
 
     ~GridGeneratorSafe();
 
-    void SetStartingField(unsigned int starting_field);
+    void SetStartingField(uint32_t starting_field);
 
     protected:
 
-    void PrepareSafeFields();
+    void PrepareSafeFields() override;
 
-    void CopySafeFields();
+    void CopySafeFields() override;
 };
 
 #endif

@@ -1,5 +1,5 @@
-#ifndef GridSelfGenerated_hpp
-#define GridSelfGenerated_hpp
+#ifndef GRID_SELF_GENERATED_HPP
+#define GRID_SELF_GENERATED_HPP
 
 #include "Grid.hpp"
 #include "GridHash.hpp"
@@ -10,13 +10,13 @@ class GridSelfGenerated : public Grid
 
     GridHash hash;
 
-    GridSelfGenerated(unsigned short int w, unsigned short int h, unsigned int m);
+    GridSelfGenerated(uint16_t w, uint16_t h, uint32_t m);
 
     ~GridSelfGenerated();
 
-    void LeftClick(unsigned int field);
+    void LeftClick(uint32_t field) override;
 
-    void RightClick(unsigned int field);
+    void RightClick(uint32_t field) override;
 
     void CalculateHash();
 
@@ -26,11 +26,11 @@ class GridSelfGenerated : public Grid
 
     protected:
 
-    std::vector<unsigned int> zcr_zeros;  // Temporary array used in ZeroChainReaction
-    unsigned int zcr_zeros_index;  // Temporary index used in ZeroChainReaction
+    std::vector<uint32_t> zcr_zeros;  // Temporary array used in ZeroChainReaction
+    uint32_t zcr_zeros_index;  // Temporary index used in ZeroChainReaction
     std::vector<bool> zcr_is_zero;  // Temporary array used in ZeroChainReaction
 
-    void ZeroChainReaction(unsigned int field);
+    void ZeroChainReaction(uint32_t field);
 
     void ClearZCR();
 };

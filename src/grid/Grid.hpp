@@ -1,5 +1,5 @@
-#ifndef Grid_hpp
-#define Grid_hpp
+#ifndef GRID_HPP
+#define GRID_HPP
 
 #include <cstring>
 #include <stdexcept>
@@ -10,15 +10,15 @@ class Grid : public GridManager
 {
     public:
 
-    std::vector<unsigned int> mines;  // Mine positions (not sorted)
-    std::vector<unsigned int> not_mines;  // Other fields, not mines (not sorted)
+    std::vector<uint32_t> mines;  // Mine positions (not sorted)
+    std::vector<uint32_t> not_mines;  // Other fields, not mines (not sorted)
     std::vector<bool> is_mine;  // True if index is a mine (sorted)
 
-    Grid(unsigned short int w, unsigned short int h, unsigned int m);
+    Grid(uint16_t w, uint16_t h, uint32_t m);
 
     ~Grid();
 
-    void Clear();
+    void Clear() override;
 
     private:
 
