@@ -14,30 +14,34 @@ GridSelfGenerated::~GridSelfGenerated()
 
 }
 
-void GridSelfGenerated::LeftClick(uint32_t field)
+bool GridSelfGenerated::LeftClick(uint32_t field)
 {
-    // cout << "Left Click @ " << field << endl;
-    if(is_lost) return;
-    if(is_visible[field]) return;
+    if(is_visible[field] || is_lost)
+    {
+        return false;
+    }
     left_click_counter++;
     is_visible[field] = true;
     visible_fields[visible_fields_index++] = field;
     if(is_mine[field])
     {
-        is_lost = true; 
-        //cout << "LOST: " << field << endl;
+        is_lost = true;
+        return false;
     } 
-    else if(field_values[field] == 0) ZeroChainReaction(field); 
+    else if(field_values[field] == 0) ZeroChainReaction(field);
+    return true;
 }
 
-void GridSelfGenerated::RightClick(uint32_t field)
+bool GridSelfGenerated::RightClick(uint32_t field)
 {
-    // cout << "Right Click @ " << field << endl;
-    if(is_lost) return;
-    if(is_flag[field]) return;
+    if(is_flag[field] || is_lost)
+    {
+        return false;
+    }
     right_click_counter++;
     is_flag[field] = true;
     flags[flags_index++] = field;
+    return true;
 }
 
 void GridSelfGenerated::CalculateValues()

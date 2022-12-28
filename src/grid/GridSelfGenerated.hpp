@@ -14,9 +14,9 @@ class GridSelfGenerated : public Grid
 
     ~GridSelfGenerated();
 
-    void LeftClick(uint32_t field) override;
+    bool LeftClick(uint32_t field) override;
 
-    void RightClick(uint32_t field) override;
+    bool RightClick(uint32_t field) override;
 
     void CalculateHash();
 

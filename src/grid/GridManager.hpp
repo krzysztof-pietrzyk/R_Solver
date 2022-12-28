@@ -35,9 +35,9 @@ class GridManager
 
     uint8_t FieldValue(uint32_t field);
 
-    virtual void LeftClick(uint32_t field) = 0;
+    virtual bool LeftClick(uint32_t field) = 0;
 
-    virtual void RightClick(uint32_t field) = 0;
+    virtual bool RightClick(uint32_t field) = 0;
 
     // virtual void PrintUncovered() = 0;
 
