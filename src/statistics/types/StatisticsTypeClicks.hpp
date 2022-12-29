@@ -11,7 +11,7 @@ class StatisticsTypeClicks : public StatisticsType
 
     ~StatisticsTypeClicks();
 
-    virtual void CopyToOutput(StatisticsType& output_data) override;
+    virtual std::string GetStatistics() override;
 
     uint64_t left_clicks;
     uint64_t wasted_left_clicks;

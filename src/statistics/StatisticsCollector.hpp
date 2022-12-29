@@ -2,6 +2,11 @@
 #define STATISTICS_COLLECTOR_HPP
 
 #include "types/StatisticsType.hpp"
+#include "StatisticsProducer.hpp"
+
+#include <map>
+#include <vector>
+#include <string>
 
 class StatisticsCollector
 {
@@ -9,17 +14,13 @@ class StatisticsCollector
 
     StatisticsCollector();
 
-    StatisticsCollector(StatisticsType* statistics_type);
-
     ~StatisticsCollector();
 
-    void SetStatisticsType(StatisticsType* statistics_type);
-
-    virtual void Get(StatisticsType& output_data);
+    void RegisterStatisticsProducer(const std::string producer_label, const StatisticsProducer* statistics_producer);
 
     protected:
 
-    StatisticsType* statistics;
+    std::map<std::string, std::vector<StatisticsType*>> statistics;
 };
 
 #endif

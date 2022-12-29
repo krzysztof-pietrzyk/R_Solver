@@ -2,6 +2,7 @@
 #define STATISTICS_TYPE_HPP
 
 #include <cstdint>
+#include <string>
 
 class StatisticsType
 {
@@ -10,7 +11,7 @@ class StatisticsType
     StatisticsType();
     ~StatisticsType();
 
-    virtual void CopyToOutput(StatisticsType& output_data) = 0;
+    virtual std::string GetStatistics() = 0;
 };
 
 #endif

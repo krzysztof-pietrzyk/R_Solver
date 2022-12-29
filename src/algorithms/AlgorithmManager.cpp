@@ -38,6 +38,11 @@ bool AlgorithmManager::RunAll() const
     }
 }
 
+const std::map<AlgorithmType, Algorithm*>& AlgorithmManager::GetAlgorithmsMap() const
+{
+    return algorithms;
+}
+
 void AlgorithmManager::CreateAlgorithms()
 {
     // This method is only called once in the constructor

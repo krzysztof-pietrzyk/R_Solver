@@ -4,6 +4,7 @@
 #include "../algorithms/AlgorithmManager.hpp"
 #include "../view/GridViewFactory.hpp"
 #include "../generators/GridGeneratorFactory.hpp"
+#include "../statistics/StatisticsCollector.hpp"
 
 #include "SolverThreadData.hpp"
 
@@ -25,6 +26,7 @@ class Solver
 	GridGenerator* generator;
 	GridView* view;
 	AlgorithmManager* algorithm_manager;
+    StatisticsCollector* statistics_collector;
 
     SolverThreadData* thread_data;
 

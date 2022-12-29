@@ -2,10 +2,12 @@
 #define ALGORITHM_HPP
 
 #include "../grid/GridManager.hpp"
+#include "../statistics/StatisticsProducer.hpp"
+#include "../statistics/types/StatisticsTypeClicks.hpp"
 #include "AlgorithmDataStorage.hpp"
 #include "AlgorithmStatus.hpp"
 
-class Algorithm
+class Algorithm : public StatisticsProducer
 {
     /*
     Abstract base class for algorithm objects.
@@ -41,6 +43,8 @@ class Algorithm
     GridManager& _grid;
 
     AlgorithmDataStorage& _data;
+
+    StatisticsTypeClicks* statistics_clicks;
 };
 
 #endif

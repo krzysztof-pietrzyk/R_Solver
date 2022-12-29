@@ -2,32 +2,19 @@
 
 StatisticsCollector::StatisticsCollector()
 {
-    statistics = nullptr;
-}
-
-StatisticsCollector::StatisticsCollector(StatisticsType* statistics_type)
-{
-    SetStatisticsType(statistics_type);
+    statistics = std::map<std::string, std::vector<StatisticsType*>>();
 }
 
 StatisticsCollector::~StatisticsCollector()
 {
-    if(statistics != nullptr)
-    {
-        delete statistics;
-    }
+
 }
 
-void StatisticsCollector::SetStatisticsType(StatisticsType* statistics_type)
+void StatisticsCollector::RegisterStatisticsProducer(const std::string producer_label, const StatisticsProducer* statistics_producer)
 {
-    if(statistics != nullptr)
+    const std::vector<StatisticsType*>& statistics_types = statistics_producer->GetStatisticsTypes();
+    for(StatisticsType* type : statistics_types)
     {
-        delete statistics;
+        statistics[producer_label].push_back(type);
     }
-    statistics = statistics_type;
-}
-
-void StatisticsCollector::Get(StatisticsType& output_data)
-{
-    statistics->CopyToOutput(output_data);
 }

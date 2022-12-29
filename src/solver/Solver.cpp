@@ -5,12 +5,19 @@ Solver::Solver(uint16_t w, uint16_t h, uint32_t m, SolverThreadData* thread_data
     generator(GridGeneratorFactory::Create(GridGeneratorType::GENERATOR_SAFE, *grid)),
     view(GridViewFactory::Create(GridViewType::GRID_VIEW_CONSOLE, *grid)),
     algorithm_manager(new AlgorithmManager(*grid)),
+	statistics_collector(new StatisticsCollector()),
 	thread_data(thread_data_), fields_to_uncover(grid->S - grid->M)
 {
 	tries = 0;
 	wins = 0;
 	last_read_tries = 0;
     last_read_wins = 0;
+
+	const std::map<AlgorithmType, Algorithm*>& algorithms = algorithm_manager->GetAlgorithmsMap();
+	for(const auto& item : algorithms)
+	{
+		statistics_collector->RegisterStatisticsProducer(GetAlgorithmTypeLabel(item.first), (const StatisticsProducer*)(item.second));
+	}
 }
 
 Solver::~Solver()
