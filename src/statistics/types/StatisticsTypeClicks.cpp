@@ -13,9 +13,14 @@ StatisticsTypeClicks::~StatisticsTypeClicks()
 
 }
 
-std::string StatisticsTypeClicks::GetStatistics() const
+std::map<std::string, uint64_t> StatisticsTypeClicks::GetStatistics() const
 {
-    return std::to_string(left_clicks);
+    std::map<std::string, uint64_t> result = std::map<std::string, uint64_t>();
+    result["Left clicks"] = left_clicks;
+    result["Wasted left clicks"] = wasted_left_clicks;
+    result["Right clicks"] = right_clicks;
+    result["Wasted right clicks"] = wasted_left_clicks;
+    return result;
 }
 
 void StatisticsTypeClicks::operator+= (const StatisticsType& other)

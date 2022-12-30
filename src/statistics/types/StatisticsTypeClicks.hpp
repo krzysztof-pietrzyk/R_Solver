@@ -11,7 +11,7 @@ class StatisticsTypeClicks : public StatisticsType
 
     ~StatisticsTypeClicks();
 
-    virtual std::string GetStatistics() const override;
+    virtual std::map<std::string, uint64_t> GetStatistics() const override;
 
     virtual void operator+= (const StatisticsType& other) override;
 

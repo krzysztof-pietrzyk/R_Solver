@@ -13,9 +13,14 @@ StatisticsTypeSolver::~StatisticsTypeSolver()
 
 }
 
-std::string StatisticsTypeSolver::GetStatistics() const
+std::map<std::string, uint64_t> StatisticsTypeSolver::GetStatistics() const
 {
-    return std::to_string(games_played);
+    std::map<std::string, uint64_t> result = std::map<std::string, uint64_t>();
+    result["Games played"] = games_played;
+    result["Games won"] = games_won;
+    result["Games abandoned"] = games_abandoned;
+    result["Total uncovered fields"] = uncovered_fields;
+    return result;
 }
 
 void StatisticsTypeSolver::operator+= (const StatisticsType& other)

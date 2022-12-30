@@ -3,6 +3,7 @@
 
 #include <cstdint>
 #include <string>
+#include <map>
 
 class StatisticsType
 {
@@ -11,7 +12,7 @@ class StatisticsType
     StatisticsType();
     ~StatisticsType();
 
-    virtual std::string GetStatistics() const = 0;
+    virtual std::map<std::string, uint64_t> GetStatistics() const = 0;
 
     virtual void operator+= (const StatisticsType& other) = 0;
 
