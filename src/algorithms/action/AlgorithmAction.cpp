@@ -2,10 +2,14 @@
 
 AlgorithmAction::AlgorithmAction(GridManager& grid_, AlgorithmDataStorage& data_) : Algorithm(grid_, data_)
 {
-
+    statistics_clicks = new StatisticsTypeClicks();
+    statistics_types.push_back(statistics_clicks);
 }
 
-AlgorithmAction::~AlgorithmAction() {}
+AlgorithmAction::~AlgorithmAction()
+{
+    delete statistics_clicks;
+}
 
 AlgorithmStatus AlgorithmAction::Run()
 {
@@ -31,4 +35,28 @@ AlgorithmStatus AlgorithmAction::GetActionResult(const uint32_t clicks_differenc
 {
     if(clicks_difference > 0) { return AlgorithmStatus::SUCCESS; }
     return AlgorithmStatus::NO_MOVES;
+}
+
+bool AlgorithmAction::LeftClick(const uint32_t field) const
+{
+    bool result = Algorithm::LeftClick(field);
+    StatisticsTypeClicks* ref = (StatisticsTypeClicks*)statistics_clicks;
+    ref->left_clicks++;
+    if(!result)
+    {
+        ref->wasted_left_clicks++;
+    }
+    return result;
+}
+
+bool AlgorithmAction::RightClick(const uint32_t field) const
+{
+    bool result = Algorithm::RightClick(field);
+    StatisticsTypeClicks* ref = (StatisticsTypeClicks*)statistics_clicks;
+    ref->right_clicks++;
+    if(!result)
+    {
+        ref->wasted_right_clicks++;
+    }
+    return result;
 }

@@ -3,7 +3,6 @@
 
 #include "../grid/GridManager.hpp"
 #include "../statistics/StatisticsProducer.hpp"
-#include "../statistics/types/StatisticsTypeClicks.hpp"
 #include "AlgorithmDataStorage.hpp"
 #include "AlgorithmStatus.hpp"
 
@@ -28,9 +27,9 @@ class Algorithm : public StatisticsProducer
 
     const AlgorithmDataStorage& data;
 
-    void LeftClick(const uint32_t field) const;
+    virtual bool LeftClick(const uint32_t field) const;
 
-    void RightClick(const uint32_t field) const;
+    virtual bool RightClick(const uint32_t field) const;
 
     uint8_t FieldValue(const uint32_t field) const;
 
@@ -43,8 +42,6 @@ class Algorithm : public StatisticsProducer
     GridManager& _grid;
 
     AlgorithmDataStorage& _data;
-
-    StatisticsTypeClicks* statistics_clicks;
 };
 
 #endif

@@ -2,6 +2,7 @@
 #define ALGORITHM_ACTION_HPP
 
 #include "../Algorithm.hpp"
+#include "../../statistics/types/StatisticsTypeClicks.hpp"
 
 class AlgorithmAction : public Algorithm
 {
@@ -23,7 +24,13 @@ class AlgorithmAction : public Algorithm
 
     virtual void RunInternal() = 0;
 
+    virtual bool LeftClick(const uint32_t field) const override;
+
+    virtual bool RightClick(const uint32_t field) const override;
+
     private:
+
+    StatisticsTypeClicks* statistics_clicks;
 
     AlgorithmStatus CheckGameOverConditions() const;
 
