@@ -11,7 +11,13 @@ class StatisticsType
     StatisticsType();
     ~StatisticsType();
 
-    virtual std::string GetStatistics() = 0;
+    virtual std::string GetStatistics() const = 0;
+
+    virtual void operator+= (const StatisticsType& other) = 0;
+
+    virtual StatisticsType* Clone() const = 0;
+
+    virtual void Clear() = 0;
 };
 
 #endif

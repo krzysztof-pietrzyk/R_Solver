@@ -2,10 +2,7 @@
 
 SolverThreadData::SolverThreadData()
 {
-    mut;
-    tries = 0;
-    wins = 0;
-    completion = 0.0;
+    statistics_data = std::map<std::string, std::vector<StatisticsType*>>();
 }
 
 SolverThreadData::~SolverThreadData() {}

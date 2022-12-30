@@ -18,6 +18,8 @@ class StatisticsCollector
 
     void RegisterStatisticsProducer(const std::string producer_label, const StatisticsProducer* statistics_producer);
 
+    void CopyCurrentDataToOutput(std::map<std::string, std::vector<StatisticsType*>>& output) const;
+
     protected:
 
     std::map<std::string, std::vector<StatisticsType*>> statistics;

@@ -11,7 +11,13 @@ class StatisticsTypeClicks : public StatisticsType
 
     ~StatisticsTypeClicks();
 
-    virtual std::string GetStatistics() override;
+    virtual std::string GetStatistics() const override;
+
+    virtual void operator+= (const StatisticsType& other) override;
+
+    virtual StatisticsType* Clone() const override;
+
+    virtual void Clear() override;
 
     uint64_t left_clicks;
     uint64_t wasted_left_clicks;
