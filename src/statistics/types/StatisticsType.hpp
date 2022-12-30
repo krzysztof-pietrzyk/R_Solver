@@ -12,13 +12,19 @@ class StatisticsType
     StatisticsType();
     ~StatisticsType();
 
-    virtual std::map<std::string, uint64_t> GetStatistics() const = 0;
+    std::map<std::string, uint64_t> GetStatistics() const;
 
-    virtual void operator+= (const StatisticsType& other) = 0;
+    void operator+= (const StatisticsType& other);
 
-    virtual StatisticsType* Clone() const = 0;
+    StatisticsType* Clone() const;
 
-    virtual void Clear() = 0;
+    void Clear();
+
+    std::map<std::string, uint64_t> data_elements;
+
+    protected:
+
+    virtual StatisticsType* CreateNew() const = 0;
 };
 
 #endif

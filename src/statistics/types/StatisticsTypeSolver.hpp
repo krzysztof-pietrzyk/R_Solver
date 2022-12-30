@@ -11,18 +11,14 @@ class StatisticsTypeSolver : public StatisticsType
 
     ~StatisticsTypeSolver();
 
-    virtual std::map<std::string, uint64_t> GetStatistics() const override;
+    uint64_t& games_played;
+    uint64_t& games_won;
+    uint64_t& games_abandoned;
+    uint64_t& uncovered_fields;
 
-    virtual void operator+= (const StatisticsType& other) override;
+    protected:
 
-    virtual StatisticsType* Clone() const override;
-
-    virtual void Clear() override;
-
-    uint64_t games_played;
-    uint64_t games_won;
-    uint64_t games_abandoned;
-    uint64_t uncovered_fields;
+    virtual StatisticsType* CreateNew() const override;
 };
 
 #endif
