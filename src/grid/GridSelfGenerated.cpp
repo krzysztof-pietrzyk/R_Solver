@@ -26,7 +26,6 @@ bool GridSelfGenerated::LeftClick(uint32_t field)
     if(is_mine[field])
     {
         is_lost = true;
-        return false;
     } 
     else if(field_values[field] == 0) ZeroChainReaction(field);
     return true;

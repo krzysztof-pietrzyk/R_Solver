@@ -19,7 +19,7 @@ std::map<std::string, uint64_t> StatisticsTypeClicks::GetStatistics() const
     result["Left clicks"] = left_clicks;
     result["Wasted left clicks"] = wasted_left_clicks;
     result["Right clicks"] = right_clicks;
-    result["Wasted right clicks"] = wasted_left_clicks;
+    result["Wasted right clicks"] = wasted_right_clicks;
     return result;
 }
 
