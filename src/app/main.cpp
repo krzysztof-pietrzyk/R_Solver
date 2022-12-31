@@ -4,6 +4,7 @@
 #include <ctime>
 #include <iostream>
 #include <string>
+#include <ostream>
 
 #include "../solver/Solver.hpp"
 
@@ -32,22 +33,23 @@ void CheckStatus(SolverThreadData* data, vector<Solver*> solvers)
 		{
 			s->UpdateThreadData();
 		}
-
-		cout << "Seconds since start: " << seconds_since_start << "\n";
+		ostringstream text_to_print = ostringstream();
+		text_to_print << "Seconds since start: " << seconds_since_start << "\n";
 		for(const auto& item : data->statistics_data)
 		{
 			const string& label = item.first;
 			const vector<StatisticsType*>& labelled_data_vector = item.second;
-			cout << label << "\n";
+			text_to_print << label << "\n";
 			for(const StatisticsType* labelled_data : labelled_data_vector)
 			{
 				const auto labelled_data_statistics = labelled_data->GetStatistics();
 				for(const auto& temp : labelled_data_statistics)
 				{
-					cout << "\t" << temp.first << ": " << to_string(temp.second) << "\n";
+					text_to_print << "\t" << temp.first << ": " << to_string(temp.second) << "\n";
 				}
 			}
 		}
+		cout << text_to_print.str();
 
 	}
 }

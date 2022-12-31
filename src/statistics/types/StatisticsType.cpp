@@ -2,14 +2,14 @@
 
 StatisticsType::StatisticsType()
 {
-    data_elements = std::map<std::string, uint64_t>();
+    data_elements = StatisticsTypeLabelledStruct();
 }
 
 StatisticsType::~StatisticsType() {}
 
-std::map<std::string, uint64_t> StatisticsType::GetStatistics() const
+StatisticsTypeLabelledStruct StatisticsType::GetStatistics() const
 {
-    return std::map<std::string, uint64_t>(data_elements);
+    return StatisticsTypeLabelledStruct(data_elements);
 }
 
 void StatisticsType::operator+= (const StatisticsType& other)

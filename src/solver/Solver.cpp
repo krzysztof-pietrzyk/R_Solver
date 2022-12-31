@@ -15,7 +15,7 @@ Solver::Solver(uint16_t w, uint16_t h, uint32_t m, SolverThreadData* thread_data
 	}
 	statistics_solver = new StatisticsTypeSolver();
 	statistics_types.push_back(statistics_solver);
-	statistics_collector->RegisterStatisticsProducer("Solver", (const StatisticsProducer*)(this));
+	statistics_collector->RegisterStatisticsProducer(Labels::Producers::SOLVER, (const StatisticsProducer*)(this));
 }
 
 Solver::~Solver()

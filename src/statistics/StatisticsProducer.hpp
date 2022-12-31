@@ -13,11 +13,11 @@ class StatisticsProducer
 
     ~StatisticsProducer();
 
-    const std::vector<StatisticsType*>& GetStatisticsTypes() const;
+    const StatisticsProducerStruct& GetStatisticsTypes() const;
 
     protected:
 
-    std::vector<StatisticsType*> statistics_types;
+    StatisticsProducerStruct statistics_types;
 
 };
 

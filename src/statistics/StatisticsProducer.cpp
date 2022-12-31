@@ -2,15 +2,18 @@
 
 StatisticsProducer::StatisticsProducer()
 {
-    statistics_types = std::vector<StatisticsType*>();
+    statistics_types = StatisticsProducerStruct();
 }
 
 StatisticsProducer::~StatisticsProducer()
 {
-
+    for(auto& type : statistics_types)
+    {
+        delete type;
+    }
 }
 
-const std::vector<StatisticsType*>& StatisticsProducer::GetStatisticsTypes() const
+const StatisticsProducerStruct& StatisticsProducer::GetStatisticsTypes() const
 {
     return statistics_types;
 }

@@ -1,9 +1,17 @@
 #ifndef STATISTICS_TYPE_HPP
 #define STATISTICS_TYPE_HPP
 
+#include "../StatisticsLabels.hpp"
+
 #include <cstdint>
 #include <string>
 #include <map>
+#include <vector>
+
+class StatisticsType;
+typedef std::map<std::string, uint64_t> StatisticsTypeLabelledStruct;
+typedef std::vector<StatisticsType*> StatisticsProducerStruct;
+typedef std::map<std::string, StatisticsProducerStruct> StatisticsCollectorLabelledStruct;
 
 class StatisticsType
 {
@@ -12,7 +20,7 @@ class StatisticsType
     StatisticsType();
     ~StatisticsType();
 
-    std::map<std::string, uint64_t> GetStatistics() const;
+    StatisticsTypeLabelledStruct GetStatistics() const;
 
     void operator+= (const StatisticsType& other);
 
@@ -20,7 +28,7 @@ class StatisticsType
 
     void Clear();
 
-    std::map<std::string, uint64_t> data_elements;
+    StatisticsTypeLabelledStruct data_elements;
 
     protected:
 

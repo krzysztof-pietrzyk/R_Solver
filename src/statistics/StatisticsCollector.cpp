@@ -2,7 +2,7 @@
 
 StatisticsCollector::StatisticsCollector()
 {
-    statistics = std::map<std::string, std::vector<StatisticsType*>>();
+    statistics = StatisticsCollectorLabelledStruct();
 }
 
 StatisticsCollector::~StatisticsCollector()
@@ -12,22 +12,22 @@ StatisticsCollector::~StatisticsCollector()
 
 void StatisticsCollector::RegisterStatisticsProducer(const std::string producer_label, const StatisticsProducer* statistics_producer)
 {
-    const std::vector<StatisticsType*>& statistics_types = statistics_producer->GetStatisticsTypes();
+    const StatisticsProducerStruct statistics_types = statistics_producer->GetStatisticsTypes();
     for(StatisticsType* type : statistics_types)
     {
         statistics[producer_label].push_back(type);
     }
 }
 
-void StatisticsCollector::CopyCurrentDataToOutput(std::map<std::string, std::vector<StatisticsType*>>& output) const
+void StatisticsCollector::CopyCurrentDataToOutput(StatisticsCollectorLabelledStruct& output) const
 {
     for(const auto& item : statistics)
     {
         const std::string& key = item.first;
-        const std::vector<StatisticsType*>& input_vector = item.second;
+        const StatisticsProducerStruct& input_vector = item.second;
         if(output.find(key) != output.end())
         {
-            std::vector<StatisticsType*>& output_vector = output[key];
+            StatisticsProducerStruct& output_vector = output[key];
             if(input_vector.size() != output_vector.size())
             {
                 // throw?
