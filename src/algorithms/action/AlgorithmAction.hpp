@@ -2,7 +2,7 @@
 #define ALGORITHM_ACTION_HPP
 
 #include "../Algorithm.hpp"
-#include "../../statistics/types/StatisticsTypeClicks.hpp"
+#include "../../statistics/collectors/StatisticsCollectorClicks.hpp"
 
 class AlgorithmAction : public Algorithm
 {
@@ -30,7 +30,7 @@ class AlgorithmAction : public Algorithm
 
     private:
 
-    StatisticsTypeClicks* statistics_clicks;
+    StatisticsCollectorClicks* statistics_clicks;
 
     AlgorithmStatus CheckGameOverConditions() const;
 

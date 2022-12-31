@@ -4,9 +4,9 @@
 #include "../algorithms/AlgorithmManager.hpp"
 #include "../view/GridViewFactory.hpp"
 #include "../generators/GridGeneratorFactory.hpp"
-#include "../statistics/StatisticsCollector.hpp"
+#include "../statistics/StatisticsAggregator.hpp"
 #include "../statistics/StatisticsProducer.hpp"
-#include "../statistics/types/StatisticsTypeSolver.hpp"
+#include "../statistics/collectors/StatisticsCollectorSolver.hpp"
 
 #include "SolverThreadData.hpp"
 
@@ -30,8 +30,8 @@ class Solver : public StatisticsProducer
 	GridGenerator* generator;
 	GridView* view;
 	AlgorithmManager* algorithm_manager;
-    StatisticsCollector* statistics_collector;
-    StatisticsTypeSolver* statistics_solver;
+    StatisticsAggregator* statistics_aggregator;
+    StatisticsCollectorSolver* statistics_solver;
 
     const uint32_t fields_to_uncover;
 

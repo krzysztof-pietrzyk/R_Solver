@@ -2,18 +2,18 @@
 
 StatisticsProducer::StatisticsProducer()
 {
-    statistics_types = StatisticsProducerStruct();
+    statistics_collectors = StatisticsProducerStruct();
 }
 
 StatisticsProducer::~StatisticsProducer()
 {
-    for(auto& type : statistics_types)
+    for(auto& type : statistics_collectors)
     {
         delete type;
     }
 }
 
-const StatisticsProducerStruct& StatisticsProducer::GetStatisticsTypes() const
+const StatisticsProducerStruct& StatisticsProducer::GetStatisticsCollectors() const
 {
-    return statistics_types;
+    return statistics_collectors;
 }

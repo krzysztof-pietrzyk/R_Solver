@@ -5,17 +5,17 @@ Solver::Solver(uint16_t w, uint16_t h, uint32_t m, SolverThreadData* thread_data
     generator(GridGeneratorFactory::Create(GridGeneratorType::GENERATOR_SAFE, *grid)),
     view(GridViewFactory::Create(GridViewType::GRID_VIEW_CONSOLE, *grid)),
     algorithm_manager(new AlgorithmManager(*grid)),
-	statistics_collector(new StatisticsCollector()),
+	statistics_aggregator(new StatisticsAggregator()),
 	thread_data(thread_data_), fields_to_uncover(grid->S - grid->M)
 {
 	const std::map<AlgorithmType, Algorithm*>& algorithms = algorithm_manager->GetAlgorithmsMap();
 	for(const auto& item : algorithms)
 	{
-		statistics_collector->RegisterStatisticsProducer(GetAlgorithmTypeLabel(item.first), (const StatisticsProducer*)(item.second));
+		statistics_aggregator->RegisterStatisticsProducer(GetAlgorithmTypeLabel(item.first), (const StatisticsProducer*)(item.second));
 	}
-	statistics_solver = new StatisticsTypeSolver();
-	statistics_types.push_back(statistics_solver);
-	statistics_collector->RegisterStatisticsProducer(Labels::Producers::SOLVER, (const StatisticsProducer*)(this));
+	statistics_solver = new StatisticsCollectorSolver();
+	statistics_collectors.push_back(statistics_solver);
+	statistics_aggregator->RegisterStatisticsProducer(Labels::Producers::SOLVER, (const StatisticsProducer*)(this));
 }
 
 Solver::~Solver()
@@ -25,7 +25,7 @@ Solver::~Solver()
     delete generator;
     delete grid;
 	delete statistics_solver;
-	delete statistics_collector;
+	delete statistics_aggregator;
 }
 
 void Solver::RunForever()
@@ -51,7 +51,7 @@ void Solver::Run()
 void Solver::UpdateThreadData()
 {
 	thread_data->mut.lock();
-	statistics_collector->CopyCurrentDataToOutput(thread_data->statistics_data);
+	statistics_aggregator->FlushCurrentDataToOutput(thread_data->statistics_data);
 	thread_data->mut.unlock();
 }
 

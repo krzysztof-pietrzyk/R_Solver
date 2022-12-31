@@ -1,7 +1,7 @@
 #ifndef SOLVER_THREAD_DATA_HPP
 #define SOLVER_THREAD_DATA_HPP
 
-#include "../statistics/types/StatisticsType.hpp"
+#include "../statistics/collectors/StatisticsCollector.hpp"
 
 #include <mutex>
 #include <string>
@@ -18,7 +18,7 @@ class SolverThreadData
 
 	std::mutex mut;
 
-    std::map<std::string, std::vector<StatisticsType*>> statistics_data;
+    std::map<Label, std::vector<StatisticsCollector*>> statistics_data;
 };
 
 #endif

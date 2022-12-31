@@ -38,11 +38,11 @@ void CheckStatus(SolverThreadData* data, vector<Solver*> solvers)
 		for(const auto& item : data->statistics_data)
 		{
 			const string& label = item.first;
-			const vector<StatisticsType*>& labelled_data_vector = item.second;
+			const vector<StatisticsCollector*>& labelled_data_vector = item.second;
 			text_to_print << label << "\n";
-			for(const StatisticsType* labelled_data : labelled_data_vector)
+			for(const StatisticsCollector* labelled_data : labelled_data_vector)
 			{
-				const auto labelled_data_statistics = labelled_data->GetStatistics();
+				const auto& labelled_data_statistics = labelled_data->GetStatistics();
 				for(const auto& temp : labelled_data_statistics)
 				{
 					text_to_print << "\t" << temp.first << ": " << to_string(temp.second) << "\n";

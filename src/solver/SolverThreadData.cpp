@@ -2,14 +2,14 @@
 
 SolverThreadData::SolverThreadData()
 {
-    statistics_data = std::map<std::string, std::vector<StatisticsType*>>();
+    statistics_data = std::map<Label, std::vector<StatisticsCollector*>>();
 }
 
 SolverThreadData::~SolverThreadData()
 {
     for(auto& item : statistics_data)
     {
-        std::vector<StatisticsType*> producer_data = item.second;
+        std::vector<StatisticsCollector*> producer_data = item.second;
         for(auto& data_pointer : producer_data)
         {
             delete data_pointer;

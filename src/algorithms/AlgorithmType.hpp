@@ -1,7 +1,8 @@
 #ifndef ALGORITHM_TYPE_HPP
 #define ALGORITHM_TYPE_HPP
 
-#include <string>
+#include "../utils/Label.hpp"
+
 #include <stdexcept>
 
 enum AlgorithmType
@@ -24,23 +25,23 @@ enum AlgorithmType
 
 namespace Labels::Producers::Algorithms
 {
-    static const std::string UNHANDLED_TYPE = "Unhandled AlgorithmType";
-    static const std::string FIRST_MOVE = "First Move";
-    static const std::string SIMPLE_CORNERS = "Simple Corners";
-    static const std::string REFRESH_BORDER = "Refresh Border";
-    static const std::string LAYER_ONE = "Layer One";
-    static const std::string REFRESH_SECTIONS = "Refresh Sections";
-    static const std::string LAYER_TWO = "Layer Two";
-    static const std::string REFRESH_SEGMENTS = "Refresh Segments";
-    static const std::string REFRESH_SUBSEGMENTS = "Refresh Subsegments";
-    static const std::string REFRESH_FACE = "Refresh Face";
-    static const std::string REFRESH_COMBINATIONS = "Refresh Combinations";
-    static const std::string COMBINATIONS_SAFE_MOVES = "Combinations Safe Moves";
-    static const std::string COMBINATIONS_LEAST_RISKY = "Combinations Least Risky";
-    static const std::string GIVE_UP = "Give Up";
+    static const Label UNHANDLED_TYPE = "Unhandled AlgorithmType";
+    static const Label FIRST_MOVE = "First Move";
+    static const Label SIMPLE_CORNERS = "Simple Corners";
+    static const Label REFRESH_BORDER = "Refresh Border";
+    static const Label LAYER_ONE = "Layer One";
+    static const Label REFRESH_SECTIONS = "Refresh Sections";
+    static const Label LAYER_TWO = "Layer Two";
+    static const Label REFRESH_SEGMENTS = "Refresh Segments";
+    static const Label REFRESH_SUBSEGMENTS = "Refresh Subsegments";
+    static const Label REFRESH_FACE = "Refresh Face";
+    static const Label REFRESH_COMBINATIONS = "Refresh Combinations";
+    static const Label COMBINATIONS_SAFE_MOVES = "Combinations Safe Moves";
+    static const Label COMBINATIONS_LEAST_RISKY = "Combinations Least Risky";
+    static const Label GIVE_UP = "Give Up";
 }
 
-static std::string GetAlgorithmTypeLabel(AlgorithmType type)
+static Label GetAlgorithmTypeLabel(AlgorithmType type)
 {
     switch(type)
     {

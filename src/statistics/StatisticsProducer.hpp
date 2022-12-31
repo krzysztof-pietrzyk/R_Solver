@@ -1,7 +1,7 @@
 #ifndef STATISTICS_PRODUCER_HPP
 #define STATISTICS_PRODUCER_HPP
 
-#include "types/StatisticsType.hpp"
+#include "collectors/StatisticsCollector.hpp"
 
 #include <vector>
 
@@ -13,11 +13,11 @@ class StatisticsProducer
 
     ~StatisticsProducer();
 
-    const StatisticsProducerStruct& GetStatisticsTypes() const;
+    const StatisticsProducerStruct& GetStatisticsCollectors() const;
 
     protected:
 
-    StatisticsProducerStruct statistics_types;
+    StatisticsProducerStruct statistics_collectors;
 
 };
 
