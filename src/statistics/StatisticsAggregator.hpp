@@ -4,10 +4,6 @@
 #include "collectors/StatisticsCollector.hpp"
 #include "StatisticsProducer.hpp"
 
-#include <map>
-#include <vector>
-#include <string>
-
 class StatisticsAggregator
 {
     public:

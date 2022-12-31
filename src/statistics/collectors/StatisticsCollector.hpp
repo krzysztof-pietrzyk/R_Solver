@@ -4,7 +4,6 @@
 #include "../StatisticsLabels.hpp"
 
 #include <cstdint>
-#include <string>
 #include <map>
 #include <vector>
 

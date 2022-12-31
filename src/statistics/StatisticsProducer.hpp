@@ -3,8 +3,6 @@
 
 #include "collectors/StatisticsCollector.hpp"
 
-#include <vector>
-
 class StatisticsProducer
 {
     public:
@@ -22,4 +20,3 @@ class StatisticsProducer
 };
 
 #endif
-
