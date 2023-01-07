@@ -16,7 +16,7 @@ class StatisticsCollector
 {
     public:
 
-    StatisticsCollector();
+    StatisticsCollector(StatisticsCollectorStruct init_struct);
     ~StatisticsCollector();
 
     void Enable();

@@ -31,6 +31,13 @@ void StatisticsElementUINT64::Clear()
     element_value = 0U;
 }
 
+StatisticsElement* StatisticsElementUINT64::Clone()
+{
+    StatisticsElement* clone = new StatisticsElementUINT64();
+    ((StatisticsElementUINT64*)clone)->element_value = element_value;
+    return clone;
+}
+
 std::string StatisticsElementUINT64::String()
 {
     return std::to_string(element_value);

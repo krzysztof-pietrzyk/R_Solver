@@ -14,6 +14,7 @@ class StatisticsElement
     virtual void Enable() = 0;
     virtual void Disable() = 0;
     virtual void Clear() = 0;
+    virtual StatisticsElement* Clone() = 0;
     virtual std::string String() = 0;
 
     virtual void operator+=(const StatisticsElement& other) = 0;

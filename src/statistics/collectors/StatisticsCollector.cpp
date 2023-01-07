@@ -1,8 +1,8 @@
 #include "StatisticsCollector.hpp"
 
-StatisticsCollector::StatisticsCollector()
+StatisticsCollector::StatisticsCollector(StatisticsCollectorStruct init_struct)
 {
-    labelled_data_elements = StatisticsCollectorStruct();
+    labelled_data_elements = init_struct;
     Enable();
 }
 
@@ -67,7 +67,7 @@ StatisticsCollector* StatisticsCollector::Clone() const
     for(const auto& item : labelled_data_elements)
     {
         const Label& key = item.first;
-        clone->labelled_data_elements[key] = item.second;
+        clone->labelled_data_elements[key] = item.second->Clone();
     }
     return clone;
 }

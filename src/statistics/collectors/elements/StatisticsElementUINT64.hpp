@@ -16,6 +16,7 @@ class StatisticsElementUINT64 : public StatisticsElement
     virtual void Enable() override;
     virtual void Disable() override;
     virtual void Clear() override;
+    virtual StatisticsElement* Clone() override;
     virtual std::string String() override;
 
     virtual void operator+=(const StatisticsElement& other) override;
