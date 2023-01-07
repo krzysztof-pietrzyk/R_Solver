@@ -2,13 +2,13 @@
 #define STATISTICS_TYPE_HPP
 
 #include "../StatisticsLabels.hpp"
+#include "elements/StatisticsElement.hpp"
 
-#include <cstdint>
 #include <map>
 #include <vector>
 
 class StatisticsCollector;
-typedef std::map<Label, uint64_t> StatisticsCollectorStruct;
+typedef std::map<Label, StatisticsElement*> StatisticsCollectorStruct;
 typedef std::vector<StatisticsCollector*> StatisticsProducerStruct;
 typedef std::map<Label, StatisticsProducerStruct> StatisticsAggregatorStruct;
 
@@ -19,17 +19,20 @@ class StatisticsCollector
     StatisticsCollector();
     ~StatisticsCollector();
 
-    const StatisticsCollectorStruct& GetStatistics() const;
+    void Enable();
+    void Disable();
+    void Clear();
 
     void operator+= (const StatisticsCollector& other);
+    void operator= (const StatisticsCollector& other);
+
+    const StatisticsCollectorStruct& GetStatistics() const;
 
     StatisticsCollector* Clone() const;
 
-    void Clear();
+    protected:
 
     StatisticsCollectorStruct labelled_data_elements;
-
-    protected:
 
     virtual StatisticsCollector* CreateNew() const = 0;
 };

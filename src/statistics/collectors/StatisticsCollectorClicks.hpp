@@ -2,6 +2,7 @@
 #define STATISTICS_COLLECTOR_CLICKS_HPP
 
 #include "StatisticsCollector.hpp"
+#include "elements/StatisticsElementUINT64.hpp"
 
 class StatisticsCollectorClicks : public StatisticsCollector
 {
@@ -11,10 +12,10 @@ class StatisticsCollectorClicks : public StatisticsCollector
 
     ~StatisticsCollectorClicks();
 
-    uint64_t& left_clicks;
-    uint64_t& wasted_left_clicks;
-    uint64_t& right_clicks;
-    uint64_t& wasted_right_clicks;
+    StatisticsElementUINT64& left_clicks;
+    StatisticsElementUINT64& wasted_left_clicks;
+    StatisticsElementUINT64& right_clicks;
+    StatisticsElementUINT64& wasted_right_clicks;
 
     protected:
 

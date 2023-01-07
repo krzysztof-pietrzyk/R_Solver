@@ -41,10 +41,10 @@ bool AlgorithmAction::LeftClick(const uint32_t field) const
 {
     bool result = Algorithm::LeftClick(field);
     StatisticsCollectorClicks* ref = (StatisticsCollectorClicks*)statistics_clicks;
-    ref->left_clicks++;
+    ref->left_clicks += 1;
     if(!result)
     {
-        ref->wasted_left_clicks++;
+        ref->wasted_left_clicks += 1;
     }
     return result;
 }
@@ -53,10 +53,10 @@ bool AlgorithmAction::RightClick(const uint32_t field) const
 {
     bool result = Algorithm::RightClick(field);
     StatisticsCollectorClicks* ref = (StatisticsCollectorClicks*)statistics_clicks;
-    ref->right_clicks++;
+    ref->right_clicks += 1;
     if(!result)
     {
-        ref->wasted_right_clicks++;
+        ref->wasted_right_clicks += 1;
     }
     return result;
 }

@@ -57,17 +57,17 @@ void Solver::UpdateThreadData()
 
 void Solver::UpdateSolverStatistics()
 {
-	statistics_solver->games_played++;
+	statistics_solver->games_played += 1;
 	uint32_t uncovered_fields = grid->visible_fields_index;
 	if(!grid->is_lost)
 	{
 		if(uncovered_fields == fields_to_uncover)
 		{
-			statistics_solver->games_won++;
+			statistics_solver->games_won += 1;
 		}
 		else
 		{
-			statistics_solver->games_abandoned++;
+			statistics_solver->games_abandoned += 1;
 		}
 		statistics_solver->uncovered_fields += uncovered_fields;
 	}

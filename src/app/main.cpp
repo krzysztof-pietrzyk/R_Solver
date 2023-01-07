@@ -45,7 +45,7 @@ void CheckStatus(SolverThreadData* data, vector<Solver*> solvers)
 				const auto& labelled_data_statistics = labelled_data->GetStatistics();
 				for(const auto& temp : labelled_data_statistics)
 				{
-					text_to_print << "\t" << temp.first << ": " << to_string(temp.second) << "\n";
+					text_to_print << "\t" << temp.first << ": " << temp.second->String() << "\n";
 				}
 			}
 		}
