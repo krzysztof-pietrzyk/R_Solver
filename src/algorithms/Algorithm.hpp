@@ -30,9 +30,7 @@ class Algorithm : public StatisticsProducer
 
     const AlgorithmDataStorage& data;
 
-    virtual AlgorithmStatus Setup();
     virtual AlgorithmStatus Execution() = 0;
-    virtual AlgorithmStatus Teardown();
 
     virtual bool LeftClick(const uint32_t field) const;
 

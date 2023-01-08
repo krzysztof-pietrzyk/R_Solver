@@ -19,9 +19,6 @@ AlgorithmStatus Algorithm::Run()
     return execution_result;
 }
 
-AlgorithmStatus Algorithm::Setup() { return AlgorithmStatus::NO_STATUS; }
-AlgorithmStatus Algorithm::Teardown() { return AlgorithmStatus::NO_STATUS; }
-
 bool Algorithm::LeftClick(const uint32_t field) const
 {
     return _grid.LeftClick(field);
