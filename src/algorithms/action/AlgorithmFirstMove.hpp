@@ -15,7 +15,7 @@ class AlgorithmFirstMove : public AlgorithmAction
 
     uint32_t first_move_field;
 
-    void RunInternal() override;
+    AlgorithmStatus Execution() override;
 
     private:
 

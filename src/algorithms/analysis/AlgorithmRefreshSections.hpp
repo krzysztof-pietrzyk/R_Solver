@@ -26,7 +26,7 @@ class AlgorithmRefreshSections : public Algorithm
 
     ~AlgorithmRefreshSections();
 
-    AlgorithmStatus Run() override;
+    AlgorithmStatus Execution() override;
 
     protected:
 

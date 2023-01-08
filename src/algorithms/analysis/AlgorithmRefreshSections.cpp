@@ -18,7 +18,7 @@ AlgorithmRefreshSections::AlgorithmRefreshSections(GridManager& grid_, Algorithm
 
 AlgorithmRefreshSections::~AlgorithmRefreshSections() {}
 
-AlgorithmStatus AlgorithmRefreshSections::Run()
+AlgorithmStatus AlgorithmRefreshSections::Execution()
 {
     Clear();
 

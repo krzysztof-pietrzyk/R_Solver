@@ -11,7 +11,7 @@ class AlgorithmRefreshFace : public Algorithm
 
     ~AlgorithmRefreshFace();
 
-    AlgorithmStatus Run() override;
+    AlgorithmStatus Execution() override;
 
     protected:
 

@@ -5,7 +5,7 @@ AlgorithmCombinationsLeastRisky::AlgorithmCombinationsLeastRisky(GridManager& gr
 
 AlgorithmCombinationsLeastRisky::~AlgorithmCombinationsLeastRisky() {}
 
-void AlgorithmCombinationsLeastRisky::RunInternal()
+AlgorithmStatus AlgorithmCombinationsLeastRisky::Execution()
 {
     const uint32_t safest_field = FindSafestField();
     // Only click if a field was found
@@ -13,6 +13,8 @@ void AlgorithmCombinationsLeastRisky::RunInternal()
     {
         LeftClick(safest_field);
     }
+
+    return AlgorithmStatus::NO_STATUS;
 }
 
 uint32_t AlgorithmCombinationsLeastRisky::FindSafestField() const

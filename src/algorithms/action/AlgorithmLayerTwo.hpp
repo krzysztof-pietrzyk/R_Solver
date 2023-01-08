@@ -23,7 +23,7 @@ class AlgorithmLayerTwo : public AlgorithmAction
     std::vector<uint32_t> not_common_current;
     std::vector<uint32_t> not_common_neighbor;
 
-    void RunInternal() override;
+    AlgorithmStatus Execution() override;
 
     uint32_t CompareSections(const Section& a, const Section& b);
 

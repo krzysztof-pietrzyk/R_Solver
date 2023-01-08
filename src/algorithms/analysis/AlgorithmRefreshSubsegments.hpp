@@ -11,7 +11,7 @@ class AlgorithmRefreshSubsegments : public Algorithm
 
     ~AlgorithmRefreshSubsegments();
 
-    AlgorithmStatus Run() override;
+    AlgorithmStatus Execution() override;
 
     protected:
 

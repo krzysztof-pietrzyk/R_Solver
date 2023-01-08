@@ -16,7 +16,7 @@ AlgorithmSimpleCorners::AlgorithmSimpleCorners(GridManager& grid_, AlgorithmData
 
 AlgorithmSimpleCorners::~AlgorithmSimpleCorners() {}
 
-void AlgorithmSimpleCorners::RunInternal()
+AlgorithmStatus AlgorithmSimpleCorners::Execution()
 {
     uint32_t chosen_corner = UINT32_MAX;
     for(const uint32_t corner : corners)
@@ -27,5 +27,7 @@ void AlgorithmSimpleCorners::RunInternal()
             break;
         }
     }
-    if(chosen_corner != UINT32_MAX) LeftClick(chosen_corner);
+    if(chosen_corner != UINT32_MAX) { LeftClick(chosen_corner); }
+
+    return AlgorithmStatus::NO_STATUS;
 }

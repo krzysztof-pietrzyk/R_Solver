@@ -2,19 +2,20 @@
 
 AlgorithmAction::AlgorithmAction(GridManager& grid_, AlgorithmDataStorage& data_) : Algorithm(grid_, data_)
 {
-    statistics_clicks = new StatisticsCollectorClicks();
+    statistics_clicks = new StatisticsCollectorClicks();  // deleted in StatisticsProducer
     statistics_collectors.push_back(statistics_clicks);
 }
 
 AlgorithmAction::~AlgorithmAction()
 {
-    delete statistics_clicks;
+
 }
 
 AlgorithmStatus AlgorithmAction::Run()
 {
+    statistics_executions->executions += 1;
     const uint32_t number_of_clicks_before = grid.left_click_counter + grid.right_click_counter;
-    RunInternal();
+    Execution();
     const uint32_t number_of_clicks_after = grid.left_click_counter + grid.right_click_counter;
     
     AlgorithmStatus action_result = GetActionResult(number_of_clicks_after - number_of_clicks_before);

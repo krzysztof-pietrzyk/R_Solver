@@ -22,8 +22,6 @@ class AlgorithmAction : public Algorithm
 
     protected:
 
-    virtual void RunInternal() = 0;
-
     virtual bool LeftClick(const uint32_t field) const override;
 
     virtual bool RightClick(const uint32_t field) const override;

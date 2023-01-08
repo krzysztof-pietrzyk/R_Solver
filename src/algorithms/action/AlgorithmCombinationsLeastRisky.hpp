@@ -13,7 +13,7 @@ class AlgorithmCombinationsLeastRisky : public AlgorithmAction
 
     protected:
 
-    void RunInternal() override;
+    AlgorithmStatus Execution() override;
 
     uint32_t FindSafestField() const;
 

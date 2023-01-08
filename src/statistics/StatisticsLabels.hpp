@@ -22,6 +22,11 @@ namespace Labels
             static const Label GAMES_ABANDONED = "Games abandoned";
             static const Label TOTAL_FIELDS_UNCOVERED = "Total fields uncovered";
         }
+
+        namespace Executions
+        {
+            static const Label EXECUTIONS = "Times executed";
+        }
     }
 
     namespace Producers

@@ -3,6 +3,7 @@
 
 #include "../grid/GridManager.hpp"
 #include "../statistics/StatisticsProducer.hpp"
+#include "../statistics/collectors/StatisticsCollectorExecutions.hpp"
 #include "AlgorithmDataStorage.hpp"
 #include "AlgorithmStatus.hpp"
 
@@ -19,13 +20,19 @@ class Algorithm : public StatisticsProducer
 
     ~Algorithm();
 
-    virtual AlgorithmStatus Run() = 0;
+    virtual AlgorithmStatus Run();
 
     protected:
+
+    StatisticsCollectorExecutions* statistics_executions;
 
     const GridManager& grid;
 
     const AlgorithmDataStorage& data;
+
+    virtual AlgorithmStatus Setup();
+    virtual AlgorithmStatus Execution() = 0;
+    virtual AlgorithmStatus Teardown();
 
     virtual bool LeftClick(const uint32_t field) const;
 

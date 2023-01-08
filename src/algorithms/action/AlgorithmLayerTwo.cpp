@@ -9,7 +9,7 @@ AlgorithmLayerTwo::AlgorithmLayerTwo(GridManager& grid_, AlgorithmDataStorage& d
 
 AlgorithmLayerTwo::~AlgorithmLayerTwo() {}
 
-void AlgorithmLayerTwo::RunInternal()
+AlgorithmStatus AlgorithmLayerTwo::Execution()
 {
     const uint32_t sections_origins_index = data.sections_origins_index;
     for(size_t i = 0; i < sections_origins_index; i++)
@@ -30,6 +30,8 @@ void AlgorithmLayerTwo::RunInternal()
             ExecNeighborPerspectiveCondition(current_section, neighbor_section, common_fields_l);
         }
     }
+
+    return AlgorithmStatus::NO_STATUS;
 }
 
 uint32_t AlgorithmLayerTwo::CompareSections(const Section& current_section, const Section& neighbor_section)
