@@ -19,8 +19,8 @@ class StatisticsCollector
     StatisticsCollector(StatisticsCollectorStruct init_struct);
     ~StatisticsCollector();
 
-    void Enable();
-    void Disable();
+    virtual void Enable();
+    virtual void Disable();
     void Clear();
 
     void operator+= (const StatisticsCollector& other);
@@ -35,6 +35,8 @@ class StatisticsCollector
     StatisticsCollectorStruct labelled_data_elements;
 
     virtual StatisticsCollector* CreateNew() const = 0;
+
+    void _DoNothing(...);
 };
 
 #endif

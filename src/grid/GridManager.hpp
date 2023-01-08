@@ -1,11 +1,13 @@
 #ifndef GRID_MANAGER_HPP
 #define GRID_MANAGER_HPP
 
+#include "../statistics/StatisticsProducer.hpp"
+
 #include <vector>
 #include <stdexcept>
 #include <cstdint>
 
-class GridManager
+class GridManager : public StatisticsProducer
 {
     public:
 

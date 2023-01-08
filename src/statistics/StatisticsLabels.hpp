@@ -28,11 +28,25 @@ namespace Labels
         {
             static const Label EXECUTIONS = "Times executed";
         }
+
+        namespace Grid
+        {
+            static const Label ZERO = "Total 0_zeros";
+            static const Label ONE = "Total 1_ones";
+            static const Label TWO = "Total 2_twos";
+            static const Label THREE = "Total 3_threes";
+            static const Label FOUR = "Total 4_fours";
+            static const Label FIVE = "Total 5_fives";
+            static const Label SIX = "Total 6_sixes";
+            static const Label SEVEN = "Total 7_sevens";
+            static const Label EIGHT = "Total 8_eights";
+        }
     }
 
     namespace Producers
     {
         static const Label SOLVER = "Solver";
+        static const Label GRID = "Grid";
     }
 }
 

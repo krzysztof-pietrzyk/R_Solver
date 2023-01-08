@@ -13,6 +13,7 @@ Solver::Solver(uint16_t w, uint16_t h, uint32_t m, SolverThreadData* thread_data
 	{
 		statistics_aggregator->RegisterStatisticsProducer(GetAlgorithmTypeLabel(item.first), (const StatisticsProducer*)(item.second));
 	}
+	statistics_aggregator->RegisterStatisticsProducer(Labels::Producers::GRID, (const StatisticsProducer*)(grid));
 	statistics_solver = new StatisticsCollectorSolver();
 	statistics_collectors.push_back(statistics_solver);
 	statistics_aggregator->RegisterStatisticsProducer(Labels::Producers::SOLVER, (const StatisticsProducer*)(this));
@@ -24,7 +25,6 @@ Solver::~Solver()
     delete view;
     delete generator;
     delete grid;
-	delete statistics_solver;
 	delete statistics_aggregator;
 }
 

@@ -71,3 +71,8 @@ StatisticsCollector* StatisticsCollector::Clone() const
     }
     return clone;
 }
+
+void StatisticsCollector::_DoNothing(...)
+{
+    
+}

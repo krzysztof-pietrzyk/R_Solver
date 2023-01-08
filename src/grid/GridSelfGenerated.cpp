@@ -7,6 +7,9 @@ GridSelfGenerated::GridSelfGenerated(uint16_t w, uint16_t h, uint32_t m)
     zcr_zeros = std::vector<uint32_t>(S, 0);
     zcr_zeros_index = 0;
     zcr_is_zero = std::vector<bool>(S, false);
+
+    statistics_field_types = new StatisticsCollectorGridFieldTypes();
+    statistics_collectors.push_back(statistics_field_types);
 }
 
 GridSelfGenerated::~GridSelfGenerated()
@@ -57,6 +60,14 @@ void GridSelfGenerated::CalculateValues()
         }
         field_values[current_field] = current_field_value;
     }
+
+    // Set all mine fields to value 9 to avoid "trashy data"
+    for(const uint32_t& current_field : mines)
+    {
+        field_values[current_field] = 9;
+    }
+
+    statistics_field_types->CountFieldTypes(field_values);
 }
 
 void GridSelfGenerated::CalculateHash()
