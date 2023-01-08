@@ -16,6 +16,7 @@ class StatisticsCollectorSolver : public StatisticsCollector
     StatisticsElementUINT64& games_won;
     StatisticsElementUINT64& games_abandoned;
     StatisticsElementUINT64& uncovered_fields;
+    StatisticsElementUINT64& flagged_mines;
 
     protected:
 

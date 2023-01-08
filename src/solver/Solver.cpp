@@ -58,6 +58,7 @@ void Solver::UpdateThreadData()
 void Solver::UpdateSolverStatistics()
 {
 	statistics_solver->games_played += 1;
+	statistics_solver->flagged_mines += grid->flags_index;
 	uint32_t uncovered_fields = grid->visible_fields_index;
 	if(!grid->is_lost)
 	{

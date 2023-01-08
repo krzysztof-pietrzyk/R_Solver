@@ -21,6 +21,7 @@ namespace Labels
             static const Label GAMES_WON = "Games won";
             static const Label GAMES_ABANDONED = "Games abandoned";
             static const Label TOTAL_FIELDS_UNCOVERED = "Total fields uncovered";
+            static const Label TOTAL_MINES_FLAGGED = "Total mines flagged";
         }
 
         namespace Executions
