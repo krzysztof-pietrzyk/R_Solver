@@ -98,6 +98,16 @@ BigNum BigNum::operator/ (const BigNum& other) const { BigNum result = BigNum(*t
 void   BigNum::operator+=(const BigNum& other)
 {
     // This operator is about 12 times slower than adding long double to long double
+    if(base == 0.0)
+    {
+        base = other.base;
+        exponent = other.exponent;
+        return;
+    }
+    else if(other.base == 0.0)
+    {
+        return;
+    }
     if(exponent > other.exponent)
     {
         const uint64_t exp_diff = exponent - other.exponent;
