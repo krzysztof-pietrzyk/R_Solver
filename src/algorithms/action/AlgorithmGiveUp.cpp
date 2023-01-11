@@ -7,7 +7,8 @@ AlgorithmGiveUp::AlgorithmGiveUp(GridManager& grid_, AlgorithmDataStorage& data_
 
 AlgorithmGiveUp::~AlgorithmGiveUp() {}
 
-void AlgorithmGiveUp::RunInternal()
+AlgorithmStatus AlgorithmGiveUp::Execution()
 {
     D_is_lost = true;
+    return AlgorithmStatus::NO_STATUS;
 }

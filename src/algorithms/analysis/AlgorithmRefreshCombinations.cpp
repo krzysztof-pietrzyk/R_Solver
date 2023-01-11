@@ -24,7 +24,7 @@ AlgorithmRefreshCombinations::AlgorithmRefreshCombinations(GridManager& grid_, A
 
 AlgorithmRefreshCombinations::~AlgorithmRefreshCombinations() {}
 
-AlgorithmStatus AlgorithmRefreshCombinations::Run()
+AlgorithmStatus AlgorithmRefreshCombinations::Execution()
 {
     Clear();
     remaining_mines = grid.M - grid.flags_index;

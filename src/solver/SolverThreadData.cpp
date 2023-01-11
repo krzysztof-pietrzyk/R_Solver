@@ -2,10 +2,17 @@
 
 SolverThreadData::SolverThreadData()
 {
-    mut;
-    tries = 0;
-    wins = 0;
-    completion = 0.0;
+    statistics_data = std::map<Label, std::vector<StatisticsCollector*>>();
 }
 
-SolverThreadData::~SolverThreadData() {}
+SolverThreadData::~SolverThreadData()
+{
+    for(auto& item : statistics_data)
+    {
+        std::vector<StatisticsCollector*> producer_data = item.second;
+        for(auto& data_pointer : producer_data)
+        {
+            delete data_pointer;
+        }
+    }
+}

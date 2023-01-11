@@ -58,7 +58,13 @@
     "unordered_set": "cpp",
     "set": "cpp",
     "variant": "cpp",
-    "bitset": "cpp"
+    "bitset": "cpp",
+    "bit": "cpp",
+    "compare": "cpp",
+    "concepts": "cpp",
+    "numbers": "cpp",
+    "semaphore": "cpp",
+    "stop_token": "cpp"
   },
 
   "testMate.cpp.test.advancedExecutables": [

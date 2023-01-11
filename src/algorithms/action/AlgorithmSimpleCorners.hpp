@@ -21,7 +21,7 @@ class AlgorithmSimpleCorners : public AlgorithmAction
 
     std::vector<uint32_t> corners;
 
-    void RunInternal() override;
+    AlgorithmStatus Execution() override;
 };
 
 #endif

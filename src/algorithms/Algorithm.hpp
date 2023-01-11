@@ -2,10 +2,12 @@
 #define ALGORITHM_HPP
 
 #include "../grid/GridManager.hpp"
+#include "../statistics/StatisticsProducer.hpp"
+#include "../statistics/collectors/StatisticsCollectorExecutions.hpp"
 #include "AlgorithmDataStorage.hpp"
 #include "AlgorithmStatus.hpp"
 
-class Algorithm
+class Algorithm : public StatisticsProducer
 {
     /*
     Abstract base class for algorithm objects.
@@ -18,17 +20,21 @@ class Algorithm
 
     ~Algorithm();
 
-    virtual AlgorithmStatus Run() = 0;
+    virtual AlgorithmStatus Run();
 
     protected:
+
+    StatisticsCollectorExecutions* statistics_executions;
 
     const GridManager& grid;
 
     const AlgorithmDataStorage& data;
 
-    void LeftClick(const uint32_t field) const;
+    virtual AlgorithmStatus Execution() = 0;
 
-    void RightClick(const uint32_t field) const;
+    virtual bool LeftClick(const uint32_t field) const;
+
+    virtual bool RightClick(const uint32_t field) const;
 
     uint8_t FieldValue(const uint32_t field) const;
 

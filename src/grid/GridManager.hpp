@@ -1,11 +1,15 @@
 #ifndef GRID_MANAGER_HPP
 #define GRID_MANAGER_HPP
 
+#include "../statistics/StatisticsProducer.hpp"
+
 #include <vector>
 #include <stdexcept>
 #include <cstdint>
 
-class GridManager
+//#define DEBUG_MODE_PRINT
+
+class GridManager : public StatisticsProducer
 {
     public:
 
@@ -35,11 +39,13 @@ class GridManager
 
     uint8_t FieldValue(uint32_t field);
 
-    virtual void LeftClick(uint32_t field) = 0;
+    virtual bool LeftClick(uint32_t field) = 0;
 
-    virtual void RightClick(uint32_t field) = 0;
+    virtual bool RightClick(uint32_t field) = 0;
 
-    // virtual void PrintUncovered() = 0;
+    #ifdef DEBUG_MODE_PRINT
+    virtual void PrintUncovered() const = 0;
+    #endif
 
     protected:
 

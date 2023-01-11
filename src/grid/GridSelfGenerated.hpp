@@ -3,6 +3,7 @@
 
 #include "Grid.hpp"
 #include "GridHash.hpp"
+#include "../statistics/collectors/StatisticsCollectorGridFieldTypes.hpp"
 
 class GridSelfGenerated : public Grid
 {
@@ -14,21 +15,25 @@ class GridSelfGenerated : public Grid
 
     ~GridSelfGenerated();
 
-    void LeftClick(uint32_t field) override;
+    bool LeftClick(uint32_t field) override;
 
-    void RightClick(uint32_t field) override;
+    bool RightClick(uint32_t field) override;
 
     void CalculateHash();
 
     void CalculateValues();
 
-    // void PrintUncovered();
+    #ifdef DEBUG_MODE_PRINT
+    virtual void PrintUncovered() const override;
+    #endif
 
     protected:
 
     std::vector<uint32_t> zcr_zeros;  // Temporary array used in ZeroChainReaction
     uint32_t zcr_zeros_index;  // Temporary index used in ZeroChainReaction
     std::vector<bool> zcr_is_zero;  // Temporary array used in ZeroChainReaction
+
+    StatisticsCollectorGridFieldTypes* statistics_field_types;
 
     void ZeroChainReaction(uint32_t field);
 

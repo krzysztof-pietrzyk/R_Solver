@@ -19,7 +19,7 @@ class AlgorithmRefreshSegments : public Algorithm
 
     ~AlgorithmRefreshSegments();
 
-    AlgorithmStatus Run() override;
+    AlgorithmStatus Execution() override;
 
     protected:
     

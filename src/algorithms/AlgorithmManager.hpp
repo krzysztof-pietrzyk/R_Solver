@@ -18,6 +18,8 @@ class AlgorithmManager
 
     bool RunAll() const;
 
+    const std::map<AlgorithmType, Algorithm*>& GetAlgorithmsMap() const;
+
     private:
 
     GridManager* grid;

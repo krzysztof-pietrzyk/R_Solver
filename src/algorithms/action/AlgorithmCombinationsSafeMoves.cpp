@@ -5,7 +5,7 @@ AlgorithmCombinationsSafeMoves::AlgorithmCombinationsSafeMoves(GridManager& grid
 
 AlgorithmCombinationsSafeMoves::~AlgorithmCombinationsSafeMoves() {}
 
-void AlgorithmCombinationsSafeMoves::RunInternal()
+AlgorithmStatus AlgorithmCombinationsSafeMoves::Execution()
 {
     const BigNum total_combinations = data.total_combinations;
     const uint32_t face_length = data.face_index;
@@ -25,4 +25,6 @@ void AlgorithmCombinationsSafeMoves::RunInternal()
             RightClick(face_field);
         }
     }
+
+    return AlgorithmStatus::NO_STATUS;
 }

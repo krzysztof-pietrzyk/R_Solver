@@ -29,13 +29,13 @@ class AlgorithmLayerOne : public AlgorithmAction
 
     protected:
 
-    void RunInternal() override;
+    AlgorithmStatus Execution() override;
 
     LayerOneFieldSignature GetFieldSignature(const uint32_t border_field) const;
 
-    void CheckForSafeClicks(const LayerOneFieldSignature signature) const;
+    void CheckForSafeClicks(const LayerOneFieldSignature& signature) const;
 
-    void CheckForMines(const LayerOneFieldSignature signature) const;
+    void CheckForMines(const LayerOneFieldSignature& signature) const;
 };
 
 #endif

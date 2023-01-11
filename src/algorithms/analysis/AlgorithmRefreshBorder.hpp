@@ -22,7 +22,7 @@ class AlgorithmRefreshBorder : public Algorithm
 
     ~AlgorithmRefreshBorder();
 
-    AlgorithmStatus Run() override;
+    AlgorithmStatus Execution() override;
 
     protected:
 

@@ -7,6 +7,9 @@ GridSelfGenerated::GridSelfGenerated(uint16_t w, uint16_t h, uint32_t m)
     zcr_zeros = std::vector<uint32_t>(S, 0);
     zcr_zeros_index = 0;
     zcr_is_zero = std::vector<bool>(S, false);
+
+    statistics_field_types = new StatisticsCollectorGridFieldTypes();
+    statistics_collectors.push_back(statistics_field_types);
 }
 
 GridSelfGenerated::~GridSelfGenerated()
@@ -14,30 +17,33 @@ GridSelfGenerated::~GridSelfGenerated()
 
 }
 
-void GridSelfGenerated::LeftClick(uint32_t field)
+bool GridSelfGenerated::LeftClick(uint32_t field)
 {
-    // cout << "Left Click @ " << field << endl;
-    if(is_lost) return;
-    if(is_visible[field]) return;
+    if(is_visible[field] || is_lost)
+    {
+        return false;
+    }
     left_click_counter++;
     is_visible[field] = true;
     visible_fields[visible_fields_index++] = field;
     if(is_mine[field])
     {
-        is_lost = true; 
-        //cout << "LOST: " << field << endl;
+        is_lost = true;
     } 
-    else if(field_values[field] == 0) ZeroChainReaction(field); 
+    else if(field_values[field] == 0) ZeroChainReaction(field);
+    return true;
 }
 
-void GridSelfGenerated::RightClick(uint32_t field)
+bool GridSelfGenerated::RightClick(uint32_t field)
 {
-    // cout << "Right Click @ " << field << endl;
-    if(is_lost) return;
-    if(is_flag[field]) return;
+    if(is_flag[field] || is_lost)
+    {
+        return false;
+    }
     right_click_counter++;
     is_flag[field] = true;
     flags[flags_index++] = field;
+    return true;
 }
 
 void GridSelfGenerated::CalculateValues()
@@ -54,6 +60,14 @@ void GridSelfGenerated::CalculateValues()
         }
         field_values[current_field] = current_field_value;
     }
+
+    // Set all mine fields to value 9 to avoid "trashy data"
+    for(const uint32_t& current_field : mines)
+    {
+        field_values[current_field] = 9;
+    }
+
+    statistics_field_types->CountFieldTypes(field_values);
 }
 
 void GridSelfGenerated::CalculateHash()
@@ -103,25 +117,28 @@ void GridSelfGenerated::ClearZCR()
     zcr_zeros_index = 0;
 }
 
-// #include <iostream>
-// using namespace std;
+#ifdef DEBUG_MODE_PRINT
+#include <iostream>
+using namespace std;
 
-// void GridSelfGenerated::PrintUncovered()
-// {
-//     for(size_t i = 0; i < H; i++)
-//     {
-//         for(size_t j = 0; j < W; j++)
-//         {
-//             const uint32_t f = i * W + j;
-//             if(is_flag[f]) cout << ".";
-//             else if(is_visible[f])
-//             {
-//                 if(field_values[f] == 0) cout << " ";
-//                 else cout << int(field_values[f]);
-//             } 
-//             else cout << "#";
-//         }
-//         cout << endl;
-//     }
-//     cout << endl;
-// }
+void GridSelfGenerated::PrintUncovered() const
+{
+    for(size_t i = 0; i < H; i++)
+    {
+        for(size_t j = 0; j < W; j++)
+        {
+            const uint32_t f = i * W + j;
+            if(is_flag[f]) cout << ".";
+            else if(is_visible[f])
+            {
+                if(field_values[f] == 0) cout << " ";
+                else if(is_mine[f]) cout << "!";
+                else cout << int(field_values[f]);
+            } 
+            else cout << "#";
+        }
+        cout << endl;
+    }
+    cout << hash.ToString() << endl;
+}
+#endif

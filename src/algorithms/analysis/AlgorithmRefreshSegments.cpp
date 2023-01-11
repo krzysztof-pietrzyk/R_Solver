@@ -15,7 +15,7 @@ AlgorithmRefreshSegments::AlgorithmRefreshSegments(GridManager& grid_, Algorithm
 
 AlgorithmRefreshSegments::~AlgorithmRefreshSegments() {}
 
-AlgorithmStatus AlgorithmRefreshSegments::Run()
+AlgorithmStatus AlgorithmRefreshSegments::Execution()
 {
     const uint32_t sections_origins_index = data.sections_origins_index;
     Clear();

@@ -5,12 +5,18 @@ Solver::Solver(uint16_t w, uint16_t h, uint32_t m, SolverThreadData* thread_data
     generator(GridGeneratorFactory::Create(GridGeneratorType::GENERATOR_SAFE, *grid)),
     view(GridViewFactory::Create(GridViewType::GRID_VIEW_CONSOLE, *grid)),
     algorithm_manager(new AlgorithmManager(*grid)),
+	statistics_aggregator(new StatisticsAggregator()),
 	thread_data(thread_data_), fields_to_uncover(grid->S - grid->M)
 {
-	tries = 0;
-	wins = 0;
-	last_read_tries = 0;
-    last_read_wins = 0;
+	const std::map<AlgorithmType, Algorithm*>& algorithms = algorithm_manager->GetAlgorithmsMap();
+	for(const auto& item : algorithms)
+	{
+		statistics_aggregator->RegisterStatisticsProducer(GetAlgorithmTypeLabel(item.first), (const StatisticsProducer*)(item.second));
+	}
+	statistics_aggregator->RegisterStatisticsProducer(Labels::Producers::GRID, (const StatisticsProducer*)(grid));
+	statistics_solver = new StatisticsCollectorSolver();
+	statistics_collectors.push_back(statistics_solver);
+	statistics_aggregator->RegisterStatisticsProducer(Labels::Producers::SOLVER, (const StatisticsProducer*)(this));
 }
 
 Solver::~Solver()
@@ -19,18 +25,17 @@ Solver::~Solver()
     delete view;
     delete generator;
     delete grid;
+	delete statistics_aggregator;
 }
 
 void Solver::RunForever()
 {
 	while(true)
 	{
-		tries++;
 		generator->Generate();
 		grid->CalculateHash();
 		algorithm_manager->RunAll();
-		if(!grid->is_lost && grid->visible_fields_index == fields_to_uncover) wins++;
-		UpdateThreadData();
+		UpdateSolverStatistics();
 	}
 }
 
@@ -45,14 +50,31 @@ void Solver::Run()
 
 void Solver::UpdateThreadData()
 {
-	uint32_t lost = 0;
-	if(grid->is_lost) lost = 1;
-	float completion_rate = float(grid->visible_fields_index - lost) / fields_to_uncover;
 	thread_data->mut.lock();
-	thread_data->tries += tries - last_read_tries;
-	thread_data->wins += wins - last_read_wins;
-	thread_data->completion += completion_rate;
+	statistics_aggregator->FlushCurrentDataToOutput(thread_data->statistics_data);
 	thread_data->mut.unlock();
-	last_read_tries = tries;
-    last_read_wins = wins;
+}
+
+void Solver::UpdateSolverStatistics()
+{
+	statistics_solver->games_played += 1;
+	statistics_solver->flagged_mines += grid->flags_index;
+	uint32_t uncovered_fields = grid->visible_fields_index;
+	if(!grid->is_lost)
+	{
+		if(uncovered_fields == fields_to_uncover)
+		{
+			statistics_solver->games_won += 1;
+		}
+		else
+		{
+			statistics_solver->games_abandoned += 1;
+		}
+		statistics_solver->uncovered_fields += uncovered_fields;
+	}
+	else
+	{
+		statistics_solver->games_lost += 1;
+		statistics_solver->uncovered_fields += uncovered_fields - 1;
+	}
 }

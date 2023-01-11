@@ -5,7 +5,7 @@ AlgorithmLayerOne::AlgorithmLayerOne(GridManager& grid_, AlgorithmDataStorage& d
 
 AlgorithmLayerOne::~AlgorithmLayerOne() {}
 
-void AlgorithmLayerOne::RunInternal()
+AlgorithmStatus AlgorithmLayerOne::Execution()
 {
     const uint32_t border_index_max = data.border_index;
 
@@ -17,6 +17,8 @@ void AlgorithmLayerOne::RunInternal()
         CheckForSafeClicks(field_signature);
         CheckForMines(field_signature);
     }
+
+    return AlgorithmStatus::NO_STATUS;
 }
 
 LayerOneFieldSignature AlgorithmLayerOne::GetFieldSignature(const uint32_t border_field) const
@@ -38,7 +40,7 @@ LayerOneFieldSignature AlgorithmLayerOne::GetFieldSignature(const uint32_t borde
     return result;
 }
 
-void AlgorithmLayerOne::CheckForSafeClicks(const LayerOneFieldSignature signature) const
+void AlgorithmLayerOne::CheckForSafeClicks(const LayerOneFieldSignature& signature) const
 {
     // If there are already enough flags...
     if(signature.field_value != signature.flags_count) { return; }
@@ -53,7 +55,7 @@ void AlgorithmLayerOne::CheckForSafeClicks(const LayerOneFieldSignature signatur
     }
 }
 
-void AlgorithmLayerOne::CheckForMines(const LayerOneFieldSignature signature) const
+void AlgorithmLayerOne::CheckForMines(const LayerOneFieldSignature& signature) const
 {
     // If the remaining covered fields exactly account for missing flags...
     if(signature.field_value != signature.flags_count + signature.not_visible_count) { return; }

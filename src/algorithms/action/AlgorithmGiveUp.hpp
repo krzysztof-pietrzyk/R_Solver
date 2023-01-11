@@ -13,7 +13,7 @@ class AlgorithmGiveUp : public AlgorithmAction
 
     protected:
 
-    void RunInternal() override;
+    AlgorithmStatus Execution() override;
 
     private:
 

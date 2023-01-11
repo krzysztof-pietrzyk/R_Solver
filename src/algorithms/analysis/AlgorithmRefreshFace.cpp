@@ -10,7 +10,7 @@ AlgorithmRefreshFace::AlgorithmRefreshFace(GridManager& grid_, AlgorithmDataStor
 
 AlgorithmRefreshFace::~AlgorithmRefreshFace() {}
 
-AlgorithmStatus AlgorithmRefreshFace::Run()
+AlgorithmStatus AlgorithmRefreshFace::Execution()
 {
     Clear();
 

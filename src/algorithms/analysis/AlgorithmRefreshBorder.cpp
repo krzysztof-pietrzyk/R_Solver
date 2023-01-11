@@ -10,7 +10,7 @@ AlgorithmRefreshBorder::AlgorithmRefreshBorder(GridManager& grid_, AlgorithmData
 
 AlgorithmRefreshBorder::~AlgorithmRefreshBorder() {}
 
-AlgorithmStatus AlgorithmRefreshBorder::Run()
+AlgorithmStatus AlgorithmRefreshBorder::Execution()
 {  
     const uint32_t visible_fields_old_index = data.border_last_visible_fields_index;
     const uint32_t visible_fields_new_index = grid.visible_fields_index;

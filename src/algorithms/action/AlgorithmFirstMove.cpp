@@ -10,7 +10,8 @@ AlgorithmFirstMove::AlgorithmFirstMove(GridManager& grid_, AlgorithmDataStorage&
 
 AlgorithmFirstMove::~AlgorithmFirstMove() {}
 
-void AlgorithmFirstMove::RunInternal()
+AlgorithmStatus AlgorithmFirstMove::Execution()
 {
     LeftClick(first_move_field);
+    return AlgorithmStatus::NO_STATUS;
 }
