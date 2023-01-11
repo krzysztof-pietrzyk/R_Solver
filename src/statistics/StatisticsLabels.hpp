@@ -13,6 +13,7 @@ namespace Labels
             static const Label RIGHT_CLICKS = "Right clicks";
             static const Label WASTED_LEFT_CLICKS = "Wasted left clicks";
             static const Label WASTED_RIGHT_CLICKS = "Wasted right clicks";
+            static const Label TIMES_LOST = "Times caused a loss";
         }
 
         namespace Solver

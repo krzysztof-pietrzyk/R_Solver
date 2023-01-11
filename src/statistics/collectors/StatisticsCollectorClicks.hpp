@@ -16,6 +16,7 @@ class StatisticsCollectorClicks : public StatisticsCollector
     StatisticsElementUINT64& wasted_left_clicks;
     StatisticsElementUINT64& right_clicks;
     StatisticsElementUINT64& wasted_right_clicks;
+    StatisticsElementUINT64& times_caused_loss;
 
     protected:
 

@@ -21,8 +21,15 @@ AlgorithmStatus AlgorithmAction::Run()
     AlgorithmStatus action_result = GetActionResult(number_of_clicks_after - number_of_clicks_before);
     AlgorithmStatus game_over_result = CheckGameOverConditions();
 
-    if(game_over_result == AlgorithmStatus::NO_STATUS) { return action_result; }
-    else return game_over_result;
+    if(game_over_result == AlgorithmStatus::NO_STATUS)
+    {
+        return action_result;
+    }
+    else
+    {
+        statistics_clicks->times_caused_loss += 1;
+        return game_over_result;
+    }
 }
 
 AlgorithmStatus AlgorithmAction::CheckGameOverConditions() const
@@ -41,11 +48,10 @@ AlgorithmStatus AlgorithmAction::GetActionResult(const uint32_t clicks_differenc
 bool AlgorithmAction::LeftClick(const uint32_t field) const
 {
     bool result = Algorithm::LeftClick(field);
-    StatisticsCollectorClicks* ref = (StatisticsCollectorClicks*)statistics_clicks;
-    ref->left_clicks += 1;
+    statistics_clicks->left_clicks += 1;
     if(!result)
     {
-        ref->wasted_left_clicks += 1;
+        statistics_clicks->wasted_left_clicks += 1;
     }
     return result;
 }
@@ -53,11 +59,10 @@ bool AlgorithmAction::LeftClick(const uint32_t field) const
 bool AlgorithmAction::RightClick(const uint32_t field) const
 {
     bool result = Algorithm::RightClick(field);
-    StatisticsCollectorClicks* ref = (StatisticsCollectorClicks*)statistics_clicks;
-    ref->right_clicks += 1;
+    statistics_clicks->right_clicks += 1;
     if(!result)
     {
-        ref->wasted_right_clicks += 1;
+        statistics_clicks->wasted_right_clicks += 1;
     }
     return result;
 }
