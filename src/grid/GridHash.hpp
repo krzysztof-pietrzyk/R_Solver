@@ -32,7 +32,7 @@ class GridHash
 
     void operator=(std::string new_hash);
 
-    std::string ToString();
+    std::string ToString() const;
 
     void SetUpToDate(const bool up_to_date);
 

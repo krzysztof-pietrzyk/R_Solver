@@ -117,25 +117,28 @@ void GridSelfGenerated::ClearZCR()
     zcr_zeros_index = 0;
 }
 
-// #include <iostream>
-// using namespace std;
+#ifdef DEBUG_MODE_PRINT
+#include <iostream>
+using namespace std;
 
-// void GridSelfGenerated::PrintUncovered()
-// {
-//     for(size_t i = 0; i < H; i++)
-//     {
-//         for(size_t j = 0; j < W; j++)
-//         {
-//             const uint32_t f = i * W + j;
-//             if(is_flag[f]) cout << ".";
-//             else if(is_visible[f])
-//             {
-//                 if(field_values[f] == 0) cout << " ";
-//                 else cout << int(field_values[f]);
-//             } 
-//             else cout << "#";
-//         }
-//         cout << endl;
-//     }
-//     cout << endl;
-// }
+void GridSelfGenerated::PrintUncovered() const
+{
+    for(size_t i = 0; i < H; i++)
+    {
+        for(size_t j = 0; j < W; j++)
+        {
+            const uint32_t f = i * W + j;
+            if(is_flag[f]) cout << ".";
+            else if(is_visible[f])
+            {
+                if(field_values[f] == 0) cout << " ";
+                else if(is_mine[f]) cout << "!";
+                else cout << int(field_values[f]);
+            } 
+            else cout << "#";
+        }
+        cout << endl;
+    }
+    cout << hash.ToString() << endl;
+}
+#endif

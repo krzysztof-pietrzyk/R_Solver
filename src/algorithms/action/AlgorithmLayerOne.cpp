@@ -40,7 +40,7 @@ LayerOneFieldSignature AlgorithmLayerOne::GetFieldSignature(const uint32_t borde
     return result;
 }
 
-void AlgorithmLayerOne::CheckForSafeClicks(const LayerOneFieldSignature signature) const
+void AlgorithmLayerOne::CheckForSafeClicks(const LayerOneFieldSignature& signature) const
 {
     // If there are already enough flags...
     if(signature.field_value != signature.flags_count) { return; }
@@ -55,7 +55,7 @@ void AlgorithmLayerOne::CheckForSafeClicks(const LayerOneFieldSignature signatur
     }
 }
 
-void AlgorithmLayerOne::CheckForMines(const LayerOneFieldSignature signature) const
+void AlgorithmLayerOne::CheckForMines(const LayerOneFieldSignature& signature) const
 {
     // If the remaining covered fields exactly account for missing flags...
     if(signature.field_value != signature.flags_count + signature.not_visible_count) { return; }

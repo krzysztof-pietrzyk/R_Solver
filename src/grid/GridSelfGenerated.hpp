@@ -23,7 +23,9 @@ class GridSelfGenerated : public Grid
 
     void CalculateValues();
 
-    // void PrintUncovered();
+    #ifdef DEBUG_MODE_PRINT
+    virtual void PrintUncovered() const override;
+    #endif
 
     protected:
 

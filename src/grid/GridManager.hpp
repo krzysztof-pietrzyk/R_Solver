@@ -7,6 +7,8 @@
 #include <stdexcept>
 #include <cstdint>
 
+//#define DEBUG_MODE_PRINT
+
 class GridManager : public StatisticsProducer
 {
     public:
@@ -41,7 +43,9 @@ class GridManager : public StatisticsProducer
 
     virtual bool RightClick(uint32_t field) = 0;
 
-    // virtual void PrintUncovered() = 0;
+    #ifdef DEBUG_MODE_PRINT
+    virtual void PrintUncovered() const = 0;
+    #endif
 
     protected:
 

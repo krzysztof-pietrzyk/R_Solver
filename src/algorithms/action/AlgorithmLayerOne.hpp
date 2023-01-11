@@ -33,9 +33,9 @@ class AlgorithmLayerOne : public AlgorithmAction
 
     LayerOneFieldSignature GetFieldSignature(const uint32_t border_field) const;
 
-    void CheckForSafeClicks(const LayerOneFieldSignature signature) const;
+    void CheckForSafeClicks(const LayerOneFieldSignature& signature) const;
 
-    void CheckForMines(const LayerOneFieldSignature signature) const;
+    void CheckForMines(const LayerOneFieldSignature& signature) const;
 };
 
 #endif

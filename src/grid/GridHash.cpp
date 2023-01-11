@@ -191,7 +191,7 @@ void GridHash::operator=(std::string new_hash)
     is_up_to_date = true;
 }
 
-std::string GridHash::ToString()
+std::string GridHash::ToString() const
 {
     std::string result_string = std::string(hash.begin(), hash.end());
     return result_string;

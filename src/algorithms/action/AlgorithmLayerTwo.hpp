@@ -29,7 +29,7 @@ class AlgorithmLayerTwo : public AlgorithmAction
 
     bool IsCurrentSectionValid(const Section& current_section) const;
 
-    bool IsNeighborSectionValid(const Section& current_section, const Section& neighbor_section) const;
+    bool IsNeighborSectionValid(const Section& current_section, const Section& neighbor_section, const size_t neighbor_section_index) const;
 
     void ExecNeighborPerspectiveCondition(const Section& current_section, const Section& neighbor_section, const uint32_t common_fields_l) const;
 
