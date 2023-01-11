@@ -74,6 +74,7 @@ void Solver::UpdateSolverStatistics()
 	}
 	else
 	{
+		statistics_solver->games_lost += 1;
 		statistics_solver->uncovered_fields += uncovered_fields - 1;
 	}
 }

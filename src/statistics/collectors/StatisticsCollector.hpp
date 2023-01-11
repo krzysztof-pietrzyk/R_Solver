@@ -23,12 +23,12 @@ class StatisticsCollector
     virtual void Disable();
     void Clear();
 
-    void operator+= (const StatisticsCollector& other);
-    void operator= (const StatisticsCollector& other);
-
     const StatisticsCollectorStruct& GetStatistics() const;
 
     StatisticsCollector* Clone() const;
+
+    void operator+= (const StatisticsCollector& other);
+    void operator= (const StatisticsCollector& other);
 
     protected:
 

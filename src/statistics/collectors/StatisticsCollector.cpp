@@ -14,11 +14,6 @@ StatisticsCollector::~StatisticsCollector()
     }
 }
 
-const StatisticsCollectorStruct& StatisticsCollector::GetStatistics() const
-{
-    return labelled_data_elements;
-}
-
 void StatisticsCollector::Enable()
 {
     for(auto& item : labelled_data_elements)
@@ -43,6 +38,22 @@ void StatisticsCollector::Clear()
     }
 }
 
+const StatisticsCollectorStruct& StatisticsCollector::GetStatistics() const
+{
+    return labelled_data_elements;
+}
+
+StatisticsCollector* StatisticsCollector::Clone() const
+{
+    StatisticsCollector* clone = CreateNew();
+    for(const auto& item : labelled_data_elements)
+    {
+        const Label& key = item.first;
+        clone->labelled_data_elements[key] = item.second->Clone();
+    }
+    return clone;
+}
+
 void StatisticsCollector::operator+= (const StatisticsCollector& other)
 {
     for(auto& item : labelled_data_elements)
@@ -59,17 +70,6 @@ void StatisticsCollector::operator= (const StatisticsCollector& other)
         const Label& key = item.first;
         *(item.second) = *(other.labelled_data_elements.at(key));
     }
-}
-
-StatisticsCollector* StatisticsCollector::Clone() const
-{
-    StatisticsCollector* clone = CreateNew();
-    for(const auto& item : labelled_data_elements)
-    {
-        const Label& key = item.first;
-        clone->labelled_data_elements[key] = item.second->Clone();
-    }
-    return clone;
 }
 
 void StatisticsCollector::_DoNothing(...)
