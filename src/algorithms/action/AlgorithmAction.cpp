@@ -25,11 +25,11 @@ AlgorithmStatus AlgorithmAction::Run()
     {
         return action_result;
     }
-    else
+    else if(game_over_result == AlgorithmStatus::GAME_LOST)
     {
         statistics_clicks->times_caused_loss += 1;
-        return game_over_result;
     }
+    return game_over_result;
 }
 
 AlgorithmStatus AlgorithmAction::CheckGameOverConditions() const
