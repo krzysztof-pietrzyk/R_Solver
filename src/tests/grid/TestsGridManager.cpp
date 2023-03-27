@@ -21,8 +21,8 @@ class MockGridManager : public GridManager
     MockGridManager(uint16_t w, uint16_t h, uint32_t m) : GridManager(w, h, m) {};
 
     MOCK_METHOD(bool, CheckVisible, (uint32_t), (override));
-    MOCK_METHOD(void, LeftClick, (uint32_t), (override));
-    MOCK_METHOD(void, RightClick, (uint32_t), (override));
+    MOCK_METHOD(bool, LeftClick, (uint32_t), (override));
+    MOCK_METHOD(bool, RightClick, (uint32_t), (override));
 };
 
 // ========================================================================= //

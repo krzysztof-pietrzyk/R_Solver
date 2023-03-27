@@ -37,6 +37,18 @@ class MockGridSelfGenerated : public GridSelfGenerated
             }
         }
     }
+
+    void UpdateMinesVector()
+    {
+        size_t mines_index = 0U;
+        for(size_t i = 0; i < is_mine.size(); i++)
+        {
+            if(is_mine[i])
+            {
+                mines[mines_index++] = i;
+            }
+        }
+    }
 };
 
 // ========================================================================= //
@@ -63,6 +75,7 @@ TEST_P(GridSelfGeneratedCalculateValuesFixture, CalculateValues)
 
     grid.is_mine.assign(input_is_mine.begin(), input_is_mine.end());
     grid.FindNotMines();
+    grid.UpdateMinesVector();
 
     grid.CalculateValues();
 
@@ -86,9 +99,9 @@ INSTANTIATE_TEST_CASE_P(TestsGridSelfGenerated, GridSelfGeneratedCalculateValues
 vector<CalculateValuesFixtureParams> GetCalculateValuesFixtureParams()
 {
     vector<CalculateValuesFixtureParams> params = vector<CalculateValuesFixtureParams>();
-    params.push_back(CalculateValuesFixtureParams({1, 0}, {0, 1}, 2, 1, 1));
-    params.push_back(CalculateValuesFixtureParams({1, 0, 1, 0}, {0, 2, 0, 1}, 4, 1, 2));
-    params.push_back(CalculateValuesFixtureParams({1, 1, 0, 0, 0, 0, 1, 0, 0}, {0, 0, 1, 3, 3, 1, 0, 1, 0}, 3, 3, 3));
+    params.push_back(CalculateValuesFixtureParams({1, 0}, {9, 1}, 2, 1, 1));
+    params.push_back(CalculateValuesFixtureParams({1, 0, 1, 0}, {9, 2, 9, 1}, 4, 1, 2));
+    params.push_back(CalculateValuesFixtureParams({1, 1, 0, 0, 0, 0, 1, 0, 0}, {9, 9, 1, 3, 3, 1, 9, 1, 0}, 3, 3, 3));
     params.push_back(CalculateValuesFixtureParams(
         {0, 0, 0, 0, 0, 0, 0, 0, 1,
          0, 1, 0, 0, 0, 0, 0, 0, 1,
@@ -99,15 +112,15 @@ vector<CalculateValuesFixtureParams> GetCalculateValuesFixtureParams()
          0, 0, 0, 1, 0, 0, 1, 0, 0,
          0, 0, 0, 0, 0, 0, 0, 0, 1,
          0, 0, 0, 0, 0, 0, 1, 0, 0},
-        {1, 1, 1, 0, 0, 0, 0, 2, 0,
-         2, 0, 3, 1, 1, 0, 0, 2, 0,
-         2, 0, 4, 0, 2, 0, 0, 1, 1,
-         1, 1, 3, 0, 2, 0, 0, 0, 0,
+        {1, 1, 1, 0, 0, 0, 0, 2, 9,
+         2, 9, 3, 1, 1, 0, 0, 2, 9,
+         2, 9, 4, 9, 2, 0, 0, 1, 1,
+         1, 1, 3, 9, 2, 0, 0, 0, 0,
          0, 0, 1, 1, 1, 0, 0, 0, 0,
          0, 0, 1, 1, 1, 1, 1, 1, 0,
-         0, 0, 1, 0, 1, 1, 0, 2, 1,
-         0, 0, 1, 1, 1, 2, 2, 3, 0,
-         0, 0, 0, 0, 0, 1, 0, 2, 1},
+         0, 0, 1, 9, 1, 1, 9, 2, 1,
+         0, 0, 1, 1, 1, 2, 2, 3, 9,
+         0, 0, 0, 0, 0, 1, 9, 2, 1},
         9, 9, 10));
     params.push_back(CalculateValuesFixtureParams(
         {1, 1, 1, 1, 1, 0, 0, 0, 0,
@@ -119,13 +132,13 @@ vector<CalculateValuesFixtureParams> GetCalculateValuesFixtureParams()
          0, 0, 0, 0, 1, 0, 0, 0, 0,
          0, 0, 0, 0, 0, 0, 0, 0, 0,
          0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 2, 0, 0, 0,
-         0, 8, 0, 7, 0, 3, 0, 0, 0,
-         0, 0, 0, 6, 0, 3, 0, 0, 0,
-         2, 4, 0, 5, 0, 3, 0, 0, 0,
-         0, 1, 1, 4, 0, 3, 0, 0, 0,
-         0, 0, 0, 3, 0, 3, 0, 0, 0,
-         0, 0, 0, 2, 0, 2, 0, 0, 0,
+        {9, 9, 9, 9, 9, 2, 0, 0, 0,
+         9, 8, 9, 7, 9, 3, 0, 0, 0,
+         9, 9, 9, 6, 9, 3, 0, 0, 0,
+         2, 4, 9, 5, 9, 3, 0, 0, 0,
+         0, 1, 1, 4, 9, 3, 0, 0, 0,
+         0, 0, 0, 3, 9, 3, 0, 0, 0,
+         0, 0, 0, 2, 9, 2, 0, 0, 0,
          0, 0, 0, 1, 1, 1, 0, 0, 0,
          0, 0, 0, 0, 0, 0, 0, 0, 0},
         9, 9, 17));
@@ -139,15 +152,15 @@ vector<CalculateValuesFixtureParams> GetCalculateValuesFixtureParams()
          0, 0, 0, 0, 1, 0, 0, 0, 0,
          1, 1, 0, 0, 0, 0, 0, 1, 1,
          0, 1, 0, 0, 0, 0, 0, 1, 1},
-        {0, 0, 0, 0, 0, 4, 0, 5, 0,
-         0, 8, 0, 7, 0, 5, 0, 0, 0,
-         0, 0, 0, 6, 0, 5, 4, 6, 4,
-         2, 4, 0, 5, 0, 5, 0, 0, 0,
-         0, 1, 1, 4, 0, 6, 0, 0, 0,
-         0, 0, 0, 3, 0, 5, 0, 0, 0,
-         2, 2, 1, 2, 0, 3, 3, 5, 4,
-         0, 0, 2, 1, 1, 1, 2, 0, 0,
-         3, 0, 2, 0, 0, 0, 2, 0, 0},
+        {9, 9, 9, 9, 9, 4, 9, 5, 9,
+         9, 8, 9, 7, 9, 5, 9, 9, 9,
+         9, 9, 9, 6, 9, 5, 4, 6, 4,
+         2, 4, 9, 5, 9, 5, 9, 9, 9,
+         0, 1, 1, 4, 9, 6, 9, 9, 9,
+         0, 0, 0, 3, 9, 5, 9, 9, 9,
+         2, 2, 1, 2, 9, 3, 3, 5, 4,
+         9, 9, 2, 1, 1, 1, 2, 9, 9,
+         3, 9, 2, 0, 0, 0, 2, 9, 9},
         9, 9, 38));
     return params;
 }
