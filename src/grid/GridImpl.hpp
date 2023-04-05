@@ -58,6 +58,7 @@ class GridImpl : public GridAccessPlayerIf, public GridAccessGeneratorIf, public
 
     std::vector<FieldType> field_types_to_display;
 
+    void FindNeighborsOfAllFields();
     FieldType GetFieldType(uint32_t field);
     FieldType GetFieldTypeLostGrid(uint32_t field);
     FieldType GetFieldTypeOngoingGrid(uint32_t field);

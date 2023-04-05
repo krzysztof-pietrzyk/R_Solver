@@ -9,7 +9,6 @@ enum FieldType
     F_FLAGGED_INCORRECTLY,
     F_MINE_EXPLODED,
     F_MINE_UNFLAGGED,
-    F_QUESTION_MARK,
     F_0,
     F_1,
     F_2,

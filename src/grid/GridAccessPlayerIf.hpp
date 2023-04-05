@@ -3,6 +3,12 @@
 
 #include "GridAccessCommonIf.hpp"
 
+enum PlayerActionResult
+{
+    CORRECT,
+    INCORRECT
+};
+
 class GridAccessPlayerIf : public GridAccessCommonIf
 {
     public:
@@ -12,8 +18,8 @@ class GridAccessPlayerIf : public GridAccessCommonIf
     virtual const std::vector<uint32_t>& GetFieldNeighbors(uint32_t field) = 0;
     virtual uint8_t GetFieldValue(uint32_t field) = 0;
 
-    virtual void SetVisible(uint32_t field) = 0;
-    virtual void SetFlag(uint32_t field) = 0;
+    virtual PlayerActionResult SetVisible(uint32_t field) = 0;
+    virtual PlayerActionResult SetFlag(uint32_t field) = 0;
     virtual bool IsLost() = 0;
     virtual bool IsWon() = 0;
 };

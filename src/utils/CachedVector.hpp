@@ -30,6 +30,7 @@ class CachedVector
     static void MoveFromTo(const CachedVector& source, CachedVector& destination);
 
     void operator=(const CachedVector& other);
+    const uint32_t& operator[](size_t index);
 
     protected:
 

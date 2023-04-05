@@ -6,13 +6,14 @@ GridImpl::GridImpl(const GridDimensions dimensions) : dimensions(dimensions)
     flagged_fields = CachedVector(dimensions.size);
     visible_fields = CachedVector(dimensions.size);
     field_values = std::vector<uint8_t>(dimensions.size);
+    field_types_to_display = std::vector<FieldType>(dimensions.size);
     neighbors = std::vector<std::vector<uint32_t>>(dimensions.size);
     for(size_t i = 0U; i < dimensions.size; i++)
     {
         neighbors[i] = std::vector<uint32_t>();
     }
+    FindNeighborsOfAllFields();
     is_lost = false;
-    field_types_to_display = std::vector<FieldType>(dimensions.size);
 }
 
 GridImpl::~GridImpl()
@@ -118,6 +119,27 @@ const std::vector<FieldType>& GridImpl::GetFieldTypesToDisplay()
 }
 
 // Private
+void GridImpl::FindNeighborsOfAllFields()
+{
+    // Only called once in constructor. The neighbors addresses never change
+    uint16_t column;
+    uint16_t row;
+    for(uint32_t i = 0; i < dimensions.size; i++)
+    {
+        // For each field, list the neighbors
+        column = i % dimensions.width;
+        row = i / dimensions.width;
+        if(column - 1 >= 0 && row - 1 >= 0)                neighbors[i].push_back(i - 1 - dimensions.width);  // Upper Left
+        if(row - 1 >= 0)                                   neighbors[i].push_back(i - dimensions.width);      // Upper Middle
+        if(column + 1 < dimensions.width && row - 1 >= 0)  neighbors[i].push_back(i + 1 - dimensions.width);  // Upper Right
+        if(column - 1 >= 0)                                neighbors[i].push_back(i - 1);                     // Middle Left
+        if(column + 1 < dimensions.width)                  neighbors[i].push_back(i + 1);                     // Middle Right
+        if(column - 1 >= 0 && row + 1 < dimensions.height) neighbors[i].push_back(i - 1 + dimensions.width);  // Bottom Left
+        if(row + 1 < dimensions.height)                    neighbors[i].push_back(i + dimensions.width);      // Bottom Middle
+        if(column + 1 < dimensions.width && row + 1 < dimensions.height) neighbors[i].push_back(i + 1 + dimensions.width);  // Bottom Right
+    }
+}
+
 FieldType GridImpl::GetFieldType(uint32_t field)
 {
     if(is_lost)
@@ -195,5 +217,6 @@ FieldType GridImpl::GetFieldTypeNumbered(uint32_t field)
             return FieldType::F_8;
         default:
             std::runtime_error("ERROR: GridImpl::GetFieldTypeNumbered impossible field value!");
+            return FieldType::UNHANDLED_TYPE;
     }
 }

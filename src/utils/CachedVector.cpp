@@ -121,3 +121,8 @@ void CachedVector::operator=(const CachedVector& other)
     *this = CachedVector(other.max_size);
     CachedVector::MoveFromTo(other, *this);
 }
+
+const uint32_t& CachedVector::operator[](size_t index)
+{
+    return data[index];
+}
