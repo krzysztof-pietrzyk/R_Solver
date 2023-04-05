@@ -5,12 +5,12 @@
 
 class GridAccessCommonIf
 {
-    virtual const GridDimensions& GetDimensions() const = 0;
-    virtual const uint16_t& GetWidth() const = 0;
-    virtual const uint16_t& GetHeight() const = 0;
-    virtual const uint32_t& GetSize() const = 0;
-    virtual const uint32_t& GetTotalMines() const = 0;
-    virtual const uint32_t& GetTotalSafeFields() const = 0;
+    virtual GridDimensions GetDimensions() const = 0;
+    virtual uint16_t GetWidth() const = 0;
+    virtual uint16_t GetHeight() const = 0;
+    virtual uint32_t GetSize() const = 0;
+    virtual uint32_t GetTotalMines() const = 0;
+    virtual uint32_t GetTotalSafeFields() const = 0;
 };
 
 #endif
