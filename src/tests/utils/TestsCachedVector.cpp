@@ -251,6 +251,46 @@ TEST(TestCachedVector, IteratorEnd)
     EXPECT_EQ(tested_vector.End(), tested_vector.GetDataVector().begin() + 3);
 }
 
+TEST(TestCachedVector, OperatorEquals)
+{
+    size_t tested_size = 5U;
+    MockCachedVector tested_vector_a = MockCachedVector(tested_size);
+    MockCachedVector tested_vector_b = MockCachedVector(tested_size);
+
+    tested_vector_a.Add(1);
+    tested_vector_a.Add(0);
+    tested_vector_a.Add(3);
+
+    CachedVector::MoveFromTo(tested_vector_a, tested_vector_b);
+
+    EXPECT_EQ(tested_vector_a.GetDataVector(), tested_vector_b.GetDataVector());
+    EXPECT_EQ(tested_vector_a.GetIsPresentVector(), tested_vector_b.GetIsPresentVector());
+    EXPECT_EQ(tested_vector_a.GetDataIndex(), tested_vector_b.GetDataIndex());
+    EXPECT_NE(&tested_vector_a, &tested_vector_b);
+}
+
+TEST(TestCachedVector, OperatorEqualsNotEmpty)
+{
+    size_t tested_size = 5U;
+    MockCachedVector tested_vector_a = MockCachedVector(tested_size);
+    MockCachedVector tested_vector_b = MockCachedVector(tested_size);
+
+    tested_vector_a.Add(1);
+    tested_vector_a.Add(0);
+    tested_vector_a.Add(3);
+
+    tested_vector_b.Add(4);
+    tested_vector_b.Add(3);
+    tested_vector_b.Add(2);
+
+    CachedVector::MoveFromTo(tested_vector_a, tested_vector_b);
+
+    EXPECT_EQ(tested_vector_a.GetDataVector(), tested_vector_b.GetDataVector());
+    EXPECT_EQ(tested_vector_a.GetIsPresentVector(), tested_vector_b.GetIsPresentVector());
+    EXPECT_EQ(tested_vector_a.GetDataIndex(), tested_vector_b.GetDataIndex());
+    EXPECT_NE(&tested_vector_a, &tested_vector_b);
+}
+
 // ========================================================================= //
 // =========================== TEST DATA SOURCES =========================== //
 // ========================================================================= //
