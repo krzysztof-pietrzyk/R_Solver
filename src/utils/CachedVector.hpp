@@ -23,11 +23,11 @@ class CachedVector
     size_t CurrentIndex() const;
     size_t MaxSize() const;
 
-    const std::vector<uint32_t>::iterator Begin();
-    const std::vector<uint32_t>::iterator At(size_t index);
-    const std::vector<uint32_t>::iterator End();
+    const std::vector<uint32_t>::iterator begin();
+    const std::vector<uint32_t>::iterator at(size_t index);
+    const std::vector<uint32_t>::iterator end();
 
-    static void MoveFromTo(const CachedVector& source, CachedVector& destination);
+    static void CopyFromTo(const CachedVector& source, CachedVector& destination);
 
     void operator=(const CachedVector& other);
     const uint32_t& operator[](size_t index);

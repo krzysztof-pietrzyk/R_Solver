@@ -52,6 +52,11 @@ uint32_t GridImpl::GetTotalSafeFields() const
     return dimensions.safe;
 }
 
+const std::vector<uint32_t>& GridImpl::GetFieldNeighbors(uint32_t field)
+{
+    return neighbors[field];
+}
+
 // GridAccessPlayerIf
 const CachedVector& GridImpl::GetVisibleFields() const
 {
@@ -61,11 +66,6 @@ const CachedVector& GridImpl::GetVisibleFields() const
 const CachedVector& GridImpl::GetFlaggedFields() const
 {
     return flagged_fields;
-}
-
-const std::vector<uint32_t>& GridImpl::GetFieldNeighbors(uint32_t field)
-{
-    return neighbors[field];
 }
 
 uint8_t GridImpl::GetFieldValue(uint32_t field)
@@ -90,23 +90,34 @@ bool GridImpl::IsWon()
 // GridAccessGeneratorIf
 void GridImpl::SetMineFields(const CachedVector& new_mine_fields)
 {
-    CachedVector::MoveFromTo(new_mine_fields, mine_fields);
+    CachedVector::CopyFromTo(new_mine_fields, mine_fields);
 }
 
 void GridImpl::SetFlaggedFields(const CachedVector& new_flagged_fields)
 {
-    CachedVector::MoveFromTo(new_flagged_fields, flagged_fields);
+    CachedVector::CopyFromTo(new_flagged_fields, flagged_fields);
 }
 
 void GridImpl::SetVisibleFields(const CachedVector& new_visible_fields)
 {
-    CachedVector::MoveFromTo(new_visible_fields, visible_fields);
+    CachedVector::CopyFromTo(new_visible_fields, visible_fields);
 }
 
 void GridImpl::SetFieldValues(const std::vector<uint8_t>& new_field_values)
 {
     std::copy(new_field_values.begin(), new_field_values.end(), field_values.begin());
 }
+
+void GridImpl::ClearFlaggedFields()
+{
+    flagged_fields.Clear();
+}
+
+void GridImpl::ClearVisibleFields()
+{
+    visible_fields.Clear();
+}
+
 
 // GridAccessViewIf
 const std::vector<FieldType>& GridImpl::GetFieldTypesToDisplay()

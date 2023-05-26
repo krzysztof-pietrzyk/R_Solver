@@ -224,7 +224,7 @@ TEST(TestCachedVector, IteratorBegin)
     tested_vector.Add(0);
     tested_vector.Add(3);
 
-    EXPECT_EQ(tested_vector.Begin(), tested_vector.GetDataVector().begin());
+    EXPECT_EQ(tested_vector.begin(), tested_vector.GetDataVector().begin());
 }
 
 TEST(TestCachedVector, IteratorAt)
@@ -236,7 +236,7 @@ TEST(TestCachedVector, IteratorAt)
     tested_vector.Add(0);
     tested_vector.Add(3);
 
-    EXPECT_EQ(tested_vector.At(1), tested_vector.GetDataVector().begin() + 1);
+    EXPECT_EQ(tested_vector.at(1), tested_vector.GetDataVector().begin() + 1);
 }
 
 TEST(TestCachedVector, IteratorEnd)
@@ -248,7 +248,7 @@ TEST(TestCachedVector, IteratorEnd)
     tested_vector.Add(0);
     tested_vector.Add(3);
 
-    EXPECT_EQ(tested_vector.End(), tested_vector.GetDataVector().begin() + 3);
+    EXPECT_EQ(tested_vector.end(), tested_vector.GetDataVector().begin() + 3);
 }
 
 TEST(TestCachedVector, OperatorEquals)
@@ -261,7 +261,7 @@ TEST(TestCachedVector, OperatorEquals)
     tested_vector_a.Add(0);
     tested_vector_a.Add(3);
 
-    CachedVector::MoveFromTo(tested_vector_a, tested_vector_b);
+    CachedVector::CopyFromTo(tested_vector_a, tested_vector_b);
 
     EXPECT_EQ(tested_vector_a.GetDataVector(), tested_vector_b.GetDataVector());
     EXPECT_EQ(tested_vector_a.GetIsPresentVector(), tested_vector_b.GetIsPresentVector());
@@ -283,7 +283,7 @@ TEST(TestCachedVector, OperatorEqualsNotEmpty)
     tested_vector_b.Add(3);
     tested_vector_b.Add(2);
 
-    CachedVector::MoveFromTo(tested_vector_a, tested_vector_b);
+    CachedVector::CopyFromTo(tested_vector_a, tested_vector_b);
 
     EXPECT_EQ(tested_vector_a.GetDataVector(), tested_vector_b.GetDataVector());
     EXPECT_EQ(tested_vector_a.GetIsPresentVector(), tested_vector_b.GetIsPresentVector());

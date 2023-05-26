@@ -32,8 +32,8 @@ void CachedVector::Add(uint32_t value)
 
 void CachedVector::Remove(uint32_t value)
 {
-    auto begin = Begin();
-    auto end = End();
+    auto begin = this->begin();
+    auto end = this->end();
     #ifdef SAFE_CACHED_VECTOR
     if(begin == end)
     {
@@ -62,7 +62,7 @@ bool CachedVector::Contains(uint32_t value) const
 
 void CachedVector::Clear()
 {
-    for(auto data_iter = Begin(); data_iter != End(); ++data_iter)
+    for(auto data_iter = this->begin(); data_iter != this->end(); ++data_iter)
     {
         is_present[*data_iter] = false;
     }
@@ -79,12 +79,12 @@ size_t CachedVector::MaxSize() const
     return max_size;
 }
 
-const std::vector<uint32_t>::iterator CachedVector::Begin()
+const std::vector<uint32_t>::iterator CachedVector::begin()
 {
     return data.begin();
 }
 
-const std::vector<uint32_t>::iterator CachedVector::At(size_t index)
+const std::vector<uint32_t>::iterator CachedVector::at(size_t index)
 {
     #ifdef SAFE_CACHED_VECTOR
     if(index >= max_size)
@@ -95,12 +95,12 @@ const std::vector<uint32_t>::iterator CachedVector::At(size_t index)
     return data.begin() + index;
 }
 
-const std::vector<uint32_t>::iterator CachedVector::End()
+const std::vector<uint32_t>::iterator CachedVector::end()
 {
-    return Begin() + CurrentIndex();
+    return begin() + CurrentIndex();
 }
 
-void CachedVector::MoveFromTo(const CachedVector& source, CachedVector& destination)
+void CachedVector::CopyFromTo(const CachedVector& source, CachedVector& destination)
 {
     #ifdef SAFE_CACHED_VECTOR
     if(source.max_size != destination.max_size)
@@ -119,7 +119,7 @@ void CachedVector::MoveFromTo(const CachedVector& source, CachedVector& destinat
 void CachedVector::operator=(const CachedVector& other)
 {
     *this = CachedVector(other.max_size);
-    CachedVector::MoveFromTo(other, *this);
+    CachedVector::CopyFromTo(other, *this);
 }
 
 const uint32_t& CachedVector::operator[](size_t index)

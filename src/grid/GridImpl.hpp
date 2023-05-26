@@ -26,11 +26,11 @@ class GridImpl : public GridAccessPlayerIf, public GridAccessGeneratorIf, public
     virtual uint32_t GetSize() const override;
     virtual uint32_t GetTotalMines() const override;
     virtual uint32_t GetTotalSafeFields() const override;
+    virtual const std::vector<uint32_t>& GetFieldNeighbors(uint32_t field) override;
 
     // GridAccessPlayerIf
     virtual const CachedVector& GetVisibleFields() const override;
     virtual const CachedVector& GetFlaggedFields() const override;
-    virtual const std::vector<uint32_t>& GetFieldNeighbors(uint32_t field) override;
     virtual uint8_t GetFieldValue(uint32_t field) override;
     virtual bool IsLost() override;
     virtual bool IsWon() override;
@@ -40,6 +40,8 @@ class GridImpl : public GridAccessPlayerIf, public GridAccessGeneratorIf, public
     virtual void SetFlaggedFields(const CachedVector& new_flagged_fields) override;
     virtual void SetVisibleFields(const CachedVector& new_visible_fields) override;
     virtual void SetFieldValues(const std::vector<uint8_t>& new_field_values) override;
+    virtual void ClearFlaggedFields() override;
+    virtual void ClearVisibleFields() override;
 
     // GridAccessViewIf
     virtual const std::vector<FieldType>& GetFieldTypesToDisplay() override;
