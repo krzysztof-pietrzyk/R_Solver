@@ -40,8 +40,7 @@ class GridImpl : public GridAccessPlayerIf, public GridAccessGeneratorIf, public
     virtual void SetFlaggedFields(const CachedVector& new_flagged_fields) override;
     virtual void SetVisibleFields(const CachedVector& new_visible_fields) override;
     virtual void SetFieldValues(const std::vector<uint8_t>& new_field_values) override;
-    virtual void ClearFlaggedFields() override;
-    virtual void ClearVisibleFields() override;
+    virtual void Reset() override;
 
     // GridAccessViewIf
     virtual const std::vector<FieldType>& GetFieldTypesToDisplay() override;

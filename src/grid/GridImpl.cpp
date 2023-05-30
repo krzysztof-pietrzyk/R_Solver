@@ -108,14 +108,11 @@ void GridImpl::SetFieldValues(const std::vector<uint8_t>& new_field_values)
     std::copy(new_field_values.begin(), new_field_values.end(), field_values.begin());
 }
 
-void GridImpl::ClearFlaggedFields()
+void GridImpl::Reset()
 {
     flagged_fields.Clear();
-}
-
-void GridImpl::ClearVisibleFields()
-{
     visible_fields.Clear();
+    is_lost = false;
 }
 
 // GridAccessViewIf

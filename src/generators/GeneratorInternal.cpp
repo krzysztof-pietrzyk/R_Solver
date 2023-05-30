@@ -56,9 +56,7 @@ void GeneratorInternal::SetValuesForMineFields()
 
 void GeneratorInternal::ClearPreviousGrid()
 {
-    //grid.ClearIsLost();
-    grid.ClearFlaggedFields();
-    grid.ClearVisibleFields();
+    grid.Reset();
     generated_mine_fields.Clear();
 }
 

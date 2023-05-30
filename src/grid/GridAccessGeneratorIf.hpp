@@ -15,8 +15,7 @@ class GridAccessGeneratorIf : public GridAccessCommonIf
     virtual void SetFlaggedFields(const CachedVector& new_flagged_fields) = 0;
     virtual void SetVisibleFields(const CachedVector& new_visible_fields) = 0;
     virtual void SetFieldValues(const std::vector<uint8_t>& new_field_values) = 0;
-    virtual void ClearFlaggedFields() = 0;
-    virtual void ClearVisibleFields() = 0;
+    virtual void Reset() = 0;
 };
 
 #endif
