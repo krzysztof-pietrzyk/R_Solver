@@ -2,29 +2,21 @@
 
 GeneratorInternal::GeneratorInternal(GridAccessGeneratorIf& grid_) : GeneratorCommon(grid_)
 {
-    empty_template = std::vector<uint32_t>(grid.GetSize(), 0U);
-    CreateEmptyTemplate();
-
-    generated_safe_fields =std::vector<uint32_t>(grid.GetSize(), 0U);
+    generated_safe_fields = std::vector<uint32_t>(grid.GetSize(), 0U);
     generated_mine_fields = CachedVector(grid.GetTotalMines());
     generated_field_values = std::vector<uint8_t>(grid.GetSize(), 0U);
 }
 
-GeneratorInternal::~GeneratorInternal() {}
-
-void GeneratorInternal::CreateEmptyTemplate()
+GeneratorInternal::~GeneratorInternal()
 {
-    for(uint32_t i = 0U; i < grid.GetSize(); i++)
-    {
-        empty_template[i] = i;
-    }
+    
 }
 
 void GeneratorInternal::GenerateGrid()
 {
+    ClearPreviousGrid();
     GenerateMinePositions();
     CalculateAllFieldValues();
-    ClearPreviousGrid();
     CopyGeneratedVectorsToGrid();
 }
 
@@ -64,8 +56,10 @@ void GeneratorInternal::SetValuesForMineFields()
 
 void GeneratorInternal::ClearPreviousGrid()
 {
+    //grid.ClearIsLost();
     grid.ClearFlaggedFields();
     grid.ClearVisibleFields();
+    generated_mine_fields.Clear();
 }
 
 void GeneratorInternal::CopyGeneratedVectorsToGrid()

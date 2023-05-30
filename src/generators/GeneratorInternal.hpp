@@ -19,21 +19,22 @@ class GeneratorInternal : public GeneratorCommon
 
     protected:
 
-    std::vector<uint32_t> empty_template;
     std::vector<uint32_t> generated_safe_fields;
     CachedVector generated_mine_fields;
     std::vector<uint8_t> generated_field_values;
 
     virtual void GenerateMinePositions() = 0;
 
-    virtual void CreateEmptyTemplate();
-
     private:
 
     void CalculateAllFieldValues();
+
     uint8_t CalculateFieldValue(uint32_t field);
+
     void SetValuesForMineFields();
+
     void ClearPreviousGrid();
+
     void CopyGeneratedVectorsToGrid();
 };
 

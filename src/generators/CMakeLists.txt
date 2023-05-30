@@ -3,6 +3,8 @@ message("Entering directory ${CMAKE_CURRENT_SOURCE_DIR}")
 set(CPP_SOURCES_GENERATORS
     ${CMAKE_CURRENT_SOURCE_DIR}/GeneratorCommon.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/GeneratorInternal.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/GeneratorRandom.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/RandomNumberGenerator.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/GridGenerator.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/GridGeneratorFactory.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/GridGeneratorFromHash.cpp

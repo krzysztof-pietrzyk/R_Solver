@@ -13,7 +13,7 @@ class GeneratorCommon : public GeneratorIf
 
     ~GeneratorCommon();
 
-    virtual void SetStartingField(uint32_t new_starting_field) override final;
+    virtual void SetStartingField(uint32_t new_starting_field) override;
 
     protected:
 
