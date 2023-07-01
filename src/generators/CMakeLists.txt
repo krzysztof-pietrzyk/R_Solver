@@ -4,6 +4,9 @@ set(CPP_SOURCES_GENERATORS
     ${CMAKE_CURRENT_SOURCE_DIR}/GeneratorCommon.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/GeneratorInternal.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/GeneratorRandom.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/GeneratorRandomGuaranteedOpening.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/GeneratorRandomSafe.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/GeneratorRandomUnsafe.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/RandomNumberGenerator.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/GridGenerator.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/GridGeneratorFactory.cpp

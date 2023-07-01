@@ -4,18 +4,11 @@
 #include "GeneratorInternal.hpp"
 #include "RandomNumberGenerator.hpp"
 
-enum GeneratorRandomType
-{
-    UNSAFE,
-    GUARANTEED_SAFE,
-    GUARANTEED_OPENING
-};
-
 class GeneratorRandom : public GeneratorInternal
 {
     public:
 
-    GeneratorRandom(GridAccessGeneratorIf& grid_, GeneratorRandomType type);
+    GeneratorRandom(GridAccessGeneratorIf& grid_);
 
     ~GeneratorRandom();
 
@@ -28,20 +21,15 @@ class GeneratorRandom : public GeneratorInternal
 
     virtual void GenerateMinePositions() override;
 
-    void CreateTemplate();
-
     void CopyTemplateToWorkingVector();
+
+    virtual void ValidateGridDimensions() = 0;
+
+    virtual void CreateTemplate() = 0;
 
     private:
 
-    GeneratorRandomType generator_type;
     uint32_t previous_starting_field;
-
-    void ValidateGridDimensions();
-
-    void CreateUnsafeTemplate();
-    void CreateSafeTemplate();
-    void CreateGuaranteedOpeningTemplate();
 };
 
 #endif
