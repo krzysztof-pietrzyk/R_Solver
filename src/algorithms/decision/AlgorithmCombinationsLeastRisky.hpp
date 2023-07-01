@@ -1,9 +1,9 @@
 #ifndef ALGORITHM_COMBINATIONS_LEAST_RISKY_HPP
 #define ALGORITHM_COMBINATIONS_LEAST_RISKY_HPP
 
-#include "AlgorithmAction.hpp"
+#include "AlgorithmDecision.hpp"
 
-class AlgorithmCombinationsLeastRisky : public AlgorithmAction
+class AlgorithmCombinationsLeastRisky : public AlgorithmDecision
 {
     public:
 

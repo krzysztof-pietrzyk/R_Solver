@@ -14,13 +14,13 @@
 #include "analysis/AlgorithmRefreshFace.hpp"
 #include "analysis/AlgorithmRefreshCombinations.hpp"
 
-#include "action/AlgorithmSimpleCorners.hpp"
-#include "action/AlgorithmLayerOne.hpp"
-#include "action/AlgorithmLayerTwo.hpp"
-#include "action/AlgorithmCombinationsSafeMoves.hpp"
-#include "action/AlgorithmCombinationsLeastRisky.hpp"
-#include "action/AlgorithmGiveUp.hpp"
-#include "action/AlgorithmFirstMove.hpp"
+#include "decision/AlgorithmSimpleCorners.hpp"
+#include "decision/AlgorithmLayerOne.hpp"
+#include "decision/AlgorithmLayerTwo.hpp"
+#include "decision/AlgorithmCombinationsSafeMoves.hpp"
+#include "decision/AlgorithmCombinationsLeastRisky.hpp"
+#include "decision/AlgorithmGiveUp.hpp"
+#include "decision/AlgorithmFirstMove.hpp"
 
 class AlgorithmFactory
 {

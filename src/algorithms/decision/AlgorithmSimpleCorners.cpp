@@ -1,7 +1,7 @@
 #include "AlgorithmSimpleCorners.hpp"
 
 AlgorithmSimpleCorners::AlgorithmSimpleCorners(GridManager& grid_, AlgorithmDataStorage& data_)
-    : AlgorithmAction(grid_, data_)
+    : AlgorithmDecision(grid_, data_)
 {
     const uint32_t upper_left = 0;
     const uint32_t upper_right = grid.W - 1;

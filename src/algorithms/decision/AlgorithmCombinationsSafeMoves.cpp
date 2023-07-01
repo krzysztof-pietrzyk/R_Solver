@@ -1,7 +1,7 @@
 #include "AlgorithmCombinationsSafeMoves.hpp"
 
 AlgorithmCombinationsSafeMoves::AlgorithmCombinationsSafeMoves(GridManager& grid_, AlgorithmDataStorage& data_)
-    : AlgorithmAction(grid_, data_) {}
+    : AlgorithmDecision(grid_, data_) {}
 
 AlgorithmCombinationsSafeMoves::~AlgorithmCombinationsSafeMoves() {}
 

@@ -1,7 +1,7 @@
 #include "AlgorithmCombinationsLeastRisky.hpp"
 
 AlgorithmCombinationsLeastRisky::AlgorithmCombinationsLeastRisky(GridManager& grid_, AlgorithmDataStorage& data_)
-    : AlgorithmAction(grid_, data_), max_combinations(data.factorial.back()) {}
+    : AlgorithmDecision(grid_, data_), max_combinations(data.factorial.back()) {}
 
 AlgorithmCombinationsLeastRisky::~AlgorithmCombinationsLeastRisky() {}
 

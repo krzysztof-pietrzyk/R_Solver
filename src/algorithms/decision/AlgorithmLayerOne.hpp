@@ -1,7 +1,7 @@
 #ifndef ALGORITHM_LAYER_ONE_HPP
 #define ALGORITHM_LAYER_ONE_HPP
 
-#include "AlgorithmAction.hpp"
+#include "AlgorithmDecision.hpp"
 
 #include <tuple>
 
@@ -13,7 +13,7 @@ struct LayerOneFieldSignature
     uint8_t field_value = 0;
 };
 
-class AlgorithmLayerOne : public AlgorithmAction
+class AlgorithmLayerOne : public AlgorithmDecision
 {
     /* 
     "Layer One" algorithm implements the most simple player strategy.

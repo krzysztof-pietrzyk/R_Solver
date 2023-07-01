@@ -1,9 +1,9 @@
 #ifndef ALGORITHM_COMBINATIONS_SAFE_MOVES_HPP
 #define ALGORITHM_COMBINATIONS_SAFE_MOVES_HPP
 
-#include "AlgorithmAction.hpp"
+#include "AlgorithmDecision.hpp"
 
-class AlgorithmCombinationsSafeMoves : public AlgorithmAction
+class AlgorithmCombinationsSafeMoves : public AlgorithmDecision
 {
     public:
 

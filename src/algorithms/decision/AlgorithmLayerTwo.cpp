@@ -1,7 +1,7 @@
 #include "AlgorithmLayerTwo.hpp"
 
 AlgorithmLayerTwo::AlgorithmLayerTwo(GridManager& grid_, AlgorithmDataStorage& data_)
-    : AlgorithmAction(grid_, data_)
+    : AlgorithmDecision(grid_, data_)
 {
     not_common_current = std::vector<uint32_t>();
     not_common_neighbor = std::vector<uint32_t>();

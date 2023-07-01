@@ -1,9 +1,9 @@
 #ifndef ALGORITHM_FIRST_MOVE_HPP
 #define ALGORITHM_FIRST_MOVE_HPP
 
-#include "AlgorithmAction.hpp"
+#include "AlgorithmDecision.hpp"
 
-class AlgorithmFirstMove : public AlgorithmAction
+class AlgorithmFirstMove : public AlgorithmDecision
 {
     public:
 

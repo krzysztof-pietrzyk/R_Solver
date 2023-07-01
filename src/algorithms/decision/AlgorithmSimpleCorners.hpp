@@ -1,9 +1,9 @@
 #ifndef ALGORITHM_SIMPLE_CORNERS_HPP
 #define ALGORITHM_SIMPLE_CORNERS_HPP
 
-#include "AlgorithmAction.hpp"
+#include "AlgorithmDecision.hpp"
 
-class AlgorithmSimpleCorners : public AlgorithmAction
+class AlgorithmSimpleCorners : public AlgorithmDecision
 {
     /*
     This algorithm implements the player strategy for simlpy uncovering the four corners of the map.

@@ -1,7 +1,7 @@
 #include "AlgorithmLayerOne.hpp"
 
 AlgorithmLayerOne::AlgorithmLayerOne(GridManager& grid_, AlgorithmDataStorage& data_)
-    : AlgorithmAction(grid_, data_) {}
+    : AlgorithmDecision(grid_, data_) {}
 
 AlgorithmLayerOne::~AlgorithmLayerOne() {}
 

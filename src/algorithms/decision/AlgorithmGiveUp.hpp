@@ -1,9 +1,9 @@
 #ifndef ALGORITHM_GIVE_UP_HPP
 #define ALGORITHM_GIVE_UP_HPP
 
-#include "AlgorithmAction.hpp"
+#include "AlgorithmDecision.hpp"
 
-class AlgorithmGiveUp : public AlgorithmAction
+class AlgorithmGiveUp : public AlgorithmDecision
 {
     public:
 

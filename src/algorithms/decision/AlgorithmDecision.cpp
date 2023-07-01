@@ -1,17 +1,17 @@
-#include "AlgorithmAction.hpp"
+#include "AlgorithmDecision.hpp"
 
-AlgorithmAction::AlgorithmAction(GridManager& grid_, AlgorithmDataStorage& data_) : Algorithm(grid_, data_)
+AlgorithmDecision::AlgorithmDecision(GridManager& grid_, AlgorithmDataStorage& data_) : Algorithm(grid_, data_)
 {
     statistics_clicks = new StatisticsCollectorClicks();  // deleted in StatisticsProducer
     statistics_collectors.push_back(statistics_clicks);
 }
 
-AlgorithmAction::~AlgorithmAction()
+AlgorithmDecision::~AlgorithmDecision()
 {
 
 }
 
-AlgorithmStatus AlgorithmAction::Run()
+AlgorithmStatus AlgorithmDecision::Run()
 {
     statistics_executions->executions += 1;
     const uint32_t number_of_clicks_before = grid.left_click_counter + grid.right_click_counter;
@@ -32,20 +32,20 @@ AlgorithmStatus AlgorithmAction::Run()
     return game_over_result;
 }
 
-AlgorithmStatus AlgorithmAction::CheckGameOverConditions() const
+AlgorithmStatus AlgorithmDecision::CheckGameOverConditions() const
 {
     if(grid.is_lost) { return AlgorithmStatus::GAME_LOST; }
     else if(grid.visible_fields_index == grid.NM) { return AlgorithmStatus::GAME_WON; }
     else return AlgorithmStatus::NO_STATUS;
 }
 
-AlgorithmStatus AlgorithmAction::GetActionResult(const uint32_t clicks_difference) const
+AlgorithmStatus AlgorithmDecision::GetActionResult(const uint32_t clicks_difference) const
 {
     if(clicks_difference > 0) { return AlgorithmStatus::SUCCESS; }
     return AlgorithmStatus::NO_MOVES;
 }
 
-bool AlgorithmAction::LeftClick(const uint32_t field) const
+bool AlgorithmDecision::LeftClick(const uint32_t field) const
 {
     bool result = Algorithm::LeftClick(field);
     statistics_clicks->left_clicks += 1;
@@ -56,7 +56,7 @@ bool AlgorithmAction::LeftClick(const uint32_t field) const
     return result;
 }
 
-bool AlgorithmAction::RightClick(const uint32_t field) const
+bool AlgorithmDecision::RightClick(const uint32_t field) const
 {
     bool result = Algorithm::RightClick(field);
     statistics_clicks->right_clicks += 1;
