@@ -3,7 +3,7 @@
 
 enum FieldType
 {
-    UNHANDLED_TYPE,
+    UNHANDLED_FIELD_TYPE,
     F_COVERED,
     F_FLAGGED,
     F_FLAGGED_INCORRECTLY,

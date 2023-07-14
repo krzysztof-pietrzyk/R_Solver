@@ -7,7 +7,7 @@ AlgorithmRefreshCombinations::AlgorithmRefreshCombinations(GridAccessPlayerIf& g
     D_remaining_fields_combinations(GetModifiableAlgorithmDataStorageReference().remaining_fields_combinations),
     D_total_combinations(GetModifiableAlgorithmDataStorageReference().total_combinations)
 {
-    field_states = std::vector<FieldCombinationState>(grid.S, FCS_UNASSIGNED);
+    field_states = std::vector<FieldCombinationState>(grid.GetSize(), FCS_UNASSIGNED);
     choice_stack = std::vector<uint32_t>();
     segment_of_choice_stack = std::vector<uint32_t>();
     modifications_stack = std::vector<uint32_t>();
@@ -15,11 +15,11 @@ AlgorithmRefreshCombinations::AlgorithmRefreshCombinations(GridAccessPlayerIf& g
     remaining_mines = 0;
     remaining_fields = 0;
 
-    mine_counts_in_segment = std::vector<std::vector<uint32_t>>(grid.M, std::vector<uint32_t>());
-    current_mine_count_id_in_segment = std::vector<size_t>(grid.M, 0);
+    mine_counts_in_segment = std::vector<std::vector<uint32_t>>(grid.GetTotalMines(), std::vector<uint32_t>());
+    current_mine_count_id_in_segment = std::vector<size_t>(grid.GetTotalMines(), 0);
 
-    segments_combinations = std::vector<std::map<uint32_t, BigNum>>(grid.M, std::map<uint32_t, BigNum>());
-    field_combinations_temp = std::vector<std::map<uint32_t, BigNum>>(grid.S, std::map<uint32_t, BigNum>());
+    segments_combinations = std::vector<std::map<uint32_t, BigNum>>(grid.GetTotalMines(), std::map<uint32_t, BigNum>());
+    field_combinations_temp = std::vector<std::map<uint32_t, BigNum>>(grid.GetSize(), std::map<uint32_t, BigNum>());
 }
 
 AlgorithmRefreshCombinations::~AlgorithmRefreshCombinations() {}
@@ -27,8 +27,8 @@ AlgorithmRefreshCombinations::~AlgorithmRefreshCombinations() {}
 AlgorithmStatus AlgorithmRefreshCombinations::Execution()
 {
     Clear();
-    remaining_mines = grid.M - grid.flags_index;
-    remaining_fields = grid.S - grid.visible_fields_index - grid.flags_index - data.face_index;
+    remaining_mines = grid.GetTotalMines() - flagged.Index();
+    remaining_fields = grid.GetSize() - visible.Index() - flagged.Index() - data.face_index;
     const uint32_t segments_to_check = data.segments_count;
     for(size_t i = 0; i < segments_to_check; i++)
     {

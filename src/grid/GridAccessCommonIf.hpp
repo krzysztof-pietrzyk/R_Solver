@@ -13,7 +13,7 @@ class GridAccessCommonIf
     virtual uint32_t GetSize() const = 0;
     virtual uint32_t GetTotalMines() const = 0;
     virtual uint32_t GetTotalSafeFields() const = 0;
-    virtual const std::vector<uint32_t>& GetFieldNeighbors(uint32_t field) const = 0;
+    virtual const std::vector<uint32_t>& GetNeighbors(uint32_t field) const = 0;
 };
 
 #endif

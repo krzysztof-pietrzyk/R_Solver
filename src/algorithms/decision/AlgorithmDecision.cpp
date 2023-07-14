@@ -1,9 +1,10 @@
 #include "AlgorithmDecision.hpp"
 
-AlgorithmDecision::AlgorithmDecision(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_) : Algorithm(grid_, data_)
+AlgorithmDecision::AlgorithmDecision(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_)
+    : Algorithm(grid_, data_),
+    D_grid(GetModifiableGridReference())
 {
-    statistics_clicks = new StatisticsCollectorClicks();  // deleted in StatisticsProducer
-    statistics_collectors.push_back(statistics_clicks);
+    
 }
 
 AlgorithmDecision::~AlgorithmDecision()
@@ -13,10 +14,9 @@ AlgorithmDecision::~AlgorithmDecision()
 
 AlgorithmStatus AlgorithmDecision::Run()
 {
-    statistics_executions->executions += 1;
-    const uint32_t number_of_clicks_before = grid.left_click_counter + grid.right_click_counter;
+    const uint32_t number_of_clicks_before = left_click_counter + right_click_counter;
     Execution();
-    const uint32_t number_of_clicks_after = grid.left_click_counter + grid.right_click_counter;
+    const uint32_t number_of_clicks_after = left_click_counter + right_click_counter;
     
     AlgorithmStatus action_result = GetActionResult(number_of_clicks_after - number_of_clicks_before);
     AlgorithmStatus game_over_result = CheckGameOverConditions();
@@ -25,17 +25,13 @@ AlgorithmStatus AlgorithmDecision::Run()
     {
         return action_result;
     }
-    else if(game_over_result == AlgorithmStatus::GAME_LOST)
-    {
-        statistics_clicks->times_caused_loss += 1;
-    }
     return game_over_result;
 }
 
 AlgorithmStatus AlgorithmDecision::CheckGameOverConditions() const
 {
-    if(grid.is_lost) { return AlgorithmStatus::GAME_LOST; }
-    else if(grid.visible_fields_index == grid.NM) { return AlgorithmStatus::GAME_WON; }
+    if(grid.IsLost()) { return AlgorithmStatus::GAME_LOST; }
+    else if(visible.Index() == grid.GetTotalSafeFields()) { return AlgorithmStatus::GAME_WON; }
     else return AlgorithmStatus::NO_STATUS;
 }
 
@@ -45,24 +41,22 @@ AlgorithmStatus AlgorithmDecision::GetActionResult(const uint32_t clicks_differe
     return AlgorithmStatus::NO_MOVES;
 }
 
-bool AlgorithmDecision::LeftClick(const uint32_t field) const
+bool AlgorithmDecision::LeftClick(const uint32_t field)
 {
-    bool result = Algorithm::LeftClick(field);
-    statistics_clicks->left_clicks += 1;
-    if(!result)
+    PlayerActionResult result = D_grid.SetVisible(field);
+    if(result == PlayerActionResult::CORRECT)
     {
-        statistics_clicks->wasted_left_clicks += 1;
+        left_click_counter += 1;
     }
     return result;
 }
 
-bool AlgorithmDecision::RightClick(const uint32_t field) const
+bool AlgorithmDecision::RightClick(const uint32_t field)
 {
-    bool result = Algorithm::RightClick(field);
-    statistics_clicks->right_clicks += 1;
-    if(!result)
+    PlayerActionResult result = D_grid.SetFlag(field);
+    if(result == PlayerActionResult::CORRECT)
     {
-        statistics_clicks->wasted_right_clicks += 1;
+        right_click_counter += 1;
     }
     return result;
 }

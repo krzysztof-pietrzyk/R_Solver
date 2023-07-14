@@ -33,7 +33,7 @@ void GeneratorInternal::CalculateAllFieldValues()
 uint8_t GeneratorInternal::CalculateFieldValue(uint32_t field)
 {
     uint8_t current_field_value = 0U;
-    const std::vector<uint32_t>& neighbors = grid.GetFieldNeighbors(field);
+    const std::vector<uint32_t>& neighbors = grid.GetNeighbors(field);
     for(const uint32_t& current_neighbor : neighbors)
     {
         // Count how many mines are within each field's neighbors

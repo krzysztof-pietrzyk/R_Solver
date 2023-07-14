@@ -52,7 +52,7 @@ uint32_t GridImpl::GetTotalSafeFields() const
     return dimensions.safe;
 }
 
-const std::vector<uint32_t>& GridImpl::GetFieldNeighbors(uint32_t field) const
+const std::vector<uint32_t>& GridImpl::GetNeighbors(uint32_t field) const
 {
     return neighbors.at(field);
 }
@@ -68,7 +68,7 @@ const CachedVector& GridImpl::GetFlaggedFields() const
     return flagged_fields;
 }
 
-uint8_t GridImpl::GetFieldValue(uint32_t field)
+uint8_t GridImpl::GetFieldValue(uint32_t field) const
 {
     if(visible_fields.Contains(field))
     {
@@ -77,14 +77,19 @@ uint8_t GridImpl::GetFieldValue(uint32_t field)
     throw std::runtime_error("ERROR: GridImpl::GetFieldValue attempting to read value of a covered field!");
 }
 
-bool GridImpl::IsLost()
+bool GridImpl::IsLost() const
 {
     return is_lost;
 }
 
-bool GridImpl::IsWon()
+bool GridImpl::IsWon() const
 {
-    return !is_lost && visible_fields.CurrentIndex() == dimensions.safe;
+    return !is_lost && visible_fields.Index() == dimensions.safe;
+}
+
+void GridImpl::GiveUp()
+{
+    is_lost = true;
 }
 
 // GridAccessGeneratorIf
@@ -224,6 +229,6 @@ FieldType GridImpl::GetFieldTypeNumbered(uint32_t field)
             return FieldType::F_8;
         default:
             std::runtime_error("ERROR: GridImpl::GetFieldTypeNumbered impossible field value!");
-            return FieldType::UNHANDLED_TYPE;
+            return FieldType::UNHANDLED_FIELD_TYPE;
     }
 }

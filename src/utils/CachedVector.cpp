@@ -69,7 +69,7 @@ void CachedVector::Clear()
     data_index = 0U;
 }
 
-size_t CachedVector::CurrentIndex() const
+size_t CachedVector::Index() const
 {
     return data_index;
 }
@@ -97,7 +97,7 @@ const std::vector<uint32_t>::iterator CachedVector::at(size_t index)
 
 const std::vector<uint32_t>::iterator CachedVector::end()
 {
-    return begin() + CurrentIndex();
+    return begin() + Index();
 }
 
 void CachedVector::CopyFromTo(const CachedVector& source, CachedVector& destination)

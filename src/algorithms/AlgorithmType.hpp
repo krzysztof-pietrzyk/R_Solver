@@ -7,7 +7,7 @@
 
 enum AlgorithmType
 {
-    UNHANDLED_TYPE,
+    UNHANDLED_ALGORITHM_TYPE,
     FIRST_MOVE,
     SIMPLE_CORNERS,
     REFRESH_BORDER,
@@ -25,7 +25,7 @@ enum AlgorithmType
 
 namespace Labels::Producers::Algorithms
 {
-    static const Label UNHANDLED_TYPE = "Unhandled AlgorithmType";
+    static const Label UNHANDLED_ALGORITHM_TYPE = "Unhandled AlgorithmType";
     static const Label FIRST_MOVE = "First Move";
     static const Label SIMPLE_CORNERS = "Simple Corners";
     static const Label REFRESH_BORDER = "Refresh Border";
@@ -45,7 +45,7 @@ static Label GetAlgorithmTypeLabel(AlgorithmType type)
 {
     switch(type)
     {
-        case UNHANDLED_TYPE:           return Labels::Producers::Algorithms::UNHANDLED_TYPE;
+        case UNHANDLED_ALGORITHM_TYPE: return Labels::Producers::Algorithms::UNHANDLED_ALGORITHM_TYPE;
         case FIRST_MOVE:               return Labels::Producers::Algorithms::FIRST_MOVE;
         case SIMPLE_CORNERS:           return Labels::Producers::Algorithms::SIMPLE_CORNERS;
         case REFRESH_BORDER:           return Labels::Producers::Algorithms::REFRESH_BORDER;

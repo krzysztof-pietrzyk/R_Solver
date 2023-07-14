@@ -81,7 +81,7 @@ bool AlgorithmLayerTwo::IsNeighborSectionValid(const Section& current_section, c
     return true;
 }
 
-void AlgorithmLayerTwo::ExecNeighborPerspectiveCondition(const Section& current_section, const Section& neighbor_section, const uint32_t common_fields_l) const
+void AlgorithmLayerTwo::ExecNeighborPerspectiveCondition(const Section& current_section, const Section& neighbor_section, const uint32_t common_fields_l)
 {
     if(neighbor_section.value == current_section.value - current_section.fields_index + common_fields_l)
     {
@@ -90,7 +90,7 @@ void AlgorithmLayerTwo::ExecNeighborPerspectiveCondition(const Section& current_
     }
 }
 
-void AlgorithmLayerTwo::ExecCurrentPerspectiveCondition(const Section& current_section, const Section& neighbor_section, const uint32_t common_fields_l) const
+void AlgorithmLayerTwo::ExecCurrentPerspectiveCondition(const Section& current_section, const Section& neighbor_section, const uint32_t common_fields_l)
 {
     if(current_section.value == neighbor_section.value - neighbor_section.fields_index + common_fields_l)
     {

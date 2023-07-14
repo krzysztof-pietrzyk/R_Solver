@@ -31,7 +31,7 @@ void CheckStatus(SolverThreadData* data, vector<Solver*> solvers)
 
 		for(Solver* s : solvers)
 		{
-			s->UpdateThreadData();
+			//s->UpdateThreadData();
 		}
 		ostringstream text_to_print = ostringstream();
 		text_to_print << "Seconds since start: " << seconds_since_start << "\n";

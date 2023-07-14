@@ -2,13 +2,13 @@
 
 AlgorithmGiveUp::AlgorithmGiveUp(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_)
     : AlgorithmDecision(grid_, data_),
-    D_is_lost(GetModifiableGridReference().is_lost)
+    D_grid(GetModifiableGridReference())
 {}
 
 AlgorithmGiveUp::~AlgorithmGiveUp() {}
 
 AlgorithmStatus AlgorithmGiveUp::Execution()
 {
-    D_is_lost = true;
+    D_grid.GiveUp();
     return AlgorithmStatus::NO_STATUS;
 }

@@ -20,7 +20,7 @@ class CachedVector
     void Remove(uint32_t value);
     bool Contains(uint32_t value) const;
     void Clear();
-    size_t CurrentIndex() const;
+    size_t Index() const;
     size_t MaxSize() const;
 
     const std::vector<uint32_t>::iterator begin();

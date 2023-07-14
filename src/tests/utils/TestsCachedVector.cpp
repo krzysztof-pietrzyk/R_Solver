@@ -180,24 +180,24 @@ TEST(TestCachedVector, ContainsValues)
     EXPECT_FALSE(tested_vector.Contains(3));
 }
 
-TEST(TestCachedVector, CurrentIndex)
+TEST(TestCachedVector, Index)
 {
     size_t tested_size = 5U;
     MockCachedVector tested_vector = MockCachedVector(tested_size);
 
-    EXPECT_EQ(tested_vector.CurrentIndex(), 0);
+    EXPECT_EQ(tested_vector.Index(), 0);
     tested_vector.Add(1);
-    EXPECT_EQ(tested_vector.CurrentIndex(), 1);
+    EXPECT_EQ(tested_vector.Index(), 1);
     tested_vector.Add(0);
-    EXPECT_EQ(tested_vector.CurrentIndex(), 2);
+    EXPECT_EQ(tested_vector.Index(), 2);
     tested_vector.Add(3);
-    EXPECT_EQ(tested_vector.CurrentIndex(), 3);
+    EXPECT_EQ(tested_vector.Index(), 3);
     tested_vector.Remove(0);
-    EXPECT_EQ(tested_vector.CurrentIndex(), 2);
+    EXPECT_EQ(tested_vector.Index(), 2);
     tested_vector.Remove(3);
-    EXPECT_EQ(tested_vector.CurrentIndex(), 1);
+    EXPECT_EQ(tested_vector.Index(), 1);
     tested_vector.Remove(1);
-    EXPECT_EQ(tested_vector.CurrentIndex(), 0);
+    EXPECT_EQ(tested_vector.Index(), 0);
 }
 
 TEST(TestCachedVector, Clear)

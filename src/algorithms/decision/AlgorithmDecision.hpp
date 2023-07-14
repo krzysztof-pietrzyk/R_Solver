@@ -2,7 +2,6 @@
 #define ALGORITHM_DECISION_HPP
 
 #include "../Algorithm.hpp"
-#include "../../statistics/collectors/StatisticsCollectorClicks.hpp"
 
 class AlgorithmDecision : public Algorithm
 {
@@ -20,13 +19,15 @@ class AlgorithmDecision : public Algorithm
 
     protected:
 
-    virtual bool LeftClick(const uint32_t field) const override;
+    bool LeftClick(const uint32_t field);
 
-    virtual bool RightClick(const uint32_t field) const override;
+    bool RightClick(const uint32_t field);
 
     private:
 
-    StatisticsCollectorClicks* statistics_clicks;
+    uint64_t left_click_counter;
+    uint64_t right_click_counter;
+    GridAccessPlayerIf& D_grid;
 
     AlgorithmStatus CheckGameOverConditions() const;
 

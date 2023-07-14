@@ -1,0 +1,12 @@
+#ifndef GENERATOR_TYPE_HPP
+#define GENERATOR_TYPE_HPP
+
+enum GeneratorType
+{
+    UNHANDLED_GENERATOR_TYPE,
+    UNSAFE,
+    SAFE,
+    GUARANTEED_OPENING,
+};
+
+#endif

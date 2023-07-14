@@ -26,28 +26,28 @@ LayerOneFieldSignature AlgorithmLayerOne::GetFieldSignature(const uint32_t borde
     uint8_t flags_count = 0;
     uint8_t not_visible_count = 0;
     // Count flags and covered fields around the border field
-    const std::vector<uint32_t>& neighbor_fields = grid.neighbors[border_field];
+    const std::vector<uint32_t>& neighbor_fields = grid.GetNeighbors(border_field);
     for(const uint32_t& neighbor_field : neighbor_fields)
     {
-        if(grid.is_flag[neighbor_field]) flags_count++;
-        else if(!grid.is_visible[neighbor_field]) not_visible_count++;
+        if(flagged.Contains(neighbor_field)) flags_count++;
+        else if(!visible.Contains(neighbor_field)) not_visible_count++;
     }
     LayerOneFieldSignature result;
     result.field = border_field;
     result.flags_count = flags_count;
     result.not_visible_count = not_visible_count;
-    result.field_value = FieldValue(border_field);
+    result.field_value = grid.GetFieldValue(border_field);
     return result;
 }
 
-void AlgorithmLayerOne::CheckForSafeClicks(const LayerOneFieldSignature& signature) const
+void AlgorithmLayerOne::CheckForSafeClicks(const LayerOneFieldSignature& signature)
 {
     // If there are already enough flags...
     if(signature.field_value != signature.flags_count) { return; }
-    const std::vector<uint32_t>& neighbor_fields = grid.neighbors[signature.field];
+    const std::vector<uint32_t>& neighbor_fields = grid.GetNeighbors(signature.field);
     for(const uint32_t& neighbor_field : neighbor_fields)
     {
-        if(!grid.is_flag[neighbor_field] && !grid.is_visible[neighbor_field])
+        if(!flagged.Contains(neighbor_field) && !visible.Contains(neighbor_field))
         {
             // ...left click on all remaining covered fields
             LeftClick(neighbor_field);
@@ -55,14 +55,14 @@ void AlgorithmLayerOne::CheckForSafeClicks(const LayerOneFieldSignature& signatu
     }
 }
 
-void AlgorithmLayerOne::CheckForMines(const LayerOneFieldSignature& signature) const
+void AlgorithmLayerOne::CheckForMines(const LayerOneFieldSignature& signature)
 {
     // If the remaining covered fields exactly account for missing flags...
     if(signature.field_value != signature.flags_count + signature.not_visible_count) { return; }
-    const std::vector<uint32_t>& neighbor_fields = grid.neighbors[signature.field];
+    const std::vector<uint32_t>& neighbor_fields = grid.GetNeighbors(signature.field);
     for(const uint32_t& neighbor_field : neighbor_fields)
     {
-        if(!grid.is_flag[neighbor_field] && !grid.is_visible[neighbor_field])
+        if(!flagged.Contains(neighbor_field) && !visible.Contains(neighbor_field))
         {
             // ...right click on all remaining covered fields
             RightClick(neighbor_field);

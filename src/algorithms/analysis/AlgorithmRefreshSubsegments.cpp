@@ -7,8 +7,8 @@ AlgorithmRefreshSubsegments::AlgorithmRefreshSubsegments(GridAccessPlayerIf& gri
     D_subsegments_cache(GetModifiableAlgorithmDataStorageReference().subsegments_cache),
     D_subsegments_cache_index(GetModifiableAlgorithmDataStorageReference().subsegments_cache_index)
 {
-    is_checked = std::vector<bool>(grid.S, false);
-    checked = std::vector<uint32_t>(grid.S, 0);
+    is_checked = std::vector<bool>(grid.GetSize(), false);
+    checked = std::vector<uint32_t>(grid.GetSize(), 0);
     checked_index = 0;
     neighbors_bits = std::map<uint32_t, uint32_t>();
     section_neighborhood = std::map<uint32_t, std::vector<uint32_t>>();
@@ -116,7 +116,7 @@ void AlgorithmRefreshSubsegments::FindSegmentsToOptimize(const uint32_t parent_s
 uint32_t AlgorithmRefreshSubsegments::GetNeighborhoodHash(const uint32_t section_field)
 {
     uint32_t hash_result = 0;
-    for(const uint32_t& section_field_neighbor : grid.neighbors[section_field])
+    for(const uint32_t& section_field_neighbor : grid.GetNeighbors(section_field))
     {
         // only consider fields that are section origins
         if(!data.is_section_origin[section_field_neighbor]) { continue; }
@@ -132,7 +132,7 @@ void AlgorithmRefreshSubsegments::FindPossibleValuesForSubsegment(SubsegmentData
     const size_t subsegment_length = subsegment_data.fields.size();
     uint8_t minimum_section_value = UCHAR_MAX;
     int8_t maximum_forced_mines = 0;
-    for(const uint32_t& subsegment_field_neighbor : grid.neighbors[subsegment_field])
+    for(const uint32_t& subsegment_field_neighbor : grid.GetNeighbors(subsegment_field))
     {
         // ignore neighbors which are not section origins
         if(!data.is_section_origin[subsegment_field_neighbor]) { continue; }

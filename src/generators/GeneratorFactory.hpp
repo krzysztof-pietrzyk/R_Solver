@@ -1,17 +1,10 @@
 #ifndef GENERATOR_FACTORY_HPP
 #define GENERATOR_FACTORY_HPP
 
+#include "GeneratorType.hpp"
 #include "GeneratorRandomGuaranteedOpening.hpp"
 #include "GeneratorRandomSafe.hpp"
 #include "GeneratorRandomUnsafe.hpp"
-
-enum GeneratorType
-{
-    UNHANDLED_TYPE,
-    UNSAFE,
-    SAFE,
-    GUARANTEED_OPENING,
-};
 
 class GeneratorFactory
 {

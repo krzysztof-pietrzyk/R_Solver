@@ -1,16 +1,14 @@
 #ifndef SOLVER_HPP
 #define SOLVER_HPP
 
+#include "../grid/GridInternalImpl.hpp"
 #include "../algorithms/AlgorithmManager.hpp"
 #include "../view/GridViewFactory.hpp"
-#include "../generators/GridGeneratorFactory.hpp"
-#include "../statistics/StatisticsAggregator.hpp"
-#include "../statistics/StatisticsProducer.hpp"
-#include "../statistics/collectors/StatisticsCollectorSolver.hpp"
+#include "../generators/GeneratorFactory.hpp"
 
 #include "SolverThreadData.hpp"
 
-class Solver : public StatisticsProducer
+class Solver
 {
     public:
 
@@ -26,18 +24,10 @@ class Solver : public StatisticsProducer
 
     private:
 
-    GridSelfGenerated* grid;
-	GridGenerator* generator;
-	GridView* view;
+    GridInternalImpl* grid;
+    GeneratorIf* generator;
 	AlgorithmManager* algorithm_manager;
-    StatisticsAggregator* statistics_aggregator;
-    StatisticsCollectorSolver* statistics_solver;
-
-    const uint32_t fields_to_uncover;
-
     SolverThreadData* thread_data;
-
-    void UpdateSolverStatistics();
 };
 
 #endif

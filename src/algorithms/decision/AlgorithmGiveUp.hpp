@@ -17,7 +17,7 @@ class AlgorithmGiveUp : public AlgorithmDecision
 
     private:
 
-    bool& D_is_lost;
+    GridAccessPlayerIf& D_grid;
 };
 
 #endif

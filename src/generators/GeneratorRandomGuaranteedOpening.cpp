@@ -23,7 +23,7 @@ void GeneratorRandomGuaranteedOpening::ValidateGridDimensions()
 
 void GeneratorRandomGuaranteedOpening::CreateTemplate()
 {
-    const std::vector<uint32_t>& starting_field_neighbors = grid.GetFieldNeighbors(starting_field);
+    const std::vector<uint32_t>& starting_field_neighbors = grid.GetNeighbors(starting_field);
     const uint32_t starting_field_neighbors_num = starting_field_neighbors.size();
     current_template = std::vector<uint32_t>(grid.GetSize() - starting_field_neighbors_num - 1U, 0U);
     uint32_t index = 0U;

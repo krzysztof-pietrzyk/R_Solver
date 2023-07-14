@@ -13,7 +13,7 @@ AlgorithmRefreshBorder::~AlgorithmRefreshBorder() {}
 AlgorithmStatus AlgorithmRefreshBorder::Execution()
 {  
     const uint32_t visible_fields_old_index = data.border_last_visible_fields_index;
-    const uint32_t visible_fields_new_index = visible.CurrentIndex();
+    const uint32_t visible_fields_new_index = visible.Index();
 
     if(visible_fields_new_index == visible_fields_old_index) return AlgorithmStatus::NO_STATUS;
 
@@ -48,7 +48,7 @@ void AlgorithmRefreshBorder::FilterOldBorderContent(uint32_t& border_index_new) 
 void AlgorithmRefreshBorder::AddNewContentToBorder(uint32_t& border_index_new) const
 {
     const uint32_t visible_fields_old_index = data.border_last_visible_fields_index;
-    const uint32_t visible_fields_new_index = visible.CurrentIndex();
+    const uint32_t visible_fields_new_index = visible.Index();
     for(size_t i = visible_fields_old_index; i < visible_fields_new_index; i++)
     {
         const uint32_t visible_field = visible[i];
@@ -63,7 +63,7 @@ void AlgorithmRefreshBorder::AddNewContentToBorder(uint32_t& border_index_new) c
 bool AlgorithmRefreshBorder::HasAtLeastOneNotVisibleNeighbor(uint32_t field) const
 {
     bool at_least_one_not_visible = false;
-    const std::vector<uint32_t>& field_neighbors = grid.GetFieldNeighbors(field);
+    const std::vector<uint32_t>& field_neighbors = grid.GetNeighbors(field);
     for(const uint32_t& neighbor_field : field_neighbors)
     {
         if(!visible.Contains(neighbor_field) && !flagged.Contains(neighbor_field))
