@@ -1,6 +1,6 @@
 #include "AlgorithmDecision.hpp"
 
-AlgorithmDecision::AlgorithmDecision(GridManager& grid_, AlgorithmDataStorage& data_) : Algorithm(grid_, data_)
+AlgorithmDecision::AlgorithmDecision(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_) : Algorithm(grid_, data_)
 {
     statistics_clicks = new StatisticsCollectorClicks();  // deleted in StatisticsProducer
     statistics_collectors.push_back(statistics_clicks);

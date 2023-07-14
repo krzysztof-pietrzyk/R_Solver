@@ -1,6 +1,6 @@
 #include "AlgorithmRefreshSegments.hpp"
 
-AlgorithmRefreshSegments::AlgorithmRefreshSegments(GridManager& grid_, AlgorithmDataStorage& data_)
+AlgorithmRefreshSegments::AlgorithmRefreshSegments(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_)
     : Algorithm(grid_, data_),
     D_segments_index(GetModifiableAlgorithmDataStorageReference().segments_index),
     D_segments_count(GetModifiableAlgorithmDataStorageReference().segments_count),

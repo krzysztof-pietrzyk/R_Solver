@@ -1,6 +1,6 @@
 #include "AlgorithmCombinationsSafeMoves.hpp"
 
-AlgorithmCombinationsSafeMoves::AlgorithmCombinationsSafeMoves(GridManager& grid_, AlgorithmDataStorage& data_)
+AlgorithmCombinationsSafeMoves::AlgorithmCombinationsSafeMoves(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_)
     : AlgorithmDecision(grid_, data_) {}
 
 AlgorithmCombinationsSafeMoves::~AlgorithmCombinationsSafeMoves() {}

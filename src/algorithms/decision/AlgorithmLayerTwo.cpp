@@ -1,6 +1,6 @@
 #include "AlgorithmLayerTwo.hpp"
 
-AlgorithmLayerTwo::AlgorithmLayerTwo(GridManager& grid_, AlgorithmDataStorage& data_)
+AlgorithmLayerTwo::AlgorithmLayerTwo(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_)
     : AlgorithmDecision(grid_, data_)
 {
     not_common_current = std::vector<uint32_t>();

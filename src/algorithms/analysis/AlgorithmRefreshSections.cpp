@@ -1,6 +1,6 @@
 #include "AlgorithmRefreshSections.hpp"
 
-AlgorithmRefreshSections::AlgorithmRefreshSections(GridManager& grid_, AlgorithmDataStorage& data_)
+AlgorithmRefreshSections::AlgorithmRefreshSections(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_)
     : Algorithm(grid_, data_),
     diff_bit_20(1), diff_bit_21(2), diff_bit_22(grid.W - 2), diff_bit_23(grid.W - 1),
     diff_bit_24(grid.W), diff_bit_25(grid.W + 1), diff_bit_26(grid.W + 2), diff_bit_27(2 * grid.W - 2),

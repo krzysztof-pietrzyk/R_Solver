@@ -4,7 +4,7 @@
 #include <vector>
 #include <map>
 
-#include "../grid/GridManager.hpp"
+#include "../grid/GridAccessPlayerIf.hpp"
 #include "../utils/BigNum.hpp"
 #include "Section.hpp"
 
@@ -61,7 +61,7 @@ class AlgorithmDataStorage
     BigNum remaining_fields_combinations;
     BigNum total_combinations;
 
-    AlgorithmDataStorage(GridManager& grid);
+    AlgorithmDataStorage(GridAccessPlayerIf& grid);
 
     ~AlgorithmDataStorage();
 
@@ -69,7 +69,7 @@ class AlgorithmDataStorage
 
     private:
 
-    void PreCalculateFactorials(GridManager& grid);
+    void PreCalculateFactorials(uint32_t grid_size);
 };
 
 #endif

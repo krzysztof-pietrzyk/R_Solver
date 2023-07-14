@@ -1,8 +1,8 @@
 #include "AlgorithmGiveUp.hpp"
 
-AlgorithmGiveUp::AlgorithmGiveUp(GridManager& grid_, AlgorithmDataStorage& data_)
+AlgorithmGiveUp::AlgorithmGiveUp(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_)
     : AlgorithmDecision(grid_, data_),
-    D_is_lost(GetModifiableGridManagerReference().is_lost)
+    D_is_lost(GetModifiableGridReference().is_lost)
 {}
 
 AlgorithmGiveUp::~AlgorithmGiveUp() {}

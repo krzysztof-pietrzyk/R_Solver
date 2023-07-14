@@ -26,7 +26,7 @@ class GridImpl : public GridAccessPlayerIf, public GridAccessGeneratorIf, public
     virtual uint32_t GetSize() const override;
     virtual uint32_t GetTotalMines() const override;
     virtual uint32_t GetTotalSafeFields() const override;
-    virtual const std::vector<uint32_t>& GetFieldNeighbors(uint32_t field) override;
+    virtual const std::vector<uint32_t>& GetFieldNeighbors(uint32_t field) const override;
 
     // GridAccessPlayerIf
     virtual const CachedVector& GetVisibleFields() const override;

@@ -7,7 +7,7 @@ class AlgorithmRefreshFace : public Algorithm
 {
     public:
 
-    AlgorithmRefreshFace(GridManager& grid_, AlgorithmDataStorage& data_);
+    AlgorithmRefreshFace(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_);
 
     ~AlgorithmRefreshFace();
 

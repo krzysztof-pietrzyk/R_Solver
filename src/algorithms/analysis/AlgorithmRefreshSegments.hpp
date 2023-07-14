@@ -15,7 +15,7 @@ class AlgorithmRefreshSegments : public Algorithm
     */
     public:
 
-    AlgorithmRefreshSegments(GridManager& grid_, AlgorithmDataStorage& data_);
+    AlgorithmRefreshSegments(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_);
 
     ~AlgorithmRefreshSegments();
 

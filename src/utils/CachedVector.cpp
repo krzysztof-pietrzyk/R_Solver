@@ -122,7 +122,7 @@ void CachedVector::operator=(const CachedVector& other)
     CachedVector::CopyFromTo(other, *this);
 }
 
-const uint32_t& CachedVector::operator[](size_t index)
+const uint32_t& CachedVector::operator[](size_t index) const
 {
     return data[index];
 }

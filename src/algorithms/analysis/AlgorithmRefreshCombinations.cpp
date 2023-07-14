@@ -1,6 +1,6 @@
 #include "AlgorithmRefreshCombinations.hpp"
 
-AlgorithmRefreshCombinations::AlgorithmRefreshCombinations(GridManager& grid_, AlgorithmDataStorage& data_)
+AlgorithmRefreshCombinations::AlgorithmRefreshCombinations(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_)
     : Algorithm(grid_, data_),
     D_subsegments(GetModifiableAlgorithmDataStorageReference().subsegments),
     D_field_combinations(GetModifiableAlgorithmDataStorageReference().field_combinations),

@@ -30,7 +30,7 @@ class CachedVector
     static void CopyFromTo(const CachedVector& source, CachedVector& destination);
 
     void operator=(const CachedVector& other);
-    const uint32_t& operator[](size_t index);
+    const uint32_t& operator[](size_t index) const;
 
     protected:
 

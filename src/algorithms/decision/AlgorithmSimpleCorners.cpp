@@ -1,6 +1,6 @@
 #include "AlgorithmSimpleCorners.hpp"
 
-AlgorithmSimpleCorners::AlgorithmSimpleCorners(GridManager& grid_, AlgorithmDataStorage& data_)
+AlgorithmSimpleCorners::AlgorithmSimpleCorners(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_)
     : AlgorithmDecision(grid_, data_)
 {
     const uint32_t upper_left = 0;

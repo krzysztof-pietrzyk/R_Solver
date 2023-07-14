@@ -52,9 +52,9 @@ uint32_t GridImpl::GetTotalSafeFields() const
     return dimensions.safe;
 }
 
-const std::vector<uint32_t>& GridImpl::GetFieldNeighbors(uint32_t field)
+const std::vector<uint32_t>& GridImpl::GetFieldNeighbors(uint32_t field) const
 {
-    return neighbors[field];
+    return neighbors.at(field);
 }
 
 // GridAccessPlayerIf

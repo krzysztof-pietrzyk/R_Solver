@@ -1,13 +1,11 @@
 #ifndef ALGORITHM_HPP
 #define ALGORITHM_HPP
 
-#include "../grid/GridManager.hpp"
-#include "../statistics/StatisticsProducer.hpp"
-#include "../statistics/collectors/StatisticsCollectorExecutions.hpp"
+#include "../grid/GridAccessPlayerIf.hpp"
 #include "AlgorithmDataStorage.hpp"
 #include "AlgorithmStatus.hpp"
 
-class Algorithm : public StatisticsProducer
+class Algorithm
 {
     /*
     Abstract base class for algorithm objects.
@@ -16,7 +14,7 @@ class Algorithm : public StatisticsProducer
     */
     public:
     
-    Algorithm(GridManager& grid_, AlgorithmDataStorage& data_);
+    Algorithm(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_);
 
     ~Algorithm();
 
@@ -24,27 +22,20 @@ class Algorithm : public StatisticsProducer
 
     protected:
 
-    StatisticsCollectorExecutions* statistics_executions;
-
-    const GridManager& grid;
-
+    const GridAccessPlayerIf& grid;
     const AlgorithmDataStorage& data;
+    const CachedVector& visible;
+    const CachedVector& flagged;
 
     virtual AlgorithmStatus Execution() = 0;
 
-    virtual bool LeftClick(const uint32_t field) const;
-
-    virtual bool RightClick(const uint32_t field) const;
-
-    uint8_t FieldValue(const uint32_t field) const;
-
-    GridManager& GetModifiableGridManagerReference() const;
+    GridAccessPlayerIf& GetModifiableGridReference() const;
 
     AlgorithmDataStorage& GetModifiableAlgorithmDataStorageReference() const;
 
     private:
 
-    GridManager& _grid;
+    GridAccessPlayerIf& _grid;
 
     AlgorithmDataStorage& _data;
 };

@@ -1,9 +1,8 @@
 #include "AlgorithmManager.hpp"
 
-AlgorithmManager::AlgorithmManager(GridManager& grid_) : grid(&grid_)
+AlgorithmManager::AlgorithmManager(GridAccessPlayerIf& grid_) : grid(&grid_)
 {
     data = new AlgorithmDataStorage(grid_);
-    factory = new AlgorithmFactory(grid_, *data);
 
     algorithms = std::map<AlgorithmType, Algorithm*>();
     transitions = AlgorithmTransitionManager();
@@ -17,7 +16,6 @@ AlgorithmManager::~AlgorithmManager()
     {
         delete iter->second;
     }
-    delete factory;
     delete data;
 }
 
@@ -47,17 +45,17 @@ void AlgorithmManager::CreateAlgorithms()
 {
     // This method is only called once in the constructor
     // It creates all Algorithm objects
-    algorithms[AlgorithmType::SIMPLE_CORNERS]           = factory->Create(AlgorithmType::SIMPLE_CORNERS);
-    algorithms[AlgorithmType::REFRESH_BORDER]           = factory->Create(AlgorithmType::REFRESH_BORDER);
-    algorithms[AlgorithmType::LAYER_ONE]                = factory->Create(AlgorithmType::LAYER_ONE);
-    algorithms[AlgorithmType::REFRESH_SECTIONS]         = factory->Create(AlgorithmType::REFRESH_SECTIONS);
-    algorithms[AlgorithmType::LAYER_TWO]                = factory->Create(AlgorithmType::LAYER_TWO);
-    algorithms[AlgorithmType::REFRESH_SEGMENTS]         = factory->Create(AlgorithmType::REFRESH_SEGMENTS);
-    algorithms[AlgorithmType::REFRESH_SUBSEGMENTS]      = factory->Create(AlgorithmType::REFRESH_SUBSEGMENTS);
-    algorithms[AlgorithmType::REFRESH_FACE]             = factory->Create(AlgorithmType::REFRESH_FACE);
-    algorithms[AlgorithmType::REFRESH_COMBINATIONS]     = factory->Create(AlgorithmType::REFRESH_COMBINATIONS);
-    algorithms[AlgorithmType::COMBINATIONS_SAFE_MOVES]  = factory->Create(AlgorithmType::COMBINATIONS_SAFE_MOVES);
-    algorithms[AlgorithmType::COMBINATIONS_LEAST_RISKY] = factory->Create(AlgorithmType::COMBINATIONS_LEAST_RISKY);
-    algorithms[AlgorithmType::GIVE_UP]                  = factory->Create(AlgorithmType::GIVE_UP);
-    algorithms[AlgorithmType::FIRST_MOVE]               = factory->Create(AlgorithmType::FIRST_MOVE);
+    algorithms[AlgorithmType::SIMPLE_CORNERS]           = AlgorithmFactory::Create(AlgorithmType::SIMPLE_CORNERS, *grid, *data);
+    algorithms[AlgorithmType::REFRESH_BORDER]           = AlgorithmFactory::Create(AlgorithmType::REFRESH_BORDER, *grid, *data);
+    algorithms[AlgorithmType::LAYER_ONE]                = AlgorithmFactory::Create(AlgorithmType::LAYER_ONE, *grid, *data);
+    algorithms[AlgorithmType::REFRESH_SECTIONS]         = AlgorithmFactory::Create(AlgorithmType::REFRESH_SECTIONS, *grid, *data);
+    algorithms[AlgorithmType::LAYER_TWO]                = AlgorithmFactory::Create(AlgorithmType::LAYER_TWO, *grid, *data);
+    algorithms[AlgorithmType::REFRESH_SEGMENTS]         = AlgorithmFactory::Create(AlgorithmType::REFRESH_SEGMENTS, *grid, *data);
+    algorithms[AlgorithmType::REFRESH_SUBSEGMENTS]      = AlgorithmFactory::Create(AlgorithmType::REFRESH_SUBSEGMENTS, *grid, *data);
+    algorithms[AlgorithmType::REFRESH_FACE]             = AlgorithmFactory::Create(AlgorithmType::REFRESH_FACE, *grid, *data);
+    algorithms[AlgorithmType::REFRESH_COMBINATIONS]     = AlgorithmFactory::Create(AlgorithmType::REFRESH_COMBINATIONS, *grid, *data);
+    algorithms[AlgorithmType::COMBINATIONS_SAFE_MOVES]  = AlgorithmFactory::Create(AlgorithmType::COMBINATIONS_SAFE_MOVES, *grid, *data);
+    algorithms[AlgorithmType::COMBINATIONS_LEAST_RISKY] = AlgorithmFactory::Create(AlgorithmType::COMBINATIONS_LEAST_RISKY, *grid, *data);
+    algorithms[AlgorithmType::GIVE_UP]                  = AlgorithmFactory::Create(AlgorithmType::GIVE_UP, *grid, *data);
+    algorithms[AlgorithmType::FIRST_MOVE]               = AlgorithmFactory::Create(AlgorithmType::FIRST_MOVE, *grid, *data);
 }

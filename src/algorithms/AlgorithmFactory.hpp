@@ -29,16 +29,11 @@ class AlgorithmFactory
     */
     public:
 
-    ~AlgorithmFactory();
+    AlgorithmFactory() = delete;
 
-    AlgorithmFactory(GridManager& grid_, AlgorithmDataStorage& data_);
+    ~AlgorithmFactory() = delete;
 
-    Algorithm* Create(AlgorithmType type);
-
-    private:
-
-    GridManager& grid;
-    AlgorithmDataStorage& data;
+    static Algorithm* Create(AlgorithmType type, GridAccessPlayerIf& grid, AlgorithmDataStorage& data);
 };
 
 #endif

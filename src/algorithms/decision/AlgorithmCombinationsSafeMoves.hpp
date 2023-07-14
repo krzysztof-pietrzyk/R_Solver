@@ -7,7 +7,7 @@ class AlgorithmCombinationsSafeMoves : public AlgorithmDecision
 {
     public:
 
-    AlgorithmCombinationsSafeMoves(GridManager& grid_, AlgorithmDataStorage& data_);
+    AlgorithmCombinationsSafeMoves(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_);
 
     ~AlgorithmCombinationsSafeMoves();
 

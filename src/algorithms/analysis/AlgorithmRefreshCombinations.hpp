@@ -14,7 +14,7 @@ class AlgorithmRefreshCombinations : public Algorithm
 {
     public:
 
-    AlgorithmRefreshCombinations(GridManager& grid_, AlgorithmDataStorage& data_);
+    AlgorithmRefreshCombinations(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_);
 
     ~AlgorithmRefreshCombinations();
 

@@ -1,6 +1,6 @@
 #include "AlgorithmRefreshSubsegments.hpp"
 
-AlgorithmRefreshSubsegments::AlgorithmRefreshSubsegments(GridManager& grid_, AlgorithmDataStorage& data_)
+AlgorithmRefreshSubsegments::AlgorithmRefreshSubsegments(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_)
     : Algorithm(grid_, data_),
     D_subsegments(GetModifiableAlgorithmDataStorageReference().subsegments),
     D_is_subsegment(GetModifiableAlgorithmDataStorageReference().is_subsegment),

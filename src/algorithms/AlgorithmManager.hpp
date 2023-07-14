@@ -3,7 +3,7 @@
 
 #include <map>
 
-#include "../grid/GridManager.hpp"
+#include "../grid/GridAccessPlayerIf.hpp"
 
 #include "AlgorithmFactory.hpp"
 #include "AlgorithmTransitionManager.hpp"
@@ -12,7 +12,7 @@ class AlgorithmManager
 {
     public:
 
-    AlgorithmManager(GridManager& grid_);
+    AlgorithmManager(GridAccessPlayerIf& grid_);
 
     ~AlgorithmManager();
 
@@ -22,8 +22,7 @@ class AlgorithmManager
 
     private:
 
-    GridManager* grid;
-    AlgorithmFactory* factory;
+    GridAccessPlayerIf* grid;
     AlgorithmDataStorage* data;
     AlgorithmTransitionManager transitions;
 
