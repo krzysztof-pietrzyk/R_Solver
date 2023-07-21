@@ -1,7 +1,10 @@
 #include "AlgorithmCombinationsLeastRisky.hpp"
 
 AlgorithmCombinationsLeastRisky::AlgorithmCombinationsLeastRisky(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_)
-    : AlgorithmDecision(grid_, data_), max_combinations(data.factorial.back()) {}
+    : AlgorithmDecision(grid_, data_), max_combinations(data.factorial.back())
+{
+    LOGGER(LOG_INIT) << "AlgorithmCombinationsLeastRisky";
+}
 
 AlgorithmCombinationsLeastRisky::~AlgorithmCombinationsLeastRisky() {}
 

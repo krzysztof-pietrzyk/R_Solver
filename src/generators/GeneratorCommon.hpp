@@ -1,9 +1,9 @@
 #ifndef GENERATOR_COMMON_HPP
 #define GENERATOR_COMMON_HPP
 
-#include "GeneratorIf.hpp"
-
 #include "../grid/GridAccessGeneratorIf.hpp"
+
+#include "GeneratorIf.hpp"
 
 class GeneratorCommon : public GeneratorIf
 {

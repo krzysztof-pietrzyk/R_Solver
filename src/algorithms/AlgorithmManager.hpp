@@ -1,12 +1,13 @@
 #ifndef ALGORITHM_MANAGER_HPP
 #define ALGORITHM_MANAGER_HPP
 
-#include <map>
-
+#include "../utils/Logger.hpp"
 #include "../grid/GridAccessPlayerIf.hpp"
 
 #include "AlgorithmFactory.hpp"
 #include "AlgorithmTransitionManager.hpp"
+
+#include <map>
 
 class AlgorithmManager
 {

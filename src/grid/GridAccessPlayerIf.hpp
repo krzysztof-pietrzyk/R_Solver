@@ -2,6 +2,7 @@
 #define GRID_ACCESS_PLAYER_IF_HPP
 
 #include "../utils/CachedVector.hpp"
+
 #include "GridAccessCommonIf.hpp"
 
 enum PlayerActionResult

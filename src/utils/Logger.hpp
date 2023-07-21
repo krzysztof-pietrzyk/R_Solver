@@ -34,7 +34,7 @@ class Logger
     std::string GetLogLevelLabel(LogLevel _loglevel);
 };
 
-#define log(level) \
+#define LOGGER(level) \
 if (level > Logger::loglevel) ; \
 else Logger(level)
 

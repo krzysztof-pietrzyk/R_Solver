@@ -1,11 +1,11 @@
 #ifndef GENERATOR_INTERNAL_HPP
 #define GENERATOR_INTERNAL_HPP
 
-#include <vector>
-
 #include "../utils/CachedVector.hpp"
 
 #include "GeneratorCommon.hpp"
+
+#include <vector>
 
 class GeneratorInternal : public GeneratorCommon
 {

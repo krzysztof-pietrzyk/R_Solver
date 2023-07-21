@@ -1,12 +1,14 @@
 #ifndef ALGORITHM_DATA_STORAGE_HPP
 #define ALGORITHM_DATA_STORAGE_HPP
 
-#include <vector>
-#include <map>
-
+#include "../utils/Logger.hpp"
 #include "../grid/GridAccessPlayerIf.hpp"
 #include "../utils/BigNum.hpp"
+
 #include "Section.hpp"
+
+#include <vector>
+#include <map>
 
 struct SubsegmentData
 {

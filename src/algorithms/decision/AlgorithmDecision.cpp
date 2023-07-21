@@ -4,13 +4,10 @@ AlgorithmDecision::AlgorithmDecision(GridAccessPlayerIf& grid_, AlgorithmDataSto
     : Algorithm(grid_, data_),
     D_grid(GetModifiableGridReference())
 {
-    
+    LOGGER(LOG_INIT) << "AlgorithmDecision";
 }
 
-AlgorithmDecision::~AlgorithmDecision()
-{
-
-}
+AlgorithmDecision::~AlgorithmDecision() {}
 
 AlgorithmStatus AlgorithmDecision::Run()
 {

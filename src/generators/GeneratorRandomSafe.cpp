@@ -3,6 +3,7 @@
 GeneratorRandomSafe::GeneratorRandomSafe(GridAccessGeneratorIf& grid_)
     : GeneratorRandom(grid_)
 {
+    LOGGER(LOG_INIT) << "GeneratorRandomSafe";
     ValidateGridDimensions();
     CreateTemplate();
 }

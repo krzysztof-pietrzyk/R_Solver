@@ -6,7 +6,9 @@ AlgorithmRefreshBorder::AlgorithmRefreshBorder(GridAccessPlayerIf& grid_, Algori
     D_border_last_visible_fields_index(GetModifiableAlgorithmDataStorageReference().border_last_visible_fields_index),
     D_border(GetModifiableAlgorithmDataStorageReference().border),
     D_is_border(GetModifiableAlgorithmDataStorageReference().is_border)
-{}
+{
+    LOGGER(LOG_INIT) << "AlgorithmRefreshBorder";
+}
 
 AlgorithmRefreshBorder::~AlgorithmRefreshBorder() {}
 

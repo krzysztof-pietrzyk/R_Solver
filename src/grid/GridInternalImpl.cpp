@@ -2,6 +2,7 @@
 
 GridInternalImpl::GridInternalImpl(GridDimensions dimensions) : GridImpl(dimensions)
 {
+    LOGGER(LOG_INIT) << "GridInternalImpl";
     chain_reaction_zeros = CachedVector(dimensions.size);
 }
 

@@ -1,6 +1,8 @@
 #ifndef GENERATOR_IF_HPP
 #define GENERATOR_IF_HPP
 
+#include "../utils/Logger.hpp"
+
 #include <cstdint>
 
 class GeneratorIf

@@ -6,6 +6,7 @@ Solver::Solver(uint16_t w, uint16_t h, uint32_t m, SolverThreadData* thread_data
     algorithm_manager(new AlgorithmManager(*grid)),
 	thread_data(thread_data_)
 {
+	LOGGER(LOG_INIT) << "Solver";
 	const std::map<AlgorithmType, Algorithm*>& algorithms = algorithm_manager->GetAlgorithmsMap();
 }
 

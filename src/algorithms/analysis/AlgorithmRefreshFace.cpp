@@ -6,7 +6,9 @@ AlgorithmRefreshFace::AlgorithmRefreshFace(GridAccessPlayerIf& grid_, AlgorithmD
     D_face(GetModifiableAlgorithmDataStorageReference().face),
     D_is_face(GetModifiableAlgorithmDataStorageReference().is_face),
     D_segments_face(GetModifiableAlgorithmDataStorageReference().segments_face)
-{}
+{
+    LOGGER(LOG_INIT) << "AlgorithmRefreshFace";
+}
 
 AlgorithmRefreshFace::~AlgorithmRefreshFace() {}
 

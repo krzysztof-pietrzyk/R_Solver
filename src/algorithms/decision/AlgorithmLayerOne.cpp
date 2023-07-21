@@ -1,7 +1,10 @@
 #include "AlgorithmLayerOne.hpp"
 
 AlgorithmLayerOne::AlgorithmLayerOne(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_)
-    : AlgorithmDecision(grid_, data_) {}
+    : AlgorithmDecision(grid_, data_)
+{
+    LOGGER(LOG_INIT) << "AlgorithmLayerOne";
+}
 
 AlgorithmLayerOne::~AlgorithmLayerOne() {}
 

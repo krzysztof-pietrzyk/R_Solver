@@ -2,6 +2,7 @@
 
 GeneratorCommon::GeneratorCommon(GridAccessGeneratorIf& grid_) : grid(grid_)
 {
+    LOGGER(LOG_INIT) << "GeneratorCommon";
     SetStartingField(0);
 }
 

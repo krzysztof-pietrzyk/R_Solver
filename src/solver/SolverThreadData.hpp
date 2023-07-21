@@ -2,6 +2,7 @@
 #define SOLVER_THREAD_DATA_HPP
 
 #include "../statistics/collectors/StatisticsCollector.hpp"
+#include "../utils/Logger.hpp"
 
 #include <mutex>
 #include <string>

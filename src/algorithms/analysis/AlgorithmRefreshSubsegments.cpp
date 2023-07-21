@@ -7,6 +7,7 @@ AlgorithmRefreshSubsegments::AlgorithmRefreshSubsegments(GridAccessPlayerIf& gri
     D_subsegments_cache(GetModifiableAlgorithmDataStorageReference().subsegments_cache),
     D_subsegments_cache_index(GetModifiableAlgorithmDataStorageReference().subsegments_cache_index)
 {
+    LOGGER(LOG_INIT) << "AlgorithmRefreshSubsegments";
     is_checked = std::vector<bool>(grid.GetSize(), false);
     checked = std::vector<uint32_t>(grid.GetSize(), 0);
     checked_index = 0;

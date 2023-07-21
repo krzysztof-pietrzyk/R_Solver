@@ -6,6 +6,7 @@
 #include <string>
 #include <ostream>
 
+#include "../utils/Logger.hpp"
 #include "../solver/Solver.hpp"
 
 using namespace std;
@@ -57,6 +58,7 @@ void CheckStatus(SolverThreadData* data, vector<Solver*> solvers)
 
 int main()
 {
+	LOGGER(LOG_INIT) << "main";
 	const uint16_t threads_number = 1;
 	const uint16_t grid_width = 30;
 	const uint16_t grid_height = 16;

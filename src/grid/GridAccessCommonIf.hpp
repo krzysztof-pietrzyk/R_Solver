@@ -1,6 +1,8 @@
 #ifndef GRID_ACCESS_COMMON_IF_HPP
 #define GRID_ACCESS_COMMON_IF_HPP
 
+#include "../utils/Logger.hpp"
+
 #include "GridDimensions.hpp"
 
 class GridAccessCommonIf

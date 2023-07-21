@@ -2,6 +2,7 @@
 
 GridImpl::GridImpl(const GridDimensions dimensions) : dimensions(dimensions)
 {
+    LOGGER(LOG_INIT) << "GridImpl";
     mine_fields = CachedVector(dimensions.size);
     flagged_fields = CachedVector(dimensions.size);
     visible_fields = CachedVector(dimensions.size);

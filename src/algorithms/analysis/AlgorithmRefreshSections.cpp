@@ -18,6 +18,7 @@ AlgorithmRefreshSections::AlgorithmRefreshSections(GridAccessPlayerIf& grid_, Al
     D_sections_origins(GetModifiableAlgorithmDataStorageReference().sections_origins),
     D_sections(GetModifiableAlgorithmDataStorageReference().sections)
 {
+    LOGGER(LOG_INIT) << "AlgorithmRefreshSections";
     if(grid.GetSize() > MAX_ALLOWED_GRID_SIZE) std::invalid_argument("ERROR: AlgorithmRefreshSections: Grid size too large!");
     sections_hashes = std::vector<uint32_t>(grid.GetSize(), 0);
     section_value_temp = 0;

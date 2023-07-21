@@ -2,6 +2,7 @@
 
 AlgorithmManager::AlgorithmManager(GridAccessPlayerIf& grid_) : grid(&grid_)
 {
+    LOGGER(LOG_INIT) << "AlgorithmManager";
     data = new AlgorithmDataStorage(grid_);
 
     algorithms = std::map<AlgorithmType, Algorithm*>();

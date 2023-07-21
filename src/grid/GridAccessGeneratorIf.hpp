@@ -2,6 +2,7 @@
 #define GRID_ACCESS_GENERATOR_IF_HPP
 
 #include "../utils/CachedVector.hpp"
+
 #include "GridAccessCommonIf.hpp"
 
 #include <vector>

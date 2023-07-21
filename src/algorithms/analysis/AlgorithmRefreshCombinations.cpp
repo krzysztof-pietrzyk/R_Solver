@@ -7,6 +7,7 @@ AlgorithmRefreshCombinations::AlgorithmRefreshCombinations(GridAccessPlayerIf& g
     D_remaining_fields_combinations(GetModifiableAlgorithmDataStorageReference().remaining_fields_combinations),
     D_total_combinations(GetModifiableAlgorithmDataStorageReference().total_combinations)
 {
+    LOGGER(LOG_INIT) << "AlgorithmRefreshCombinations";
     field_states = std::vector<FieldCombinationState>(grid.GetSize(), FCS_UNASSIGNED);
     choice_stack = std::vector<uint32_t>();
     segment_of_choice_stack = std::vector<uint32_t>();

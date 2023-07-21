@@ -3,6 +3,7 @@
 GeneratorRandom::GeneratorRandom(GridAccessGeneratorIf& grid_)
     : GeneratorInternal(grid_)
 {
+    LOGGER(LOG_INIT) << "GeneratorRandom";
     previous_starting_field = GeneratorCommon::starting_field;
 }
 

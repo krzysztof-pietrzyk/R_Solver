@@ -4,6 +4,7 @@ const AlgorithmType AlgorithmTransitionManager::default_starting_algorithm = Alg
 
 AlgorithmTransitionManager::AlgorithmTransitionManager()
 {
+    LOGGER(LOG_INIT) << "AlgorithmTransitionManager";
     transitions = std::map<AlgorithmType, std::map<AlgorithmStatus, AlgorithmType>>();
     ConfigureDefaultTransitions();
     SetStartingAlgorithm(default_starting_algorithm);

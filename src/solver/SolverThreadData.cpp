@@ -2,6 +2,7 @@
 
 SolverThreadData::SolverThreadData()
 {
+    LOGGER(LOG_INIT) << "SolverThreadData";
     statistics_data = std::map<Label, std::vector<StatisticsCollector*>>();
 }
 

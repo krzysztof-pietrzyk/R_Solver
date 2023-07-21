@@ -1,7 +1,9 @@
 #ifndef ALGORITHM_HPP
 #define ALGORITHM_HPP
 
+#include "../utils/Logger.hpp"
 #include "../grid/GridAccessPlayerIf.hpp"
+
 #include "AlgorithmDataStorage.hpp"
 #include "AlgorithmStatus.hpp"
 

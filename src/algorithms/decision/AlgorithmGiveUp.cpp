@@ -3,7 +3,9 @@
 AlgorithmGiveUp::AlgorithmGiveUp(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_)
     : AlgorithmDecision(grid_, data_),
     D_grid(GetModifiableGridReference())
-{}
+{
+    LOGGER(LOG_INIT) << "AlgorithmGiveUp";
+}
 
 AlgorithmGiveUp::~AlgorithmGiveUp() {}
 
