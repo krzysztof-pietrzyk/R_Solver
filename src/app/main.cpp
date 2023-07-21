@@ -19,7 +19,6 @@ void Run(Solver* solver)
 
 void CheckStatus(SolverThreadData* data, vector<Solver*> solvers)
 {
-	cout << "-----\n";
 	// const uint32_t status_read_interval = 1U;
 	// auto time_since_start = std::chrono::duration<int64_t, std::nano>(0);
 	// auto start_time = std::chrono::high_resolution_clock::now();

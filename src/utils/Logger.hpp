@@ -12,7 +12,15 @@ enum LogLevel
     LOG_WARNING,
     LOG_INFO,
     LOG_INIT,
-    LOG_DEBUG
+    LOG_DEBUG,
+    LOG_DEBUG2,
+    LOG_DEBUG3,
+    LOG_DEBUG4,
+    LOG_DEBUG5,
+    LOG_DEBUG6,
+    LOG_DEBUG7,
+    LOG_DEBUG8,
+    LOG_DEBUG9
 };
 
 class Logger

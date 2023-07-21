@@ -142,14 +142,14 @@ void GridImpl::FindNeighborsOfAllFields()
         // For each field, list the neighbors
         column = i % dimensions.width;
         row = i / dimensions.width;
-        if(column - 1U >= 0 && row - 1U >= 0U)                neighbors[i].push_back(i - 1U - dimensions.width);  // Upper Left
-        if(row - 1U >= 0U)                                    neighbors[i].push_back(i - dimensions.width);       // Upper Middle
-        if(column + 1U < dimensions.width && row - 1U >= 0U)  neighbors[i].push_back(i + 1U - dimensions.width);  // Upper Right
-        if(column - 1U >= 0U)                                 neighbors[i].push_back(i - 1U);                     // Middle Left
-        if(column + 1U < dimensions.width)                    neighbors[i].push_back(i + 1U);                     // Middle Right
-        if(column - 1U >= 0U && row + 1U < dimensions.height) neighbors[i].push_back(i - 1U + dimensions.width);  // Bottom Left
-        if(row + 1U < dimensions.height)                      neighbors[i].push_back(i + dimensions.width);       // Bottom Middle
-        if(column + 1U < dimensions.width && row + 1U < dimensions.height) neighbors[i].push_back(i + 1U + dimensions.width);  // Bottom Right
+        if(column - 1 >= 0 && row - 1 >= 0)                neighbors[i].push_back(i - 1 - dimensions.width);  // Upper Left
+        if(row - 1 >= 0)                                   neighbors[i].push_back(i - dimensions.width);      // Upper Middle
+        if(column + 1 < dimensions.width && row - 1 >= 0)  neighbors[i].push_back(i + 1 - dimensions.width);  // Upper Right
+        if(column - 1 >= 0)                                neighbors[i].push_back(i - 1);                     // Middle Left
+        if(column + 1 < dimensions.width)                  neighbors[i].push_back(i + 1);                     // Middle Right
+        if(column - 1 >= 0 && row + 1 < dimensions.height) neighbors[i].push_back(i - 1 + dimensions.width);  // Bottom Left
+        if(row + 1 < dimensions.height)                    neighbors[i].push_back(i + dimensions.width);      // Bottom Middle
+        if(column + 1 < dimensions.width && row + 1 < dimensions.height) neighbors[i].push_back(i + 1 + dimensions.width);  // Bottom Right
     }
 }
 

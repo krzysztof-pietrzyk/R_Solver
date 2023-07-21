@@ -23,6 +23,7 @@ AlgorithmManager::~AlgorithmManager()
 bool AlgorithmManager::RunAll() const
 {
     // Run algorithms in defined order until the game is either won or lost
+    LOGGER(LOG_DEBUG) << "AlgorithmManager::RunAll";
     data->Clear();
     AlgorithmType current_algorithm = transitions.GetStartingAlgorithm();
     AlgorithmStatus current_status;
