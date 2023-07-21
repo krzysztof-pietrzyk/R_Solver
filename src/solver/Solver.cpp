@@ -1,7 +1,7 @@
 #include "Solver.hpp"
 
-Solver::Solver(uint16_t w, uint16_t h, uint32_t m, SolverThreadData* thread_data_) :
-    grid(new GridInternalImpl(GridDimensions(w, h, m))),
+Solver::Solver(GridDimensions grid_dimensions, SolverThreadData* thread_data_) :
+    grid(new GridInternalImpl(grid_dimensions)),
     generator(GeneratorFactory::Create(GeneratorType::SAFE, *grid)),
     algorithm_manager(new AlgorithmManager(*grid)),
 	statistics_aggregator(new StatisticsAggregator()),
