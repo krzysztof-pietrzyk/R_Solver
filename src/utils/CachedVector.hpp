@@ -29,12 +29,12 @@ class CachedVector
 
     static void CopyFromTo(const CachedVector& source, CachedVector& destination);
 
-    void operator=(const CachedVector& other);
+    CachedVector& operator=(const CachedVector& other);
     const uint32_t& operator[](size_t index) const;
 
     protected:
 
-    const size_t max_size;
+    size_t max_size;
     std::vector<uint32_t> data;
     std::vector<bool> is_present;
     size_t data_index;

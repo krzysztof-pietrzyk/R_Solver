@@ -1,10 +1,10 @@
 #include "CachedVector.hpp"
 
-CachedVector::CachedVector(size_t max_size)
-    : max_size(max_size)
+CachedVector::CachedVector(size_t _max_size)
 {
-    data = std::vector<uint32_t>(max_size);
-    is_present = std::vector<bool>(max_size);
+    max_size = _max_size;
+    data = std::vector<uint32_t>(max_size, 0U);
+    is_present = std::vector<bool>(max_size, false);
     data_index = 0U;
 }
 
@@ -116,10 +116,23 @@ void CachedVector::CopyFromTo(const CachedVector& source, CachedVector& destinat
     destination.data_index = source.data_index;
 }
 
-void CachedVector::operator=(const CachedVector& other)
+CachedVector& CachedVector::operator=(const CachedVector& other)
 {
-    *this = CachedVector(other.max_size);
+    if(this == &other)
+    {
+        return *this;
+    }
+
+    if(max_size != other.max_size)
+    {
+        max_size = other.max_size;
+        data = std::vector<uint32_t>(max_size, 0U);
+        is_present = std::vector<bool>(max_size, false);
+        data_index = 0U;
+    }
+
     CachedVector::CopyFromTo(other, *this);
+    return *this;
 }
 
 const uint32_t& CachedVector::operator[](size_t index) const
