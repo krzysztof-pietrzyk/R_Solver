@@ -5,15 +5,18 @@ AlgorithmDecision::AlgorithmDecision(GridAccessPlayerIf& grid_, AlgorithmDataSto
     D_grid(GetModifiableGridReference())
 {
     LOGGER(LOG_INIT) << "AlgorithmDecision";
+    statistics_clicks = new StatisticsCollectorClicks();  // deleted in StatisticsProducer
+    statistics_collectors.push_back(statistics_clicks);
 }
 
 AlgorithmDecision::~AlgorithmDecision() {}
 
 AlgorithmStatus AlgorithmDecision::Run()
 {
-    const uint32_t number_of_clicks_before = left_click_counter + right_click_counter;
+    const uint64_t number_of_clicks_before = left_click_counter + right_click_counter;
     Execution();
-    const uint32_t number_of_clicks_after = left_click_counter + right_click_counter;
+    statistics_executions->executions += 1;
+    const uint64_t number_of_clicks_after = left_click_counter + right_click_counter;
     
     AlgorithmStatus action_result = GetActionResult(number_of_clicks_after - number_of_clicks_before);
     AlgorithmStatus game_over_result = CheckGameOverConditions();
@@ -22,28 +25,46 @@ AlgorithmStatus AlgorithmDecision::Run()
     {
         return action_result;
     }
+    else if(game_over_result == AlgorithmStatus::GAME_LOST)
+    {
+        statistics_clicks->times_caused_loss += 1;
+    }
     return game_over_result;
 }
 
 AlgorithmStatus AlgorithmDecision::CheckGameOverConditions() const
 {
-    if(grid.IsLost()) { return AlgorithmStatus::GAME_LOST; }
-    else if(visible.Index() == grid.GetTotalSafeFields()) { return AlgorithmStatus::GAME_WON; }
-    else return AlgorithmStatus::NO_STATUS;
+    if(grid.IsLost())
+    {
+        return AlgorithmStatus::GAME_LOST;
+    }
+    else if(visible.Index() == grid.GetTotalSafeFields())
+    {
+        return AlgorithmStatus::GAME_WON;
+    }
+    return AlgorithmStatus::NO_STATUS;
 }
 
 AlgorithmStatus AlgorithmDecision::GetActionResult(const uint32_t clicks_difference) const
 {
-    if(clicks_difference > 0) { return AlgorithmStatus::SUCCESS; }
+    if(clicks_difference > 0)
+    {
+        return AlgorithmStatus::SUCCESS;
+    }
     return AlgorithmStatus::NO_MOVES;
 }
 
 bool AlgorithmDecision::LeftClick(const uint32_t field)
 {
     PlayerActionResult result = D_grid.SetVisible(field);
+    statistics_clicks->left_clicks += 1;
     if(result == PlayerActionResult::CORRECT)
     {
         left_click_counter += 1;
+    }
+    else
+    {
+        statistics_clicks->wasted_left_clicks += 1;
     }
     return result;
 }
@@ -51,9 +72,14 @@ bool AlgorithmDecision::LeftClick(const uint32_t field)
 bool AlgorithmDecision::RightClick(const uint32_t field)
 {
     PlayerActionResult result = D_grid.SetFlag(field);
+    statistics_clicks->right_clicks += 1;
     if(result == PlayerActionResult::CORRECT)
     {
         right_click_counter += 1;
+    }
+    else
+    {
+        statistics_clicks->wasted_right_clicks += 1;
     }
     return result;
 }

@@ -3,11 +3,13 @@
 
 #include "../utils/Logger.hpp"
 #include "../grid/GridAccessPlayerIf.hpp"
+#include "../statistics/StatisticsProducer.hpp"
+#include "../statistics/collectors/StatisticsCollectorExecutions.hpp"
 
 #include "AlgorithmDataStorage.hpp"
 #include "AlgorithmStatus.hpp"
 
-class Algorithm
+class Algorithm : public StatisticsProducer
 {
     /*
     Abstract base class for algorithm objects.
@@ -28,6 +30,7 @@ class Algorithm
     const AlgorithmDataStorage& data;
     const CachedVector& visible;
     const CachedVector& flagged;
+    StatisticsCollectorExecutions* statistics_executions;
 
     virtual AlgorithmStatus Execution() = 0;
 
