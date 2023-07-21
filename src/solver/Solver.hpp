@@ -20,8 +20,6 @@ class Solver
 
     void Run();
 
-    void UpdateThreadData();
-
     private:
 
     GridInternalImpl* grid;
