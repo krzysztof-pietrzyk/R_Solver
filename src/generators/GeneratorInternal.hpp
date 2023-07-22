@@ -2,12 +2,13 @@
 #define GENERATOR_INTERNAL_HPP
 
 #include "../utils/CachedVector.hpp"
+#include "../statistics/collectors/StatisticsCollectorFieldTypes.hpp"
 
-#include "GeneratorCommon.hpp"
+#include "GeneratorImpl.hpp"
 
 #include <vector>
 
-class GeneratorInternal : public GeneratorCommon
+class GeneratorInternal : public GeneratorImpl
 {
     public:
 
@@ -22,6 +23,7 @@ class GeneratorInternal : public GeneratorCommon
     std::vector<uint32_t> generated_safe_fields;
     CachedVector generated_mine_fields;
     std::vector<uint8_t> generated_field_values;
+    StatisticsCollectorFieldTypes* statistics_field_types;
 
     virtual void GenerateMinePositions() = 0;
 

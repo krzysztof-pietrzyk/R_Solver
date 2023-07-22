@@ -26,19 +26,19 @@ enum AlgorithmType
 namespace Labels::Producers::Algorithms
 {
     static const Label UNHANDLED_ALGORITHM_TYPE = "Unhandled AlgorithmType";
-    static const Label FIRST_MOVE = "First Move";
-    static const Label SIMPLE_CORNERS = "Simple Corners";
-    static const Label REFRESH_BORDER = "Refresh Border";
-    static const Label LAYER_ONE = "Layer One";
-    static const Label REFRESH_SECTIONS = "Refresh Sections";
-    static const Label LAYER_TWO = "Layer Two";
-    static const Label REFRESH_SEGMENTS = "Refresh Segments";
-    static const Label REFRESH_SUBSEGMENTS = "Refresh Subsegments";
-    static const Label REFRESH_FACE = "Refresh Face";
-    static const Label REFRESH_COMBINATIONS = "Refresh Combinations";
-    static const Label COMBINATIONS_SAFE_MOVES = "Combinations Safe Moves";
-    static const Label COMBINATIONS_LEAST_RISKY = "Combinations Least Risky";
-    static const Label GIVE_UP = "Give Up";
+    static const Label FIRST_MOVE               = "Algorithm: First Move";
+    static const Label SIMPLE_CORNERS           = "Algorithm: Simple Corners";
+    static const Label REFRESH_BORDER           = "Algorithm: Refresh Border";
+    static const Label LAYER_ONE                = "Algorithm: Layer One";
+    static const Label REFRESH_SECTIONS         = "Algorithm: Refresh Sections";
+    static const Label LAYER_TWO                = "Algorithm: Layer Two";
+    static const Label REFRESH_SEGMENTS         = "Algorithm: Refresh Segments";
+    static const Label REFRESH_SUBSEGMENTS      = "Algorithm: Refresh Subsegments";
+    static const Label REFRESH_FACE             = "Algorithm: Refresh Face";
+    static const Label REFRESH_COMBINATIONS     = "Algorithm: Refresh Combinations";
+    static const Label COMBINATIONS_SAFE_MOVES  = "Algorithm: Combinations Safe Moves";
+    static const Label COMBINATIONS_LEAST_RISKY = "Algorithm: Combinations Least Risky";
+    static const Label GIVE_UP                  = "Algorithm: Give Up";
 }
 
 static Label GetAlgorithmTypeLabel(AlgorithmType type)

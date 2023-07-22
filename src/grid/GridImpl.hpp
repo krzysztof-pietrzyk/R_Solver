@@ -12,7 +12,10 @@
 #include <cstdint>
 #include <stdexcept>
 
-class GridImpl : public GridAccessPlayerIf, public GridAccessGeneratorIf, public GridAccessViewIf
+class GridImpl : 
+    public GridAccessPlayerIf,
+    public GridAccessGeneratorIf,
+    public GridAccessViewIf
 {
     public:
 

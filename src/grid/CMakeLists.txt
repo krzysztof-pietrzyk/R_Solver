@@ -6,5 +6,5 @@ set(CPP_SOURCES_GRID
     ${CMAKE_CURRENT_SOURCE_DIR}/GridSelfGenerated.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/GridHash.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/GridImpl.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/GridInternalImpl.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/GridInternal.cpp
     PARENT_SCOPE)

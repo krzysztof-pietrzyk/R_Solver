@@ -4,7 +4,7 @@ GeneratorRandom::GeneratorRandom(GridAccessGeneratorIf& grid_)
     : GeneratorInternal(grid_)
 {
     LOGGER(LOG_INIT) << "GeneratorRandom";
-    previous_starting_field = GeneratorCommon::starting_field;
+    previous_starting_field = GeneratorImpl::starting_field;
 }
 
 GeneratorRandom::~GeneratorRandom()
@@ -14,7 +14,7 @@ GeneratorRandom::~GeneratorRandom()
 
 void GeneratorRandom::SetStartingField(uint32_t new_starting_field)
 {
-    GeneratorCommon::SetStartingField(new_starting_field);
+    GeneratorImpl::SetStartingField(new_starting_field);
     if(new_starting_field != previous_starting_field)
     {
         previous_starting_field = new_starting_field;

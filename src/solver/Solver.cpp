@@ -1,7 +1,7 @@
 #include "Solver.hpp"
 
 Solver::Solver(GridDimensions grid_dimensions, SolverThreadData* thread_data_) :
-    grid(new GridInternalImpl(grid_dimensions)),
+    grid(new GridInternal(grid_dimensions)),
     generator(GeneratorFactory::Create(GeneratorType::SAFE, *grid)),
     algorithm_manager(new AlgorithmManager(*grid)),
 	statistics_aggregator(new StatisticsAggregator()),
@@ -13,8 +13,8 @@ Solver::Solver(GridDimensions grid_dimensions, SolverThreadData* thread_data_) :
 	{
 		statistics_aggregator->RegisterStatisticsProducer(GetAlgorithmTypeLabel(item.first), (const StatisticsProducer*)(item.second));
 	}
-	// statistics_aggregator->RegisterStatisticsProducer(Labels::Producers::GRID, (const StatisticsProducer*)(grid));
-	statistics_solver = new StatisticsCollectorSolver();
+	statistics_aggregator->RegisterStatisticsProducer(Labels::Producers::GENERATOR, (const StatisticsProducer*)(generator));
+	statistics_solver = new StatisticsCollectorSolver();  // deleted in StatisticsProducer
 	statistics_collectors.push_back(statistics_solver);
 	statistics_aggregator->RegisterStatisticsProducer(Labels::Producers::SOLVER, (const StatisticsProducer*)(this));
 }

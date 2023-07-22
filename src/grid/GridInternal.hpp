@@ -1,14 +1,14 @@
-#ifndef GRID_INTERNAL_IMPL_HPP
-#define GRID_INTERNAL_IMPL_HPP
+#ifndef GRID_INTERNAL_HPP
+#define GRID_INTERNAL_HPP
 
 #include "GridImpl.hpp"
 
-class GridInternalImpl : public GridImpl
+class GridInternal : public GridImpl
 {
     public:
 
-    GridInternalImpl(GridDimensions dimensions);
-    ~GridInternalImpl();
+    GridInternal(GridDimensions dimensions);
+    ~GridInternal();
 
     // GridAccessPlayerIf
     virtual PlayerActionResult SetVisible(uint32_t field) override;

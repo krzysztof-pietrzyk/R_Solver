@@ -8,7 +8,7 @@ GridSelfGenerated::GridSelfGenerated(uint16_t w, uint16_t h, uint32_t m)
     zcr_zeros_index = 0;
     zcr_is_zero = std::vector<bool>(S, false);
 
-    statistics_field_types = new StatisticsCollectorGridFieldTypes();
+    statistics_field_types = new StatisticsCollectorFieldTypes();
     statistics_collectors.push_back(statistics_field_types);
 }
 

@@ -1,11 +1,13 @@
 #include "GeneratorInternal.hpp"
 
-GeneratorInternal::GeneratorInternal(GridAccessGeneratorIf& grid_) : GeneratorCommon(grid_)
+GeneratorInternal::GeneratorInternal(GridAccessGeneratorIf& grid_) : GeneratorImpl(grid_)
 {
     LOGGER(LOG_INIT) << "GeneratorInternal";
     generated_safe_fields = std::vector<uint32_t>(grid.GetSize(), 0U);
     generated_mine_fields = CachedVector(grid.GetSize());
     generated_field_values = std::vector<uint8_t>(grid.GetSize(), 0U);
+    statistics_field_types = new StatisticsCollectorFieldTypes();  // deleted in StatisticsProducer
+    statistics_collectors.push_back(statistics_field_types);
 }
 
 GeneratorInternal::~GeneratorInternal()
@@ -30,6 +32,7 @@ void GeneratorInternal::CalculateAllFieldValues()
         generated_field_values[current_field] = CalculateFieldValue(current_field);
     }
     SetValuesForMineFields();
+    statistics_field_types->CountFieldTypes(generated_field_values);
 }
 
 uint8_t GeneratorInternal::CalculateFieldValue(uint32_t field)

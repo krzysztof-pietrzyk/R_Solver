@@ -1,19 +1,19 @@
-#include "GridInternalImpl.hpp"
+#include "GridInternal.hpp"
 
-GridInternalImpl::GridInternalImpl(GridDimensions dimensions) : GridImpl(dimensions)
+GridInternal::GridInternal(GridDimensions dimensions) : GridImpl(dimensions)
 {
-    LOGGER(LOG_INIT) << "GridInternalImpl";
+    LOGGER(LOG_INIT) << "GridInternal";
     chain_reaction_zeros = CachedVector(dimensions.size);
 }
 
-GridInternalImpl::~GridInternalImpl()
+GridInternal::~GridInternal()
 {
 
 }
 
 
 // GridAccessPlayerIf
-PlayerActionResult GridInternalImpl::SetVisible(uint32_t field)
+PlayerActionResult GridInternal::SetVisible(uint32_t field)
 {
     if(visible_fields.Contains(field) || is_lost)
     {
@@ -33,18 +33,18 @@ PlayerActionResult GridInternalImpl::SetVisible(uint32_t field)
     return PlayerActionResult::CORRECT;
 }
 
-PlayerActionResult GridInternalImpl::SetFlag(uint32_t field)
+PlayerActionResult GridInternal::SetFlag(uint32_t field)
 {
     if(flagged_fields.Contains(field) || is_lost)
     {
-        // GridInternalImpl does not allow to remove flags - it's never needed
+        // GridInternal does not allow to remove flags - it's never needed
         return PlayerActionResult::INCORRECT;
     }
     flagged_fields.Add(field);
     return PlayerActionResult::CORRECT;
 }
 
-void GridInternalImpl::StartChainReactionAt(uint32_t field)
+void GridInternal::StartChainReactionAt(uint32_t field)
 {
     // Return if called on a non-zero field
     if(GetFieldValue(field) != 0U) { return; }
@@ -59,7 +59,7 @@ void GridInternalImpl::StartChainReactionAt(uint32_t field)
     }
 }
 
-void GridInternalImpl::HandleChainReactionAt(uint32_t field)
+void GridInternal::HandleChainReactionAt(uint32_t field)
 {
     for(const uint32_t& current_neighbor : neighbors[field])
     {

@@ -14,7 +14,7 @@ class GeneratorFactory
 
     ~GeneratorFactory() = delete;
 
-    static GeneratorIf* Create(GeneratorType type, GridAccessGeneratorIf& grid);
+    static GeneratorImpl* Create(GeneratorType type, GridAccessGeneratorIf& grid);
 };
 
 #endif

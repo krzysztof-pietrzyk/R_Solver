@@ -1,17 +1,21 @@
-#ifndef GENERATOR_COMMON_HPP
-#define GENERATOR_COMMON_HPP
+#ifndef GENERATOR_IMPL_HPP
+#define GENERATOR_IMPL_HPP
 
 #include "../grid/GridAccessGeneratorIf.hpp"
+#include "../statistics/StatisticsProducer.hpp"
+
 
 #include "GeneratorIf.hpp"
 
-class GeneratorCommon : public GeneratorIf
+class GeneratorImpl :
+    public GeneratorIf,
+    public StatisticsProducer
 {
     public:
 
-    GeneratorCommon(GridAccessGeneratorIf& grid_);
+    GeneratorImpl(GridAccessGeneratorIf& grid_);
 
-    ~GeneratorCommon();
+    ~GeneratorImpl();
 
     virtual void SetStartingField(uint32_t new_starting_field) override;
 

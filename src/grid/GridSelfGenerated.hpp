@@ -3,7 +3,7 @@
 
 #include "Grid.hpp"
 #include "GridHash.hpp"
-#include "../statistics/collectors/StatisticsCollectorGridFieldTypes.hpp"
+#include "../statistics/collectors/StatisticsCollectorFieldTypes.hpp"
 
 class GridSelfGenerated : public Grid
 {
@@ -33,7 +33,7 @@ class GridSelfGenerated : public Grid
     uint32_t zcr_zeros_index;  // Temporary index used in ZeroChainReaction
     std::vector<bool> zcr_is_zero;  // Temporary array used in ZeroChainReaction
 
-    StatisticsCollectorGridFieldTypes* statistics_field_types;
+    StatisticsCollectorFieldTypes* statistics_field_types;
 
     void ZeroChainReaction(uint32_t field);
 
