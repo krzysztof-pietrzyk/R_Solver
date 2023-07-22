@@ -11,24 +11,22 @@ GridInternal::~GridInternal()
 
 }
 
-
 // GridAccessPlayerIf
 PlayerActionResult GridInternal::SetVisible(uint32_t field)
 {
     if(visible_fields.Contains(field) || is_lost)
     {
-        return PlayerActionResult::INCORRECT;
+        return PlayerActionResult::WASTED;
     }
     visible_fields.Add(field);
     if(mine_fields.Contains(field))
     {
         is_lost = true;
-        return PlayerActionResult::INCORRECT;
+        return PlayerActionResult::EXPLODED;
     } 
     if(field_values[field] == 0U)
     {
         StartChainReactionAt(field);
-        return PlayerActionResult::CORRECT;
     }
     return PlayerActionResult::CORRECT;
 }
@@ -38,7 +36,7 @@ PlayerActionResult GridInternal::SetFlag(uint32_t field)
     if(flagged_fields.Contains(field) || is_lost)
     {
         // GridInternal does not allow to remove flags - it's never needed
-        return PlayerActionResult::INCORRECT;
+        return PlayerActionResult::WASTED;
     }
     flagged_fields.Add(field);
     return PlayerActionResult::CORRECT;

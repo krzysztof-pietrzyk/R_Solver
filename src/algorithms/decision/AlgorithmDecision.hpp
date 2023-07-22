@@ -20,9 +20,9 @@ class AlgorithmDecision : public Algorithm
 
     protected:
 
-    bool LeftClick(const uint32_t field);
+    PlayerActionResult LeftClick(const uint32_t field);
 
-    bool RightClick(const uint32_t field);
+    PlayerActionResult RightClick(const uint32_t field);
 
     private:
 

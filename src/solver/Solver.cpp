@@ -58,14 +58,14 @@ void Solver::UpdateSolverStatistics()
 	if(grid->IsLost())
 	{
 		statistics_solver->games_lost += 1;
-		statistics_solver->uncovered_fields += uncovered_fields - 1;
+		statistics_solver->uncovered_fields += uncovered_fields - 1;  // -1 because the exploded mine doesn't count
 	}
 	else if(grid->IsWon())
 	{
 		statistics_solver->games_won += 1;
 		statistics_solver->uncovered_fields += uncovered_fields;
 	}
-	else  // Game was abandoned
+	else  // Abandoned game, neither lost or won
 	{
 		statistics_solver->games_abandoned += 1;
 		statistics_solver->uncovered_fields += uncovered_fields;

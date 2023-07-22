@@ -54,32 +54,32 @@ AlgorithmStatus AlgorithmDecision::GetActionResult(const uint32_t clicks_differe
     return AlgorithmStatus::NO_MOVES;
 }
 
-bool AlgorithmDecision::LeftClick(const uint32_t field)
+PlayerActionResult AlgorithmDecision::LeftClick(const uint32_t field)
 {
     PlayerActionResult result = D_grid.SetVisible(field);
-    statistics_clicks->left_clicks += 1;
+    statistics_clicks->left_clicks += 1U;
     if(result == PlayerActionResult::CORRECT)
     {
-        left_click_counter += 1;
+        left_click_counter += 1U;
     }
-    else
+    else if(result == PlayerActionResult::WASTED)
     {
-        statistics_clicks->wasted_left_clicks += 1;
+        statistics_clicks->wasted_left_clicks += 1U;
     }
     return result;
 }
 
-bool AlgorithmDecision::RightClick(const uint32_t field)
+PlayerActionResult AlgorithmDecision::RightClick(const uint32_t field)
 {
     PlayerActionResult result = D_grid.SetFlag(field);
-    statistics_clicks->right_clicks += 1;
+    statistics_clicks->right_clicks += 1U;
     if(result == PlayerActionResult::CORRECT)
     {
-        right_click_counter += 1;
+        right_click_counter += 1U;
     }
-    else
+    else if(result == PlayerActionResult::WASTED)
     {
-        statistics_clicks->wasted_right_clicks += 1;
+        statistics_clicks->wasted_right_clicks += 1U;
     }
     return result;
 }

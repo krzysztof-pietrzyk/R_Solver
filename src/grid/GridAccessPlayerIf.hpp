@@ -8,7 +8,8 @@
 enum PlayerActionResult
 {
     CORRECT,
-    INCORRECT
+    EXPLODED,
+    WASTED
 };
 
 class GridAccessPlayerIf : public GridAccessCommonIf
