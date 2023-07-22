@@ -1,5 +1,7 @@
 #include "GeneratorRandomSafe.hpp"
 
+const uint32_t GeneratorRandomSafe::minimum_safe_fields = 1U;
+
 GeneratorRandomSafe::GeneratorRandomSafe(GridAccessGeneratorIf& grid_)
     : GeneratorRandom(grid_)
 {
@@ -15,7 +17,6 @@ GeneratorRandomSafe::~GeneratorRandomSafe()
 
 void GeneratorRandomSafe::ValidateGridDimensions()
 {
-    const uint32_t minimum_safe_fields = 1U;
     if(grid.GetSize() - grid.GetTotalMines() < minimum_safe_fields)
     {
         throw std::runtime_error("ERROR: GeneratorRandomSafe::ValidateGridDimensions() Invalid grid dimensions.");
@@ -35,4 +36,6 @@ void GeneratorRandomSafe::CreateTemplate()
         current_template[index++] = i;
     }
     current_max = current_template.size();
+    forced_safe_fields = std::vector<uint32_t>(minimum_safe_fields, 0U);
+    forced_safe_fields[0] = starting_field;
 }

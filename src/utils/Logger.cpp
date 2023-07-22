@@ -1,6 +1,6 @@
 #include "Logger.hpp"
 
-LogLevel Logger::loglevel = LogLevel::LOG_INIT;
+LogLevel Logger::loglevel = LogLevel::LOG_INFO;
 
 Logger::Logger(LogLevel _loglevel)
 {
@@ -16,6 +16,24 @@ Logger::~Logger()
 Logger& Logger::operator<<(const std::string& value)
 {
     _buffer << value;
+    return *this;
+}
+
+Logger& Logger::operator<<(const std::vector<uint32_t> value_vector)
+{
+    _buffer << "vector (size " << std::to_string(value_vector.size()) << "): [ ";
+    for(auto value : value_vector)
+    {
+        _buffer << std::to_string(value);
+        _buffer << " ";
+    }
+    _buffer << "]";
+    return *this;
+}
+
+Logger& Logger::operator<<(const uint64_t value)
+{
+    _buffer << std::to_string(value);
     return *this;
 }
 

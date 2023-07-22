@@ -4,6 +4,7 @@ GeneratorInternal::GeneratorInternal(GridAccessGeneratorIf& grid_) : GeneratorIm
 {
     LOGGER(LOG_INIT) << "GeneratorInternal";
     generated_safe_fields = std::vector<uint32_t>(grid.GetSize(), 0U);
+    forced_safe_fields = std::vector<uint32_t>();
     generated_mine_fields = CachedVector(grid.GetSize());
     generated_field_values = std::vector<uint8_t>(grid.GetSize(), 0U);
     statistics_field_types = new StatisticsCollectorFieldTypes();  // deleted in StatisticsProducer
@@ -19,20 +20,49 @@ void GeneratorInternal::GenerateGrid()
 {
     LOGGER(LOG_DEBUG) << "GeneratorInternal::GenerateGrid";
     ClearPreviousGrid();
-    GenerateMinePositions();
+    GenerateMinePositions();  // Pure virtual
     CalculateAllFieldValues();
     CopyGeneratedVectorsToGrid();
 }
 
+void GeneratorInternal::ClearPreviousGrid()
+{
+    grid.Reset();
+    generated_mine_fields.Clear();
+}
+
 void GeneratorInternal::CalculateAllFieldValues()
 {
-    // Only iterate over non-mine fields
+    CalculateRegularFieldValues();
+    CalculateForcedSafeFieldValues();
+    SetValuesForMineFields();
+    statistics_field_types->CountFieldTypes(generated_field_values);
+}
+
+void GeneratorInternal::CalculateRegularFieldValues()
+{
     for(const uint32_t& current_field : generated_safe_fields)
     {
         generated_field_values[current_field] = CalculateFieldValue(current_field);
     }
-    SetValuesForMineFields();
-    statistics_field_types->CountFieldTypes(generated_field_values);
+}
+
+void GeneratorInternal::CalculateForcedSafeFieldValues()
+{
+    for(const uint32_t& current_field : forced_safe_fields)
+    {
+        generated_field_values[current_field] = CalculateFieldValue(current_field);
+    }
+}
+
+void GeneratorInternal::SetValuesForMineFields()
+{
+    // Different from all other fields, to avoid confusion in some cases
+    const uint8_t value_for_mine_fields = 9U;
+    for(const uint32_t& current_field : generated_mine_fields)
+    {
+        generated_field_values[current_field] = value_for_mine_fields;
+    }
 }
 
 uint8_t GeneratorInternal::CalculateFieldValue(uint32_t field)
@@ -48,21 +78,6 @@ uint8_t GeneratorInternal::CalculateFieldValue(uint32_t field)
         }
     }
     return current_field_value;
-}
-
-void GeneratorInternal::SetValuesForMineFields()
-{
-    const uint8_t value_for_mine_fields = 9U;  // Different from all other fields, to avoid confusion in some cases
-    for(const uint32_t& current_field : generated_mine_fields)
-    {
-        generated_field_values[current_field] = value_for_mine_fields;
-    }
-}
-
-void GeneratorInternal::ClearPreviousGrid()
-{
-    grid.Reset();
-    generated_mine_fields.Clear();
 }
 
 void GeneratorInternal::CopyGeneratedVectorsToGrid()

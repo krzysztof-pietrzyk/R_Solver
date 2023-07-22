@@ -21,11 +21,16 @@ class GeneratorInternal : public GeneratorImpl
     protected:
 
     std::vector<uint32_t> generated_safe_fields;
+    std::vector<uint32_t> forced_safe_fields;
     CachedVector generated_mine_fields;
     std::vector<uint8_t> generated_field_values;
     StatisticsCollectorFieldTypes* statistics_field_types;
 
     virtual void GenerateMinePositions() = 0;
+
+    virtual void CalculateRegularFieldValues();
+
+    virtual void CalculateForcedSafeFieldValues();
 
     private:
 

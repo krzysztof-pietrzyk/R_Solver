@@ -16,6 +16,10 @@ class GeneratorRandomSafe : public GeneratorRandom
     virtual void ValidateGridDimensions() override;
 
     virtual void CreateTemplate() override;
+
+    private:
+
+    static const uint32_t minimum_safe_fields;
 };
 
 #endif

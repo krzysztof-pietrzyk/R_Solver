@@ -4,6 +4,8 @@
 #include <iostream>
 #include <sstream>
 #include <string>
+#include <vector>
+#include <cstdint>
 
 enum LogLevel
 {
@@ -34,6 +36,8 @@ class Logger
     ~Logger();
 
     Logger& operator<<(const std::string& value);
+    Logger& operator<<(const std::vector<uint32_t> value_vector);
+    Logger& operator<<(const uint64_t value);
 
     private:
 
