@@ -21,4 +21,8 @@ struct GridDimensions
     }
 };
 
+const GridDimensions GRID_DIMENSIONS_BEGINNER = GridDimensions(9U, 9U, 10U);
+const GridDimensions GRID_DIMENSIONS_INTERMEDIATE = GridDimensions(16U, 16U, 40U);
+const GridDimensions GRID_DIMENSIONS_EXPERT = GridDimensions(30U, 16U, 99U);
+
 #endif
