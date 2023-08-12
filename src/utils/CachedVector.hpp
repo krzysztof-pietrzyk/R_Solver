@@ -12,7 +12,9 @@ class CachedVector
 {
     public:
 
-    CachedVector(size_t max_size);
+    CachedVector(size_t _max_size);
+    CachedVector(const std::vector<bool>& _is_present);
+    CachedVector(const std::vector<uint32_t>& _data, size_t _max_size);
     CachedVector();
     ~CachedVector();
 
@@ -30,6 +32,7 @@ class CachedVector
     static void CopyFromTo(const CachedVector& source, CachedVector& destination);
 
     CachedVector& operator=(const CachedVector& other);
+    bool operator==(const CachedVector& other) const;
     const uint32_t& operator[](size_t index) const;
 
     protected:

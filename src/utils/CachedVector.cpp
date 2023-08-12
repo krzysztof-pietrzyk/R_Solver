@@ -8,6 +8,33 @@ CachedVector::CachedVector(size_t _max_size)
     data_index = 0U;
 }
 
+CachedVector::CachedVector(const std::vector<bool>& _is_present)
+{
+    max_size = _is_present.size();
+    data = std::vector<uint32_t>(max_size, 0U);
+    is_present = std::vector<bool>(max_size, false);
+    data_index = 0U;
+    for(size_t i = 0; i < max_size; i++)
+    {
+        if(_is_present[i])
+        {
+            Add(i);
+        }
+    }
+}
+
+CachedVector::CachedVector(const std::vector<uint32_t>& _data, size_t _max_size)
+{
+    max_size = _max_size;
+    data = std::vector<uint32_t>(max_size, 0U);
+    is_present = std::vector<bool>(max_size, false);
+    data_index = 0U;
+    for(size_t i = 0; i < _data.size(); i++)
+    {
+        Add(_data[i]);
+    }
+}
+
 CachedVector::CachedVector() : CachedVector(1U)
 {
 
@@ -133,6 +160,13 @@ CachedVector& CachedVector::operator=(const CachedVector& other)
 
     CachedVector::CopyFromTo(other, *this);
     return *this;
+}
+
+bool CachedVector::operator==(const CachedVector& other) const
+{
+    return data == other.data 
+        && is_present == other.is_present
+        && data_index == other.data_index;
 }
 
 const uint32_t& CachedVector::operator[](size_t index) const

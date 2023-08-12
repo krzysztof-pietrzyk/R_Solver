@@ -10,6 +10,9 @@ class GridInternal : public GridImpl
     GridInternal(GridDimensions dimensions);
     ~GridInternal();
 
+    // GridAccessCommonIf
+    virtual GridHash GetHash() const override;
+
     // GridAccessPlayerIf
     virtual PlayerActionResult SetVisible(uint32_t field) override;
     virtual PlayerActionResult SetFlag(uint32_t field) override;

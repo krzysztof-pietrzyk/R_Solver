@@ -14,13 +14,7 @@
 // ============================ MOCKED CLASSES ============================= //
 // ========================================================================= //
 
-class MockGridHash : public GridHash
-{
-    public:
-    MockGridHash(const uint32_t grid_size) : GridHash(grid_size) {};
 
-    MOCK_METHOD(void, CalculateHash, (const std::vector<bool>), (override));
-};
 
 // ========================================================================= //
 // ============================= TEST FIXTURES ============================= //
@@ -41,7 +35,7 @@ TEST_P(GridHashCreationFixture, Creation)
         expectedHashLength += 1;
     }
     
-    GridHash gridHash(grid_size);
+    GridHash gridHash = GridHash(grid_size);
     ASSERT_EQ(gridHash.Length(), expectedHashLength);
 }
 
@@ -65,11 +59,9 @@ TEST_P(GridHashCalculateHashFixture, CalculateHash)
     const CalculateHashFixtureParams params = GetParam();
     const vector<bool> is_mine = get<0>(params);
     const string expected_hash = get<1>(params);
-    const uint32_t grid_size = is_mine.size();
 
-    GridHash gridHash(grid_size);
-
-    gridHash.GridHash::CalculateHash(is_mine);
+    const CachedVector mines_vector = CachedVector(is_mine);
+    GridHash gridHash = GridHash(mines_vector);
 
     ASSERT_EQ(gridHash.ToString(), expected_hash);
 }
@@ -96,11 +88,10 @@ TEST_P(GridHashCalculateHashFromMinesFixture, CalculateHashFromMines)
     const uint32_t grid_size = get<1>(params);
     const vector<bool> expected_is_mine = get<2>(params);
 
-    MockGridHash gridHash(grid_size);
-
-    EXPECT_CALL(gridHash, CalculateHash(expected_is_mine));
+    GridHash gridHash = GridHash(CachedVector(mine_positions, grid_size));
+    GridHash expectedGridHash = GridHash(expected_is_mine);
     
-    gridHash.GridHash::CalculateHash(mine_positions, grid_size);
+    ASSERT_TRUE(gridHash.ToString() == expectedGridHash.ToString());
 }
 
 vector<CalculateHashFromMinesFixtureParams> GetParamsGridHashCalculateHashFromMinesFixture();
@@ -111,11 +102,11 @@ INSTANTIATE_TEST_CASE_P(TestsGridHash, GridHashCalculateHashFromMinesFixture, Va
 // ========================================================================= //
 // ========================================================================= //
 
-using GetMinesFixtureParams = tuple<string, uint32_t, vector<bool>>;
+using GetMinesFixtureParams = tuple<string, uint32_t, CachedVector>;
 
 class GridHashGetMinesFixture : public TestWithParam<GetMinesFixtureParams>
 {
-    // input_hash, input_hash_length, expected_is_mine
+    // input_hash, input_hash_length, expected_mine_positions
 };
 
 TEST_P(GridHashGetMinesFixture, GetMines)
@@ -123,16 +114,13 @@ TEST_P(GridHashGetMinesFixture, GetMines)
     const GetMinesFixtureParams params = GetParam();
     const string input_hash = get<0>(params);
     const uint32_t input_hash_length = get<1>(params);
-    const vector<bool> expected_is_mine = get<2>(params);
+    const CachedVector& expected_mine_positions = get<2>(params);
 
-    GridHash gridHash(input_hash_length);
-    gridHash = input_hash;
+    GridHash gridHash = GridHash(input_hash, input_hash_length);
 
-    vector<bool> observed_is_mine = vector<bool>(input_hash_length, false);
+    const CachedVector& observed_mine_positions = gridHash.GetMinePositions();
 
-    gridHash.GetMines(observed_is_mine);
-
-    ASSERT_THAT(observed_is_mine, ElementsAreArray(expected_is_mine));
+    ASSERT_TRUE(observed_mine_positions == expected_mine_positions);
 }
 
 vector<GetMinesFixtureParams> GetParamsGridHashGetMinesFixture();
@@ -289,14 +277,14 @@ vector<GetMinesFixtureParams> GetParamsGridHashGetMinesFixture()
     {
         hashToMinesParams.push_back(GetMinesFixtureParams(
             string(1, hash_symbols[temp_value]), 6,
-            {
+            CachedVector({
                 bool(temp_value & 32),
                 bool(temp_value & 16),
                 bool(temp_value & 8),
                 bool(temp_value & 4),
                 bool(temp_value & 2),
                 bool(temp_value & 1)
-            }
+            })
         ));
     }
 
@@ -312,6 +300,7 @@ vector<GetMinesFixtureParams> GetParamsGridHashGetMinesFixture()
 
     hashToMinesParams.push_back(GetMinesFixtureParams(
         "@`014040P12002", 81,
+        CachedVector(
         {0, 1, 0, 0, 0, 0, 1, 1, 0,
          0, 0, 0, 0, 0, 0, 0, 0, 0,
          0, 0, 0, 0, 0, 1, 0, 0, 0,
@@ -320,17 +309,18 @@ vector<GetMinesFixtureParams> GetParamsGridHashGetMinesFixture()
          0, 0, 0, 1, 0, 0, 0, 0, 0,
          0, 0, 0, 0, 0, 1, 0, 0, 0,
          0, 1, 0, 0, 0, 0, 0, 0, 0,
-         0, 0, 0, 0, 0, 0, 0, 1, 0}
+         0, 0, 0, 0, 0, 0, 0, 1, 0})
     ));
 
     hashToMinesParams.push_back(GetMinesFixtureParams(
         "123456789@P", 66,
+        CachedVector(
         {0, 0, 0, 0, 0, 1,  0, 0, 0, 0, 1, 0,
          0, 0, 0, 0, 1, 1,  0, 0, 0, 1, 0, 0,
          0, 0, 0, 1, 0, 1,  0, 0, 0, 1, 1, 0,
          0, 0, 0, 1, 1, 1,  0, 0, 1, 0, 0, 0,
          0, 0, 1, 0, 0, 1,  0, 1, 0, 0, 0, 0,
-         1, 0, 0, 0, 0, 0}
+         1, 0, 0, 0, 0, 0})
     ));
 
     return hashToMinesParams;

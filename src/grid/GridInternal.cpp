@@ -11,6 +11,12 @@ GridInternal::~GridInternal()
 
 }
 
+// GridAccessCommonIf
+GridHash GridInternal::GetHash() const
+{
+    return GridHash(mine_fields);
+}
+
 // GridAccessPlayerIf
 PlayerActionResult GridInternal::SetVisible(uint32_t field)
 {

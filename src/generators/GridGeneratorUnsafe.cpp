@@ -13,27 +13,27 @@ GridGeneratorUnsafe::~GridGeneratorUnsafe() {}
 
 void GridGeneratorUnsafe::Generate()
 {
-    uint32_t poll_index = 0;
-    uint32_t random_field = 0;
+    // uint32_t poll_index = 0;
+    // uint32_t random_field = 0;
 
-    grid.Clear();
-    PrepareSafeFields();
+    // grid.Clear();
+    // PrepareSafeFields();
 
-    for(size_t i = 0; i < grid.M; i++)
-    {
-        // Get random poll_index between 0 and current_max
-        poll_index = dist(rng) % current_max;
-        // safe_fields[poll_index] is the next generated mine
-        random_field = safe_fields[poll_index];
-        grid.mines[i] = random_field;
-        grid.is_mine[random_field] = true;
-        // Move the last value in safe_fields to safe_fields[poll_index] and decrement current_max
-        safe_fields[poll_index] = safe_fields[--current_max];
-    }
+    // for(size_t i = 0; i < grid.M; i++)
+    // {
+    //     // Get random poll_index between 0 and current_max
+    //     poll_index = dist(rng) % current_max;
+    //     // safe_fields[poll_index] is the next generated mine
+    //     random_field = safe_fields[poll_index];
+    //     grid.mines[i] = random_field;
+    //     grid.is_mine[random_field] = true;
+    //     // Move the last value in safe_fields to safe_fields[poll_index] and decrement current_max
+    //     safe_fields[poll_index] = safe_fields[--current_max];
+    // }
 
-    CopySafeFields();
-    grid.hash.SetUpToDate(false);
-    grid.CalculateValues();
+    // CopySafeFields();
+    // grid.hash.SetUpToDate(false);
+    // grid.CalculateValues();
 }
 
 void GridGeneratorUnsafe::SetStartingField(uint32_t starting_field) {}

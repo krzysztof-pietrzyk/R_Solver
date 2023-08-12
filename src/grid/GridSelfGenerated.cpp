@@ -72,7 +72,7 @@ void GridSelfGenerated::CalculateValues()
 
 void GridSelfGenerated::CalculateHash()
 {
-    hash.CalculateHash(is_mine);
+    // hash.CalculateHash(is_mine);
 }
 
 // protected
