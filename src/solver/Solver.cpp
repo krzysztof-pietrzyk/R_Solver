@@ -3,6 +3,7 @@
 Solver::Solver(GridDimensions grid_dimensions, SolverThreadData* thread_data_) :
     grid(new GridInternal(grid_dimensions)),
     generator(GeneratorFactory::Create(GeneratorType::SAFE, *grid)),
+	view(ViewFactory::Create(ViewType::VIEW_CONSOLE, *grid)),
     algorithm_manager(new AlgorithmManager(*grid)),
 	statistics_aggregator(new StatisticsAggregator()),
 	thread_data(thread_data_)
@@ -23,14 +24,18 @@ Solver::~Solver()
 {
     delete algorithm_manager;
     delete generator;
+	delete view;
     delete grid;
+	delete thread_data;
 	delete statistics_aggregator;
 }
 
 void Solver::RunForever()
 {
+	LOGGER(LOG_DEBUG) << "Solver::RunForever";
 	while(true)
 	{
+		LOGGER(LOG_DEBUG3) << "Solver::RunForever loop";
 		generator->GenerateGrid();
 		algorithm_manager->RunAll();
 		UpdateSolverStatistics();
@@ -41,6 +46,8 @@ void Solver::Run()
 {
 	generator->GenerateGrid();
 	algorithm_manager->RunAll();
+	UpdateSolverStatistics();
+	view->Display();
 }
 
 void Solver::UpdateThreadData()

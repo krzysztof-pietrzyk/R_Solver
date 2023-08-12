@@ -36,7 +36,7 @@ void CheckStatus(SolverThreadData* data, vector<Solver*> solvers)
 			s->UpdateThreadData();
 		}
 		ostringstream text_to_print = ostringstream();
-		text_to_print << "Seconds since start: " << seconds_since_start << "\n";
+		text_to_print << "\nSeconds since start: " << seconds_since_start << "\n";
 		for(const auto& item : data->statistics_data)
 		{
 			const string& label = item.first;
@@ -59,7 +59,7 @@ void CheckStatus(SolverThreadData* data, vector<Solver*> solvers)
 int main()
 {
 	LOGGER(LOG_INIT) << "main";
-	const uint16_t threads_number = 8;
+	const uint16_t threads_number = 1;
 	const uint16_t grid_width = 30;
 	const uint16_t grid_height = 16;
 	const uint32_t grid_mines = 99;

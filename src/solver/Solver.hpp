@@ -4,7 +4,7 @@
 #include "../grid/GridImpl.hpp"
 #include "../grid/GridInternal.hpp"
 #include "../algorithms/AlgorithmManager.hpp"
-#include "../view/GridViewFactory.hpp"
+#include "../view/ViewFactory.hpp"
 #include "../generators/GeneratorFactory.hpp"
 #include "../statistics/StatisticsAggregator.hpp"
 #include "../statistics/StatisticsProducer.hpp"
@@ -30,6 +30,7 @@ class Solver : public StatisticsProducer
 
     GridImpl* grid;
     GeneratorImpl* generator;
+    ViewIf* view;
 	AlgorithmManager* algorithm_manager;
     SolverThreadData* thread_data;
     StatisticsAggregator* statistics_aggregator;
