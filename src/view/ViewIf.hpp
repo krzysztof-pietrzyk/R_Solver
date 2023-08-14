@@ -5,7 +5,7 @@ class ViewIf
 {
     public:
 
-    virtual void Display();
+    virtual void Display() = 0;
 };
 
 #endif
