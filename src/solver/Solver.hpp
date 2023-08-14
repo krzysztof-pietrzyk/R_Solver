@@ -1,7 +1,7 @@
 #ifndef SOLVER_HPP
 #define SOLVER_HPP
 
-#include "../grid/GridImpl.hpp"
+#include "../grid/Grid.hpp"
 #include "../grid/GridInternal.hpp"
 #include "../algorithms/AlgorithmManager.hpp"
 #include "../view/ViewFactory.hpp"
@@ -28,8 +28,8 @@ class Solver : public StatisticsProducer
 
     private:
 
-    GridImpl* grid;
-    GeneratorImpl* generator;
+    Grid* grid;
+    Generator* generator;
     ViewIf* view;
 	AlgorithmManager* algorithm_manager;
     SolverThreadData* thread_data;

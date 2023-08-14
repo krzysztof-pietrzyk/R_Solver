@@ -1,6 +1,6 @@
 #include "GridInternal.hpp"
 
-GridInternal::GridInternal(GridDimensions dimensions) : GridImpl(dimensions)
+GridInternal::GridInternal(GridDimensions dimensions) : Grid(dimensions)
 {
     LOGGER(LOG_INIT) << "GridInternal";
     chain_reaction_zeros = CachedVector(dimensions.size);

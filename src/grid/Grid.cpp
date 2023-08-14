@@ -1,8 +1,8 @@
-#include "GridImpl.hpp"
+#include "Grid.hpp"
 
-GridImpl::GridImpl(const GridDimensions dimensions) : dimensions(dimensions)
+Grid::Grid(const GridDimensions dimensions) : dimensions(dimensions)
 {
-    LOGGER(LOG_INIT) << "GridImpl";
+    LOGGER(LOG_INIT) << "Grid";
     VerifyDimensions(dimensions);
     mine_fields = CachedVector(dimensions.size);
     flagged_fields = CachedVector(dimensions.size);
@@ -18,101 +18,101 @@ GridImpl::GridImpl(const GridDimensions dimensions) : dimensions(dimensions)
     is_lost = false;
 }
 
-GridImpl::~GridImpl()
+Grid::~Grid()
 {
 
 }
 
 // GridAccessCommonIf
-GridDimensions GridImpl::GetDimensions() const 
+GridDimensions Grid::GetDimensions() const 
 {
     return dimensions;
 }
 
-uint16_t GridImpl::GetWidth() const
+uint16_t Grid::GetWidth() const
 {
     return dimensions.width;
 }
 
-uint16_t GridImpl::GetHeight() const
+uint16_t Grid::GetHeight() const
 {
     return dimensions.height;
 }
 
-uint32_t GridImpl::GetSize() const
+uint32_t Grid::GetSize() const
 {
     return dimensions.size;
 }
 
-uint32_t GridImpl::GetTotalMines() const
+uint32_t Grid::GetTotalMines() const
 {
     return dimensions.mines;
 }
 
-uint32_t GridImpl::GetTotalSafeFields() const
+uint32_t Grid::GetTotalSafeFields() const
 {
     return dimensions.safe;
 }
 
-const std::vector<uint32_t>& GridImpl::GetNeighbors(uint32_t field) const
+const std::vector<uint32_t>& Grid::GetNeighbors(uint32_t field) const
 {
     return neighbors.at(field);
 }
 
 // GridAccessPlayerIf
-const CachedVector& GridImpl::GetVisibleFields() const
+const CachedVector& Grid::GetVisibleFields() const
 {
     return visible_fields;
 }
 
-const CachedVector& GridImpl::GetFlaggedFields() const
+const CachedVector& Grid::GetFlaggedFields() const
 {
     return flagged_fields;
 }
 
-uint8_t GridImpl::GetFieldValue(uint32_t field) const
+uint8_t Grid::GetFieldValue(uint32_t field) const
 {
-    LOGGER_ASSERT(CheckVisible(field), "GridImpl::GetFieldValue attempting to read value of a covered field!");
+    LOGGER_ASSERT(CheckVisible(field), "Grid::GetFieldValue attempting to read value of a covered field!");
     return field_values[field];
 }
 
-bool GridImpl::IsLost() const
+bool Grid::IsLost() const
 {
     return is_lost;
 }
 
-bool GridImpl::IsWon() const
+bool Grid::IsWon() const
 {
     return !is_lost && visible_fields.Index() == dimensions.safe;
 }
 
-void GridImpl::GiveUp()
+void Grid::GiveUp()
 {
     is_lost = true;
 }
 
 // GridAccessGeneratorIf
-void GridImpl::SetMineFields(const CachedVector& new_mine_fields)
+void Grid::SetMineFields(const CachedVector& new_mine_fields)
 {
     CachedVector::CopyFromTo(new_mine_fields, mine_fields);
 }
 
-void GridImpl::SetFlaggedFields(const CachedVector& new_flagged_fields)
+void Grid::SetFlaggedFields(const CachedVector& new_flagged_fields)
 {
     CachedVector::CopyFromTo(new_flagged_fields, flagged_fields);
 }
 
-void GridImpl::SetVisibleFields(const CachedVector& new_visible_fields)
+void Grid::SetVisibleFields(const CachedVector& new_visible_fields)
 {
     CachedVector::CopyFromTo(new_visible_fields, visible_fields);
 }
 
-void GridImpl::SetFieldValues(const std::vector<uint8_t>& new_field_values)
+void Grid::SetFieldValues(const std::vector<uint8_t>& new_field_values)
 {
     std::copy(new_field_values.begin(), new_field_values.end(), field_values.begin());
 }
 
-void GridImpl::Reset()
+void Grid::Reset()
 {
     flagged_fields.Clear();
     visible_fields.Clear();
@@ -120,7 +120,7 @@ void GridImpl::Reset()
 }
 
 // GridAccessViewIf
-const std::vector<FieldType>& GridImpl::GetFieldTypesToDisplay()
+const std::vector<FieldType>& Grid::GetFieldTypesToDisplay()
 {
     for(size_t i = 0U; i < dimensions.size; i++)
     {
@@ -129,21 +129,21 @@ const std::vector<FieldType>& GridImpl::GetFieldTypesToDisplay()
     return field_types_to_display;
 }
 
-bool GridImpl::CheckVisible(uint32_t field) const
+bool Grid::CheckVisible(uint32_t field) const
 {
     return visible_fields.Contains(field);
 }
 
 // Private
-void GridImpl::VerifyDimensions(GridDimensions dim) const
+void Grid::VerifyDimensions(GridDimensions dim) const
 {
-    LOGGER_ASSERT(dim.mines < dim.size, "GridImpl::VerifyDimensions - Too many mines in grid.");
-    LOGGER_ASSERT(dim.mines >= 1U, "GridImpl::VerifyDimensions - Too few mines in grid.");
-    LOGGER_ASSERT(dim.height <= 1024U && dim.width <= 1024U, "GridImpl::VerifyDimensions - Grid too big.");
-    LOGGER_ASSERT(dim.height > 0U && dim.width > 0U, "GridImpl::VerifyDimensions - Grid too small.");
+    LOGGER_ASSERT(dim.mines < dim.size, "Grid::VerifyDimensions - Too many mines in grid.");
+    LOGGER_ASSERT(dim.mines >= 1U, "Grid::VerifyDimensions - Too few mines in grid.");
+    LOGGER_ASSERT(dim.height <= 1024U && dim.width <= 1024U, "Grid::VerifyDimensions - Grid too big.");
+    LOGGER_ASSERT(dim.height > 0U && dim.width > 0U, "Grid::VerifyDimensions - Grid too small.");
 }
 
-void GridImpl::FindNeighborsOfAllFields()
+void Grid::FindNeighborsOfAllFields()
 {
     // Only called once in constructor. The neighbors addresses never change
     uint16_t column;
@@ -164,7 +164,7 @@ void GridImpl::FindNeighborsOfAllFields()
     }
 }
 
-FieldType GridImpl::GetFieldType(uint32_t field)
+FieldType Grid::GetFieldType(uint32_t field)
 {
     if(is_lost)
     {
@@ -173,7 +173,7 @@ FieldType GridImpl::GetFieldType(uint32_t field)
     return GetFieldTypeOngoingGrid(field);
 }
 
-FieldType GridImpl::GetFieldTypeLostGrid(uint32_t field)
+FieldType Grid::GetFieldTypeLostGrid(uint32_t field)
 {
     bool is_mine = mine_fields.Contains(field);
     bool is_flag = flagged_fields.Contains(field);
@@ -201,7 +201,7 @@ FieldType GridImpl::GetFieldTypeLostGrid(uint32_t field)
     return GetFieldTypeNumbered(field);
 }
 
-FieldType GridImpl::GetFieldTypeOngoingGrid(uint32_t field)
+FieldType Grid::GetFieldTypeOngoingGrid(uint32_t field)
 {
     bool is_flag = flagged_fields.Contains(field);
     bool is_visible = visible_fields.Contains(field);
@@ -216,7 +216,7 @@ FieldType GridImpl::GetFieldTypeOngoingGrid(uint32_t field)
     return GetFieldTypeNumbered(field);
 }
 
-FieldType GridImpl::GetFieldTypeNumbered(uint32_t field)
+FieldType Grid::GetFieldTypeNumbered(uint32_t field)
 {
     uint8_t field_value = GetFieldValue(field);
     switch(field_value)
@@ -240,7 +240,7 @@ FieldType GridImpl::GetFieldTypeNumbered(uint32_t field)
         case 8U:
             return FieldType::F_8;
         default:
-            std::runtime_error("ERROR: GridImpl::GetFieldTypeNumbered impossible field value!");
+            std::runtime_error("ERROR: Grid::GetFieldTypeNumbered impossible field value!");
             return FieldType::UNHANDLED_FIELD_TYPE;
     }
 }

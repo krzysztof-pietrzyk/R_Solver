@@ -1,5 +1,5 @@
-#ifndef GRID_IMPL_HPP
-#define GRID_IMPL_HPP
+#ifndef GRID_HPP
+#define GRID_HPP
 
 #include "../utils/CachedVector.hpp"
 
@@ -12,15 +12,15 @@
 #include <cstdint>
 #include <stdexcept>
 
-class GridImpl : 
+class Grid : 
     public GridAccessPlayerIf,
     public GridAccessGeneratorIf,
     public GridAccessViewIf
 {
     public:
 
-    GridImpl(const GridDimensions dimensions);
-    ~GridImpl();
+    Grid(const GridDimensions dimensions);
+    ~Grid();
 
     // GridAccessCommonIf
     virtual GridDimensions GetDimensions() const override;

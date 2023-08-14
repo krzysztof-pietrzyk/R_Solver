@@ -1,6 +1,6 @@
 #include "GeneratorInternal.hpp"
 
-GeneratorInternal::GeneratorInternal(GridAccessGeneratorIf& grid_) : GeneratorImpl(grid_)
+GeneratorInternal::GeneratorInternal(GridAccessGeneratorIf& grid_) : Generator(grid_)
 {
     LOGGER(LOG_INIT) << "GeneratorInternal";
     generated_safe_fields = std::vector<uint32_t>(grid.GetSize(), 0U);

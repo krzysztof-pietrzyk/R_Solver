@@ -4,11 +4,11 @@
 #include "../utils/CachedVector.hpp"
 #include "../statistics/collectors/StatisticsCollectorFieldTypes.hpp"
 
-#include "GeneratorImpl.hpp"
+#include "Generator.hpp"
 
 #include <vector>
 
-class GeneratorInternal : public GeneratorImpl
+class GeneratorInternal : public Generator
 {
     public:
 

@@ -1,9 +1,9 @@
 #ifndef GRID_INTERNAL_HPP
 #define GRID_INTERNAL_HPP
 
-#include "GridImpl.hpp"
+#include "Grid.hpp"
 
-class GridInternal : public GridImpl
+class GridInternal : public Grid
 {
     public:
 
