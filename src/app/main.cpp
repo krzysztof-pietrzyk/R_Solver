@@ -6,7 +6,9 @@
 #include <string>
 #include <ostream>
 
+#include "../utils/Logger.hpp"
 #include "../solver/Solver.hpp"
+#include "../grid/GridDimensions.hpp"
 
 using namespace std;
 
@@ -34,7 +36,7 @@ void CheckStatus(SolverThreadData* data, vector<Solver*> solvers)
 			s->UpdateThreadData();
 		}
 		ostringstream text_to_print = ostringstream();
-		text_to_print << "Seconds since start: " << seconds_since_start << "\n";
+		text_to_print << "\nSeconds since start: " << seconds_since_start << "\n";
 		for(const auto& item : data->statistics_data)
 		{
 			const string& label = item.first;
@@ -56,6 +58,7 @@ void CheckStatus(SolverThreadData* data, vector<Solver*> solvers)
 
 int main()
 {
+	LOGGER(LogLevel::INIT) << "main";
 	const uint16_t threads_number = 1;
 	const uint16_t grid_width = 30;
 	const uint16_t grid_height = 16;
@@ -67,9 +70,10 @@ int main()
 
 	vector<thread> solver_threads;
 	vector<Solver*> solvers;
+	GridDimensions grid_dimensions = GridDimensions(grid_width, grid_height, grid_mines);
 	for(size_t i = 0; i < threads_number; i++)
 	{
-		Solver* s = new Solver(grid_width, grid_height, grid_mines, data);
+		Solver* s = new Solver(grid_dimensions, data);
 		solvers.push_back(s);
 		solver_threads.push_back(thread(Run, s));
 	}

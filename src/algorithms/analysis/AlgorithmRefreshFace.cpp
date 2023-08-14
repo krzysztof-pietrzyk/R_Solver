@@ -1,12 +1,14 @@
 #include "AlgorithmRefreshFace.hpp"
 
-AlgorithmRefreshFace::AlgorithmRefreshFace(GridManager& grid_, AlgorithmDataStorage& data_)
+AlgorithmRefreshFace::AlgorithmRefreshFace(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_)
     : Algorithm(grid_, data_),
     D_face_index(GetModifiableAlgorithmDataStorageReference().face_index),
     D_face(GetModifiableAlgorithmDataStorageReference().face),
     D_is_face(GetModifiableAlgorithmDataStorageReference().is_face),
     D_segments_face(GetModifiableAlgorithmDataStorageReference().segments_face)
-{}
+{
+    LOGGER(LogLevel::INIT) << "AlgorithmRefreshFace";
+}
 
 AlgorithmRefreshFace::~AlgorithmRefreshFace() {}
 

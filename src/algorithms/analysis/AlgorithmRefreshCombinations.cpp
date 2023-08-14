@@ -1,13 +1,14 @@
 #include "AlgorithmRefreshCombinations.hpp"
 
-AlgorithmRefreshCombinations::AlgorithmRefreshCombinations(GridManager& grid_, AlgorithmDataStorage& data_)
+AlgorithmRefreshCombinations::AlgorithmRefreshCombinations(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_)
     : Algorithm(grid_, data_),
     D_subsegments(GetModifiableAlgorithmDataStorageReference().subsegments),
     D_field_combinations(GetModifiableAlgorithmDataStorageReference().field_combinations),
     D_remaining_fields_combinations(GetModifiableAlgorithmDataStorageReference().remaining_fields_combinations),
     D_total_combinations(GetModifiableAlgorithmDataStorageReference().total_combinations)
 {
-    field_states = std::vector<FieldCombinationState>(grid.S, FCS_UNASSIGNED);
+    LOGGER(LogLevel::INIT) << "AlgorithmRefreshCombinations";
+    field_states = std::vector<FieldState>(grid.GetSize(), FieldState::UNASSIGNED);
     choice_stack = std::vector<uint32_t>();
     segment_of_choice_stack = std::vector<uint32_t>();
     modifications_stack = std::vector<uint32_t>();
@@ -15,11 +16,11 @@ AlgorithmRefreshCombinations::AlgorithmRefreshCombinations(GridManager& grid_, A
     remaining_mines = 0;
     remaining_fields = 0;
 
-    mine_counts_in_segment = std::vector<std::vector<uint32_t>>(grid.M, std::vector<uint32_t>());
-    current_mine_count_id_in_segment = std::vector<size_t>(grid.M, 0);
+    mine_counts_in_segment = std::vector<std::vector<uint32_t>>(grid.GetTotalMines(), std::vector<uint32_t>());
+    current_mine_count_id_in_segment = std::vector<size_t>(grid.GetTotalMines(), 0);
 
-    segments_combinations = std::vector<std::map<uint32_t, BigNum>>(grid.M, std::map<uint32_t, BigNum>());
-    field_combinations_temp = std::vector<std::map<uint32_t, BigNum>>(grid.S, std::map<uint32_t, BigNum>());
+    segments_combinations = std::vector<std::map<uint32_t, BigNum>>(grid.GetTotalMines(), std::map<uint32_t, BigNum>());
+    field_combinations_temp = std::vector<std::map<uint32_t, BigNum>>(grid.GetSize(), std::map<uint32_t, BigNum>());
 }
 
 AlgorithmRefreshCombinations::~AlgorithmRefreshCombinations() {}
@@ -27,8 +28,8 @@ AlgorithmRefreshCombinations::~AlgorithmRefreshCombinations() {}
 AlgorithmStatus AlgorithmRefreshCombinations::Execution()
 {
     Clear();
-    remaining_mines = grid.M - grid.flags_index;
-    remaining_fields = grid.S - grid.visible_fields_index - grid.flags_index - data.face_index;
+    remaining_mines = grid.GetTotalMines() - flagged.Index();
+    remaining_fields = grid.GetSize() - visible.Index() - flagged.Index() - data.face_index;
     const uint32_t segments_to_check = data.segments_count;
     for(size_t i = 0; i < segments_to_check; i++)
     {
@@ -47,7 +48,7 @@ void AlgorithmRefreshCombinations::Clear()
     for(size_t i = 0; i < face_length; i++)
     {
         const uint32_t face_field = data.face[i];
-        field_states[face_field] = FCS_UNASSIGNED;
+        field_states[face_field] = FieldState::UNASSIGNED;
         D_field_combinations[face_field] = 0;
         field_combinations_temp[face_field].clear();
     }
@@ -80,7 +81,7 @@ void AlgorithmRefreshCombinations::ClearStatesInSegment(uint32_t segment_id)
     for(size_t i = 0; i < segment_face_l; i++)
     {
         const uint32_t segment_face_field = segment_face[i];
-        field_states[segment_face_field] = FCS_UNASSIGNED;
+        field_states[segment_face_field] = FieldState::UNASSIGNED;
     }
 }
 
@@ -100,8 +101,8 @@ BigNum AlgorithmRefreshCombinations::ApplySubsegmentsCombination(std::vector<Sub
         for(size_t i = 0; i < subsegment_l; i++)
         {
             const uint32_t subsegment_field = subsegment.fields[i];
-            if(i < mines_to_add) { field_states[subsegment_field] = FCS_MINE; current_segment_mine_count++; }
-            else                 { field_states[subsegment_field] = FCS_SAFE; }
+            if(i < mines_to_add) { field_states[subsegment_field] = FieldState::MINE; current_segment_mine_count++; }
+            else                 { field_states[subsegment_field] = FieldState::SAFE; }
         }
     }
     return subsegment_combination_weight;
@@ -165,9 +166,9 @@ void AlgorithmRefreshCombinations::FindRemainingSectionValue(const Section& sect
     const size_t section_l = section.fields_index;
     for(size_t section_head = 0; section_head < section_l; section_head++)
     {
-        const FieldCombinationState& field_state = field_states[section.fields[section_head]];
-        if(field_state == FCS_MINE) { section_value--; }
-        else if(field_state == FCS_UNASSIGNED) { section_length++; }
+        const FieldState& field_state = field_states[section.fields[section_head]];
+        if(field_state == FieldState::MINE) { section_value--; }
+        else if(field_state == FieldState::UNASSIGNED) { section_length++; }
     }
 }
 
@@ -180,21 +181,21 @@ bool AlgorithmRefreshCombinations::RevertSegmentHeadToLastChoice(size_t& segment
     while(true)
     {
         const uint32_t last_modification = modifications_stack.back();
-        FieldCombinationState& current_field_state = field_states[last_modification];
+        FieldState& current_field_state = field_states[last_modification];
 
         // keep popping modifications from the stack until the last choice is found
         if(last_choice == last_modification)
         {
             // change the last choice into FCS_SAFE (it was originally FSC_MINE)
-            current_field_state = FCS_SAFE;
+            current_field_state = FieldState::SAFE;
             current_segment_mine_count--;
             // don't pop_back because it is still a modification, just different
             break; 
         }
         else
         {
-            if(current_field_state == FCS_MINE) { current_segment_mine_count--; }
-            current_field_state = FCS_UNASSIGNED;
+            if(current_field_state == FieldState::MINE) { current_segment_mine_count--; }
+            current_field_state = FieldState::UNASSIGNED;
             // pop back to allow this field to be assigned something else
             modifications_stack.pop_back();
         }
@@ -207,8 +208,8 @@ bool AlgorithmRefreshCombinations::RevertSegmentHeadToLastChoice(size_t& segment
 
 void AlgorithmRefreshCombinations::TransitionFieldStateForward(const uint32_t section_field, const size_t current_segment_head, int8_t& remaining_section_value, int8_t& remaining_section_length)
 {
-    FieldCombinationState& current_state = field_states[section_field];
-    if(current_state != FCS_UNASSIGNED) { return; }
+    FieldState& current_state = field_states[section_field];
+    if(current_state != FieldState::UNASSIGNED) { return; }
     if(remaining_section_value > 0)
     {
         // it's only a choice if there are more fields than remaining mines
@@ -217,13 +218,13 @@ void AlgorithmRefreshCombinations::TransitionFieldStateForward(const uint32_t se
             choice_stack.push_back(section_field);
             segment_of_choice_stack.push_back(current_segment_head);
         }
-        current_state = FCS_MINE;
+        current_state = FieldState::MINE;
         remaining_section_value--;
         current_segment_mine_count++;
     }
     else
     {
-        current_state = FCS_SAFE;
+        current_state = FieldState::SAFE;
     }
     modifications_stack.push_back(section_field);
     remaining_section_length--;
@@ -267,7 +268,7 @@ void AlgorithmRefreshCombinations::ApplyCurrentCombinationAsValid(const uint32_t
         // subsegments were already handled above
         if(data.is_subsegment[segment_face_field]) { continue; }
         // only look for the mines of this combination
-        if(field_states[segment_face_field] != FCS_MINE) { continue; }
+        if(field_states[segment_face_field] != FieldState::MINE) { continue; }
         field_combinations_temp[segment_face_field][final_mine_count] += combination_multiplier;
     }
 }

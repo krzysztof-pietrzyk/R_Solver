@@ -1,7 +1,7 @@
 #ifndef ALGORITHM_STATUS_HPP
 #define ALGORITHM_STATUS_HPP
 
-enum AlgorithmStatus
+enum class AlgorithmStatus
 {
     UNHANDLED_STATUS,  // For testing and debugging purposes
     NO_STATUS,         // For algorithms which only analyze the board

@@ -1,18 +1,19 @@
 #ifndef ALGORITHM_MANAGER_HPP
 #define ALGORITHM_MANAGER_HPP
 
-#include <map>
-
-#include "../grid/GridManager.hpp"
+#include "../utils/Logger.hpp"
+#include "../grid/GridAccessPlayerIf.hpp"
 
 #include "AlgorithmFactory.hpp"
 #include "AlgorithmTransitionManager.hpp"
+
+#include <map>
 
 class AlgorithmManager
 {
     public:
 
-    AlgorithmManager(GridManager& grid_);
+    AlgorithmManager(GridAccessPlayerIf& grid_);
 
     ~AlgorithmManager();
 
@@ -22,8 +23,7 @@ class AlgorithmManager
 
     private:
 
-    GridManager* grid;
-    AlgorithmFactory* factory;
+    GridAccessPlayerIf* grid;
     AlgorithmDataStorage* data;
     AlgorithmTransitionManager transitions;
 

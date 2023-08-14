@@ -1,16 +1,8 @@
 #ifndef STATISTICS_TYPE_HPP
 #define STATISTICS_TYPE_HPP
 
+#include "../StatisticsStructs.hpp"
 #include "../StatisticsLabels.hpp"
-#include "elements/StatisticsElement.hpp"
-
-#include <map>
-#include <vector>
-
-class StatisticsCollector;
-typedef std::map<Label, StatisticsElement*> StatisticsCollectorStruct;
-typedef std::vector<StatisticsCollector*> StatisticsProducerStruct;
-typedef std::map<Label, StatisticsProducerStruct> StatisticsAggregatorStruct;
 
 class StatisticsCollector
 {

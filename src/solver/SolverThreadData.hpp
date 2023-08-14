@@ -2,6 +2,7 @@
 #define SOLVER_THREAD_DATA_HPP
 
 #include "../statistics/collectors/StatisticsCollector.hpp"
+#include "../utils/Logger.hpp"
 
 #include <mutex>
 #include <string>
@@ -18,7 +19,7 @@ class SolverThreadData
 
 	std::mutex mut;
 
-    std::map<Label, std::vector<StatisticsCollector*>> statistics_data;
+    StatisticsAggregatorStruct statistics_data;
 };
 
 #endif

@@ -88,14 +88,14 @@ std::string BigNum::StrBase10() const
     return std::to_string(base_base10) + "*10^" + std::to_string(exponent_whole_base10);
 }
 
-void   BigNum::operator= (const BigNum& other) { base = other.base; exponent = other.exponent; }
-void   BigNum::operator= (const uint64_t& other) { base = other; exponent = 0; Normalize(); }
+void BigNum::operator= (const BigNum& other) { base = other.base; exponent = other.exponent; }
+void BigNum::operator= (const uint64_t& other) { base = other; exponent = 0; Normalize(); }
 
 BigNum BigNum::operator+ (const BigNum& other) const { BigNum result = BigNum(*this); result += other; return result; }
 BigNum BigNum::operator* (const BigNum& other) const { BigNum result = BigNum(*this); result *= other; return result; }
 BigNum BigNum::operator/ (const BigNum& other) const { BigNum result = BigNum(*this); result /= other; return result; }
 
-void   BigNum::operator+=(const BigNum& other)
+void BigNum::operator+=(const BigNum& other)
 {
     // This operator is about 12 times slower than adding long double to long double
     if(base == 0.0)
@@ -133,7 +133,7 @@ void   BigNum::operator+=(const BigNum& other)
     }
 }
 
-void   BigNum::operator*=(const BigNum& other)
+void BigNum::operator*=(const BigNum& other)
 { 
     base *= other.base;
     if(base != 0.0)
@@ -147,9 +147,9 @@ void   BigNum::operator*=(const BigNum& other)
     }
 }
 
-void   BigNum::operator/=(const BigNum& other)
+void BigNum::operator/=(const BigNum& other)
 {
-    if(other.base == 0.0) { throw std::runtime_error("ERROR: BigNum::operator/=(const BigNum&): Division by zero!"); }
+    LOGGER_ASSERT(other.base != 0.0, "BigNum::operator/=(const BigNum&) - Division by zero");
     base /= other.base;
     if(base != 0.0)
     {
@@ -162,18 +162,18 @@ BigNum BigNum::operator+ (const uint64_t& other) const { BigNum result = BigNum(
 BigNum BigNum::operator* (const uint64_t& other) const { BigNum result = BigNum(*this); result *= other; return result; }
 BigNum BigNum::operator/ (const uint64_t& other) const { BigNum result = BigNum(*this); result /= other; return result; }
 
-void   BigNum::operator+=(const uint64_t& other) { BigNum temp = BigNum(other); *this += temp; }
-void   BigNum::operator*=(const uint64_t& other) { base *= other; Normalize(); }
-void   BigNum::operator/=(const uint64_t& other)
+void BigNum::operator+=(const uint64_t& other) { BigNum temp = BigNum(other); *this += temp; }
+void BigNum::operator*=(const uint64_t& other) { base *= other; Normalize(); }
+void BigNum::operator/=(const uint64_t& other)
 {
-    if(other == 0ULL) { throw std::runtime_error("ERROR: BigNum::operator/=(const uint64_t&): Division by zero!"); }
+    LOGGER_ASSERT(other != 0ULL, "BigNum::operator/=(const uint64_t&) - Division by zero");
     base /= other;
     Normalize();
 }
 
-bool   BigNum::operator> (const BigNum& other) const { return (exponent > other.exponent || (exponent == other.exponent && base > other.exponent)); }
-bool   BigNum::operator>=(const BigNum& other) const { return (exponent > other.exponent || (exponent == other.exponent && base >= other.exponent)); }
-bool   BigNum::operator< (const BigNum& other) const { return (exponent < other.exponent || (exponent == other.exponent && base < other.exponent)); }
-bool   BigNum::operator<=(const BigNum& other) const { return (exponent < other.exponent || (exponent == other.exponent && base <= other.exponent)); }
-bool   BigNum::operator==(const BigNum& other) const { return (base == other.base && exponent == other.exponent); }
-bool   BigNum::operator!=(const BigNum& other) const { return (base != other.base || exponent != other.exponent); }
+bool BigNum::operator> (const BigNum& other) const { return (exponent > other.exponent || (exponent == other.exponent && base > other.exponent)); }
+bool BigNum::operator>=(const BigNum& other) const { return (exponent > other.exponent || (exponent == other.exponent && base >= other.exponent)); }
+bool BigNum::operator< (const BigNum& other) const { return (exponent < other.exponent || (exponent == other.exponent && base < other.exponent)); }
+bool BigNum::operator<=(const BigNum& other) const { return (exponent < other.exponent || (exponent == other.exponent && base <= other.exponent)); }
+bool BigNum::operator==(const BigNum& other) const { return (base == other.base && exponent == other.exponent); }
+bool BigNum::operator!=(const BigNum& other) const { return (base != other.base || exponent != other.exponent); }

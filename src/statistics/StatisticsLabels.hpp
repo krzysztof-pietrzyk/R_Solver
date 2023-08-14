@@ -31,7 +31,7 @@ namespace Labels
             static const Label EXECUTIONS = "Times executed";
         }
 
-        namespace Grid
+        namespace Generator
         {
             static const Label ZERO = "Total 0_zeros";
             static const Label ONE = "Total 1_ones";
@@ -48,7 +48,7 @@ namespace Labels
     namespace Producers
     {
         static const Label SOLVER = "Solver";
-        static const Label GRID = "Grid";
+        static const Label GENERATOR = "Generator";
     }
 }
 

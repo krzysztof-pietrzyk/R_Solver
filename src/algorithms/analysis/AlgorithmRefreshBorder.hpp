@@ -18,7 +18,7 @@ class AlgorithmRefreshBorder : public Algorithm
     */
     public:
 
-    AlgorithmRefreshBorder(GridManager& grid_, AlgorithmDataStorage& data_);
+    AlgorithmRefreshBorder(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_);
 
     ~AlgorithmRefreshBorder();
 
@@ -36,6 +36,8 @@ class AlgorithmRefreshBorder : public Algorithm
     uint32_t& D_border_last_visible_fields_index;
     std::vector<uint32_t>& D_border;
     std::vector<bool>& D_is_border;
+
+    bool HasAtLeastOneNotVisibleNeighbor(uint32_t field) const;
 };
 
 #endif

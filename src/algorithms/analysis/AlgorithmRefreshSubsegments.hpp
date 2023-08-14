@@ -7,7 +7,7 @@ class AlgorithmRefreshSubsegments : public Algorithm
 {
     public:
 
-    AlgorithmRefreshSubsegments(GridManager& grid_, AlgorithmDataStorage& data_);
+    AlgorithmRefreshSubsegments(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_);
 
     ~AlgorithmRefreshSubsegments();
 

@@ -2,14 +2,15 @@
 
 SolverThreadData::SolverThreadData()
 {
-    statistics_data = std::map<Label, std::vector<StatisticsCollector*>>();
+    LOGGER(LogLevel::INIT) << "SolverThreadData";
+    statistics_data = StatisticsAggregatorStruct();
 }
 
 SolverThreadData::~SolverThreadData()
 {
     for(auto& item : statistics_data)
     {
-        std::vector<StatisticsCollector*> producer_data = item.second;
+        StatisticsProducerStruct producer_data = item.second;
         for(auto& data_pointer : producer_data)
         {
             delete data_pointer;

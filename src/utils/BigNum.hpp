@@ -1,6 +1,8 @@
 #ifndef BIG_NUM_HPP
 #define BIG_NUM_HPP
 
+#include "Logger.hpp"
+
 #include <iomanip>
 #include <bitset>
 #include <cmath>

@@ -1,11 +1,12 @@
 #ifndef ALGORITHM_TRANSITION_MANAGER_HPP
 #define ALGORITHM_TRANSITION_MANAGER_HPP
 
+#include "../utils/Logger.hpp"
+
 #include "AlgorithmType.hpp"
 #include "AlgorithmStatus.hpp"
 
 #include <map>
-#include <stdexcept>
 
 class AlgorithmTransitionManager
 {

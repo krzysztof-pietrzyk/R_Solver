@@ -1,6 +1,6 @@
 #include "AlgorithmRefreshSegments.hpp"
 
-AlgorithmRefreshSegments::AlgorithmRefreshSegments(GridManager& grid_, AlgorithmDataStorage& data_)
+AlgorithmRefreshSegments::AlgorithmRefreshSegments(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_)
     : Algorithm(grid_, data_),
     D_segments_index(GetModifiableAlgorithmDataStorageReference().segments_index),
     D_segments_count(GetModifiableAlgorithmDataStorageReference().segments_count),
@@ -8,9 +8,10 @@ AlgorithmRefreshSegments::AlgorithmRefreshSegments(GridManager& grid_, Algorithm
     D_segments_starting_indexes(GetModifiableAlgorithmDataStorageReference().segments_starting_indexes),
     D_segments_l(GetModifiableAlgorithmDataStorageReference().segments_l)
 {
-    fields_to_check = std::vector<uint32_t>(grid.S, 0);
+    LOGGER(LogLevel::INIT) << "AlgorithmRefreshSegments";
+    fields_to_check = std::vector<uint32_t>(grid.GetSize(), 0);
     fields_to_check_index = 0;
-    is_checked = std::vector<bool>(grid.S, false);
+    is_checked = std::vector<bool>(grid.GetSize(), false);
 }
 
 AlgorithmRefreshSegments::~AlgorithmRefreshSegments() {}

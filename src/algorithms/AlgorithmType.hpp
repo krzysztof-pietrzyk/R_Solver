@@ -5,9 +5,9 @@
 
 #include <stdexcept>
 
-enum AlgorithmType
+enum class AlgorithmType
 {
-    UNHANDLED_TYPE,
+    UNHANDLED_ALGORITHM_TYPE,
     FIRST_MOVE,
     SIMPLE_CORNERS,
     REFRESH_BORDER,
@@ -25,42 +25,42 @@ enum AlgorithmType
 
 namespace Labels::Producers::Algorithms
 {
-    static const Label UNHANDLED_TYPE = "Unhandled AlgorithmType";
-    static const Label FIRST_MOVE = "First Move";
-    static const Label SIMPLE_CORNERS = "Simple Corners";
-    static const Label REFRESH_BORDER = "Refresh Border";
-    static const Label LAYER_ONE = "Layer One";
-    static const Label REFRESH_SECTIONS = "Refresh Sections";
-    static const Label LAYER_TWO = "Layer Two";
-    static const Label REFRESH_SEGMENTS = "Refresh Segments";
-    static const Label REFRESH_SUBSEGMENTS = "Refresh Subsegments";
-    static const Label REFRESH_FACE = "Refresh Face";
-    static const Label REFRESH_COMBINATIONS = "Refresh Combinations";
-    static const Label COMBINATIONS_SAFE_MOVES = "Combinations Safe Moves";
-    static const Label COMBINATIONS_LEAST_RISKY = "Combinations Least Risky";
-    static const Label GIVE_UP = "Give Up";
+    static const Label UNHANDLED_ALGORITHM_TYPE = "Unhandled AlgorithmType";
+    static const Label FIRST_MOVE               = "Algorithm: First Move";
+    static const Label SIMPLE_CORNERS           = "Algorithm: Simple Corners";
+    static const Label REFRESH_BORDER           = "Algorithm: Refresh Border";
+    static const Label LAYER_ONE                = "Algorithm: Layer One";
+    static const Label REFRESH_SECTIONS         = "Algorithm: Refresh Sections";
+    static const Label LAYER_TWO                = "Algorithm: Layer Two";
+    static const Label REFRESH_SEGMENTS         = "Algorithm: Refresh Segments";
+    static const Label REFRESH_SUBSEGMENTS      = "Algorithm: Refresh Subsegments";
+    static const Label REFRESH_FACE             = "Algorithm: Refresh Face";
+    static const Label REFRESH_COMBINATIONS     = "Algorithm: Refresh Combinations";
+    static const Label COMBINATIONS_SAFE_MOVES  = "Algorithm: Combinations Safe Moves";
+    static const Label COMBINATIONS_LEAST_RISKY = "Algorithm: Combinations Least Risky";
+    static const Label GIVE_UP                  = "Algorithm: Give Up";
 }
 
 static Label GetAlgorithmTypeLabel(AlgorithmType type)
 {
     switch(type)
     {
-        case UNHANDLED_TYPE:           return Labels::Producers::Algorithms::UNHANDLED_TYPE;
-        case FIRST_MOVE:               return Labels::Producers::Algorithms::FIRST_MOVE;
-        case SIMPLE_CORNERS:           return Labels::Producers::Algorithms::SIMPLE_CORNERS;
-        case REFRESH_BORDER:           return Labels::Producers::Algorithms::REFRESH_BORDER;
-        case LAYER_ONE:                return Labels::Producers::Algorithms::LAYER_ONE;
-        case REFRESH_SECTIONS:         return Labels::Producers::Algorithms::REFRESH_SECTIONS;
-        case LAYER_TWO:                return Labels::Producers::Algorithms::LAYER_TWO;
-        case REFRESH_SEGMENTS:         return Labels::Producers::Algorithms::REFRESH_SEGMENTS;
-        case REFRESH_SUBSEGMENTS:      return Labels::Producers::Algorithms::REFRESH_SUBSEGMENTS;
-        case REFRESH_FACE:             return Labels::Producers::Algorithms::REFRESH_FACE;
-        case REFRESH_COMBINATIONS:     return Labels::Producers::Algorithms::REFRESH_COMBINATIONS;
-        case COMBINATIONS_SAFE_MOVES:  return Labels::Producers::Algorithms::COMBINATIONS_SAFE_MOVES;
-        case COMBINATIONS_LEAST_RISKY: return Labels::Producers::Algorithms::COMBINATIONS_LEAST_RISKY;
-        case GIVE_UP:                  return Labels::Producers::Algorithms::GIVE_UP;
+        case AlgorithmType::UNHANDLED_ALGORITHM_TYPE: return Labels::Producers::Algorithms::UNHANDLED_ALGORITHM_TYPE;
+        case AlgorithmType::FIRST_MOVE:               return Labels::Producers::Algorithms::FIRST_MOVE;
+        case AlgorithmType::SIMPLE_CORNERS:           return Labels::Producers::Algorithms::SIMPLE_CORNERS;
+        case AlgorithmType::REFRESH_BORDER:           return Labels::Producers::Algorithms::REFRESH_BORDER;
+        case AlgorithmType::LAYER_ONE:                return Labels::Producers::Algorithms::LAYER_ONE;
+        case AlgorithmType::REFRESH_SECTIONS:         return Labels::Producers::Algorithms::REFRESH_SECTIONS;
+        case AlgorithmType::LAYER_TWO:                return Labels::Producers::Algorithms::LAYER_TWO;
+        case AlgorithmType::REFRESH_SEGMENTS:         return Labels::Producers::Algorithms::REFRESH_SEGMENTS;
+        case AlgorithmType::REFRESH_SUBSEGMENTS:      return Labels::Producers::Algorithms::REFRESH_SUBSEGMENTS;
+        case AlgorithmType::REFRESH_FACE:             return Labels::Producers::Algorithms::REFRESH_FACE;
+        case AlgorithmType::REFRESH_COMBINATIONS:     return Labels::Producers::Algorithms::REFRESH_COMBINATIONS;
+        case AlgorithmType::COMBINATIONS_SAFE_MOVES:  return Labels::Producers::Algorithms::COMBINATIONS_SAFE_MOVES;
+        case AlgorithmType::COMBINATIONS_LEAST_RISKY: return Labels::Producers::Algorithms::COMBINATIONS_LEAST_RISKY;
+        case AlgorithmType::GIVE_UP:                  return Labels::Producers::Algorithms::GIVE_UP;
         default:
-            throw std::runtime_error("ERROR: GetAlgorithmTypeLabel(AlgorithmType): Unhandled AlgorithmType!");
+            throw std::runtime_error("GetAlgorithmTypeLabel - Unhandled AlgorithmType");
     }
 }
 

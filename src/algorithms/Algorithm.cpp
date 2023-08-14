@@ -1,8 +1,10 @@
 #include "Algorithm.hpp"
 
-Algorithm::Algorithm(GridManager& grid_, AlgorithmDataStorage& data_)
-    : grid(grid_), data(data_), _grid(grid_), _data(data_)
+Algorithm::Algorithm(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_)
+    : grid(grid_), data(data_), _grid(grid_), _data(data_), 
+    visible(grid_.GetVisibleFields()), flagged(grid_.GetFlaggedFields())
 {
+    LOGGER(LogLevel::INIT) << "Algorithm";
     statistics_executions = new StatisticsCollectorExecutions();  // deleted in StatisticsProducer
     statistics_collectors.push_back(statistics_executions);
 }
@@ -14,27 +16,12 @@ Algorithm::~Algorithm()
 
 AlgorithmStatus Algorithm::Run()
 {
-    statistics_executions->executions += 1;
     AlgorithmStatus execution_result = Execution();
+    statistics_executions->executions += 1;
     return execution_result;
 }
 
-bool Algorithm::LeftClick(const uint32_t field) const
-{
-    return _grid.LeftClick(field);
-}
-
-bool Algorithm::RightClick(const uint32_t field) const
-{
-    return _grid.RightClick(field);
-}
-
-uint8_t Algorithm::FieldValue(const uint32_t field) const
-{
-    return _grid.FieldValue(field);
-}
-
-GridManager& Algorithm::GetModifiableGridManagerReference() const
+GridAccessPlayerIf& Algorithm::GetModifiableGridReference() const
 {
     return _grid;
 }

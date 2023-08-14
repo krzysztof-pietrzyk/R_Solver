@@ -1,8 +1,6 @@
 #ifndef ALGORITHM_FACTORY_HPP
 #define ALGORITHM_FACTORY_HPP
 
-#include <stdexcept>
-
 #include "Algorithm.hpp"
 #include "AlgorithmType.hpp"
 #include "AlgorithmDataStorage.hpp"
@@ -14,13 +12,13 @@
 #include "analysis/AlgorithmRefreshFace.hpp"
 #include "analysis/AlgorithmRefreshCombinations.hpp"
 
-#include "action/AlgorithmSimpleCorners.hpp"
-#include "action/AlgorithmLayerOne.hpp"
-#include "action/AlgorithmLayerTwo.hpp"
-#include "action/AlgorithmCombinationsSafeMoves.hpp"
-#include "action/AlgorithmCombinationsLeastRisky.hpp"
-#include "action/AlgorithmGiveUp.hpp"
-#include "action/AlgorithmFirstMove.hpp"
+#include "decision/AlgorithmSimpleCorners.hpp"
+#include "decision/AlgorithmLayerOne.hpp"
+#include "decision/AlgorithmLayerTwo.hpp"
+#include "decision/AlgorithmCombinationsSafeMoves.hpp"
+#include "decision/AlgorithmCombinationsLeastRisky.hpp"
+#include "decision/AlgorithmGiveUp.hpp"
+#include "decision/AlgorithmFirstMove.hpp"
 
 class AlgorithmFactory
 {
@@ -29,16 +27,11 @@ class AlgorithmFactory
     */
     public:
 
-    ~AlgorithmFactory();
+    AlgorithmFactory() = delete;
 
-    AlgorithmFactory(GridManager& grid_, AlgorithmDataStorage& data_);
+    ~AlgorithmFactory() = delete;
 
-    Algorithm* Create(AlgorithmType type);
-
-    private:
-
-    GridManager& grid;
-    AlgorithmDataStorage& data;
+    static Algorithm* Create(AlgorithmType type, GridAccessPlayerIf& grid, AlgorithmDataStorage& data);
 };
 
 #endif

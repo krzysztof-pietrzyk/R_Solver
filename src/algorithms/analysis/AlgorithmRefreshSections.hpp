@@ -22,7 +22,7 @@ class AlgorithmRefreshSections : public Algorithm
     */
     public:
 
-    AlgorithmRefreshSections(GridManager& grid_, AlgorithmDataStorage& data_);
+    AlgorithmRefreshSections(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_);
 
     ~AlgorithmRefreshSections();
 

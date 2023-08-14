@@ -1,17 +1,26 @@
 #include "AlgorithmRefreshSections.hpp"
 
-AlgorithmRefreshSections::AlgorithmRefreshSections(GridManager& grid_, AlgorithmDataStorage& data_)
+AlgorithmRefreshSections::AlgorithmRefreshSections(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_)
     : Algorithm(grid_, data_),
-    diff_bit_20(1), diff_bit_21(2), diff_bit_22(grid.W - 2), diff_bit_23(grid.W - 1),
-    diff_bit_24(grid.W), diff_bit_25(grid.W + 1), diff_bit_26(grid.W + 2), diff_bit_27(2 * grid.W - 2),
-    diff_bit_28(2 * grid.W - 1), diff_bit_29(2 * grid.W), diff_bit_30(2 * grid.W + 1), diff_bit_31(2 * grid.W + 2),
+    diff_bit_20(1), diff_bit_21(2),
+    diff_bit_22(grid.GetWidth() - 2),
+    diff_bit_23(grid.GetWidth() - 1),
+    diff_bit_24(grid.GetWidth()),
+    diff_bit_25(grid.GetWidth() + 1),
+    diff_bit_26(grid.GetWidth() + 2),
+    diff_bit_27(2 * grid.GetWidth() - 2),
+    diff_bit_28(2 * grid.GetWidth() - 1),
+    diff_bit_29(2 * grid.GetWidth()),
+    diff_bit_30(2 * grid.GetWidth() + 1),
+    diff_bit_31(2 * grid.GetWidth() + 2),
     D_sections_origins_index(GetModifiableAlgorithmDataStorageReference().sections_origins_index),
     D_is_section_origin(GetModifiableAlgorithmDataStorageReference().is_section_origin),
     D_sections_origins(GetModifiableAlgorithmDataStorageReference().sections_origins),
     D_sections(GetModifiableAlgorithmDataStorageReference().sections)
 {
-    if(grid.S > MAX_ALLOWED_GRID_SIZE) std::invalid_argument("ERROR: AlgorithmRefreshSections: Grid size too large!");
-    sections_hashes = std::vector<uint32_t>(grid.S, 0);
+    LOGGER(LogLevel::INIT) << "AlgorithmRefreshSections";
+    if(grid.GetSize() > MAX_ALLOWED_GRID_SIZE) std::invalid_argument("ERROR: AlgorithmRefreshSections: Grid size too large!");
+    sections_hashes = std::vector<uint32_t>(grid.GetSize(), 0);
     section_value_temp = 0;
     current_section_hash = 0;
 }
@@ -50,10 +59,10 @@ void AlgorithmRefreshSections::AnalyzeSection(const uint32_t border_field)
 {
         Section& current_section = D_sections[border_field];
         current_section.Clear();
-        section_value_temp = FieldValue(border_field);
+        section_value_temp = grid.GetFieldValue(border_field);
         current_section_hash = 0;
         // iterate through each border field's neigbors
-        for(const uint32_t& border_field_neighbor : grid.neighbors[border_field])
+        for(const uint32_t& border_field_neighbor : grid.GetNeighbors(border_field))
         {
             AnalyzeSectionField(border_field, border_field_neighbor, current_section);
         }
@@ -68,9 +77,16 @@ void AlgorithmRefreshSections::AnalyzeSection(const uint32_t border_field)
 void AlgorithmRefreshSections::AnalyzeSectionField(const uint32_t border_field, const uint32_t border_field_neighbor, Section& current_section)
 {
     // count the number of flags already marked around the border_field
-    if(grid.is_flag[border_field_neighbor]) { section_value_temp--; return; }
+    if(flagged.Contains(border_field_neighbor))
+    {
+        section_value_temp--;
+        return;
+    }
     // if this neighbor is already visible, ignore it
-    else if(grid.is_visible[border_field_neighbor]) { return; }
+    else if(visible.Contains(border_field_neighbor))
+    {
+        return;
+    }
     // add this neighbor to the section
     D_sections[border_field].AddField(border_field_neighbor);
     // encode data about the section into the hash
@@ -78,7 +94,7 @@ void AlgorithmRefreshSections::AnalyzeSectionField(const uint32_t border_field, 
     else { current_section_hash += GetHashBit(border_field_neighbor - current_section.fields[0]); }
     // iterate through the neighbors of that neighbor, in order to determine
     // potential neighbour sections of this section
-    for(const uint32_t& section_neighbor : grid.neighbors[border_field_neighbor])
+    for(const uint32_t& section_neighbor : grid.GetNeighbors(border_field_neighbor))
     {
         AnalyzeSectionNeighbor(border_field, section_neighbor, current_section);
     }
@@ -130,7 +146,7 @@ uint32_t AlgorithmRefreshSections::GetHashBit(uint32_t difference) const
     else if(difference == diff_bit_29) return (uint32_t)0b00100000000000000000000000000000;  // 2^29
     else if(difference == diff_bit_30) return (uint32_t)0b01000000000000000000000000000000;  // 2^30
     else if(difference == diff_bit_31) return (uint32_t)0b10000000000000000000000000000000;  // 2^31
-    else throw std::invalid_argument("ERROR: AlgorithmRefreshSections::GetHashBit: Impossible section shape!");
+    else throw std::runtime_error("AlgorithmRefreshSections::GetHashBit - Impossible section shape");
 }
 
 bool AlgorithmRefreshSections::CheckHashUnique(uint32_t hash) const
