@@ -2,7 +2,7 @@
 
 Grid::Grid(const GridDimensions dimensions) : dimensions(dimensions)
 {
-    LOGGER(LOG_INIT) << "Grid";
+    LOGGER(LogLevel::INIT) << "Grid";
     VerifyDimensions(dimensions);
     mine_fields = CachedVector(dimensions.size);
     flagged_fields = CachedVector(dimensions.size);

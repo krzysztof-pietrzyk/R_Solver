@@ -4,7 +4,7 @@ AlgorithmDecision::AlgorithmDecision(GridAccessPlayerIf& grid_, AlgorithmDataSto
     : Algorithm(grid_, data_),
     D_grid(GetModifiableGridReference())
 {
-    LOGGER(LOG_INIT) << "AlgorithmDecision";
+    LOGGER(LogLevel::INIT) << "AlgorithmDecision";
     statistics_clicks = new StatisticsCollectorClicks();  // deleted in StatisticsProducer
     statistics_collectors.push_back(statistics_clicks);
 }

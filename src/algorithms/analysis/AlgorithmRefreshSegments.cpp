@@ -8,7 +8,7 @@ AlgorithmRefreshSegments::AlgorithmRefreshSegments(GridAccessPlayerIf& grid_, Al
     D_segments_starting_indexes(GetModifiableAlgorithmDataStorageReference().segments_starting_indexes),
     D_segments_l(GetModifiableAlgorithmDataStorageReference().segments_l)
 {
-    LOGGER(LOG_INIT) << "AlgorithmRefreshSegments";
+    LOGGER(LogLevel::INIT) << "AlgorithmRefreshSegments";
     fields_to_check = std::vector<uint32_t>(grid.GetSize(), 0);
     fields_to_check_index = 0;
     is_checked = std::vector<bool>(grid.GetSize(), false);

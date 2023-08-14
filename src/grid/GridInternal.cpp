@@ -2,7 +2,7 @@
 
 GridInternal::GridInternal(GridDimensions dimensions) : Grid(dimensions)
 {
-    LOGGER(LOG_INIT) << "GridInternal";
+    LOGGER(LogLevel::INIT) << "GridInternal";
     chain_reaction_zeros = CachedVector(dimensions.size);
 }
 

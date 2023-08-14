@@ -1,10 +1,10 @@
 #include "Logger.hpp"
 
-LogLevel Logger::loglevel = LogLevel::LOG_INFO;
+LogLevel Logger::loglevel = LogLevel::INFO;
 
 Logger::Logger(LogLevel _loglevel)
 {
-    _buffer << std::string(_loglevel, '-') << GetLogLevelLabel(_loglevel) << " : ";
+    _buffer << std::string(int(_loglevel), '-') << GetLogLevelLabel(_loglevel) << " : ";
 }
 
 Logger::~Logger()
@@ -41,47 +41,35 @@ std::string Logger::GetLogLevelLabel(LogLevel _loglevel)
 {
     switch(_loglevel)
     {
-        case LOG_ERROR:
+        case LogLevel::ERROR:
             return "ERROR";
-            break;
-        case LOG_WARNING:
+        case LogLevel::WARNING:
             return "WARNING";
-            break;
-        case LOG_INFO:
+        case LogLevel::INFO:
             return "INFO";
-            break;
-        case LOG_INIT:
+        case LogLevel::INIT:
             return "INIT";
-            break;
-        case LOG_DEBUG:
+        case LogLevel::DEBUG:
             return "DEBUG";
-            break;
-        case LOG_DEBUG2:
+        case LogLevel::DEBUG1:
+            return "DEBUG1";
+        case LogLevel::DEBUG2:
             return "DEBUG2";
-            break;
-        case LOG_DEBUG3:
+        case LogLevel::DEBUG3:
             return "DEBUG3";
-            break;
-        case LOG_DEBUG4:
+        case LogLevel::DEBUG4:
             return "DEBUG4";
-            break;
-        case LOG_DEBUG5:
+        case LogLevel::DEBUG5:
             return "DEBUG5";
-            break;
-        case LOG_DEBUG6:
+        case LogLevel::DEBUG6:
             return "DEBUG6";
-            break;
-        case LOG_DEBUG7:
+        case LogLevel::DEBUG7:
             return "DEBUG7";
-            break;
-        case LOG_DEBUG8:
+        case LogLevel::DEBUG8:
             return "DEBUG8";
-            break;
-        case LOG_DEBUG9:
+        case LogLevel::DEBUG9:
             return "DEBUG9";
-            break;
         default:
             return "";
-            break;
     }
 }

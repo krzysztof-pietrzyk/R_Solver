@@ -3,7 +3,7 @@
 AlgorithmLayerOne::AlgorithmLayerOne(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_)
     : AlgorithmDecision(grid_, data_)
 {
-    LOGGER(LOG_INIT) << "AlgorithmLayerOne";
+    LOGGER(LogLevel::INIT) << "AlgorithmLayerOne";
 }
 
 AlgorithmLayerOne::~AlgorithmLayerOne() {}

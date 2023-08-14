@@ -2,7 +2,7 @@
 
 SolverThreadData::SolverThreadData()
 {
-    LOGGER(LOG_INIT) << "SolverThreadData";
+    LOGGER(LogLevel::INIT) << "SolverThreadData";
     statistics_data = StatisticsAggregatorStruct();
 }
 

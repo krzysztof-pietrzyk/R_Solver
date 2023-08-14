@@ -1,7 +1,7 @@
 #ifndef FIELD_TYPE_HPP
 #define FIELD_TYPE_HPP
 
-enum FieldType
+enum class FieldType
 {
     UNHANDLED_FIELD_TYPE,
     F_COVERED,

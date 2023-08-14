@@ -2,7 +2,7 @@
 
 GeneratorInternal::GeneratorInternal(GridAccessGeneratorIf& grid_) : Generator(grid_)
 {
-    LOGGER(LOG_INIT) << "GeneratorInternal";
+    LOGGER(LogLevel::INIT) << "GeneratorInternal";
     generated_safe_fields = std::vector<uint32_t>(grid.GetSize(), 0U);
     forced_safe_fields = std::vector<uint32_t>();
     generated_mine_fields = CachedVector(grid.GetSize());
@@ -18,7 +18,7 @@ GeneratorInternal::~GeneratorInternal()
 
 void GeneratorInternal::GenerateGrid()
 {
-    LOGGER(LOG_DEBUG) << "GeneratorInternal::GenerateGrid";
+    LOGGER(LogLevel::DEBUG) << "GeneratorInternal::GenerateGrid";
     ClearPreviousGrid();
     GenerateMinePositions();  // Pure virtual
     CalculateAllFieldValues();

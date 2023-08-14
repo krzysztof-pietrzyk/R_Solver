@@ -8,22 +8,23 @@
 #include <cstdint>
 #include <stdexcept>
 
-enum LogLevel
+enum class LogLevel
 {
-    LOG_NOTHING,  // To disable all logs. Do not use for logging anything
-    LOG_ERROR,
-    LOG_WARNING,
-    LOG_INFO,
-    LOG_INIT,
-    LOG_DEBUG,
-    LOG_DEBUG2,
-    LOG_DEBUG3,
-    LOG_DEBUG4,
-    LOG_DEBUG5,
-    LOG_DEBUG6,
-    LOG_DEBUG7,
-    LOG_DEBUG8,
-    LOG_DEBUG9
+    NOTHING,  // To disable all logs. Do not use for logging anything
+    ERROR,
+    WARNING,
+    INFO,
+    INIT,
+    DEBUG,
+    DEBUG1,
+    DEBUG2,
+    DEBUG3,
+    DEBUG4,
+    DEBUG5,
+    DEBUG6,
+    DEBUG7,
+    DEBUG8,
+    DEBUG9
 };
 
 class Logger
@@ -53,10 +54,10 @@ else Logger(level)
 
 #define LOGGER_ASSERT(condition, fail_desc) \
 if(condition) {} \
-else { LOGGER(LOG_ERROR) << fail_desc; throw std::runtime_error(fail_desc); }
+else { LOGGER(LogLevel::ERROR) << fail_desc; throw std::runtime_error(fail_desc); }
 
 #define LOGGER_ASSERT_NO_THROW(condition, fail_desc) \
 if(condition) {} \
-else { LOGGER(LOG_ERROR) << fail_desc; }
+else { LOGGER(LogLevel::ERROR) << fail_desc; }
 
 #endif

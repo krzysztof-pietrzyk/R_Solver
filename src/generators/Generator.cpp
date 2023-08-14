@@ -2,7 +2,7 @@
 
 Generator::Generator(GridAccessGeneratorIf& grid_) : grid(grid_)
 {
-    LOGGER(LOG_INIT) << "Generator";
+    LOGGER(LogLevel::INIT) << "Generator";
     SetStartingField(0);
 }
 

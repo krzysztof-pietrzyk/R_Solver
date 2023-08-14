@@ -3,12 +3,12 @@
 Solver::Solver(GridDimensions grid_dimensions, SolverThreadData* thread_data_) :
     grid(new GridInternal(grid_dimensions)),
     generator(GeneratorFactory::Create(GeneratorType::SAFE, *grid)),
-	view(ViewFactory::Create(ViewType::VIEW_CONSOLE, *grid)),
+	view(ViewFactory::Create(ViewType::CONSOLE, *grid)),
     algorithm_manager(new AlgorithmManager(*grid)),
 	statistics_aggregator(new StatisticsAggregator()),
 	thread_data(thread_data_)
 {
-	LOGGER(LOG_INIT) << "Solver";
+	LOGGER(LogLevel::INIT) << "Solver";
 	const std::map<AlgorithmType, Algorithm*>& algorithms = algorithm_manager->GetAlgorithmsMap();
 	for(const auto& item : algorithms)
 	{
@@ -32,10 +32,10 @@ Solver::~Solver()
 
 void Solver::RunForever()
 {
-	LOGGER(LOG_DEBUG) << "Solver::RunForever";
+	LOGGER(LogLevel::DEBUG) << "Solver::RunForever";
 	while(true)
 	{
-		LOGGER(LOG_DEBUG3) << "Solver::RunForever loop";
+		LOGGER(LogLevel::DEBUG3) << "Solver::RunForever loop";
 		generator->GenerateGrid();
 		algorithm_manager->RunAll();
 		UpdateSolverStatistics();

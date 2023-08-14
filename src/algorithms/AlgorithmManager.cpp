@@ -2,7 +2,7 @@
 
 AlgorithmManager::AlgorithmManager(GridAccessPlayerIf& grid_) : grid(&grid_)
 {
-    LOGGER(LOG_INIT) << "AlgorithmManager";
+    LOGGER(LogLevel::INIT) << "AlgorithmManager";
     data = new AlgorithmDataStorage(grid_);
 
     algorithms = std::map<AlgorithmType, Algorithm*>();
@@ -23,7 +23,7 @@ AlgorithmManager::~AlgorithmManager()
 bool AlgorithmManager::RunAll() const
 {
     // Run algorithms in defined order until the game is either won or lost
-    LOGGER(LOG_DEBUG) << "AlgorithmManager::RunAll";
+    LOGGER(LogLevel::DEBUG) << "AlgorithmManager::RunAll";
     data->Clear();
     AlgorithmType current_algorithm = transitions.GetStartingAlgorithm();
     AlgorithmStatus current_status;

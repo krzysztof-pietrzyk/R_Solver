@@ -3,7 +3,7 @@
 AlgorithmCombinationsSafeMoves::AlgorithmCombinationsSafeMoves(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_)
     : AlgorithmDecision(grid_, data_)
 {
-    LOGGER(LOG_INIT) << "AlgorithmCombinationsSafeMoves";
+    LOGGER(LogLevel::INIT) << "AlgorithmCombinationsSafeMoves";
 }
 
 AlgorithmCombinationsSafeMoves::~AlgorithmCombinationsSafeMoves() {}

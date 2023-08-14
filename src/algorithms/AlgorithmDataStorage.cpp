@@ -2,7 +2,7 @@
 
 AlgorithmDataStorage::AlgorithmDataStorage(GridAccessPlayerIf& grid)
 {
-    LOGGER(LOG_INIT) << "AlgorithmDataStorage";
+    LOGGER(LogLevel::INIT) << "AlgorithmDataStorage";
     is_border = std::vector<bool>(grid.GetSize(), false);
     border = std::vector<uint32_t>(grid.GetSize(), 0);
     border_index = 0;

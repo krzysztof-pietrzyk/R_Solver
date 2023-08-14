@@ -3,7 +3,7 @@
 AlgorithmSimpleCorners::AlgorithmSimpleCorners(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_)
     : AlgorithmDecision(grid_, data_)
 {
-    LOGGER(LOG_INIT) << "AlgorithmSimpleCorners";
+    LOGGER(LogLevel::INIT) << "AlgorithmSimpleCorners";
     const uint32_t upper_left = 0;
     const uint32_t upper_right = grid.GetWidth() - 1;
     const uint32_t bottom_left = (grid.GetHeight() - 1) * grid.GetWidth();

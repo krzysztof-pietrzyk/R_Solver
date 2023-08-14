@@ -4,31 +4,31 @@ Algorithm* AlgorithmFactory::Create(AlgorithmType type, GridAccessPlayerIf& grid
 {
     switch(type)
     {
-        case REFRESH_BORDER:
+        case AlgorithmType::REFRESH_BORDER:
             return new AlgorithmRefreshBorder(grid, data);
-        case REFRESH_SECTIONS:
+        case AlgorithmType::REFRESH_SECTIONS:
             return new AlgorithmRefreshSections(grid, data);
-        case REFRESH_SEGMENTS:
+        case AlgorithmType::REFRESH_SEGMENTS:
             return new AlgorithmRefreshSegments(grid, data);
-        case REFRESH_SUBSEGMENTS:
+        case AlgorithmType::REFRESH_SUBSEGMENTS:
             return new AlgorithmRefreshSubsegments(grid, data);
-        case REFRESH_FACE:
+        case AlgorithmType::REFRESH_FACE:
             return new AlgorithmRefreshFace(grid, data);
-        case REFRESH_COMBINATIONS:
+        case AlgorithmType::REFRESH_COMBINATIONS:
             return new AlgorithmRefreshCombinations(grid, data);
-        case SIMPLE_CORNERS:
+        case AlgorithmType::SIMPLE_CORNERS:
             return new AlgorithmSimpleCorners(grid, data);
-        case LAYER_ONE:
+        case AlgorithmType::LAYER_ONE:
             return new AlgorithmLayerOne(grid, data);
-        case LAYER_TWO:
+        case AlgorithmType::LAYER_TWO:
             return new AlgorithmLayerTwo(grid, data);
-        case COMBINATIONS_SAFE_MOVES:
+        case AlgorithmType::COMBINATIONS_SAFE_MOVES:
             return new AlgorithmCombinationsSafeMoves(grid, data);
-        case COMBINATIONS_LEAST_RISKY:
+        case AlgorithmType::COMBINATIONS_LEAST_RISKY:
             return new AlgorithmCombinationsLeastRisky(grid, data);
-        case GIVE_UP:
+        case AlgorithmType::GIVE_UP:
             return new AlgorithmGiveUp(grid, data);
-        case FIRST_MOVE:
+        case AlgorithmType::FIRST_MOVE:
             return new AlgorithmFirstMove(grid, data);
         default:
             throw std::invalid_argument("ERROR: Attempting to create a non-existent Algorithm type!");

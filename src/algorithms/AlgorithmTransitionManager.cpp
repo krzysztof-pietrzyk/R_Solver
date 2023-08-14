@@ -4,7 +4,7 @@ const AlgorithmType AlgorithmTransitionManager::default_starting_algorithm = Alg
 
 AlgorithmTransitionManager::AlgorithmTransitionManager()
 {
-    LOGGER(LOG_INIT) << "AlgorithmTransitionManager";
+    LOGGER(LogLevel::INIT) << "AlgorithmTransitionManager";
     transitions = std::map<AlgorithmType, std::map<AlgorithmStatus, AlgorithmType>>();
     ConfigureDefaultTransitions();
     SetStartingAlgorithm(default_starting_algorithm);
@@ -55,32 +55,32 @@ AlgorithmType AlgorithmTransitionManager::GetStartingAlgorithm() const
 
 void AlgorithmTransitionManager::ConfigureDefaultTransitions()
 {
-    AddTransition(FIRST_MOVE, SUCCESS, REFRESH_BORDER);
+    AddTransition(AlgorithmType::FIRST_MOVE, AlgorithmStatus::SUCCESS, AlgorithmType::REFRESH_BORDER);
 
-    AddTransition(SIMPLE_CORNERS, SUCCESS, REFRESH_BORDER);
-    AddTransition(SIMPLE_CORNERS, NO_MOVES, COMBINATIONS_LEAST_RISKY);
+    AddTransition(AlgorithmType::SIMPLE_CORNERS, AlgorithmStatus::SUCCESS, AlgorithmType::REFRESH_BORDER);
+    AddTransition(AlgorithmType::SIMPLE_CORNERS, AlgorithmStatus::NO_MOVES, AlgorithmType::COMBINATIONS_LEAST_RISKY);
 
-    AddTransition(REFRESH_BORDER, NO_STATUS, LAYER_ONE);
+    AddTransition(AlgorithmType::REFRESH_BORDER, AlgorithmStatus::NO_STATUS, AlgorithmType::LAYER_ONE);
 
-    AddTransition(LAYER_ONE, SUCCESS, REFRESH_BORDER);
-    AddTransition(LAYER_ONE, NO_MOVES, REFRESH_SECTIONS);
+    AddTransition(AlgorithmType::LAYER_ONE, AlgorithmStatus::SUCCESS, AlgorithmType::REFRESH_BORDER);
+    AddTransition(AlgorithmType::LAYER_ONE, AlgorithmStatus::NO_MOVES, AlgorithmType::REFRESH_SECTIONS);
 
-    AddTransition(REFRESH_SECTIONS, NO_STATUS, LAYER_TWO);
+    AddTransition(AlgorithmType::REFRESH_SECTIONS, AlgorithmStatus::NO_STATUS, AlgorithmType::LAYER_TWO);
 
-    AddTransition(LAYER_TWO, SUCCESS, REFRESH_BORDER);
-    AddTransition(LAYER_TWO, NO_MOVES, REFRESH_SEGMENTS);
+    AddTransition(AlgorithmType::LAYER_TWO, AlgorithmStatus::SUCCESS, AlgorithmType::REFRESH_BORDER);
+    AddTransition(AlgorithmType::LAYER_TWO, AlgorithmStatus::NO_MOVES, AlgorithmType::REFRESH_SEGMENTS);
 
-    AddTransition(REFRESH_SEGMENTS, NO_STATUS, REFRESH_SUBSEGMENTS);
+    AddTransition(AlgorithmType::REFRESH_SEGMENTS, AlgorithmStatus::NO_STATUS, AlgorithmType::REFRESH_SUBSEGMENTS);
 
-    AddTransition(REFRESH_SUBSEGMENTS, NO_STATUS, REFRESH_FACE);
+    AddTransition(AlgorithmType::REFRESH_SUBSEGMENTS, AlgorithmStatus::NO_STATUS, AlgorithmType::REFRESH_FACE);
 
-    AddTransition(REFRESH_FACE, NO_STATUS, REFRESH_COMBINATIONS);
+    AddTransition(AlgorithmType::REFRESH_FACE, AlgorithmStatus::NO_STATUS, AlgorithmType::REFRESH_COMBINATIONS);
 
-    AddTransition(REFRESH_COMBINATIONS, NO_STATUS, COMBINATIONS_SAFE_MOVES);
+    AddTransition(AlgorithmType::REFRESH_COMBINATIONS, AlgorithmStatus::NO_STATUS, AlgorithmType::COMBINATIONS_SAFE_MOVES);
 
-    AddTransition(COMBINATIONS_SAFE_MOVES, SUCCESS, REFRESH_BORDER);
-    AddTransition(COMBINATIONS_SAFE_MOVES, NO_MOVES, SIMPLE_CORNERS);
+    AddTransition(AlgorithmType::COMBINATIONS_SAFE_MOVES, AlgorithmStatus::SUCCESS, AlgorithmType::REFRESH_BORDER);
+    AddTransition(AlgorithmType::COMBINATIONS_SAFE_MOVES, AlgorithmStatus::NO_MOVES, AlgorithmType::SIMPLE_CORNERS);
 
-    AddTransition(COMBINATIONS_LEAST_RISKY, SUCCESS, REFRESH_BORDER);
-    AddTransition(COMBINATIONS_LEAST_RISKY, NO_MOVES, GIVE_UP);
+    AddTransition(AlgorithmType::COMBINATIONS_LEAST_RISKY, AlgorithmStatus::SUCCESS, AlgorithmType::REFRESH_BORDER);
+    AddTransition(AlgorithmType::COMBINATIONS_LEAST_RISKY, AlgorithmStatus::NO_MOVES, AlgorithmType::GIVE_UP);
 }

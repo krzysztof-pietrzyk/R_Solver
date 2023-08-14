@@ -3,7 +3,7 @@
 AlgorithmLayerTwo::AlgorithmLayerTwo(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_)
     : AlgorithmDecision(grid_, data_)
 {
-    LOGGER(LOG_INIT) << "AlgorithmLayerTwo";
+    LOGGER(LogLevel::INIT) << "AlgorithmLayerTwo";
     not_common_current = std::vector<uint32_t>();
     not_common_neighbor = std::vector<uint32_t>();
 }

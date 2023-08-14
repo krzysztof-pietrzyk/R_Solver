@@ -2,20 +2,20 @@
 
 const std::map<FieldType, char> ViewConsole::fields_map = 
 {
-    {F_COVERED, '#'},
-    {F_FLAGGED, '.'},
-    {F_FLAGGED_INCORRECTLY, 'X'},
-    {F_MINE_EXPLODED, '*'},
-    {F_MINE_UNFLAGGED, 'o'},
-    {F_0, ' '},
-    {F_1, '1'},
-    {F_2, '2'},
-    {F_3, '3'},
-    {F_4, '4'},
-    {F_5, '5'},
-    {F_6, '6'},
-    {F_7, '7'},
-    {F_8, '8'}
+    {FieldType::F_COVERED, '#'},
+    {FieldType::F_FLAGGED, '.'},
+    {FieldType::F_FLAGGED_INCORRECTLY, 'X'},
+    {FieldType::F_MINE_EXPLODED, '*'},
+    {FieldType::F_MINE_UNFLAGGED, 'o'},
+    {FieldType::F_0, ' '},
+    {FieldType::F_1, '1'},
+    {FieldType::F_2, '2'},
+    {FieldType::F_3, '3'},
+    {FieldType::F_4, '4'},
+    {FieldType::F_5, '5'},
+    {FieldType::F_6, '6'},
+    {FieldType::F_7, '7'},
+    {FieldType::F_8, '8'}
 };
 
 const char ViewConsole::frame_horizontal = '-';
@@ -32,7 +32,7 @@ ViewConsole::ViewConsole(GridAccessViewIf& _grid)
     grid_width(grid.GetWidth()),
     grid_height(grid.GetHeight())
 {
-    LOGGER(LOG_INIT) << "ViewConsole";
+    LOGGER(LogLevel::INIT) << "ViewConsole";
 }
 
 ViewConsole::~ViewConsole()
@@ -42,7 +42,7 @@ ViewConsole::~ViewConsole()
 
 void ViewConsole::Display()
 {
-    LOGGER(LOG_DEBUG) << "ViewConsole::Display";
+    LOGGER(LogLevel::DEBUG) << "ViewConsole::Display";
     const std::vector<FieldType>& fields_to_display = grid.GetFieldTypesToDisplay();
 
     std::stringstream output;

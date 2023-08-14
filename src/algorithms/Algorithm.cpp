@@ -4,7 +4,7 @@ Algorithm::Algorithm(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_)
     : grid(grid_), data(data_), _grid(grid_), _data(data_), 
     visible(grid_.GetVisibleFields()), flagged(grid_.GetFlaggedFields())
 {
-    LOGGER(LOG_INIT) << "Algorithm";
+    LOGGER(LogLevel::INIT) << "Algorithm";
     statistics_executions = new StatisticsCollectorExecutions();  // deleted in StatisticsProducer
     statistics_collectors.push_back(statistics_executions);
 }

@@ -7,7 +7,7 @@ AlgorithmRefreshBorder::AlgorithmRefreshBorder(GridAccessPlayerIf& grid_, Algori
     D_border(GetModifiableAlgorithmDataStorageReference().border),
     D_is_border(GetModifiableAlgorithmDataStorageReference().is_border)
 {
-    LOGGER(LOG_INIT) << "AlgorithmRefreshBorder";
+    LOGGER(LogLevel::INIT) << "AlgorithmRefreshBorder";
 }
 
 AlgorithmRefreshBorder::~AlgorithmRefreshBorder() {}

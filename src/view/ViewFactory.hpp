@@ -6,10 +6,10 @@
 #include "ViewIf.hpp"
 #include "ViewConsole.hpp"
 
-enum ViewType
+enum class ViewType
 {
-    VIEW_CONSOLE,
-    VIEW_FILE
+    CONSOLE,
+    FILE
 };
 
 class ViewFactory

@@ -3,11 +3,11 @@
 
 #include "../Algorithm.hpp"
 
-enum FieldCombinationState
+enum class FieldState
 {
-    FCS_UNASSIGNED,
-    FCS_MINE,
-    FCS_SAFE
+    UNASSIGNED,
+    MINE,
+    SAFE
 };
 
 class AlgorithmRefreshCombinations : public Algorithm
@@ -22,7 +22,7 @@ class AlgorithmRefreshCombinations : public Algorithm
 
     protected:
 
-    std::vector<FieldCombinationState> field_states;
+    std::vector<FieldState> field_states;
     std::vector<uint32_t> choice_stack;
     std::vector<uint32_t> segment_of_choice_stack;
     std::vector<uint32_t> modifications_stack;

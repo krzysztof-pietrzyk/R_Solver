@@ -5,7 +5,7 @@
 
 #include "GridAccessCommonIf.hpp"
 
-enum PlayerActionResult
+enum class PlayerActionResult
 {
     CORRECT,
     EXPLODED,

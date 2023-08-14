@@ -5,7 +5,7 @@ const uint32_t GeneratorRandomSafe::minimum_safe_fields = 1U;
 GeneratorRandomSafe::GeneratorRandomSafe(GridAccessGeneratorIf& grid_)
     : GeneratorRandom(grid_)
 {
-    LOGGER(LOG_INIT) << "GeneratorRandomSafe";
+    LOGGER(LogLevel::INIT) << "GeneratorRandomSafe";
     ValidateGridDimensions();
     CreateTemplate();
 }

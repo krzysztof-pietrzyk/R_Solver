@@ -5,7 +5,7 @@ const uint32_t GeneratorRandomGuaranteedOpening::minimum_safe_fields = 9U;
 GeneratorRandomGuaranteedOpening::GeneratorRandomGuaranteedOpening(GridAccessGeneratorIf& grid_)
     : GeneratorRandom(grid_)
 {
-    LOGGER(LOG_INIT) << "GeneratorRandomGuaranteedOpening";
+    LOGGER(LogLevel::INIT) << "GeneratorRandomGuaranteedOpening";
     ValidateGridDimensions();
     CreateTemplate();
 }
