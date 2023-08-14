@@ -6,6 +6,7 @@
 #include <string>
 #include <vector>
 #include <cstdint>
+#include <stdexcept>
 
 enum LogLevel
 {
@@ -49,5 +50,13 @@ class Logger
 #define LOGGER(level) \
 if (level > Logger::loglevel) ; \
 else Logger(level)
+
+#define LOGGER_ASSERT(condition, fail_desc) \
+if(condition) {} \
+else { LOGGER(LOG_ERROR) << fail_desc; throw std::runtime_error(fail_desc); }
+
+#define LOGGER_ASSERT_NO_THROW(condition, fail_desc) \
+if(condition) {} \
+else { LOGGER(LOG_ERROR) << fail_desc; }
 
 #endif

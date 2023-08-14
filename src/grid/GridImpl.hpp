@@ -59,10 +59,13 @@ class GridImpl :
     std::vector<std::vector<uint32_t>> neighbors;
     bool is_lost;
 
+    virtual bool CheckVisible(uint32_t field) const;
+
     private:
 
     std::vector<FieldType> field_types_to_display;
 
+    void VerifyDimensions(GridDimensions dim) const;
     void FindNeighborsOfAllFields();
     FieldType GetFieldType(uint32_t field);
     FieldType GetFieldTypeLostGrid(uint32_t field);

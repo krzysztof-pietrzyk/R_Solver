@@ -3,6 +3,7 @@
 GridImpl::GridImpl(const GridDimensions dimensions) : dimensions(dimensions)
 {
     LOGGER(LOG_INIT) << "GridImpl";
+    VerifyDimensions(dimensions);
     mine_fields = CachedVector(dimensions.size);
     flagged_fields = CachedVector(dimensions.size);
     visible_fields = CachedVector(dimensions.size);
@@ -71,11 +72,8 @@ const CachedVector& GridImpl::GetFlaggedFields() const
 
 uint8_t GridImpl::GetFieldValue(uint32_t field) const
 {
-    if(visible_fields.Contains(field))
-    {
-        return field_values[field];
-    }
-    throw std::runtime_error("ERROR: GridImpl::GetFieldValue attempting to read value of a covered field!");
+    LOGGER_ASSERT(CheckVisible(field), "GridImpl::GetFieldValue attempting to read value of a covered field!");
+    return field_values[field];
 }
 
 bool GridImpl::IsLost() const
@@ -131,7 +129,20 @@ const std::vector<FieldType>& GridImpl::GetFieldTypesToDisplay()
     return field_types_to_display;
 }
 
+bool GridImpl::CheckVisible(uint32_t field) const
+{
+    return visible_fields.Contains(field);
+}
+
 // Private
+void GridImpl::VerifyDimensions(GridDimensions dim) const
+{
+    LOGGER_ASSERT(dim.mines < dim.size, "GridImpl::VerifyDimensions - Too many mines in grid.");
+    LOGGER_ASSERT(dim.mines >= 1U, "GridImpl::VerifyDimensions - Too few mines in grid.");
+    LOGGER_ASSERT(dim.height <= 1024U && dim.width <= 1024U, "GridImpl::VerifyDimensions - Grid too big.");
+    LOGGER_ASSERT(dim.height > 0U && dim.width > 0U, "GridImpl::VerifyDimensions - Grid too small.");
+}
+
 void GridImpl::FindNeighborsOfAllFields()
 {
     // Only called once in constructor. The neighbors addresses never change
