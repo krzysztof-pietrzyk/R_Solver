@@ -1,8 +1,6 @@
 #ifndef ALGORITHM_FACTORY_HPP
 #define ALGORITHM_FACTORY_HPP
 
-#include <stdexcept>
-
 #include "Algorithm.hpp"
 #include "AlgorithmType.hpp"
 #include "AlgorithmDataStorage.hpp"

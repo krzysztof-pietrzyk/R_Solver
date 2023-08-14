@@ -26,7 +26,7 @@ void AlgorithmTransitionManager::DeleteTransition(const AlgorithmType type, cons
     }
     catch(const std::out_of_range& e)
     {
-        throw std::out_of_range("ERROR: AlgorithmTransitionManager::DeleteTransition() unhandled AlgorithmType!");
+        throw std::runtime_error("AlgorithmTransitionManager::DeleteTransition - unhandled AlgorithmType");
     }
 }
 
@@ -39,7 +39,7 @@ AlgorithmType AlgorithmTransitionManager::GetNext(const AlgorithmType previous_t
     }
     catch(const std::out_of_range& e)
     {
-        throw std::out_of_range("ERROR: AlgorithmTransitionManager::GetNext() unhandled AlgorithmStatus for this AlgorithmType!");
+        throw std::runtime_error("AlgorithmTransitionManager::GetNext - unhandled AlgorithmStatus for this AlgorithmType");
     }
 }
 

@@ -52,10 +52,9 @@ uint32_t AlgorithmLayerTwo::CompareSections(const Section& current_section, cons
                         std::inserter(not_common_neighbor, not_common_neighbor.begin()));
     const uint32_t current_section_common_l = current_section.fields_index - not_common_current.size();
     const uint32_t neighbor_section_common_l = neighbor_section.fields_index - not_common_neighbor.size();
-    if(current_section_common_l != neighbor_section_common_l)
-    {
-        throw std::runtime_error("ERROR: AlgorithmLayerTwo::CompareSections impossible section!");
-    }
+
+    LOGGER_ASSERT(current_section_common_l == neighbor_section_common_l, "AlgorithmLayerTwo::CompareSections - impossible section");
+
     return current_section_common_l;
 }
 

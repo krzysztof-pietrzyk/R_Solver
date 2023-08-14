@@ -13,9 +13,6 @@ Generator::~Generator()
 
 void Generator::SetStartingField(uint32_t new_starting_field)
 {
-    if(new_starting_field >= grid.GetSize())
-    {
-        throw std::runtime_error("ERROR: Generator::SetStartingField out of bounds.");
-    }
+    LOGGER_ASSERT(new_starting_field < grid.GetSize(), "Generator::SetStartingField - out of bounds")
     starting_field = new_starting_field;
 }

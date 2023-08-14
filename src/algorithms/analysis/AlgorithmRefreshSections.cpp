@@ -146,7 +146,7 @@ uint32_t AlgorithmRefreshSections::GetHashBit(uint32_t difference) const
     else if(difference == diff_bit_29) return (uint32_t)0b00100000000000000000000000000000;  // 2^29
     else if(difference == diff_bit_30) return (uint32_t)0b01000000000000000000000000000000;  // 2^30
     else if(difference == diff_bit_31) return (uint32_t)0b10000000000000000000000000000000;  // 2^31
-    else throw std::invalid_argument("ERROR: AlgorithmRefreshSections::GetHashBit: Impossible section shape!");
+    else throw std::runtime_error("AlgorithmRefreshSections::GetHashBit - Impossible section shape");
 }
 
 bool AlgorithmRefreshSections::CheckHashUnique(uint32_t hash) const

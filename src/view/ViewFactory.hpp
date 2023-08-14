@@ -1,8 +1,6 @@
 #ifndef VIEW_FACTORY_HPP
 #define VIEW_FACTORY_HPP
 
-#include <stdexcept>
-
 #include "ViewIf.hpp"
 #include "ViewConsole.hpp"
 

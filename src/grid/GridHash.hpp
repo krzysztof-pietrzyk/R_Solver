@@ -2,10 +2,9 @@
 #define GRID_HASH_HPP
 
 #include "../utils/CachedVector.hpp"
+#include "../utils/Logger.hpp"
 
-#include <vector>
 #include <string>
-#include <stdexcept>
 
 class GridHash
 {

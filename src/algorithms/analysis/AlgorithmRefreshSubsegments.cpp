@@ -189,6 +189,5 @@ uint32_t AlgorithmRefreshSubsegments::NChooseK(const uint32_t n, const uint32_t 
         else if(k == 3 || k == 5) { return 56; }
         else if(k == 4) { return 70; }
     }
-    throw std::invalid_argument("ERROR: AlgorithmRefreshSubsegments::NChooseK(n, k): Unknown result for given n, k values!");
-    return 0;
+    throw std::runtime_error("AlgorithmRefreshSubsegments::NChooseK - Unknown result for given n, k values");
 }

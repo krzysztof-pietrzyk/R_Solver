@@ -133,10 +133,8 @@ GridHash& GridHash::operator=(const GridHash& other)
 
     const size_t this_hash_length = hash.size();
     const size_t other_hash_length = other.hash.size();
-    if(this_hash_length != other_hash_length)
-    {
-        throw std::invalid_argument("ERROR: GridHash::operator=(const GridHash&) Invalid hash length!");
-    }
+
+    LOGGER_ASSERT(this_hash_length == other_hash_length, "GridHash::operator=(const GridHash&) - Invalid hash length");
 
     for(size_t i = 0; i < other_hash_length; i++)
     {
@@ -149,10 +147,8 @@ GridHash& GridHash::operator=(const std::string& new_hash)
 {
     const size_t this_hash_length = hash.size();
     const size_t new_hash_length = new_hash.size();
-    if(this_hash_length != new_hash_length)
-    {
-        throw std::invalid_argument("ERROR: GridHash::operator=(const std::string&) Invalid hash length!");
-    }
+
+    LOGGER_ASSERT(this_hash_length == new_hash_length, "GridHash::operator=(const std::string&) - Invalid hash length");
 
     for(size_t i = 0; i < new_hash_length; i++)
     {

@@ -7,7 +7,6 @@
 #include "AlgorithmStatus.hpp"
 
 #include <map>
-#include <stdexcept>
 
 class AlgorithmTransitionManager
 {

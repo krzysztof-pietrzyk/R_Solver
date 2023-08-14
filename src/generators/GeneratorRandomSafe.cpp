@@ -17,10 +17,8 @@ GeneratorRandomSafe::~GeneratorRandomSafe()
 
 void GeneratorRandomSafe::ValidateGridDimensions()
 {
-    if(grid.GetSize() - grid.GetTotalMines() < minimum_safe_fields)
-    {
-        throw std::runtime_error("ERROR: GeneratorRandomSafe::ValidateGridDimensions() Invalid grid dimensions.");
-    }
+    bool grid_valid = grid.GetSize() - grid.GetTotalMines() >= minimum_safe_fields;
+    LOGGER_ASSERT(grid_valid, "GeneratorRandomSafe::ValidateGridDimensions - Invalid grid dimensions");
 }
 
 void GeneratorRandomSafe::CreateTemplate()

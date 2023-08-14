@@ -60,7 +60,7 @@ static Label GetAlgorithmTypeLabel(AlgorithmType type)
         case AlgorithmType::COMBINATIONS_LEAST_RISKY: return Labels::Producers::Algorithms::COMBINATIONS_LEAST_RISKY;
         case AlgorithmType::GIVE_UP:                  return Labels::Producers::Algorithms::GIVE_UP;
         default:
-            throw std::runtime_error("ERROR: GetAlgorithmTypeLabel(AlgorithmType): Unhandled AlgorithmType!");
+            throw std::runtime_error("GetAlgorithmTypeLabel - Unhandled AlgorithmType");
     }
 }
 
