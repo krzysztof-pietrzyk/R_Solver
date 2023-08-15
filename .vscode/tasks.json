@@ -10,19 +10,40 @@
             "type": "cppbuild",
             "label": "Build All",
             "command": "make",
-            "args": ["--directory=${workspaceRoot}\\build", "all", "--no-print-directory"]
+            "args": [
+                "--directory=${workspaceRoot}\\build",
+                "all",
+                "--no-print-directory"
+            ]
         },
         {
             "type": "cppbuild",
             "label": "Build R_Solver.exe",
             "command": "make",
-            "args": ["--directory=${workspaceRoot}\\build", "App", "--no-print-directory"]
+            "args": [
+                "--directory=${workspaceRoot}\\build",
+                "App",
+                "--no-print-directory"
+            ]
         },
         {
             "type": "cppbuild",
             "label": "Build R_Solver_UnitTests.exe",
             "command": "make",
-            "args": ["--directory=${workspaceRoot}\\build", "UnitTests", "--no-print-directory"]
+            "args": [
+                "--directory=${workspaceRoot}\\build",
+                "UnitTests",
+                "--no-print-directory"
+            ]
+        },
+        {
+            "type": "shell",
+            "label": "Generate Doxygen Documentation",
+            "command": "doxygen",
+            "args": [
+                "${workspaceRoot}\\Doxyfile"
+            ],
+            "problemMatcher": []
         }
     ],
     "version": "2.0.0"
