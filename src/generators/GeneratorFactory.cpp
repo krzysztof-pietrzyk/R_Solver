@@ -11,6 +11,6 @@ Generator* GeneratorFactory::Create(GeneratorType type, GridAccessGeneratorIf& g
         case GeneratorType::GUARANTEED_OPENING:
             return new GeneratorRandomGuaranteedOpening(grid);
         default:
-            throw std::runtime_error("GeneratorFactory::Create - unhandled GeneratorType");
+            LOGGER_THROW("GeneratorFactory::Create - unhandled GeneratorType");
     }
 }

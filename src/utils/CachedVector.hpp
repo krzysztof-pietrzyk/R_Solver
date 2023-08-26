@@ -1,12 +1,12 @@
 #ifndef CACHED_VECTOR_HPP
 #define CACHED_VECTOR_HPP
 
+#include "Logger.hpp"
+
 #include <vector>
 #include <cstdint>
 #include <algorithm>
 #include <stdexcept>
-
-// #define SAFE_CACHED_VECTOR
 
 class CachedVector
 {

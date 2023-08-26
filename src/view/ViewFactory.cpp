@@ -7,6 +7,6 @@ ViewIf* ViewFactory::Create(ViewType type, GridAccessViewIf& grid)
         case ViewType::CONSOLE:
             return new ViewConsole(grid);
         default:
-            throw std::runtime_error("ViewFactory::Create - unhandled ViewType");
+            LOGGER_THROW("ViewFactory::Create - unhandled ViewType");
     }
 }

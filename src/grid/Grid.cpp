@@ -240,7 +240,6 @@ FieldType Grid::GetFieldTypeNumbered(uint32_t field)
         case 8U:
             return FieldType::F_8;
         default:
-            std::runtime_error("ERROR: Grid::GetFieldTypeNumbered impossible field value!");
-            return FieldType::UNHANDLED_FIELD_TYPE;
+            LOGGER_THROW("Grid::GetFieldTypeNumbered - impossible field value");
     }
 }

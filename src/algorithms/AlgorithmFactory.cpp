@@ -31,6 +31,6 @@ Algorithm* AlgorithmFactory::Create(AlgorithmType type, GridAccessPlayerIf& grid
         case AlgorithmType::FIRST_MOVE:
             return new AlgorithmFirstMove(grid, data);
         default:
-            throw std::runtime_error("AlgorithmFactory::Create - unhandled AlgorithmType");
+            LOGGER_THROW("AlgorithmFactory::Create - unhandled AlgorithmType");
     }
 }

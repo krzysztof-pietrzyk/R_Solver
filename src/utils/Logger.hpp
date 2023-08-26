@@ -60,4 +60,12 @@ else { LOGGER(LogLevel::ERROR) << fail_desc; throw std::runtime_error(fail_desc)
 if(condition) {} \
 else { LOGGER(LogLevel::ERROR) << fail_desc; }
 
+#define LOGGER_ASSERT_TRY(expression, exception_type, fail_desc) \
+try { expression; } \
+catch(exception_type) \
+{ LOGGER(LogLevel::ERROR) << fail_desc; throw std::runtime_error(fail_desc); }
+
+#define LOGGER_THROW(fail_desc) \
+{ LOGGER(LogLevel::ERROR) << fail_desc; throw std::runtime_error(fail_desc); }
+
 #endif

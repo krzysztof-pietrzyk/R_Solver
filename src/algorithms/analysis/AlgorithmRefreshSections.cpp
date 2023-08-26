@@ -19,7 +19,7 @@ AlgorithmRefreshSections::AlgorithmRefreshSections(GridAccessPlayerIf& grid_, Al
     D_sections(GetModifiableAlgorithmDataStorageReference().sections)
 {
     LOGGER(LogLevel::INIT) << "AlgorithmRefreshSections";
-    if(grid.GetSize() > MAX_ALLOWED_GRID_SIZE) std::invalid_argument("ERROR: AlgorithmRefreshSections: Grid size too large!");
+    LOGGER_ASSERT(grid.GetSize() <= MAX_ALLOWED_GRID_SIZE, "AlgorithmRefreshSections - Grid size too large");
     sections_hashes = std::vector<uint32_t>(grid.GetSize(), 0);
     section_value_temp = 0;
     current_section_hash = 0;
@@ -146,7 +146,7 @@ uint32_t AlgorithmRefreshSections::GetHashBit(uint32_t difference) const
     else if(difference == diff_bit_29) return (uint32_t)0b00100000000000000000000000000000;  // 2^29
     else if(difference == diff_bit_30) return (uint32_t)0b01000000000000000000000000000000;  // 2^30
     else if(difference == diff_bit_31) return (uint32_t)0b10000000000000000000000000000000;  // 2^31
-    else throw std::runtime_error("AlgorithmRefreshSections::GetHashBit - Impossible section shape");
+    else LOGGER_THROW("AlgorithmFactory::Create - unhandled AlgorithmType");
 }
 
 bool AlgorithmRefreshSections::CheckHashUnique(uint32_t hash) const

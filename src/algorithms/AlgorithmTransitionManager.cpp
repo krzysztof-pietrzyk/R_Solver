@@ -20,27 +20,23 @@ void AlgorithmTransitionManager::AddTransition(const AlgorithmType previous_type
 
 void AlgorithmTransitionManager::DeleteTransition(const AlgorithmType type, const AlgorithmStatus status)
 {
-    try
-    {
-        transitions.at(type).erase(status);
-    }
-    catch(const std::out_of_range& e)
-    {
-        throw std::runtime_error("AlgorithmTransitionManager::DeleteTransition - unhandled AlgorithmType");
-    }
+    LOGGER_ASSERT_TRY(
+        transitions.at(type).erase(status),
+        std::out_of_range,
+        "AlgorithmTransitionManager::DeleteTransition - unhandled AlgorithmType"
+    );
 }
 
 AlgorithmType AlgorithmTransitionManager::GetNext(const AlgorithmType previous_type, const AlgorithmStatus previous_status) const
 {
-    try
-    {
-        const AlgorithmType next_algorithm = transitions.at(previous_type).at(previous_status);
-        return next_algorithm;
-    }
-    catch(const std::out_of_range& e)
-    {
-        throw std::runtime_error("AlgorithmTransitionManager::GetNext - unhandled AlgorithmStatus for this AlgorithmType");
-    }
+    LOGGER_ASSERT_TRY(
+        { 
+            const AlgorithmType next_algorithm = transitions.at(previous_type).at(previous_status);
+            return next_algorithm;
+        },
+        std::out_of_range,
+        "AlgorithmTransitionManager::GetNext - unhandled AlgorithmStatus for this AlgorithmType"
+    );
 }
 
 void AlgorithmTransitionManager::SetStartingAlgorithm(const AlgorithmType new_starting_algorithm)

@@ -47,9 +47,7 @@ CachedVector::~CachedVector()
 
 void CachedVector::Add(uint32_t value)
 {
-    #ifdef SAFE_CACHED_VECTOR
     LOGGER_ASSERT(data_index < max_size, "CachedVector::Add - Exceeded max size");
-    #endif
     data[data_index++] = value;
     is_present[value] = true;
 }
@@ -58,9 +56,7 @@ void CachedVector::Remove(uint32_t value)
 {
     auto begin = this->begin();
     auto end = this->end();
-    #ifdef SAFE_CACHED_VECTOR
     LOGGER_ASSERT(begin != end, "CachedVector::Remove - Removing from empty vector");
-    #endif
     auto position_iter = std::find(begin, end, value);
     if(position_iter != end)
     {
@@ -72,9 +68,7 @@ void CachedVector::Remove(uint32_t value)
 
 bool CachedVector::Contains(uint32_t value) const
 {
-    #ifdef SAFE_CACHED_VECTOR
     LOGGER_ASSERT(value < max_size, "CachedVector::Contains - Exceeded max size");
-    #endif
     return is_present[value];
 }
 
@@ -104,9 +98,7 @@ const std::vector<uint32_t>::iterator CachedVector::begin()
 
 const std::vector<uint32_t>::iterator CachedVector::at(size_t index)
 {
-    #ifdef SAFE_CACHED_VECTOR
     LOGGER_ASSERT(index < max_size, "CachedVector::At - Exceeded max size");
-    #endif
     return data.begin() + index;
 }
 
@@ -117,9 +109,7 @@ const std::vector<uint32_t>::iterator CachedVector::end()
 
 void CachedVector::CopyFromTo(const CachedVector& source, CachedVector& destination)
 {
-    #ifdef SAFE_CACHED_VECTOR
     LOGGER_ASSERT(source.max_size == destination.max_size, "CachedVector::CopyFromTo - source and destination have different sizes");
-    #endif
     for(size_t i = 0U; i < source.max_size; i++)
     {
         destination.data[i] = source.data[i];
