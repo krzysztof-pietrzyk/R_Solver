@@ -1,6 +1,8 @@
 #ifndef STATISTICS_AGGREGATOR_HPP
 #define STATISTICS_AGGREGATOR_HPP
 
+#include "../utils/Logger.hpp"
+
 #include "collectors/StatisticsCollector.hpp"
 #include "StatisticsProducer.hpp"
 
@@ -14,7 +16,7 @@ class StatisticsAggregator
 
     void RegisterStatisticsProducer(const Label producer_label, const StatisticsProducer* statistics_producer);
 
-    void FlushCurrentDataToOutput(StatisticsAggregatorStruct& output) const;
+    void FlushToOutput(StatisticsAggregatorStruct& output) const;
 
     protected:
 

@@ -1,8 +1,8 @@
-#include "AlgorithmManager.hpp"
+#include "AlgorithmExecutor.hpp"
 
-AlgorithmManager::AlgorithmManager(GridAccessPlayerIf& grid_) : grid(&grid_)
+AlgorithmExecutor::AlgorithmExecutor(GridAccessPlayerIf& grid_) : grid(&grid_)
 {
-    LOGGER(LogLevel::INIT) << "AlgorithmManager";
+    LOGGER(LogLevel::INIT) << "AlgorithmExecutor";
     data = new AlgorithmDataStorage(grid_);
 
     algorithms = std::map<AlgorithmType, Algorithm*>();
@@ -11,7 +11,7 @@ AlgorithmManager::AlgorithmManager(GridAccessPlayerIf& grid_) : grid(&grid_)
     CreateAlgorithms();
 }
 
-AlgorithmManager::~AlgorithmManager()
+AlgorithmExecutor::~AlgorithmExecutor()
 {
     for(auto iter = algorithms.begin(); iter != algorithms.end(); ++iter)
     {
@@ -20,10 +20,10 @@ AlgorithmManager::~AlgorithmManager()
     delete data;
 }
 
-bool AlgorithmManager::RunAll() const
+void AlgorithmExecutor::RunAll() const
 {
     // Run algorithms in defined order until the game is either won or lost
-    LOGGER(LogLevel::DEBUG) << "AlgorithmManager::RunAll";
+    LOGGER(LogLevel::DEBUG) << "AlgorithmExecutor::RunAll";
     data->Clear();
     AlgorithmType current_algorithm = transitions.GetStartingAlgorithm();
     AlgorithmStatus current_status;
@@ -31,19 +31,21 @@ bool AlgorithmManager::RunAll() const
     {
         current_status = algorithms.at(current_algorithm)->Run();
 
-        if(current_status == AlgorithmStatus::GAME_LOST) return false;
-        if(current_status == AlgorithmStatus::GAME_WON) return true;
+        if(current_status == AlgorithmStatus::GAME_LOST || current_status == AlgorithmStatus::GAME_WON)
+        {
+            return;
+        }
 
         current_algorithm = transitions.GetNext(current_algorithm, current_status);
     }
 }
 
-const std::map<AlgorithmType, Algorithm*>& AlgorithmManager::GetAlgorithmsMap() const
+const std::map<AlgorithmType, Algorithm*>& AlgorithmExecutor::GetAlgorithmsMap() const
 {
     return algorithms;
 }
 
-void AlgorithmManager::CreateAlgorithms()
+void AlgorithmExecutor::CreateAlgorithms()
 {
     // This method is only called once in the constructor
     // It creates all Algorithm objects

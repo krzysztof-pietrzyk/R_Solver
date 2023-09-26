@@ -4,12 +4,12 @@ Solver::Solver(GridDimensions grid_dimensions, SolverThreadData* thread_data_) :
     grid(new GridInternal(grid_dimensions)),
     generator(GeneratorFactory::Create(GeneratorType::SAFE, *grid)),
 	view(ViewFactory::Create(ViewType::CONSOLE, *grid)),
-    algorithm_manager(new AlgorithmManager(*grid)),
+    algorithm_executor(new AlgorithmExecutor(*grid)),
 	statistics_aggregator(new StatisticsAggregator()),
 	thread_data(thread_data_)
 {
 	LOGGER(LogLevel::INIT) << "Solver";
-	const std::map<AlgorithmType, Algorithm*>& algorithms = algorithm_manager->GetAlgorithmsMap();
+	const std::map<AlgorithmType, Algorithm*>& algorithms = algorithm_executor->GetAlgorithmsMap();
 	for(const auto& item : algorithms)
 	{
 		statistics_aggregator->RegisterStatisticsProducer(GetAlgorithmTypeLabel(item.first), (const StatisticsProducer*)(item.second));
@@ -22,7 +22,7 @@ Solver::Solver(GridDimensions grid_dimensions, SolverThreadData* thread_data_) :
 
 Solver::~Solver()
 {
-    delete algorithm_manager;
+    delete algorithm_executor;
     delete generator;
 	delete view;
     delete grid;
@@ -37,7 +37,7 @@ void Solver::RunForever()
 	{
 		LOGGER(LogLevel::DEBUG3) << "Solver::RunForever loop";
 		generator->GenerateGrid();
-		algorithm_manager->RunAll();
+		algorithm_executor->RunAll();
 		UpdateSolverStatistics();
 	}
 }
@@ -45,7 +45,7 @@ void Solver::RunForever()
 void Solver::Run()
 {
 	generator->GenerateGrid();
-	algorithm_manager->RunAll();
+	algorithm_executor->RunAll();
 	UpdateSolverStatistics();
 	view->Display();
 }
@@ -53,7 +53,7 @@ void Solver::Run()
 void Solver::UpdateThreadData()
 {
 	thread_data->mut.lock();
-	statistics_aggregator->FlushCurrentDataToOutput(thread_data->statistics_data);
+	statistics_aggregator->FlushToOutput(thread_data->statistics_data);
 	thread_data->mut.unlock();
 }
 

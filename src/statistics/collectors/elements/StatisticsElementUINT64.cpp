@@ -33,14 +33,20 @@ void StatisticsElementUINT64::Clear()
 
 StatisticsElement* StatisticsElementUINT64::Clone()
 {
-    StatisticsElement* clone = new StatisticsElementUINT64();
-    ((StatisticsElementUINT64*)clone)->element_value = element_value;
-    return clone;
+    return new StatisticsElementUINT64();
 }
 
 std::string StatisticsElementUINT64::String()
 {
     return std::to_string(element_value);
+}
+
+void StatisticsElementUINT64::FlushToOutput(StatisticsElement& output)
+{
+    mut.lock();
+    ((StatisticsElementUINT64&)output).element_value += element_value;
+    Clear();
+    mut.unlock();
 }
 
 void StatisticsElementUINT64::operator+=(const StatisticsElement& other)
@@ -53,8 +59,25 @@ void StatisticsElementUINT64::operator=(const StatisticsElement& other)
     element_value = ((StatisticsElementUINT64&)other).element_value;
 }
 
-void StatisticsElementUINT64::operator+=(const uint64_t& other) { InPlaceAddFunction(*this, other); }
-void StatisticsElementUINT64::operator=(const uint64_t& other) { AssignFunction(*this, other); }
+void StatisticsElementUINT64::operator+=(const uint64_t& other)
+{
+    InPlaceAddFunction(*this, other);
+}
 
-void StatisticsElementUINT64::_InPlaceAdd(const uint64_t& other) { element_value += other; }
-void StatisticsElementUINT64::_Assign(const uint64_t& other) { element_value = other; }
+void StatisticsElementUINT64::operator=(const uint64_t& other)
+{
+    AssignFunction(*this, other);
+}
+
+void StatisticsElementUINT64::_InPlaceAdd(const uint64_t& other)
+{
+    mut.lock();
+    element_value += other;
+    mut.unlock();
+}
+void StatisticsElementUINT64::_Assign(const uint64_t& other)
+{
+    mut.lock();
+    element_value = other;
+    mut.unlock();
+}

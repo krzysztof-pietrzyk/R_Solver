@@ -7,7 +7,7 @@ set(CPP_SOURCES_ALGORITHMS
     ${CMAKE_CURRENT_SOURCE_DIR}/Algorithm.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/AlgorithmDataStorage.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/AlgorithmFactory.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/AlgorithmManager.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/AlgorithmExecutor.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/AlgorithmTransitionManager.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/Section.cpp
     ${CPP_SOURCES_ALGORITHMS_DECISION}

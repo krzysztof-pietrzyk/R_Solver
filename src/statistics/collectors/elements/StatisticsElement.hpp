@@ -3,6 +3,7 @@
 
 #include <functional>
 #include <string>
+#include <mutex>
 
 class StatisticsElement
 {
@@ -17,10 +18,13 @@ class StatisticsElement
     virtual StatisticsElement* Clone() = 0;
     virtual std::string String() = 0;
 
-    virtual void operator+=(const StatisticsElement& other) = 0;
+    virtual void FlushToOutput(StatisticsElement& output) = 0;
     virtual void operator=(const StatisticsElement& other) = 0;
+    virtual void operator+=(const StatisticsElement& other) = 0;
 
     protected:
+
+    std::mutex mut;
 
     void _DoNothing(...);
 };

@@ -1,5 +1,5 @@
-#ifndef ALGORITHM_MANAGER_HPP
-#define ALGORITHM_MANAGER_HPP
+#ifndef ALGORITHM_EXECUTOR_HPP
+#define ALGORITHM_EXECUTOR_HPP
 
 #include "../utils/Logger.hpp"
 #include "../grid/GridAccessPlayerIf.hpp"
@@ -9,15 +9,15 @@
 
 #include <map>
 
-class AlgorithmManager
+class AlgorithmExecutor
 {
     public:
 
-    AlgorithmManager(GridAccessPlayerIf& grid_);
+    AlgorithmExecutor(GridAccessPlayerIf& grid_);
 
-    ~AlgorithmManager();
+    ~AlgorithmExecutor();
 
-    bool RunAll() const;
+    void RunAll() const;
 
     const std::map<AlgorithmType, Algorithm*>& GetAlgorithmsMap() const;
 

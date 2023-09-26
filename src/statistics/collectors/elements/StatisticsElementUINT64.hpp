@@ -19,8 +19,9 @@ class StatisticsElementUINT64 : public StatisticsElement
     virtual StatisticsElement* Clone() override;
     virtual std::string String() override;
 
-    virtual void operator+=(const StatisticsElement& other) override;
+    virtual void FlushToOutput(StatisticsElement& output) override;
     virtual void operator=(const StatisticsElement& other) override;
+    virtual void operator+=(const StatisticsElement& other) override;
 
     void operator+=(const uint64_t& other);
     void operator=(const uint64_t& other);

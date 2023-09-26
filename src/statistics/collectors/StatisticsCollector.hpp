@@ -19,7 +19,7 @@ class StatisticsCollector
 
     StatisticsCollector* Clone() const;
 
-    void operator+= (const StatisticsCollector& other);
+    void FlushToOutput(StatisticsCollector& output);
     void operator= (const StatisticsCollector& other);
 
     protected:

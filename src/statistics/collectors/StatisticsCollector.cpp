@@ -54,12 +54,12 @@ StatisticsCollector* StatisticsCollector::Clone() const
     return clone;
 }
 
-void StatisticsCollector::operator+= (const StatisticsCollector& other)
+void StatisticsCollector::FlushToOutput(StatisticsCollector& output)
 {
     for(auto& item : labelled_data_elements)
     {
         const Label& key = item.first;
-        *(item.second) += *(other.labelled_data_elements.at(key));
+        (*item.second).FlushToOutput(*(output.labelled_data_elements.at(key)));
     }
 }
 
