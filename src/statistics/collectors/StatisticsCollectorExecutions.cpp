@@ -3,8 +3,8 @@
 StatisticsCollectorExecutions::StatisticsCollectorExecutions() :
     StatisticsCollector(
         StatisticsCollectorStruct({
-            {Labels::Collectors::Executions::EXECUTIONS, new StatisticsElementUINT64()}})),
-    executions((StatisticsElementUINT64&)*labelled_data_elements[Labels::Collectors::Executions::EXECUTIONS])
+            {Labels::Collectors::Executions::EXECUTIONS, new StatisticsElementCounter()}})),
+    executions((StatisticsElementCounter&)*labelled_data_elements[Labels::Collectors::Executions::EXECUTIONS])
 {
     executions = 0U;
 }

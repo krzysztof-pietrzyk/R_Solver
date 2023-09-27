@@ -2,7 +2,7 @@
 #define STATISTICS_COLLECTOR_FIELD_TYPES
 
 #include "StatisticsCollector.hpp"
-#include "elements/StatisticsElementUINT64.hpp"
+#include "elements/StatisticsElementCounter.hpp"
 
 #include <functional>
 
@@ -14,15 +14,15 @@ class StatisticsCollectorFieldTypes : public StatisticsCollector
 
     ~StatisticsCollectorFieldTypes();
 
-    StatisticsElementUINT64& count_0;
-    StatisticsElementUINT64& count_1;
-    StatisticsElementUINT64& count_2;
-    StatisticsElementUINT64& count_3;
-    StatisticsElementUINT64& count_4;
-    StatisticsElementUINT64& count_5;
-    StatisticsElementUINT64& count_6;
-    StatisticsElementUINT64& count_7;
-    StatisticsElementUINT64& count_8;
+    StatisticsElementCounter& count_0;
+    StatisticsElementCounter& count_1;
+    StatisticsElementCounter& count_2;
+    StatisticsElementCounter& count_3;
+    StatisticsElementCounter& count_4;
+    StatisticsElementCounter& count_5;
+    StatisticsElementCounter& count_6;
+    StatisticsElementCounter& count_7;
+    StatisticsElementCounter& count_8;
 
     virtual void Enable() override;
     virtual void Disable() override;

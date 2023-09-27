@@ -3,24 +3,24 @@
 StatisticsCollectorFieldTypes::StatisticsCollectorFieldTypes() :
     StatisticsCollector(
         StatisticsCollectorStruct({
-            {Labels::Collectors::Generator::ZERO,  new StatisticsElementUINT64()},
-            {Labels::Collectors::Generator::ONE,   new StatisticsElementUINT64()},
-            {Labels::Collectors::Generator::TWO,   new StatisticsElementUINT64()},
-            {Labels::Collectors::Generator::THREE, new StatisticsElementUINT64()},
-            {Labels::Collectors::Generator::FOUR,  new StatisticsElementUINT64()},
-            {Labels::Collectors::Generator::FIVE,  new StatisticsElementUINT64()},
-            {Labels::Collectors::Generator::SIX,   new StatisticsElementUINT64()},
-            {Labels::Collectors::Generator::SEVEN, new StatisticsElementUINT64()},
-            {Labels::Collectors::Generator::EIGHT, new StatisticsElementUINT64()}})),
-    count_0((StatisticsElementUINT64&)*labelled_data_elements[Labels::Collectors::Generator::ZERO]),
-    count_1((StatisticsElementUINT64&)*labelled_data_elements[Labels::Collectors::Generator::ONE]),
-    count_2((StatisticsElementUINT64&)*labelled_data_elements[Labels::Collectors::Generator::TWO]),
-    count_3((StatisticsElementUINT64&)*labelled_data_elements[Labels::Collectors::Generator::THREE]),
-    count_4((StatisticsElementUINT64&)*labelled_data_elements[Labels::Collectors::Generator::FOUR]),
-    count_5((StatisticsElementUINT64&)*labelled_data_elements[Labels::Collectors::Generator::FIVE]),
-    count_6((StatisticsElementUINT64&)*labelled_data_elements[Labels::Collectors::Generator::SIX]),
-    count_7((StatisticsElementUINT64&)*labelled_data_elements[Labels::Collectors::Generator::SEVEN]),
-    count_8((StatisticsElementUINT64&)*labelled_data_elements[Labels::Collectors::Generator::EIGHT])
+            {Labels::Collectors::Generator::ZERO,  new StatisticsElementCounter()},
+            {Labels::Collectors::Generator::ONE,   new StatisticsElementCounter()},
+            {Labels::Collectors::Generator::TWO,   new StatisticsElementCounter()},
+            {Labels::Collectors::Generator::THREE, new StatisticsElementCounter()},
+            {Labels::Collectors::Generator::FOUR,  new StatisticsElementCounter()},
+            {Labels::Collectors::Generator::FIVE,  new StatisticsElementCounter()},
+            {Labels::Collectors::Generator::SIX,   new StatisticsElementCounter()},
+            {Labels::Collectors::Generator::SEVEN, new StatisticsElementCounter()},
+            {Labels::Collectors::Generator::EIGHT, new StatisticsElementCounter()}})),
+    count_0((StatisticsElementCounter&)*labelled_data_elements[Labels::Collectors::Generator::ZERO]),
+    count_1((StatisticsElementCounter&)*labelled_data_elements[Labels::Collectors::Generator::ONE]),
+    count_2((StatisticsElementCounter&)*labelled_data_elements[Labels::Collectors::Generator::TWO]),
+    count_3((StatisticsElementCounter&)*labelled_data_elements[Labels::Collectors::Generator::THREE]),
+    count_4((StatisticsElementCounter&)*labelled_data_elements[Labels::Collectors::Generator::FOUR]),
+    count_5((StatisticsElementCounter&)*labelled_data_elements[Labels::Collectors::Generator::FIVE]),
+    count_6((StatisticsElementCounter&)*labelled_data_elements[Labels::Collectors::Generator::SIX]),
+    count_7((StatisticsElementCounter&)*labelled_data_elements[Labels::Collectors::Generator::SEVEN]),
+    count_8((StatisticsElementCounter&)*labelled_data_elements[Labels::Collectors::Generator::EIGHT])
 {
     count_0 = 0U;
     count_1 = 0U;
@@ -59,41 +59,52 @@ void StatisticsCollectorFieldTypes::CountFieldTypes(const std::vector<uint8_t>& 
 
 void StatisticsCollectorFieldTypes::_CountFieldTypes(const std::vector<uint8_t>& field_values)
 {
+    uint64_t t0, t1, t2, t3, t4, t5, t6, t7, t8;
+    t0 = t1 = t2 = t3 = t4 = t5 = t6 = t7 = t8 = 0U;
     for(const uint8_t& field : field_values)
     {
         switch (field)
         {
             case 0U:
-                count_0 += 1;
+                t0++;
                 break;
             case 1U:
-                count_1 += 1;
+                t1++;
                 break;
             case 2U:
-                count_2 += 1;
+                t2++;
                 break;
             case 3U:
-                count_3 += 1;
+                t3++;
                 break;
             case 4U:
-                count_4 += 1;
+                t4++;
                 break;
             case 5U:
-                count_5 += 1;
+                t5++;
                 break;
             case 6U:
-                count_6 += 1;
+                t6++;
                 break;
             case 7U:
-                count_7 += 1;
+                t7++;
                 break;
             case 8U:
-                count_8 += 1;
+                t8++;
                 break;
             default:
                 break;
         }
     }
+    count_0 += t0;
+    count_1 += t1;
+    count_2 += t2;
+    count_3 += t3;
+    count_4 += t4;
+    count_5 += t5;
+    count_6 += t6;
+    count_7 += t7;
+    count_8 += t8;
 }
 
 StatisticsCollector* StatisticsCollectorFieldTypes::CreateNew() const

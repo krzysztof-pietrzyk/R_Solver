@@ -2,7 +2,7 @@
 #define STATISTICS_COLLECTOR_SOLVER_HPP
 
 #include "StatisticsCollector.hpp"
-#include "elements/StatisticsElementUINT64.hpp"
+#include "elements/StatisticsElementCounter.hpp"
 
 class StatisticsCollectorSolver : public StatisticsCollector
 {
@@ -12,12 +12,12 @@ class StatisticsCollectorSolver : public StatisticsCollector
 
     ~StatisticsCollectorSolver();
 
-    StatisticsElementUINT64& games_played;
-    StatisticsElementUINT64& games_won;
-    StatisticsElementUINT64& games_lost;
-    StatisticsElementUINT64& games_abandoned;
-    StatisticsElementUINT64& uncovered_fields;
-    StatisticsElementUINT64& flagged_mines;
+    StatisticsElementCounter& games_played;
+    StatisticsElementCounter& games_won;
+    StatisticsElementCounter& games_lost;
+    StatisticsElementCounter& games_abandoned;
+    StatisticsElementCounter& uncovered_fields;
+    StatisticsElementCounter& flagged_mines;
 
     protected:
 

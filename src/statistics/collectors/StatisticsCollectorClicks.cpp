@@ -3,16 +3,16 @@
 StatisticsCollectorClicks::StatisticsCollectorClicks() :
     StatisticsCollector(
         StatisticsCollectorStruct({
-            {Labels::Collectors::Clicks::LEFT_CLICKS, new StatisticsElementUINT64()},
-            {Labels::Collectors::Clicks::WASTED_LEFT_CLICKS, new StatisticsElementUINT64()},
-            {Labels::Collectors::Clicks::RIGHT_CLICKS, new StatisticsElementUINT64()},
-            {Labels::Collectors::Clicks::WASTED_RIGHT_CLICKS, new StatisticsElementUINT64()},
-            {Labels::Collectors::Clicks::TIMES_LOST, new StatisticsElementUINT64()}})),
-    left_clicks        ((StatisticsElementUINT64&)*labelled_data_elements[Labels::Collectors::Clicks::LEFT_CLICKS]),
-    wasted_left_clicks ((StatisticsElementUINT64&)*labelled_data_elements[Labels::Collectors::Clicks::WASTED_LEFT_CLICKS]),
-    right_clicks       ((StatisticsElementUINT64&)*labelled_data_elements[Labels::Collectors::Clicks::RIGHT_CLICKS]),
-    wasted_right_clicks((StatisticsElementUINT64&)*labelled_data_elements[Labels::Collectors::Clicks::WASTED_RIGHT_CLICKS]),
-    times_caused_loss  ((StatisticsElementUINT64&)*labelled_data_elements[Labels::Collectors::Clicks::TIMES_LOST])
+            {Labels::Collectors::Clicks::LEFT_CLICKS, new StatisticsElementCounter()},
+            {Labels::Collectors::Clicks::WASTED_LEFT_CLICKS, new StatisticsElementCounter()},
+            {Labels::Collectors::Clicks::RIGHT_CLICKS, new StatisticsElementCounter()},
+            {Labels::Collectors::Clicks::WASTED_RIGHT_CLICKS, new StatisticsElementCounter()},
+            {Labels::Collectors::Clicks::TIMES_LOST, new StatisticsElementCounter()}})),
+    left_clicks        ((StatisticsElementCounter&)*labelled_data_elements[Labels::Collectors::Clicks::LEFT_CLICKS]),
+    wasted_left_clicks ((StatisticsElementCounter&)*labelled_data_elements[Labels::Collectors::Clicks::WASTED_LEFT_CLICKS]),
+    right_clicks       ((StatisticsElementCounter&)*labelled_data_elements[Labels::Collectors::Clicks::RIGHT_CLICKS]),
+    wasted_right_clicks((StatisticsElementCounter&)*labelled_data_elements[Labels::Collectors::Clicks::WASTED_RIGHT_CLICKS]),
+    times_caused_loss  ((StatisticsElementCounter&)*labelled_data_elements[Labels::Collectors::Clicks::TIMES_LOST])
 {
     left_clicks = 0U;
     wasted_left_clicks = 0U;

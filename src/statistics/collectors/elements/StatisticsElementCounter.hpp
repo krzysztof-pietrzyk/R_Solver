@@ -1,17 +1,17 @@
-#ifndef STATISTICS_ELEMENT_UINT64_HPP
-#define STATISTICS_ELEMENT_UINT64_HPP
+#ifndef STATISTICS_ELEMENT_COUNTER_HPP
+#define STATISTICS_ELEMENT_COUNTER_HPP
 
 #include "StatisticsElement.hpp"
 
 #include <cstdint>
 
-class StatisticsElementUINT64 : public StatisticsElement
+class StatisticsElementCounter : public StatisticsElement
 {
     public:
 
-    StatisticsElementUINT64();
-    StatisticsElementUINT64(const StatisticsElementUINT64& other);
-    ~StatisticsElementUINT64();
+    StatisticsElementCounter();
+    StatisticsElementCounter(const StatisticsElementCounter& other);
+    ~StatisticsElementCounter();
 
     virtual void Enable() override;
     virtual void Disable() override;
@@ -29,9 +29,10 @@ class StatisticsElementUINT64 : public StatisticsElement
     protected:
 
     uint64_t element_value;
+    uint64_t last_read_value;
 
-    std::function<void(StatisticsElementUINT64&, const uint64_t&)> InPlaceAddFunction;
-    std::function<void(StatisticsElementUINT64&, const uint64_t&)> AssignFunction;
+    std::function<void(StatisticsElementCounter&, const uint64_t&)> InPlaceAddFunction;
+    std::function<void(StatisticsElementCounter&, const uint64_t&)> AssignFunction;
 
     void _InPlaceAdd(const uint64_t& other);
     void _Assign(const uint64_t& other);

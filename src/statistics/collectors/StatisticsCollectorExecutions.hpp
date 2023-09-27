@@ -2,7 +2,7 @@
 #define STATISTICS_COLLECTOR_EXECUTIONS_HPP
 
 #include "StatisticsCollector.hpp"
-#include "elements/StatisticsElementUINT64.hpp"
+#include "elements/StatisticsElementCounter.hpp"
 
 class StatisticsCollectorExecutions : public StatisticsCollector
 {
@@ -12,7 +12,7 @@ class StatisticsCollectorExecutions : public StatisticsCollector
 
     ~StatisticsCollectorExecutions();
 
-    StatisticsElementUINT64& executions;
+    StatisticsElementCounter& executions;
 
     protected:
 
