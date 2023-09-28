@@ -4,7 +4,10 @@ LogLevel Logger::loglevel = LogLevel::INFO;
 
 Logger::Logger(LogLevel _loglevel)
 {
-    _buffer << std::string(int(_loglevel), '-') << GetLogLevelLabel(_loglevel) << " : ";
+    auto t = std::time(nullptr);
+    auto tm = *std::localtime(&t);
+    _buffer << std::string(int(_loglevel), '-') << GetLogLevelLabel(_loglevel) 
+        << " " << std::put_time(&tm, "%d-%m-%Y %H-%M-%S") << " : ";
 }
 
 Logger::~Logger()

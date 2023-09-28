@@ -1,6 +1,8 @@
 #ifndef ALGORITHM_REFRESH_COMBINATIONS_HPP
 #define ALGORITHM_REFRESH_COMBINATIONS_HPP
 
+#include "../../statistics/collectors/StatisticsCollectorFailures.hpp"
+
 #include "../Algorithm.hpp"
 
 enum class FieldState
@@ -8,6 +10,17 @@ enum class FieldState
     UNASSIGNED,
     MINE,
     SAFE
+};
+
+class FailSafeException : public std::runtime_error
+{
+    public:
+
+    FailSafeException() throw()
+        : std::runtime_error("Too much data to process.")
+    {
+
+    }
 };
 
 class AlgorithmRefreshCombinations : public Algorithm
@@ -38,6 +51,8 @@ class AlgorithmRefreshCombinations : public Algorithm
     // field_combinations_temp - vector id: field position, key: given mine count within entire segment
     // value: number of combinations, in which a mine appears on that field for given mine count of this segment
     std::vector<std::map<uint32_t, BigNum>> field_combinations_temp;
+
+    StatisticsCollectorFailures* statistics_failures;
 
     void Clear();
 
@@ -75,6 +90,10 @@ class AlgorithmRefreshCombinations : public Algorithm
     std::vector<BigNum>& D_field_combinations;
     BigNum& D_remaining_fields_combinations;
     BigNum& D_total_combinations;
+
+    static const uint64_t fail_safe_permutation_threshold;
+    static const uint64_t fail_safe_enumeration_threshold;
+    uint64_t fail_safe_enumeration;
 };
 
 #endif

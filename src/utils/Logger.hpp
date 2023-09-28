@@ -7,6 +7,8 @@
 #include <vector>
 #include <cstdint>
 #include <stdexcept>
+#include <ctime>
+#include <iomanip>
 
 enum class LogLevel
 {

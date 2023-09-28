@@ -1,5 +1,8 @@
 #include "AlgorithmRefreshCombinations.hpp"
 
+const uint64_t AlgorithmRefreshCombinations::fail_safe_permutation_threshold = 100'000;
+const uint64_t AlgorithmRefreshCombinations::fail_safe_enumeration_threshold = 50'000'000;
+
 AlgorithmRefreshCombinations::AlgorithmRefreshCombinations(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_)
     : Algorithm(grid_, data_),
     D_subsegments(GetModifiableAlgorithmDataStorageReference().subsegments),
@@ -21,6 +24,9 @@ AlgorithmRefreshCombinations::AlgorithmRefreshCombinations(GridAccessPlayerIf& g
 
     segments_combinations = std::vector<std::map<uint32_t, BigNum>>(grid.GetTotalMines(), std::map<uint32_t, BigNum>());
     field_combinations_temp = std::vector<std::map<uint32_t, BigNum>>(grid.GetSize(), std::map<uint32_t, BigNum>());
+
+    statistics_failures = new StatisticsCollectorFailures();  // deleted in StatisticsProducer
+    statistics_collectors.push_back(statistics_failures);
 }
 
 AlgorithmRefreshCombinations::~AlgorithmRefreshCombinations() {}
@@ -31,12 +37,19 @@ AlgorithmStatus AlgorithmRefreshCombinations::Execution()
     remaining_mines = grid.GetTotalMines() - flagged.Index();
     remaining_fields = grid.GetSize() - visible.Index() - flagged.Index() - data.face_index;
     const uint32_t segments_to_check = data.segments_count;
-    for(size_t i = 0; i < segments_to_check; i++)
+    try
     {
-        FindCombinationsForSegment(i);
+        for(size_t i = 0; i < segments_to_check; i++)
+        {
+            FindCombinationsForSegment(i);
+        }
+        MergeAllSegmentsCombinations();
     }
-    MergeAllSegmentsCombinations();
-
+    catch(FailSafeException)
+    {
+        statistics_failures->failures += 1;
+        return AlgorithmStatus::FAILURE;
+    }
     return AlgorithmStatus::NO_STATUS;
 }
 
@@ -61,6 +74,7 @@ void AlgorithmRefreshCombinations::Clear()
     }
     D_remaining_fields_combinations = 0;
     D_total_combinations = 0.0L;
+    fail_safe_enumeration = 0;
 }
 
 void AlgorithmRefreshCombinations::FindCombinationsForSegment(uint32_t segment_id)
@@ -119,6 +133,13 @@ void AlgorithmRefreshCombinations::FindCombinationsForFixedSubsegments(const uin
     // dirty loop. segment_head may be going back and forth but will always terminate
     while(true)
     {
+        if(fail_safe_enumeration > fail_safe_enumeration_threshold)
+        {
+            LOGGER(LogLevel::DEBUG2) << "AlgorithmRefreshCombinations::FindCombinationsForFixedSubsegments - Too much data: "
+                << segment_id << " out of " << data.segments_count << " segments checked.";
+            throw FailSafeException();
+        }
+        fail_safe_enumeration++;
         const uint32_t section_origin = data.segments[segment_head];
         const Section& current_section = data.sections[section_origin];
         const uint8_t section_l = current_section.fields_index;
@@ -311,6 +332,8 @@ void AlgorithmRefreshCombinations::MergeAllSegmentsCombinations()
 void AlgorithmRefreshCombinations::CachePossibleSegmentsMineCounts()
 {
     const uint32_t segments_to_check = data.segments_count;
+    uint64_t total_permutations = 1;
+    uint64_t single_permutations = 0;
     for(uint32_t segment_id = 0; segment_id < segments_to_check; segment_id++)
     {
         const std::map<uint32_t, BigNum>& combinations_ref = segments_combinations[segment_id];
@@ -318,7 +341,17 @@ void AlgorithmRefreshCombinations::CachePossibleSegmentsMineCounts()
         for(auto it = combinations_ref.begin(); it != combinations_ref.end(); ++it)
         {
             mine_counts_ref.push_back(it->first);
+            single_permutations++;;
         }
+        total_permutations *= single_permutations;
+        single_permutations = 0;
+    }
+    if(total_permutations > fail_safe_permutation_threshold)
+    {
+        // It will take too long to finish this calculation
+        LOGGER(LogLevel::DEBUG2) << "AlgorithmRefreshCombinations::CachePossibleSegmentsMineCounts - Too much data: "
+            << segments_to_check << " segments, " << total_permutations << " permutations.";
+        throw FailSafeException();
     }
 }
 

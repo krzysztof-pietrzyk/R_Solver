@@ -73,6 +73,7 @@ void AlgorithmTransitionManager::ConfigureDefaultTransitions()
     AddTransition(AlgorithmType::REFRESH_FACE, AlgorithmStatus::NO_STATUS, AlgorithmType::REFRESH_COMBINATIONS);
 
     AddTransition(AlgorithmType::REFRESH_COMBINATIONS, AlgorithmStatus::NO_STATUS, AlgorithmType::COMBINATIONS_SAFE_MOVES);
+    AddTransition(AlgorithmType::REFRESH_COMBINATIONS, AlgorithmStatus::FAILURE, AlgorithmType::GIVE_UP);
 
     AddTransition(AlgorithmType::COMBINATIONS_SAFE_MOVES, AlgorithmStatus::SUCCESS, AlgorithmType::REFRESH_BORDER);
     AddTransition(AlgorithmType::COMBINATIONS_SAFE_MOVES, AlgorithmStatus::NO_MOVES, AlgorithmType::SIMPLE_CORNERS);

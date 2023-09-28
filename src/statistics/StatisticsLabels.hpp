@@ -29,6 +29,7 @@ namespace Labels
         namespace Executions
         {
             static const Label EXECUTIONS = "Times executed";
+            static const Label FAILURES = "Times failed";
         }
 
         namespace Generator
