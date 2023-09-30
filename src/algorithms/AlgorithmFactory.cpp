@@ -5,17 +5,17 @@ Algorithm* AlgorithmFactory::Create(AlgorithmType type, GridAccessPlayerIf& grid
     switch(type)
     {
         case AlgorithmType::REFRESH_BORDER:
-            return new AlgorithmRefreshBorder(grid, data);
+            return new AlgorithmBorder(grid, data);
         case AlgorithmType::REFRESH_SECTIONS:
-            return new AlgorithmRefreshSections(grid, data);
+            return new AlgorithmSections(grid, data);
         case AlgorithmType::REFRESH_SEGMENTS:
-            return new AlgorithmRefreshSegments(grid, data);
+            return new AlgorithmSegments(grid, data);
         case AlgorithmType::REFRESH_SUBSEGMENTS:
-            return new AlgorithmRefreshSubsegments(grid, data);
+            return new AlgorithmSubsegments(grid, data);
         case AlgorithmType::REFRESH_FACE:
-            return new AlgorithmRefreshFace(grid, data);
+            return new AlgorithmFace(grid, data);
         case AlgorithmType::REFRESH_COMBINATIONS:
-            return new AlgorithmRefreshCombinations(grid, data);
+            return new AlgorithmCombinations(grid, data);
         case AlgorithmType::SIMPLE_CORNERS:
             return new AlgorithmSimpleCorners(grid, data);
         case AlgorithmType::LAYER_ONE:

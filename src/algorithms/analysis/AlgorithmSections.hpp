@@ -1,5 +1,5 @@
-#ifndef ALGORITHM_REFRESH_SECTIONS_HPP
-#define ALGORITHM_REFRESH_SECTIONS_HPP
+#ifndef ALGORITHM_SECTIONS_HPP
+#define ALGORITHM_SECTIONS_HPP
 
 #include "../Algorithm.hpp"
 
@@ -7,7 +7,7 @@
 
 #define MAX_ALLOWED_GRID_SIZE 1048576
 
-class AlgorithmRefreshSections : public Algorithm
+class AlgorithmSections : public Algorithm
 {
     /*
     This algorithm gathers data about "sections".
@@ -22,9 +22,9 @@ class AlgorithmRefreshSections : public Algorithm
     */
     public:
 
-    AlgorithmRefreshSections(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_);
+    AlgorithmSections(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_);
 
-    ~AlgorithmRefreshSections();
+    ~AlgorithmSections();
 
     AlgorithmStatus Execution() override;
 

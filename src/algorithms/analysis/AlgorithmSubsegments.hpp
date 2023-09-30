@@ -1,15 +1,15 @@
-#ifndef ALGORITHM_REFRESH_SUBSEGMENTS_HPP
-#define ALGORITHM_REFRESH_SUBSEGMENTS_HPP
+#ifndef ALGORITHM_SUBSEGMENTS_HPP
+#define ALGORITHM_SUBSEGMENTS_HPP
 
 #include "../Algorithm.hpp"
 
-class AlgorithmRefreshSubsegments : public Algorithm
+class AlgorithmSubsegments : public Algorithm
 {
     public:
 
-    AlgorithmRefreshSubsegments(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_);
+    AlgorithmSubsegments(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_);
 
-    ~AlgorithmRefreshSubsegments();
+    ~AlgorithmSubsegments();
 
     AlgorithmStatus Execution() override;
 

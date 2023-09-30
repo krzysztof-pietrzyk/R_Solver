@@ -1,9 +1,9 @@
-#ifndef ALGORITHM_REFRESH_BORDER_HPP
-#define ALGORITHM_REFRESH_BORDER_HPP
+#ifndef ALGORITHM_BORDER_HPP
+#define ALGORITHM_BORDER_HPP
 
 #include "../Algorithm.hpp"
 
-class AlgorithmRefreshBorder : public Algorithm
+class AlgorithmBorder : public Algorithm
 {
     /*
     This algorithm gathers information about the "border", which is
@@ -18,9 +18,9 @@ class AlgorithmRefreshBorder : public Algorithm
     */
     public:
 
-    AlgorithmRefreshBorder(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_);
+    AlgorithmBorder(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_);
 
-    ~AlgorithmRefreshBorder();
+    ~AlgorithmBorder();
 
     AlgorithmStatus Execution() override;
 

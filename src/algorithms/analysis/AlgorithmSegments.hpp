@@ -1,23 +1,23 @@
-#ifndef ALGORITHM_REFRESH_SEGMENTS_HPP
-#define ALGORITHM_REFRESH_SEGMENTS_HPP
+#ifndef ALGORITHM_SEGMENTS_HPP
+#define ALGORITHM_SEGMENTS_HPP
 
 #include "../Algorithm.hpp"
 
-class AlgorithmRefreshSegments : public Algorithm
+class AlgorithmSegments : public Algorithm
 {
     /*
     This algorithm gathers information about "segments".
     A segment is a set of sections overlapping with each other, usually in a form of a chain-like structure.
-    See AlgorithmRefreshSegments for an explanation of what a section is.
+    See AlgorithmSegments for an explanation of what a section is.
     On the map there can be one or more segments. A segment can consist of one or more sections.
     The purpose of this analysis is to speed up the combination checking for the algorithms using this data later.
     Each segment can be analyzed separately for its possible combinations
     */
     public:
 
-    AlgorithmRefreshSegments(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_);
+    AlgorithmSegments(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_);
 
-    ~AlgorithmRefreshSegments();
+    ~AlgorithmSegments();
 
     AlgorithmStatus Execution() override;
 

@@ -1,23 +1,26 @@
-#include "AlgorithmRefreshBorder.hpp"
+#include "AlgorithmBorder.hpp"
 
-AlgorithmRefreshBorder::AlgorithmRefreshBorder(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_)
+AlgorithmBorder::AlgorithmBorder(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_)
     : Algorithm(grid_, data_),
     D_border_index(GetModifiableAlgorithmDataStorageReference().border_index),
     D_border_last_visible_fields_index(GetModifiableAlgorithmDataStorageReference().border_last_visible_fields_index),
     D_border(GetModifiableAlgorithmDataStorageReference().border),
     D_is_border(GetModifiableAlgorithmDataStorageReference().is_border)
 {
-    LOGGER(LogLevel::INIT) << "AlgorithmRefreshBorder";
+    LOGGER(LogLevel::INIT) << "AlgorithmBorder";
 }
 
-AlgorithmRefreshBorder::~AlgorithmRefreshBorder() {}
+AlgorithmBorder::~AlgorithmBorder() {}
 
-AlgorithmStatus AlgorithmRefreshBorder::Execution()
+AlgorithmStatus AlgorithmBorder::Execution()
 {  
     const uint32_t visible_fields_old_index = data.border_last_visible_fields_index;
     const uint32_t visible_fields_new_index = visible.Index();
 
-    if(visible_fields_new_index == visible_fields_old_index) return AlgorithmStatus::NO_STATUS;
+    if(visible_fields_new_index == visible_fields_old_index)
+    {
+        return AlgorithmStatus::NO_STATUS;
+    }
 
     uint32_t border_index_new = 0;
 
@@ -30,7 +33,7 @@ AlgorithmStatus AlgorithmRefreshBorder::Execution()
     return AlgorithmStatus::NO_STATUS;
 }
 
-void AlgorithmRefreshBorder::FilterOldBorderContent(uint32_t& border_index_new) const
+void AlgorithmBorder::FilterOldBorderContent(uint32_t& border_index_new) const
 {
     const uint32_t border_index_old = data.border_index;
     for(size_t i = 0; i < border_index_old; i++)
@@ -47,7 +50,7 @@ void AlgorithmRefreshBorder::FilterOldBorderContent(uint32_t& border_index_new) 
     }
 }
 
-void AlgorithmRefreshBorder::AddNewContentToBorder(uint32_t& border_index_new) const
+void AlgorithmBorder::AddNewContentToBorder(uint32_t& border_index_new) const
 {
     const uint32_t visible_fields_old_index = data.border_last_visible_fields_index;
     const uint32_t visible_fields_new_index = visible.Index();
@@ -62,7 +65,7 @@ void AlgorithmRefreshBorder::AddNewContentToBorder(uint32_t& border_index_new) c
     }
 }
 
-bool AlgorithmRefreshBorder::HasAtLeastOneNotVisibleNeighbor(uint32_t field) const
+bool AlgorithmBorder::HasAtLeastOneNotVisibleNeighbor(uint32_t field) const
 {
     bool at_least_one_not_visible = false;
     const std::vector<uint32_t>& field_neighbors = grid.GetNeighbors(field);

@@ -1,16 +1,16 @@
-#include "AlgorithmRefreshCombinations.hpp"
+#include "AlgorithmCombinations.hpp"
 
-const uint64_t AlgorithmRefreshCombinations::fail_safe_permutation_threshold = 100'000;
-const uint64_t AlgorithmRefreshCombinations::fail_safe_enumeration_threshold = 50'000'000;
+const uint64_t AlgorithmCombinations::fail_safe_permutation_threshold = 100'000;
+const uint64_t AlgorithmCombinations::fail_safe_enumeration_threshold = 50'000'000;
 
-AlgorithmRefreshCombinations::AlgorithmRefreshCombinations(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_)
+AlgorithmCombinations::AlgorithmCombinations(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_)
     : Algorithm(grid_, data_),
     D_subsegments(GetModifiableAlgorithmDataStorageReference().subsegments),
     D_field_combinations(GetModifiableAlgorithmDataStorageReference().field_combinations),
     D_remaining_fields_combinations(GetModifiableAlgorithmDataStorageReference().remaining_fields_combinations),
     D_total_combinations(GetModifiableAlgorithmDataStorageReference().total_combinations)
 {
-    LOGGER(LogLevel::INIT) << "AlgorithmRefreshCombinations";
+    LOGGER(LogLevel::INIT) << "AlgorithmCombinations";
     field_states = std::vector<FieldState>(grid.GetSize(), FieldState::UNASSIGNED);
     choice_stack = std::vector<uint32_t>();
     segment_of_choice_stack = std::vector<uint32_t>();
@@ -29,9 +29,9 @@ AlgorithmRefreshCombinations::AlgorithmRefreshCombinations(GridAccessPlayerIf& g
     statistics_collectors.push_back(statistics_failures);
 }
 
-AlgorithmRefreshCombinations::~AlgorithmRefreshCombinations() {}
+AlgorithmCombinations::~AlgorithmCombinations() {}
 
-AlgorithmStatus AlgorithmRefreshCombinations::Execution()
+AlgorithmStatus AlgorithmCombinations::Execution()
 {
     Clear();
     remaining_mines = grid.GetTotalMines() - flagged.Index();
@@ -54,7 +54,7 @@ AlgorithmStatus AlgorithmRefreshCombinations::Execution()
 }
 
 // only called once at the beginning of Run
-void AlgorithmRefreshCombinations::Clear()
+void AlgorithmCombinations::Clear()
 {
     // Only clearing fields that are going to be used
     const uint32_t face_length = data.face_index;
@@ -77,7 +77,7 @@ void AlgorithmRefreshCombinations::Clear()
     fail_safe_enumeration = 0;
 }
 
-void AlgorithmRefreshCombinations::FindCombinationsForSegment(uint32_t segment_id)
+void AlgorithmCombinations::FindCombinationsForSegment(uint32_t segment_id)
 {
     std::vector<SubsegmentData>& subsegments_ref = D_subsegments[segment_id];
     do
@@ -88,7 +88,7 @@ void AlgorithmRefreshCombinations::FindCombinationsForSegment(uint32_t segment_i
     } while (NextSubsegmentsCombination(subsegments_ref));
 }
 
-void AlgorithmRefreshCombinations::ClearStatesInSegment(uint32_t segment_id)
+void AlgorithmCombinations::ClearStatesInSegment(uint32_t segment_id)
 {
     const std::vector<uint32_t>& segment_face = data.segments_face[segment_id];
     const size_t segment_face_l = segment_face.size();
@@ -99,7 +99,7 @@ void AlgorithmRefreshCombinations::ClearStatesInSegment(uint32_t segment_id)
     }
 }
 
-BigNum AlgorithmRefreshCombinations::ApplySubsegmentsCombination(std::vector<SubsegmentData>& subsegments_ref)
+BigNum AlgorithmCombinations::ApplySubsegmentsCombination(std::vector<SubsegmentData>& subsegments_ref)
 {
     // returns the weight of the combination. it is the multiplier of the number of mine combinations
     // of the entire segment for this particular set of subsegments values combination
@@ -122,7 +122,7 @@ BigNum AlgorithmRefreshCombinations::ApplySubsegmentsCombination(std::vector<Sub
     return subsegment_combination_weight;
 }
 
-void AlgorithmRefreshCombinations::FindCombinationsForFixedSubsegments(const uint32_t segment_id, const BigNum combination_multiplier)
+void AlgorithmCombinations::FindCombinationsForFixedSubsegments(const uint32_t segment_id, const BigNum combination_multiplier)
 {
     choice_stack.clear();
     modifications_stack.clear();
@@ -135,7 +135,7 @@ void AlgorithmRefreshCombinations::FindCombinationsForFixedSubsegments(const uin
     {
         if(fail_safe_enumeration > fail_safe_enumeration_threshold)
         {
-            LOGGER(LogLevel::DEBUG2) << "AlgorithmRefreshCombinations::FindCombinationsForFixedSubsegments - Too much data: "
+            LOGGER(LogLevel::DEBUG2) << "AlgorithmCombinations::FindCombinationsForFixedSubsegments - Too much data: "
                 << segment_id << " out of " << data.segments_count << " segments checked.";
             throw FailSafeException();
         }
@@ -182,7 +182,7 @@ void AlgorithmRefreshCombinations::FindCombinationsForFixedSubsegments(const uin
     }
 }
 
-void AlgorithmRefreshCombinations::FindRemainingSectionValue(const Section& section, int8_t& section_value, int8_t& section_length) const
+void AlgorithmCombinations::FindRemainingSectionValue(const Section& section, int8_t& section_value, int8_t& section_length) const
 {
     const size_t section_l = section.fields_index;
     for(size_t section_head = 0; section_head < section_l; section_head++)
@@ -193,7 +193,7 @@ void AlgorithmRefreshCombinations::FindRemainingSectionValue(const Section& sect
     }
 }
 
-bool AlgorithmRefreshCombinations::RevertSegmentHeadToLastChoice(size_t& segment_head)
+bool AlgorithmCombinations::RevertSegmentHeadToLastChoice(size_t& segment_head)
 {
     // returns true if there was a choice it could revert to
     if(choice_stack.empty()) { return false; }
@@ -227,7 +227,7 @@ bool AlgorithmRefreshCombinations::RevertSegmentHeadToLastChoice(size_t& segment
     return true;
 }
 
-void AlgorithmRefreshCombinations::TransitionFieldStateForward(const uint32_t section_field, const size_t current_segment_head, int8_t& remaining_section_value, int8_t& remaining_section_length)
+void AlgorithmCombinations::TransitionFieldStateForward(const uint32_t section_field, const size_t current_segment_head, int8_t& remaining_section_value, int8_t& remaining_section_length)
 {
     FieldState& current_state = field_states[section_field];
     if(current_state != FieldState::UNASSIGNED) { return; }
@@ -251,7 +251,7 @@ void AlgorithmRefreshCombinations::TransitionFieldStateForward(const uint32_t se
     remaining_section_length--;
 }
 
-void AlgorithmRefreshCombinations::ApplyCurrentCombinationAsValid(const uint32_t segment_id, const BigNum combination_multiplier)
+void AlgorithmCombinations::ApplyCurrentCombinationAsValid(const uint32_t segment_id, const BigNum combination_multiplier)
 {
     const uint32_t final_mine_count = current_segment_mine_count;
     // store the number of combinations for the whole segment
@@ -294,7 +294,7 @@ void AlgorithmRefreshCombinations::ApplyCurrentCombinationAsValid(const uint32_t
     }
 }
 
-bool AlgorithmRefreshCombinations::NextSubsegmentsCombination(std::vector<SubsegmentData>& subsegments_ref) const
+bool AlgorithmCombinations::NextSubsegmentsCombination(std::vector<SubsegmentData>& subsegments_ref) const
 {
     // repeatedly called, this will enumerate over every possible set of values of subsegments within the segment
     // returns false if there aren't any more possibilities for the sets of values of subsegments
@@ -314,7 +314,7 @@ bool AlgorithmRefreshCombinations::NextSubsegmentsCombination(std::vector<Subseg
     return false;
 }
 
-void AlgorithmRefreshCombinations::MergeAllSegmentsCombinations()
+void AlgorithmCombinations::MergeAllSegmentsCombinations()
 {
     CachePossibleSegmentsMineCounts();
     do
@@ -329,7 +329,7 @@ void AlgorithmRefreshCombinations::MergeAllSegmentsCombinations()
     } while (NextSegmentsMineCountCombination());
 }
 
-void AlgorithmRefreshCombinations::CachePossibleSegmentsMineCounts()
+void AlgorithmCombinations::CachePossibleSegmentsMineCounts()
 {
     const uint32_t segments_to_check = data.segments_count;
     uint64_t total_permutations = 1;
@@ -349,13 +349,13 @@ void AlgorithmRefreshCombinations::CachePossibleSegmentsMineCounts()
     if(total_permutations > fail_safe_permutation_threshold)
     {
         // It will take too long to finish this calculation
-        LOGGER(LogLevel::DEBUG2) << "AlgorithmRefreshCombinations::CachePossibleSegmentsMineCounts - Too much data: "
+        LOGGER(LogLevel::DEBUG2) << "AlgorithmCombinations::CachePossibleSegmentsMineCounts - Too much data: "
             << segments_to_check << " segments, " << total_permutations << " permutations.";
         throw FailSafeException();
     }
 }
 
-uint32_t AlgorithmRefreshCombinations::GetTotalMineCountOfSegmentCombination() const
+uint32_t AlgorithmCombinations::GetTotalMineCountOfSegmentCombination() const
 {
     uint32_t mine_count_sum = 0;
     const size_t segments_count = data.segments_count;
@@ -366,7 +366,7 @@ uint32_t AlgorithmRefreshCombinations::GetTotalMineCountOfSegmentCombination() c
     return mine_count_sum;
 }
 
-void AlgorithmRefreshCombinations::MergeCurrentSegmentsMineCountCombination(const uint32_t segments_combination_mine_count)
+void AlgorithmCombinations::MergeCurrentSegmentsMineCountCombination(const uint32_t segments_combination_mine_count)
 {
     const uint32_t mines_in_remaining_fields = remaining_mines - segments_combination_mine_count;
     const uint32_t remaining_safe_fields = remaining_fields - mines_in_remaining_fields;
@@ -420,7 +420,7 @@ void AlgorithmRefreshCombinations::MergeCurrentSegmentsMineCountCombination(cons
     }
 }
 
-bool AlgorithmRefreshCombinations::NextSegmentsMineCountCombination()
+bool AlgorithmCombinations::NextSegmentsMineCountCombination()
 {
     // repeatedly called, this will enumerate over every possible set of values of mine counts within the segments
     // returns false if there aren't any more possibilities for the sets of mine counts of segments

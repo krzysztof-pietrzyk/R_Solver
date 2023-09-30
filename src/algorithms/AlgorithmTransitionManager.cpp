@@ -13,9 +13,9 @@ AlgorithmTransitionManager::AlgorithmTransitionManager()
 AlgorithmTransitionManager::~AlgorithmTransitionManager() {}
 
 
-void AlgorithmTransitionManager::AddTransition(const AlgorithmType previous_type, const AlgorithmStatus previous_status, const AlgorithmType next_type)
+void AlgorithmTransitionManager::AddTransition(const AlgorithmType type, const AlgorithmStatus status, const AlgorithmType next_type)
 {
-    transitions[previous_type][previous_status] = next_type;
+    transitions[type][status] = next_type;
 }
 
 void AlgorithmTransitionManager::DeleteTransition(const AlgorithmType type, const AlgorithmStatus status)
@@ -27,11 +27,11 @@ void AlgorithmTransitionManager::DeleteTransition(const AlgorithmType type, cons
     );
 }
 
-AlgorithmType AlgorithmTransitionManager::GetNext(const AlgorithmType previous_type, const AlgorithmStatus previous_status) const
+AlgorithmType AlgorithmTransitionManager::GetNext(const AlgorithmType type, const AlgorithmStatus status) const
 {
     LOGGER_ASSERT_TRY(
         { 
-            const AlgorithmType next_algorithm = transitions.at(previous_type).at(previous_status);
+            const AlgorithmType next_algorithm = transitions.at(type).at(status);
             return next_algorithm;
         },
         std::out_of_range,

@@ -5,12 +5,12 @@
 #include "AlgorithmType.hpp"
 #include "AlgorithmDataStorage.hpp"
 
-#include "analysis/AlgorithmRefreshBorder.hpp"
-#include "analysis/AlgorithmRefreshSections.hpp"
-#include "analysis/AlgorithmRefreshSegments.hpp"
-#include "analysis/AlgorithmRefreshSubsegments.hpp"
-#include "analysis/AlgorithmRefreshFace.hpp"
-#include "analysis/AlgorithmRefreshCombinations.hpp"
+#include "analysis/AlgorithmBorder.hpp"
+#include "analysis/AlgorithmSections.hpp"
+#include "analysis/AlgorithmSegments.hpp"
+#include "analysis/AlgorithmSubsegments.hpp"
+#include "analysis/AlgorithmFace.hpp"
+#include "analysis/AlgorithmCombinations.hpp"
 
 #include "decision/AlgorithmSimpleCorners.hpp"
 #include "decision/AlgorithmLayerOne.hpp"

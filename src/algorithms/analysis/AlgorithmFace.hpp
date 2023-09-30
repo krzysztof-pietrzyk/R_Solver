@@ -1,15 +1,15 @@
-#ifndef ALGORITHM_REFRESH_FACE_HPP
-#define ALGORITHM_REFRESH_FACE_HPP
+#ifndef ALGORITHM_FACE_HPP
+#define ALGORITHM_FACE_HPP
 
 #include "../Algorithm.hpp"
 
-class AlgorithmRefreshFace : public Algorithm
+class AlgorithmFace : public Algorithm
 {
     public:
 
-    AlgorithmRefreshFace(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_);
+    AlgorithmFace(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_);
 
-    ~AlgorithmRefreshFace();
+    ~AlgorithmFace();
 
     AlgorithmStatus Execution() override;
 

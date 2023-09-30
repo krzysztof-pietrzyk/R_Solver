@@ -1,13 +1,13 @@
-#include "AlgorithmRefreshSubsegments.hpp"
+#include "AlgorithmSubsegments.hpp"
 
-AlgorithmRefreshSubsegments::AlgorithmRefreshSubsegments(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_)
+AlgorithmSubsegments::AlgorithmSubsegments(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_)
     : Algorithm(grid_, data_),
     D_subsegments(GetModifiableAlgorithmDataStorageReference().subsegments),
     D_is_subsegment(GetModifiableAlgorithmDataStorageReference().is_subsegment),
     D_subsegments_cache(GetModifiableAlgorithmDataStorageReference().subsegments_cache),
     D_subsegments_cache_index(GetModifiableAlgorithmDataStorageReference().subsegments_cache_index)
 {
-    LOGGER(LogLevel::INIT) << "AlgorithmRefreshSubsegments";
+    LOGGER(LogLevel::INIT) << "AlgorithmSubsegments";
     is_checked = std::vector<bool>(grid.GetSize(), false);
     checked = std::vector<uint32_t>(grid.GetSize(), 0);
     checked_index = 0;
@@ -15,9 +15,9 @@ AlgorithmRefreshSubsegments::AlgorithmRefreshSubsegments(GridAccessPlayerIf& gri
     section_neighborhood = std::map<uint32_t, std::vector<uint32_t>>();
 }
 
-AlgorithmRefreshSubsegments::~AlgorithmRefreshSubsegments() {}
+AlgorithmSubsegments::~AlgorithmSubsegments() {}
 
-AlgorithmStatus AlgorithmRefreshSubsegments::Execution()
+AlgorithmStatus AlgorithmSubsegments::Execution()
 {
     Clear();
 
@@ -43,7 +43,7 @@ AlgorithmStatus AlgorithmRefreshSubsegments::Execution()
     return AlgorithmStatus::NO_STATUS;
 }
 
-void AlgorithmRefreshSubsegments::Clear()
+void AlgorithmSubsegments::Clear()
 {
     for(size_t i = 0; i < checked_index; i++) { is_checked[checked[i]] = false; }
     checked_index = 0;
@@ -53,7 +53,7 @@ void AlgorithmRefreshSubsegments::Clear()
     D_subsegments.clear();
 }
 
-void AlgorithmRefreshSubsegments::UpdateNeighborsBits(const uint32_t border_field)
+void AlgorithmSubsegments::UpdateNeighborsBits(const uint32_t border_field)
 {
     neighbors_bits.clear();
     const Section& border_field_section = data.sections[border_field];
@@ -70,7 +70,7 @@ void AlgorithmRefreshSubsegments::UpdateNeighborsBits(const uint32_t border_fiel
     }
 }
 
-void AlgorithmRefreshSubsegments::UpdateSectionNeighborhood(const uint32_t section_origin)
+void AlgorithmSubsegments::UpdateSectionNeighborhood(const uint32_t section_origin)
 {
     section_neighborhood.clear();
     const Section& current_section = data.sections[section_origin];
@@ -93,7 +93,7 @@ void AlgorithmRefreshSubsegments::UpdateSectionNeighborhood(const uint32_t secti
     }
 }
 
-void AlgorithmRefreshSubsegments::FindSegmentsToOptimize(const uint32_t parent_segment) const
+void AlgorithmSubsegments::FindSegmentsToOptimize(const uint32_t parent_segment) const
 {
     for(auto iter = section_neighborhood.begin(); iter != section_neighborhood.end(); ++iter)
     {
@@ -114,7 +114,7 @@ void AlgorithmRefreshSubsegments::FindSegmentsToOptimize(const uint32_t parent_s
     }
 }
 
-uint32_t AlgorithmRefreshSubsegments::GetNeighborhoodHash(const uint32_t section_field)
+uint32_t AlgorithmSubsegments::GetNeighborhoodHash(const uint32_t section_field)
 {
     uint32_t hash_result = 0;
     for(const uint32_t& section_field_neighbor : grid.GetNeighbors(section_field))
@@ -126,7 +126,7 @@ uint32_t AlgorithmRefreshSubsegments::GetNeighborhoodHash(const uint32_t section
     return hash_result;
 }
 
-void AlgorithmRefreshSubsegments::FindPossibleValuesForSubsegment(SubsegmentData& subsegment_data) const
+void AlgorithmSubsegments::FindPossibleValuesForSubsegment(SubsegmentData& subsegment_data) const
 {
     // all subsegment fields have the same neighboring section origins. just take the first one
     const uint32_t subsegment_field = subsegment_data.fields[0];
@@ -164,7 +164,7 @@ void AlgorithmRefreshSubsegments::FindPossibleValuesForSubsegment(SubsegmentData
     subsegment_data.current_possibility_id = 0;
 }
 
-uint32_t AlgorithmRefreshSubsegments::NChooseK(const uint32_t n, const uint32_t k) const
+uint32_t AlgorithmSubsegments::NChooseK(const uint32_t n, const uint32_t k) const
 {
     // look-up table to speed things up. there are relatively few possible cases here
     // vast majority of results are handled by those two cases
@@ -189,5 +189,5 @@ uint32_t AlgorithmRefreshSubsegments::NChooseK(const uint32_t n, const uint32_t 
         else if(k == 3 || k == 5) { return 56; }
         else if(k == 4) { return 70; }
     }
-    LOGGER_THROW("AlgorithmRefreshSubsegments::NChooseK - Unknown result for given n, k values");
+    LOGGER_THROW("AlgorithmSubsegments::NChooseK - Unknown result for given n, k values");
 }

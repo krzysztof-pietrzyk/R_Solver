@@ -1,6 +1,6 @@
-#include "AlgorithmRefreshSections.hpp"
+#include "AlgorithmSections.hpp"
 
-AlgorithmRefreshSections::AlgorithmRefreshSections(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_)
+AlgorithmSections::AlgorithmSections(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_)
     : Algorithm(grid_, data_),
     diff_bit_20(1), diff_bit_21(2),
     diff_bit_22(grid.GetWidth() - 2),
@@ -18,16 +18,16 @@ AlgorithmRefreshSections::AlgorithmRefreshSections(GridAccessPlayerIf& grid_, Al
     D_sections_origins(GetModifiableAlgorithmDataStorageReference().sections_origins),
     D_sections(GetModifiableAlgorithmDataStorageReference().sections)
 {
-    LOGGER(LogLevel::INIT) << "AlgorithmRefreshSections";
-    LOGGER_ASSERT(grid.GetSize() <= MAX_ALLOWED_GRID_SIZE, "AlgorithmRefreshSections - Grid size too large");
+    LOGGER(LogLevel::INIT) << "AlgorithmSections";
+    LOGGER_ASSERT(grid.GetSize() <= MAX_ALLOWED_GRID_SIZE, "AlgorithmSections - Grid size too large");
     sections_hashes = std::vector<uint32_t>(grid.GetSize(), 0);
     section_value_temp = 0;
     current_section_hash = 0;
 }
 
-AlgorithmRefreshSections::~AlgorithmRefreshSections() {}
+AlgorithmSections::~AlgorithmSections() {}
 
-AlgorithmStatus AlgorithmRefreshSections::Execution()
+AlgorithmStatus AlgorithmSections::Execution()
 {
     Clear();
 
@@ -43,7 +43,7 @@ AlgorithmStatus AlgorithmRefreshSections::Execution()
     return AlgorithmStatus::NO_STATUS;
 }
 
-void AlgorithmRefreshSections::Clear()
+void AlgorithmSections::Clear()
 {
     for(size_t i = 0; i < data.sections_origins_index; i++)
     {
@@ -55,7 +55,7 @@ void AlgorithmRefreshSections::Clear()
     D_sections_origins_index = 0;
 }
 
-void AlgorithmRefreshSections::AnalyzeSection(const uint32_t border_field)
+void AlgorithmSections::AnalyzeSection(const uint32_t border_field)
 {
         Section& current_section = D_sections[border_field];
         current_section.Clear();
@@ -74,7 +74,7 @@ void AlgorithmRefreshSections::AnalyzeSection(const uint32_t border_field)
         }
 }
 
-void AlgorithmRefreshSections::AnalyzeSectionField(const uint32_t border_field, const uint32_t border_field_neighbor, Section& current_section)
+void AlgorithmSections::AnalyzeSectionField(const uint32_t border_field, const uint32_t border_field_neighbor, Section& current_section)
 {
     // count the number of flags already marked around the border_field
     if(flagged.Contains(border_field_neighbor))
@@ -100,7 +100,7 @@ void AlgorithmRefreshSections::AnalyzeSectionField(const uint32_t border_field, 
     }
 }
 
-void AlgorithmRefreshSections::AnalyzeSectionNeighbor(const uint32_t border_field, const uint32_t section_neighbor, Section& current_section) const
+void AlgorithmSections::AnalyzeSectionNeighbor(const uint32_t border_field, const uint32_t section_neighbor, Section& current_section) const
 {
     // if this neighbor is not on border or is the currently considered field, ignore it
     if(!data.is_border[section_neighbor] || section_neighbor == border_field) { return; }
@@ -109,7 +109,7 @@ void AlgorithmRefreshSections::AnalyzeSectionNeighbor(const uint32_t border_fiel
     current_section.AddNeighbor(section_neighbor);
 }
 
-void AlgorithmRefreshSections::SaveSectionData(const uint32_t border_field, Section& current_section) const
+void AlgorithmSections::SaveSectionData(const uint32_t border_field, Section& current_section) const
 {
     // Save all the information about the section
     D_sections_origins[D_sections_origins_index++] = border_field;
@@ -118,7 +118,7 @@ void AlgorithmRefreshSections::SaveSectionData(const uint32_t border_field, Sect
     current_section.origin = border_field;
 }
 
-uint32_t AlgorithmRefreshSections::GetHashBit(uint32_t difference) const
+uint32_t AlgorithmSections::GetHashBit(uint32_t difference) const
 {
 	/* This method will only work as intended if the map has less than 1048576 fields
 
@@ -149,7 +149,7 @@ uint32_t AlgorithmRefreshSections::GetHashBit(uint32_t difference) const
     else LOGGER_THROW("AlgorithmFactory::Create - unhandled AlgorithmType");
 }
 
-bool AlgorithmRefreshSections::CheckHashUnique(uint32_t hash) const
+bool AlgorithmSections::CheckHashUnique(uint32_t hash) const
 {
     auto end = sections_hashes.begin() + data.sections_origins_index;
     return std::find(sections_hashes.begin(), end, hash) == end;

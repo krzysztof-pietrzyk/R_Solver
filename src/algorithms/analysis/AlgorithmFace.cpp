@@ -1,18 +1,18 @@
-#include "AlgorithmRefreshFace.hpp"
+#include "AlgorithmFace.hpp"
 
-AlgorithmRefreshFace::AlgorithmRefreshFace(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_)
+AlgorithmFace::AlgorithmFace(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_)
     : Algorithm(grid_, data_),
     D_face_index(GetModifiableAlgorithmDataStorageReference().face_index),
     D_face(GetModifiableAlgorithmDataStorageReference().face),
     D_is_face(GetModifiableAlgorithmDataStorageReference().is_face),
     D_segments_face(GetModifiableAlgorithmDataStorageReference().segments_face)
 {
-    LOGGER(LogLevel::INIT) << "AlgorithmRefreshFace";
+    LOGGER(LogLevel::INIT) << "AlgorithmFace";
 }
 
-AlgorithmRefreshFace::~AlgorithmRefreshFace() {}
+AlgorithmFace::~AlgorithmFace() {}
 
-AlgorithmStatus AlgorithmRefreshFace::Execution()
+AlgorithmStatus AlgorithmFace::Execution()
 {
     Clear();
 
@@ -41,7 +41,7 @@ AlgorithmStatus AlgorithmRefreshFace::Execution()
     return AlgorithmStatus::NO_STATUS;
 }
 
-void AlgorithmRefreshFace::Clear()
+void AlgorithmFace::Clear()
 {
     const uint32_t segments_to_clear = data.segments_count;
     for(size_t segment_id = 0; segment_id < segments_to_clear; segment_id++)

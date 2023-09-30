@@ -51,8 +51,10 @@ PlayerActionResult GridInternal::SetFlag(uint32_t field)
 void GridInternal::StartChainReactionAt(uint32_t field)
 {
     // Return if called on a non-zero field
-    if(GetFieldValue(field) != 0U) { return; }
-
+    if(GetFieldValue(field) != 0U)
+    {
+        return;
+    }
     chain_reaction_zeros.Clear();
     chain_reaction_zeros.Add(field);
     // chain_reaction_zeros.Index() may increase while the loop is being executed
@@ -67,7 +69,10 @@ void GridInternal::HandleChainReactionAt(uint32_t field)
 {
     for(const uint32_t& current_neighbor : neighbors[field])
     {
-        if(visible_fields.Contains(current_neighbor)) { continue; }
+        if(visible_fields.Contains(current_neighbor))
+        {
+            continue;
+        }
         visible_fields.Add(current_neighbor);
         if(GetFieldValue(current_neighbor) == 0U && !chain_reaction_zeros.Contains(current_neighbor))
         {

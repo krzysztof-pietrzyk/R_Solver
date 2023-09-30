@@ -1,6 +1,6 @@
-#include "AlgorithmRefreshSegments.hpp"
+#include "AlgorithmSegments.hpp"
 
-AlgorithmRefreshSegments::AlgorithmRefreshSegments(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_)
+AlgorithmSegments::AlgorithmSegments(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_)
     : Algorithm(grid_, data_),
     D_segments_index(GetModifiableAlgorithmDataStorageReference().segments_index),
     D_segments_count(GetModifiableAlgorithmDataStorageReference().segments_count),
@@ -8,15 +8,15 @@ AlgorithmRefreshSegments::AlgorithmRefreshSegments(GridAccessPlayerIf& grid_, Al
     D_segments_starting_indexes(GetModifiableAlgorithmDataStorageReference().segments_starting_indexes),
     D_segments_l(GetModifiableAlgorithmDataStorageReference().segments_l)
 {
-    LOGGER(LogLevel::INIT) << "AlgorithmRefreshSegments";
+    LOGGER(LogLevel::INIT) << "AlgorithmSegments";
     fields_to_check = std::vector<uint32_t>(grid.GetSize(), 0);
     fields_to_check_index = 0;
     is_checked = std::vector<bool>(grid.GetSize(), false);
 }
 
-AlgorithmRefreshSegments::~AlgorithmRefreshSegments() {}
+AlgorithmSegments::~AlgorithmSegments() {}
 
-AlgorithmStatus AlgorithmRefreshSegments::Execution()
+AlgorithmStatus AlgorithmSegments::Execution()
 {
     const uint32_t sections_origins_index = data.sections_origins_index;
     Clear();
@@ -33,7 +33,7 @@ AlgorithmStatus AlgorithmRefreshSegments::Execution()
     return AlgorithmStatus::NO_STATUS;
 }
 
-void AlgorithmRefreshSegments::Clear()
+void AlgorithmSegments::Clear()
 {
     for(size_t i = 0; i < fields_to_check_index; i++) { is_checked[fields_to_check[i]] = false; }
     fields_to_check_index = 0;
@@ -41,7 +41,7 @@ void AlgorithmRefreshSegments::Clear()
     D_segments_index = 0;
 }
 
-void AlgorithmRefreshSegments::ChainReactionFromField(uint32_t field)
+void AlgorithmSegments::ChainReactionFromField(uint32_t field)
 {
     if(!data.is_section_origin[field]) return;
     const uint32_t fields_to_check_starting_index = fields_to_check_index;

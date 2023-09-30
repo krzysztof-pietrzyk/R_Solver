@@ -1,5 +1,5 @@
-#ifndef ALGORITHM_REFRESH_COMBINATIONS_HPP
-#define ALGORITHM_REFRESH_COMBINATIONS_HPP
+#ifndef ALGORITHM_COMBINATIONS_HPP
+#define ALGORITHM_COMBINATIONS_HPP
 
 #include "../../statistics/collectors/StatisticsCollectorFailures.hpp"
 
@@ -23,13 +23,13 @@ class FailSafeException : public std::runtime_error
     }
 };
 
-class AlgorithmRefreshCombinations : public Algorithm
+class AlgorithmCombinations : public Algorithm
 {
     public:
 
-    AlgorithmRefreshCombinations(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_);
+    AlgorithmCombinations(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_);
 
-    ~AlgorithmRefreshCombinations();
+    ~AlgorithmCombinations();
 
     AlgorithmStatus Execution() override;
 
