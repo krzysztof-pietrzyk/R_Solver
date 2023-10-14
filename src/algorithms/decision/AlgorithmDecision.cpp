@@ -38,7 +38,7 @@ AlgorithmStatus AlgorithmDecision::CheckGameOverConditions() const
     {
         return AlgorithmStatus::GAME_LOST;
     }
-    else if(visible.Index() == grid.GetTotalSafeFields())
+    else if(visible.Index() == grid_dim.safe)
     {
         return AlgorithmStatus::GAME_WON;
     }

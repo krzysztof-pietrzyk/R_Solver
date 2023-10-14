@@ -19,6 +19,7 @@ class Generator : public StatisticsProducer
     protected:
 
     GridAccessGeneratorIf& grid;
+    const GridDimensions grid_dim;
 
     uint32_t starting_field;
 };

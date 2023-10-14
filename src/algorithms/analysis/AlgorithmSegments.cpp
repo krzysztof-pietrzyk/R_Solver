@@ -9,9 +9,9 @@ AlgorithmSegments::AlgorithmSegments(GridAccessPlayerIf& grid_, AlgorithmDataSto
     D_segments_l(GetModifiableAlgorithmDataStorageReference().segments_l)
 {
     LOGGER(LogLevel::INIT) << "AlgorithmSegments";
-    fields_to_check = std::vector<uint32_t>(grid.GetSize(), 0);
+    fields_to_check = std::vector<uint32_t>(grid_dim.size, 0);
     fields_to_check_index = 0;
-    is_checked = std::vector<bool>(grid.GetSize(), false);
+    is_checked = std::vector<bool>(grid_dim.size, false);
 }
 
 AlgorithmSegments::~AlgorithmSegments() {}

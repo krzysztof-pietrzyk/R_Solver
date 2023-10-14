@@ -8,8 +8,8 @@ AlgorithmSubsegments::AlgorithmSubsegments(GridAccessPlayerIf& grid_, AlgorithmD
     D_subsegments_cache_index(GetModifiableAlgorithmDataStorageReference().subsegments_cache_index)
 {
     LOGGER(LogLevel::INIT) << "AlgorithmSubsegments";
-    is_checked = std::vector<bool>(grid.GetSize(), false);
-    checked = std::vector<uint32_t>(grid.GetSize(), 0);
+    is_checked = std::vector<bool>(grid_dim.size, false);
+    checked = std::vector<uint32_t>(grid_dim.size, 0);
     checked_index = 0;
     neighbors_bits = std::map<uint32_t, uint32_t>();
     section_neighborhood = std::map<uint32_t, std::vector<uint32_t>>();

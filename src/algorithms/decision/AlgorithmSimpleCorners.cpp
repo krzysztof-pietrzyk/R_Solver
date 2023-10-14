@@ -5,9 +5,9 @@ AlgorithmSimpleCorners::AlgorithmSimpleCorners(GridAccessPlayerIf& grid_, Algori
 {
     LOGGER(LogLevel::INIT) << "AlgorithmSimpleCorners";
     const uint32_t upper_left = 0;
-    const uint32_t upper_right = grid.GetWidth() - 1;
-    const uint32_t bottom_left = (grid.GetHeight() - 1) * grid.GetWidth();
-    const uint32_t bottom_right = grid.GetHeight() * grid.GetWidth() - 1;
+    const uint32_t upper_right = grid_dim.width - 1;
+    const uint32_t bottom_left = (grid_dim.height - 1) * grid_dim.width;
+    const uint32_t bottom_right = grid_dim.height * grid_dim.width - 1;
     corners = std::vector<uint32_t>();
     corners.push_back(upper_left);
     corners.push_back(upper_right);

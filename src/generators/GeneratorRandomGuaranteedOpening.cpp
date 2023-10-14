@@ -17,7 +17,7 @@ GeneratorRandomGuaranteedOpening::~GeneratorRandomGuaranteedOpening()
 
 void GeneratorRandomGuaranteedOpening::ValidateGridDimensions()
 {
-    bool grid_valid = grid.GetSize() - grid.GetTotalMines() >= minimum_safe_fields;
+    bool grid_valid = grid_dim.size - grid_dim.mines >= minimum_safe_fields;
     LOGGER_ASSERT(grid_valid, "GeneratorRandomGuaranteedOpening::ValidateGridDimensions - Invalid grid dimensions");
 }
 
@@ -25,9 +25,9 @@ void GeneratorRandomGuaranteedOpening::CreateTemplate()
 {
     const std::vector<uint32_t>& starting_field_neighbors = grid.GetNeighbors(starting_field);
     const uint32_t starting_field_neighbors_num = starting_field_neighbors.size();
-    current_template = std::vector<uint32_t>(grid.GetSize() - starting_field_neighbors_num - 1U, 0U);
+    current_template = std::vector<uint32_t>(grid_dim.size - starting_field_neighbors_num - 1U, 0U);
     uint32_t index = 0U;
-    for(uint32_t i = 0U; i < grid.GetSize(); i++)
+    for(uint32_t i = 0U; i < grid_dim.size; i++)
     {
         if(i == starting_field || std::find(starting_field_neighbors.begin(), starting_field_neighbors.end(), i) != starting_field_neighbors.end())
         {

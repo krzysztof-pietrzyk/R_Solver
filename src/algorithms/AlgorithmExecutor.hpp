@@ -23,13 +23,12 @@ class AlgorithmExecutor
 
     private:
 
-    GridAccessPlayerIf* grid;
     AlgorithmDataStorage* data;
     AlgorithmTransitionManager transitions;
 
     std::map<AlgorithmType, Algorithm*> algorithms;  // pointers to all algorithms
 
-    void CreateAlgorithms();
+    void CreateAlgorithms(GridAccessPlayerIf& grid);
 };
 
 #endif

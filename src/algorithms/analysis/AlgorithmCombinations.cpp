@@ -11,7 +11,7 @@ AlgorithmCombinations::AlgorithmCombinations(GridAccessPlayerIf& grid_, Algorith
     D_total_combinations(GetModifiableAlgorithmDataStorageReference().total_combinations)
 {
     LOGGER(LogLevel::INIT) << "AlgorithmCombinations";
-    field_states = std::vector<FieldState>(grid.GetSize(), FieldState::UNASSIGNED);
+    field_states = std::vector<FieldState>(grid_dim.size, FieldState::UNASSIGNED);
     choice_stack = std::vector<uint32_t>();
     segment_of_choice_stack = std::vector<uint32_t>();
     modifications_stack = std::vector<uint32_t>();
@@ -19,11 +19,11 @@ AlgorithmCombinations::AlgorithmCombinations(GridAccessPlayerIf& grid_, Algorith
     remaining_mines = 0;
     remaining_fields = 0;
 
-    mine_counts_in_segment = std::vector<std::vector<uint32_t>>(grid.GetTotalMines(), std::vector<uint32_t>());
-    current_mine_count_id_in_segment = std::vector<size_t>(grid.GetTotalMines(), 0);
+    mine_counts_in_segment = std::vector<std::vector<uint32_t>>(grid_dim.mines, std::vector<uint32_t>());
+    current_mine_count_id_in_segment = std::vector<size_t>(grid_dim.mines, 0);
 
-    segments_combinations = std::vector<std::map<uint32_t, BigNum>>(grid.GetTotalMines(), std::map<uint32_t, BigNum>());
-    field_combinations_temp = std::vector<std::map<uint32_t, BigNum>>(grid.GetSize(), std::map<uint32_t, BigNum>());
+    segments_combinations = std::vector<std::map<uint32_t, BigNum>>(grid_dim.mines, std::map<uint32_t, BigNum>());
+    field_combinations_temp = std::vector<std::map<uint32_t, BigNum>>(grid_dim.size, std::map<uint32_t, BigNum>());
 
     statistics_failures = new StatisticsCollectorFailures();  // deleted in StatisticsProducer
     statistics_collectors.push_back(statistics_failures);
@@ -34,8 +34,8 @@ AlgorithmCombinations::~AlgorithmCombinations() {}
 AlgorithmStatus AlgorithmCombinations::Execution()
 {
     Clear();
-    remaining_mines = grid.GetTotalMines() - flagged.Index();
-    remaining_fields = grid.GetSize() - visible.Index() - flagged.Index() - data.face_index;
+    remaining_mines = grid_dim.mines - flagged.Index();
+    remaining_fields = grid_dim.size - visible.Index() - flagged.Index() - data.face_index;
     const uint32_t segments_to_check = data.segments_count;
     try
     {

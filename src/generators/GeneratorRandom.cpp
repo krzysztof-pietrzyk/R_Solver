@@ -30,7 +30,7 @@ void GeneratorRandom::GenerateMinePositions()
 
     CopyTemplateToWorkingVector();
 
-    for(size_t i = 0; i < grid.GetTotalMines(); i++)
+    for(size_t i = 0; i < grid_dim.mines; i++)
     {
         // Get random poll_index between 0 and current_max
         poll_index = RandomNumberGenerator::GetRandom() % current_max;

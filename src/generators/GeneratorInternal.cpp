@@ -3,10 +3,10 @@
 GeneratorInternal::GeneratorInternal(GridAccessGeneratorIf& grid_) : Generator(grid_)
 {
     LOGGER(LogLevel::INIT) << "GeneratorInternal";
-    generated_safe_fields = std::vector<uint32_t>(grid.GetSize(), 0U);
+    generated_safe_fields = std::vector<uint32_t>(grid_dim.size, 0U);
     forced_safe_fields = std::vector<uint32_t>();
-    generated_mine_fields = CachedVector(grid.GetSize());
-    generated_field_values = std::vector<uint8_t>(grid.GetSize(), 0U);
+    generated_mine_fields = CachedVector(grid_dim.size);
+    generated_field_values = std::vector<uint8_t>(grid_dim.size, 0U);
     statistics_field_types = new StatisticsCollectorFieldTypes();  // deleted in StatisticsProducer
     statistics_collectors.push_back(statistics_field_types);
 }

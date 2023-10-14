@@ -30,6 +30,7 @@ class Algorithm : public StatisticsProducer
     const AlgorithmDataStorage& data;
     const CachedVector& visible;
     const CachedVector& flagged;
+    const GridDimensions grid_dim;
     StatisticsCollectorExecutions* statistics_executions;
 
     virtual AlgorithmStatus Execution() = 0;

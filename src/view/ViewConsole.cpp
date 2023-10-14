@@ -25,12 +25,11 @@ const uint32_t ViewConsole::num_of_digits = 10U;
 
 using std::to_string, std::endl, std::cout, std::setw, std::left, std::right, std::setfill;
 
-ViewConsole::ViewConsole(GridAccessViewIf& _grid)
-    : grid(_grid),
-    row_indicator_max_w(to_string(grid.GetHeight()).length()),
-    is_wider_than_10(grid.GetWidth() > 10),
-    grid_width(grid.GetWidth()),
-    grid_height(grid.GetHeight())
+ViewConsole::ViewConsole(GridAccessViewIf& grid_)
+    : grid(grid_),
+    grid_dim(grid_.GetDimensions()),
+    row_indicator_max_w(to_string(grid_dim.height).length()),
+    is_wider_than_10(grid_dim.width > 10)
 {
     LOGGER(LogLevel::INIT) << "ViewConsole";
 }
@@ -65,7 +64,7 @@ void ViewConsole::DrawBigNumberRow(std::stringstream& output)
     if(is_wider_than_10)
     {
         output << setw(row_indicator_max_w + 1) << "";
-		for(size_t i = 0; i < grid_width; i += num_of_digits)
+		for(size_t i = 0; i < grid_dim.width; i += num_of_digits)
         {
             output << setw(num_of_digits) << left << i;
         }
@@ -76,7 +75,7 @@ void ViewConsole::DrawBigNumberRow(std::stringstream& output)
 void ViewConsole::DrawSmallNumberRow(std::stringstream& output)
 {
 	output << setw(row_indicator_max_w + 1) << "";
-	for(size_t i = 0; i < grid_width; i++)
+	for(size_t i = 0; i < grid_dim.width; i++)
     {
         output << i % num_of_digits;
     }
@@ -86,17 +85,17 @@ void ViewConsole::DrawSmallNumberRow(std::stringstream& output)
 void ViewConsole::DrawHorizontalBar(std::stringstream& output)
 {
     output << setw(row_indicator_max_w) << "" << frame_corner << setfill(frame_horizontal) 
-        << setw(grid_width) << "" << frame_corner << setfill(' ') << endl;
+        << setw(grid_dim.width) << "" << frame_corner << setfill(' ') << endl;
 }
 
 void ViewConsole::DrawGridRows(std::stringstream& output, const std::vector<FieldType>& fields_to_display)
 {
-    for(size_t i = 0; i < grid_height; i++)
+    for(size_t i = 0; i < grid_dim.height; i++)
 	{
 		output << setw(row_indicator_max_w) << right << i << frame_vertical;
-		for(size_t j = 0; j < grid_width; j++)
+		for(size_t j = 0; j < grid_dim.width; j++)
 		{
-			uint32_t position = i * grid_width + j;
+			uint32_t position = i * grid_dim.width + j;
             output << fields_map.at(fields_to_display[position]);
 		}
 		output << frame_vertical << left << i << endl;

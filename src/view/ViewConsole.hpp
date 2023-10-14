@@ -15,7 +15,7 @@ class ViewConsole : public ViewIf
 {
     public:
 
-    ViewConsole(GridAccessViewIf& _grid);
+    ViewConsole(GridAccessViewIf& grid_);
 
     ~ViewConsole();
 
@@ -25,10 +25,9 @@ class ViewConsole : public ViewIf
 
     GridAccessViewIf& grid;
 
+    const GridDimensions grid_dim;
     const uint32_t row_indicator_max_w;
     const bool is_wider_than_10;
-    const uint32_t grid_width;
-    const uint32_t grid_height;
 
     static const std::map<FieldType, char> fields_map;
     static const char frame_horizontal;

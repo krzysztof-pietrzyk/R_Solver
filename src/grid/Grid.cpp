@@ -29,31 +29,6 @@ GridDimensions Grid::GetDimensions() const
     return dimensions;
 }
 
-uint16_t Grid::GetWidth() const
-{
-    return dimensions.width;
-}
-
-uint16_t Grid::GetHeight() const
-{
-    return dimensions.height;
-}
-
-uint32_t Grid::GetSize() const
-{
-    return dimensions.size;
-}
-
-uint32_t Grid::GetTotalMines() const
-{
-    return dimensions.mines;
-}
-
-uint32_t Grid::GetTotalSafeFields() const
-{
-    return dimensions.safe;
-}
-
 const std::vector<uint32_t>& Grid::GetNeighbors(uint32_t field) const
 {
     return neighbors.at(field);

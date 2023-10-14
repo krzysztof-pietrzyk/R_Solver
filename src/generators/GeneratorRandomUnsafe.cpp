@@ -20,8 +20,8 @@ void GeneratorRandomUnsafe::ValidateGridDimensions()
 
 void GeneratorRandomUnsafe::CreateTemplate()
 {
-    current_template = std::vector<uint32_t>(grid.GetSize(), 0U);
-    for(uint32_t i = 0U; i < grid.GetSize(); i++)
+    current_template = std::vector<uint32_t>(grid_dim.size, 0U);
+    for(uint32_t i = 0U; i < grid_dim.size; i++)
     {
         current_template[i] = i;
     }

@@ -1,42 +1,45 @@
 #include "AlgorithmDataStorage.hpp"
 
-AlgorithmDataStorage::AlgorithmDataStorage(GridAccessPlayerIf& grid)
+AlgorithmDataStorage::AlgorithmDataStorage(GridDimensions grid_dim)
 {
     LOGGER(LogLevel::INIT) << "AlgorithmDataStorage";
-    is_border = std::vector<bool>(grid.GetSize(), false);
-    border = std::vector<uint32_t>(grid.GetSize(), 0);
+    LOGGER(LogLevel::INIT) << "GridDimensions are: " <<
+        int(grid_dim.width) << "x" << int(grid_dim.height) << ", size " << int(grid_dim.size) <<
+        ", mines " << int(grid_dim.mines) << ", safe " << int(grid_dim.safe);
+    is_border = std::vector<bool>(grid_dim.size, false);
+    border = std::vector<uint32_t>(grid_dim.size, 0);
     border_index = 0;
     border_last_visible_fields_index = 0;
 
     sections_origins_index = 0;
-    sections_origins = std::vector<uint32_t>(grid.GetSize(), 0);
-    is_section_origin = std::vector<bool>(grid.GetSize(), false);
-    sections = std::vector<Section>(grid.GetSize(), Section());
+    sections_origins = std::vector<uint32_t>(grid_dim.size, 0);
+    is_section_origin = std::vector<bool>(grid_dim.size, false);
+    sections = std::vector<Section>(grid_dim.size, Section());
 
     segments_index = 0;
     segments_count = 0;
-    segments = std::vector<uint32_t>(grid.GetTotalSafeFields(), 0);
-    segments_starting_indexes = std::vector<uint32_t>(grid.GetTotalSafeFields(), 0);
-    segments_l = std::vector<uint32_t>(grid.GetTotalSafeFields(), 0);
+    segments = std::vector<uint32_t>(grid_dim.safe, 0);
+    segments_starting_indexes = std::vector<uint32_t>(grid_dim.safe, 0);
+    segments_l = std::vector<uint32_t>(grid_dim.safe, 0);
 
     subsegments = std::vector<std::vector<SubsegmentData>>();
-    is_subsegment = std::vector<bool>(grid.GetSize(), false);
-    subsegments_cache = std::vector<uint32_t>(grid.GetSize(), 0);
+    is_subsegment = std::vector<bool>(grid_dim.size, false);
+    subsegments_cache = std::vector<uint32_t>(grid_dim.size, 0);
     subsegments_cache_index = 0;
 
-    face = std::vector<uint32_t>(grid.GetSize(), 0);
-    is_face = std::vector<bool>(grid.GetSize(), false);
+    face = std::vector<uint32_t>(grid_dim.size, 0);
+    is_face = std::vector<bool>(grid_dim.size, false);
     face_index = 0;
-    segments_face = std::vector<std::vector<uint32_t>>(grid.GetTotalMines(), std::vector<uint32_t>());
+    segments_face = std::vector<std::vector<uint32_t>>(grid_dim.mines, std::vector<uint32_t>());
 
-    factorial = std::vector<BigNum>(grid.GetSize(), BigNum(0));
-    factorial_reciprocal = std::vector<BigNum>(grid.GetSize(), BigNum(0));
+    factorial = std::vector<BigNum>(grid_dim.size, BigNum(0));
+    factorial_reciprocal = std::vector<BigNum>(grid_dim.size, BigNum(0));
 
-    field_combinations = std::vector<BigNum>(grid.GetSize(), BigNum(0));
+    field_combinations = std::vector<BigNum>(grid_dim.size, BigNum(0));
     total_combinations = BigNum(0);
     remaining_fields_combinations = BigNum(0);
 
-    PreCalculateFactorials(grid.GetSize());
+    PreCalculateFactorials(grid_dim.size);
 }
 
 AlgorithmDataStorage::~AlgorithmDataStorage() {}

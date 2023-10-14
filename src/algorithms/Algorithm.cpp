@@ -2,7 +2,7 @@
 
 Algorithm::Algorithm(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_)
     : grid(grid_), data(data_), _grid(grid_), _data(data_), 
-    visible(grid_.GetVisibleFields()), flagged(grid_.GetFlaggedFields())
+    visible(grid_.GetVisibleFields()), flagged(grid_.GetFlaggedFields()), grid_dim(grid_.GetDimensions())
 {
     LOGGER(LogLevel::INIT) << "Algorithm";
     statistics_executions = new StatisticsCollectorExecutions();  // deleted in StatisticsProducer

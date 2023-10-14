@@ -2,7 +2,7 @@
 #define ALGORITHM_DATA_STORAGE_HPP
 
 #include "../utils/Logger.hpp"
-#include "../grid/GridAccessPlayerIf.hpp"
+#include "../grid/GridDimensions.hpp"
 #include "../utils/BigNum.hpp"
 
 #include "Section.hpp"
@@ -63,7 +63,7 @@ class AlgorithmDataStorage
     BigNum remaining_fields_combinations;
     BigNum total_combinations;
 
-    AlgorithmDataStorage(GridAccessPlayerIf& grid);
+    AlgorithmDataStorage(GridDimensions grid_dim);
 
     ~AlgorithmDataStorage();
 

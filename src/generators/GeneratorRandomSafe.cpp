@@ -17,15 +17,15 @@ GeneratorRandomSafe::~GeneratorRandomSafe()
 
 void GeneratorRandomSafe::ValidateGridDimensions()
 {
-    bool grid_valid = grid.GetSize() - grid.GetTotalMines() >= minimum_safe_fields;
+    bool grid_valid = grid_dim.size - grid_dim.mines >= minimum_safe_fields;
     LOGGER_ASSERT(grid_valid, "GeneratorRandomSafe::ValidateGridDimensions - Invalid grid dimensions");
 }
 
 void GeneratorRandomSafe::CreateTemplate()
 {
-    current_template = std::vector<uint32_t>(grid.GetSize() - 1U, 0U);
+    current_template = std::vector<uint32_t>(grid_dim.size - 1U, 0U);
     uint32_t index = 0U;
-    for(uint32_t i = 0U; i < grid.GetSize(); i++)
+    for(uint32_t i = 0U; i < grid_dim.size; i++)
     {
         if(i == starting_field)
         {

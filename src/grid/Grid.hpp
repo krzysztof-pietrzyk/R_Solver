@@ -20,11 +20,6 @@ class Grid :
 
     // GridAccessCommonIf
     virtual GridDimensions GetDimensions() const override;
-    virtual uint16_t GetWidth() const override;
-    virtual uint16_t GetHeight() const override;
-    virtual uint32_t GetSize() const override;
-    virtual uint32_t GetTotalMines() const override;
-    virtual uint32_t GetTotalSafeFields() const override;
     virtual const std::vector<uint32_t>& GetNeighbors(uint32_t field) const override;
 
     // GridAccessPlayerIf
