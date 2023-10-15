@@ -1,6 +1,6 @@
 #include "AlgorithmCombinationsSafeMoves.hpp"
 
-AlgorithmCombinationsSafeMoves::AlgorithmCombinationsSafeMoves(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_)
+AlgorithmCombinationsSafeMoves::AlgorithmCombinationsSafeMoves(GridAccessPlayerIf& grid_, AlgorithmDataTransfer& data_)
     : AlgorithmDecision(grid_, data_)
 {
     LOGGER(LogLevel::INIT) << "AlgorithmCombinationsSafeMoves";

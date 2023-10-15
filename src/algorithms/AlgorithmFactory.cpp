@@ -1,6 +1,6 @@
 #include "AlgorithmFactory.hpp"
 
-Algorithm* AlgorithmFactory::Create(AlgorithmType type, GridAccessPlayerIf& grid, AlgorithmDataStorage& data)
+Algorithm* AlgorithmFactory::Create(AlgorithmType type, GridAccessPlayerIf& grid, AlgorithmDataTransfer& data)
 {
     switch(type)
     {

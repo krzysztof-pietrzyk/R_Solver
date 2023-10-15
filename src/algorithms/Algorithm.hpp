@@ -6,7 +6,7 @@
 #include "../statistics/StatisticsProducer.hpp"
 #include "../statistics/collectors/StatisticsCollectorExecutions.hpp"
 
-#include "AlgorithmDataStorage.hpp"
+#include "AlgorithmDataTransfer.hpp"
 #include "AlgorithmStatus.hpp"
 
 class Algorithm : public StatisticsProducer
@@ -14,11 +14,11 @@ class Algorithm : public StatisticsProducer
     /*
     Abstract base class for algorithm objects.
     Each algorithm has a Run() method, which executes the algorithm
-    Algorithms have access to AlgorithmDataStorage and GridManager
+    Algorithms have access to AlgorithmDataTransfer and GridManager
     */
     public:
     
-    Algorithm(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_);
+    Algorithm(GridAccessPlayerIf& grid_, AlgorithmDataTransfer& data_);
 
     ~Algorithm();
 
@@ -27,7 +27,7 @@ class Algorithm : public StatisticsProducer
     protected:
 
     const GridAccessPlayerIf& grid;
-    const AlgorithmDataStorage& data;
+    const AlgorithmDataTransfer& data;
     const CachedVector& visible;
     const CachedVector& flagged;
     const GridDimensions grid_dim;
@@ -37,13 +37,13 @@ class Algorithm : public StatisticsProducer
 
     GridAccessPlayerIf& GetModifiableGridReference() const;
 
-    AlgorithmDataStorage& GetModifiableAlgorithmDataStorageReference() const;
+    AlgorithmDataTransfer& GetModifiableAlgorithmDataTransferReference() const;
 
     private:
 
     GridAccessPlayerIf& _grid;
 
-    AlgorithmDataStorage& _data;
+    AlgorithmDataTransfer& _data;
 };
 
 #endif

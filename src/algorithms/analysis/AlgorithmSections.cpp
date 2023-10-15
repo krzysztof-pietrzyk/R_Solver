@@ -1,6 +1,6 @@
 #include "AlgorithmSections.hpp"
 
-AlgorithmSections::AlgorithmSections(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_)
+AlgorithmSections::AlgorithmSections(GridAccessPlayerIf& grid_, AlgorithmDataTransfer& data_)
     : Algorithm(grid_, data_),
     diff_bit_20(1), diff_bit_21(2),
     diff_bit_22(grid_dim.width - 2),
@@ -13,10 +13,10 @@ AlgorithmSections::AlgorithmSections(GridAccessPlayerIf& grid_, AlgorithmDataSto
     diff_bit_29(2 * grid_dim.width),
     diff_bit_30(2 * grid_dim.width + 1),
     diff_bit_31(2 * grid_dim.width + 2),
-    D_sections_origins_index(GetModifiableAlgorithmDataStorageReference().sections_origins_index),
-    D_is_section_origin(GetModifiableAlgorithmDataStorageReference().is_section_origin),
-    D_sections_origins(GetModifiableAlgorithmDataStorageReference().sections_origins),
-    D_sections(GetModifiableAlgorithmDataStorageReference().sections)
+    D_sections_origins_index(GetModifiableAlgorithmDataTransferReference().sections_origins_index),
+    D_is_section_origin(GetModifiableAlgorithmDataTransferReference().is_section_origin),
+    D_sections_origins(GetModifiableAlgorithmDataTransferReference().sections_origins),
+    D_sections(GetModifiableAlgorithmDataTransferReference().sections)
 {
     LOGGER(LogLevel::INIT) << "AlgorithmSections";
     LOGGER_ASSERT(grid_dim.size <= MAX_ALLOWED_GRID_SIZE, "AlgorithmSections - Grid size too large");

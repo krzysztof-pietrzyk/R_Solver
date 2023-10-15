@@ -1,11 +1,11 @@
 #include "AlgorithmFace.hpp"
 
-AlgorithmFace::AlgorithmFace(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_)
+AlgorithmFace::AlgorithmFace(GridAccessPlayerIf& grid_, AlgorithmDataTransfer& data_)
     : Algorithm(grid_, data_),
-    D_face_index(GetModifiableAlgorithmDataStorageReference().face_index),
-    D_face(GetModifiableAlgorithmDataStorageReference().face),
-    D_is_face(GetModifiableAlgorithmDataStorageReference().is_face),
-    D_segments_face(GetModifiableAlgorithmDataStorageReference().segments_face)
+    D_face_index(GetModifiableAlgorithmDataTransferReference().face_index),
+    D_face(GetModifiableAlgorithmDataTransferReference().face),
+    D_is_face(GetModifiableAlgorithmDataTransferReference().is_face),
+    D_segments_face(GetModifiableAlgorithmDataTransferReference().segments_face)
 {
     LOGGER(LogLevel::INIT) << "AlgorithmFace";
 }

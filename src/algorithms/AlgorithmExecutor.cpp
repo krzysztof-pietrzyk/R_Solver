@@ -3,7 +3,7 @@
 AlgorithmExecutor::AlgorithmExecutor(GridAccessPlayerIf& grid_)
 {
     LOGGER(LogLevel::INIT) << "AlgorithmExecutor";
-    data = new AlgorithmDataStorage(grid_.GetDimensions());
+    data = new AlgorithmDataTransfer(grid_.GetDimensions());
 
     algorithms = std::map<AlgorithmType, Algorithm*>();
     transitions = AlgorithmTransitionManager();

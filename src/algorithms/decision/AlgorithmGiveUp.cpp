@@ -1,6 +1,6 @@
 #include "AlgorithmGiveUp.hpp"
 
-AlgorithmGiveUp::AlgorithmGiveUp(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_)
+AlgorithmGiveUp::AlgorithmGiveUp(GridAccessPlayerIf& grid_, AlgorithmDataTransfer& data_)
     : AlgorithmDecision(grid_, data_),
     D_grid(GetModifiableGridReference())
 {

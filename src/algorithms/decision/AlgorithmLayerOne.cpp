@@ -1,6 +1,6 @@
 #include "AlgorithmLayerOne.hpp"
 
-AlgorithmLayerOne::AlgorithmLayerOne(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_)
+AlgorithmLayerOne::AlgorithmLayerOne(GridAccessPlayerIf& grid_, AlgorithmDataTransfer& data_)
     : AlgorithmDecision(grid_, data_)
 {
     LOGGER(LogLevel::INIT) << "AlgorithmLayerOne";

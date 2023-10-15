@@ -1,11 +1,11 @@
 #include "AlgorithmBorder.hpp"
 
-AlgorithmBorder::AlgorithmBorder(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_)
+AlgorithmBorder::AlgorithmBorder(GridAccessPlayerIf& grid_, AlgorithmDataTransfer& data_)
     : Algorithm(grid_, data_),
-    D_border_index(GetModifiableAlgorithmDataStorageReference().border_index),
-    D_border_last_visible_fields_index(GetModifiableAlgorithmDataStorageReference().border_last_visible_fields_index),
-    D_border(GetModifiableAlgorithmDataStorageReference().border),
-    D_is_border(GetModifiableAlgorithmDataStorageReference().is_border)
+    D_border_index(GetModifiableAlgorithmDataTransferReference().border_index),
+    D_border_last_visible_fields_index(GetModifiableAlgorithmDataTransferReference().border_last_visible_fields_index),
+    D_border(GetModifiableAlgorithmDataTransferReference().border),
+    D_is_border(GetModifiableAlgorithmDataTransferReference().is_border)
 {
     LOGGER(LogLevel::INIT) << "AlgorithmBorder";
 }

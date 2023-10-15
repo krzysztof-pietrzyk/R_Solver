@@ -7,7 +7,7 @@ class AlgorithmSubsegments : public Algorithm
 {
     public:
 
-    AlgorithmSubsegments(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_);
+    AlgorithmSubsegments(GridAccessPlayerIf& grid_, AlgorithmDataTransfer& data_);
 
     ~AlgorithmSubsegments();
 

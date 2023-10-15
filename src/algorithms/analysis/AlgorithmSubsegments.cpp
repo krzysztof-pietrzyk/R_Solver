@@ -1,11 +1,11 @@
 #include "AlgorithmSubsegments.hpp"
 
-AlgorithmSubsegments::AlgorithmSubsegments(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_)
+AlgorithmSubsegments::AlgorithmSubsegments(GridAccessPlayerIf& grid_, AlgorithmDataTransfer& data_)
     : Algorithm(grid_, data_),
-    D_subsegments(GetModifiableAlgorithmDataStorageReference().subsegments),
-    D_is_subsegment(GetModifiableAlgorithmDataStorageReference().is_subsegment),
-    D_subsegments_cache(GetModifiableAlgorithmDataStorageReference().subsegments_cache),
-    D_subsegments_cache_index(GetModifiableAlgorithmDataStorageReference().subsegments_cache_index)
+    D_subsegments(GetModifiableAlgorithmDataTransferReference().subsegments),
+    D_is_subsegment(GetModifiableAlgorithmDataTransferReference().is_subsegment),
+    D_subsegments_cache(GetModifiableAlgorithmDataTransferReference().subsegments_cache),
+    D_subsegments_cache_index(GetModifiableAlgorithmDataTransferReference().subsegments_cache_index)
 {
     LOGGER(LogLevel::INIT) << "AlgorithmSubsegments";
     is_checked = std::vector<bool>(grid_dim.size, false);

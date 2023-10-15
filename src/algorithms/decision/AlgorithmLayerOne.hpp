@@ -23,7 +23,7 @@ class AlgorithmLayerOne : public AlgorithmDecision
     */
     public:
 
-    AlgorithmLayerOne(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_);
+    AlgorithmLayerOne(GridAccessPlayerIf& grid_, AlgorithmDataTransfer& data_);
 
     ~AlgorithmLayerOne();
 

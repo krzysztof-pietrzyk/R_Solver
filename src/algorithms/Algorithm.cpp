@@ -1,6 +1,6 @@
 #include "Algorithm.hpp"
 
-Algorithm::Algorithm(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_)
+Algorithm::Algorithm(GridAccessPlayerIf& grid_, AlgorithmDataTransfer& data_)
     : grid(grid_), data(data_), _grid(grid_), _data(data_), 
     visible(grid_.GetVisibleFields()), flagged(grid_.GetFlaggedFields()), grid_dim(grid_.GetDimensions())
 {
@@ -26,7 +26,7 @@ GridAccessPlayerIf& Algorithm::GetModifiableGridReference() const
     return _grid;
 }
 
-AlgorithmDataStorage& Algorithm::GetModifiableAlgorithmDataStorageReference() const
+AlgorithmDataTransfer& Algorithm::GetModifiableAlgorithmDataTransferReference() const
 {
     return _data;
 }

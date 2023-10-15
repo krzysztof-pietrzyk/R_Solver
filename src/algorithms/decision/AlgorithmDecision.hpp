@@ -12,7 +12,7 @@ class AlgorithmDecision : public Algorithm
     */
     public:
 
-    AlgorithmDecision(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_);
+    AlgorithmDecision(GridAccessPlayerIf& grid_, AlgorithmDataTransfer& data_);
 
     ~AlgorithmDecision();
 

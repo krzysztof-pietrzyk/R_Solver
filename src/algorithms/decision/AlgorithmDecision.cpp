@@ -1,6 +1,6 @@
 #include "AlgorithmDecision.hpp"
 
-AlgorithmDecision::AlgorithmDecision(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_)
+AlgorithmDecision::AlgorithmDecision(GridAccessPlayerIf& grid_, AlgorithmDataTransfer& data_)
     : Algorithm(grid_, data_),
     D_grid(GetModifiableGridReference())
 {

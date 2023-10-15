@@ -14,7 +14,7 @@ class AlgorithmLayerTwo : public AlgorithmDecision
     */
     public:
 
-    AlgorithmLayerTwo(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_);
+    AlgorithmLayerTwo(GridAccessPlayerIf& grid_, AlgorithmDataTransfer& data_);
 
     ~AlgorithmLayerTwo();
 

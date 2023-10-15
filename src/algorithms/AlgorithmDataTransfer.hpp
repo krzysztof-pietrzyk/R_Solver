@@ -1,5 +1,5 @@
-#ifndef ALGORITHM_DATA_STORAGE_HPP
-#define ALGORITHM_DATA_STORAGE_HPP
+#ifndef ALGORITHM_DATA_TRANSFER_HPP
+#define ALGORITHM_DATA_TRANSFER_HPP
 
 #include "../utils/Logger.hpp"
 #include "../grid/GridDimensions.hpp"
@@ -19,7 +19,7 @@ struct SubsegmentData
     size_t current_possibility_id;
 };
 
-class AlgorithmDataStorage
+class AlgorithmDataTransfer
 {
     /*
     This class is used for storing all data which needs to be exchanged between algorithms.
@@ -63,9 +63,9 @@ class AlgorithmDataStorage
     BigNum remaining_fields_combinations;
     BigNum total_combinations;
 
-    AlgorithmDataStorage(GridDimensions grid_dim);
+    AlgorithmDataTransfer(GridDimensions grid_dim);
 
-    ~AlgorithmDataStorage();
+    ~AlgorithmDataTransfer();
 
     void Clear();
 

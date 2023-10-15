@@ -1,8 +1,8 @@
-#include "AlgorithmDataStorage.hpp"
+#include "AlgorithmDataTransfer.hpp"
 
-AlgorithmDataStorage::AlgorithmDataStorage(GridDimensions grid_dim)
+AlgorithmDataTransfer::AlgorithmDataTransfer(GridDimensions grid_dim)
 {
-    LOGGER(LogLevel::INIT) << "AlgorithmDataStorage";
+    LOGGER(LogLevel::INIT) << "AlgorithmDataTransfer";
     LOGGER(LogLevel::INIT) << "GridDimensions are: " <<
         int(grid_dim.width) << "x" << int(grid_dim.height) << ", size " << int(grid_dim.size) <<
         ", mines " << int(grid_dim.mines) << ", safe " << int(grid_dim.safe);
@@ -42,9 +42,9 @@ AlgorithmDataStorage::AlgorithmDataStorage(GridDimensions grid_dim)
     PreCalculateFactorials(grid_dim.size);
 }
 
-AlgorithmDataStorage::~AlgorithmDataStorage() {}
+AlgorithmDataTransfer::~AlgorithmDataTransfer() {}
 
-void AlgorithmDataStorage::Clear()
+void AlgorithmDataTransfer::Clear()
 {
     for(size_t i = 0; i < border_index; i++) is_border[border[i]] = false;
     border_index = 0;
@@ -61,7 +61,7 @@ void AlgorithmDataStorage::Clear()
 }
 
 // only called once in constructor
-void AlgorithmDataStorage::PreCalculateFactorials(uint32_t grid_size)
+void AlgorithmDataTransfer::PreCalculateFactorials(uint32_t grid_size)
 {
     BigNum current_factorial = BigNum(1);
     BigNum current_factorial_reciprocal = BigNum(1);

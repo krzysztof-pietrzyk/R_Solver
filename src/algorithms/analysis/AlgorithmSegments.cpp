@@ -1,12 +1,12 @@
 #include "AlgorithmSegments.hpp"
 
-AlgorithmSegments::AlgorithmSegments(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_)
+AlgorithmSegments::AlgorithmSegments(GridAccessPlayerIf& grid_, AlgorithmDataTransfer& data_)
     : Algorithm(grid_, data_),
-    D_segments_index(GetModifiableAlgorithmDataStorageReference().segments_index),
-    D_segments_count(GetModifiableAlgorithmDataStorageReference().segments_count),
-    D_segments(GetModifiableAlgorithmDataStorageReference().segments),
-    D_segments_starting_indexes(GetModifiableAlgorithmDataStorageReference().segments_starting_indexes),
-    D_segments_l(GetModifiableAlgorithmDataStorageReference().segments_l)
+    D_segments_index(GetModifiableAlgorithmDataTransferReference().segments_index),
+    D_segments_count(GetModifiableAlgorithmDataTransferReference().segments_count),
+    D_segments(GetModifiableAlgorithmDataTransferReference().segments),
+    D_segments_starting_indexes(GetModifiableAlgorithmDataTransferReference().segments_starting_indexes),
+    D_segments_l(GetModifiableAlgorithmDataTransferReference().segments_l)
 {
     LOGGER(LogLevel::INIT) << "AlgorithmSegments";
     fields_to_check = std::vector<uint32_t>(grid_dim.size, 0);

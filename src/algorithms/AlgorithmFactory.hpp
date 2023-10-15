@@ -3,7 +3,7 @@
 
 #include "Algorithm.hpp"
 #include "AlgorithmType.hpp"
-#include "AlgorithmDataStorage.hpp"
+#include "AlgorithmDataTransfer.hpp"
 
 #include "analysis/AlgorithmBorder.hpp"
 #include "analysis/AlgorithmSections.hpp"
@@ -31,7 +31,7 @@ class AlgorithmFactory
 
     ~AlgorithmFactory() = delete;
 
-    static Algorithm* Create(AlgorithmType type, GridAccessPlayerIf& grid, AlgorithmDataStorage& data);
+    static Algorithm* Create(AlgorithmType type, GridAccessPlayerIf& grid, AlgorithmDataTransfer& data);
 };
 
 #endif

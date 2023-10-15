@@ -22,7 +22,7 @@ class AlgorithmSections : public Algorithm
     */
     public:
 
-    AlgorithmSections(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_);
+    AlgorithmSections(GridAccessPlayerIf& grid_, AlgorithmDataTransfer& data_);
 
     ~AlgorithmSections();
 

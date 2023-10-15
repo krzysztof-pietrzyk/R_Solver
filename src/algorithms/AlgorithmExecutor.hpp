@@ -23,7 +23,7 @@ class AlgorithmExecutor
 
     private:
 
-    AlgorithmDataStorage* data;
+    AlgorithmDataTransfer* data;
     AlgorithmTransitionManager transitions;
 
     std::map<AlgorithmType, Algorithm*> algorithms;  // pointers to all algorithms

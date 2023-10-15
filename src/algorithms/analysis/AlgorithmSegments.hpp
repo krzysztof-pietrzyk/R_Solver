@@ -15,7 +15,7 @@ class AlgorithmSegments : public Algorithm
     */
     public:
 
-    AlgorithmSegments(GridAccessPlayerIf& grid_, AlgorithmDataStorage& data_);
+    AlgorithmSegments(GridAccessPlayerIf& grid_, AlgorithmDataTransfer& data_);
 
     ~AlgorithmSegments();
 
