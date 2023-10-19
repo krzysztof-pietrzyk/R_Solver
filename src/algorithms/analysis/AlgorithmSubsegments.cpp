@@ -25,7 +25,7 @@ AlgorithmStatus AlgorithmSubsegments::Execution()
 
     for(size_t segment_id = 0; segment_id < segments_count; segment_id++)
     {
-        D_subsegments.push_back(std::vector<SubsegmentData>());
+        D_subsegments.push_back(std::vector<Subsegment>());
         // It's important to keep track which segment this optimization relates to
         // This is why we are iterating over segments, not over sections directly
         const uint32_t segment_begin = data.segments_starting_indexes[segment_id];
@@ -100,7 +100,7 @@ void AlgorithmSubsegments::FindSegmentsToOptimize(const uint32_t parent_segment)
         const size_t hash_repetitions = iter->second.size();
         // filter out all hashes which appear less than 2 times (vast majority)
         if(hash_repetitions < 2) { continue; }
-        SubsegmentData subsegment_temp = SubsegmentData();
+        Subsegment subsegment_temp = Subsegment();
         // copy the fields into the structure
         for(size_t i = 0; i < hash_repetitions; i++)
         {
@@ -126,7 +126,7 @@ uint32_t AlgorithmSubsegments::GetNeighborhoodHash(const uint32_t section_field)
     return hash_result;
 }
 
-void AlgorithmSubsegments::FindPossibleValuesForSubsegment(SubsegmentData& subsegment_data) const
+void AlgorithmSubsegments::FindPossibleValuesForSubsegment(Subsegment& subsegment_data) const
 {
     // all subsegment fields have the same neighboring section origins. just take the first one
     const uint32_t subsegment_field = subsegment_data.fields[0];

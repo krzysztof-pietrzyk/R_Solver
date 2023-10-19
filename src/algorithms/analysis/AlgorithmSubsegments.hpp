@@ -33,13 +33,13 @@ class AlgorithmSubsegments : public Algorithm
 
     uint32_t GetNeighborhoodHash(const uint32_t section_field);
 
-    void FindPossibleValuesForSubsegment(SubsegmentData& subsegment_data) const;
+    void FindPossibleValuesForSubsegment(Subsegment& subsegment_data) const;
 
     uint32_t NChooseK(const uint32_t n, const uint32_t k) const;
 
     private:
 
-    std::vector<std::vector<SubsegmentData>>& D_subsegments;
+    std::vector<std::vector<Subsegment>>& D_subsegments;
     std::vector<bool>& D_is_subsegment;
     std::vector<uint32_t>& D_subsegments_cache;
     uint32_t& D_subsegments_cache_index;

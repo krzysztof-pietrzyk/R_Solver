@@ -11,14 +11,7 @@ struct GridDimensions
     uint32_t mines;
     uint32_t safe;
 
-    GridDimensions(uint16_t w, uint16_t h, uint32_t m)
-    {
-        width = w;
-        height = h;
-        mines = m;
-        size = w * h;
-        safe = size - mines;
-    }
+    GridDimensions(uint16_t w, uint16_t h, uint32_t m);
 };
 
 #endif

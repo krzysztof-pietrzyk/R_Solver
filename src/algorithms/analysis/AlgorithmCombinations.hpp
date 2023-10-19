@@ -60,7 +60,7 @@ class AlgorithmCombinations : public Algorithm
 
     void ClearStatesInSegment(uint32_t segment_id);
 
-    BigNum ApplySubsegmentsCombination(std::vector<SubsegmentData>& subsegments_ref);
+    BigNum ApplySubsegmentsCombination(std::vector<Subsegment>& subsegments_ref);
 
     void FindCombinationsForFixedSubsegments(const uint32_t segment_id, const BigNum combination_multiplier);
 
@@ -72,7 +72,7 @@ class AlgorithmCombinations : public Algorithm
 
     void ApplyCurrentCombinationAsValid(const uint32_t segment_id, const BigNum combination_multiplier);
 
-    bool NextSubsegmentsCombination(std::vector<SubsegmentData>& subsegments_ref) const;
+    bool NextSubsegmentsCombination(std::vector<Subsegment>& subsegments_ref) const;
 
     void MergeAllSegmentsCombinations();
 
@@ -86,7 +86,7 @@ class AlgorithmCombinations : public Algorithm
 
     private:
 
-    std::vector<std::vector<SubsegmentData>>& D_subsegments;
+    std::vector<std::vector<Subsegment>>& D_subsegments;
     std::vector<BigNum>& D_field_combinations;
     BigNum& D_remaining_fields_combinations;
     BigNum& D_total_combinations;

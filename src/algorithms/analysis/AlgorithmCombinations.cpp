@@ -79,7 +79,7 @@ void AlgorithmCombinations::Clear()
 
 void AlgorithmCombinations::FindCombinationsForSegment(uint32_t segment_id)
 {
-    std::vector<SubsegmentData>& subsegments_ref = D_subsegments[segment_id];
+    std::vector<Subsegment>& subsegments_ref = D_subsegments[segment_id];
     do
     {
         ClearStatesInSegment(segment_id);
@@ -99,7 +99,7 @@ void AlgorithmCombinations::ClearStatesInSegment(uint32_t segment_id)
     }
 }
 
-BigNum AlgorithmCombinations::ApplySubsegmentsCombination(std::vector<SubsegmentData>& subsegments_ref)
+BigNum AlgorithmCombinations::ApplySubsegmentsCombination(std::vector<Subsegment>& subsegments_ref)
 {
     // returns the weight of the combination. it is the multiplier of the number of mine combinations
     // of the entire segment for this particular set of subsegments values combination
@@ -108,7 +108,7 @@ BigNum AlgorithmCombinations::ApplySubsegmentsCombination(std::vector<Subsegment
     const size_t subsegments_max = subsegments_ref.size();
     for(size_t subsegment_id = 0; subsegment_id < subsegments_max; subsegment_id++)
     {
-        SubsegmentData& subsegment = subsegments_ref[subsegment_id];
+        Subsegment& subsegment = subsegments_ref[subsegment_id];
         const uint8_t mines_to_add = subsegment.possible_values[subsegment.current_possibility_id];
         subsegment_combination_weight = subsegment_combination_weight * subsegment.combinations_for_value[mines_to_add];
         const size_t subsegment_l = subsegment.fields.size();
@@ -257,11 +257,11 @@ void AlgorithmCombinations::ApplyCurrentCombinationAsValid(const uint32_t segmen
     // store the number of combinations for the whole segment
     segments_combinations[segment_id][final_mine_count] += combination_multiplier;
     // store the number of mines in subsegments
-    const std::vector<SubsegmentData>& subsegments_ref = data.subsegments[segment_id];
+    const std::vector<Subsegment>& subsegments_ref = data.subsegments[segment_id];
     const size_t subsegments_max = subsegments_ref.size();
     for(size_t subsegment_id = 0; subsegment_id < subsegments_max; subsegment_id++)
     {
-        const SubsegmentData& subsegment_ref = subsegments_ref[subsegment_id];
+        const Subsegment& subsegment_ref = subsegments_ref[subsegment_id];
         const uint8_t number_of_mines_in_subsegment = subsegment_ref.possible_values[subsegment_ref.current_possibility_id];
         // nothing to calculate or add if there are no mines in the subsegment
         if(number_of_mines_in_subsegment == 0) { continue; }
@@ -294,14 +294,14 @@ void AlgorithmCombinations::ApplyCurrentCombinationAsValid(const uint32_t segmen
     }
 }
 
-bool AlgorithmCombinations::NextSubsegmentsCombination(std::vector<SubsegmentData>& subsegments_ref) const
+bool AlgorithmCombinations::NextSubsegmentsCombination(std::vector<Subsegment>& subsegments_ref) const
 {
     // repeatedly called, this will enumerate over every possible set of values of subsegments within the segment
     // returns false if there aren't any more possibilities for the sets of values of subsegments
     const size_t subsegments_max = subsegments_ref.size();
     for(size_t subsegment_id = 0; subsegment_id < subsegments_max; subsegment_id++)
     {
-        SubsegmentData& subsegment = subsegments_ref[subsegment_id];
+        Subsegment& subsegment = subsegments_ref[subsegment_id];
         subsegment.current_possibility_id++;
         if(subsegment.current_possibility_id == subsegment.total_possibilities)
         {
