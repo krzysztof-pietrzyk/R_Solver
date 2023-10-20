@@ -1,6 +1,6 @@
 #include "AlgorithmSegments.hpp"
 
-AlgorithmSegments::AlgorithmSegments(GridAccessPlayerIf& grid_, AlgorithmDataTransfer& data_)
+AlgorithmSegments::AlgorithmSegments(GridAlgorithmAnalysisIf& grid_, AlgorithmDataTransfer& data_)
     : Algorithm(grid_, data_),
     D_segments_index(GetModifiableAlgorithmDataTransferReference().segments_index),
     D_segments_count(GetModifiableAlgorithmDataTransferReference().segments_count),

@@ -1,6 +1,6 @@
 #include "ViewFactory.hpp"
 
-ViewIf* ViewFactory::Create(ViewType type, GridAccessViewIf& grid)
+ViewIf* ViewFactory::Create(ViewType type, GridViewIf& grid)
 {
     switch(type)
     {

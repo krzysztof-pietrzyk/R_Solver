@@ -18,7 +18,7 @@ class AlgorithmBorder : public Algorithm
     */
     public:
 
-    AlgorithmBorder(GridAccessPlayerIf& grid_, AlgorithmDataTransfer& data_);
+    AlgorithmBorder(GridAlgorithmAnalysisIf& grid_, AlgorithmDataTransfer& data_);
 
     ~AlgorithmBorder();
 

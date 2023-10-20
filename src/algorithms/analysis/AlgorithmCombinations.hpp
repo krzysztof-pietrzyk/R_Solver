@@ -27,7 +27,7 @@ class AlgorithmCombinations : public Algorithm
 {
     public:
 
-    AlgorithmCombinations(GridAccessPlayerIf& grid_, AlgorithmDataTransfer& data_);
+    AlgorithmCombinations(GridAlgorithmAnalysisIf& grid_, AlgorithmDataTransfer& data_);
 
     ~AlgorithmCombinations();
 

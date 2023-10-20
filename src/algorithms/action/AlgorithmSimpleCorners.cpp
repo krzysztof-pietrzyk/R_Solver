@@ -1,6 +1,6 @@
 #include "AlgorithmSimpleCorners.hpp"
 
-AlgorithmSimpleCorners::AlgorithmSimpleCorners(GridAccessPlayerIf& grid_, AlgorithmDataTransfer& data_)
+AlgorithmSimpleCorners::AlgorithmSimpleCorners(GridAlgorithmAnalysisIf& grid_, AlgorithmDataTransfer& data_)
     : AlgorithmDecision(grid_, data_)
 {
     LOGGER(LogLevel::INIT) << "AlgorithmSimpleCorners";

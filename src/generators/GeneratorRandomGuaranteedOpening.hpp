@@ -7,7 +7,7 @@ class GeneratorRandomGuaranteedOpening : public GeneratorRandom
 {
     public:
 
-    GeneratorRandomGuaranteedOpening(GridAccessGeneratorIf& grid_);
+    GeneratorRandomGuaranteedOpening(GridGeneratorIf& grid_);
 
     ~GeneratorRandomGuaranteedOpening();
 

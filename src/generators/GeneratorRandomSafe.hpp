@@ -7,7 +7,7 @@ class GeneratorRandomSafe : public GeneratorRandom
 {
     public:
 
-    GeneratorRandomSafe(GridAccessGeneratorIf& grid_);
+    GeneratorRandomSafe(GridGeneratorIf& grid_);
 
     ~GeneratorRandomSafe();
 

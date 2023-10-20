@@ -1,6 +1,6 @@
 #include "GeneratorRandom.hpp"
 
-GeneratorRandom::GeneratorRandom(GridAccessGeneratorIf& grid_)
+GeneratorRandom::GeneratorRandom(GridGeneratorIf& grid_)
     : GeneratorInternal(grid_)
 {
     LOGGER(LogLevel::INIT) << "GeneratorRandom";

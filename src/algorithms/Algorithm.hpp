@@ -2,11 +2,11 @@
 #define ALGORITHM_HPP
 
 #include "../utils/Logger.hpp"
-#include "../grid/GridAccessPlayerIf.hpp"
+#include "../grid/GridCommonIf.hpp"
 #include "../statistics/StatisticsProducer.hpp"
 #include "../statistics/collectors/StatisticsCollectorExecutions.hpp"
 
-#include "AlgorithmDataTransfer.hpp"
+#include "data/AlgorithmDataTransfer.hpp"
 #include "AlgorithmStatus.hpp"
 
 class Algorithm : public StatisticsProducer
@@ -18,7 +18,7 @@ class Algorithm : public StatisticsProducer
     */
     public:
     
-    Algorithm(GridAccessPlayerIf& grid_, AlgorithmDataTransfer& data_);
+    Algorithm(const GridCommonIf& grid_, AlgorithmDataTransfer& data_);
 
     ~Algorithm();
 
@@ -26,24 +26,11 @@ class Algorithm : public StatisticsProducer
 
     protected:
 
-    const GridAccessPlayerIf& grid;
-    const AlgorithmDataTransfer& data;
-    const CachedVector& visible;
-    const CachedVector& flagged;
+    AlgorithmDataTransfer& data;
     const GridDimensions grid_dim;
     StatisticsCollectorExecutions* statistics_executions;
 
     virtual AlgorithmStatus Execution() = 0;
-
-    GridAccessPlayerIf& GetModifiableGridReference() const;
-
-    AlgorithmDataTransfer& GetModifiableAlgorithmDataTransferReference() const;
-
-    private:
-
-    GridAccessPlayerIf& _grid;
-
-    AlgorithmDataTransfer& _data;
 };
 
 #endif

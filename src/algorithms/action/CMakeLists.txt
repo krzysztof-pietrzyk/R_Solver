@@ -1,0 +1,5 @@
+message("Entering directory ${CMAKE_CURRENT_SOURCE_DIR}")
+
+set(CPP_SOURCES_ALGORITHMS_ACTION
+    ${CMAKE_CURRENT_SOURCE_DIR}/AlgorithmAction.cpp
+    PARENT_SCOPE)

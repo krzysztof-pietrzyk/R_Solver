@@ -1,6 +1,6 @@
 #include "GeneratorRandomUnsafe.hpp"
 
-GeneratorRandomUnsafe::GeneratorRandomUnsafe(GridAccessGeneratorIf& grid_)
+GeneratorRandomUnsafe::GeneratorRandomUnsafe(GridGeneratorIf& grid_)
     : GeneratorRandom(grid_)
 {
     LOGGER(LogLevel::INIT) << "GeneratorRandomUnsafe";

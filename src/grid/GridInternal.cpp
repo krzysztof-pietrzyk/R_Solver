@@ -11,13 +11,13 @@ GridInternal::~GridInternal()
 
 }
 
-// GridAccessCommonIf
+// GridCommonIf
 GridHash GridInternal::GetHash() const
 {
     return GridHash(mine_fields);
 }
 
-// GridAccessPlayerIf
+// GridAlgorithmAnalysisIf
 PlayerActionResult GridInternal::SetVisible(uint32_t field)
 {
     if(visible_fields.Contains(field) || is_lost)
@@ -46,6 +46,21 @@ PlayerActionResult GridInternal::SetFlag(uint32_t field)
     }
     flagged_fields.Add(field);
     return PlayerActionResult::CORRECT;
+}
+
+bool GridInternal::IsLost() const
+{
+    return is_lost;
+}
+
+bool GridInternal::IsWon() const
+{
+    return !is_lost && visible_fields.Index() == dimensions.safe;
+}
+
+void GridInternal::GiveUp()
+{
+    is_lost = true;
 }
 
 void GridInternal::StartChainReactionAt(uint32_t field)

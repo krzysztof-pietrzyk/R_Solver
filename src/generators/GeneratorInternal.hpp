@@ -12,7 +12,7 @@ class GeneratorInternal : public Generator
 {
     public:
 
-    GeneratorInternal(GridAccessGeneratorIf& grid_);
+    GeneratorInternal(GridGeneratorIf& grid_);
 
     ~GeneratorInternal();
 

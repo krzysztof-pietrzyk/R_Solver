@@ -1,14 +1,14 @@
 #ifndef GENERATOR_HPP
 #define GENERATOR_HPP
 
-#include "../grid/GridAccessGeneratorIf.hpp"
+#include "../grid/GridGeneratorIf.hpp"
 #include "../statistics/StatisticsProducer.hpp"
 
 class Generator : public StatisticsProducer
 {
     public:
 
-    Generator(GridAccessGeneratorIf& grid_);
+    Generator(GridGeneratorIf& grid_);
 
     ~Generator();
 
@@ -18,7 +18,7 @@ class Generator : public StatisticsProducer
 
     protected:
 
-    GridAccessGeneratorIf& grid;
+    GridGeneratorIf& grid;
     const GridDimensions grid_dim;
 
     uint32_t starting_field;

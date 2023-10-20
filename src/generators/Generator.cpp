@@ -1,6 +1,6 @@
 #include "Generator.hpp"
 
-Generator::Generator(GridAccessGeneratorIf& grid_) : grid(grid_), grid_dim(grid_.GetDimensions())
+Generator::Generator(GridGeneratorIf& grid_) : grid(grid_), grid_dim(grid_.GetDimensions())
 {
     LOGGER(LogLevel::INIT) << "Generator";
     SetStartingField(0);

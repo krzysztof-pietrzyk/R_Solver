@@ -2,7 +2,7 @@
 
 const uint32_t AlgorithmFirstMove::default_first_move_field = 0;
 
-AlgorithmFirstMove::AlgorithmFirstMove(GridAccessPlayerIf& grid_, AlgorithmDataTransfer& data_)
+AlgorithmFirstMove::AlgorithmFirstMove(GridAlgorithmAnalysisIf& grid_, AlgorithmDataTransfer& data_)
     : AlgorithmDecision(grid_, data_)
 {
     LOGGER(LogLevel::INIT) << "AlgorithmFirstMove";

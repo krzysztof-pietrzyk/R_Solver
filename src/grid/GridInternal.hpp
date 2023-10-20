@@ -10,12 +10,15 @@ class GridInternal : public Grid
     GridInternal(GridDimensions dimensions);
     ~GridInternal();
 
-    // GridAccessCommonIf
+    // GridCommonIf
     virtual GridHash GetHash() const override;
 
-    // GridAccessPlayerIf
+    // GridAlgorithmActionIf
     virtual PlayerActionResult SetVisible(uint32_t field) override;
     virtual PlayerActionResult SetFlag(uint32_t field) override;
+    virtual bool IsLost() const override;
+    virtual bool IsWon() const override;
+    virtual void GiveUp() override;
 
     private:
 

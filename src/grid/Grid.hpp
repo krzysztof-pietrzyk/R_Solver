@@ -3,41 +3,40 @@
 
 #include "../utils/CachedVector.hpp"
 
-#include "GridAccessPlayerIf.hpp"
-#include "GridAccessGeneratorIf.hpp"
-#include "GridAccessViewIf.hpp"
+#include "GridAlgorithmActionIf.hpp"
+#include "GridAlgorithmAnalysisIf.hpp"
+#include "GridGeneratorIf.hpp"
+#include "GridViewIf.hpp"
 #include "GridDimensions.hpp"
 
 class Grid : 
-    public GridAccessPlayerIf,
-    public GridAccessGeneratorIf,
-    public GridAccessViewIf
+    public GridAlgorithmActionIf,
+    public GridAlgorithmAnalysisIf,
+    public GridGeneratorIf,
+    public GridViewIf
 {
     public:
 
-    Grid(const GridDimensions dimensions);
+    Grid(GridDimensions dimensions);
     ~Grid();
 
-    // GridAccessCommonIf
+    // GridCommonIf
     virtual GridDimensions GetDimensions() const override;
     virtual const std::vector<uint32_t>& GetNeighbors(uint32_t field) const override;
 
-    // GridAccessPlayerIf
+    // GridAlgorithmAnalysisIf
     virtual const CachedVector& GetVisibleFields() const override;
     virtual const CachedVector& GetFlaggedFields() const override;
     virtual uint8_t GetFieldValue(uint32_t field) const override;
-    virtual bool IsLost() const override;
-    virtual bool IsWon() const override;
-    virtual void GiveUp() override;
 
-    // GridAccessGeneratorIf
+    // GridGeneratorIf
     virtual void SetMineFields(const CachedVector& new_mine_fields) override;
     virtual void SetFlaggedFields(const CachedVector& new_flagged_fields) override;
     virtual void SetVisibleFields(const CachedVector& new_visible_fields) override;
     virtual void SetFieldValues(const std::vector<uint8_t>& new_field_values) override;
     virtual void Reset() override;
 
-    // GridAccessViewIf
+    // GridViewIf
     virtual const std::vector<FieldType>& GetFieldTypesToDisplay() override;
 
     protected:

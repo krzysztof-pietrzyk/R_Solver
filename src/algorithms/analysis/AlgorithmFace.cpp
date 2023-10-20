@@ -1,6 +1,6 @@
 #include "AlgorithmFace.hpp"
 
-AlgorithmFace::AlgorithmFace(GridAccessPlayerIf& grid_, AlgorithmDataTransfer& data_)
+AlgorithmFace::AlgorithmFace(GridAlgorithmAnalysisIf& grid_, AlgorithmDataTransfer& data_)
     : Algorithm(grid_, data_),
     D_face_index(GetModifiableAlgorithmDataTransferReference().face_index),
     D_face(GetModifiableAlgorithmDataTransferReference().face),

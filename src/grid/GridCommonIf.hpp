@@ -1,12 +1,12 @@
-#ifndef GRID_ACCESS_COMMON_IF_HPP
-#define GRID_ACCESS_COMMON_IF_HPP
+#ifndef GRID_COMMON_IF_HPP
+#define GRID_COMMON_IF_HPP
 
 #include "../utils/Logger.hpp"
 
 #include "GridHash.hpp"
 #include "GridDimensions.hpp"
 
-class GridAccessCommonIf
+class GridCommonIf
 {
     public:
 

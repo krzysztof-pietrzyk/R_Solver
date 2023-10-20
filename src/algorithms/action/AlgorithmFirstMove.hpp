@@ -7,7 +7,7 @@ class AlgorithmFirstMove : public AlgorithmDecision
 {
     public:
 
-    AlgorithmFirstMove(GridAccessPlayerIf& grid_, AlgorithmDataTransfer& data_);
+    AlgorithmFirstMove(GridAlgorithmAnalysisIf& grid_, AlgorithmDataTransfer& data_);
 
     ~AlgorithmFirstMove();
 

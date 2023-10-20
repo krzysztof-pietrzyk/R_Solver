@@ -7,7 +7,7 @@ class AlgorithmFace : public Algorithm
 {
     public:
 
-    AlgorithmFace(GridAccessPlayerIf& grid_, AlgorithmDataTransfer& data_);
+    AlgorithmFace(GridAlgorithmAnalysisIf& grid_, AlgorithmDataTransfer& data_);
 
     ~AlgorithmFace();
 

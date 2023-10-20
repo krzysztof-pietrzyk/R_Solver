@@ -1,6 +1,6 @@
 #include "AlgorithmSections.hpp"
 
-AlgorithmSections::AlgorithmSections(GridAccessPlayerIf& grid_, AlgorithmDataTransfer& data_)
+AlgorithmSections::AlgorithmSections(GridAlgorithmAnalysisIf& grid_, AlgorithmDataTransfer& data_)
     : Algorithm(grid_, data_),
     diff_bit_20(1), diff_bit_21(2),
     diff_bit_22(grid_dim.width - 2),

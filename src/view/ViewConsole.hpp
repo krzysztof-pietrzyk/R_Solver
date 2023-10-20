@@ -1,7 +1,7 @@
 #ifndef VIEW_CONSOLE_HPP
 #define VIEW_CONSOLE_HPP
 
-#include "../grid/GridAccessViewIf.hpp"
+#include "../grid/GridViewIf.hpp"
 
 #include "ViewIf.hpp"
 
@@ -15,7 +15,7 @@ class ViewConsole : public ViewIf
 {
     public:
 
-    ViewConsole(GridAccessViewIf& grid_);
+    ViewConsole(GridViewIf& grid_);
 
     ~ViewConsole();
 
@@ -23,7 +23,7 @@ class ViewConsole : public ViewIf
 
     protected:
 
-    GridAccessViewIf& grid;
+    GridViewIf& grid;
 
     const GridDimensions grid_dim;
     const uint32_t row_indicator_max_w;

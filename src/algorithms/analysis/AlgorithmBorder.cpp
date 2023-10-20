@@ -1,6 +1,6 @@
 #include "AlgorithmBorder.hpp"
 
-AlgorithmBorder::AlgorithmBorder(GridAccessPlayerIf& grid_, AlgorithmDataTransfer& data_)
+AlgorithmBorder::AlgorithmBorder(GridAlgorithmAnalysisIf& grid_, AlgorithmDataTransfer& data_)
     : Algorithm(grid_, data_),
     D_border_index(GetModifiableAlgorithmDataTransferReference().border_index),
     D_border_last_visible_fields_index(GetModifiableAlgorithmDataTransferReference().border_last_visible_fields_index),

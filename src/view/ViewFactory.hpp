@@ -18,7 +18,7 @@ class ViewFactory
 
     ~ViewFactory() = delete;
 
-    static ViewIf* Create(ViewType type, GridAccessViewIf& grid);
+    static ViewIf* Create(ViewType type, GridViewIf& grid);
 };
 
 #endif

@@ -8,7 +8,7 @@ class GeneratorRandom : public GeneratorInternal
 {
     public:
 
-    GeneratorRandom(GridAccessGeneratorIf& grid_);
+    GeneratorRandom(GridGeneratorIf& grid_);
 
     ~GeneratorRandom();
 

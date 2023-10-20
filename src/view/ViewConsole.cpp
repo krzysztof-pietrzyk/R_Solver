@@ -25,7 +25,7 @@ const uint32_t ViewConsole::num_of_digits = 10U;
 
 using std::to_string, std::endl, std::cout, std::setw, std::left, std::right, std::setfill;
 
-ViewConsole::ViewConsole(GridAccessViewIf& grid_)
+ViewConsole::ViewConsole(GridViewIf& grid_)
     : grid(grid_),
     grid_dim(grid_.GetDimensions()),
     row_indicator_max_w(to_string(grid_dim.height).length()),

@@ -7,7 +7,7 @@ class AlgorithmGiveUp : public AlgorithmDecision
 {
     public:
 
-    AlgorithmGiveUp(GridAccessPlayerIf& grid_, AlgorithmDataTransfer& data_);
+    AlgorithmGiveUp(GridAlgorithmAnalysisIf& grid_, AlgorithmDataTransfer& data_);
 
     ~AlgorithmGiveUp();
 
@@ -17,7 +17,7 @@ class AlgorithmGiveUp : public AlgorithmDecision
 
     private:
 
-    GridAccessPlayerIf& D_grid;
+    GridAlgorithmAnalysisIf& D_grid;
 };
 
 #endif

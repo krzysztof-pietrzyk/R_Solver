@@ -31,7 +31,7 @@ class AlgorithmFactory
 
     ~AlgorithmFactory() = delete;
 
-    static Algorithm* Create(AlgorithmType type, GridAccessPlayerIf& grid, AlgorithmDataTransfer& data);
+    static Algorithm* Create(AlgorithmType type, GridAlgorithmAnalysisIf& grid, AlgorithmDataTransfer& data);
 };
 
 #endif
