@@ -1,6 +1,6 @@
 #include "AlgorithmCombinationsLeastRisky.hpp"
 
-AlgorithmCombinationsLeastRisky::AlgorithmCombinationsLeastRisky(GridAlgorithmAnalysisIf& grid_, AlgorithmDataTransfer& data_)
+AlgorithmCombinationsLeastRisky::AlgorithmCombinationsLeastRisky(GridAlgorithmIf& grid_, AlgorithmDataTransfer& data_)
     : AlgorithmDecision(grid_, data_), max_combinations(data.factorial.back())
 {
     LOGGER(LogLevel::INIT) << "AlgorithmCombinationsLeastRisky";

@@ -1,6 +1,6 @@
 #include "AlgorithmExecutor.hpp"
 
-AlgorithmExecutor::AlgorithmExecutor(GridAlgorithmAnalysisIf& grid_)
+AlgorithmExecutor::AlgorithmExecutor(GridAlgorithmIf& grid_)
 {
     LOGGER(LogLevel::INIT) << "AlgorithmExecutor";
     data = new AlgorithmDataTransfer(grid_.GetDimensions());
@@ -49,7 +49,7 @@ const std::map<AlgorithmType, Algorithm*>& AlgorithmExecutor::GetAlgorithmsMap()
     return algorithms;
 }
 
-void AlgorithmExecutor::CreateAlgorithms(GridAlgorithmAnalysisIf& grid)
+void AlgorithmExecutor::CreateAlgorithms(GridAlgorithmIf& grid)
 {
     // This method is only called once in the constructor
     // It creates all Algorithm objects

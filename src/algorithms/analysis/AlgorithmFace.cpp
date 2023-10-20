@@ -1,11 +1,7 @@
 #include "AlgorithmFace.hpp"
 
-AlgorithmFace::AlgorithmFace(GridAlgorithmAnalysisIf& grid_, AlgorithmDataTransfer& data_)
-    : Algorithm(grid_, data_),
-    D_face_index(GetModifiableAlgorithmDataTransferReference().face_index),
-    D_face(GetModifiableAlgorithmDataTransferReference().face),
-    D_is_face(GetModifiableAlgorithmDataTransferReference().is_face),
-    D_segments_face(GetModifiableAlgorithmDataTransferReference().segments_face)
+AlgorithmFace::AlgorithmFace(GridAlgorithmIf& grid_, AlgorithmDataTransfer& data_)
+    : AlgorithmAnalysis(grid_, data_)
 {
     LOGGER(LogLevel::INIT) << "AlgorithmFace";
 }

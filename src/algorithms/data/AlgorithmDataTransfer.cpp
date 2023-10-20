@@ -1,7 +1,8 @@
 #include "AlgorithmDataTransfer.hpp"
 
 AlgorithmDataTransfer::AlgorithmDataTransfer(GridDimensions grid_dim)
-    : border_dto(BorderDTO(grid_dim)),
+    : actions_dto(ActionsDTO(grid_dim)),
+    border_dto(BorderDTO(grid_dim)),
     sections_dto(SectionsDTO(grid_dim)),
     segments_dto(SegmentsDTO(grid_dim)),
     subsegments_dto(SubsegmentsDTO(grid_dim)),
@@ -18,6 +19,7 @@ AlgorithmDataTransfer::AlgorithmDataTransfer(GridDimensions grid_dim)
 void AlgorithmDataTransfer::Clear()
 {
     // Not all DTOs require something to be cleared
+    actions_dto.Clear();
     border_dto.Clear();
     sections_dto.Clear();
     segments_dto.Clear();

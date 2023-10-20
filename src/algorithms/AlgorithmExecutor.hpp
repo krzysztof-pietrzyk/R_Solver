@@ -2,7 +2,7 @@
 #define ALGORITHM_EXECUTOR_HPP
 
 #include "../utils/Logger.hpp"
-#include "../grid/GridAlgorithmAnalysisIf.hpp"
+#include "../grid/GridAlgorithmIf.hpp"
 
 #include "AlgorithmFactory.hpp"
 #include "AlgorithmTransitionManager.hpp"
@@ -13,7 +13,7 @@ class AlgorithmExecutor
 {
     public:
 
-    AlgorithmExecutor(GridAlgorithmAnalysisIf& grid_);
+    AlgorithmExecutor(GridAlgorithmIf& grid_);
 
     ~AlgorithmExecutor();
 
@@ -28,7 +28,7 @@ class AlgorithmExecutor
 
     std::map<AlgorithmType, Algorithm*> algorithms;  // pointers to all algorithms
 
-    void CreateAlgorithms(GridAlgorithmAnalysisIf& grid);
+    void CreateAlgorithms(GridAlgorithmIf& grid);
 };
 
 #endif

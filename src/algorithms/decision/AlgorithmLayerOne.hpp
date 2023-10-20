@@ -23,7 +23,7 @@ class AlgorithmLayerOne : public AlgorithmDecision
     */
     public:
 
-    AlgorithmLayerOne(GridAlgorithmAnalysisIf& grid_, AlgorithmDataTransfer& data_);
+    AlgorithmLayerOne(GridAlgorithmIf& grid_, AlgorithmDataTransfer& data_);
 
     ~AlgorithmLayerOne();
 

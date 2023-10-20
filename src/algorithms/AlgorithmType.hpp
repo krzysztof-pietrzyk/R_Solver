@@ -20,7 +20,8 @@ enum class AlgorithmType
     REFRESH_COMBINATIONS,
     COMBINATIONS_SAFE_MOVES,
     COMBINATIONS_LEAST_RISKY,
-    GIVE_UP
+    GIVE_UP,
+    SIMPLE_ACTIONS
 };
 
 namespace Labels::Producers::Algorithms
@@ -39,6 +40,7 @@ namespace Labels::Producers::Algorithms
     static const Label COMBINATIONS_SAFE_MOVES  = "Algorithm: Combinations Safe Moves";
     static const Label COMBINATIONS_LEAST_RISKY = "Algorithm: Combinations Least Risky";
     static const Label GIVE_UP                  = "Algorithm: Give Up";
+    static const Label SIMPLE_ACTIONS           = "Algorithm: Simple Actions";
 }
 
 static Label GetAlgorithmTypeLabel(AlgorithmType type)
@@ -73,6 +75,8 @@ static Label GetAlgorithmTypeLabel(AlgorithmType type)
             return Labels::Producers::Algorithms::COMBINATIONS_LEAST_RISKY;
         case AlgorithmType::GIVE_UP:
             return Labels::Producers::Algorithms::GIVE_UP;
+        case AlgorithmType::SIMPLE_ACTIONS:
+            return Labels::Producers::Algorithms::SIMPLE_ACTIONS;
         default:
             LOGGER_THROW("GetAlgorithmTypeLabel - Unhandled AlgorithmType");
     }

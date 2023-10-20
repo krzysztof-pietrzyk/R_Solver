@@ -1,9 +1,9 @@
 #ifndef ALGORITHM_SIMPLE_CORNERS_HPP
 #define ALGORITHM_SIMPLE_CORNERS_HPP
 
-#include "AlgorithmDecision.hpp"
+#include "AlgorithmAction.hpp"
 
-class AlgorithmSimpleCorners : public AlgorithmDecision
+class AlgorithmSimpleCorners : public AlgorithmAction
 {
     /*
     This algorithm implements the player strategy for simlpy uncovering the four corners of the map.
@@ -13,7 +13,7 @@ class AlgorithmSimpleCorners : public AlgorithmDecision
     */
     public:
 
-    AlgorithmSimpleCorners(GridAlgorithmAnalysisIf& grid_, AlgorithmDataTransfer& data_);
+    AlgorithmSimpleCorners(GridAlgorithmIf& grid_, AlgorithmDataTransfer& data_);
 
     ~AlgorithmSimpleCorners();
 

@@ -1,23 +1,19 @@
 #ifndef ALGORITHM_GIVE_UP_HPP
 #define ALGORITHM_GIVE_UP_HPP
 
-#include "AlgorithmDecision.hpp"
+#include "AlgorithmAction.hpp"
 
-class AlgorithmGiveUp : public AlgorithmDecision
+class AlgorithmGiveUp : public AlgorithmAction
 {
     public:
 
-    AlgorithmGiveUp(GridAlgorithmAnalysisIf& grid_, AlgorithmDataTransfer& data_);
+    AlgorithmGiveUp(GridAlgorithmIf& grid_, AlgorithmDataTransfer& data_);
 
     ~AlgorithmGiveUp();
 
     protected:
 
     AlgorithmStatus Execution() override;
-
-    private:
-
-    GridAlgorithmAnalysisIf& D_grid;
 };
 
 #endif

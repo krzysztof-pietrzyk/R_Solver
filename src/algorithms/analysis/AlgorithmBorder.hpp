@@ -1,9 +1,9 @@
 #ifndef ALGORITHM_BORDER_HPP
 #define ALGORITHM_BORDER_HPP
 
-#include "../Algorithm.hpp"
+#include "AlgorithmAnalysis.hpp"
 
-class AlgorithmBorder : public Algorithm
+class AlgorithmBorder : public AlgorithmAnalysis
 {
     /*
     This algorithm gathers information about the "border", which is
@@ -18,24 +18,17 @@ class AlgorithmBorder : public Algorithm
     */
     public:
 
-    AlgorithmBorder(GridAlgorithmAnalysisIf& grid_, AlgorithmDataTransfer& data_);
+    AlgorithmBorder(GridAlgorithmIf& grid_, AlgorithmDataTransfer& data_);
 
     ~AlgorithmBorder();
 
     AlgorithmStatus Execution() override;
 
-    protected:
+    private:
 
     void FilterOldBorderContent(uint32_t& border_index_new) const;
 
     void AddNewContentToBorder(uint32_t& border_index_new) const;
-
-    private:
-
-    uint32_t& D_border_index;
-    uint32_t& D_border_last_visible_fields_index;
-    std::vector<uint32_t>& D_border;
-    std::vector<bool>& D_is_border;
 
     bool HasAtLeastOneNotVisibleNeighbor(uint32_t field) const;
 };

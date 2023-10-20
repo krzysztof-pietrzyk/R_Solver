@@ -1,7 +1,7 @@
 #include "AlgorithmSections.hpp"
 
-AlgorithmSections::AlgorithmSections(GridAlgorithmAnalysisIf& grid_, AlgorithmDataTransfer& data_)
-    : Algorithm(grid_, data_),
+AlgorithmSections::AlgorithmSections(GridAlgorithmIf& grid_, AlgorithmDataTransfer& data_)
+    : AlgorithmAnalysis(grid_, data_),
     diff_bit_20(1), diff_bit_21(2),
     diff_bit_22(grid_dim.width - 2),
     diff_bit_23(grid_dim.width - 1),
@@ -12,11 +12,7 @@ AlgorithmSections::AlgorithmSections(GridAlgorithmAnalysisIf& grid_, AlgorithmDa
     diff_bit_28(2 * grid_dim.width - 1),
     diff_bit_29(2 * grid_dim.width),
     diff_bit_30(2 * grid_dim.width + 1),
-    diff_bit_31(2 * grid_dim.width + 2),
-    D_sections_origins_index(GetModifiableAlgorithmDataTransferReference().sections_origins_index),
-    D_is_section_origin(GetModifiableAlgorithmDataTransferReference().is_section_origin),
-    D_sections_origins(GetModifiableAlgorithmDataTransferReference().sections_origins),
-    D_sections(GetModifiableAlgorithmDataTransferReference().sections)
+    diff_bit_31(2 * grid_dim.width + 2)
 {
     LOGGER(LogLevel::INIT) << "AlgorithmSections";
     LOGGER_ASSERT(grid_dim.size <= MAX_ALLOWED_GRID_SIZE, "AlgorithmSections - Grid size too large");

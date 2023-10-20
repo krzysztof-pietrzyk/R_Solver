@@ -3,15 +3,14 @@
 
 #include "../utils/CachedVector.hpp"
 
-#include "GridAlgorithmActionIf.hpp"
-#include "GridAlgorithmAnalysisIf.hpp"
+#include "GridAlgorithmIf.hpp"
+#include "GridAlgorithmIf.hpp"
 #include "GridGeneratorIf.hpp"
 #include "GridViewIf.hpp"
 #include "GridDimensions.hpp"
 
 class Grid : 
-    public GridAlgorithmActionIf,
-    public GridAlgorithmAnalysisIf,
+    public GridAlgorithmIf,
     public GridGeneratorIf,
     public GridViewIf
 {
@@ -23,8 +22,10 @@ class Grid :
     // GridCommonIf
     virtual GridDimensions GetDimensions() const override;
     virtual const std::vector<uint32_t>& GetNeighbors(uint32_t field) const override;
+    virtual bool IsLost() const override;
+    virtual bool IsWon() const override;
 
-    // GridAlgorithmAnalysisIf
+    // GridAlgorithmIf
     virtual const CachedVector& GetVisibleFields() const override;
     virtual const CachedVector& GetFlaggedFields() const override;
     virtual uint8_t GetFieldValue(uint32_t field) const override;

@@ -14,7 +14,7 @@ class AlgorithmLayerTwo : public AlgorithmDecision
     */
     public:
 
-    AlgorithmLayerTwo(GridAlgorithmAnalysisIf& grid_, AlgorithmDataTransfer& data_);
+    AlgorithmLayerTwo(GridAlgorithmIf& grid_, AlgorithmDataTransfer& data_);
 
     ~AlgorithmLayerTwo();
 

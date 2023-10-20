@@ -3,12 +3,8 @@
 const uint64_t AlgorithmCombinations::fail_safe_permutation_threshold = 100'000;
 const uint64_t AlgorithmCombinations::fail_safe_enumeration_threshold = 50'000'000;
 
-AlgorithmCombinations::AlgorithmCombinations(GridAlgorithmAnalysisIf& grid_, AlgorithmDataTransfer& data_)
-    : Algorithm(grid_, data_),
-    D_subsegments(GetModifiableAlgorithmDataTransferReference().subsegments),
-    D_field_combinations(GetModifiableAlgorithmDataTransferReference().field_combinations),
-    D_remaining_fields_combinations(GetModifiableAlgorithmDataTransferReference().remaining_fields_combinations),
-    D_total_combinations(GetModifiableAlgorithmDataTransferReference().total_combinations)
+AlgorithmCombinations::AlgorithmCombinations(GridAlgorithmIf& grid_, AlgorithmDataTransfer& data_)
+    : AlgorithmAnalysis(grid_, data_)
 {
     LOGGER(LogLevel::INIT) << "AlgorithmCombinations";
     field_states = std::vector<FieldState>(grid_dim.size, FieldState::UNASSIGNED);

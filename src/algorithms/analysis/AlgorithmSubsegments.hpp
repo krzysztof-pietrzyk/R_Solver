@@ -1,19 +1,21 @@
 #ifndef ALGORITHM_SUBSEGMENTS_HPP
 #define ALGORITHM_SUBSEGMENTS_HPP
 
-#include "../Algorithm.hpp"
+#include "AlgorithmAnalysis.hpp"
 
-class AlgorithmSubsegments : public Algorithm
+class AlgorithmSubsegments : public AlgorithmAnalysis
 {
     public:
 
-    AlgorithmSubsegments(GridAlgorithmAnalysisIf& grid_, AlgorithmDataTransfer& data_);
+    AlgorithmSubsegments(GridAlgorithmIf& grid_, AlgorithmDataTransfer& data_);
 
     ~AlgorithmSubsegments();
 
+    protected:
+
     AlgorithmStatus Execution() override;
 
-    protected:
+    private:
 
     std::vector<bool> is_checked;
     std::vector<uint32_t> checked;
@@ -36,13 +38,6 @@ class AlgorithmSubsegments : public Algorithm
     void FindPossibleValuesForSubsegment(Subsegment& subsegment_data) const;
 
     uint32_t NChooseK(const uint32_t n, const uint32_t k) const;
-
-    private:
-
-    std::vector<std::vector<Subsegment>>& D_subsegments;
-    std::vector<bool>& D_is_subsegment;
-    std::vector<uint32_t>& D_subsegments_cache;
-    uint32_t& D_subsegments_cache_index;
 };
 
 #endif

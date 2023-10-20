@@ -7,7 +7,7 @@ class AlgorithmCombinationsSafeMoves : public AlgorithmDecision
 {
     public:
 
-    AlgorithmCombinationsSafeMoves(GridAlgorithmAnalysisIf& grid_, AlgorithmDataTransfer& data_);
+    AlgorithmCombinationsSafeMoves(GridAlgorithmIf& grid_, AlgorithmDataTransfer& data_);
 
     ~AlgorithmCombinationsSafeMoves();
 

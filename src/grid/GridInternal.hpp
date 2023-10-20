@@ -13,11 +13,9 @@ class GridInternal : public Grid
     // GridCommonIf
     virtual GridHash GetHash() const override;
 
-    // GridAlgorithmActionIf
+    // GridAlgorithmIf
     virtual PlayerActionResult SetVisible(uint32_t field) override;
     virtual PlayerActionResult SetFlag(uint32_t field) override;
-    virtual bool IsLost() const override;
-    virtual bool IsWon() const override;
     virtual void GiveUp() override;
 
     private:

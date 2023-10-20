@@ -1,6 +1,6 @@
 #include "AlgorithmFactory.hpp"
 
-Algorithm* AlgorithmFactory::Create(AlgorithmType type, GridAlgorithmAnalysisIf& grid, AlgorithmDataTransfer& data)
+Algorithm* AlgorithmFactory::Create(AlgorithmType type, GridAlgorithmIf& grid, AlgorithmDataTransfer& data)
 {
     switch(type)
     {
@@ -30,6 +30,8 @@ Algorithm* AlgorithmFactory::Create(AlgorithmType type, GridAlgorithmAnalysisIf&
             return new AlgorithmGiveUp(grid, data);
         case AlgorithmType::FIRST_MOVE:
             return new AlgorithmFirstMove(grid, data);
+        case AlgorithmType::SIMPLE_ACTIONS:
+            return new AlgorithmSimpleActions(grid, data);
         default:
             LOGGER_THROW("AlgorithmFactory::Create - unhandled AlgorithmType");
     }

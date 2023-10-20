@@ -17,8 +17,10 @@
 #include "decision/AlgorithmLayerTwo.hpp"
 #include "decision/AlgorithmCombinationsSafeMoves.hpp"
 #include "decision/AlgorithmCombinationsLeastRisky.hpp"
-#include "decision/AlgorithmGiveUp.hpp"
-#include "decision/AlgorithmFirstMove.hpp"
+
+#include "action/AlgorithmGiveUp.hpp"
+#include "action/AlgorithmFirstMove.hpp"
+#include "action/AlgorithmSimpleActions.hpp"
 
 class AlgorithmFactory
 {
@@ -31,7 +33,7 @@ class AlgorithmFactory
 
     ~AlgorithmFactory() = delete;
 
-    static Algorithm* Create(AlgorithmType type, GridAlgorithmAnalysisIf& grid, AlgorithmDataTransfer& data);
+    static Algorithm* Create(AlgorithmType type, GridAlgorithmIf& grid, AlgorithmDataTransfer& data);
 };
 
 #endif

@@ -1,6 +1,6 @@
 #include "AlgorithmSubsegments.hpp"
 
-AlgorithmSubsegments::AlgorithmSubsegments(GridAlgorithmAnalysisIf& grid_, AlgorithmDataTransfer& data_)
+AlgorithmSubsegments::AlgorithmSubsegments(GridAlgorithmIf& grid_, AlgorithmDataTransfer& data_)
     : Algorithm(grid_, data_),
     D_subsegments(GetModifiableAlgorithmDataTransferReference().subsegments),
     D_is_subsegment(GetModifiableAlgorithmDataTransferReference().is_subsegment),

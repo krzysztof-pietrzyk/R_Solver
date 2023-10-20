@@ -1,12 +1,7 @@
 #include "AlgorithmSegments.hpp"
 
-AlgorithmSegments::AlgorithmSegments(GridAlgorithmAnalysisIf& grid_, AlgorithmDataTransfer& data_)
-    : Algorithm(grid_, data_),
-    D_segments_index(GetModifiableAlgorithmDataTransferReference().segments_index),
-    D_segments_count(GetModifiableAlgorithmDataTransferReference().segments_count),
-    D_segments(GetModifiableAlgorithmDataTransferReference().segments),
-    D_segments_starting_indexes(GetModifiableAlgorithmDataTransferReference().segments_starting_indexes),
-    D_segments_l(GetModifiableAlgorithmDataTransferReference().segments_l)
+AlgorithmSegments::AlgorithmSegments(GridAlgorithmIf& grid_, AlgorithmDataTransfer& data_)
+    : AlgorithmAnalysis(grid_, data_)
 {
     LOGGER(LogLevel::INIT) << "AlgorithmSegments";
     fields_to_check = std::vector<uint32_t>(grid_dim.size, 0);

@@ -1,7 +1,7 @@
 #include "AlgorithmSimpleCorners.hpp"
 
-AlgorithmSimpleCorners::AlgorithmSimpleCorners(GridAlgorithmAnalysisIf& grid_, AlgorithmDataTransfer& data_)
-    : AlgorithmDecision(grid_, data_)
+AlgorithmSimpleCorners::AlgorithmSimpleCorners(GridAlgorithmIf& grid_, AlgorithmDataTransfer& data_)
+    : AlgorithmAction(grid_, data_)
 {
     LOGGER(LogLevel::INIT) << "AlgorithmSimpleCorners";
     const uint32_t upper_left = 0;

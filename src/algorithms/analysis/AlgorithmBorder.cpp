@@ -1,11 +1,7 @@
 #include "AlgorithmBorder.hpp"
 
-AlgorithmBorder::AlgorithmBorder(GridAlgorithmAnalysisIf& grid_, AlgorithmDataTransfer& data_)
-    : Algorithm(grid_, data_),
-    D_border_index(GetModifiableAlgorithmDataTransferReference().border_index),
-    D_border_last_visible_fields_index(GetModifiableAlgorithmDataTransferReference().border_last_visible_fields_index),
-    D_border(GetModifiableAlgorithmDataTransferReference().border),
-    D_is_border(GetModifiableAlgorithmDataTransferReference().is_border)
+AlgorithmBorder::AlgorithmBorder(GridAlgorithmIf& grid_, AlgorithmDataTransfer& data_)
+    : AlgorithmAnalysis(grid_, data_)
 {
     LOGGER(LogLevel::INIT) << "AlgorithmBorder";
 }

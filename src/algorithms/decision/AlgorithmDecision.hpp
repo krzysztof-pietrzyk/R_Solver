@@ -1,8 +1,9 @@
 #ifndef ALGORITHM_DECISION_HPP
 #define ALGORITHM_DECISION_HPP
 
-#include "../../grid/GridAlgorithmAnalysisIf.hpp"
-#include "../../statistics/collectors/StatisticsCollectorClicks.hpp"
+#include "../../grid/GridAlgorithmIf.hpp"
+
+#include "../AlgorithmType.hpp"
 #include "../Algorithm.hpp"
 
 class AlgorithmDecision : public Algorithm
@@ -13,28 +14,19 @@ class AlgorithmDecision : public Algorithm
     */
     public:
 
-    AlgorithmDecision(GridAlgorithmAnalysisIf& grid_, AlgorithmDataTransfer& data_);
+    AlgorithmDecision(GridAlgorithmIf& grid_, AlgorithmDataTransfer& data_);
 
     ~AlgorithmDecision();
 
-    AlgorithmStatus Run() override;
-
     protected:
 
-    PlayerActionResult LeftClick(const uint32_t field);
+    const GridAlgorithmIf& grid;
 
-    PlayerActionResult RightClick(const uint32_t field);
+    ActionsDTO& actions_dto;
 
-    private:
+    AlgorithmType algorithm_type;
 
-    uint64_t left_click_counter;
-    uint64_t right_click_counter;
-    StatisticsCollectorClicks* statistics_clicks;
-    GridAlgorithmAnalysisIf& D_grid;
-
-    AlgorithmStatus CheckGameOverConditions() const;
-
-    AlgorithmStatus GetActionResult(const uint32_t clicks_difference) const;
+    void QueueAction(uint32_t field, PlayerAction action);
 };
 
 #endif

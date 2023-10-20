@@ -7,7 +7,7 @@ class AlgorithmCombinationsLeastRisky : public AlgorithmDecision
 {
     public:
 
-    AlgorithmCombinationsLeastRisky(GridAlgorithmAnalysisIf& grid_, AlgorithmDataTransfer& data_);
+    AlgorithmCombinationsLeastRisky(GridAlgorithmIf& grid_, AlgorithmDataTransfer& data_);
 
     ~AlgorithmCombinationsLeastRisky();
 

@@ -4,6 +4,7 @@
 #include "../utils/Logger.hpp"
 #include "../grid/GridDimensions.hpp"
 
+#include "ActionsDTO.hpp"
 #include "BorderDTO.hpp"
 #include "SectionsDTO.hpp"
 #include "SegmentsDTO.hpp"
@@ -14,6 +15,7 @@
 
 struct AlgorithmDataTransfer
 {
+    ActionsDTO actions_dto;
     BorderDTO border_dto;
     SectionsDTO sections_dto;
     SegmentsDTO segments_dto;

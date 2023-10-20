@@ -34,7 +34,17 @@ const std::vector<uint32_t>& Grid::GetNeighbors(uint32_t field) const
     return neighbors.at(field);
 }
 
-// GridAlgorithmAnalysisIf
+bool Grid::IsLost() const
+{
+    return is_lost;
+}
+
+bool Grid::IsWon() const
+{
+    return !is_lost && visible_fields.Index() == dimensions.safe;
+}
+
+// GridAlgorithmIf
 const CachedVector& Grid::GetVisibleFields() const
 {
     return visible_fields;

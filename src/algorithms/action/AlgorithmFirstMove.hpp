@@ -1,25 +1,23 @@
 #ifndef ALGORITHM_FIRST_MOVE_HPP
 #define ALGORITHM_FIRST_MOVE_HPP
 
-#include "AlgorithmDecision.hpp"
+#include "AlgorithmAction.hpp"
 
-class AlgorithmFirstMove : public AlgorithmDecision
+class AlgorithmFirstMove : public AlgorithmAction
 {
     public:
 
-    AlgorithmFirstMove(GridAlgorithmAnalysisIf& grid_, AlgorithmDataTransfer& data_);
+    AlgorithmFirstMove(GridAlgorithmIf& grid_, AlgorithmDataTransfer& data_);
 
     ~AlgorithmFirstMove();
 
     protected:
 
-    uint32_t first_move_field;
-
     AlgorithmStatus Execution() override;
 
     private:
 
-    static const uint32_t default_first_move_field;
+    static const uint32_t first_move_field;
 };
 
 #endif
