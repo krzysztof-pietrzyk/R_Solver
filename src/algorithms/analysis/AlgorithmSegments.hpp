@@ -24,6 +24,9 @@ class AlgorithmSegments : public AlgorithmAnalysis
     AlgorithmStatus Execution() override;
 
     private:
+
+    SectionsDTO& sections_dto;
+    SegmentsDTO& segments_dto;
     
     std::vector<uint32_t> fields_to_check;
     uint32_t fields_to_check_index;

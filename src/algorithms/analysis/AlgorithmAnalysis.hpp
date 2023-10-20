@@ -16,6 +16,8 @@ class AlgorithmAnalysis : public Algorithm
     protected:
 
     const GridAlgorithmIf& grid;
+    const CachedVector& visible;
+    const CachedVector& flagged;
 };
 
 #endif

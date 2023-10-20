@@ -17,6 +17,10 @@ struct SegmentsDTO
     SegmentsDTO(GridDimensions dim);
 
     void Clear();
+
+    void AddField(uint32_t field);
+
+    void AddSegment(uint32_t start, uint32_t length);
 };
 
 #endif

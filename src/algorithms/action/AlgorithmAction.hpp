@@ -32,7 +32,7 @@ class AlgorithmAction : public Algorithm
 
     AlgorithmStatus CheckGameOverConditions() const;
 
-    AlgorithmStatus GetActionResult(const uint32_t clicks_difference) const;
+    AlgorithmStatus GetExecutionResult(const uint32_t clicks_difference) const;
 };
 
 #endif

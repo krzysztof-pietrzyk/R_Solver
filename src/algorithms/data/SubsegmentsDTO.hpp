@@ -18,6 +18,8 @@ struct SubsegmentsDTO
     std::vector<std::vector<Subsegment>> subsegments;
 
     SubsegmentsDTO(GridDimensions dim);
+
+    void Clear();
 };
 
 #endif

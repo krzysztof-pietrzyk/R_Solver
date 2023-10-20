@@ -32,6 +32,9 @@ class AlgorithmSections : public AlgorithmAnalysis
 
     private:
 
+    BorderDTO& border_dto;
+    SectionsDTO& sections_dto;
+
     std::vector<uint32_t> sections_hashes;
     uint8_t section_value_temp;
     uint32_t current_section_hash;
@@ -48,8 +51,6 @@ class AlgorithmSections : public AlgorithmAnalysis
     const uint32_t diff_bit_29;
     const uint32_t diff_bit_30;
     const uint32_t diff_bit_31;
-
-    void Clear();
 
     void AnalyzeSection(const uint32_t border_field);
 

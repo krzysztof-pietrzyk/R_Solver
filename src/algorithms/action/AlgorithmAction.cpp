@@ -22,12 +22,12 @@ AlgorithmStatus AlgorithmAction::Run()
     statistics_executions->executions += 1;
     const uint64_t number_of_clicks_after = left_click_counter + right_click_counter;
     
-    AlgorithmStatus action_result = GetActionResult(number_of_clicks_after - number_of_clicks_before);
+    AlgorithmStatus execution_result = GetExecutionResult(number_of_clicks_after - number_of_clicks_before);
     AlgorithmStatus game_over_result = CheckGameOverConditions();
 
     if(game_over_result == AlgorithmStatus::NO_STATUS)
     {
-        return action_result;
+        return execution_result;
     }
     else if(game_over_result == AlgorithmStatus::GAME_LOST)
     {
@@ -49,7 +49,7 @@ AlgorithmStatus AlgorithmAction::CheckGameOverConditions() const
     return AlgorithmStatus::NO_STATUS;
 }
 
-AlgorithmStatus AlgorithmAction::GetActionResult(const uint32_t clicks_difference) const
+AlgorithmStatus AlgorithmAction::GetExecutionResult(const uint32_t clicks_difference) const
 {
     if(clicks_difference > 0)
     {

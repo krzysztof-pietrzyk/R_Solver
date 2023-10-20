@@ -2,12 +2,19 @@
 
 BorderDTO::BorderDTO(GridDimensions dim)
 {
-    border = CachedVector(dim.size);
-    border_last_visible_fields_index = 0;
+    border = std::vector<uint32_t>(dim.size, 0);
+    is_border = std::vector<bool>(dim.size, false);
+    index = 0;
+    last_visible_fields_index = 0;
 }
 
 void BorderDTO::Clear()
 {
-    border.Clear();
-    border_last_visible_fields_index = 0;
+    for(size_t i = 0; i < index; i++)
+    {
+        uint32_t border_field = border[i];
+        is_border[border_field] = false;
+    }
+    index = 0;
+    last_visible_fields_index = 0;
 }

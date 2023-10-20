@@ -37,6 +37,13 @@ class AlgorithmCombinations : public AlgorithmAnalysis
 
     private:
 
+    SectionsDTO& sections_dto;
+    SegmentsDTO& segments_dto;
+    SubsegmentsDTO& subsegments_dto;
+    FaceDTO& face_dto;
+    CombinationsDTO& combinations_dto;
+    FactorialsDTO& factorials_dto;
+
     std::vector<FieldState> field_states;
     std::vector<uint32_t> choice_stack;
     std::vector<uint32_t> segment_of_choice_stack;

@@ -17,6 +17,10 @@ class AlgorithmSubsegments : public AlgorithmAnalysis
 
     private:
 
+    SectionsDTO& sections_dto;
+    SegmentsDTO& segments_dto;
+    SubsegmentsDTO& subsegments_dto;
+
     std::vector<bool> is_checked;
     std::vector<uint32_t> checked;
     uint32_t checked_index;

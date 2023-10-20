@@ -1,16 +1,19 @@
 #ifndef BORDER_DTO_HPP
 #define BORDER_DTO_HPP
 
-#include <vector>
-#include <cstdint>
-
 #include "../../grid/GridDimensions.hpp"
 #include "../../utils/CachedVector.hpp"
 
+#include <vector>
+#include <cstdint>
+
 struct BorderDTO
 {
-    CachedVector border;
-    uint32_t border_last_visible_fields_index;
+    // CachedVector can't be used here due to optimizations in usage
+    std::vector<uint32_t> border;
+    std::vector<bool> is_border;
+    uint32_t index;
+    uint32_t last_visible_fields_index;
 
     BorderDTO(GridDimensions dim);
 

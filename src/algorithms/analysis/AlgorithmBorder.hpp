@@ -26,6 +26,10 @@ class AlgorithmBorder : public AlgorithmAnalysis
 
     private:
 
+    BorderDTO& border_dto;
+    std::vector<uint32_t>& border;
+    std::vector<bool>& is_border;
+
     void FilterOldBorderContent(uint32_t& border_index_new) const;
 
     void AddNewContentToBorder(uint32_t& border_index_new) const;

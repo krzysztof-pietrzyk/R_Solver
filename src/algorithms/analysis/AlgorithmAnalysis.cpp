@@ -2,7 +2,9 @@
 
 AlgorithmAnalysis::AlgorithmAnalysis(GridAlgorithmIf& grid_, AlgorithmDataTransfer& data_)
     : Algorithm(grid_, data_),
-    grid(grid_)
+    grid(grid_),
+    visible(grid_.GetVisibleFields()),
+    flagged(grid_.GetFlaggedFields())
 {
 
 }

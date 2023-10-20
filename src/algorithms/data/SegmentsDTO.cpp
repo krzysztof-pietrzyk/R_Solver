@@ -14,3 +14,15 @@ void SegmentsDTO::Clear()
     segments_index = 0;
     segments_count = 0;
 }
+
+void SegmentsDTO::AddField(uint32_t field)
+{
+    segments[segments_index++] = field;
+}
+
+void SegmentsDTO::AddSegment(uint32_t start, uint32_t length)
+{
+    segments_starting_indexes[segments_count] = start;
+    segments_l[segments_count] = length;
+    segments_count++;
+}

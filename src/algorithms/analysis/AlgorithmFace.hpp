@@ -17,6 +17,10 @@ class AlgorithmFace : public AlgorithmAnalysis
 
     private:
 
+    SectionsDTO& sections_dto;
+    SegmentsDTO& segments_dto;
+    FaceDTO& face_dto;
+
     void Clear();
 };
 
