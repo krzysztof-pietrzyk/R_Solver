@@ -29,7 +29,11 @@ namespace Labels
         namespace Executions
         {
             static const Label EXECUTIONS = "Times executed";
-            static const Label FAILURES = "Times failed";
+            static const Label NO_MOVES = "Status 'no moves'";
+            static const Label SUCCESS = "Status 'success'";
+            static const Label FAILURE = "Status 'failure'";
+            static const Label GAME_WON = "Status 'game won'";
+            static const Label GAME_LOST = "Status 'game lost'";
         }
 
         namespace Generator

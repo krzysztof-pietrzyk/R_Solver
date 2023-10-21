@@ -31,6 +31,8 @@ class Algorithm : public StatisticsProducer
     StatisticsCollectorExecutions* statistics_executions;
 
     virtual AlgorithmStatus Execution() = 0;
+
+    void UpdateExecutionStatistics(AlgorithmStatus status);
 };
 
 #endif

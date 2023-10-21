@@ -33,6 +33,8 @@ class AlgorithmAction : public Algorithm
     AlgorithmStatus CheckGameOverConditions() const;
 
     AlgorithmStatus GetExecutionResult(const uint32_t clicks_difference) const;
+
+    AlgorithmStatus GetReturnStatus(AlgorithmStatus execution_result, AlgorithmStatus game_over_result) const;
 };
 
 #endif

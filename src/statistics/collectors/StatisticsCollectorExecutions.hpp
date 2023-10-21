@@ -13,6 +13,11 @@ class StatisticsCollectorExecutions : public StatisticsCollector
     ~StatisticsCollectorExecutions();
 
     StatisticsElementCounter& executions;
+    StatisticsElementCounter& success;
+    StatisticsElementCounter& no_moves;
+    StatisticsElementCounter& failure;
+    StatisticsElementCounter& game_won;
+    StatisticsElementCounter& game_lost;
 
     protected:
 

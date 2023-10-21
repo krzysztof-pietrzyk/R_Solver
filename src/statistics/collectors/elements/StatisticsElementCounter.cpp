@@ -43,6 +43,11 @@ std::string StatisticsElementCounter::String()
     return std::to_string(element_value);
 }
 
+bool StatisticsElementCounter::IsEmpty()
+{
+    return element_value == 0U;
+}
+
 void StatisticsElementCounter::FlushToOutput(StatisticsElement& output)
 {
     // temp is needed because FlushToOutput is called from a different thread

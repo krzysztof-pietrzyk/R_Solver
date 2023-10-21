@@ -19,11 +19,11 @@ AlgorithmStatus AlgorithmDecision::Run()
     const size_t count_actions_before = actions_dto.actions.size();
     Execution();
     const size_t count_actions_after = actions_dto.actions.size();
-    statistics_executions->executions += 1;
     const size_t count_actions_new = count_actions_after - count_actions_before;
     AlgorithmStatus status;
     if(count_actions_new > 0) { status = AlgorithmStatus::SUCCESS; }
     else                      { status = AlgorithmStatus::NO_MOVES; }
+    UpdateExecutionStatistics(status);
     return status;
 }
 

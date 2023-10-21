@@ -26,20 +26,20 @@ enum class AlgorithmType
 namespace Labels::Producers::Algorithms
 {
     static const Label UNHANDLED_ALGORITHM_TYPE = "Unhandled AlgorithmType";
-    static const Label FIRST_MOVE               = "Algorithm: First Move";
-    static const Label SIMPLE_CORNERS           = "Algorithm: Simple Corners";
-    static const Label BORDER                   = "Algorithm: Refresh Border";
-    static const Label LAYER_ONE                = "Algorithm: Layer One";
-    static const Label SECTIONS                 = "Algorithm: Refresh Sections";
-    static const Label LAYER_TWO                = "Algorithm: Layer Two";
-    static const Label SEGMENTS                 = "Algorithm: Refresh Segments";
-    static const Label SUBSEGMENTS              = "Algorithm: Refresh Subsegments";
-    static const Label FACE                     = "Algorithm: Refresh Face";
-    static const Label COMBINATIONS             = "Algorithm: Refresh Combinations";
-    static const Label COMBINATIONS_SAFE_MOVES  = "Algorithm: Combinations Safe Moves";
-    static const Label COMBINATIONS_LEAST_RISKY = "Algorithm: Combinations Least Risky";
-    static const Label GIVE_UP                  = "Algorithm: Give Up";
-    static const Label SIMPLE_ACTIONS           = "Algorithm: Simple Actions";
+    static const Label FIRST_MOVE               = "Action: First Move";
+    static const Label SIMPLE_CORNERS           = "Decision: Simple Corners";
+    static const Label BORDER                   = "Analysis: Border";
+    static const Label LAYER_ONE                = "Decision: Layer One";
+    static const Label SECTIONS                 = "Analysis: Sections";
+    static const Label LAYER_TWO                = "Decision: Layer Two";
+    static const Label SEGMENTS                 = "Analysis: Segments";
+    static const Label SUBSEGMENTS              = "Analysis: Subsegments";
+    static const Label FACE                     = "Analysis: Face";
+    static const Label COMBINATIONS             = "Analysis: Combinations";
+    static const Label COMBINATIONS_SAFE_MOVES  = "Decision: Combinations Safe Moves";
+    static const Label COMBINATIONS_LEAST_RISKY = "Decision: Combinations Least Risky";
+    static const Label GIVE_UP                  = "Action: Give Up";
+    static const Label SIMPLE_ACTIONS           = "Action: Simple Actions";
 }
 
 static Label GetAlgorithmTypeLabel(AlgorithmType type)

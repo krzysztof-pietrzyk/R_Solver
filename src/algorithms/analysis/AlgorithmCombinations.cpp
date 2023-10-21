@@ -26,9 +26,6 @@ AlgorithmCombinations::AlgorithmCombinations(GridAlgorithmIf& grid_, AlgorithmDa
 
     segments_combinations = std::vector<std::map<uint32_t, BigNum>>(grid_dim.mines, std::map<uint32_t, BigNum>());
     field_combinations_temp = std::vector<std::map<uint32_t, BigNum>>(grid_dim.size, std::map<uint32_t, BigNum>());
-
-    statistics_failures = new StatisticsCollectorFailures();  // deleted in StatisticsProducer
-    statistics_collectors.push_back(statistics_failures);
 }
 
 AlgorithmCombinations::~AlgorithmCombinations() {}
@@ -49,7 +46,6 @@ AlgorithmStatus AlgorithmCombinations::Execution()
     }
     catch(FailSafeException)
     {
-        statistics_failures->failures += 1;
         return AlgorithmStatus::FAILURE;
     }
     return AlgorithmStatus::NO_STATUS;

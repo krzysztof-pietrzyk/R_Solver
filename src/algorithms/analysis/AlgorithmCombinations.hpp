@@ -1,8 +1,6 @@
 #ifndef ALGORITHM_COMBINATIONS_HPP
 #define ALGORITHM_COMBINATIONS_HPP
 
-#include "../../statistics/collectors/StatisticsCollectorFailures.hpp"
-
 #include "AlgorithmAnalysis.hpp"
 
 enum class FieldState
@@ -60,8 +58,6 @@ class AlgorithmCombinations : public AlgorithmAnalysis
     // field_combinations_temp - vector id: field position, key: given mine count within entire segment
     // value: number of combinations, in which a mine appears on that field for given mine count of this segment
     std::vector<std::map<uint32_t, BigNum>> field_combinations_temp;
-
-    StatisticsCollectorFailures* statistics_failures;
 
     static const uint64_t fail_safe_permutation_threshold;
     static const uint64_t fail_safe_enumeration_threshold;

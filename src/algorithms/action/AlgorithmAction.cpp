@@ -19,21 +19,14 @@ AlgorithmStatus AlgorithmAction::Run()
 {
     const uint64_t number_of_clicks_before = left_click_counter + right_click_counter;
     Execution();
-    statistics_executions->executions += 1;
     const uint64_t number_of_clicks_after = left_click_counter + right_click_counter;
+    const uint64_t clicks_difference = number_of_clicks_after - number_of_clicks_before;
     
-    AlgorithmStatus execution_result = GetExecutionResult(number_of_clicks_after - number_of_clicks_before);
+    AlgorithmStatus execution_result = GetExecutionResult(clicks_difference);
     AlgorithmStatus game_over_result = CheckGameOverConditions();
-
-    if(game_over_result == AlgorithmStatus::NO_STATUS)
-    {
-        return execution_result;
-    }
-    else if(game_over_result == AlgorithmStatus::GAME_LOST)
-    {
-        statistics_clicks->times_caused_loss += 1;
-    }
-    return game_over_result;
+    AlgorithmStatus final_status = GetReturnStatus(execution_result, game_over_result);
+    UpdateExecutionStatistics(final_status);
+    return final_status;
 }
 
 AlgorithmStatus AlgorithmAction::CheckGameOverConditions() const
@@ -86,4 +79,18 @@ PlayerActionResult AlgorithmAction::RightClick(const uint32_t field)
         statistics_clicks->wasted_right_clicks += 1U;
     }
     return result;
+}
+
+AlgorithmStatus AlgorithmAction::GetReturnStatus(AlgorithmStatus execution_result, AlgorithmStatus game_over_result) const
+{
+    AlgorithmStatus return_status;
+    if(game_over_result == AlgorithmStatus::NO_STATUS)
+    {
+        return_status = execution_result;
+    }
+    else
+    {
+        return_status = game_over_result;
+    }
+    return return_status;
 }
