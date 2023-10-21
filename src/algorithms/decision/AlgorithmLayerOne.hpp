@@ -31,6 +31,10 @@ class AlgorithmLayerOne : public AlgorithmDecision
 
     AlgorithmStatus Execution() override;
 
+    private:
+
+    BorderDTO& border_dto;
+
     LayerOneFieldSignature GetFieldSignature(const uint32_t border_field) const;
 
     void CheckForSafeClicks(const LayerOneFieldSignature& signature);

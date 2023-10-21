@@ -18,12 +18,17 @@ class AlgorithmDecision : public Algorithm
 
     ~AlgorithmDecision();
 
+    AlgorithmStatus Run() override;
+
     protected:
 
     const GridAlgorithmIf& grid;
+    const CachedVector& visible;
+    const CachedVector& flagged;
 
     ActionsDTO& actions_dto;
 
+    // Overwrite it in inheriting classes
     AlgorithmType algorithm_type;
 
     void QueueAction(uint32_t field, PlayerAction action);

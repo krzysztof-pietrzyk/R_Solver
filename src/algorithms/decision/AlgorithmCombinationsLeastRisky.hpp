@@ -15,6 +15,11 @@ class AlgorithmCombinationsLeastRisky : public AlgorithmDecision
 
     AlgorithmStatus Execution() override;
 
+    private:
+
+    FaceDTO& face_dto;
+    CombinationsDTO& combinations_dto;
+
     uint32_t FindSafestField() const;
 
     const BigNum max_combinations;

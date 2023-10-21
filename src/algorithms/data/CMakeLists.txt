@@ -1,6 +1,7 @@
 message("Entering directory ${CMAKE_CURRENT_SOURCE_DIR}")
 
 set(CPP_SOURCES_ALGORITHMS_DATA
+    ${CMAKE_CURRENT_SOURCE_DIR}/ActionsDTO.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/AlgorithmDataTransfer.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/BorderDTO.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/CombinationsDTO.cpp

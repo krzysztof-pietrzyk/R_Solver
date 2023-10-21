@@ -14,6 +14,11 @@ class AlgorithmCombinationsSafeMoves : public AlgorithmDecision
     protected:
 
     AlgorithmStatus Execution() override;
+
+    private:
+
+    FaceDTO& face_dto;
+    CombinationsDTO& combinations_dto;
 };
 
 #endif

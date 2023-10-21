@@ -34,4 +34,6 @@ AlgorithmStatus AlgorithmSimpleActions::Execution()
         }
     }
     actions_dto.Clear();
+
+    return AlgorithmStatus::NO_STATUS;
 }
