@@ -1,7 +1,9 @@
 #include "AlgorithmCombinationsSafeMoves.hpp"
 
-AlgorithmCombinationsSafeMoves::AlgorithmCombinationsSafeMoves(GridAccessPlayerIf& grid_, AlgorithmDataTransfer& data_)
-    : AlgorithmDecision(grid_, data_)
+AlgorithmCombinationsSafeMoves::AlgorithmCombinationsSafeMoves(GridAlgorithmIf& grid_, AlgorithmDataTransfer& data_)
+    : AlgorithmDecision(grid_, data_),
+    face_dto(data_.face_dto),
+    combinations_dto(data_.combinations_dto)
 {
     LOGGER(LogLevel::INIT) << "AlgorithmCombinationsSafeMoves";
 }
@@ -10,22 +12,22 @@ AlgorithmCombinationsSafeMoves::~AlgorithmCombinationsSafeMoves() {}
 
 AlgorithmStatus AlgorithmCombinationsSafeMoves::Execution()
 {
-    const BigNum total_combinations = data.total_combinations;
-    const uint32_t face_length = data.face_index;
+    const BigNum total_combinations = combinations_dto.total_combinations;
+    const uint32_t face_length = face_dto.face.Index();
     const BigNum no_combinations = 0;
     for(size_t i = 0; i < face_length; i++)
     {
-        const uint32_t face_field = data.face[i];
-        const BigNum face_field_combinations = data.field_combinations[face_field];
+        const uint32_t face_field = face_dto.face[i];
+        const BigNum face_field_combinations = combinations_dto.field_combinations[face_field];
         if(face_field_combinations == no_combinations) 
         {
             // A mine on this field appears in 0 combinations - it's safe
-            LeftClick(face_field);
+            QueueAction(face_field, PlayerAction::LEFT_CLICK);
         }
         else if(face_field_combinations == total_combinations)
         {
             // A mine on this field appears in all combinations - it's a mine
-            RightClick(face_field);
+            QueueAction(face_field, PlayerAction::RIGHT_CLICK);
         }
     }
 

@@ -14,16 +14,20 @@ class AlgorithmLayerTwo : public AlgorithmDecision
     */
     public:
 
-    AlgorithmLayerTwo(GridAccessPlayerIf& grid_, AlgorithmDataTransfer& data_);
+    AlgorithmLayerTwo(GridAlgorithmIf& grid_, AlgorithmDataTransfer& data_);
 
     ~AlgorithmLayerTwo();
 
     protected:
 
+    AlgorithmStatus Execution() override;
+
+    private:
+
+    SectionsDTO& sections_dto;
+
     std::vector<uint32_t> not_common_current;
     std::vector<uint32_t> not_common_neighbor;
-
-    AlgorithmStatus Execution() override;
 
     uint32_t CompareSections(const Section& a, const Section& b);
 

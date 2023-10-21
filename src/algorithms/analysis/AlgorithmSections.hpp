@@ -1,13 +1,13 @@
 #ifndef ALGORITHM_SECTIONS_HPP
 #define ALGORITHM_SECTIONS_HPP
 
-#include "../Algorithm.hpp"
+#include "AlgorithmAnalysis.hpp"
 
 #include <algorithm>
 
 #define MAX_ALLOWED_GRID_SIZE 1048576
 
-class AlgorithmSections : public Algorithm
+class AlgorithmSections : public AlgorithmAnalysis
 {
     /*
     This algorithm gathers data about "sections".
@@ -22,30 +22,20 @@ class AlgorithmSections : public Algorithm
     */
     public:
 
-    AlgorithmSections(GridAccessPlayerIf& grid_, AlgorithmDataTransfer& data_);
+    AlgorithmSections(GridAlgorithmIf& grid_, AlgorithmDataTransfer& data_);
 
     ~AlgorithmSections();
 
-    AlgorithmStatus Execution() override;
-
     protected:
 
+    AlgorithmStatus Execution() override;
+
+    private:
+
+    BorderDTO& border_dto;
+    SectionsDTO& sections_dto;
+
     std::vector<uint32_t> sections_hashes;
-
-    void Clear();
-
-    void AnalyzeSection(const uint32_t border_field);
-
-    void AnalyzeSectionField(const uint32_t border_field, const uint32_t border_field_neighbor, Section& current_section);
-
-    void AnalyzeSectionNeighbor(const uint32_t border_field, const uint32_t section_neighbor, Section& current_section) const;
-
-    void SaveSectionData(const uint32_t border_field, Section& current_section) const;
-
-    uint32_t GetHashBit(uint32_t difference) const;
-
-    bool CheckHashUnique(uint32_t hash) const;
-
     uint8_t section_value_temp;
     uint32_t current_section_hash;
 
@@ -62,12 +52,17 @@ class AlgorithmSections : public Algorithm
     const uint32_t diff_bit_30;
     const uint32_t diff_bit_31;
 
-    private:
+    void AnalyzeSection(const uint32_t border_field);
 
-    uint32_t& D_sections_origins_index;
-    std::vector<uint32_t>& D_sections_origins;
-    std::vector<bool>& D_is_section_origin;
-    std::vector<Section>& D_sections;
+    void AnalyzeSectionField(const uint32_t border_field, const uint32_t border_field_neighbor, Section& current_section);
+
+    void AnalyzeSectionNeighbor(const uint32_t border_field, const uint32_t section_neighbor, Section& current_section) const;
+
+    void SaveSectionData(const uint32_t border_field, Section& current_section) const;
+
+    uint32_t GetHashBit(uint32_t difference) const;
+
+    bool CheckHashUnique(uint32_t hash) const;
 };
 
 #endif

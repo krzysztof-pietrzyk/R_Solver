@@ -16,6 +16,7 @@ class StatisticsElement
     virtual void Clear() = 0;
     virtual StatisticsElement* Clone() = 0;
     virtual std::string String() = 0;
+    virtual bool IsEmpty() = 0;
 
     virtual void FlushToOutput(StatisticsElement& output) = 0;
     virtual void operator=(const StatisticsElement& other) = 0;

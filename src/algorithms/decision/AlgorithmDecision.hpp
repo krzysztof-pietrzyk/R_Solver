@@ -1,7 +1,10 @@
 #ifndef ALGORITHM_DECISION_HPP
 #define ALGORITHM_DECISION_HPP
 
-#include "../../statistics/collectors/StatisticsCollectorClicks.hpp"
+#include "../../grid/GridAlgorithmIf.hpp"
+#include "../../statistics/collectors/StatisticsCollectorDecisions.hpp"
+
+#include "../AlgorithmType.hpp"
 #include "../Algorithm.hpp"
 
 class AlgorithmDecision : public Algorithm
@@ -12,7 +15,7 @@ class AlgorithmDecision : public Algorithm
     */
     public:
 
-    AlgorithmDecision(GridAccessPlayerIf& grid_, AlgorithmDataTransfer& data_);
+    AlgorithmDecision(GridAlgorithmIf& grid_, AlgorithmDataTransfer& data_);
 
     ~AlgorithmDecision();
 
@@ -20,20 +23,20 @@ class AlgorithmDecision : public Algorithm
 
     protected:
 
-    PlayerActionResult LeftClick(const uint32_t field);
+    const GridAlgorithmIf& grid;
+    const CachedVector& visible;
+    const CachedVector& flagged;
 
-    PlayerActionResult RightClick(const uint32_t field);
+    ActionsDTO& actions_dto;
+
+    // Overwrite it in inheriting classes
+    AlgorithmType algorithm_type;
+
+    void QueueAction(uint32_t field, PlayerAction action);
 
     private:
 
-    uint64_t left_click_counter;
-    uint64_t right_click_counter;
-    StatisticsCollectorClicks* statistics_clicks;
-    GridAccessPlayerIf& D_grid;
-
-    AlgorithmStatus CheckGameOverConditions() const;
-
-    AlgorithmStatus GetActionResult(const uint32_t clicks_difference) const;
+    StatisticsCollectorDecisions* statistics_decisions;
 };
 
 #endif

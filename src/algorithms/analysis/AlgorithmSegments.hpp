@@ -1,9 +1,9 @@
 #ifndef ALGORITHM_SEGMENTS_HPP
 #define ALGORITHM_SEGMENTS_HPP
 
-#include "../Algorithm.hpp"
+#include "AlgorithmAnalysis.hpp"
 
-class AlgorithmSegments : public Algorithm
+class AlgorithmSegments : public AlgorithmAnalysis
 {
     /*
     This algorithm gathers information about "segments".
@@ -15,13 +15,18 @@ class AlgorithmSegments : public Algorithm
     */
     public:
 
-    AlgorithmSegments(GridAccessPlayerIf& grid_, AlgorithmDataTransfer& data_);
+    AlgorithmSegments(GridAlgorithmIf& grid_, AlgorithmDataTransfer& data_);
 
     ~AlgorithmSegments();
 
+    protected:
+
     AlgorithmStatus Execution() override;
 
-    protected:
+    private:
+
+    SectionsDTO& sections_dto;
+    SegmentsDTO& segments_dto;
     
     std::vector<uint32_t> fields_to_check;
     uint32_t fields_to_check_index;
@@ -30,14 +35,6 @@ class AlgorithmSegments : public Algorithm
     void Clear();
 
     void ChainReactionFromField(uint32_t field);
-
-    private:
-
-    uint32_t& D_segments_index;
-    uint32_t& D_segments_count;
-    std::vector<uint32_t>& D_segments;
-    std::vector<uint32_t>& D_segments_starting_indexes;
-    std::vector<uint32_t>& D_segments_l;
 };
 
 #endif

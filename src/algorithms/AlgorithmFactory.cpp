@@ -1,20 +1,20 @@
 #include "AlgorithmFactory.hpp"
 
-Algorithm* AlgorithmFactory::Create(AlgorithmType type, GridAccessPlayerIf& grid, AlgorithmDataTransfer& data)
+Algorithm* AlgorithmFactory::Create(AlgorithmType type, GridAlgorithmIf& grid, AlgorithmDataTransfer& data)
 {
     switch(type)
     {
-        case AlgorithmType::REFRESH_BORDER:
+        case AlgorithmType::BORDER:
             return new AlgorithmBorder(grid, data);
-        case AlgorithmType::REFRESH_SECTIONS:
+        case AlgorithmType::SECTIONS:
             return new AlgorithmSections(grid, data);
-        case AlgorithmType::REFRESH_SEGMENTS:
+        case AlgorithmType::SEGMENTS:
             return new AlgorithmSegments(grid, data);
-        case AlgorithmType::REFRESH_SUBSEGMENTS:
+        case AlgorithmType::SUBSEGMENTS:
             return new AlgorithmSubsegments(grid, data);
-        case AlgorithmType::REFRESH_FACE:
+        case AlgorithmType::FACE:
             return new AlgorithmFace(grid, data);
-        case AlgorithmType::REFRESH_COMBINATIONS:
+        case AlgorithmType::COMBINATIONS:
             return new AlgorithmCombinations(grid, data);
         case AlgorithmType::SIMPLE_CORNERS:
             return new AlgorithmSimpleCorners(grid, data);
@@ -30,6 +30,8 @@ Algorithm* AlgorithmFactory::Create(AlgorithmType type, GridAccessPlayerIf& grid
             return new AlgorithmGiveUp(grid, data);
         case AlgorithmType::FIRST_MOVE:
             return new AlgorithmFirstMove(grid, data);
+        case AlgorithmType::SIMPLE_ACTIONS:
+            return new AlgorithmSimpleActions(grid, data);
         default:
             LOGGER_THROW("AlgorithmFactory::Create - unhandled AlgorithmType");
     }

@@ -1,21 +1,23 @@
 #include "AlgorithmLayerOne.hpp"
 
-AlgorithmLayerOne::AlgorithmLayerOne(GridAccessPlayerIf& grid_, AlgorithmDataTransfer& data_)
-    : AlgorithmDecision(grid_, data_)
+AlgorithmLayerOne::AlgorithmLayerOne(GridAlgorithmIf& grid_, AlgorithmDataTransfer& data_)
+    : AlgorithmDecision(grid_, data_),
+    border_dto(data_.border_dto)
 {
     LOGGER(LogLevel::INIT) << "AlgorithmLayerOne";
+    algorithm_type = AlgorithmType::LAYER_ONE;
 }
 
 AlgorithmLayerOne::~AlgorithmLayerOne() {}
 
 AlgorithmStatus AlgorithmLayerOne::Execution()
 {
-    const uint32_t border_index_max = data.border_index;
+    const uint32_t border_index_max = border_dto.index;
 
     // Go through each field on the broder
     for(size_t i = 0; i < border_index_max; i++)
     {
-        const uint32_t border_field = data.border[i];
+        const uint32_t border_field = border_dto.border[i];
         const LayerOneFieldSignature field_signature = GetFieldSignature(border_field);
         CheckForSafeClicks(field_signature);
         CheckForMines(field_signature);
@@ -53,7 +55,7 @@ void AlgorithmLayerOne::CheckForSafeClicks(const LayerOneFieldSignature& signatu
         if(!flagged.Contains(neighbor_field) && !visible.Contains(neighbor_field))
         {
             // ...left click on all remaining covered fields
-            LeftClick(neighbor_field);
+            QueueAction(neighbor_field, PlayerAction::LEFT_CLICK);
         }
     }
 }
@@ -68,7 +70,7 @@ void AlgorithmLayerOne::CheckForMines(const LayerOneFieldSignature& signature)
         if(!flagged.Contains(neighbor_field) && !visible.Contains(neighbor_field))
         {
             // ...right click on all remaining covered fields
-            RightClick(neighbor_field);
+            QueueAction(neighbor_field, PlayerAction::RIGHT_CLICK);
         }
     }
 }

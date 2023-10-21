@@ -1,6 +1,6 @@
 #include "GeneratorFactory.hpp"
 
-Generator* GeneratorFactory::Create(GeneratorType type, GridAccessGeneratorIf& grid)
+Generator* GeneratorFactory::Create(GeneratorType type, GridGeneratorIf& grid)
 {
     switch(type)
     {

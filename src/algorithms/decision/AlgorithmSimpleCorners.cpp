@@ -1,6 +1,6 @@
 #include "AlgorithmSimpleCorners.hpp"
 
-AlgorithmSimpleCorners::AlgorithmSimpleCorners(GridAccessPlayerIf& grid_, AlgorithmDataTransfer& data_)
+AlgorithmSimpleCorners::AlgorithmSimpleCorners(GridAlgorithmIf& grid_, AlgorithmDataTransfer& data_)
     : AlgorithmDecision(grid_, data_)
 {
     LOGGER(LogLevel::INIT) << "AlgorithmSimpleCorners";
@@ -13,6 +13,7 @@ AlgorithmSimpleCorners::AlgorithmSimpleCorners(GridAccessPlayerIf& grid_, Algori
     corners.push_back(upper_right);
     corners.push_back(bottom_left);
     corners.push_back(bottom_right);
+    algorithm_type = AlgorithmType::SIMPLE_CORNERS;
 }
 
 AlgorithmSimpleCorners::~AlgorithmSimpleCorners() {}
@@ -28,7 +29,10 @@ AlgorithmStatus AlgorithmSimpleCorners::Execution()
             break;
         }
     }
-    if(chosen_corner != UINT32_MAX) { LeftClick(chosen_corner); }
+    if(chosen_corner != UINT32_MAX)
+    {
+        QueueAction(chosen_corner, PlayerAction::LEFT_CLICK);
+    }
 
     return AlgorithmStatus::NO_STATUS;
 }

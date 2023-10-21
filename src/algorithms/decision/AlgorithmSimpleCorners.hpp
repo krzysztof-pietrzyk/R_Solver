@@ -13,7 +13,7 @@ class AlgorithmSimpleCorners : public AlgorithmDecision
     */
     public:
 
-    AlgorithmSimpleCorners(GridAccessPlayerIf& grid_, AlgorithmDataTransfer& data_);
+    AlgorithmSimpleCorners(GridAlgorithmIf& grid_, AlgorithmDataTransfer& data_);
 
     ~AlgorithmSimpleCorners();
 

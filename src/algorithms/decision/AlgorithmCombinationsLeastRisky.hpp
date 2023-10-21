@@ -7,13 +7,18 @@ class AlgorithmCombinationsLeastRisky : public AlgorithmDecision
 {
     public:
 
-    AlgorithmCombinationsLeastRisky(GridAccessPlayerIf& grid_, AlgorithmDataTransfer& data_);
+    AlgorithmCombinationsLeastRisky(GridAlgorithmIf& grid_, AlgorithmDataTransfer& data_);
 
     ~AlgorithmCombinationsLeastRisky();
 
     protected:
 
     AlgorithmStatus Execution() override;
+
+    private:
+
+    FaceDTO& face_dto;
+    CombinationsDTO& combinations_dto;
 
     uint32_t FindSafestField() const;
 

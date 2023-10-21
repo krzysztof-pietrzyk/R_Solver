@@ -7,13 +7,18 @@ class AlgorithmCombinationsSafeMoves : public AlgorithmDecision
 {
     public:
 
-    AlgorithmCombinationsSafeMoves(GridAccessPlayerIf& grid_, AlgorithmDataTransfer& data_);
+    AlgorithmCombinationsSafeMoves(GridAlgorithmIf& grid_, AlgorithmDataTransfer& data_);
 
     ~AlgorithmCombinationsSafeMoves();
 
     protected:
 
     AlgorithmStatus Execution() override;
+
+    private:
+
+    FaceDTO& face_dto;
+    CombinationsDTO& combinations_dto;
 };
 
 #endif

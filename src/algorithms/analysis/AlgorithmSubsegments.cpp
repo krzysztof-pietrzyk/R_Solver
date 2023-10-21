@@ -1,11 +1,10 @@
 #include "AlgorithmSubsegments.hpp"
 
-AlgorithmSubsegments::AlgorithmSubsegments(GridAccessPlayerIf& grid_, AlgorithmDataTransfer& data_)
-    : Algorithm(grid_, data_),
-    D_subsegments(GetModifiableAlgorithmDataTransferReference().subsegments),
-    D_is_subsegment(GetModifiableAlgorithmDataTransferReference().is_subsegment),
-    D_subsegments_cache(GetModifiableAlgorithmDataTransferReference().subsegments_cache),
-    D_subsegments_cache_index(GetModifiableAlgorithmDataTransferReference().subsegments_cache_index)
+AlgorithmSubsegments::AlgorithmSubsegments(GridAlgorithmIf& grid_, AlgorithmDataTransfer& data_)
+    : AlgorithmAnalysis(grid_, data_),
+    sections_dto(data_.sections_dto),
+    segments_dto(data_.segments_dto),
+    subsegments_dto(data_.subsegments_dto)
 {
     LOGGER(LogLevel::INIT) << "AlgorithmSubsegments";
     is_checked = std::vector<bool>(grid_dim.size, false);
@@ -21,19 +20,19 @@ AlgorithmStatus AlgorithmSubsegments::Execution()
 {
     Clear();
 
-    const uint32_t segments_count = data.segments_count;
+    const uint32_t segments_count = segments_dto.segments_count;
 
     for(size_t segment_id = 0; segment_id < segments_count; segment_id++)
     {
-        D_subsegments.push_back(std::vector<SubsegmentData>());
+        subsegments_dto.subsegments.push_back(std::vector<Subsegment>());
         // It's important to keep track which segment this optimization relates to
         // This is why we are iterating over segments, not over sections directly
-        const uint32_t segment_begin = data.segments_starting_indexes[segment_id];
-        const uint32_t segment_end = segment_begin + data.segments_l[segment_id];
+        const uint32_t segment_begin = segments_dto.segments_starting_indexes[segment_id];
+        const uint32_t segment_end = segment_begin + segments_dto.segments_l[segment_id];
         for(size_t j = segment_begin; j < segment_end; j++)
         {
             // Border fields are unique in segments. No need to check for duplicates here
-            const uint32_t border_field = data.segments[j];
+            const uint32_t border_field = segments_dto.segments[j];
             UpdateNeighborsBits(border_field);
             UpdateSectionNeighborhood(border_field);
             FindSegmentsToOptimize(segment_id);
@@ -47,16 +46,13 @@ void AlgorithmSubsegments::Clear()
 {
     for(size_t i = 0; i < checked_index; i++) { is_checked[checked[i]] = false; }
     checked_index = 0;
-    const uint32_t subsegments_cache_index = data.subsegments_cache_index;
-    for(size_t i = 0; i < subsegments_cache_index; i++) { D_is_subsegment[data.subsegments_cache[i]] = false; }
-    D_subsegments_cache_index = 0;
-    D_subsegments.clear();
+    subsegments_dto.Clear();
 }
 
 void AlgorithmSubsegments::UpdateNeighborsBits(const uint32_t border_field)
 {
     neighbors_bits.clear();
-    const Section& border_field_section = data.sections[border_field];
+    const Section& border_field_section = sections_dto.sections[border_field];
     const size_t border_field_neighbors_l = border_field_section.neighbors_index;
     uint32_t bit_shift_temp = 1;
     for(size_t i = 0; i < border_field_neighbors_l; i++)
@@ -73,7 +69,7 @@ void AlgorithmSubsegments::UpdateNeighborsBits(const uint32_t border_field)
 void AlgorithmSubsegments::UpdateSectionNeighborhood(const uint32_t section_origin)
 {
     section_neighborhood.clear();
-    const Section& current_section = data.sections[section_origin];
+    const Section& current_section = sections_dto.sections[section_origin];
     const size_t current_section_l = current_section.fields_index;
     for(size_t i = 0; i < current_section_l; i++)
     {
@@ -100,17 +96,16 @@ void AlgorithmSubsegments::FindSegmentsToOptimize(const uint32_t parent_segment)
         const size_t hash_repetitions = iter->second.size();
         // filter out all hashes which appear less than 2 times (vast majority)
         if(hash_repetitions < 2) { continue; }
-        SubsegmentData subsegment_temp = SubsegmentData();
+        Subsegment subsegment_temp = Subsegment();
         // copy the fields into the structure
         for(size_t i = 0; i < hash_repetitions; i++)
         {
             const uint32_t field_temp = iter->second[i];
-            D_is_subsegment[field_temp] = true;
-            D_subsegments_cache[D_subsegments_cache_index++] = field_temp;
+            subsegments_dto.subsegments_cache.Add(field_temp);
             subsegment_temp.fields.push_back(field_temp); 
         }
         FindPossibleValuesForSubsegment(subsegment_temp);
-        D_subsegments[parent_segment].push_back(subsegment_temp);
+        subsegments_dto.subsegments[parent_segment].push_back(subsegment_temp);
     }
 }
 
@@ -120,13 +115,13 @@ uint32_t AlgorithmSubsegments::GetNeighborhoodHash(const uint32_t section_field)
     for(const uint32_t& section_field_neighbor : grid.GetNeighbors(section_field))
     {
         // only consider fields that are section origins
-        if(!data.is_section_origin[section_field_neighbor]) { continue; }
+        if(!sections_dto.sections_origins.Contains(section_field_neighbor)) { continue; }
         hash_result += neighbors_bits[section_field_neighbor];
     }
     return hash_result;
 }
 
-void AlgorithmSubsegments::FindPossibleValuesForSubsegment(SubsegmentData& subsegment_data) const
+void AlgorithmSubsegments::FindPossibleValuesForSubsegment(Subsegment& subsegment_data) const
 {
     // all subsegment fields have the same neighboring section origins. just take the first one
     const uint32_t subsegment_field = subsegment_data.fields[0];
@@ -136,8 +131,8 @@ void AlgorithmSubsegments::FindPossibleValuesForSubsegment(SubsegmentData& subse
     for(const uint32_t& subsegment_field_neighbor : grid.GetNeighbors(subsegment_field))
     {
         // ignore neighbors which are not section origins
-        if(!data.is_section_origin[subsegment_field_neighbor]) { continue; }
-        const Section& current_section = data.sections[subsegment_field_neighbor];
+        if(!sections_dto.sections_origins.Contains(subsegment_field_neighbor)) { continue; }
+        const Section& current_section = sections_dto.sections[subsegment_field_neighbor];
         const uint8_t section_value = current_section.value;
         const size_t section_length = current_section.fields_index;
         // will be greater than 0 if the section value is so big that it can't fit

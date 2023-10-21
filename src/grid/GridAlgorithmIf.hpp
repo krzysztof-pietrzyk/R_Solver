@@ -1,18 +1,12 @@
-#ifndef GRID_ACCESS_PLAYER_IF_HPP
-#define GRID_ACCESS_PLAYER_IF_HPP
+#ifndef GRID_ALGORITHM_IF_HPP
+#define GRID_ALGORITHM_IF_HPP
 
 #include "../utils/CachedVector.hpp"
+#include "../algorithms/PlayerAction.hpp"
 
-#include "GridAccessCommonIf.hpp"
+#include "GridCommonIf.hpp"
 
-enum class PlayerActionResult
-{
-    CORRECT,
-    EXPLODED,
-    WASTED
-};
-
-class GridAccessPlayerIf : public GridAccessCommonIf
+class GridAlgorithmIf : public GridCommonIf
 {
     public:
 
@@ -22,8 +16,6 @@ class GridAccessPlayerIf : public GridAccessCommonIf
 
     virtual PlayerActionResult SetVisible(uint32_t field) = 0;
     virtual PlayerActionResult SetFlag(uint32_t field) = 0;
-    virtual bool IsLost() const = 0;
-    virtual bool IsWon() const = 0;
     virtual void GiveUp() = 0;
 };
 

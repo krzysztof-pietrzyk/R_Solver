@@ -1,28 +1,27 @@
 #ifndef ALGORITHM_FACE_HPP
 #define ALGORITHM_FACE_HPP
 
-#include "../Algorithm.hpp"
+#include "AlgorithmAnalysis.hpp"
 
-class AlgorithmFace : public Algorithm
+class AlgorithmFace : public AlgorithmAnalysis
 {
     public:
 
-    AlgorithmFace(GridAccessPlayerIf& grid_, AlgorithmDataTransfer& data_);
+    AlgorithmFace(GridAlgorithmIf& grid_, AlgorithmDataTransfer& data_);
 
     ~AlgorithmFace();
 
-    AlgorithmStatus Execution() override;
-
     protected:
 
-    void Clear();
+    AlgorithmStatus Execution() override;
 
     private:
 
-    uint32_t& D_face_index;
-    std::vector<uint32_t>& D_face;
-    std::vector<bool>& D_is_face;
-    std::vector<std::vector<uint32_t>>& D_segments_face;
+    SectionsDTO& sections_dto;
+    SegmentsDTO& segments_dto;
+    FaceDTO& face_dto;
+
+    void Clear();
 };
 
 #endif

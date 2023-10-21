@@ -23,13 +23,17 @@ class AlgorithmLayerOne : public AlgorithmDecision
     */
     public:
 
-    AlgorithmLayerOne(GridAccessPlayerIf& grid_, AlgorithmDataTransfer& data_);
+    AlgorithmLayerOne(GridAlgorithmIf& grid_, AlgorithmDataTransfer& data_);
 
     ~AlgorithmLayerOne();
 
     protected:
 
     AlgorithmStatus Execution() override;
+
+    private:
+
+    BorderDTO& border_dto;
 
     LayerOneFieldSignature GetFieldSignature(const uint32_t border_field) const;
 

@@ -1,85 +1,43 @@
 #include "AlgorithmDecision.hpp"
 
-AlgorithmDecision::AlgorithmDecision(GridAccessPlayerIf& grid_, AlgorithmDataTransfer& data_)
+AlgorithmDecision::AlgorithmDecision(GridAlgorithmIf& grid_, AlgorithmDataTransfer& data_)
     : Algorithm(grid_, data_),
-    D_grid(GetModifiableGridReference())
+    grid(grid_),
+    visible(grid_.GetVisibleFields()),
+    flagged(grid_.GetFlaggedFields()),
+    actions_dto(data_.actions_dto)
 {
     LOGGER(LogLevel::INIT) << "AlgorithmDecision";
-    statistics_clicks = new StatisticsCollectorClicks();  // deleted in StatisticsProducer
-    statistics_collectors.push_back(statistics_clicks);
+    statistics_decisions = new StatisticsCollectorDecisions();  // deleted in StatisticsProducer
+    statistics_collectors.push_back(statistics_decisions);
+    // Overwrite it in inheriting classes
+    algorithm_type = AlgorithmType::UNHANDLED_ALGORITHM_TYPE;
 }
 
 AlgorithmDecision::~AlgorithmDecision() {}
 
 AlgorithmStatus AlgorithmDecision::Run()
 {
-    const uint64_t number_of_clicks_before = left_click_counter + right_click_counter;
+    const size_t count_actions_before = actions_dto.actions.size();
     Execution();
-    statistics_executions->executions += 1;
-    const uint64_t number_of_clicks_after = left_click_counter + right_click_counter;
-    
-    AlgorithmStatus action_result = GetActionResult(number_of_clicks_after - number_of_clicks_before);
-    AlgorithmStatus game_over_result = CheckGameOverConditions();
-
-    if(game_over_result == AlgorithmStatus::NO_STATUS)
-    {
-        return action_result;
-    }
-    else if(game_over_result == AlgorithmStatus::GAME_LOST)
-    {
-        statistics_clicks->times_caused_loss += 1;
-    }
-    return game_over_result;
+    const size_t count_actions_after = actions_dto.actions.size();
+    const size_t count_actions_new = count_actions_after - count_actions_before;
+    AlgorithmStatus status;
+    if(count_actions_new > 0) { status = AlgorithmStatus::SUCCESS; }
+    else                      { status = AlgorithmStatus::NO_MOVES; }
+    UpdateExecutionStatistics(status);
+    return status;
 }
 
-AlgorithmStatus AlgorithmDecision::CheckGameOverConditions() const
+void AlgorithmDecision::QueueAction(uint32_t field, PlayerAction action)
 {
-    if(grid.IsLost())
+    actions_dto.Add(field, action, algorithm_type);
+    if(action == PlayerAction::LEFT_CLICK)
     {
-        return AlgorithmStatus::GAME_LOST;
+        statistics_decisions->decisions_left_click += 1;
     }
-    else if(visible.Index() == grid_dim.safe)
+    else if(action == PlayerAction::RIGHT_CLICK)
     {
-        return AlgorithmStatus::GAME_WON;
+        statistics_decisions->decisions_right_click += 1;
     }
-    return AlgorithmStatus::NO_STATUS;
-}
-
-AlgorithmStatus AlgorithmDecision::GetActionResult(const uint32_t clicks_difference) const
-{
-    if(clicks_difference > 0)
-    {
-        return AlgorithmStatus::SUCCESS;
-    }
-    return AlgorithmStatus::NO_MOVES;
-}
-
-PlayerActionResult AlgorithmDecision::LeftClick(const uint32_t field)
-{
-    PlayerActionResult result = D_grid.SetVisible(field);
-    statistics_clicks->left_clicks += 1U;
-    if(result == PlayerActionResult::CORRECT)
-    {
-        left_click_counter += 1U;
-    }
-    else if(result == PlayerActionResult::WASTED)
-    {
-        statistics_clicks->wasted_left_clicks += 1U;
-    }
-    return result;
-}
-
-PlayerActionResult AlgorithmDecision::RightClick(const uint32_t field)
-{
-    PlayerActionResult result = D_grid.SetFlag(field);
-    statistics_clicks->right_clicks += 1U;
-    if(result == PlayerActionResult::CORRECT)
-    {
-        right_click_counter += 1U;
-    }
-    else if(result == PlayerActionResult::WASTED)
-    {
-        statistics_clicks->wasted_right_clicks += 1U;
-    }
-    return result;
 }

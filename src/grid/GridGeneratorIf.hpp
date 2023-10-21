@@ -1,14 +1,14 @@
-#ifndef GRID_ACCESS_GENERATOR_IF_HPP
-#define GRID_ACCESS_GENERATOR_IF_HPP
+#ifndef GRID_GENERATOR_IF_HPP
+#define GRID_GENERATOR_IF_HPP
 
 #include "../utils/CachedVector.hpp"
 
-#include "GridAccessCommonIf.hpp"
+#include "GridCommonIf.hpp"
 
 #include <vector>
 #include <cstdint>
 
-class GridAccessGeneratorIf : public GridAccessCommonIf
+class GridGeneratorIf : public GridCommonIf
 {
     public:
 

@@ -1,9 +1,7 @@
 #ifndef ALGORITHM_COMBINATIONS_HPP
 #define ALGORITHM_COMBINATIONS_HPP
 
-#include "../../statistics/collectors/StatisticsCollectorFailures.hpp"
-
-#include "../Algorithm.hpp"
+#include "AlgorithmAnalysis.hpp"
 
 enum class FieldState
 {
@@ -23,17 +21,26 @@ class FailSafeException : public std::runtime_error
     }
 };
 
-class AlgorithmCombinations : public Algorithm
+class AlgorithmCombinations : public AlgorithmAnalysis
 {
     public:
 
-    AlgorithmCombinations(GridAccessPlayerIf& grid_, AlgorithmDataTransfer& data_);
+    AlgorithmCombinations(GridAlgorithmIf& grid_, AlgorithmDataTransfer& data_);
 
     ~AlgorithmCombinations();
 
+    protected:
+
     AlgorithmStatus Execution() override;
 
-    protected:
+    private:
+
+    SectionsDTO& sections_dto;
+    SegmentsDTO& segments_dto;
+    SubsegmentsDTO& subsegments_dto;
+    FaceDTO& face_dto;
+    CombinationsDTO& combinations_dto;
+    FactorialsDTO& factorials_dto;
 
     std::vector<FieldState> field_states;
     std::vector<uint32_t> choice_stack;
@@ -52,7 +59,9 @@ class AlgorithmCombinations : public Algorithm
     // value: number of combinations, in which a mine appears on that field for given mine count of this segment
     std::vector<std::map<uint32_t, BigNum>> field_combinations_temp;
 
-    StatisticsCollectorFailures* statistics_failures;
+    static const uint64_t fail_safe_permutation_threshold;
+    static const uint64_t fail_safe_enumeration_threshold;
+    uint64_t fail_safe_enumeration;
 
     void Clear();
 
@@ -60,7 +69,7 @@ class AlgorithmCombinations : public Algorithm
 
     void ClearStatesInSegment(uint32_t segment_id);
 
-    BigNum ApplySubsegmentsCombination(std::vector<SubsegmentData>& subsegments_ref);
+    BigNum ApplySubsegmentsCombination(std::vector<Subsegment>& subsegments_ref);
 
     void FindCombinationsForFixedSubsegments(const uint32_t segment_id, const BigNum combination_multiplier);
 
@@ -72,7 +81,7 @@ class AlgorithmCombinations : public Algorithm
 
     void ApplyCurrentCombinationAsValid(const uint32_t segment_id, const BigNum combination_multiplier);
 
-    bool NextSubsegmentsCombination(std::vector<SubsegmentData>& subsegments_ref) const;
+    bool NextSubsegmentsCombination(std::vector<Subsegment>& subsegments_ref) const;
 
     void MergeAllSegmentsCombinations();
 
@@ -83,17 +92,6 @@ class AlgorithmCombinations : public Algorithm
     void MergeCurrentSegmentsMineCountCombination(const uint32_t segments_combination_mine_count);
 
     bool NextSegmentsMineCountCombination();
-
-    private:
-
-    std::vector<std::vector<SubsegmentData>>& D_subsegments;
-    std::vector<BigNum>& D_field_combinations;
-    BigNum& D_remaining_fields_combinations;
-    BigNum& D_total_combinations;
-
-    static const uint64_t fail_safe_permutation_threshold;
-    static const uint64_t fail_safe_enumeration_threshold;
-    uint64_t fail_safe_enumeration;
 };
 
 #endif

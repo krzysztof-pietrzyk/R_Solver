@@ -1,0 +1,14 @@
+message("Entering directory ${CMAKE_CURRENT_SOURCE_DIR}")
+
+set(CPP_SOURCES_ALGORITHMS_DATA
+    ${CMAKE_CURRENT_SOURCE_DIR}/ActionsDTO.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/AlgorithmDataTransfer.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/BorderDTO.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/CombinationsDTO.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/FaceDTO.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/FactorialsDTO.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/Section.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/SectionsDTO.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/SegmentsDTO.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/SubsegmentsDTO.cpp
+    PARENT_SCOPE)

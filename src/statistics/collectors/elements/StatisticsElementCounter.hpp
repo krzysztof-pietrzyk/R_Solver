@@ -18,6 +18,7 @@ class StatisticsElementCounter : public StatisticsElement
     virtual void Clear() override;
     virtual StatisticsElement* Clone() override;
     virtual std::string String() override;
+    virtual bool IsEmpty() override;
 
     virtual void FlushToOutput(StatisticsElement& output) override;
     virtual void operator=(const StatisticsElement& other) override;

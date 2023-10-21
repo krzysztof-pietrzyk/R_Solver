@@ -1,6 +1,6 @@
 #include "Grid.hpp"
 
-Grid::Grid(const GridDimensions dimensions) : dimensions(dimensions)
+Grid::Grid(GridDimensions dimensions) : dimensions(dimensions)
 {
     LOGGER(LogLevel::INIT) << "Grid";
     VerifyDimensions(dimensions);
@@ -23,7 +23,7 @@ Grid::~Grid()
 
 }
 
-// GridAccessCommonIf
+// GridCommonIf
 GridDimensions Grid::GetDimensions() const 
 {
     return dimensions;
@@ -34,7 +34,17 @@ const std::vector<uint32_t>& Grid::GetNeighbors(uint32_t field) const
     return neighbors.at(field);
 }
 
-// GridAccessPlayerIf
+bool Grid::IsLost() const
+{
+    return is_lost;
+}
+
+bool Grid::IsWon() const
+{
+    return !is_lost && visible_fields.Index() == dimensions.safe;
+}
+
+// GridAlgorithmIf
 const CachedVector& Grid::GetVisibleFields() const
 {
     return visible_fields;
@@ -51,22 +61,7 @@ uint8_t Grid::GetFieldValue(uint32_t field) const
     return field_values[field];
 }
 
-bool Grid::IsLost() const
-{
-    return is_lost;
-}
-
-bool Grid::IsWon() const
-{
-    return !is_lost && visible_fields.Index() == dimensions.safe;
-}
-
-void Grid::GiveUp()
-{
-    is_lost = true;
-}
-
-// GridAccessGeneratorIf
+// GridGeneratorIf
 void Grid::SetMineFields(const CachedVector& new_mine_fields)
 {
     CachedVector::CopyFromTo(new_mine_fields, mine_fields);
@@ -94,7 +89,7 @@ void Grid::Reset()
     is_lost = false;
 }
 
-// GridAccessViewIf
+// GridViewIf
 const std::vector<FieldType>& Grid::GetFieldTypesToDisplay()
 {
     for(size_t i = 0U; i < dimensions.size; i++)
