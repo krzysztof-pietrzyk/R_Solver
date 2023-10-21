@@ -1,8 +1,8 @@
 #ifndef ALGORITHM_DATA_TRANSFER_HPP
 #define ALGORITHM_DATA_TRANSFER_HPP
 
-#include "../utils/Logger.hpp"
-#include "../grid/GridDimensions.hpp"
+#include "../../utils/Logger.hpp"
+#include "../../grid/GridDimensions.hpp"
 
 #include "ActionsDTO.hpp"
 #include "BorderDTO.hpp"

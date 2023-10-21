@@ -3,7 +3,7 @@
 
 #include "Algorithm.hpp"
 #include "AlgorithmType.hpp"
-#include "AlgorithmDataTransfer.hpp"
+#include "data/AlgorithmDataTransfer.hpp"
 
 #include "analysis/AlgorithmBorder.hpp"
 #include "analysis/AlgorithmSections.hpp"

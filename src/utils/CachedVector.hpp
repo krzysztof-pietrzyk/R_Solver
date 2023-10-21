@@ -6,7 +6,6 @@
 #include <vector>
 #include <cstdint>
 #include <algorithm>
-#include <stdexcept>
 
 class CachedVector
 {

@@ -4,17 +4,17 @@ Algorithm* AlgorithmFactory::Create(AlgorithmType type, GridAlgorithmIf& grid, A
 {
     switch(type)
     {
-        case AlgorithmType::REFRESH_BORDER:
+        case AlgorithmType::BORDER:
             return new AlgorithmBorder(grid, data);
-        case AlgorithmType::REFRESH_SECTIONS:
+        case AlgorithmType::SECTIONS:
             return new AlgorithmSections(grid, data);
-        case AlgorithmType::REFRESH_SEGMENTS:
+        case AlgorithmType::SEGMENTS:
             return new AlgorithmSegments(grid, data);
-        case AlgorithmType::REFRESH_SUBSEGMENTS:
+        case AlgorithmType::SUBSEGMENTS:
             return new AlgorithmSubsegments(grid, data);
-        case AlgorithmType::REFRESH_FACE:
+        case AlgorithmType::FACE:
             return new AlgorithmFace(grid, data);
-        case AlgorithmType::REFRESH_COMBINATIONS:
+        case AlgorithmType::COMBINATIONS:
             return new AlgorithmCombinations(grid, data);
         case AlgorithmType::SIMPLE_CORNERS:
             return new AlgorithmSimpleCorners(grid, data);

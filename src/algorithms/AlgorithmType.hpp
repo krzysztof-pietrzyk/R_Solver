@@ -2,22 +2,21 @@
 #define ALGORITHM_TYPE_HPP
 
 #include "../utils/Label.hpp"
-
-#include <stdexcept>
+#include "../utils/Logger.hpp"
 
 enum class AlgorithmType
 {
     UNHANDLED_ALGORITHM_TYPE,
     FIRST_MOVE,
     SIMPLE_CORNERS,
-    REFRESH_BORDER,
+    BORDER,
     LAYER_ONE,
-    REFRESH_SECTIONS,
+    SECTIONS,
     LAYER_TWO,
-    REFRESH_SEGMENTS,
-    REFRESH_SUBSEGMENTS,
-    REFRESH_FACE,
-    REFRESH_COMBINATIONS,
+    SEGMENTS,
+    SUBSEGMENTS,
+    FACE,
+    COMBINATIONS,
     COMBINATIONS_SAFE_MOVES,
     COMBINATIONS_LEAST_RISKY,
     GIVE_UP,
@@ -29,14 +28,14 @@ namespace Labels::Producers::Algorithms
     static const Label UNHANDLED_ALGORITHM_TYPE = "Unhandled AlgorithmType";
     static const Label FIRST_MOVE               = "Algorithm: First Move";
     static const Label SIMPLE_CORNERS           = "Algorithm: Simple Corners";
-    static const Label REFRESH_BORDER           = "Algorithm: Refresh Border";
+    static const Label BORDER                   = "Algorithm: Refresh Border";
     static const Label LAYER_ONE                = "Algorithm: Layer One";
-    static const Label REFRESH_SECTIONS         = "Algorithm: Refresh Sections";
+    static const Label SECTIONS                 = "Algorithm: Refresh Sections";
     static const Label LAYER_TWO                = "Algorithm: Layer Two";
-    static const Label REFRESH_SEGMENTS         = "Algorithm: Refresh Segments";
-    static const Label REFRESH_SUBSEGMENTS      = "Algorithm: Refresh Subsegments";
-    static const Label REFRESH_FACE             = "Algorithm: Refresh Face";
-    static const Label REFRESH_COMBINATIONS     = "Algorithm: Refresh Combinations";
+    static const Label SEGMENTS                 = "Algorithm: Refresh Segments";
+    static const Label SUBSEGMENTS              = "Algorithm: Refresh Subsegments";
+    static const Label FACE                     = "Algorithm: Refresh Face";
+    static const Label COMBINATIONS             = "Algorithm: Refresh Combinations";
     static const Label COMBINATIONS_SAFE_MOVES  = "Algorithm: Combinations Safe Moves";
     static const Label COMBINATIONS_LEAST_RISKY = "Algorithm: Combinations Least Risky";
     static const Label GIVE_UP                  = "Algorithm: Give Up";
@@ -53,22 +52,22 @@ static Label GetAlgorithmTypeLabel(AlgorithmType type)
             return Labels::Producers::Algorithms::FIRST_MOVE;
         case AlgorithmType::SIMPLE_CORNERS:
             return Labels::Producers::Algorithms::SIMPLE_CORNERS;
-        case AlgorithmType::REFRESH_BORDER:
-            return Labels::Producers::Algorithms::REFRESH_BORDER;
+        case AlgorithmType::BORDER:
+            return Labels::Producers::Algorithms::BORDER;
         case AlgorithmType::LAYER_ONE:
             return Labels::Producers::Algorithms::LAYER_ONE;
-        case AlgorithmType::REFRESH_SECTIONS:
-            return Labels::Producers::Algorithms::REFRESH_SECTIONS;
+        case AlgorithmType::SECTIONS:
+            return Labels::Producers::Algorithms::SECTIONS;
         case AlgorithmType::LAYER_TWO:
             return Labels::Producers::Algorithms::LAYER_TWO;
-        case AlgorithmType::REFRESH_SEGMENTS:
-            return Labels::Producers::Algorithms::REFRESH_SEGMENTS;
-        case AlgorithmType::REFRESH_SUBSEGMENTS:
-            return Labels::Producers::Algorithms::REFRESH_SUBSEGMENTS;
-        case AlgorithmType::REFRESH_FACE:
-            return Labels::Producers::Algorithms::REFRESH_FACE;
-        case AlgorithmType::REFRESH_COMBINATIONS:
-            return Labels::Producers::Algorithms::REFRESH_COMBINATIONS;
+        case AlgorithmType::SEGMENTS:
+            return Labels::Producers::Algorithms::SEGMENTS;
+        case AlgorithmType::SUBSEGMENTS:
+            return Labels::Producers::Algorithms::SUBSEGMENTS;
+        case AlgorithmType::FACE:
+            return Labels::Producers::Algorithms::FACE;
+        case AlgorithmType::COMBINATIONS:
+            return Labels::Producers::Algorithms::COMBINATIONS;
         case AlgorithmType::COMBINATIONS_SAFE_MOVES:
             return Labels::Producers::Algorithms::COMBINATIONS_SAFE_MOVES;
         case AlgorithmType::COMBINATIONS_LEAST_RISKY:

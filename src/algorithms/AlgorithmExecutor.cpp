@@ -54,16 +54,17 @@ void AlgorithmExecutor::CreateAlgorithms(GridAlgorithmIf& grid)
     // This method is only called once in the constructor
     // It creates all Algorithm objects
     algorithms[AlgorithmType::SIMPLE_CORNERS]           = AlgorithmFactory::Create(AlgorithmType::SIMPLE_CORNERS, grid, *data);
-    algorithms[AlgorithmType::REFRESH_BORDER]           = AlgorithmFactory::Create(AlgorithmType::REFRESH_BORDER, grid, *data);
+    algorithms[AlgorithmType::BORDER]                   = AlgorithmFactory::Create(AlgorithmType::BORDER, grid, *data);
     algorithms[AlgorithmType::LAYER_ONE]                = AlgorithmFactory::Create(AlgorithmType::LAYER_ONE, grid, *data);
-    algorithms[AlgorithmType::REFRESH_SECTIONS]         = AlgorithmFactory::Create(AlgorithmType::REFRESH_SECTIONS, grid, *data);
+    algorithms[AlgorithmType::SECTIONS]                 = AlgorithmFactory::Create(AlgorithmType::SECTIONS, grid, *data);
     algorithms[AlgorithmType::LAYER_TWO]                = AlgorithmFactory::Create(AlgorithmType::LAYER_TWO, grid, *data);
-    algorithms[AlgorithmType::REFRESH_SEGMENTS]         = AlgorithmFactory::Create(AlgorithmType::REFRESH_SEGMENTS, grid, *data);
-    algorithms[AlgorithmType::REFRESH_SUBSEGMENTS]      = AlgorithmFactory::Create(AlgorithmType::REFRESH_SUBSEGMENTS, grid, *data);
-    algorithms[AlgorithmType::REFRESH_FACE]             = AlgorithmFactory::Create(AlgorithmType::REFRESH_FACE, grid, *data);
-    algorithms[AlgorithmType::REFRESH_COMBINATIONS]     = AlgorithmFactory::Create(AlgorithmType::REFRESH_COMBINATIONS, grid, *data);
+    algorithms[AlgorithmType::SEGMENTS]                 = AlgorithmFactory::Create(AlgorithmType::SEGMENTS, grid, *data);
+    algorithms[AlgorithmType::SUBSEGMENTS]              = AlgorithmFactory::Create(AlgorithmType::SUBSEGMENTS, grid, *data);
+    algorithms[AlgorithmType::FACE]                     = AlgorithmFactory::Create(AlgorithmType::FACE, grid, *data);
+    algorithms[AlgorithmType::COMBINATIONS]             = AlgorithmFactory::Create(AlgorithmType::COMBINATIONS, grid, *data);
     algorithms[AlgorithmType::COMBINATIONS_SAFE_MOVES]  = AlgorithmFactory::Create(AlgorithmType::COMBINATIONS_SAFE_MOVES, grid, *data);
     algorithms[AlgorithmType::COMBINATIONS_LEAST_RISKY] = AlgorithmFactory::Create(AlgorithmType::COMBINATIONS_LEAST_RISKY, grid, *data);
     algorithms[AlgorithmType::GIVE_UP]                  = AlgorithmFactory::Create(AlgorithmType::GIVE_UP, grid, *data);
     algorithms[AlgorithmType::FIRST_MOVE]               = AlgorithmFactory::Create(AlgorithmType::FIRST_MOVE, grid, *data);
+    algorithms[AlgorithmType::SIMPLE_ACTIONS]           = AlgorithmFactory::Create(AlgorithmType::SIMPLE_ACTIONS, grid, *data);
 }
