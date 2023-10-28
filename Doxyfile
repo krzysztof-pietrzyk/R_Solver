@@ -124,7 +124,7 @@ WARN_LOGFILE           =
 #---------------------------------------------------------------------------
 # Configuration options related to the input files
 #---------------------------------------------------------------------------
-INPUT                  = E:/Projects/R_Solver/src
+INPUT                  = E:/Projects/R_Solver/src E:/Projects/R_Solver/documentation
 INPUT_ENCODING         = UTF-8
 INPUT_FILE_ENCODING    =
 FILE_PATTERNS          = *.c \
@@ -277,7 +277,7 @@ EXTRA_SEARCH_MAPPINGS  =
 #---------------------------------------------------------------------------
 # Configuration options related to the LaTeX output
 #---------------------------------------------------------------------------
-GENERATE_LATEX         = YES
+GENERATE_LATEX         = NO
 LATEX_OUTPUT           = latex
 LATEX_CMD_NAME         =
 MAKEINDEX_CMD_NAME     = makeindex
@@ -389,7 +389,7 @@ DOT_PATH               =
 DOTFILE_DIRS           =
 DIA_PATH               =
 DIAFILE_DIRS           =
-PLANTUML_JAR_PATH      =
+PLANTUML_JAR_PATH      = E:\Programs\plantuml\plantuml.jar
 PLANTUML_CFG_FILE      =
 PLANTUML_INCLUDE_PATH  =
 DOT_GRAPH_MAX_NODES    = 50
