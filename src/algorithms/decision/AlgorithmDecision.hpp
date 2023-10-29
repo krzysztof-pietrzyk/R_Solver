@@ -2,7 +2,7 @@
 #define ALGORITHM_DECISION_HPP
 
 #include "../../grid/GridAlgorithmIf.hpp"
-#include "../../statistics/collectors/StatisticsCollectorDecisions.hpp"
+#include "../../statistics/elements/StatisticsElementCounter.hpp"
 
 #include "../AlgorithmType.hpp"
 #include "../Algorithm.hpp"
@@ -36,7 +36,10 @@ class AlgorithmDecision : public Algorithm
 
     private:
 
-    StatisticsCollectorDecisions* statistics_decisions;
+    StatisticsElementCounter* decisions_left_click;
+    StatisticsElementCounter* decisions_right_click;
+
+    void CreateStatisticsElements();
 };
 
 #endif

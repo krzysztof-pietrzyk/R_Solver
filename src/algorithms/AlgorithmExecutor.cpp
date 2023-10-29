@@ -23,7 +23,7 @@ AlgorithmExecutor::~AlgorithmExecutor()
 void AlgorithmExecutor::RunAll() const
 {
     // Run algorithms in defined order until the game is either won or lost
-    LOGGER(LogLevel::DEBUG) << "AlgorithmExecutor::RunAll";
+    LOGGER(LogLevel::DEBUG4) << "AlgorithmExecutor::RunAll";
     data->Clear();
     AlgorithmType current_algorithm = transitions.GetStartingAlgorithm();
     AlgorithmStatus current_status;

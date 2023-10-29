@@ -3,7 +3,6 @@
 
 #include "../utils/Logger.hpp"
 
-#include "collectors/StatisticsCollector.hpp"
 #include "StatisticsProducer.hpp"
 
 class StatisticsAggregator
@@ -14,13 +13,17 @@ class StatisticsAggregator
 
     ~StatisticsAggregator();
 
-    void RegisterStatisticsProducer(const Label producer_label, const StatisticsProducer* statistics_producer);
+    void RegisterStatisticsProducer(const Label producer_label, StatisticsProducer* statistics_producer);
 
-    void FlushToOutput(StatisticsAggregatorStruct& output) const;
+    StatisticsAggregator* Clone() const;
+
+    std::string String() const;
+
+    void FlushToOutput(StatisticsAggregator* output) const;
 
     protected:
 
-    StatisticsAggregatorStruct aggregated_statistics;
+    std::map<Label, StatisticsProducer*> labelled_producers;
 };
 
 #endif

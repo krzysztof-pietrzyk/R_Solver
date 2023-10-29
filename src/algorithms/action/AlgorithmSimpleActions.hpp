@@ -1,7 +1,7 @@
 #ifndef ALGORITHM_SIMPLE_ACTIONS_HPP
 #define ALGORITHM_SIMPLE_ACTIONS_HPP
 
-#include "../../statistics/collectors/StatisticsCollectorActionsLoss.hpp"
+#include "../../statistics/elements/StatisticsElementCounter.hpp"
 
 #include "AlgorithmAction.hpp"
 
@@ -21,7 +21,11 @@ class AlgorithmSimpleActions : public AlgorithmAction
 
     ActionsDTO& actions_dto;
 
-    StatisticsCollectorActionsLoss* statistics_loss;
+    StatisticsElementCounter* counter_loss_simple_corners;
+    StatisticsElementCounter* counter_loss_combinations_least_risky;
+    StatisticsElementCounter* counter_loss_other;
+
+    void CreateStatisticsElements();
 
     void UpdateLossStatistics(AlgorithmType algorithm_type);
 };

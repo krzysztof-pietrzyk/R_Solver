@@ -1,7 +1,7 @@
 #ifndef STATISTICS_PRODUCER_HPP
 #define STATISTICS_PRODUCER_HPP
 
-#include "collectors/StatisticsCollector.hpp"
+#include "StatisticsCollector.hpp"
 
 class StatisticsProducer
 {
@@ -11,12 +11,15 @@ class StatisticsProducer
 
     ~StatisticsProducer();
 
-    const StatisticsProducerStruct& GetStatisticsCollectors() const;
+    StatisticsProducer* Clone() const;
+
+    std::string String() const;
+
+    void FlushToOutput(StatisticsProducer* output) const;
 
     protected:
 
-    StatisticsProducerStruct statistics_collectors;
-
+    StatisticsCollector* statistics_collector;
 };
 
 #endif

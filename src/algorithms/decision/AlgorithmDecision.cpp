@@ -8,8 +8,7 @@ AlgorithmDecision::AlgorithmDecision(GridAlgorithmIf& grid_, AlgorithmDataTransf
     actions_dto(data_.actions_dto)
 {
     LOGGER(LogLevel::INIT) << "AlgorithmDecision";
-    statistics_decisions = new StatisticsCollectorDecisions();  // deleted in StatisticsProducer
-    statistics_collectors.push_back(statistics_decisions);
+    CreateStatisticsElements();
     // Overwrite it in inheriting classes
     algorithm_type = AlgorithmType::UNHANDLED_ALGORITHM_TYPE;
 }
@@ -34,10 +33,18 @@ void AlgorithmDecision::QueueAction(uint32_t field, PlayerAction action)
     actions_dto.Add(field, action, algorithm_type);
     if(action == PlayerAction::LEFT_CLICK)
     {
-        statistics_decisions->decisions_left_click += 1;
+        *decisions_left_click += 1;
     }
     else if(action == PlayerAction::RIGHT_CLICK)
     {
-        statistics_decisions->decisions_right_click += 1;
+        *decisions_right_click += 1;
     }
+}
+
+void AlgorithmDecision::CreateStatisticsElements()
+{
+    decisions_left_click = new StatisticsElementCounter();
+    decisions_right_click = new StatisticsElementCounter();
+    statistics_collector->AddElement(Labels::Collectors::Decisions::LEFT_CLICKS, decisions_left_click);
+    statistics_collector->AddElement(Labels::Collectors::Decisions::RIGHT_CLICKS, decisions_right_click);
 }

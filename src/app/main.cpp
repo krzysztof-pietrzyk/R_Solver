@@ -30,30 +30,16 @@ void CheckStatus(SolverThreadData* data, vector<Solver*> solvers)
 		current_time = std::chrono::high_resolution_clock::now();
 		time_since_start = current_time - start_time;
 		double seconds_since_start = time_since_start.count() / double(1E09);
+		ostringstream text_to_print = ostringstream();
+		text_to_print << string(40, '=') << '\n';
+		text_to_print << "Seconds since start: " << seconds_since_start << "\n";
 
 		for(Solver* s : solvers)
 		{
 			s->UpdateThreadData();
 		}
-		ostringstream text_to_print = ostringstream();
-		text_to_print << "\nSeconds since start: " << seconds_since_start << "\n";
-		for(const auto& item : data->statistics_data)
-		{
-			const string& label = item.first;
-			const vector<StatisticsCollector*>& labelled_data_vector = item.second;
-			text_to_print << label << "\n";
-			for(const StatisticsCollector* labelled_data : labelled_data_vector)
-			{
-				const auto& labelled_data_statistics = labelled_data->GetStatistics();
-				for(const auto& temp : labelled_data_statistics)
-				{
-					if(temp.second->IsEmpty()) { continue; }
-					text_to_print << "\t" << temp.first << ": " << temp.second->String() << "\n";
-				}
-			}
-		}
+		text_to_print << data->statistics_data->String();
 		cout << text_to_print.str();
-
 	}
 }
 

@@ -2,7 +2,7 @@
 #define GENERATOR_INTERNAL_HPP
 
 #include "../utils/CachedVector.hpp"
-#include "../statistics/collectors/StatisticsCollectorFieldTypes.hpp"
+#include "../statistics/elements/StatisticsElementCounter.hpp"
 
 #include "Generator.hpp"
 
@@ -24,7 +24,6 @@ class GeneratorInternal : public Generator
     std::vector<uint32_t> forced_safe_fields;
     CachedVector generated_mine_fields;
     std::vector<uint8_t> generated_field_values;
-    StatisticsCollectorFieldTypes* statistics_field_types;
 
     virtual void GenerateMinePositions() = 0;
 
@@ -33,6 +32,18 @@ class GeneratorInternal : public Generator
     virtual void CalculateForcedSafeFieldValues();
 
     private:
+
+    StatisticsElementCounter* counter_zero;
+    StatisticsElementCounter* counter_one;
+    StatisticsElementCounter* counter_two;
+    StatisticsElementCounter* counter_three;
+    StatisticsElementCounter* counter_four;
+    StatisticsElementCounter* counter_five;
+    StatisticsElementCounter* counter_six;
+    StatisticsElementCounter* counter_seven;
+    StatisticsElementCounter* counter_eight;
+
+    void CreateStatisticsElements();
 
     void CalculateAllFieldValues();
 
@@ -43,6 +54,8 @@ class GeneratorInternal : public Generator
     void ClearPreviousGrid();
 
     void CopyGeneratedVectorsToGrid();
+
+    void CountFieldTypes(const std::vector<uint8_t>& field_values);
 };
 
 #endif

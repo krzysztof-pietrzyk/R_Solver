@@ -5,8 +5,7 @@ AlgorithmSimpleActions::AlgorithmSimpleActions(GridAlgorithmIf& grid_, Algorithm
     actions_dto(data_.actions_dto)
 {
     LOGGER(LogLevel::INIT) << "AlgorithmSimpleActions";
-    statistics_loss = new StatisticsCollectorActionsLoss();  // deleted in StatisticsProducer
-    statistics_collectors.push_back(statistics_loss);
+    CreateStatisticsElements();
 }
 
 AlgorithmSimpleActions::~AlgorithmSimpleActions()
@@ -48,18 +47,28 @@ AlgorithmStatus AlgorithmSimpleActions::Execution()
     return AlgorithmStatus::NO_STATUS;
 }
 
+void AlgorithmSimpleActions::CreateStatisticsElements()
+{
+    counter_loss_simple_corners = new StatisticsElementCounter();
+    counter_loss_combinations_least_risky = new StatisticsElementCounter();
+    counter_loss_other = new StatisticsElementCounter();
+    statistics_collector->AddElement(Labels::Collectors::ActionsLoss::SIMPLE_CORNERS, counter_loss_simple_corners);
+    statistics_collector->AddElement(Labels::Collectors::ActionsLoss::LEAST_RISKY, counter_loss_combinations_least_risky);
+    statistics_collector->AddElement(Labels::Collectors::ActionsLoss::OTHER, counter_loss_other);
+}
+
 void AlgorithmSimpleActions::UpdateLossStatistics(AlgorithmType algorithm_type)
 {
     switch(algorithm_type)
     {
         case AlgorithmType::SIMPLE_CORNERS:
-            statistics_loss->loss_simple_corners += 1;
+            *counter_loss_simple_corners += 1;
             break;
         case AlgorithmType::COMBINATIONS_LEAST_RISKY:
-            statistics_loss->loss_combinations_least_risky += 1;
+            *counter_loss_combinations_least_risky += 1;
             break;
         default:
-            statistics_loss->loss_other += 1;
+            *counter_loss_other += 1;
             break;
     }
 }

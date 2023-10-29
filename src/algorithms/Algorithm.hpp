@@ -4,7 +4,7 @@
 #include "../utils/Logger.hpp"
 #include "../grid/GridCommonIf.hpp"
 #include "../statistics/StatisticsProducer.hpp"
-#include "../statistics/collectors/StatisticsCollectorExecutions.hpp"
+#include "../statistics/elements/StatisticsElementCounter.hpp"
 
 #include "data/AlgorithmDataTransfer.hpp"
 #include "AlgorithmStatus.hpp"
@@ -28,11 +28,21 @@ class Algorithm : public StatisticsProducer
 
     AlgorithmDataTransfer& data;
     const GridDimensions grid_dim;
-    StatisticsCollectorExecutions* statistics_executions;
 
     virtual AlgorithmStatus Execution() = 0;
 
     void UpdateExecutionStatistics(AlgorithmStatus status);
+
+    private:
+
+    StatisticsElementCounter* counter_executions;
+    StatisticsElementCounter* counter_success;
+    StatisticsElementCounter* counter_no_moves;
+    StatisticsElementCounter* counter_failure;
+    StatisticsElementCounter* counter_won;
+    StatisticsElementCounter* counter_lost;
+
+    void CreateStatisticsElements();
 };
 
 #endif

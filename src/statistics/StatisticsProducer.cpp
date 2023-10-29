@@ -2,18 +2,28 @@
 
 StatisticsProducer::StatisticsProducer()
 {
-    statistics_collectors = StatisticsProducerStruct();
+    statistics_collector = new StatisticsCollector();
 }
 
 StatisticsProducer::~StatisticsProducer()
 {
-    for(auto& type : statistics_collectors)
-    {
-        delete type;
-    }
+    delete statistics_collector;
 }
 
-const StatisticsProducerStruct& StatisticsProducer::GetStatisticsCollectors() const
+StatisticsProducer* StatisticsProducer::Clone() const
 {
-    return statistics_collectors;
+    StatisticsProducer* cloned_producer = new StatisticsProducer();
+    delete cloned_producer->statistics_collector;
+    cloned_producer->statistics_collector = statistics_collector->Clone();
+    return cloned_producer;
+}
+
+std::string StatisticsProducer::String() const
+{
+    return statistics_collector->String();
+}
+
+void StatisticsProducer::FlushToOutput(StatisticsProducer* output) const
+{
+    statistics_collector->FlushToOutput(output->statistics_collector);
 }

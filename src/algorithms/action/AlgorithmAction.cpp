@@ -5,8 +5,7 @@ AlgorithmAction::AlgorithmAction(GridAlgorithmIf& grid_, AlgorithmDataTransfer& 
     grid(grid_)
 {
     LOGGER(LogLevel::INIT) << "AlgorithmAction";
-    statistics_clicks = new StatisticsCollectorClicks();  // deleted in StatisticsProducer
-    statistics_collectors.push_back(statistics_clicks);
+    CreateStatisticsElements();
     left_click_counter = 0U;
     right_click_counter = 0U;
 }
@@ -55,14 +54,14 @@ AlgorithmStatus AlgorithmAction::GetExecutionResult(const uint32_t clicks_differ
 PlayerActionResult AlgorithmAction::LeftClick(const uint32_t field)
 {
     PlayerActionResult result = grid.SetVisible(field);
-    statistics_clicks->left_clicks += 1U;
+    *counter_left_clicks += 1U;
     if(result == PlayerActionResult::CORRECT)
     {
         left_click_counter += 1U;
     }
     else if(result == PlayerActionResult::WASTED)
     {
-        statistics_clicks->wasted_left_clicks += 1U;
+        *counter_wasted_left_clicks += 1U;
     }
     return result;
 }
@@ -70,16 +69,28 @@ PlayerActionResult AlgorithmAction::LeftClick(const uint32_t field)
 PlayerActionResult AlgorithmAction::RightClick(const uint32_t field)
 {
     PlayerActionResult result = grid.SetFlag(field);
-    statistics_clicks->right_clicks += 1U;
+    *counter_right_clicks += 1U;
     if(result == PlayerActionResult::CORRECT)
     {
         right_click_counter += 1U;
     }
     else if(result == PlayerActionResult::WASTED)
     {
-        statistics_clicks->wasted_right_clicks += 1U;
+        *counter_wasted_right_clicks += 1U;
     }
     return result;
+}
+
+void AlgorithmAction::CreateStatisticsElements()
+{
+    counter_left_clicks = new StatisticsElementCounter();
+    counter_wasted_left_clicks = new StatisticsElementCounter();
+    counter_right_clicks = new StatisticsElementCounter();
+    counter_wasted_right_clicks = new StatisticsElementCounter();
+    statistics_collector->AddElement(Labels::Collectors::Clicks::LEFT_CLICKS, counter_left_clicks);
+    statistics_collector->AddElement(Labels::Collectors::Clicks::WASTED_LEFT_CLICKS, counter_wasted_left_clicks);
+    statistics_collector->AddElement(Labels::Collectors::Clicks::RIGHT_CLICKS, counter_right_clicks);
+    statistics_collector->AddElement(Labels::Collectors::Clicks::WASTED_RIGHT_CLICKS, counter_wasted_right_clicks);
 }
 
 AlgorithmStatus AlgorithmAction::GetReturnStatus(AlgorithmStatus execution_result, AlgorithmStatus game_over_result) const

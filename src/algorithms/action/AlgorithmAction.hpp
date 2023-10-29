@@ -2,7 +2,7 @@
 #define ALGORITHM_ACTION_HPP
 
 #include "../../grid/GridAlgorithmIf.hpp"
-#include "../../statistics/collectors/StatisticsCollectorClicks.hpp"
+#include "../../statistics/elements/StatisticsElementCounter.hpp"
 
 #include "../Algorithm.hpp"
 
@@ -28,7 +28,13 @@ class AlgorithmAction : public Algorithm
 
     uint64_t left_click_counter;
     uint64_t right_click_counter;
-    StatisticsCollectorClicks* statistics_clicks;
+
+    StatisticsElementCounter* counter_left_clicks;
+    StatisticsElementCounter* counter_wasted_left_clicks;
+    StatisticsElementCounter* counter_right_clicks;
+    StatisticsElementCounter* counter_wasted_right_clicks;
+
+    void CreateStatisticsElements();
 
     AlgorithmStatus CheckGameOverConditions() const;
 

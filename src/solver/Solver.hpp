@@ -8,7 +8,7 @@
 #include "../generators/GeneratorFactory.hpp"
 #include "../statistics/StatisticsAggregator.hpp"
 #include "../statistics/StatisticsProducer.hpp"
-#include "../statistics/collectors/StatisticsCollectorSolver.hpp"
+#include "../statistics/elements/StatisticsElementCounter.hpp"
 
 #include "SolverThreadData.hpp"
 
@@ -34,7 +34,15 @@ class Solver : public StatisticsProducer
 	AlgorithmExecutor* algorithm_executor;
     SolverThreadData* thread_data;
     StatisticsAggregator* statistics_aggregator;
-    StatisticsCollectorSolver* statistics_solver;
+
+    StatisticsElementCounter* games_played;
+    StatisticsElementCounter* games_won;
+    StatisticsElementCounter* games_lost;
+    StatisticsElementCounter* games_abandoned;
+    StatisticsElementCounter* total_flagged_mines;
+    StatisticsElementCounter* total_uncovered_fields;
+
+    void CreateStatisticsElements();
 
     void UpdateSolverStatistics();
 };

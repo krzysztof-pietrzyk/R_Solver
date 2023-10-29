@@ -133,7 +133,7 @@ void AlgorithmCombinations::FindCombinationsForFixedSubsegments(const uint32_t s
     {
         if(fail_safe_enumeration > fail_safe_enumeration_threshold)
         {
-            LOGGER(LogLevel::DEBUG2) << "AlgorithmCombinations::FindCombinationsForFixedSubsegments - Too much data: "
+            LOGGER(LogLevel::DEBUG) << "AlgorithmCombinations::FindCombinationsForFixedSubsegments - Too much data: "
                 << segment_id << " out of " << segments_dto.segments_count << " segments checked.";
             throw FailSafeException();
         }
@@ -347,7 +347,7 @@ void AlgorithmCombinations::CachePossibleSegmentsMineCounts()
     if(total_permutations > fail_safe_permutation_threshold)
     {
         // It will take too long to finish this calculation
-        LOGGER(LogLevel::DEBUG2) << "AlgorithmCombinations::CachePossibleSegmentsMineCounts - Too much data: "
+        LOGGER(LogLevel::DEBUG) << "AlgorithmCombinations::CachePossibleSegmentsMineCounts - Too much data: "
             << segments_to_check << " segments, " << total_permutations << " permutations.";
         throw FailSafeException();
     }

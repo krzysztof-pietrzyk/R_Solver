@@ -3,17 +3,21 @@
 SolverThreadData::SolverThreadData()
 {
     LOGGER(LogLevel::INIT) << "SolverThreadData";
-    statistics_data = StatisticsAggregatorStruct();
+    statistics_data = nullptr;
 }
 
 SolverThreadData::~SolverThreadData()
 {
-    for(auto& item : statistics_data)
+    if(statistics_data)
     {
-        StatisticsProducerStruct producer_data = item.second;
-        for(auto& data_pointer : producer_data)
-        {
-            delete data_pointer;
-        }
+        delete statistics_data;
+    }
+}
+
+void SolverThreadData::SetAggregatorIfEmpty(StatisticsAggregator* aggregator)
+{
+    if(!statistics_data)
+    {
+        statistics_data = aggregator->Clone();
     }
 }
