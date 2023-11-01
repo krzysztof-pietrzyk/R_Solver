@@ -1,7 +1,13 @@
 #ifndef STATISTICS_ELEMENT_IF_HPP
 #define STATISTICS_ELEMENT_IF_HPP
 
+// project includes
+
+// std includes
 #include <string>
+
+// forward declarations
+
 
 class StatisticsElementIf
 {

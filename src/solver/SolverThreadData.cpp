@@ -1,4 +1,12 @@
+// implemented header
 #include "SolverThreadData.hpp"
+
+// project includes
+#include "../statistics/StatisticsAggregator.hpp"
+#include "../utils/Logger.hpp"
+
+// std includes
+
 
 SolverThreadData::SolverThreadData()
 {
@@ -16,6 +24,7 @@ SolverThreadData::~SolverThreadData()
 
 void SolverThreadData::SetAggregatorIfEmpty(StatisticsAggregator* aggregator)
 {
+    LOGGER(LogLevel::INIT) << "SolverThreadData::SetAggregatorIfEmpty";
     if(!statistics_data)
     {
         statistics_data = aggregator->Clone();

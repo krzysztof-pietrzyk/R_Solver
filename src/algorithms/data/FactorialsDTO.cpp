@@ -1,4 +1,12 @@
+// implemented header
 #include "FactorialsDTO.hpp"
+
+// project includes
+#include "../../grid/GridDimensions.hpp"
+#include "../../utils/BigNum.hpp"
+
+// std includes
+
 
 FactorialsDTO::FactorialsDTO(GridDimensions dim)
 {

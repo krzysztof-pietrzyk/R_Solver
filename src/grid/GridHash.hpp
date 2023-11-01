@@ -1,10 +1,15 @@
 #ifndef GRID_HASH_HPP
 #define GRID_HASH_HPP
 
-#include "../utils/CachedVector.hpp"
-#include "../utils/Logger.hpp"
+// project includes
 
+// std includes
 #include <string>
+#include <vector>
+
+// forward declarations
+class CachedVector;
+
 
 class GridHash
 {

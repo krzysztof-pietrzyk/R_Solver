@@ -1,16 +1,21 @@
 #ifndef SOLVER_HPP
 #define SOLVER_HPP
 
-#include "../grid/Grid.hpp"
-#include "../grid/GridInternal.hpp"
-#include "../algorithms/AlgorithmExecutor.hpp"
-#include "../view/ViewFactory.hpp"
-#include "../generators/GeneratorFactory.hpp"
-#include "../statistics/StatisticsAggregator.hpp"
+// project includes
 #include "../statistics/StatisticsProducer.hpp"
-#include "../statistics/elements/StatisticsElementCounter.hpp"
 
-#include "SolverThreadData.hpp"
+// std includes
+
+// forward declarations
+class Grid;
+class Generator;
+class ViewIf;
+class AlgorithmExecutor;
+class SolverThreadData;
+class StatisticsAggregator;
+class StatisticsElementCounter;
+struct GridDimensions;
+
 
 class Solver : public StatisticsProducer
 {

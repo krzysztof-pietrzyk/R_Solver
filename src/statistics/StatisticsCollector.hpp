@@ -1,11 +1,16 @@
 #ifndef STATISTICS_TYPE_HPP
 #define STATISTICS_TYPE_HPP
 
-#include "StatisticsLabels.hpp"
-#include "elements/StatisticsElementIf.hpp"
+// project includes
+#include "../utils/Label.hpp"
 
+// std includes
 #include <map>
-#include <iomanip>
+#include <string>
+
+// forward declarations
+class StatisticsElementIf;
+
 
 class StatisticsCollector
 {

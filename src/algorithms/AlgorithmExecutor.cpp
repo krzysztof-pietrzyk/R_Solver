@@ -1,4 +1,16 @@
+// implemented header
 #include "AlgorithmExecutor.hpp"
+
+// project includes
+#include "AlgorithmFactory.hpp"
+#include "data/PlayerActionStruct.hpp"
+#include "data/Section.hpp"
+#include "data/Subsegment.hpp"
+#include "../grid/GridAlgorithmIf.hpp"
+#include "../utils/Logger.hpp"
+
+// std includes
+
 
 AlgorithmExecutor::AlgorithmExecutor(GridAlgorithmIf& grid_)
 {

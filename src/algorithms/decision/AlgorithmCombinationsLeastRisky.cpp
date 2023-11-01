@@ -1,4 +1,10 @@
+// implemented header
 #include "AlgorithmCombinationsLeastRisky.hpp"
+
+// project includes
+
+// std includes
+
 
 AlgorithmCombinationsLeastRisky::AlgorithmCombinationsLeastRisky(GridAlgorithmIf& grid_, AlgorithmDataTransfer& data_)
     : AlgorithmDecision(grid_, data_),

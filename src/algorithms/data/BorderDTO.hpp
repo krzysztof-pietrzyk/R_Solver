@@ -1,11 +1,15 @@
 #ifndef BORDER_DTO_HPP
 #define BORDER_DTO_HPP
 
-#include "../../grid/GridDimensions.hpp"
-#include "../../utils/CachedVector.hpp"
+// project includes
 
-#include <vector>
+// std includes
 #include <cstdint>
+#include <vector>
+
+// forward declarations
+struct GridDimensions;
+
 
 struct BorderDTO
 {

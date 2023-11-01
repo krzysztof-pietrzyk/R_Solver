@@ -1,13 +1,19 @@
 #ifndef ALGORITHM_HPP
 #define ALGORITHM_HPP
 
-#include "../utils/Logger.hpp"
-#include "../grid/GridCommonIf.hpp"
-#include "../statistics/StatisticsProducer.hpp"
-#include "../statistics/elements/StatisticsElementCounter.hpp"
-
-#include "data/AlgorithmDataTransfer.hpp"
+// project includes
 #include "AlgorithmStatus.hpp"
+#include "data/AlgorithmDataTransfer.hpp"
+#include "../grid/GridDimensions.hpp"
+#include "../statistics/StatisticsProducer.hpp"
+#include "../utils/Logger.hpp"
+
+// std includes
+
+// forward declarations
+class GridCommonIf;
+class StatisticsElementCounter;
+
 
 class Algorithm : public StatisticsProducer
 {

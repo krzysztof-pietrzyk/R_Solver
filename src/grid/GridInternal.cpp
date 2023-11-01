@@ -1,4 +1,12 @@
+// implemented header
 #include "GridInternal.hpp"
+
+// project includes
+#include "GridHash.hpp"
+#include "../utils/Logger.hpp"
+
+// std includes
+
 
 GridInternal::GridInternal(GridDimensions dimensions) : Grid(dimensions)
 {

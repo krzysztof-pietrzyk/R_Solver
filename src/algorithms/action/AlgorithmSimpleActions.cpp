@@ -1,4 +1,16 @@
+// implemented header
 #include "AlgorithmSimpleActions.hpp"
+
+// project includes
+#include "../AlgorithmType.hpp"
+#include "../PlayerAction.hpp"
+#include "../data/PlayerActionStruct.hpp"
+#include "../../statistics/StatisticsCollector.hpp"
+#include "../../statistics/StatisticsLabels.hpp"
+#include "../../statistics/elements/StatisticsElementCounter.hpp"
+
+// std includes
+
 
 AlgorithmSimpleActions::AlgorithmSimpleActions(GridAlgorithmIf& grid_, AlgorithmDataTransfer& data_)
     : AlgorithmAction(grid_, data_),

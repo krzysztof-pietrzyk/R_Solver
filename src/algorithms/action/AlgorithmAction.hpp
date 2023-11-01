@@ -1,10 +1,15 @@
 #ifndef ALGORITHM_ACTION_HPP
 #define ALGORITHM_ACTION_HPP
 
-#include "../../grid/GridAlgorithmIf.hpp"
-#include "../../statistics/elements/StatisticsElementCounter.hpp"
-
+// project includes
 #include "../Algorithm.hpp"
+#include "../../grid/GridAlgorithmIf.hpp"
+
+// std includes
+
+// forward declarations
+class StatisticsElementCounter;
+
 
 class AlgorithmAction : public Algorithm
 {

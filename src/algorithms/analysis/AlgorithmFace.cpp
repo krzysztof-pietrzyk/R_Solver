@@ -1,4 +1,11 @@
+// implemented header
 #include "AlgorithmFace.hpp"
+
+// project includes
+#include "../data/Section.hpp"
+
+// std includes
+
 
 AlgorithmFace::AlgorithmFace(GridAlgorithmIf& grid_, AlgorithmDataTransfer& data_)
     : AlgorithmAnalysis(grid_, data_),

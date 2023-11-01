@@ -1,7 +1,13 @@
 #ifndef ALGORITHM_FACE_HPP
 #define ALGORITHM_FACE_HPP
 
+// project includes
 #include "AlgorithmAnalysis.hpp"
+
+// std includes
+
+// forward declarations
+
 
 class AlgorithmFace : public AlgorithmAnalysis
 {

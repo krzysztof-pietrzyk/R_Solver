@@ -1,9 +1,14 @@
 #ifndef ALGORITHM_SIMPLE_ACTIONS_HPP
 #define ALGORITHM_SIMPLE_ACTIONS_HPP
 
-#include "../../statistics/elements/StatisticsElementCounter.hpp"
-
+// project includes
 #include "AlgorithmAction.hpp"
+
+// std includes
+
+// forward declarations
+class StatisticsElementCounter;
+
 
 class AlgorithmSimpleActions : public AlgorithmAction
 {

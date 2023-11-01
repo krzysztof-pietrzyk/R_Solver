@@ -1,4 +1,15 @@
+// implemented header
 #include "Algorithm.hpp"
+
+// project includes
+#include "AlgorithmStatus.hpp"
+#include "../grid/GridCommonIf.hpp"
+#include "../statistics/StatisticsCollector.hpp"
+#include "../statistics/StatisticsLabels.hpp"
+#include "../statistics/elements/StatisticsElementCounter.hpp"
+
+// std includes
+
 
 Algorithm::Algorithm(const GridCommonIf& grid_, AlgorithmDataTransfer& data_)
     : data(data_),

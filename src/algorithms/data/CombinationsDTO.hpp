@@ -1,11 +1,15 @@
 #ifndef COMBINATIONS_DTO_HPP
 #define COMBINATIONS_DTO_HPP
 
-#include <vector>
-#include <cstdint>
-
-#include "../../grid/GridDimensions.hpp"
+// project includes
 #include "../../utils/BigNum.hpp"
+
+// std includes
+#include <vector>
+
+// forward declarations
+struct GridDimensions;
+
 
 struct CombinationsDTO
 {

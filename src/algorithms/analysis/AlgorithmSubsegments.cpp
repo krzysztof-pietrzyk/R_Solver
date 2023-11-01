@@ -1,4 +1,12 @@
+// implemented header
 #include "AlgorithmSubsegments.hpp"
+
+// project includes
+#include "../data/Section.hpp"
+#include "../data/Subsegment.hpp"
+
+// std includes
+
 
 AlgorithmSubsegments::AlgorithmSubsegments(GridAlgorithmIf& grid_, AlgorithmDataTransfer& data_)
     : AlgorithmAnalysis(grid_, data_),

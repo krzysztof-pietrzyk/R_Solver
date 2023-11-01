@@ -1,4 +1,22 @@
+// implemented header
 #include "Solver.hpp"
+
+// project includes
+#include "SolverThreadData.hpp"
+#include "../algorithms/Algorithm.hpp"
+#include "../algorithms/AlgorithmExecutor.hpp"
+#include "../algorithms/AlgorithmLabels.hpp"
+#include "../generators/GeneratorFactory.hpp"
+#include "../grid/GridInternal.hpp"
+#include "../statistics/StatisticsAggregator.hpp"
+#include "../statistics/StatisticsCollector.hpp"
+#include "../statistics/StatisticsLabels.hpp"
+#include "../statistics/elements/StatisticsElementCounter.hpp"
+#include "../utils/Logger.hpp"
+#include "../view/ViewFactory.hpp"
+
+// std includes
+
 
 Solver::Solver(GridDimensions grid_dimensions, SolverThreadData* thread_data_) :
     grid(new GridInternal(grid_dimensions)),
@@ -13,14 +31,14 @@ Solver::Solver(GridDimensions grid_dimensions, SolverThreadData* thread_data_) :
 	const std::map<AlgorithmType, Algorithm*>& algorithms = algorithm_executor->GetAlgorithmsMap();
 	for(const auto& item : algorithms)
 	{
-		statistics_aggregator->RegisterStatisticsProducer(GetAlgorithmTypeLabel(item.first), (StatisticsProducer*)(item.second));
+		statistics_aggregator->RegisterStatisticsProducer(GetAlgorithmTypeLabel(item.first), item.second);
 	}
-	statistics_aggregator->RegisterStatisticsProducer(Labels::Producers::GENERATOR, (StatisticsProducer*)(generator));
-	statistics_aggregator->RegisterStatisticsProducer(Labels::Producers::SOLVER, (StatisticsProducer*)(this));
-
+	statistics_aggregator->RegisterStatisticsProducer(Labels::Producers::GENERATOR, generator);
+	statistics_aggregator->RegisterStatisticsProducer(Labels::Producers::SOLVER, this);
 	thread_data->mut.lock();
 	thread_data->SetAggregatorIfEmpty(statistics_aggregator);
 	thread_data->mut.unlock();
+	LOGGER(LogLevel::INIT) << "Solver Constructor Complete";
 }
 
 Solver::~Solver()

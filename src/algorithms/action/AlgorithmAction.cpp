@@ -1,4 +1,13 @@
+// implemented header
 #include "AlgorithmAction.hpp"
+
+// project includes
+#include "../../statistics/StatisticsCollector.hpp"
+#include "../../statistics/StatisticsLabels.hpp"
+#include "../../statistics/elements/StatisticsElementCounter.hpp"
+
+// std includes
+
 
 AlgorithmAction::AlgorithmAction(GridAlgorithmIf& grid_, AlgorithmDataTransfer& data_)
     : Algorithm(grid_, data_),

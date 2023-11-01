@@ -1,4 +1,12 @@
+// implemented header
 #include "CachedVector.hpp"
+
+// project includes
+#include "Logger.hpp"
+
+// std includes
+#include <algorithm>
+
 
 CachedVector::CachedVector(size_t _max_size)
 {

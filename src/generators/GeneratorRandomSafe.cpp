@@ -1,4 +1,10 @@
+// implemented header
 #include "GeneratorRandomSafe.hpp"
+
+// project includes
+
+// std includes
+
 
 const uint32_t GeneratorRandomSafe::minimum_safe_fields = 1U;
 

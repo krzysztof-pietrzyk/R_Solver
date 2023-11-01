@@ -1,8 +1,13 @@
 #ifndef GENERATOR_RANDOM_HPP
 #define GENERATOR_RANDOM_HPP
 
+// project includes
 #include "GeneratorInternal.hpp"
-#include "RandomNumberGenerator.hpp"
+
+// std includes
+
+// forward declarations
+
 
 class GeneratorRandom : public GeneratorInternal
 {

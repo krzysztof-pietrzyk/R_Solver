@@ -1,4 +1,11 @@
+// implemented header
 #include "GeneratorRandomGuaranteedOpening.hpp"
+
+// project includes
+
+// std includes
+#include <algorithm>
+
 
 const uint32_t GeneratorRandomGuaranteedOpening::minimum_safe_fields = 9U;
 

@@ -1,10 +1,15 @@
 #ifndef GRID_COMMON_IF_HPP
 #define GRID_COMMON_IF_HPP
 
-#include "../utils/Logger.hpp"
-
-#include "GridHash.hpp"
+// project includes
 #include "GridDimensions.hpp"
+
+// std includes
+#include <vector>
+
+// forward declarations
+class GridHash;
+
 
 class GridCommonIf
 {

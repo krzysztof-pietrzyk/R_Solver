@@ -1,4 +1,10 @@
+// implemented header
 #include "AlgorithmSimpleCorners.hpp"
+
+// project includes
+
+// std includes
+
 
 AlgorithmSimpleCorners::AlgorithmSimpleCorners(GridAlgorithmIf& grid_, AlgorithmDataTransfer& data_)
     : AlgorithmDecision(grid_, data_)

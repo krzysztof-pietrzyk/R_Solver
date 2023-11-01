@@ -1,4 +1,11 @@
+// implemented header
 #include "StatisticsProducer.hpp"
+
+// project includes
+#include "StatisticsCollector.hpp"
+
+// std includes
+
 
 StatisticsProducer::StatisticsProducer()
 {

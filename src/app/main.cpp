@@ -1,17 +1,18 @@
-#include <thread>
-#include <vector>
-#include <chrono>
-#include <ctime>
-#include <iostream>
-#include <string>
-#include <ostream>
+// implemented header
 
+// project includes
 #include "../utils/Logger.hpp"
 #include "../solver/Solver.hpp"
+#include "../solver/SolverThreadData.hpp"
+#include "../statistics/StatisticsAggregator.hpp"
 #include "../grid/GridDimensions.hpp"
 
-using namespace std;
+// std includes
+#include <thread>
+#include <iostream>
 
+
+using namespace std;
 
 void Run(Solver* solver)
 {

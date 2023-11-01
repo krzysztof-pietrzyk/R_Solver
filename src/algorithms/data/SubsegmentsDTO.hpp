@@ -1,13 +1,15 @@
 #ifndef SUBSEGMENTS_DTO_HPP
 #define SUBSEGMENTS_DTO_HPP
 
-#include <vector>
-#include <cstdint>
-
-#include "../../grid/GridDimensions.hpp"
+// project includes
 #include "../../utils/CachedVector.hpp"
 
-#include "Subsegment.hpp"
+// std includes
+
+// forward declarations
+struct Subsegment;
+struct GridDimensions;
+
 
 struct SubsegmentsDTO
 {

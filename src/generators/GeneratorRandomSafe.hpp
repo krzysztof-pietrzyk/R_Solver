@@ -1,7 +1,13 @@
 #ifndef GENERATOR_RANDOM_SAFE_HPP
 #define GENERATOR_RANDOM_SAFE_HPP
 
+// project includes
 #include "GeneratorRandom.hpp"
+
+// std includes
+
+// forward declarations
+
 
 class GeneratorRandomSafe : public GeneratorRandom
 {

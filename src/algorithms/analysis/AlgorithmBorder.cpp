@@ -1,4 +1,10 @@
+// implemented header
 #include "AlgorithmBorder.hpp"
+
+// project includes
+
+// std includes
+
 
 AlgorithmBorder::AlgorithmBorder(GridAlgorithmIf& grid_, AlgorithmDataTransfer& data_)
     : AlgorithmAnalysis(grid_, data_),

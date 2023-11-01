@@ -1,4 +1,13 @@
+// implemented header
 #include "GeneratorInternal.hpp"
+
+// project includes
+#include "../statistics/StatisticsCollector.hpp"
+#include "../statistics/StatisticsLabels.hpp"
+#include "../statistics/elements/StatisticsElementCounter.hpp"
+
+// std includes
+
 
 GeneratorInternal::GeneratorInternal(GridGeneratorIf& grid_) : Generator(grid_)
 {

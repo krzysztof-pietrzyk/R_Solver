@@ -1,4 +1,12 @@
+// implemented header
 #include "SectionsDTO.hpp"
+
+// project includes
+#include "Section.hpp"
+#include "../../grid/GridDimensions.hpp"
+
+// std includes
+
 
 SectionsDTO::SectionsDTO(GridDimensions dim)
 {

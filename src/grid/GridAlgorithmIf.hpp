@@ -1,10 +1,15 @@
 #ifndef GRID_ALGORITHM_IF_HPP
 #define GRID_ALGORITHM_IF_HPP
 
-#include "../utils/CachedVector.hpp"
-#include "../algorithms/PlayerAction.hpp"
-
+// project includes
 #include "GridCommonIf.hpp"
+#include "../algorithms/PlayerActionResult.hpp"
+
+// std includes
+
+// forward declarations
+class CachedVector;
+
 
 class GridAlgorithmIf : public GridCommonIf
 {

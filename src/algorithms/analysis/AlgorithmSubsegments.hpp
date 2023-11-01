@@ -1,7 +1,13 @@
 #ifndef ALGORITHM_SUBSEGMENTS_HPP
 #define ALGORITHM_SUBSEGMENTS_HPP
 
+// project includes
 #include "AlgorithmAnalysis.hpp"
+
+// std includes
+
+// forward declarations
+
 
 class AlgorithmSubsegments : public AlgorithmAnalysis
 {

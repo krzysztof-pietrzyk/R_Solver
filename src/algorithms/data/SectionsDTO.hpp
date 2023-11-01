@@ -1,13 +1,15 @@
 #ifndef SECTIONS_DTO_HPP
 #define SECTIONS_DTO_HPP
 
-#include <vector>
-#include <cstdint>
-
-#include "../../grid/GridDimensions.hpp"
+// project includes
 #include "../../utils/CachedVector.hpp"
 
-#include "Section.hpp"
+// std includes
+
+// forward declarations
+struct GridDimensions;
+class Section;
+
 
 struct SectionsDTO
 {

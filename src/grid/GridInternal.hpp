@@ -1,7 +1,13 @@
 #ifndef GRID_INTERNAL_HPP
 #define GRID_INTERNAL_HPP
 
+// project includes
 #include "Grid.hpp"
+
+// std includes
+
+// forward declarations
+
 
 class GridInternal : public Grid
 {

@@ -1,4 +1,13 @@
+// implemented header
 #include "BigNum.hpp"
+
+// project includes
+#include "Logger.hpp"
+
+// std includes
+#include <bitset>
+#include <cmath>
+
 
 const uint64_t BigNum::exponent_mask          = 0x7FF0000000000000ULL;
 const uint64_t BigNum::mantissa_mask          = 0x000FFFFFFFFFFFFFULL;

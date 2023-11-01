@@ -1,8 +1,14 @@
 #ifndef GENERATOR_HPP
 #define GENERATOR_HPP
 
-#include "../grid/GridGeneratorIf.hpp"
+// project includes
 #include "../statistics/StatisticsProducer.hpp"
+#include "../grid/GridGeneratorIf.hpp"
+
+// std includes
+
+// forward declarations
+
 
 class Generator : public StatisticsProducer
 {

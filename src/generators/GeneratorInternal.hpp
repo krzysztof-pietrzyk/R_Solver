@@ -1,12 +1,16 @@
 #ifndef GENERATOR_INTERNAL_HPP
 #define GENERATOR_INTERNAL_HPP
 
-#include "../utils/CachedVector.hpp"
-#include "../statistics/elements/StatisticsElementCounter.hpp"
-
+// project includes
 #include "Generator.hpp"
+#include "../utils/Logger.hpp"
 
-#include <vector>
+// std includes
+#include "../utils/CachedVector.hpp"
+
+// forward declarations
+class StatisticsElementCounter;
+
 
 class GeneratorInternal : public Generator
 {

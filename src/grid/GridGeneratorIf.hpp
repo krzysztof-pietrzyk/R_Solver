@@ -1,12 +1,14 @@
 #ifndef GRID_GENERATOR_IF_HPP
 #define GRID_GENERATOR_IF_HPP
 
-#include "../utils/CachedVector.hpp"
-
+// project includes
 #include "GridCommonIf.hpp"
 
-#include <vector>
-#include <cstdint>
+// std includes
+
+// forward declarations
+class CachedVector;
+
 
 class GridGeneratorIf : public GridCommonIf
 {

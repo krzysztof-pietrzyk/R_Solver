@@ -1,4 +1,14 @@
+// implemented header
 #include "AlgorithmDecision.hpp"
+
+// project includes
+#include "../PlayerAction.hpp"
+#include "../../statistics/StatisticsCollector.hpp"
+#include "../../statistics/StatisticsLabels.hpp"
+#include "../../statistics/elements/StatisticsElementCounter.hpp"
+
+// std includes
+
 
 AlgorithmDecision::AlgorithmDecision(GridAlgorithmIf& grid_, AlgorithmDataTransfer& data_)
     : Algorithm(grid_, data_),

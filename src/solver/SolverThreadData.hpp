@@ -1,10 +1,15 @@
 #ifndef SOLVER_THREAD_DATA_HPP
 #define SOLVER_THREAD_DATA_HPP
 
-#include "../statistics/StatisticsAggregator.hpp"
-#include "../utils/Logger.hpp"
+// project includes
 
+// std includes
 #include <mutex>
+
+// forward declarations
+class StatisticsAggregator;
+class Logger;
+
 
 class SolverThreadData
 {

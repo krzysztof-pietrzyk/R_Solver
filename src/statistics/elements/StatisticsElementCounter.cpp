@@ -1,4 +1,10 @@
+// implemented header
 #include "StatisticsElementCounter.hpp"
+
+// project includes
+
+// std includes
+
 
 StatisticsElementCounter::StatisticsElementCounter()
 {

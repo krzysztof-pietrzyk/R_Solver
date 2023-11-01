@@ -1,4 +1,15 @@
+// implemented header
 #include "ViewConsole.hpp"
+
+// project includes
+#include "../grid/GridHash.hpp"
+#include "../grid/GridViewIf.hpp"
+#include "../utils/Logger.hpp"
+
+// std includes
+#include <iomanip>
+#include <iostream>
+
 
 const std::map<FieldType, char> ViewConsole::fields_map = 
 {
@@ -101,4 +112,3 @@ void ViewConsole::DrawGridRows(std::stringstream& output, const std::vector<Fiel
 		output << frame_vertical << left << i << endl;
 	}
 }
-

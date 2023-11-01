@@ -1,13 +1,16 @@
 #ifndef GRID_HPP
 #define GRID_HPP
 
-#include "../utils/CachedVector.hpp"
-
-#include "GridAlgorithmIf.hpp"
+// project includes
 #include "GridAlgorithmIf.hpp"
 #include "GridGeneratorIf.hpp"
 #include "GridViewIf.hpp"
-#include "GridDimensions.hpp"
+#include "../utils/CachedVector.hpp"
+
+// std includes
+
+// forward declarations
+
 
 class Grid : 
     public GridAlgorithmIf,

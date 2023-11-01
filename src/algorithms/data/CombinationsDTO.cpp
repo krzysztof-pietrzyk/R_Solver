@@ -1,4 +1,11 @@
+// implemented header
 #include "CombinationsDTO.hpp"
+
+// project includes
+#include "../../grid/GridDimensions.hpp"
+
+// std includes
+
 
 CombinationsDTO::CombinationsDTO(GridDimensions dim)
 {

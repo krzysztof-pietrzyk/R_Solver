@@ -1,4 +1,10 @@
+// implemented header
 #include "AlgorithmCombinationsSafeMoves.hpp"
+
+// project includes
+
+// std includes
+
 
 AlgorithmCombinationsSafeMoves::AlgorithmCombinationsSafeMoves(GridAlgorithmIf& grid_, AlgorithmDataTransfer& data_)
     : AlgorithmDecision(grid_, data_),

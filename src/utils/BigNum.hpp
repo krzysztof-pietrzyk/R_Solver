@@ -1,11 +1,13 @@
 #ifndef BIG_NUM_HPP
 #define BIG_NUM_HPP
 
-#include "Logger.hpp"
+// project includes
 
-#include <iomanip>
-#include <bitset>
-#include <cmath>
+// std includes
+#include <string>
+
+// forward declarations
+
 
 class BigNum
 {

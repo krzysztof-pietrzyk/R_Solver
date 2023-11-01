@@ -1,9 +1,13 @@
 #ifndef STATISTICS_ELEMENT_COUNTER_HPP
 #define STATISTICS_ELEMENT_COUNTER_HPP
 
+// project includes
 #include "StatisticsElementIf.hpp"
 
-#include <cstdint>
+// std includes
+
+// forward declarations
+
 
 class StatisticsElementCounter : public StatisticsElementIf
 {

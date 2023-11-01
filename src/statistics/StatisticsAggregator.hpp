@@ -1,9 +1,16 @@
 #ifndef STATISTICS_AGGREGATOR_HPP
 #define STATISTICS_AGGREGATOR_HPP
 
-#include "../utils/Logger.hpp"
+// project includes
+#include "../utils/Label.hpp"
 
-#include "StatisticsProducer.hpp"
+// std includes
+#include <map>
+#include <string>
+
+// forward declarations
+class StatisticsProducer;
+
 
 class StatisticsAggregator
 {

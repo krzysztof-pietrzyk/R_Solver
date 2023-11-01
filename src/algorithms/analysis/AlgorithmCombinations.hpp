@@ -1,25 +1,14 @@
 #ifndef ALGORITHM_COMBINATIONS_HPP
 #define ALGORITHM_COMBINATIONS_HPP
 
+// project includes
 #include "AlgorithmAnalysis.hpp"
 
-enum class FieldState
-{
-    UNASSIGNED,
-    MINE,
-    SAFE
-};
+// std includes
 
-class FailSafeException : public std::runtime_error
-{
-    public:
+// forward declarations
+enum class FieldState;
 
-    FailSafeException() throw()
-        : std::runtime_error("Too much data to process.")
-    {
-
-    }
-};
 
 class AlgorithmCombinations : public AlgorithmAnalysis
 {

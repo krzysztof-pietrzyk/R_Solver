@@ -1,4 +1,14 @@
+// implemented header
 #include "GeneratorFactory.hpp"
+
+// project includes
+#include "GeneratorRandomGuaranteedOpening.hpp"
+#include "GeneratorRandomSafe.hpp"
+#include "GeneratorRandomUnsafe.hpp"
+#include "GeneratorType.hpp"
+
+// std includes
+
 
 Generator* GeneratorFactory::Create(GeneratorType type, GridGeneratorIf& grid)
 {

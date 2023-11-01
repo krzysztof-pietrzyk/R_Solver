@@ -1,4 +1,12 @@
+// implemented header
 #include "AlgorithmLayerTwo.hpp"
+
+// project includes
+#include "../data/Section.hpp"
+
+// std includes
+#include <algorithm>
+
 
 AlgorithmLayerTwo::AlgorithmLayerTwo(GridAlgorithmIf& grid_, AlgorithmDataTransfer& data_)
     : AlgorithmDecision(grid_, data_),

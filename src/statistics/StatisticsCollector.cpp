@@ -1,4 +1,13 @@
+// implemented header
 #include "StatisticsCollector.hpp"
+
+// project includes
+#include "elements/StatisticsElementIf.hpp"
+#include "../utils/Label.hpp"
+
+// std includes
+#include <sstream>
+
 
 StatisticsCollector::StatisticsCollector()
 {

@@ -1,4 +1,12 @@
+// implemented header
 #include "ViewFactory.hpp"
+
+// project includes
+#include "ViewConsole.hpp"
+#include "../utils/Logger.hpp"
+
+// std includes
+
 
 ViewIf* ViewFactory::Create(ViewType type, GridViewIf& grid)
 {

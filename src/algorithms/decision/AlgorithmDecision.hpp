@@ -1,11 +1,17 @@
 #ifndef ALGORITHM_DECISION_HPP
 #define ALGORITHM_DECISION_HPP
 
-#include "../../grid/GridAlgorithmIf.hpp"
-#include "../../statistics/elements/StatisticsElementCounter.hpp"
-
-#include "../AlgorithmType.hpp"
+// project includes
 #include "../Algorithm.hpp"
+#include "../AlgorithmType.hpp"
+#include "../PlayerAction.hpp"
+#include "../../grid/GridAlgorithmIf.hpp"
+
+// std includes
+
+// forward declarations
+class StatisticsElementCounter;
+
 
 class AlgorithmDecision : public Algorithm
 {
@@ -29,6 +35,8 @@ class AlgorithmDecision : public Algorithm
 
     ActionsDTO& actions_dto;
 
+    // This is to provide information about which Algorithm decided to perform
+    // which actions. It's used by Action Algorithms
     // Overwrite it in inheriting classes
     AlgorithmType algorithm_type;
 

@@ -1,17 +1,15 @@
 #ifndef GENERATOR_FACTORY_HPP
 #define GENERATOR_FACTORY_HPP
 
-#include "GeneratorRandomGuaranteedOpening.hpp"
-#include "GeneratorRandomSafe.hpp"
-#include "GeneratorRandomUnsafe.hpp"
+// project includes
+#include "Generator.hpp"
+#include "GeneratorType.hpp"
 
-enum class GeneratorType
-{
-    UNHANDLED_GENERATOR_TYPE,
-    UNSAFE,
-    SAFE,
-    GUARANTEED_OPENING
-};
+// std includes
+
+// forward declarations
+class GridGeneratorIf;
+
 
 class GeneratorFactory
 {

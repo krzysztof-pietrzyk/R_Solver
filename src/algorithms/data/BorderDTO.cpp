@@ -1,4 +1,11 @@
+// implemented header
 #include "BorderDTO.hpp"
+
+// project includes
+#include "../../grid/GridDimensions.hpp"
+
+// std includes
+
 
 BorderDTO::BorderDTO(GridDimensions dim)
 {

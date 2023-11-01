@@ -1,7 +1,14 @@
 #ifndef STATISTICS_PRODUCER_HPP
 #define STATISTICS_PRODUCER_HPP
 
-#include "StatisticsCollector.hpp"
+// project includes
+
+// std includes
+#include <string>
+
+// forward declarations
+class StatisticsCollector;
+
 
 class StatisticsProducer
 {

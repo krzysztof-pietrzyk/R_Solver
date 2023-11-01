@@ -1,4 +1,13 @@
+// implemented header
 #include "AlgorithmCombinations.hpp"
+
+// project includes
+#include "AlgorithmCombinationsUtils.hpp"
+#include "../data/Section.hpp"
+#include "../data/Subsegment.hpp"
+
+// std includes
+
 
 const uint64_t AlgorithmCombinations::fail_safe_permutation_threshold = 100'000;
 const uint64_t AlgorithmCombinations::fail_safe_enumeration_threshold = 50'000'000;

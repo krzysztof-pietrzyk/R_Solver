@@ -1,10 +1,15 @@
 #ifndef SEGMENTS_DTO_HPP
 #define SEGMENTS_DTO_HPP
 
-#include <vector>
-#include <cstdint>
+// project includes
 
-#include "../../grid/GridDimensions.hpp"
+// std includes
+#include <cstdint>
+#include <vector>
+
+// forward declarations
+struct GridDimensions;
+
 
 struct SegmentsDTO
 {

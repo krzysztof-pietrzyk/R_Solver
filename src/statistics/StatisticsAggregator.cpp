@@ -1,4 +1,13 @@
+// implemented header
 #include "StatisticsAggregator.hpp"
+
+// project includes
+#include "StatisticsProducer.hpp"
+#include "../utils/Label.hpp"
+
+// std includes
+#include <sstream>
+
 
 StatisticsAggregator::StatisticsAggregator()
 {

@@ -1,4 +1,14 @@
+// implemented header
 #include "AlgorithmSections.hpp"
+
+// project includes
+#include "../data/Section.hpp"
+
+// std includes
+#include <algorithm>
+
+
+const uint32_t AlgorithmSections::max_allowed_grid_size = 1048576U;
 
 AlgorithmSections::AlgorithmSections(GridAlgorithmIf& grid_, AlgorithmDataTransfer& data_)
     : AlgorithmAnalysis(grid_, data_),
@@ -17,7 +27,7 @@ AlgorithmSections::AlgorithmSections(GridAlgorithmIf& grid_, AlgorithmDataTransf
     diff_bit_31(2 * grid_dim.width + 2)
 {
     LOGGER(LogLevel::INIT) << "AlgorithmSections";
-    LOGGER_ASSERT(grid_dim.size <= MAX_ALLOWED_GRID_SIZE, "AlgorithmSections - Grid size too large");
+    LOGGER_ASSERT(grid_dim.size <= max_allowed_grid_size, "AlgorithmSections - Grid size too large");
     sections_hashes = std::vector<uint32_t>(grid_dim.size, 0);
     section_value_temp = 0;
     current_section_hash = 0;
