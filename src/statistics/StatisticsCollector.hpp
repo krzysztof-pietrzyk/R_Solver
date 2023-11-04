@@ -19,8 +19,6 @@ class StatisticsCollector
     StatisticsCollector();
     ~StatisticsCollector();
 
-    void Clear();
-
     void AddElement(Label label, StatisticsElementIf* element);
 
     const std::map<Label, StatisticsElementIf*>& GetElements() const;

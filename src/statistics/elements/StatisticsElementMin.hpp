@@ -1,5 +1,5 @@
-#ifndef STATISTICS_ELEMENT_COUNTER_HPP
-#define STATISTICS_ELEMENT_COUNTER_HPP
+#ifndef STATISTICS_ELEMENT_MIN_HPP
+#define STATISTICS_ELEMENT_MIN_HPP
 
 // project includes
 #include "StatisticsElementIf.hpp"
@@ -9,12 +9,13 @@
 // forward declarations
 
 
-class StatisticsElementCounter : public StatisticsElementIf
+class StatisticsElementMin : public StatisticsElementIf
 {
     public:
 
-    StatisticsElementCounter();
-    ~StatisticsElementCounter();
+    StatisticsElementMin();
+
+    ~StatisticsElementMin();
 
     virtual StatisticsElementIf* Clone() override;
     virtual std::string String() const override;
@@ -22,13 +23,11 @@ class StatisticsElementCounter : public StatisticsElementIf
 
     virtual void FlushToOutput(StatisticsElementIf* output) override;
 
-    void operator+=(const uint64_t other);
-    void operator=(const uint64_t other);
+    void CompareAndSet(uint64_t new_value);
 
     private:
 
     uint64_t element_value;
-    uint64_t last_read_value;
 };
 
 #endif

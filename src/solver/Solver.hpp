@@ -5,6 +5,7 @@
 #include "../statistics/StatisticsProducer.hpp"
 
 // std includes
+#include <bitset>
 
 // forward declarations
 class Grid;
@@ -13,7 +14,9 @@ class ViewIf;
 class AlgorithmExecutor;
 class SolverThreadData;
 class StatisticsAggregator;
+class StatisticsElementAverage;
 class StatisticsElementCounter;
+class StatisticsElementMax;
 struct GridDimensions;
 
 
@@ -43,13 +46,22 @@ class Solver : public StatisticsProducer
     StatisticsElementCounter* games_played;
     StatisticsElementCounter* games_won;
     StatisticsElementCounter* games_lost;
-    StatisticsElementCounter* games_abandoned;
     StatisticsElementCounter* total_flagged_mines;
     StatisticsElementCounter* total_uncovered_fields;
+    StatisticsElementMax* best_win_streak;
+    StatisticsElementMax* best_of_100;
+    StatisticsElementAverage* average_win_streak;
+    StatisticsElementAverage* average_win_rate;
+
+    uint64_t current_win_streak;
+    std::bitset<100> best_of_100_set;
+    uint8_t best_of_100_index;
 
     void CreateStatisticsElements();
 
     void UpdateSolverStatistics();
+
+    void UpdateWinStreakStatistics(bool is_win);
 };
 
 #endif

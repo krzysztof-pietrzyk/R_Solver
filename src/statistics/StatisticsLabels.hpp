@@ -27,9 +27,12 @@ namespace Labels
             static const Label GAMES_PLAYED = "Games played";
             static const Label GAMES_WON = "Games won";
             static const Label GAMES_LOST = "Games lost";
-            static const Label GAMES_ABANDONED = "Games abandoned";
             static const Label TOTAL_FIELDS_UNCOVERED = "Total fields uncovered";
             static const Label TOTAL_MINES_FLAGGED = "Total mines flagged";
+            static const Label BEST_WIN_STREAK = "Best win streak";
+            static const Label BEST_OF_100 = "Best wins in 100 games";
+            static const Label AVERAGE_WIN_STREAK = "Average win streak";
+            static const Label AVERAGE_WIN_RATE = "Average win rate";
         }
 
         namespace Executions

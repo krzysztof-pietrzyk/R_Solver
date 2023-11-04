@@ -11,7 +11,9 @@
 #include "../statistics/StatisticsAggregator.hpp"
 #include "../statistics/StatisticsCollector.hpp"
 #include "../statistics/StatisticsLabels.hpp"
+#include "../statistics/elements/StatisticsElementAverage.hpp"
 #include "../statistics/elements/StatisticsElementCounter.hpp"
+#include "../statistics/elements/StatisticsElementMax.hpp"
 #include "../utils/Logger.hpp"
 #include "../view/ViewFactory.hpp"
 
@@ -38,6 +40,11 @@ Solver::Solver(GridDimensions grid_dimensions, SolverThreadData* thread_data_) :
 	thread_data->mut.lock();
 	thread_data->SetAggregatorIfEmpty(statistics_aggregator);
 	thread_data->mut.unlock();
+
+    current_win_streak = 0U;
+    best_of_100_set = std::bitset<100>(0);
+    best_of_100_index = 0U;
+
 	LOGGER(LogLevel::INIT) << "Solver Constructor Complete";
 }
 
@@ -85,35 +92,58 @@ void Solver::CreateStatisticsElements()
     games_played = new StatisticsElementCounter();
     games_won = new StatisticsElementCounter();
     games_lost = new StatisticsElementCounter();
-    games_abandoned = new StatisticsElementCounter();
     total_flagged_mines = new StatisticsElementCounter();
     total_uncovered_fields = new StatisticsElementCounter();
+	best_win_streak = new StatisticsElementMax();
+	best_of_100 = new StatisticsElementMax();
+	average_win_streak = new StatisticsElementAverage();
+	average_win_rate = new StatisticsElementAverage();
     statistics_collector->AddElement(Labels::Collectors::Solver::GAMES_PLAYED, games_played);
     statistics_collector->AddElement(Labels::Collectors::Solver::GAMES_WON, games_won);
     statistics_collector->AddElement(Labels::Collectors::Solver::GAMES_LOST, games_lost);
-    statistics_collector->AddElement(Labels::Collectors::Solver::GAMES_ABANDONED, games_abandoned);
     statistics_collector->AddElement(Labels::Collectors::Solver::TOTAL_MINES_FLAGGED, total_flagged_mines);
     statistics_collector->AddElement(Labels::Collectors::Solver::TOTAL_FIELDS_UNCOVERED, total_uncovered_fields);
+	statistics_collector->AddElement(Labels::Collectors::Solver::BEST_WIN_STREAK, best_win_streak);
+    statistics_collector->AddElement(Labels::Collectors::Solver::BEST_OF_100, best_of_100);
+	statistics_collector->AddElement(Labels::Collectors::Solver::AVERAGE_WIN_STREAK, average_win_streak);
+    statistics_collector->AddElement(Labels::Collectors::Solver::AVERAGE_WIN_RATE, average_win_rate);
 }
 
 void Solver::UpdateSolverStatistics()
 {
 	*games_played += 1;
 	*total_flagged_mines += grid->GetFlaggedFields().Index();
-	uint32_t uncovered_fields = grid->GetVisibleFields().Index();
-	if(grid->IsLost())
-	{
-		*games_lost += 1;
-		*total_uncovered_fields += uncovered_fields - 1;  // -1 because the exploded mine doesn't count
-	}
-	else if(grid->IsWon())
+	*total_uncovered_fields += grid->GetVisibleFields().Index();  // this includes exploded mines
+	if(grid->IsWon())
 	{
 		*games_won += 1;
-		*total_uncovered_fields += uncovered_fields;
+		UpdateWinStreakStatistics(true);
 	}
-	else  // Abandoned game, neither lost or won
+	else
 	{
-		*games_abandoned += 1;
-		*total_uncovered_fields += uncovered_fields;
+		*games_lost += 1;
+		UpdateWinStreakStatistics(false);
+	}
+}
+
+void Solver::UpdateWinStreakStatistics(bool is_win)
+{
+	best_of_100_set[best_of_100_index++] = is_win;
+	if(best_of_100_index >= 100U)
+	{
+		best_of_100_index = 0U;
+	}
+	uint32_t current_best_of_100 = best_of_100_set.count();
+	best_of_100->CompareAndSet(current_best_of_100);
+	average_win_rate->AddEntryToAverage(int(is_win));
+	if(is_win)
+	{
+		++current_win_streak;
+	}
+	else
+	{
+		best_win_streak->CompareAndSet(current_win_streak);
+		average_win_streak->AddEntryToAverage(current_win_streak);
+		current_win_streak = 0U;
 	}
 }

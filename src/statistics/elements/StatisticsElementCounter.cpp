@@ -17,12 +17,6 @@ StatisticsElementCounter::~StatisticsElementCounter()
 
 }
 
-void StatisticsElementCounter::Clear()
-{
-    element_value = 0U;
-    last_read_value = 0U;
-}
-
 StatisticsElementIf* StatisticsElementCounter::Clone()
 {
     return new StatisticsElementCounter();
@@ -45,16 +39,6 @@ void StatisticsElementCounter::FlushToOutput(StatisticsElementIf* output)
     uint64_t temp = element_value;
     ((StatisticsElementCounter*)output)->element_value += temp - last_read_value;
     last_read_value = temp;
-}
-
-void StatisticsElementCounter::operator+=(const StatisticsElementIf* other)
-{
-    element_value += ((StatisticsElementCounter*)other)->element_value;
-}
-
-void StatisticsElementCounter::operator=(const StatisticsElementIf* other)
-{
-    element_value = ((StatisticsElementCounter*)other)->element_value;
 }
 
 void StatisticsElementCounter::operator+=(const uint64_t other)

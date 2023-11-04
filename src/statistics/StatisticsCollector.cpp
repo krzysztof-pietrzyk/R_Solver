@@ -22,14 +22,6 @@ StatisticsCollector::~StatisticsCollector()
     }
 }
 
-void StatisticsCollector::Clear()
-{
-    for(auto& item : labelled_elements)
-    {
-        item.second->Clear();
-    }
-}
-
 void StatisticsCollector::AddElement(Label label, StatisticsElementIf* element)
 {
     labelled_elements[label] = element;
