@@ -9,7 +9,7 @@
 #include <string>
 
 // forward declarations
-class StatisticsProducer;
+class StatisticsCollector;
 
 
 class StatisticsAggregator
@@ -20,7 +20,7 @@ class StatisticsAggregator
 
     ~StatisticsAggregator();
 
-    void RegisterStatisticsProducer(const Label producer_label, StatisticsProducer* statistics_producer);
+    void RegisterStatisticsCollector(Label collector_label, const StatisticsCollector* statistics_collector);
 
     StatisticsAggregator* Clone() const;
 
@@ -30,7 +30,7 @@ class StatisticsAggregator
 
     protected:
 
-    std::map<Label, StatisticsProducer*> labelled_producers;
+    std::map<Label, const StatisticsCollector*> labelled_collectors;
 };
 
 #endif

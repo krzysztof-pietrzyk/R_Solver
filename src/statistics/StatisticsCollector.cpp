@@ -27,11 +27,6 @@ void StatisticsCollector::AddElement(Label label, StatisticsElementIf* element)
     labelled_elements[label] = element;
 }
 
-const std::map<Label, StatisticsElementIf*>& StatisticsCollector::GetElements() const
-{
-    return labelled_elements;
-}
-
 StatisticsCollector* StatisticsCollector::Clone() const
 {
     StatisticsCollector* clone = new StatisticsCollector();
@@ -54,7 +49,7 @@ std::string StatisticsCollector::String() const
     return text_to_print.str();
 }
 
-void StatisticsCollector::FlushToOutput(StatisticsCollector* output) const
+void StatisticsCollector::FlushToOutput(const StatisticsCollector* output) const
 {
     for(auto& item : labelled_elements)
     {

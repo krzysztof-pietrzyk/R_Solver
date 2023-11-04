@@ -96,10 +96,10 @@ void AlgorithmAction::CreateStatisticsElements()
     counter_wasted_left_clicks = new StatisticsElementCounter();
     counter_right_clicks = new StatisticsElementCounter();
     counter_wasted_right_clicks = new StatisticsElementCounter();
-    statistics_collector->AddElement(Labels::Collectors::Clicks::LEFT_CLICKS, counter_left_clicks);
-    statistics_collector->AddElement(Labels::Collectors::Clicks::WASTED_LEFT_CLICKS, counter_wasted_left_clicks);
-    statistics_collector->AddElement(Labels::Collectors::Clicks::RIGHT_CLICKS, counter_right_clicks);
-    statistics_collector->AddElement(Labels::Collectors::Clicks::WASTED_RIGHT_CLICKS, counter_wasted_right_clicks);
+    statistics_collector->AddElement(Labels::Elements::Clicks::LEFT_CLICKS, counter_left_clicks);
+    statistics_collector->AddElement(Labels::Elements::Clicks::WASTED_LEFT_CLICKS, counter_wasted_left_clicks);
+    statistics_collector->AddElement(Labels::Elements::Clicks::RIGHT_CLICKS, counter_right_clicks);
+    statistics_collector->AddElement(Labels::Elements::Clicks::WASTED_RIGHT_CLICKS, counter_wasted_right_clicks);
 }
 
 AlgorithmStatus AlgorithmAction::GetReturnStatus(AlgorithmStatus execution_result, AlgorithmStatus game_over_result) const

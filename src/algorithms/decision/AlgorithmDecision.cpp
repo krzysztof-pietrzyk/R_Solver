@@ -55,6 +55,6 @@ void AlgorithmDecision::CreateStatisticsElements()
 {
     decisions_left_click = new StatisticsElementCounter();
     decisions_right_click = new StatisticsElementCounter();
-    statistics_collector->AddElement(Labels::Collectors::Decisions::LEFT_CLICKS, decisions_left_click);
-    statistics_collector->AddElement(Labels::Collectors::Decisions::RIGHT_CLICKS, decisions_right_click);
+    statistics_collector->AddElement(Labels::Elements::Decisions::LEFT_CLICKS, decisions_left_click);
+    statistics_collector->AddElement(Labels::Elements::Decisions::RIGHT_CLICKS, decisions_right_click);
 }

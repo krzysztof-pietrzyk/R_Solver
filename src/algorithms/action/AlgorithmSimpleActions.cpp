@@ -64,9 +64,9 @@ void AlgorithmSimpleActions::CreateStatisticsElements()
     counter_loss_simple_corners = new StatisticsElementCounter();
     counter_loss_combinations_least_risky = new StatisticsElementCounter();
     counter_loss_other = new StatisticsElementCounter();
-    statistics_collector->AddElement(Labels::Collectors::ActionsLoss::SIMPLE_CORNERS, counter_loss_simple_corners);
-    statistics_collector->AddElement(Labels::Collectors::ActionsLoss::LEAST_RISKY, counter_loss_combinations_least_risky);
-    statistics_collector->AddElement(Labels::Collectors::ActionsLoss::OTHER, counter_loss_other);
+    statistics_collector->AddElement(Labels::Elements::ActionsLoss::SIMPLE_CORNERS, counter_loss_simple_corners);
+    statistics_collector->AddElement(Labels::Elements::ActionsLoss::LEAST_RISKY, counter_loss_combinations_least_risky);
+    statistics_collector->AddElement(Labels::Elements::ActionsLoss::OTHER, counter_loss_other);
 }
 
 void AlgorithmSimpleActions::UpdateLossStatistics(AlgorithmType algorithm_type)

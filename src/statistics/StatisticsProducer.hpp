@@ -18,11 +18,7 @@ class StatisticsProducer
 
     ~StatisticsProducer();
 
-    StatisticsProducer* Clone() const;
-
-    std::string String() const;
-
-    void FlushToOutput(StatisticsProducer* output) const;
+    const StatisticsCollector* GetStatisticsCollector();
 
     protected:
 

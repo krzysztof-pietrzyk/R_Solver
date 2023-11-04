@@ -17,17 +17,16 @@ class StatisticsCollector
     public:
 
     StatisticsCollector();
+
     ~StatisticsCollector();
 
     void AddElement(Label label, StatisticsElementIf* element);
-
-    const std::map<Label, StatisticsElementIf*>& GetElements() const;
 
     StatisticsCollector* Clone() const;
 
     std::string String() const;
 
-    void FlushToOutput(StatisticsCollector* output) const;
+    void FlushToOutput(const StatisticsCollector* output) const;
 
     private:
 

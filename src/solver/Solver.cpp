@@ -5,7 +5,6 @@
 #include "SolverThreadData.hpp"
 #include "../algorithms/Algorithm.hpp"
 #include "../algorithms/AlgorithmExecutor.hpp"
-#include "../algorithms/AlgorithmLabels.hpp"
 #include "../generators/GeneratorFactory.hpp"
 #include "../grid/GridInternal.hpp"
 #include "../statistics/StatisticsAggregator.hpp"
@@ -33,10 +32,10 @@ Solver::Solver(GridDimensions grid_dimensions, SolverThreadData* thread_data_) :
 	const std::map<AlgorithmType, Algorithm*>& algorithms = algorithm_executor->GetAlgorithmsMap();
 	for(const auto& item : algorithms)
 	{
-		statistics_aggregator->RegisterStatisticsProducer(GetAlgorithmTypeLabel(item.first), item.second);
+		statistics_aggregator->RegisterStatisticsCollector(GetAlgorithmTypeLabel(item.first), item.second->GetStatisticsCollector());
 	}
-	statistics_aggregator->RegisterStatisticsProducer(Labels::Producers::GENERATOR, generator);
-	statistics_aggregator->RegisterStatisticsProducer(Labels::Producers::SOLVER, this);
+	statistics_aggregator->RegisterStatisticsCollector(Labels::Collectors::GENERATOR, generator->GetStatisticsCollector());
+	statistics_aggregator->RegisterStatisticsCollector(Labels::Collectors::SOLVER, this->GetStatisticsCollector());
 	thread_data->mut.lock();
 	thread_data->SetAggregatorIfEmpty(statistics_aggregator);
 	thread_data->mut.unlock();
@@ -98,15 +97,15 @@ void Solver::CreateStatisticsElements()
 	best_of_100 = new StatisticsElementMax();
 	average_win_streak = new StatisticsElementAverage();
 	average_win_rate = new StatisticsElementAverage();
-    statistics_collector->AddElement(Labels::Collectors::Solver::GAMES_PLAYED, games_played);
-    statistics_collector->AddElement(Labels::Collectors::Solver::GAMES_WON, games_won);
-    statistics_collector->AddElement(Labels::Collectors::Solver::GAMES_LOST, games_lost);
-    statistics_collector->AddElement(Labels::Collectors::Solver::TOTAL_MINES_FLAGGED, total_flagged_mines);
-    statistics_collector->AddElement(Labels::Collectors::Solver::TOTAL_FIELDS_UNCOVERED, total_uncovered_fields);
-	statistics_collector->AddElement(Labels::Collectors::Solver::BEST_WIN_STREAK, best_win_streak);
-    statistics_collector->AddElement(Labels::Collectors::Solver::BEST_OF_100, best_of_100);
-	statistics_collector->AddElement(Labels::Collectors::Solver::AVERAGE_WIN_STREAK, average_win_streak);
-    statistics_collector->AddElement(Labels::Collectors::Solver::AVERAGE_WIN_RATE, average_win_rate);
+    statistics_collector->AddElement(Labels::Elements::Solver::GAMES_PLAYED, games_played);
+    statistics_collector->AddElement(Labels::Elements::Solver::GAMES_WON, games_won);
+    statistics_collector->AddElement(Labels::Elements::Solver::GAMES_LOST, games_lost);
+    statistics_collector->AddElement(Labels::Elements::Solver::TOTAL_MINES_FLAGGED, total_flagged_mines);
+    statistics_collector->AddElement(Labels::Elements::Solver::TOTAL_FIELDS_UNCOVERED, total_uncovered_fields);
+	statistics_collector->AddElement(Labels::Elements::Solver::BEST_WIN_STREAK, best_win_streak);
+    statistics_collector->AddElement(Labels::Elements::Solver::BEST_OF_100, best_of_100);
+	statistics_collector->AddElement(Labels::Elements::Solver::AVERAGE_WIN_STREAK, average_win_streak);
+    statistics_collector->AddElement(Labels::Elements::Solver::AVERAGE_WIN_RATE, average_win_rate);
 }
 
 void Solver::UpdateSolverStatistics()

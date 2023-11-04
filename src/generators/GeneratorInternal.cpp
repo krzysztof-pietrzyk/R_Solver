@@ -50,15 +50,15 @@ void GeneratorInternal::CreateStatisticsElements()
     counter_six = new StatisticsElementCounter();
     counter_seven = new StatisticsElementCounter();
     counter_eight = new StatisticsElementCounter();
-    statistics_collector->AddElement(Labels::Collectors::Generator::ZERO, counter_zero);
-    statistics_collector->AddElement(Labels::Collectors::Generator::ONE, counter_one);
-    statistics_collector->AddElement(Labels::Collectors::Generator::TWO, counter_two);
-    statistics_collector->AddElement(Labels::Collectors::Generator::THREE, counter_three);
-    statistics_collector->AddElement(Labels::Collectors::Generator::FOUR, counter_four);
-    statistics_collector->AddElement(Labels::Collectors::Generator::FIVE, counter_five);
-    statistics_collector->AddElement(Labels::Collectors::Generator::SIX, counter_six);
-    statistics_collector->AddElement(Labels::Collectors::Generator::SEVEN, counter_seven);
-    statistics_collector->AddElement(Labels::Collectors::Generator::EIGHT, counter_eight);
+    statistics_collector->AddElement(Labels::Elements::Generator::ZERO, counter_zero);
+    statistics_collector->AddElement(Labels::Elements::Generator::ONE, counter_one);
+    statistics_collector->AddElement(Labels::Elements::Generator::TWO, counter_two);
+    statistics_collector->AddElement(Labels::Elements::Generator::THREE, counter_three);
+    statistics_collector->AddElement(Labels::Elements::Generator::FOUR, counter_four);
+    statistics_collector->AddElement(Labels::Elements::Generator::FIVE, counter_five);
+    statistics_collector->AddElement(Labels::Elements::Generator::SIX, counter_six);
+    statistics_collector->AddElement(Labels::Elements::Generator::SEVEN, counter_seven);
+    statistics_collector->AddElement(Labels::Elements::Generator::EIGHT, counter_eight);
 }
 
 void GeneratorInternal::CalculateAllFieldValues()

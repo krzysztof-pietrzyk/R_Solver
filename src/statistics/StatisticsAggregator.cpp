@@ -2,7 +2,7 @@
 #include "StatisticsAggregator.hpp"
 
 // project includes
-#include "StatisticsProducer.hpp"
+#include "StatisticsCollector.hpp"
 #include "../utils/Label.hpp"
 
 // std includes
@@ -11,7 +11,7 @@
 
 StatisticsAggregator::StatisticsAggregator()
 {
-    labelled_producers = std::map<Label, StatisticsProducer*>();
+    labelled_collectors = std::map<Label, const StatisticsCollector*>();
 }
 
 StatisticsAggregator::~StatisticsAggregator()
@@ -19,19 +19,19 @@ StatisticsAggregator::~StatisticsAggregator()
 
 }
 
-void StatisticsAggregator::RegisterStatisticsProducer(const Label producer_label, StatisticsProducer* statistics_producer)
+void StatisticsAggregator::RegisterStatisticsCollector(Label collector_label, const StatisticsCollector* statistics_collector)
 {
-    labelled_producers[producer_label] = statistics_producer;
+    labelled_collectors[collector_label] = statistics_collector;
 }
 
 StatisticsAggregator* StatisticsAggregator::Clone() const
 {
     StatisticsAggregator* clone = new StatisticsAggregator();
-    for(const auto& labelled_producer : labelled_producers)
+    for(const auto& labelled_collector : labelled_collectors)
     {
-        const Label& producer_label = labelled_producer.first;
-        const StatisticsProducer* producer = labelled_producer.second;
-        clone->labelled_producers[producer_label] = producer->Clone();
+        const Label& collector_label = labelled_collector.first;
+        const StatisticsCollector* collector = labelled_collector.second;
+        clone->labelled_collectors[collector_label] = collector->Clone();
     }
     return clone;
 }
@@ -39,23 +39,23 @@ StatisticsAggregator* StatisticsAggregator::Clone() const
 std::string StatisticsAggregator::String() const
 {
     std::ostringstream text_to_print = std::ostringstream();
-    for(const auto& labelled_producer : labelled_producers)
+    for(const auto& labelled_collector : labelled_collectors)
     {
-        const Label& producer_label = labelled_producer.first;
-        const StatisticsProducer* producer = labelled_producer.second;
-        text_to_print << producer_label << '\n' << producer->String();
+        const Label& collector_label = labelled_collector.first;
+        const StatisticsCollector* collector = labelled_collector.second;
+        text_to_print << collector_label << '\n' << collector->String();
     }
     return text_to_print.str();
 }
 
 void StatisticsAggregator::FlushToOutput(StatisticsAggregator* output) const
 {
-    std::map<Label, StatisticsProducer*>& output_labelled_producers = output->labelled_producers;
-    for(const auto& labelled_producer : labelled_producers)
+    std::map<Label, const StatisticsCollector*>& output_labelled_collectors = output->labelled_collectors;
+    for(const auto& labelled_collector : labelled_collectors)
     {
-        const Label& producer_label = labelled_producer.first;
-        const StatisticsProducer* input_producer = labelled_producer.second;
-        StatisticsProducer* output_producer = output_labelled_producers[producer_label];
-        input_producer->FlushToOutput(output_producer);
+        const Label& collector_label = labelled_collector.first;
+        const StatisticsCollector* input_collector = labelled_collector.second;
+        const StatisticsCollector* output_collector = output_labelled_collectors[collector_label];
+        input_collector->FlushToOutput(output_collector);
     }
 }
