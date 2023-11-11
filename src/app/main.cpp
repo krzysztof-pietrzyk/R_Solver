@@ -59,14 +59,14 @@ int main()
 	vector<thread> solver_threads;
 	vector<Solver*> solvers;
 	GridDimensions grid_dimensions = GridDimensions(grid_width, grid_height, grid_mines);
-	for(size_t i = 0; i < threads_number; i++)
+	for(size_t i = 0; i < threads_number; ++i)
 	{
 		Solver* s = new Solver(grid_dimensions, data);
 		solvers.push_back(s);
 		solver_threads.push_back(thread(Run, s));
 	}
 	thread status = thread(CheckStatus, data, solvers);
-	for(size_t i = 0; i < threads_number; i++) solver_threads[i].join();
+	for(size_t i = 0; i < threads_number; ++i) solver_threads[i].join();
 	status.join();
 	
 	return 0;

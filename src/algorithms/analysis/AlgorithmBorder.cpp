@@ -41,7 +41,7 @@ AlgorithmStatus AlgorithmBorder::Execution()
 void AlgorithmBorder::FilterOldBorderContent(uint32_t& border_index_new) const
 {
     const uint32_t border_index_old = border_dto.index;
-    for(size_t i = 0; i < border_index_old; i++)
+    for(size_t i = 0; i < border_index_old; ++i)
     {
         const uint32_t border_field = border[i];
         if(HasAtLeastOneNotVisibleNeighbor(border_field))
@@ -59,7 +59,7 @@ void AlgorithmBorder::AddNewContentToBorder(uint32_t& border_index_new) const
 {
     const uint32_t visible_fields_old_index = border_dto.last_visible_fields_index;
     const uint32_t visible_fields_new_index = visible.Index();
-    for(size_t i = visible_fields_old_index; i < visible_fields_new_index; i++)
+    for(size_t i = visible_fields_old_index; i < visible_fields_new_index; ++i)
     {
         const uint32_t visible_field = visible[i];
         if(HasAtLeastOneNotVisibleNeighbor(visible_field))

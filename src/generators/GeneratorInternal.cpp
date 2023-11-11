@@ -104,7 +104,7 @@ uint8_t GeneratorInternal::CalculateFieldValue(uint32_t field)
         // Count how many mines are within each field's neighbors
         if(generated_mine_fields.Contains(current_neighbor))
         {
-            current_field_value++;
+            ++current_field_value;
         }
     }
     return current_field_value;
@@ -125,31 +125,31 @@ void GeneratorInternal::CountFieldTypes(const std::vector<uint8_t>& field_values
         switch (field)
         {
             case 0U:
-                t0++;
+                ++t0;
                 break;
             case 1U:
-                t1++;
+                ++t1;
                 break;
             case 2U:
-                t2++;
+                ++t2;
                 break;
             case 3U:
-                t3++;
+                ++t3;
                 break;
             case 4U:
-                t4++;
+                ++t4;
                 break;
             case 5U:
-                t5++;
+                ++t5;
                 break;
             case 6U:
-                t6++;
+                ++t6;
                 break;
             case 7U:
-                t7++;
+                ++t7;
                 break;
             case 8U:
-                t8++;
+                ++t8;
                 break;
             default:
                 break;

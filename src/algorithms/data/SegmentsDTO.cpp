@@ -31,5 +31,5 @@ void SegmentsDTO::AddSegment(uint32_t start, uint32_t length)
 {
     segments_starting_indexes[segments_count] = start;
     segments_l[segments_count] = length;
-    segments_count++;
+    ++segments_count;
 }

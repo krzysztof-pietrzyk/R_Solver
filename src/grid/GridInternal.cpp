@@ -71,7 +71,7 @@ void GridInternal::StartChainReactionAt(uint32_t field)
     chain_reaction_zeros.Clear();
     chain_reaction_zeros.Add(field);
     // chain_reaction_zeros.Index() may increase while the loop is being executed
-    for(size_t i = 0U; i < chain_reaction_zeros.Index(); i++)
+    for(size_t i = 0U; i < chain_reaction_zeros.Index(); ++i)
     {
         uint32_t current_zero = chain_reaction_zeros[i];
         HandleChainReactionAt(current_zero);

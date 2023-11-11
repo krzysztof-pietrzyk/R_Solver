@@ -42,7 +42,7 @@ AlgorithmStatus AlgorithmSections::Execution()
     const uint32_t border_l = border_dto.index;
 
     // iterate through border fields
-    for(size_t i = 0; i < border_l; i++)
+    for(size_t i = 0; i < border_l; ++i)
     {
         const uint32_t border_field = border_dto.border[i];
         AnalyzeSection(border_field);
@@ -75,7 +75,7 @@ void AlgorithmSections::AnalyzeSectionField(const uint32_t border_field, const u
     // count the number of flags already marked around the border_field
     if(flagged.Contains(border_field_neighbor))
     {
-        section_value_temp--;
+        --section_value_temp;
         return;
     }
     // if this neighbor is already visible, ignore it

@@ -156,7 +156,7 @@ vector<CalculateHashFixtureParams> GetParamsGridHashCalculateHashFixture()
 {
     vector<CalculateHashFixtureParams> allHashSymbolsParams = vector<CalculateHashFixtureParams>();
 
-    for(char temp_value = 0; temp_value < hash_symbols.size(); temp_value++)
+    for(char temp_value = 0; temp_value < hash_symbols.size(); ++temp_value)
     {
         allHashSymbolsParams.push_back(CalculateHashFixtureParams(
             {
@@ -277,7 +277,7 @@ vector<GetMinesFixtureParams> GetParamsGridHashGetMinesFixture()
 {
     vector<GetMinesFixtureParams> hashToMinesParams = vector<GetMinesFixtureParams>();
 
-    for(char temp_value = 0; temp_value < hash_symbols.size(); temp_value++)
+    for(char temp_value = 0; temp_value < hash_symbols.size(); ++temp_value)
     {
         hashToMinesParams.push_back(GetMinesFixtureParams(
             string(1, hash_symbols[temp_value]), 6,

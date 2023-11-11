@@ -86,7 +86,7 @@ void ViewConsole::DrawBigNumberRow(std::stringstream& output)
 void ViewConsole::DrawSmallNumberRow(std::stringstream& output)
 {
 	output << setw(row_indicator_max_w + 1) << "";
-	for(size_t i = 0; i < grid_dim.width; i++)
+	for(size_t i = 0; i < grid_dim.width; ++i)
     {
         output << i % num_of_digits;
     }
@@ -101,10 +101,10 @@ void ViewConsole::DrawHorizontalBar(std::stringstream& output)
 
 void ViewConsole::DrawGridRows(std::stringstream& output, const std::vector<FieldType>& fields_to_display)
 {
-    for(size_t i = 0; i < grid_dim.height; i++)
+    for(size_t i = 0; i < grid_dim.height; ++i)
 	{
 		output << setw(row_indicator_max_w) << right << i << frame_vertical;
-		for(size_t j = 0; j < grid_dim.width; j++)
+		for(size_t j = 0; j < grid_dim.width; ++j)
 		{
 			uint32_t position = i * grid_dim.width + j;
             output << fields_map.at(fields_to_display[position]);

@@ -56,7 +56,7 @@ void StatisticsElementAverage::AddEntryToAverage(uint64_t new_value)
 {
     mut.lock();
     total_sum += new_value;
-    number_of_entries++;
+    ++number_of_entries;
     mut.unlock();
 }
 

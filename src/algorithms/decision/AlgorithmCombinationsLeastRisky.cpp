@@ -36,7 +36,7 @@ uint32_t AlgorithmCombinationsLeastRisky::FindSafestField() const
     BigNum lowest_combination = max_combinations;
     uint32_t safest_field = UINT_MAX;
     // Find the safest field (index of lowest entry in data.field_combinations)
-    for(size_t i = 0; i < face_length; i++)
+    for(size_t i = 0; i < face_length; ++i)
     {
         const uint32_t face_field = face_dto.face[i];
         const BigNum face_field_combinations = combinations_dto.field_combinations[face_field];

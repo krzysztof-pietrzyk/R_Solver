@@ -30,14 +30,14 @@ AlgorithmStatus AlgorithmSubsegments::Execution()
 
     const uint32_t segments_count = segments_dto.segments_count;
 
-    for(size_t segment_id = 0; segment_id < segments_count; segment_id++)
+    for(size_t segment_id = 0; segment_id < segments_count; ++segment_id)
     {
         subsegments_dto.subsegments.push_back(std::vector<Subsegment>());
         // It's important to keep track which segment this optimization relates to
         // This is why we are iterating over segments, not over sections directly
         const uint32_t segment_begin = segments_dto.segments_starting_indexes[segment_id];
         const uint32_t segment_end = segment_begin + segments_dto.segments_l[segment_id];
-        for(size_t j = segment_begin; j < segment_end; j++)
+        for(size_t j = segment_begin; j < segment_end; ++j)
         {
             // Border fields are unique in segments. No need to check for duplicates here
             const uint32_t border_field = segments_dto.segments[j];
@@ -52,7 +52,7 @@ AlgorithmStatus AlgorithmSubsegments::Execution()
 
 void AlgorithmSubsegments::Clear()
 {
-    for(size_t i = 0; i < checked_index; i++) { is_checked[checked[i]] = false; }
+    for(size_t i = 0; i < checked_index; ++i) { is_checked[checked[i]] = false; }
     checked_index = 0;
     subsegments_dto.Clear();
 }
@@ -63,7 +63,7 @@ void AlgorithmSubsegments::UpdateNeighborsBits(const uint32_t border_field)
     const Section& border_field_section = sections_dto.sections[border_field];
     const size_t border_field_neighbors_l = border_field_section.neighbors_index;
     uint32_t bit_shift_temp = 1;
-    for(size_t i = 0; i < border_field_neighbors_l; i++)
+    for(size_t i = 0; i < border_field_neighbors_l; ++i)
     {
         // border_field_neighbors are origins of sections, which overlap with this border field's section
         // each of those neighbors is being assigned a different bit.
@@ -79,7 +79,7 @@ void AlgorithmSubsegments::UpdateSectionNeighborhood(const uint32_t section_orig
     section_neighborhood.clear();
     const Section& current_section = sections_dto.sections[section_origin];
     const size_t current_section_l = current_section.fields_index;
-    for(size_t i = 0; i < current_section_l; i++)
+    for(size_t i = 0; i < current_section_l; ++i)
     {
         const uint32_t section_field = current_section.fields[i];
         // Sections can overlap. Need to check for duplicates
@@ -106,7 +106,7 @@ void AlgorithmSubsegments::FindSegmentsToOptimize(const uint32_t parent_segment)
         if(hash_repetitions < 2) { continue; }
         Subsegment subsegment_temp = Subsegment();
         // copy the fields into the structure
-        for(size_t i = 0; i < hash_repetitions; i++)
+        for(size_t i = 0; i < hash_repetitions; ++i)
         {
             const uint32_t field_temp = iter->second[i];
             subsegments_dto.subsegments_cache.Add(field_temp);
@@ -158,7 +158,7 @@ void AlgorithmSubsegments::FindPossibleValuesForSubsegment(Subsegment& subsegmen
     // there can't be more mines in the subsegment than there are fields in the subsegment
     const uint8_t upper_bound = minimum_section_value < subsegment_length ? minimum_section_value : subsegment_length;
     // all values between those bounds are possible numbers of mines in this subsection (including bounds)
-    for(uint8_t i = lower_bound; i <= upper_bound; i++)
+    for(uint8_t i = lower_bound; i <= upper_bound; ++i)
     {
         subsegment_data.possible_values.push_back(i);
         subsegment_data.combinations_for_value[i] = NChooseK(subsegment_length, i);

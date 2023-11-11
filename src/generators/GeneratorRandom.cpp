@@ -37,7 +37,7 @@ void GeneratorRandom::GenerateMinePositions()
 
     CopyTemplateToWorkingVector();
 
-    for(size_t i = 0; i < grid_dim.mines; i++)
+    for(size_t i = 0; i < grid_dim.mines; ++i)
     {
         // Get random poll_index between 0 and current_max
         poll_index = RandomNumberGenerator::GetRandom() % current_max;
@@ -52,7 +52,7 @@ void GeneratorRandom::GenerateMinePositions()
 void GeneratorRandom::CopyTemplateToWorkingVector()
 {
     const size_t current_template_size = current_template.size();
-    for(size_t i = 0; i < current_template_size; i++)
+    for(size_t i = 0; i < current_template_size; ++i)
     {
         generated_safe_fields[i] = current_template[i];
     }

@@ -17,7 +17,7 @@ Grid::Grid(GridDimensions dimensions) : dimensions(dimensions)
     field_values = std::vector<uint8_t>(dimensions.size);
     field_types_to_display = std::vector<FieldType>(dimensions.size);
     neighbors = std::vector<std::vector<uint32_t>>(dimensions.size);
-    for(size_t i = 0U; i < dimensions.size; i++)
+    for(size_t i = 0U; i < dimensions.size; ++i)
     {
         neighbors[i] = std::vector<uint32_t>();
     }
@@ -99,7 +99,7 @@ void Grid::Reset()
 // GridViewIf
 const std::vector<FieldType>& Grid::GetFieldTypesToDisplay()
 {
-    for(size_t i = 0U; i < dimensions.size; i++)
+    for(size_t i = 0U; i < dimensions.size; ++i)
     {
         field_types_to_display[i] = GetFieldType(i);
     }
@@ -125,7 +125,7 @@ void Grid::FindNeighborsOfAllFields()
     // Only called once in constructor. The neighbors addresses never change
     uint16_t column;
     uint16_t row;
-    for(uint32_t i = 0U; i < dimensions.size; i++)
+    for(uint32_t i = 0U; i < dimensions.size; ++i)
     {
         // For each field, list the neighbors
         column = i % dimensions.width;

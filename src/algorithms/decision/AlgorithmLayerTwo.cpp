@@ -23,14 +23,14 @@ AlgorithmLayerTwo::~AlgorithmLayerTwo() {}
 AlgorithmStatus AlgorithmLayerTwo::Execution()
 {
     const uint32_t sections_origins_index = sections_dto.sections_origins.Index();
-    for(size_t i = 0; i < sections_origins_index; i++)
+    for(size_t i = 0; i < sections_origins_index; ++i)
     {
         const size_t current_section_index = sections_dto.sections_origins[i];
         const Section& current_section = sections_dto.sections[current_section_index];
         if(!IsCurrentSectionValid(current_section)) { continue; }
 
         const std::vector<uint32_t>& current_section_neighbors = current_section.neighbors;
-        for(size_t j = 0; j < current_section.neighbors_index; j++)
+        for(size_t j = 0; j < current_section.neighbors_index; ++j)
         {
             const size_t neighbor_section_index = current_section_neighbors[j];
             const Section& neighbor_section = sections_dto.sections[neighbor_section_index];
