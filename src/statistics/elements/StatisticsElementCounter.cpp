@@ -17,7 +17,7 @@ StatisticsElementCounter::~StatisticsElementCounter()
 
 }
 
-StatisticsElementIf* StatisticsElementCounter::Clone()
+StatisticsElementIf* StatisticsElementCounter::GetNewInstance()
 {
     return new StatisticsElementCounter();
 }

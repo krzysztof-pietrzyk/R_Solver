@@ -22,7 +22,7 @@ class StatisticsAggregator
 
     void RegisterStatisticsCollector(Label collector_label, const StatisticsCollector* statistics_collector);
 
-    StatisticsAggregator* Clone() const;
+    StatisticsAggregator* GetNewInstance() const;
 
     std::string String() const;
 

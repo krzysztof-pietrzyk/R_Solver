@@ -13,7 +13,7 @@ class StatisticsElementIf
 {
     public:
 
-    virtual StatisticsElementIf* Clone() = 0;
+    virtual StatisticsElementIf* GetNewInstance() = 0;
     virtual std::string String() const = 0;
     virtual bool IsEmpty() = 0;
 

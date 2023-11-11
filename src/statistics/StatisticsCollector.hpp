@@ -22,7 +22,7 @@ class StatisticsCollector
 
     void AddElement(Label label, StatisticsElementIf* element);
 
-    StatisticsCollector* Clone() const;
+    StatisticsCollector* GetNewInstance() const;
 
     std::string String() const;
 

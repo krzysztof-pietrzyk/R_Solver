@@ -27,13 +27,13 @@ void StatisticsCollector::AddElement(Label label, StatisticsElementIf* element)
     labelled_elements[label] = element;
 }
 
-StatisticsCollector* StatisticsCollector::Clone() const
+StatisticsCollector* StatisticsCollector::GetNewInstance() const
 {
     StatisticsCollector* clone = new StatisticsCollector();
     for(const auto& item : labelled_elements)
     {
         const Label& key = item.first;
-        clone->labelled_elements[key] = item.second->Clone();
+        clone->labelled_elements[key] = item.second->GetNewInstance();
     }
     return clone;
 }

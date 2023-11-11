@@ -16,7 +16,7 @@ StatisticsElementMax::~StatisticsElementMax()
 
 }
 
-StatisticsElementIf* StatisticsElementMax::Clone()
+StatisticsElementIf* StatisticsElementMax::GetNewInstance()
 {
     return new StatisticsElementMax();
 }

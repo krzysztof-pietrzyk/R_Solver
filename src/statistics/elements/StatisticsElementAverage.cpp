@@ -18,7 +18,7 @@ StatisticsElementAverage::~StatisticsElementAverage()
 
 }
 
-StatisticsElementIf* StatisticsElementAverage::Clone()
+StatisticsElementIf* StatisticsElementAverage::GetNewInstance()
 {
     return new StatisticsElementAverage();
 }

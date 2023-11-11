@@ -16,7 +16,7 @@ StatisticsElementMin::~StatisticsElementMin()
 
 }
 
-StatisticsElementIf* StatisticsElementMin::Clone()
+StatisticsElementIf* StatisticsElementMin::GetNewInstance()
 {
     return new StatisticsElementMin();
 }

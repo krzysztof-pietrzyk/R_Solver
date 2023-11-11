@@ -27,6 +27,6 @@ void SolverThreadData::SetAggregatorIfEmpty(StatisticsAggregator* aggregator)
     LOGGER(LogLevel::INIT) << "SolverThreadData::SetAggregatorIfEmpty";
     if(!statistics_data)
     {
-        statistics_data = aggregator->Clone();
+        statistics_data = aggregator->GetNewInstance();
     }
 }

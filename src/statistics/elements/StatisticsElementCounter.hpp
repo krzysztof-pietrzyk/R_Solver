@@ -16,7 +16,7 @@ class StatisticsElementCounter : public StatisticsElementIf
     StatisticsElementCounter();
     ~StatisticsElementCounter();
 
-    virtual StatisticsElementIf* Clone() override;
+    virtual StatisticsElementIf* GetNewInstance() override;
     virtual std::string String() const override;
     virtual bool IsEmpty() override;
 

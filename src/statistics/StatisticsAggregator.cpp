@@ -24,14 +24,14 @@ void StatisticsAggregator::RegisterStatisticsCollector(Label collector_label, co
     labelled_collectors[collector_label] = statistics_collector;
 }
 
-StatisticsAggregator* StatisticsAggregator::Clone() const
+StatisticsAggregator* StatisticsAggregator::GetNewInstance() const
 {
     StatisticsAggregator* clone = new StatisticsAggregator();
     for(const auto& labelled_collector : labelled_collectors)
     {
         const Label& collector_label = labelled_collector.first;
         const StatisticsCollector* collector = labelled_collector.second;
-        clone->labelled_collectors[collector_label] = collector->Clone();
+        clone->labelled_collectors[collector_label] = collector->GetNewInstance();
     }
     return clone;
 }

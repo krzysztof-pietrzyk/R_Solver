@@ -17,7 +17,7 @@ class StatisticsElementMax : public StatisticsElementIf
 
     ~StatisticsElementMax();
 
-    virtual StatisticsElementIf* Clone() override;
+    virtual StatisticsElementIf* GetNewInstance() override;
     virtual std::string String() const override;
     virtual bool IsEmpty() override;
 
