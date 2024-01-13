@@ -1,4 +1,3 @@
-/**
 \page ComponentDesignAlgorithm Component Design: Algorithm
 
 \tableofcontents

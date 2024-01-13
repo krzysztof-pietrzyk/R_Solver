@@ -2,25 +2,9 @@
 <span style="letter-spacing:0px;line-height:0px;white-space:nowrap;">
 <br>
 
-![0]![1]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]<br>
-![1]![1]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]<br>
-![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]<br>
-![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]<br>
-![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]<br>
-![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]<br>
-![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]<br>
-![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]<br>
-![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]<br>
-![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]<br>
-![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]<br>
-![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]<br>
-![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]<br>
-![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]<br>
-![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]<br>
-![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]![e]<br>
+
 
 </span>
-
 
 [0]: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAIAAADZF8uwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAAnSURBVChTY2xqauLk5GTACxi7u7tNTU2hPByACUrjBaOKqKaIgQEAclsD+EbAJKEAAAAASUVORK5CYII=
 [1]: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAIAAADZF8uwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAABvSURBVChTY2hqauomBBiA+AAhgEWRgsKXgoJbUA4YoCjasOGotPQ3Bob/CQn3oUJggFAEVGFg8B6oAp+i3bsPLVhwmoBJEAB0EMWKli49CVTByvoXqEhA4BeQDREHAnRFyAgiDgTo1mEFRCg6cAAA90sYfZ1nBXYAAAAASUVORK5CYII=

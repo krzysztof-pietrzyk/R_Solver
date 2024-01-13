@@ -1,4 +1,3 @@
-/**
 \page ComponentDesignGrid Component Design: Grid
 
 \tableofcontents
