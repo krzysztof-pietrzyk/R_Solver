@@ -13,7 +13,8 @@ enum class GeneratorType
     UNHANDLED_GENERATOR_TYPE,
     UNSAFE,
     SAFE,
-    GUARANTEED_OPENING
+    GUARANTEED_OPENING,
+    LOAD_STATE
 };
 
 #endif

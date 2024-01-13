@@ -9,7 +9,8 @@
 
 // forward declarations
 class Grid;
-class Generator;
+class GeneratorInternal;
+class GeneratorExternal;
 class ViewIf;
 class AlgorithmExecutor;
 class SolverThreadData;
@@ -34,10 +35,13 @@ class Solver : public StatisticsProducer
 
     void UpdateThreadData();
 
+    void LoadGridFromString(const std::string& grid_string);
+
     private:
 
     Grid* grid;
-    Generator* generator;
+    GeneratorInternal* generator_internal;
+    GeneratorExternal* generator_external;
     ViewIf* view;
 	AlgorithmExecutor* algorithm_executor;
     SolverThreadData* thread_data;

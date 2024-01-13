@@ -5,12 +5,13 @@
 #include "AlgorithmCombinationsUtils.hpp"
 #include "../data/Section.hpp"
 #include "../data/Subsegment.hpp"
+#include "../../grid/state/GridState.hpp"
 
 // std includes
 
 
 const uint64_t AlgorithmCombinations::fail_safe_permutation_threshold = 100'000;
-const uint64_t AlgorithmCombinations::fail_safe_enumeration_threshold = 50'000'000;
+const uint64_t AlgorithmCombinations::fail_safe_enumeration_threshold = 100'000'000;
 
 AlgorithmCombinations::AlgorithmCombinations(GridAlgorithmIf& grid_, AlgorithmDataTransfer& data_)
     : AlgorithmAnalysis(grid_, data_),
@@ -55,6 +56,7 @@ AlgorithmStatus AlgorithmCombinations::Execution()
     }
     catch(FailSafeException)
     {
+        LOGGER(LogLevel::DEBUG) << "AlgorithmCombinations::Execution - Failed. GridState: " << grid.GetState().String();
         return AlgorithmStatus::FAILURE;
     }
     return AlgorithmStatus::NO_STATUS;

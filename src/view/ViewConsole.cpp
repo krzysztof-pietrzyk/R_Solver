@@ -2,7 +2,7 @@
 #include "ViewConsole.hpp"
 
 // project includes
-#include "../grid/GridHash.hpp"
+#include "../grid/state/GridState.hpp"
 #include "../grid/GridViewIf.hpp"
 #include "../utils/Logger.hpp"
 
@@ -65,7 +65,7 @@ void ViewConsole::Display()
 	DrawSmallNumberRow(output);
     DrawBigNumberRow(output);
 
-    output << "hash: " << grid.GetHash().ToString() << endl << endl;
+    output << "hash: " << grid.GetState().String() << endl << endl;
 
     cout << output.str();
 }

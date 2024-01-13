@@ -22,18 +22,15 @@ class GeneratorInternal : public Generator
 
     virtual void GenerateGrid() override final;
 
+    virtual void SetStartingField(uint32_t new_starting_field) = 0;
+
     protected:
 
-    std::vector<uint32_t> generated_safe_fields;
+    uint32_t starting_field;
     std::vector<uint32_t> forced_safe_fields;
-    CachedVector generated_mine_fields;
-    std::vector<uint8_t> generated_field_values;
+    std::vector<uint32_t> generated_safe_fields;
 
     virtual void GenerateMinePositions() = 0;
-
-    virtual void CalculateRegularFieldValues();
-
-    virtual void CalculateForcedSafeFieldValues();
 
     private:
 
@@ -48,16 +45,6 @@ class GeneratorInternal : public Generator
     StatisticsElementCounter* counter_eight;
 
     void CreateStatisticsElements();
-
-    void CalculateAllFieldValues();
-
-    uint8_t CalculateFieldValue(uint32_t field);
-
-    void SetValuesForMineFields();
-
-    void ClearPreviousGrid();
-
-    void CopyGeneratedVectorsToGrid();
 
     void CountFieldTypes(const std::vector<uint8_t>& field_values);
 };

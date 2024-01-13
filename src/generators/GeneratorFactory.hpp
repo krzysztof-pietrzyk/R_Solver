@@ -9,6 +9,7 @@
 
 // forward declarations
 class GridGeneratorIf;
+class GridState;
 
 
 class GeneratorFactory

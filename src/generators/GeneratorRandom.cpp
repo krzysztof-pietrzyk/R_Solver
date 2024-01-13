@@ -11,7 +11,7 @@ GeneratorRandom::GeneratorRandom(GridGeneratorIf& grid_)
     : GeneratorInternal(grid_)
 {
     LOGGER(LogLevel::INIT) << "GeneratorRandom";
-    previous_starting_field = Generator::starting_field;
+    previous_starting_field = GeneratorInternal::starting_field;
 }
 
 GeneratorRandom::~GeneratorRandom()
@@ -21,7 +21,8 @@ GeneratorRandom::~GeneratorRandom()
 
 void GeneratorRandom::SetStartingField(uint32_t new_starting_field)
 {
-    Generator::SetStartingField(new_starting_field);
+    LOGGER_ASSERT(new_starting_field < grid_dim.size, "GeneratorRandom::SetStartingField - out of bounds");
+    starting_field = new_starting_field;
     if(new_starting_field != previous_starting_field)
     {
         previous_starting_field = new_starting_field;

@@ -6,7 +6,10 @@
 #include "../algorithms/Algorithm.hpp"
 #include "../algorithms/AlgorithmExecutor.hpp"
 #include "../generators/GeneratorFactory.hpp"
+#include "../generators/GeneratorExternal.hpp"
+#include "../generators/GeneratorInternal.hpp"
 #include "../grid/GridInternal.hpp"
+#include "../grid/state/GridState.hpp"
 #include "../statistics/StatisticsAggregator.hpp"
 #include "../statistics/StatisticsCollector.hpp"
 #include "../statistics/StatisticsLabels.hpp"
@@ -21,7 +24,8 @@
 
 Solver::Solver(GridDimensions grid_dimensions, SolverThreadData* thread_data_) :
     grid(new GridInternal(grid_dimensions)),
-    generator(GeneratorFactory::Create(GeneratorType::SAFE, *grid)),
+    generator_internal((GeneratorInternal*)GeneratorFactory::Create(GeneratorType::SAFE, *grid)),
+	generator_external((GeneratorExternal*)GeneratorFactory::Create(GeneratorType::LOAD_STATE, *grid)),
 	view(ViewFactory::Create(ViewType::CONSOLE, *grid)),
     algorithm_executor(new AlgorithmExecutor(*grid)),
 	statistics_aggregator(new StatisticsAggregator()),
@@ -34,7 +38,7 @@ Solver::Solver(GridDimensions grid_dimensions, SolverThreadData* thread_data_) :
 	{
 		statistics_aggregator->RegisterStatisticsCollector(GetAlgorithmTypeLabel(item.first), item.second->GetStatisticsCollector());
 	}
-	statistics_aggregator->RegisterStatisticsCollector(Labels::Collectors::GENERATOR, generator->GetStatisticsCollector());
+	statistics_aggregator->RegisterStatisticsCollector(Labels::Collectors::GENERATOR, generator_internal->GetStatisticsCollector());
 	statistics_aggregator->RegisterStatisticsCollector(Labels::Collectors::SOLVER, this->GetStatisticsCollector());
 	thread_data->mut.lock();
 	thread_data->SetAggregatorIfEmpty(statistics_aggregator);
@@ -50,7 +54,7 @@ Solver::Solver(GridDimensions grid_dimensions, SolverThreadData* thread_data_) :
 Solver::~Solver()
 {
     delete algorithm_executor;
-    delete generator;
+    delete generator_internal;
 	delete view;
     delete grid;
 	delete thread_data;
@@ -63,7 +67,7 @@ void Solver::RunForever()
 	while(true)
 	{
 		LOGGER(LogLevel::DEBUG3) << "Solver::RunForever loop";
-		generator->GenerateGrid();
+		generator_internal->GenerateGrid();
 		algorithm_executor->RunAll();
 		UpdateSolverStatistics();
 	}
@@ -71,9 +75,6 @@ void Solver::RunForever()
 
 void Solver::Run()
 {
-	generator->GenerateGrid();
-	algorithm_executor->RunAll();
-	UpdateSolverStatistics();
 	view->Display();
 }
 
@@ -84,6 +85,12 @@ void Solver::UpdateThreadData()
 	statistics_aggregator->FlushToOutput(thread_data->statistics_data);
 	thread_data->mut.unlock();
 	LOGGER(LogLevel::DEBUG) << "Solver::UpdateThreadData() done";
+}
+
+void Solver::LoadGridFromString(const std::string& grid_string)
+{
+	generator_external->SetLoadingSource(new GridState(grid_string));
+	generator_external->GenerateGrid();
 }
 
 void Solver::CreateStatisticsElements()

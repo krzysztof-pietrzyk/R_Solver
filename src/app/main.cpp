@@ -16,6 +16,7 @@ using namespace std;
 
 void Run(Solver* solver)
 {
+	//solver->LoadGridFromString("256|0|4g880k0y80hi0g0a80i22a@w8j@42y04gM0w09g@|!!`|U07w02@kw0c0-g@w0-@2@4@8@g@w0-#w0-");
 	solver->RunForever();
 }
 

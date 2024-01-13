@@ -15,8 +15,7 @@ GeneratorInternal::GeneratorInternal(GridGeneratorIf& grid_) : Generator(grid_)
     CreateStatisticsElements();
     generated_safe_fields = std::vector<uint32_t>(grid_dim.size, 0U);
     forced_safe_fields = std::vector<uint32_t>();
-    generated_mine_fields = CachedVector(grid_dim.size);
-    generated_field_values = std::vector<uint8_t>(grid_dim.size, 0U);
+    starting_field = 0U;
 }
 
 GeneratorInternal::~GeneratorInternal()
@@ -27,16 +26,12 @@ GeneratorInternal::~GeneratorInternal()
 void GeneratorInternal::GenerateGrid()
 {
     LOGGER(LogLevel::DEBUG4) << "GeneratorInternal::GenerateGrid";
-    ClearPreviousGrid();
-    GenerateMinePositions();  // Pure virtual
-    CalculateAllFieldValues();
-    CopyGeneratedVectorsToGrid();
-}
-
-void GeneratorInternal::ClearPreviousGrid()
-{
     grid.Reset();
-    generated_mine_fields.Clear();
+    ClearGeneratedVectors();
+    GenerateMinePositions();  // Pure virtual
+    CalculateFieldValues();
+    CountFieldTypes(generated_field_values);
+    CopyGeneratedDataToGrid();
 }
 
 void GeneratorInternal::CreateStatisticsElements()
@@ -59,61 +54,6 @@ void GeneratorInternal::CreateStatisticsElements()
     statistics_collector->AddElement(Labels::Elements::Generator::SIX, counter_six);
     statistics_collector->AddElement(Labels::Elements::Generator::SEVEN, counter_seven);
     statistics_collector->AddElement(Labels::Elements::Generator::EIGHT, counter_eight);
-}
-
-void GeneratorInternal::CalculateAllFieldValues()
-{
-    CalculateRegularFieldValues();
-    CalculateForcedSafeFieldValues();
-    SetValuesForMineFields();
-    CountFieldTypes(generated_field_values);
-}
-
-void GeneratorInternal::CalculateRegularFieldValues()
-{
-    for(const uint32_t& current_field : generated_safe_fields)
-    {
-        generated_field_values[current_field] = CalculateFieldValue(current_field);
-    }
-}
-
-void GeneratorInternal::CalculateForcedSafeFieldValues()
-{
-    for(const uint32_t& current_field : forced_safe_fields)
-    {
-        generated_field_values[current_field] = CalculateFieldValue(current_field);
-    }
-}
-
-void GeneratorInternal::SetValuesForMineFields()
-{
-    // Different from all other fields, to avoid confusion in some cases
-    const uint8_t value_for_mine_fields = 9U;
-    for(const uint32_t& current_field : generated_mine_fields)
-    {
-        generated_field_values[current_field] = value_for_mine_fields;
-    }
-}
-
-uint8_t GeneratorInternal::CalculateFieldValue(uint32_t field)
-{
-    uint8_t current_field_value = 0U;
-    const std::vector<uint32_t>& neighbors = grid.GetNeighbors(field);
-    for(const uint32_t& current_neighbor : neighbors)
-    {
-        // Count how many mines are within each field's neighbors
-        if(generated_mine_fields.Contains(current_neighbor))
-        {
-            ++current_field_value;
-        }
-    }
-    return current_field_value;
-}
-
-void GeneratorInternal::CopyGeneratedVectorsToGrid()
-{
-    grid.SetMineFields(generated_mine_fields);
-    grid.SetFieldValues(generated_field_values);
 }
 
 void GeneratorInternal::CountFieldTypes(const std::vector<uint8_t>& field_values)

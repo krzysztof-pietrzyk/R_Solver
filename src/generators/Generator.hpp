@@ -2,8 +2,9 @@
 #define GENERATOR_HPP
 
 // project includes
-#include "../statistics/StatisticsProducer.hpp"
 #include "../grid/GridGeneratorIf.hpp"
+#include "../statistics/StatisticsProducer.hpp"
+#include "../utils/CachedVector.hpp"
 
 // std includes
 
@@ -20,14 +21,25 @@ class Generator : public StatisticsProducer
 
     virtual void GenerateGrid() = 0;
 
-    virtual void SetStartingField(uint32_t new_starting_field);
-
     protected:
 
     GridGeneratorIf& grid;
     const GridDimensions grid_dim;
+    static const uint8_t value_for_mine_fields;
 
-    uint32_t starting_field;
+    CachedVector generated_mine_fields;
+    std::vector<uint8_t> generated_field_values;
+    CachedVector generated_visible_fields;
+    CachedVector generated_flagged_fields;
+    bool generated_lost;
+
+    uint8_t CalculateFieldValue(uint32_t field);
+
+    void CalculateFieldValues();
+
+    void CopyGeneratedDataToGrid();
+
+    void ClearGeneratedVectors();
 };
 
 #endif
