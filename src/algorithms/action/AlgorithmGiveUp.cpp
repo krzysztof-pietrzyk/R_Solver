@@ -1,4 +1,10 @@
+// implemented header
 #include "AlgorithmGiveUp.hpp"
+
+// project includes
+
+// std includes
+
 
 AlgorithmGiveUp::AlgorithmGiveUp(GridAlgorithmIf& grid_, AlgorithmDataTransfer& data_)
     : AlgorithmAction(grid_, data_)

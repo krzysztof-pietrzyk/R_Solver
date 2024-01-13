@@ -1,7 +1,13 @@
 #ifndef ALGORITHM_BORDER_HPP
 #define ALGORITHM_BORDER_HPP
 
+// project includes
 #include "AlgorithmAnalysis.hpp"
+
+// std includes
+
+// forward declarations
+
 
 class AlgorithmBorder : public AlgorithmAnalysis
 {

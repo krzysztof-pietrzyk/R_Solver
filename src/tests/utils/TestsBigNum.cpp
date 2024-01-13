@@ -5,12 +5,14 @@
 // UnitTest environment
 #include "../UnitTestEnv.hpp"
 
-// Other libraries
+// tested interface
+#include "../../utils/BigNum.hpp"
 
+// project includes
+
+// std includes
 #include <math.h>
 
-// Tested interface
-#include "../../utils/BigNum.hpp"
 
 // ========================================================================= //
 // ============================ MOCKED CLASSES ============================= //
@@ -312,7 +314,7 @@ TEST(TestBigNum, FactorialAndReciprocal)
     long double factorial_double = 1.0;
     long double reciprocal_double = 1.0;
 
-    for(uint32_t i = 1; i <= factorial_max; i++)
+    for(uint32_t i = 1; i <= factorial_max; ++i)
     {
         factorial_num *= i; 
         reciprocal_num /= i;

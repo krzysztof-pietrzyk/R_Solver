@@ -1,4 +1,16 @@
+// implemented header
 #include "AlgorithmExecutor.hpp"
+
+// project includes
+#include "AlgorithmFactory.hpp"
+#include "data/PlayerActionStruct.hpp"
+#include "data/Section.hpp"
+#include "data/Subsegment.hpp"
+#include "../grid/GridAlgorithmIf.hpp"
+#include "../utils/Logger.hpp"
+
+// std includes
+
 
 AlgorithmExecutor::AlgorithmExecutor(GridAlgorithmIf& grid_)
 {
@@ -23,7 +35,7 @@ AlgorithmExecutor::~AlgorithmExecutor()
 void AlgorithmExecutor::RunAll() const
 {
     // Run algorithms in defined order until the game is either won or lost
-    LOGGER(LogLevel::DEBUG) << "AlgorithmExecutor::RunAll";
+    LOGGER(LogLevel::DEBUG4) << "AlgorithmExecutor::RunAll";
     data->Clear();
     AlgorithmType current_algorithm = transitions.GetStartingAlgorithm();
     AlgorithmStatus current_status;

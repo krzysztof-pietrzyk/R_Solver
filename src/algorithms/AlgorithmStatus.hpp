@@ -1,6 +1,13 @@
 #ifndef ALGORITHM_STATUS_HPP
 #define ALGORITHM_STATUS_HPP
 
+// project includes
+
+// std includes
+
+// forward declarations
+
+
 enum class AlgorithmStatus
 {
     UNHANDLED_STATUS,  // For testing and debugging purposes

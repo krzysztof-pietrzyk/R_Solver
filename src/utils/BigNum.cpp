@@ -1,4 +1,13 @@
+// implemented header
 #include "BigNum.hpp"
+
+// project includes
+#include "Logger.hpp"
+
+// std includes
+#include <bitset>
+#include <cmath>
+
 
 const uint64_t BigNum::exponent_mask          = 0x7FF0000000000000ULL;
 const uint64_t BigNum::mantissa_mask          = 0x000FFFFFFFFFFFFFULL;
@@ -113,7 +122,7 @@ void BigNum::operator+=(const BigNum& other)
         const uint64_t exp_diff = exponent - other.exponent;
         bool overflow = false;
         base = ShiftAndAdd(other.base, base, exp_diff, overflow);
-        if(overflow) { exponent++; }
+        if(overflow) { ++exponent; }
         return;
     }
     else if(exponent < other.exponent)
@@ -122,7 +131,7 @@ void BigNum::operator+=(const BigNum& other)
         bool overflow = false;
         base = ShiftAndAdd(base, other.base, exp_diff, overflow);
         exponent = other.exponent;
-        if(overflow) { exponent++; }
+        if(overflow) { ++exponent; }
         return;
     }
     else  // exponent == other.exponent

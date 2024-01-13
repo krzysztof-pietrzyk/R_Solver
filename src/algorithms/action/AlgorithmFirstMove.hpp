@@ -1,7 +1,13 @@
 #ifndef ALGORITHM_FIRST_MOVE_HPP
 #define ALGORITHM_FIRST_MOVE_HPP
 
+// project includes
 #include "AlgorithmAction.hpp"
+
+// std includes
+
+// forward declarations
+
 
 class AlgorithmFirstMove : public AlgorithmAction
 {

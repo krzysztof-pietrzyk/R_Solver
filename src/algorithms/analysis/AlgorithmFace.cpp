@@ -1,4 +1,11 @@
+// implemented header
 #include "AlgorithmFace.hpp"
+
+// project includes
+#include "../data/Section.hpp"
+
+// std includes
+
 
 AlgorithmFace::AlgorithmFace(GridAlgorithmIf& grid_, AlgorithmDataTransfer& data_)
     : AlgorithmAnalysis(grid_, data_),
@@ -16,16 +23,16 @@ AlgorithmStatus AlgorithmFace::Execution()
     Clear();
 
     const uint32_t segments_max = segments_dto.segments_count;
-    for(size_t segment_id = 0; segment_id < segments_max; segment_id++)
+    for(size_t segment_id = 0; segment_id < segments_max; ++segment_id)
     {
         const uint32_t segment_begin = segments_dto.segments_starting_indexes[segment_id];
         const uint32_t segment_end = segment_begin + segments_dto.segments_l[segment_id];
-        for(size_t section_id = segment_begin; section_id < segment_end; section_id++)
+        for(size_t section_id = segment_begin; section_id < segment_end; ++section_id)
         {
             const uint32_t section_origin = segments_dto.segments[section_id];
             const Section& current_section = sections_dto.sections[section_origin];
             const size_t current_section_l = current_section.fields_index;
-            for(size_t field_id = 0; field_id < current_section_l; field_id++)
+            for(size_t field_id = 0; field_id < current_section_l; ++field_id)
             {
                 const uint32_t section_field = current_section.fields[field_id];
                 if(face_dto.face.Contains(section_field)) { continue; }

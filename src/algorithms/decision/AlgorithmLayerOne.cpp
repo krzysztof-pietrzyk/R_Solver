@@ -1,4 +1,11 @@
+// implemented header
 #include "AlgorithmLayerOne.hpp"
+
+// project includes
+#include "LayerOneFieldSignature.hpp"
+
+// std includes
+
 
 AlgorithmLayerOne::AlgorithmLayerOne(GridAlgorithmIf& grid_, AlgorithmDataTransfer& data_)
     : AlgorithmDecision(grid_, data_),
@@ -15,7 +22,7 @@ AlgorithmStatus AlgorithmLayerOne::Execution()
     const uint32_t border_index_max = border_dto.index;
 
     // Go through each field on the broder
-    for(size_t i = 0; i < border_index_max; i++)
+    for(size_t i = 0; i < border_index_max; ++i)
     {
         const uint32_t border_field = border_dto.border[i];
         const LayerOneFieldSignature field_signature = GetFieldSignature(border_field);
@@ -34,8 +41,8 @@ LayerOneFieldSignature AlgorithmLayerOne::GetFieldSignature(const uint32_t borde
     const std::vector<uint32_t>& neighbor_fields = grid.GetNeighbors(border_field);
     for(const uint32_t& neighbor_field : neighbor_fields)
     {
-        if(flagged.Contains(neighbor_field)) flags_count++;
-        else if(!visible.Contains(neighbor_field)) not_visible_count++;
+        if(flagged.Contains(neighbor_field))       { ++flags_count; }
+        else if(!visible.Contains(neighbor_field)) { ++not_visible_count; }
     }
     LayerOneFieldSignature result;
     result.field = border_field;

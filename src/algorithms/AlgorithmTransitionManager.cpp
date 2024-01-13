@@ -1,4 +1,12 @@
+// implemented header
 #include "AlgorithmTransitionManager.hpp"
+
+// project includes
+#include "AlgorithmStatus.hpp"
+#include "../utils/Logger.hpp"
+
+// std includes
+
 
 const AlgorithmType AlgorithmTransitionManager::default_starting_algorithm = AlgorithmType::FIRST_MOVE;
 

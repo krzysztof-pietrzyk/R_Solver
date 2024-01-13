@@ -1,18 +1,18 @@
 #ifndef ACTION_QUEUE_DTO_HPP
 #define ACTION_QUEUE_DTO_HPP
 
-#include "../../grid/GridDimensions.hpp"
+// project includes
 
-#include "../PlayerAction.hpp"
-#include "../AlgorithmType.hpp"
-
+// std includes
+#include <cstdint>
 #include <map>
 
-struct PlayerActionStruct
-{
-    PlayerAction action;
-    AlgorithmType algorithm_type;
-};
+// forward declarations
+struct PlayerActionStruct;
+struct GridDimensions;
+enum class PlayerAction;
+enum class AlgorithmType;
+
 
 struct ActionsDTO
 {

@@ -1,4 +1,11 @@
+// implemented header
 #include "GeneratorRandomGuaranteedOpening.hpp"
+
+// project includes
+
+// std includes
+#include <algorithm>
+
 
 const uint32_t GeneratorRandomGuaranteedOpening::minimum_safe_fields = 9U;
 
@@ -27,7 +34,7 @@ void GeneratorRandomGuaranteedOpening::CreateTemplate()
     const uint32_t starting_field_neighbors_num = starting_field_neighbors.size();
     current_template = std::vector<uint32_t>(grid_dim.size - starting_field_neighbors_num - 1U, 0U);
     uint32_t index = 0U;
-    for(uint32_t i = 0U; i < grid_dim.size; i++)
+    for(uint32_t i = 0U; i < grid_dim.size; ++i)
     {
         if(i == starting_field || std::find(starting_field_neighbors.begin(), starting_field_neighbors.end(), i) != starting_field_neighbors.end())
         {

@@ -1,12 +1,15 @@
 #ifndef ALGORITHM_TRANSITION_MANAGER_HPP
 #define ALGORITHM_TRANSITION_MANAGER_HPP
 
-#include "../utils/Logger.hpp"
-
+// project includes
 #include "AlgorithmType.hpp"
-#include "AlgorithmStatus.hpp"
 
+// std includes
 #include <map>
+
+// forward declarations
+enum class AlgorithmStatus;
+
 
 class AlgorithmTransitionManager
 {

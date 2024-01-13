@@ -1,4 +1,11 @@
+// implemented header
 #include "RandomNumberGenerator.hpp"
+
+// project includes
+
+// std includes
+#include <chrono>
+
 
 int64_t RandomNumberGenerator::seed = std::chrono::system_clock::now().time_since_epoch().count();
 

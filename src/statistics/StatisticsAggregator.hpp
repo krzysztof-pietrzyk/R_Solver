@@ -1,10 +1,16 @@
 #ifndef STATISTICS_AGGREGATOR_HPP
 #define STATISTICS_AGGREGATOR_HPP
 
-#include "../utils/Logger.hpp"
+// project includes
+#include "../utils/Label.hpp"
 
-#include "collectors/StatisticsCollector.hpp"
-#include "StatisticsProducer.hpp"
+// std includes
+#include <map>
+#include <string>
+
+// forward declarations
+class StatisticsCollector;
+
 
 class StatisticsAggregator
 {
@@ -14,13 +20,17 @@ class StatisticsAggregator
 
     ~StatisticsAggregator();
 
-    void RegisterStatisticsProducer(const Label producer_label, const StatisticsProducer* statistics_producer);
+    void RegisterStatisticsCollector(Label collector_label, const StatisticsCollector* statistics_collector);
 
-    void FlushToOutput(StatisticsAggregatorStruct& output) const;
+    StatisticsAggregator* GetNewInstance() const;
+
+    std::string String() const;
+
+    void FlushToOutput(StatisticsAggregator* output) const;
 
     protected:
 
-    StatisticsAggregatorStruct aggregated_statistics;
+    std::map<Label, const StatisticsCollector*> labelled_collectors;
 };
 
 #endif

@@ -1,9 +1,14 @@
 #ifndef ALGORITHM_ANALYSIS_HPP
 #define ALGORITHM_ANALYSIS_HPP
 
+// project includes
+#include "../Algorithm.hpp"
 #include "../../grid/GridAlgorithmIf.hpp"
 
-#include "../Algorithm.hpp"
+// std includes
+
+// forward declarations
+
 
 class AlgorithmAnalysis : public Algorithm
 {

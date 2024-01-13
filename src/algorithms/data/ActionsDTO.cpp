@@ -1,4 +1,12 @@
+// implemented header
 #include "ActionsDTO.hpp"
+
+// project includes
+#include "PlayerActionStruct.hpp"
+#include "../../grid/GridDimensions.hpp"
+
+// std includes
+
 
 ActionsDTO::ActionsDTO(GridDimensions dim)
 {

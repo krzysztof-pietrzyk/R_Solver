@@ -1,4 +1,11 @@
+// implemented header
 #include "AlgorithmSegments.hpp"
+
+// project includes
+#include "../data/Section.hpp"
+
+// std includes
+
 
 AlgorithmSegments::AlgorithmSegments(GridAlgorithmIf& grid_, AlgorithmDataTransfer& data_)
     : AlgorithmAnalysis(grid_, data_),
@@ -19,7 +26,7 @@ AlgorithmStatus AlgorithmSegments::Execution()
     Clear();
 
     // Go through each section origin
-    for(size_t i = 0; i < sections_origins_index; i++)
+    for(size_t i = 0; i < sections_origins_index; ++i)
     {
         const uint32_t current_section_origin = sections_dto.sections_origins[i];
         // If the field hasn't been marked as checked ...
@@ -32,7 +39,10 @@ AlgorithmStatus AlgorithmSegments::Execution()
 
 void AlgorithmSegments::Clear()
 {
-    for(size_t i = 0; i < fields_to_check_index; i++) { is_checked[fields_to_check[i]] = false; }
+    for(size_t i = 0; i < fields_to_check_index; ++i)
+    {
+        is_checked[fields_to_check[i]] = false;
+    }
     fields_to_check_index = 0;
     segments_dto.Clear();
 }
@@ -46,12 +56,12 @@ void AlgorithmSegments::ChainReactionFromField(uint32_t field)
     is_checked[field] = true;
     segments_dto.AddField(field);
     // fields_to_check_index may increase within the runtime of this loop
-    for(size_t i = fields_to_check_starting_index; i < fields_to_check_index; i++)
+    for(size_t i = fields_to_check_starting_index; i < fields_to_check_index; ++i)
     {
         const uint32_t field_to_check = fields_to_check[i];
         const Section& section_to_check = sections_dto.sections[field_to_check];
         const uint8_t field_to_check_neighbors_l = section_to_check.neighbors_index;
-        for(size_t j = 0; j < field_to_check_neighbors_l; j++)
+        for(size_t j = 0; j < field_to_check_neighbors_l; ++j)
         {
             const uint32_t neighbor_to_add = section_to_check.neighbors[j];
             if(!sections_dto.sections_origins.Contains(neighbor_to_add)) { continue; }  // Ignore fields that are not sections origins

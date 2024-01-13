@@ -1,9 +1,16 @@
 #ifndef SUBSEGMENT_HPP
 #define SUBSEGMENT_HPP
 
-#include <vector>
-#include <map>
+// project includes
+
+// std includes
 #include <cstdint>
+#include <map>
+#include <vector>
+
+
+// forward declarations
+
 
 struct Subsegment
 {

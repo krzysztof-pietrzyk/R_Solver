@@ -1,11 +1,16 @@
 #ifndef FACTORIALS_DTO_HPP
 #define FACTORIALS_DTO_HPP
 
-#include <vector>
-#include <cstdint>
+// project includes
 
-#include "../../grid/GridDimensions.hpp"
-#include "../../utils/BigNum.hpp"
+// std includes
+#include <cstdint>
+#include <vector>
+
+// forward declarations
+struct GridDimensions;
+class BigNum;
+
 
 struct FactorialsDTO
 {

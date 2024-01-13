@@ -1,4 +1,10 @@
+// implemented header
 #include "GeneratorRandomSafe.hpp"
+
+// project includes
+
+// std includes
+
 
 const uint32_t GeneratorRandomSafe::minimum_safe_fields = 1U;
 
@@ -25,7 +31,7 @@ void GeneratorRandomSafe::CreateTemplate()
 {
     current_template = std::vector<uint32_t>(grid_dim.size - 1U, 0U);
     uint32_t index = 0U;
-    for(uint32_t i = 0U; i < grid_dim.size; i++)
+    for(uint32_t i = 0U; i < grid_dim.size; ++i)
     {
         if(i == starting_field)
         {

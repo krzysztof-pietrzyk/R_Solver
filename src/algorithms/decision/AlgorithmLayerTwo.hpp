@@ -1,10 +1,14 @@
 #ifndef ALGORITHM_LAYER_TWO_HPP
 #define ALGORITHM_LAYER_TWO_HPP
 
+// project includes
 #include "AlgorithmDecision.hpp"
 
+// std includes
 #include <vector>
-#include <algorithm>
+
+// forward declarations
+
 
 class AlgorithmLayerTwo : public AlgorithmDecision
 {

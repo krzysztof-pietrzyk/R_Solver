@@ -1,13 +1,19 @@
 #ifndef ALGORITHM_HPP
 #define ALGORITHM_HPP
 
-#include "../utils/Logger.hpp"
-#include "../grid/GridCommonIf.hpp"
-#include "../statistics/StatisticsProducer.hpp"
-#include "../statistics/collectors/StatisticsCollectorExecutions.hpp"
-
-#include "data/AlgorithmDataTransfer.hpp"
+// project includes
 #include "AlgorithmStatus.hpp"
+#include "data/AlgorithmDataTransfer.hpp"
+#include "../grid/GridDimensions.hpp"
+#include "../statistics/StatisticsProducer.hpp"
+#include "../utils/Logger.hpp"
+
+// std includes
+
+// forward declarations
+class GridCommonIf;
+class StatisticsElementCounter;
+
 
 class Algorithm : public StatisticsProducer
 {
@@ -28,11 +34,21 @@ class Algorithm : public StatisticsProducer
 
     AlgorithmDataTransfer& data;
     const GridDimensions grid_dim;
-    StatisticsCollectorExecutions* statistics_executions;
 
     virtual AlgorithmStatus Execution() = 0;
 
     void UpdateExecutionStatistics(AlgorithmStatus status);
+
+    private:
+
+    StatisticsElementCounter* counter_executions;
+    StatisticsElementCounter* counter_success;
+    StatisticsElementCounter* counter_no_moves;
+    StatisticsElementCounter* counter_failure;
+    StatisticsElementCounter* counter_won;
+    StatisticsElementCounter* counter_lost;
+
+    void CreateStatisticsElements();
 };
 
 #endif

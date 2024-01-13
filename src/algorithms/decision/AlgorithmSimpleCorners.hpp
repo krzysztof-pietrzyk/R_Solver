@@ -1,7 +1,13 @@
 #ifndef ALGORITHM_SIMPLE_CORNERS_HPP
 #define ALGORITHM_SIMPLE_CORNERS_HPP
 
+// project includes
 #include "AlgorithmDecision.hpp"
+
+// std includes
+
+// forward declarations
+
 
 class AlgorithmSimpleCorners : public AlgorithmDecision
 {

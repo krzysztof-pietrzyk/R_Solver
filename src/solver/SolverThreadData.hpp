@@ -1,13 +1,15 @@
 #ifndef SOLVER_THREAD_DATA_HPP
 #define SOLVER_THREAD_DATA_HPP
 
-#include "../statistics/collectors/StatisticsCollector.hpp"
-#include "../utils/Logger.hpp"
+// project includes
 
+// std includes
 #include <mutex>
-#include <string>
-#include <map>
-#include <vector>
+
+// forward declarations
+class StatisticsAggregator;
+class Logger;
+
 
 class SolverThreadData
 {
@@ -17,9 +19,11 @@ class SolverThreadData
 
     ~SolverThreadData();
 
+    void SetAggregatorIfEmpty(StatisticsAggregator* aggregator);
+
 	std::mutex mut;
 
-    StatisticsAggregatorStruct statistics_data;
+    StatisticsAggregator* statistics_data;
 };
 
 #endif

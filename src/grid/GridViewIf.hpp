@@ -1,10 +1,14 @@
 #ifndef GRID_VIEW_IF_HPP
 #define GRID_VIEW_IF_HPP
 
-#include "GridCommonIf.hpp"
+// project includes
 #include "FieldType.hpp"
+#include "GridCommonIf.hpp"
 
-#include <vector>
+// std includes
+
+// forward declarations
+
 
 class GridViewIf : public GridCommonIf
 {

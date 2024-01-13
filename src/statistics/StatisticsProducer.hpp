@@ -1,7 +1,14 @@
 #ifndef STATISTICS_PRODUCER_HPP
 #define STATISTICS_PRODUCER_HPP
 
-#include "collectors/StatisticsCollector.hpp"
+// project includes
+
+// std includes
+#include <string>
+
+// forward declarations
+class StatisticsCollector;
+
 
 class StatisticsProducer
 {
@@ -11,12 +18,11 @@ class StatisticsProducer
 
     ~StatisticsProducer();
 
-    const StatisticsProducerStruct& GetStatisticsCollectors() const;
+    const StatisticsCollector* GetStatisticsCollector();
 
     protected:
 
-    StatisticsProducerStruct statistics_collectors;
-
+    StatisticsCollector* statistics_collector;
 };
 
 #endif

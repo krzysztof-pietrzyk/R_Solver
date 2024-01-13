@@ -1,4 +1,10 @@
+// implemented header
 #include "AlgorithmFirstMove.hpp"
+
+// project includes
+
+// std includes
+
 
 const uint32_t AlgorithmFirstMove::first_move_field = 0U;
 

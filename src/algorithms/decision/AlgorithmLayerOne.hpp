@@ -1,17 +1,14 @@
 #ifndef ALGORITHM_LAYER_ONE_HPP
 #define ALGORITHM_LAYER_ONE_HPP
 
+// project includes
 #include "AlgorithmDecision.hpp"
 
-#include <tuple>
+// std includes
 
-struct LayerOneFieldSignature
-{
-    uint32_t field = 0;
-    uint8_t flags_count = 0;
-    uint8_t not_visible_count = 0;
-    uint8_t field_value = 0;
-};
+// forward declarations
+struct LayerOneFieldSignature;
+
 
 class AlgorithmLayerOne : public AlgorithmDecision
 {

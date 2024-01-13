@@ -1,14 +1,15 @@
 #ifndef VIEW_FACTORY_HPP
 #define VIEW_FACTORY_HPP
 
+// project includes
 #include "ViewIf.hpp"
-#include "ViewConsole.hpp"
+#include "ViewType.hpp"
 
-enum class ViewType
-{
-    CONSOLE,
-    FILE
-};
+// std includes
+
+// forward declarations
+class GridViewIf;
+
 
 class ViewFactory
 {

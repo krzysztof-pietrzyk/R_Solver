@@ -1,11 +1,14 @@
 #ifndef CACHED_VECTOR_HPP
 #define CACHED_VECTOR_HPP
 
-#include "Logger.hpp"
+// project includes
 
-#include <vector>
+// std includes
 #include <cstdint>
-#include <algorithm>
+#include <vector>
+
+// forward declarations
+
 
 class CachedVector
 {

@@ -1,4 +1,12 @@
+// implemented header
 #include "CachedVector.hpp"
+
+// project includes
+#include "Logger.hpp"
+
+// std includes
+#include <algorithm>
+
 
 CachedVector::CachedVector(size_t _max_size)
 {
@@ -14,7 +22,7 @@ CachedVector::CachedVector(const std::vector<bool>& _is_present)
     data = std::vector<uint32_t>(max_size, 0U);
     is_present = std::vector<bool>(max_size, false);
     data_index = 0U;
-    for(size_t i = 0; i < max_size; i++)
+    for(size_t i = 0; i < max_size; ++i)
     {
         if(_is_present[i])
         {
@@ -29,7 +37,7 @@ CachedVector::CachedVector(const std::vector<uint32_t>& _data, size_t _max_size)
     data = std::vector<uint32_t>(max_size, 0U);
     is_present = std::vector<bool>(max_size, false);
     data_index = 0U;
-    for(size_t i = 0; i < _data.size(); i++)
+    for(size_t i = 0; i < _data.size(); ++i)
     {
         Add(_data[i]);
     }
@@ -48,6 +56,11 @@ CachedVector::~CachedVector()
 void CachedVector::Add(uint32_t value)
 {
     LOGGER_ASSERT(data_index < max_size, "CachedVector::Add - Exceeded max size");
+    if(is_present[value])
+    {
+        LOGGER(LogLevel::WARNING) << "CachedVector::Add - Value already present";
+        return;
+    }
     data[data_index++] = value;
     is_present[value] = true;
 }
@@ -110,7 +123,7 @@ const std::vector<uint32_t>::iterator CachedVector::end()
 void CachedVector::CopyFromTo(const CachedVector& source, CachedVector& destination)
 {
     LOGGER_ASSERT(source.max_size == destination.max_size, "CachedVector::CopyFromTo - source and destination have different sizes");
-    for(size_t i = 0U; i < source.max_size; i++)
+    for(size_t i = 0U; i < source.max_size; ++i)
     {
         destination.data[i] = source.data[i];
         destination.is_present[i] = source.is_present[i];

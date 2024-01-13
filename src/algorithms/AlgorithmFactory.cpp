@@ -1,4 +1,24 @@
+// implemented header
 #include "AlgorithmFactory.hpp"
+
+// project includes
+#include "analysis/AlgorithmBorder.hpp"
+#include "analysis/AlgorithmCombinations.hpp"
+#include "analysis/AlgorithmFace.hpp"
+#include "analysis/AlgorithmSections.hpp"
+#include "analysis/AlgorithmSegments.hpp"
+#include "analysis/AlgorithmSubsegments.hpp"
+#include "decision/AlgorithmCombinationsLeastRisky.hpp"
+#include "decision/AlgorithmCombinationsSafeMoves.hpp"
+#include "decision/AlgorithmLayerOne.hpp"
+#include "decision/AlgorithmLayerTwo.hpp"
+#include "decision/AlgorithmSimpleCorners.hpp"
+#include "action/AlgorithmFirstMove.hpp"
+#include "action/AlgorithmGiveUp.hpp"
+#include "action/AlgorithmSimpleActions.hpp"
+
+// std includes
+
 
 Algorithm* AlgorithmFactory::Create(AlgorithmType type, GridAlgorithmIf& grid, AlgorithmDataTransfer& data)
 {

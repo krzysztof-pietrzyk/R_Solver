@@ -1,10 +1,17 @@
+// implemented header
 #include "GeneratorRandom.hpp"
+
+// project includes
+#include "RandomNumberGenerator.hpp"
+
+// std includes
+
 
 GeneratorRandom::GeneratorRandom(GridGeneratorIf& grid_)
     : GeneratorInternal(grid_)
 {
     LOGGER(LogLevel::INIT) << "GeneratorRandom";
-    previous_starting_field = Generator::starting_field;
+    previous_starting_field = GeneratorInternal::starting_field;
 }
 
 GeneratorRandom::~GeneratorRandom()
@@ -14,7 +21,8 @@ GeneratorRandom::~GeneratorRandom()
 
 void GeneratorRandom::SetStartingField(uint32_t new_starting_field)
 {
-    Generator::SetStartingField(new_starting_field);
+    LOGGER_ASSERT(new_starting_field < grid_dim.size, "GeneratorRandom::SetStartingField - out of bounds");
+    starting_field = new_starting_field;
     if(new_starting_field != previous_starting_field)
     {
         previous_starting_field = new_starting_field;
@@ -30,7 +38,7 @@ void GeneratorRandom::GenerateMinePositions()
 
     CopyTemplateToWorkingVector();
 
-    for(size_t i = 0; i < grid_dim.mines; i++)
+    for(size_t i = 0; i < grid_dim.mines; ++i)
     {
         // Get random poll_index between 0 and current_max
         poll_index = RandomNumberGenerator::GetRandom() % current_max;
@@ -45,7 +53,7 @@ void GeneratorRandom::GenerateMinePositions()
 void GeneratorRandom::CopyTemplateToWorkingVector()
 {
     const size_t current_template_size = current_template.size();
-    for(size_t i = 0; i < current_template_size; i++)
+    for(size_t i = 0; i < current_template_size; ++i)
     {
         generated_safe_fields[i] = current_template[i];
     }

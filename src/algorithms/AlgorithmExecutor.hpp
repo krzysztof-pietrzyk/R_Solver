@@ -1,13 +1,17 @@
 #ifndef ALGORITHM_EXECUTOR_HPP
 #define ALGORITHM_EXECUTOR_HPP
 
-#include "../utils/Logger.hpp"
-#include "../grid/GridAlgorithmIf.hpp"
-
-#include "AlgorithmFactory.hpp"
+// project includes
 #include "AlgorithmTransitionManager.hpp"
+#include "data/AlgorithmDataTransfer.hpp"
 
+// std includes
 #include <map>
+
+// forward declarations
+class GridAlgorithmIf;
+class Algorithm;
+
 
 class AlgorithmExecutor
 {

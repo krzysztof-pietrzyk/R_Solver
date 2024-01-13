@@ -1,4 +1,10 @@
+// implemented header
 #include "AlgorithmCombinationsSafeMoves.hpp"
+
+// project includes
+
+// std includes
+
 
 AlgorithmCombinationsSafeMoves::AlgorithmCombinationsSafeMoves(GridAlgorithmIf& grid_, AlgorithmDataTransfer& data_)
     : AlgorithmDecision(grid_, data_),
@@ -15,7 +21,7 @@ AlgorithmStatus AlgorithmCombinationsSafeMoves::Execution()
     const BigNum total_combinations = combinations_dto.total_combinations;
     const uint32_t face_length = face_dto.face.Index();
     const BigNum no_combinations = 0;
-    for(size_t i = 0; i < face_length; i++)
+    for(size_t i = 0; i < face_length; ++i)
     {
         const uint32_t face_field = face_dto.face[i];
         const BigNum face_field_combinations = combinations_dto.field_combinations[face_field];

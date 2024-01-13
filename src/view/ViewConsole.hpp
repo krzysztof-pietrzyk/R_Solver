@@ -1,15 +1,19 @@
 #ifndef VIEW_CONSOLE_HPP
 #define VIEW_CONSOLE_HPP
 
-#include "../grid/GridViewIf.hpp"
-
+// project includes
 #include "ViewIf.hpp"
+#include "../grid/GridDimensions.hpp"
 
-#include <sstream>
-#include <iostream>
-#include <iomanip>
-#include <fstream>
+// std includes
 #include <map>
+#include <sstream>
+#include <vector>
+
+// forward declarations
+class GridViewIf;
+enum class FieldType;
+
 
 class ViewConsole : public ViewIf
 {

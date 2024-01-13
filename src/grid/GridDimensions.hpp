@@ -1,7 +1,13 @@
 #ifndef GRID_DIMENSIONS_HPP
 #define GRID_DIMENSIONS_HPP
 
+// project includes
+
+// std includes
 #include <cstdint>
+
+// forward declarations
+
 
 struct GridDimensions
 {

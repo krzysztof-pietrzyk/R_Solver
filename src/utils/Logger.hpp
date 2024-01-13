@@ -1,14 +1,17 @@
 #ifndef LOGGER_HPP
 #define LOGGER_HPP
 
-#include <iostream>
+// project includes
+
+// std includes
+#include <cstdint>
 #include <sstream>
+#include <stdexcept>
 #include <string>
 #include <vector>
-#include <cstdint>
-#include <stdexcept>
-#include <ctime>
-#include <iomanip>
+
+// forward declarations
+
 
 enum class LogLevel
 {

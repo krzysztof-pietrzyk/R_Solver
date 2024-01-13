@@ -1,4 +1,15 @@
+// implemented header
 #include "AlgorithmDataTransfer.hpp"
+
+// project includes
+#include "PlayerActionStruct.hpp"
+#include "Section.hpp"
+#include "Subsegment.hpp"
+#include "../../grid/GridDimensions.hpp"
+#include "../../utils/Logger.hpp"
+
+// std includes
+
 
 AlgorithmDataTransfer::AlgorithmDataTransfer(GridDimensions grid_dim)
     : actions_dto(ActionsDTO(grid_dim)),

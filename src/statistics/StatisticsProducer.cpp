@@ -1,19 +1,23 @@
+// implemented header
 #include "StatisticsProducer.hpp"
+
+// project includes
+#include "StatisticsCollector.hpp"
+
+// std includes
+
 
 StatisticsProducer::StatisticsProducer()
 {
-    statistics_collectors = StatisticsProducerStruct();
+    statistics_collector = new StatisticsCollector();
 }
 
 StatisticsProducer::~StatisticsProducer()
 {
-    for(auto& type : statistics_collectors)
-    {
-        delete type;
-    }
+    delete statistics_collector;
 }
 
-const StatisticsProducerStruct& StatisticsProducer::GetStatisticsCollectors() const
+const StatisticsCollector* StatisticsProducer::GetStatisticsCollector()
 {
-    return statistics_collectors;
+    return statistics_collector;
 }

@@ -1,4 +1,11 @@
+// implemented header
 #include "BorderDTO.hpp"
+
+// project includes
+#include "../../grid/GridDimensions.hpp"
+
+// std includes
+
 
 BorderDTO::BorderDTO(GridDimensions dim)
 {
@@ -10,7 +17,7 @@ BorderDTO::BorderDTO(GridDimensions dim)
 
 void BorderDTO::Clear()
 {
-    for(size_t i = 0; i < index; i++)
+    for(size_t i = 0; i < index; ++i)
     {
         uint32_t border_field = border[i];
         is_border[border_field] = false;

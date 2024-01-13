@@ -1,11 +1,14 @@
 #ifndef FACE_DTO_HPP
 #define FACE_DTO_HPP
 
-#include <vector>
-#include <cstdint>
-
-#include "../../grid/GridDimensions.hpp"
+// project includes
 #include "../../utils/CachedVector.hpp"
+
+// std includes
+
+// forward declarations
+class GridDimensions;
+
 
 struct FaceDTO
 {

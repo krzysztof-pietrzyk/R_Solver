@@ -1,19 +1,32 @@
+// implemented header
 #include "SolverThreadData.hpp"
+
+// project includes
+#include "../statistics/StatisticsAggregator.hpp"
+#include "../utils/Logger.hpp"
+
+// std includes
+
 
 SolverThreadData::SolverThreadData()
 {
     LOGGER(LogLevel::INIT) << "SolverThreadData";
-    statistics_data = StatisticsAggregatorStruct();
+    statistics_data = nullptr;
 }
 
 SolverThreadData::~SolverThreadData()
 {
-    for(auto& item : statistics_data)
+    if(statistics_data)
     {
-        StatisticsProducerStruct producer_data = item.second;
-        for(auto& data_pointer : producer_data)
-        {
-            delete data_pointer;
-        }
+        delete statistics_data;
+    }
+}
+
+void SolverThreadData::SetAggregatorIfEmpty(StatisticsAggregator* aggregator)
+{
+    LOGGER(LogLevel::INIT) << "SolverThreadData::SetAggregatorIfEmpty";
+    if(!statistics_data)
+    {
+        statistics_data = aggregator->GetNewInstance();
     }
 }

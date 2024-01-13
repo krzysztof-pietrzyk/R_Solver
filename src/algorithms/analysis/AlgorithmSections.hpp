@@ -1,11 +1,13 @@
 #ifndef ALGORITHM_SECTIONS_HPP
 #define ALGORITHM_SECTIONS_HPP
 
+// project includes
 #include "AlgorithmAnalysis.hpp"
 
-#include <algorithm>
+// std includes
 
-#define MAX_ALLOWED_GRID_SIZE 1048576
+// forward declarations
+
 
 class AlgorithmSections : public AlgorithmAnalysis
 {
@@ -51,6 +53,8 @@ class AlgorithmSections : public AlgorithmAnalysis
     const uint32_t diff_bit_29;
     const uint32_t diff_bit_30;
     const uint32_t diff_bit_31;
+
+    static const uint32_t max_allowed_grid_size;
 
     void AnalyzeSection(const uint32_t border_field);
 

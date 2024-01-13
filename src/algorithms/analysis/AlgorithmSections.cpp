@@ -1,4 +1,14 @@
+// implemented header
 #include "AlgorithmSections.hpp"
+
+// project includes
+#include "../data/Section.hpp"
+
+// std includes
+#include <algorithm>
+
+
+const uint32_t AlgorithmSections::max_allowed_grid_size = 1048576U;
 
 AlgorithmSections::AlgorithmSections(GridAlgorithmIf& grid_, AlgorithmDataTransfer& data_)
     : AlgorithmAnalysis(grid_, data_),
@@ -17,7 +27,7 @@ AlgorithmSections::AlgorithmSections(GridAlgorithmIf& grid_, AlgorithmDataTransf
     diff_bit_31(2 * grid_dim.width + 2)
 {
     LOGGER(LogLevel::INIT) << "AlgorithmSections";
-    LOGGER_ASSERT(grid_dim.size <= MAX_ALLOWED_GRID_SIZE, "AlgorithmSections - Grid size too large");
+    LOGGER_ASSERT(grid_dim.size <= max_allowed_grid_size, "AlgorithmSections - Grid size too large");
     sections_hashes = std::vector<uint32_t>(grid_dim.size, 0);
     section_value_temp = 0;
     current_section_hash = 0;
@@ -32,7 +42,7 @@ AlgorithmStatus AlgorithmSections::Execution()
     const uint32_t border_l = border_dto.index;
 
     // iterate through border fields
-    for(size_t i = 0; i < border_l; i++)
+    for(size_t i = 0; i < border_l; ++i)
     {
         const uint32_t border_field = border_dto.border[i];
         AnalyzeSection(border_field);
@@ -65,7 +75,7 @@ void AlgorithmSections::AnalyzeSectionField(const uint32_t border_field, const u
     // count the number of flags already marked around the border_field
     if(flagged.Contains(border_field_neighbor))
     {
-        section_value_temp--;
+        --section_value_temp;
         return;
     }
     // if this neighbor is already visible, ignore it
