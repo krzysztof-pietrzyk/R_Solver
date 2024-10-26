@@ -18,7 +18,7 @@ Grid component is an abstraction for the Minesweeper game board, implementing fe
 |**c.** <a id="$~544f0ab3"></a> Information which squares contain mines.|
 |**d.** <a id="$~22f16924"></a> Information which squares are visible to the player and how many visible squares there are.|
 |**e.** <a id="$~ede4812f"></a> Information which squares are flagged by the player and how many flagged squares there are.|
-|**f.** <a id="$~174c1320"></a> [Clue](05_Dictionary_of_Concepts.md) of each square (number of mines in the neighbourhood of that square).|
+|**f.** <a id="$~174c1320"></a> [Clue](05_Dictionary_of_Concepts.md#$~80af1ada) of each square (number of mines in the neighbourhood of that square).|
 
 |Engine Grid Data Access <a id="$~cb6545f1"></a>|
 |-|
@@ -54,7 +54,9 @@ Grid component is an abstraction for the Minesweeper game board, implementing fe
 
 |Engine Grid Chording <a id="$~961c88b1"></a>|
 |-|
-|Chording is an action performed by the player, which may uncover multiple fields with a single click. If the player left-clicks a visible field, consider fields in the neighbourhood of that field. If the number of flags is equal to number of mines, all covered fields become uncovered. If this results in a mine being uncovered, the game is immediately lost.|
+|Chording is an action performed by the player, which may uncover multiple fields with a single left click.|
+|**a.** <a id="$~5484072c"></a> If the player left-clicks a visible field, consider fields in the neighbourhood of that field. If the number of flags is equal to the [Clue](05_Dictionary_of_Concepts.md#$~80af1ada) of that field, all covered fields become uncovered.|
+|**b.** <a id="$~85c38ac5"></a> If this results in a mine being uncovered, the game is immediately lost, [as normal](#$~b9dd5682).|
 
 ## Component: Generator Requirements
 
