@@ -48,10 +48,10 @@ void CheckStatus(SolverThreadData* data, vector<Solver*> solvers)
 int main()
 {
 	LOGGER(LogLevel::INIT) << "main";
-	const uint16_t threads_number = 1;
-	const uint16_t grid_width = 30;
-	const uint16_t grid_height = 16;
-	const uint32_t grid_mines = 99;
+	const uint16_t threads_number = 10;
+	const uint16_t grid_width = 100;
+	const uint16_t grid_height = 100;
+	const uint32_t grid_mines = 2440;
 
 	cout << "Attempting to run " << threads_number << " threads on " << grid_width << "x" << grid_height << " grid with " << grid_mines << " mines" << endl;
 

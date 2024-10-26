@@ -30,8 +30,8 @@ Those are techniques, which <b>perform clicks on the Grid</b>. Having the inform
 
 # Algorithm component design
 
-\startuml diagram_algorithm_component_design
-@startuml
+```plantuml
+@startuml diagram_algorithm_component_design
 
 title Algorithm component design
 
@@ -116,7 +116,7 @@ AlgorithmExecutor o--> "many" Algorithm : owns
 Solver o-up-> AlgorithmExecutor : owns
 
 @enduml
-\enduml
+```
 
 # Strategies
 
@@ -134,8 +134,8 @@ Different **Strategies** are implemented in AlgorithmTransitionManager by defini
 
 This strategy maximizes win ratio. Second priority is fast execution time. Click efficiency and human similarity are not considered at all.
 
-\startuml diagram_algorithm_state_machine
-@startuml
+```plantuml
+@startuml diagram_algorithm_state_machine
 
 title AlgorithmTransitionManager default order of execution
 
@@ -190,6 +190,4 @@ CombinationsLeastRisky -[#Red,bold]-> GiveUp : No_Moves
 GiveUp -[#Black,bold]-> [*]
 
 @enduml
-\enduml
-
-*/
+```

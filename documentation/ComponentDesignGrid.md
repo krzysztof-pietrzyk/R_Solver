@@ -12,8 +12,8 @@ Grid represents the functionalities of the Minesweeper board and is used via int
 
 # Grid component design
 
-\startuml diagram_grid_component_design
-@startuml
+```plantuml
+@startuml diagram_grid_component_design
 
 title Grid component design
 
@@ -104,6 +104,4 @@ View --> GridViewIf : uses
 Solver o--> Grid : owns
 
 @enduml
-\enduml
-
-*/
+```
