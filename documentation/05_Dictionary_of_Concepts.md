@@ -10,9 +10,11 @@
 
 # C
 
-<a id="$~07f89b67"></a> **Cell** - see [Field](#$~a75c9e8d)
+\anchor def-cell
+**Cell** - see \ref def-field "Field".
 
-<a id="$~80af1ada"></a> **Clue** - The number on an uncovered square, indicating the number of mines in the 8 squares surrounding that square.
+\anchor def-clue
+**Clue** - The number on an uncovered \ref def-field "Field", indicating the number of mines in the 8 fields surrounding that field.
 
 # D
 
@@ -24,7 +26,8 @@
 
 # F
 
-<a id="$~a75c9e8d"></a> **Field** - A field on Minesweeper board, which can be uncovered by the player by left-clicking on it. A field may contain a mine, which explodes and ends the game if uncovered. In case when an uncovered field doesn't contain a mine, it reveals a [Clue](#$~80af1ada)
+\anchor def-field
+**Field** - A field on Minesweeper board, which can be uncovered by the player by left-clicking on it. A field may contain a mine, which explodes and ends the game if uncovered. In case when an uncovered field doesn't contain a mine, it reveals a \ref def-clue "Clue".
 
 # G
 
@@ -76,7 +79,8 @@
 
 # S
 
-<a id="$~c469f4ec"></a> **Square** - see [Field](#$~a75c9e8d)
+\anchor def-square
+**Square** - see \ref def-field "Field".
 
 # T
 
