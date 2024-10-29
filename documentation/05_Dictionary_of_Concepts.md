@@ -6,7 +6,11 @@
 
 # B
 
+\anchor def-beginner
+**Beginner** - The easiest default difficulty setting for a Minesweeper game: width=9, height=9, mines=10.
 
+\anchor def-board
+**Board** - Collection of all \ref def-field "Fields" that compose a given Minesweeper game. The fields are arranged into a rectangular grid.
 
 # C
 
@@ -14,7 +18,7 @@
 **Cell** - see \ref def-field "Field".
 
 \anchor def-clue
-**Clue** - The number on an uncovered \ref def-field "Field", indicating the number of mines in the 8 fields surrounding that field.
+**Clue** - The number on an uncovered \ref def-field "Field", indicating the number of mines in the \ref def-neighbour "Neighbourhood" of that field.
 
 # D
 
@@ -22,7 +26,8 @@
 
 # E
 
-
+\anchor def-expert
+**Expert** - The hardest default difficulty setting for a Minesweeper game: width=30, height=16, mines=99.
 
 # F
 
@@ -39,7 +44,8 @@
 
 # I
 
-
+\anchor def-intermediate
+**Intermediate** - Default medium difficulty setting for a Minesweeper game: width=16, height=16, mines=40.
 
 # J
 
@@ -59,7 +65,8 @@
 
 # N
 
-
+\anchor def-neighbour
+**Neighbour, Neighbourhood** - Two \ref def-field "Fields" are neighbours when they are directly next to each other, including diagonally. Neighbourhood of a field is a collection of all fields that are its neighbours. Different fields may have different number of neighbours: for example a field in the corner of the \ref def-board "Board" has 3 neighbours and a field on the edge of the board has 5 neighbours.
 
 # O
 
