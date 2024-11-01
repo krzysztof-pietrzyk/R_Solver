@@ -1,4 +1,4 @@
-\page ComponentDesignGrid Component Design: Grid
+\page Detailed_Design_Grid Detailed Design: Grid
 
 \tableofcontents
 

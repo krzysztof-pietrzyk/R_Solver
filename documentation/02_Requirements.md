@@ -1,4 +1,4 @@
-\page DOC_Requirements 02 Requirements
+\page DOC_Requirements Requirements
 
 This page contains requirements for the R_Solver, divided into sections for each component.
 

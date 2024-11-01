@@ -1,4 +1,4 @@
-\page ComponentDesignAlgorithm Component Design: Algorithm
+\page Detailed_Design_Algorithm Detailed Design: Algorithm
 
 \tableofcontents
 

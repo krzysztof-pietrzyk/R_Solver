@@ -1,4 +1,4 @@
-\page DOC_Dictionary 05 Dictionary of Concepts
+\page DOC_Dictionary Dictionary of Concepts
 
 # A
 
