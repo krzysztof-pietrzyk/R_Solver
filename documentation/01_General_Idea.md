@@ -1,4 +1,4 @@
-\page DOC_GeneralIdea General Idea
+\page General_Idea General Idea
 
 \tableofcontents
 

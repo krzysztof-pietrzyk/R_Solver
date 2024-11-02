@@ -1,4 +1,4 @@
-\page DOC_Dictionary Dictionary of Concepts
+\page Dictionary Dictionary of Terms
 
 # A
 

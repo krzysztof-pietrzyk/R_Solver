@@ -1,1 +1,1 @@
-\page DOC_Architecture Architecture
+\page Architecture Architecture

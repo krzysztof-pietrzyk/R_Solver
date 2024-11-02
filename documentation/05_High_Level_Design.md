@@ -1,1 +1,1 @@
-\page DOC_HighLevelDesign High Level Design
+\page High_Level_Design High Level Design

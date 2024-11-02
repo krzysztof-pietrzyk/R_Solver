@@ -1,4 +1,4 @@
-\page DOC_DetailedDesigns Detailed Designs
+\page Detailed_Design Detailed Design
 
 \subpage Detailed_Design_Grid
 
