@@ -5,3 +5,11 @@ This page contains requirements for the R_Solver, divided into sections for each
 \subpage Requirements_Grid
 
 \subpage Requirements_Generator
+
+\subpage Requirements_View
+
+\subpage Requirements_Strategy
+
+\subpage Requirements_Statistics
+
+\subpage Requirements_Game
