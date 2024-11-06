@@ -1,4 +1,4 @@
-\page Dictionary Dictionary of Terms
+\page Dictionary_of_Terms Dictionary of Terms
 
 # A
 
