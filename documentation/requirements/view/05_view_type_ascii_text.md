@@ -3,14 +3,7 @@
 \anchor req-view-type-ascii-text
 |\ref req-view-type-ascii-text "View Type: ASCII Text"|
 |:-|
-|Example introduction.|
-|\anchor req-view-type-ascii-text-a \ref req-view-type-ascii-text-a "a." Example point.|
-|\anchor req-view-type-ascii-text-b \ref req-view-type-ascii-text-b "b." Example point.|
-|\anchor req-view-type-ascii-text-c \ref req-view-type-ascii-text-c "c." Example point.|
-|\anchor req-view-type-ascii-text-d \ref req-view-type-ascii-text-d "d." Example point.|
-|\anchor req-view-type-ascii-text-e \ref req-view-type-ascii-text-e "e." Example point.|
-|\anchor req-view-type-ascii-text-f \ref req-view-type-ascii-text-f "f." Example point.|
-|\anchor req-view-type-ascii-text-g \ref req-view-type-ascii-text-g "g." Example point.|
-|\anchor req-view-type-ascii-text-h \ref req-view-type-ascii-text-h "h." Example point.|
-|\anchor req-view-type-ascii-text-i \ref req-view-type-ascii-text-i "i." Example point.|
-|\anchor req-view-type-ascii-text-j \ref req-view-type-ascii-text-j "j." Example point.|
+|ASCII text representation of the board, for debugging, testing and quick storage.|
+|\anchor req-view-type-ascii-text-a \ref req-view-type-ascii-text-a "a." Each field of the board is represented by an ASCII symbol and printed to console or a text file.|
+|\anchor req-view-type-ascii-text-b \ref req-view-type-ascii-text-b "b." The ASCII text can optionally be surrounded by a border where rows and columns are numbered, for improved human readability.|
+|\anchor req-view-type-ascii-text-c \ref req-view-type-ascii-text-c "c." This type of view doesn't allow for player inputs.|

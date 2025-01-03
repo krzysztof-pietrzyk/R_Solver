@@ -3,14 +3,6 @@
 \anchor req-view-type-raw-data
 |\ref req-view-type-raw-data "View Type: Raw Data"|
 |:-|
-|Example introduction.|
-|\anchor req-view-type-raw-data-a \ref req-view-type-raw-data-a "a." Example point.|
-|\anchor req-view-type-raw-data-b \ref req-view-type-raw-data-b "b." Example point.|
-|\anchor req-view-type-raw-data-c \ref req-view-type-raw-data-c "c." Example point.|
-|\anchor req-view-type-raw-data-d \ref req-view-type-raw-data-d "d." Example point.|
-|\anchor req-view-type-raw-data-e \ref req-view-type-raw-data-e "e." Example point.|
-|\anchor req-view-type-raw-data-f \ref req-view-type-raw-data-f "f." Example point.|
-|\anchor req-view-type-raw-data-g \ref req-view-type-raw-data-g "g." Example point.|
-|\anchor req-view-type-raw-data-h \ref req-view-type-raw-data-h "h." Example point.|
-|\anchor req-view-type-raw-data-i \ref req-view-type-raw-data-i "i." Example point.|
-|\anchor req-view-type-raw-data-j \ref req-view-type-raw-data-j "j." Example point.|
+|Raw data representation of the board, for automation purposes.|
+|\anchor req-view-type-raw-data-a \ref req-view-type-raw-data-a "a." Player can access contents of the board in form of data, which can be used to automatically analyze the board.|
+|\anchor req-view-type-raw-data-b \ref req-view-type-raw-data-b "b." Player can perform inputs on the board by programatically calling View functions. See also \ref req-grid-left-click "left clicks" and \ref req-grid-right-click "right clicks".|

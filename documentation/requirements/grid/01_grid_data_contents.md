@@ -10,3 +10,4 @@
 |\anchor req-grid-data-contents-d \ref req-grid-data-contents-d "d." Information which fields are visible to the player and how many visible fields there are.|
 |\anchor req-grid-data-contents-e \ref req-grid-data-contents-e "e." Information which fields are flagged by the player and how many flagged fields there are.|
 |\anchor req-grid-data-contents-f \ref req-grid-data-contents-f "f." \ref def-clue "Clue" of each field (number of mines in the neighbourhood of that field).|
+|\anchor req-grid-data-contents-g \ref req-grid-data-contents-g "g." For each field, information about what other fields are neighbours of that field, and how many neighbours that field has. This is constant for a given board Width and Height, and can be pre-calculated once, upon creation.|
