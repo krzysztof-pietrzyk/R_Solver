@@ -3,7 +3,7 @@
 \anchor req-strategy-technique
 |\ref req-strategy-technique "Strategy: Technique"|
 |:-|
-|Due to complexity, Strategy shall be divided into small, managable parts, called \ref def-technique Techniques. A technique is an abstraction for a single analysis method a human player would perform when playing Minesweeper.|
+|Due to complexity, Strategy shall be divided into small, managable parts, called \ref def-technique "Techniques". A technique is an abstraction for a single analysis method a human player would perform when playing Minesweeper.|
 |\anchor req-strategy-technique-a \ref req-strategy-technique-a "a." Techniques have access to the Grid via the View component, on the basis defined in \ref req-grid-data-access "grid data access" and \ref req-view-functionality "view functionality".|
 |\anchor req-strategy-technique-b \ref req-strategy-technique-b "b." Techniques are allowed to store internal data, as well as share external data with other Techniques. Techniques shall not access each others' internal data.|
 |\anchor req-strategy-technique-c \ref req-strategy-technique-c "c." A Technique only has one publicly available functionality, which is to be "activated". Any other functionality shall be done by other components (like for example retrieving statistics shall be done via \ref req-statistics "Statistics Component").|
