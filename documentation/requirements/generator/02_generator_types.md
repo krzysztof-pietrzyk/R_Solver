@@ -1,7 +1,7 @@
 \page Requirements_Generator Requirements: Generator
 
 \anchor req-generator-types
-|\ref req-generator-types "Generator Types"|
+|\ref req-generator-types "Generator: Types"|
 |:-|
 |Generator allows for providing Grid data according to different desired rules. The following are the examples of functional rules that the generator can follow.|
 |\anchor req-generator-types-a \ref req-generator-types-a "a." Random mine distribution.|

@@ -1,7 +1,7 @@
 \page Requirements_Grid Requirements: Grid
 
 \anchor req-grid-left-click
-|\ref req-grid-left-click "Grid Left Click"|
+|\ref req-grid-left-click "Grid: Left Click"|
 |:-|
 |Player can left-click any field.|
 |\anchor req-grid-left-click-a \ref req-grid-left-click-a "a." If the player left-clicks a covered field, that field becomes visible. See also \ref req-grid-zero-chain-reaction "Zero Chain Reaction".|

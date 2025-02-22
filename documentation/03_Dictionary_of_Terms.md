@@ -91,6 +91,8 @@
 
 # T
 
+\anchor def-technique
+**Technique** - A single analysis method a human player would perform when playing Minesweeper.
 
 
 # U

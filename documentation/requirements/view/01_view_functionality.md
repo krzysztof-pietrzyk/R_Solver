@@ -1,7 +1,7 @@
 \page Requirements_View Requirements: View
 
 \anchor req-view-functionality
-|\ref req-view-functionality "View Functionality"|
+|\ref req-view-functionality "View: Functionality"|
 |:-|
 |View component provides the following functionailities.|
 |\anchor req-view-functionality-a \ref req-view-functionality-a "a." Show the state of the \ref def-board "board" to the player.|

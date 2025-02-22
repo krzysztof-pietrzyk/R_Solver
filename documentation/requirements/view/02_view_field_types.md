@@ -1,7 +1,7 @@
 \page Requirements_View Requirements: View
 
 \anchor req-view-field-types
-|\ref req-view-field-types "View Field Types"|
+|\ref req-view-field-types "View: Field Types"|
 |:-|
 |The following visual types of fields are supported.|
 |\anchor req-view-field-types-a \ref req-view-field-types-a "a." Covered field. The default state of all fields in the beginning of the game.|

@@ -1,7 +1,7 @@
 \page Requirements_Grid Requirements: Grid
 
 \anchor req-grid-chording
-|\ref req-grid-chording "Grid Chording"|
+|\ref req-grid-chording "Grid: Chording"|
 |:-|
 |Chording is an action performed by the player, which may uncover multiple fields with a single left click.|
 |\anchor req-grid-chording-a \ref req-grid-chording-a "a." If the player left-clicks a visible field, consider fields in the neighbourhood of that field. If the number of flags is equal to the \ref def-clue "Clue" of that field, all covered fields become uncovered.|

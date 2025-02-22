@@ -1,7 +1,7 @@
 \page Requirements_Grid Requirements: Grid
 
 \anchor req-grid-data-access
-|\ref req-grid-data-access "Grid Data Access"|
+|\ref req-grid-data-access "Grid: Data Access"|
 |:-|
 |Player can only access data, which the rules of the game permit the player to access.|
 |\anchor req-grid-data-access-a \ref req-grid-data-access-a "a." Width and Height of the board (size) is always available to the player.|

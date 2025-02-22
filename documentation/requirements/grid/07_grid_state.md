@@ -1,7 +1,7 @@
 \page Requirements_Grid Requirements: Grid
 
 \anchor req-grid-state
-|\ref req-grid-state "Grid State"|
+|\ref req-grid-state "Grid: State"|
 |:-|
 |State of Grid can be stored into text.|
 |\anchor req-grid-state-a \ref req-grid-state-a "a." State of Grid can be stored into text, in form of printable characters. The text shall be as short as possible.|

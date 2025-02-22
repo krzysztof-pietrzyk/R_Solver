@@ -1,7 +1,7 @@
 \page Requirements_Grid Requirements: Grid
 
 \anchor req-grid-data-contents
-|\ref req-grid-data-contents "Grid Data Contents"|
+|\ref req-grid-data-contents "Grid: Data Contents"|
 |:-|
 |Grid contains information about state of the board.|
 |\anchor req-grid-data-contents-a \ref req-grid-data-contents-a "a." Width and Height of the board (size).|

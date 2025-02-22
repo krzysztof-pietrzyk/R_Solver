@@ -1,7 +1,7 @@
 \page Requirements_Generator Requirements: Generator
 
 \anchor req-generator-functionality
-|\ref req-generator-functionality "Generator Functionality"|
+|\ref req-generator-functionality "Generator: Functionality"|
 |:-|
 |Generator produces contents of a Grid.|
 |\anchor req-generator-functionality-a \ref req-generator-functionality-a "a." Generator produces placement of mines on the Grid. The placement may be random, predetermined, or follow some specific rules.|
