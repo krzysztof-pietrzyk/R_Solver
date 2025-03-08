@@ -1,7 +1,7 @@
 \page Requirements Requirements
 
 \anchor req-grid-data-contents
-|\ref req-grid-data-contents "Grid: Data Contents" &emsp; Version: 1 &emsp; \ref tp-grid-data-contents "Test"|
+|\ref req-grid-data-contents "Grid: Data Contents" &emsp; Version: 1 &emsp; \ref tp-grid-data-contents "Test Plan"|
 |:-|
 |Grid contains information about state of the board.|
 |\anchor req-grid-data-contents-a \ref req-grid-data-contents-a "a." Width and Height of the board (size).|
@@ -18,10 +18,10 @@
 \anchor tp-grid-data-contents
 |\ref req-grid-data-contents "Grid: Data Contents"|Test Category|Test Link|Comment|
 |-|-|-|-|
-|\anchor tp-grid-data-contents-a \ref req-grid-data-contents-a "req-grid-data-contents-a"|a|b|c|
-|\anchor tp-grid-data-contents-b \ref req-grid-data-contents-b "req-grid-data-contents-b"|a|b|c|
-|\anchor tp-grid-data-contents-c \ref req-grid-data-contents-c "req-grid-data-contents-c"|a|b|c|
-|\anchor tp-grid-data-contents-d \ref req-grid-data-contents-d "req-grid-data-contents-d"|a|b|c|
-|\anchor tp-grid-data-contents-e \ref req-grid-data-contents-e "req-grid-data-contents-e"|a|b|c|
-|\anchor tp-grid-data-contents-f \ref req-grid-data-contents-f "req-grid-data-contents-f"|a|b|c|
-|\anchor tp-grid-data-contents-g \ref req-grid-data-contents-g "req-grid-data-contents-g"|a|b|c|
+|\anchor tp-grid-data-contents-a \ref req-grid-data-contents-a "req-grid-data-contents-a"| | | |
+|\anchor tp-grid-data-contents-b \ref req-grid-data-contents-b "req-grid-data-contents-b"| | | |
+|\anchor tp-grid-data-contents-c \ref req-grid-data-contents-c "req-grid-data-contents-c"| | | |
+|\anchor tp-grid-data-contents-d \ref req-grid-data-contents-d "req-grid-data-contents-d"| | | |
+|\anchor tp-grid-data-contents-e \ref req-grid-data-contents-e "req-grid-data-contents-e"| | | |
+|\anchor tp-grid-data-contents-f \ref req-grid-data-contents-f "req-grid-data-contents-f"| | | |
+|\anchor tp-grid-data-contents-g \ref req-grid-data-contents-g "req-grid-data-contents-g"| | | |

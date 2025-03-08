@@ -1,7 +1,7 @@
 \page Requirements Requirements
 
 \anchor req-statistics-functionality
-|\ref req-statistics-functionality "Statistics: Functionality"|
+|\ref req-statistics-functionality "Statistics: Functionality" &emsp; Version: 1 &emsp; \ref tp-statistics-functionality "Test Plan"|
 |:-|
 |\anchor req-statistics-functionality-a \ref req-statistics-functionality-a "a." Statistics data is gathered from one or multiple \ref req-game "Game" instances into a single common collection.|
 |\anchor req-statistics-functionality-b \ref req-statistics-functionality-b "b." Each distinct value that is being collected as statistics data is its own separate "Element" object. The Element object knows its own name (description string) and how to handle the data it represents. See also \ref req-statistics-element-types "Element Types".|
@@ -11,3 +11,18 @@
 |\anchor req-statistics-functionality-f \ref req-statistics-functionality-f "f." In some cases, statistics data can be associated with a specific Game loop or Grid State. For example, data collected this way may be related to rarely occurring game situations. See also \ref req-statistics-element-types-g "Circular Buffer of Grid States".|
 |\anchor req-statistics-functionality-g \ref req-statistics-functionality-g "g." Some statistics data may be time-expensive to gather, for example calculating 3BV metric of a Grid. It shall be configurable by the user whether those statistics data are gathered or not.|
 |\anchor req-statistics-functionality-h \ref req-statistics-functionality-h "h." Statistics data can be collected (from producers to common collection) upon a trigger from the outside, or after every finished game. User chooses which of those two modes is used.|
+
+
+\page Test_Plan Test Plan
+
+\anchor tp-statistics-functionality
+|\ref req-statistics-functionality "Statistics: Functionality"|Test Category|Test Link|Comment|
+|-|-|-|-|
+|\anchor tp-statistics-functionality-a \ref req-statistics-functionality-a "req-statistics-functionality-a"| | | |
+|\anchor tp-statistics-functionality-b \ref req-statistics-functionality-b "req-statistics-functionality-b"| | | |
+|\anchor tp-statistics-functionality-c \ref req-statistics-functionality-c "req-statistics-functionality-c"| | | |
+|\anchor tp-statistics-functionality-d \ref req-statistics-functionality-d "req-statistics-functionality-d"| | | |
+|\anchor tp-statistics-functionality-e \ref req-statistics-functionality-e "req-statistics-functionality-e"| | | |
+|\anchor tp-statistics-functionality-f \ref req-statistics-functionality-f "req-statistics-functionality-f"| | | |
+|\anchor tp-statistics-functionality-g \ref req-statistics-functionality-g "req-statistics-functionality-g"| | | |
+|\anchor tp-statistics-functionality-h \ref req-statistics-functionality-h "req-statistics-functionality-h"| | | |
