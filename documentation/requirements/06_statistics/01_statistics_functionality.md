@@ -1,4 +1,4 @@
-\page Requirements Requirements: Statistics
+\page Requirements Requirements
 
 \anchor req-statistics-functionality
 |\ref req-statistics-functionality "Statistics: Functionality"|

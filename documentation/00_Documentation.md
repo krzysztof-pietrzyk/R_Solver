@@ -10,7 +10,7 @@ This is the main page for R_Solver Documentation.
 
 \subpage Architecture
 
-\subpage Testing_Strategy
+\subpage Test_Plan
 
 \subpage High_Level_Design
 
