@@ -1,0 +1,43 @@
+```plantuml
+@startuml diagram_components_solver
+
+title Solver owns Grid, Generator, Algorithm and View
+
+component Grid
+component Generator
+component Algorithm
+component View
+component Solver
+
+Solver *--> Grid
+Solver *--> Algorithm
+Solver *--> Generator
+Solver *--> View
+
+@enduml
+```
+
+```plantuml
+@startuml diagram_components_statistics_aggregator
+
+title Solver owns a StatisticsAggregator, which gathers statistics produced by components
+
+component Grid
+component Generator
+component Algorithm
+component Solver
+component Statistics
+
+interface StatisticsProducer
+interface StatisticsAggregator
+
+Statistics -down- StatisticsProducer
+StatisticsAggregator "1" -down-> "n" StatisticsProducer
+Grid -up-|> StatisticsProducer
+Generator -up-|> StatisticsProducer
+Algorithm -up-|> StatisticsProducer
+Solver -up-|> StatisticsProducer
+Solver *-up-> StatisticsAggregator
+
+@enduml
+```
