@@ -96,6 +96,9 @@ namespace Labels
             static const Label SIX   = "Total 6_sixes";
             static const Label SEVEN = "Total 7_sevens";
             static const Label EIGHT = "Total 8_eights";
+            static const Label EIGHT_2X = "2x eights";
+            static const Label EIGHT_3X = "3x eights";
+            static const Label EIGHT_4X = "4x eights";
         }
     }
 }

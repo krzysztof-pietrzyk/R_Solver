@@ -43,6 +43,9 @@ class GeneratorInternal : public Generator
     StatisticsElementCounter* counter_six;
     StatisticsElementCounter* counter_seven;
     StatisticsElementCounter* counter_eight;
+    StatisticsElementCounter* counter_double_eight;
+    StatisticsElementCounter* counter_triple_eight;
+    StatisticsElementCounter* counter_quadruple_eight;
 
     void CreateStatisticsElements();
 

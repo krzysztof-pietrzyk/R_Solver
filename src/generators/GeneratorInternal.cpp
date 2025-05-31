@@ -45,6 +45,9 @@ void GeneratorInternal::CreateStatisticsElements()
     counter_six = new StatisticsElementCounter();
     counter_seven = new StatisticsElementCounter();
     counter_eight = new StatisticsElementCounter();
+    counter_double_eight = new StatisticsElementCounter();
+    counter_triple_eight = new StatisticsElementCounter();
+    counter_quadruple_eight = new StatisticsElementCounter();
     statistics_collector->AddElement(Labels::Elements::Generator::ZERO, counter_zero);
     statistics_collector->AddElement(Labels::Elements::Generator::ONE, counter_one);
     statistics_collector->AddElement(Labels::Elements::Generator::TWO, counter_two);
@@ -54,6 +57,9 @@ void GeneratorInternal::CreateStatisticsElements()
     statistics_collector->AddElement(Labels::Elements::Generator::SIX, counter_six);
     statistics_collector->AddElement(Labels::Elements::Generator::SEVEN, counter_seven);
     statistics_collector->AddElement(Labels::Elements::Generator::EIGHT, counter_eight);
+    statistics_collector->AddElement(Labels::Elements::Generator::EIGHT_2X, counter_double_eight);
+    statistics_collector->AddElement(Labels::Elements::Generator::EIGHT_3X, counter_triple_eight);
+    statistics_collector->AddElement(Labels::Elements::Generator::EIGHT_4X, counter_quadruple_eight);
 }
 
 void GeneratorInternal::CountFieldTypes(const std::vector<uint8_t>& field_values)
@@ -104,4 +110,16 @@ void GeneratorInternal::CountFieldTypes(const std::vector<uint8_t>& field_values
     *counter_six += t6;
     *counter_seven += t7;
     *counter_eight += t8;
+    if(t8 >= 2)
+    {
+        *counter_double_eight += 1;
+    }
+    if(t8 >= 3)
+    {
+        *counter_triple_eight += 1;
+    }
+    if(t8 >= 4)
+    {
+        *counter_quadruple_eight += 1;
+    }
 }
